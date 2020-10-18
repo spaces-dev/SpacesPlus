@@ -1,0 +1,1 @@
+export const qs = (e: string): Element | null => { return document.querySelector(e) }
