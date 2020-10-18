@@ -1,0 +1,1 @@
+export const rever = (s: string | number) => s ? s.toString().split('').join('.') : s

@@ -1,1 +1,1 @@
-export const qs = (e: string): Element | null => { return document.querySelector(e) }
+export const qs = (e: string) => document.querySelector(e)

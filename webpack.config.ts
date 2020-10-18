@@ -4,11 +4,12 @@ import WebpackUserscript from 'webpack-userscript'
 import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 import userscriptConfig from './userscript.config'
 
+const CopyPlugin = require('copy-webpack-plugin')
 const outputPath = path.resolve(__dirname, 'dist')
 const fileName = userscriptConfig.scriptFileName
 const isDev = process.env.NODE_ENV === 'development'
 const PORT = 8080
-const HTTPS = false
+const HTTPS = true
 
 const devServerOpenPage: string[] = (() => {
     const pages: string[] = []
@@ -22,7 +23,7 @@ const devServerOpenPage: string[] = (() => {
 })()
 
 const config: webpack.Configuration = {
-    mode: 'production',
+    mode: isDev ? 'development' : 'production',
     entry: path.join(__dirname, 'src/index.ts'),
     output: {
         path: outputPath,
@@ -50,7 +51,7 @@ const config: webpack.Configuration = {
         ],
     },
     resolve: {
-        extensions: ['.tsx', '.ts', '.js']
+        extensions: ['.ts', '.js']
     },
     optimization: {
         minimize: !isDev
@@ -58,6 +59,7 @@ const config: webpack.Configuration = {
     devServer: {
         https: HTTPS,
         port: PORT,
+        headers: { 'Access-Control-Allow-Origin': '*' },
         writeToDisk: true,
         contentBase: outputPath,
         open: !!(userscriptConfig.openTargetPage && userscriptConfig.openScriptInstallPage),
@@ -67,6 +69,17 @@ const config: webpack.Configuration = {
         liveReload: false
     },
     plugins: [
+        new CopyPlugin({
+            patterns: [
+                {
+                    from: 'src/types/updater.json'
+                },
+                {
+                    from: 'src/attaches/',
+                    to: 'src/attaches/'
+                }
+            ]
+        }),
         new CleanWebpackPlugin(),
         new WebpackUserscript({
             headers: userscriptConfig.scriptHeaders,

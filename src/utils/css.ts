@@ -2,11 +2,11 @@ import { trim } from './trim'
 
 // TODO: interface
 export const css = (elem: any, css: any) => {
-    const list = css.split(';')
+    let list = css.split(';')
 
     for (let i in list) {
         if (trim(list[i]) !== '') {
-            const valList = trim(list[i]).split(':')
+            let valList = trim(list[i]).split(':')
 
             if (valList[0].indexOf('-') >= 0) {
                 valList[0] = valList[0].replace(/\-([a-z]{1})/g, function (e) {

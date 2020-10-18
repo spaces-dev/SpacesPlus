@@ -2,7 +2,7 @@ import { css } from './css'
 
 // TODO: interface
 export const ce = (name: any, params: any): HTMLElement => {
-    const Elem = document.createElement(name)
+    let Elem = document.createElement(name)
 
     for (let i in params) {
         if (i === 'style') {
@@ -15,6 +15,8 @@ export const ce = (name: any, params: any): HTMLElement => {
             Elem.innerHTML = params[i]
         } else if (i === 'class') {
             Elem.className = params[i]
+        } else {
+            Elem[i] = params[i];
         }
     }
 
