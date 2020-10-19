@@ -1,7 +1,4 @@
-import { qs } from '../utils/qs'
-import { ce } from '../utils/ce'
-import { find } from '../utils/find'
-import { insertAfter } from '../utils/insertAfter'
+import { qs, ce, find, insertAfter } from '../utils'
 
 import { HTTP, BASE_URL } from '../types/base'
 

@@ -1,8 +1,7 @@
-import { qs } from '../utils/qs'
-import { ce } from '../utils/ce'
+import { qs, ce } from '../utils'
 
 import { ENV, GITHUB, REVISION } from '../types/base'
-import { _SETTINGS } from '../types/defaultSettings'
+import { _SETTINGS } from '../types/Settings'
 
 export const setStyle = () => {
     let stl = qs('#SP_PLUS_INJSTYLE') || ce('style', {
@@ -21,11 +20,11 @@ export const setStyle = () => {
         document.getElementsByTagName('head')[0].appendChild(menu)
     }
 
-    if (_SETTINGS.bodystyle) {
-        if (_SETTINGS.bodystyleSetting.url && _SETTINGS.bodystyleSetting.urlchecked)
-            stl.innerHTML = `body,#main_wrap{background-image:url(${_SETTINGS.bodystyleSetting.url})}`
-        if (_SETTINGS.bodystyleSetting.color && _SETTINGS.bodystyleSetting.colorchecked)
-            stl.innerHTML = `body,#main_wrap{background-color:${_SETTINGS.bodystyleSetting.color}}`
+    if (_SETTINGS.STRINGS.bodystyle) {
+        if (_SETTINGS.STRINGS.bodystyleSetting.url && _SETTINGS.STRINGS.bodystyleSetting.urlchecked)
+            stl.innerHTML = `body,#main_wrap{background-image:url(${_SETTINGS.STRINGS.bodystyleSetting.url})}`
+        if (_SETTINGS.STRINGS.bodystyleSetting.color && _SETTINGS.STRINGS.bodystyleSetting.colorchecked)
+            stl.innerHTML = `body,#main_wrap{background-color:${_SETTINGS.STRINGS.bodystyleSetting.color}}`
     }
 
     document.getElementsByTagName('head')[0].appendChild(stl)

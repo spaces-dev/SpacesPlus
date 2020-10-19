@@ -1,7 +1,7 @@
 import { error } from './console'
 import { extend } from './extend'
 import { getCookie } from './getCookie'
-import { _SETTINGS } from '../types/defaultSettings'
+import { _SETTINGS } from '../types/Settings'
 
 export const readSettings = () => {
     let cookieSet = getCookie('SP_PLUS_SET')
@@ -9,9 +9,7 @@ export const readSettings = () => {
     try {
         if (cookieSet) {
             cookieSet = JSON.parse(cookieSet)
-            // TODO: interface
-            // @ts-ignore
-            _SETTINGS = extend(_SETTINGS, cookieSet)
+            _SETTINGS.STRINGS = extend(_SETTINGS.STRINGS, cookieSet)
         }
     } catch (e) {
         error('Ошибка (readSettings.ts): ' + e)

@@ -1,5 +1,5 @@
-import { qs } from '../utils/qs'
-import { ce } from '../utils/ce'
+import { qs, ce } from '../utils'
+
 import { DEVICE } from '../types/base'
 
 export const userStatus = (code: string | undefined) => {

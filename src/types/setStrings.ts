@@ -1,4 +1,8 @@
-export const _SETSTRINGS = {
+type Strings = {
+    [key: string]: string
+}
+
+export const _SETSTRINGS: Strings = {
     'comments': 'Пакетное удаление комментариев',
     'blogsd': 'Пакетное удаление блогов',
     'readersd': 'Пакетное удаление читателей',

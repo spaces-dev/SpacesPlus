@@ -1,4 +1,4 @@
-import { find } from '../utils/find'
+import { find } from '../utils'
 
 export const oldHeader = () => {
     let navi = find(document.links, { className: 'horiz-menu__link' })
