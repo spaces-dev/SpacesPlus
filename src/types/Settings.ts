@@ -2,7 +2,7 @@ import { ISettings } from '../interfaces/Settings'
 import { OVERRIDE, GITHUB } from './base'
 
 export class _SETTINGS {
-    public static STRINGS: ISettings = {
+    public static e: ISettings = {
         'comments': false,
         'blogsd': false,
         'readersd': false,

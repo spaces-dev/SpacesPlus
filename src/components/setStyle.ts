@@ -20,11 +20,11 @@ export const setStyle = () => {
         document.getElementsByTagName('head')[0].appendChild(menu)
     }
 
-    if (_SETTINGS.STRINGS.bodystyle) {
-        if (_SETTINGS.STRINGS.bodystyleSetting.url && _SETTINGS.STRINGS.bodystyleSetting.urlchecked)
-            stl.innerHTML = `body,#main_wrap{background-image:url(${_SETTINGS.STRINGS.bodystyleSetting.url})}`
-        if (_SETTINGS.STRINGS.bodystyleSetting.color && _SETTINGS.STRINGS.bodystyleSetting.colorchecked)
-            stl.innerHTML = `body,#main_wrap{background-color:${_SETTINGS.STRINGS.bodystyleSetting.color}}`
+    if (_SETTINGS.e.bodystyle) {
+        if (_SETTINGS.e.bodystyleSetting.url && _SETTINGS.e.bodystyleSetting.urlchecked)
+            stl.innerHTML = `body,#main_wrap{background-image:url(${_SETTINGS.e.bodystyleSetting.url})}`
+        if (_SETTINGS.e.bodystyleSetting.color && _SETTINGS.e.bodystyleSetting.colorchecked)
+            stl.innerHTML = `body,#main_wrap{background-color:${_SETTINGS.e.bodystyleSetting.color}}`
     }
 
     document.getElementsByTagName('head')[0].appendChild(stl)

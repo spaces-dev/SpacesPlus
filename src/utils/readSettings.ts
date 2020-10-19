@@ -9,7 +9,7 @@ export const readSettings = () => {
     try {
         if (cookieSet) {
             cookieSet = JSON.parse(cookieSet)
-            _SETTINGS.STRINGS = extend(_SETTINGS.STRINGS, cookieSet)
+            _SETTINGS.e = extend(_SETTINGS.e, cookieSet)
         }
     } catch (e) {
         error('Ошибка (readSettings.ts): ' + e)

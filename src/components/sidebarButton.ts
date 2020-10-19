@@ -19,7 +19,7 @@ export const sidebarButton = () => {
         insertAfter(link, target)
 
         if (target.nextElementSibling.nodeName === 'BR') {
-            insertAfter(ce('br', null), link)
+            insertAfter(ce('br'), link)
         }
     }
 }

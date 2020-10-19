@@ -1,0 +1,1 @@
+export const remove = (e: any) => e.parentNode.removeChild(e)

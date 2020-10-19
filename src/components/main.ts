@@ -4,6 +4,10 @@ import { checkUpdates } from './checkUpdates'
 import { sidebarButton } from './sidebarButton'
 import { setStyle } from './setStyle'
 import { freeStickers } from './freeStickers'
+import { settingsMenu } from './settingsMenu'
+import { friendsOnline } from './friendsOnline'
+
+import { _SETTINGS } from '../types/Settings'
 
 export const main = () => {
     // execute once
@@ -11,9 +15,13 @@ export const main = () => {
     readSettings()
     setStyle()
 
-    oldHeader()
-    freeStickers()
+    if (_SETTINGS.e.fixes) oldHeader()
+    if (_SETTINGS.e.sticker) freeStickers()
+    
     sidebarButton()
-
-    //setInterval(() => { }, 200)
+    
+    setInterval(() => {
+        if (_SETTINGS.e.friendsOn) friendsOnline()
+        settingsMenu()
+    }, 200)
 }

@@ -2,7 +2,7 @@ import { extend } from './extend'
 import { BASE_URL } from '../types/base'
 
 // TODO: Refactoring & interface
-export const setCookie = (key: string, value: string, opts: any) => {
+export const setCookie = (key: string, value: string, opts?: any) => {
     opts = extend({
         path: '/',
         expires: 365,

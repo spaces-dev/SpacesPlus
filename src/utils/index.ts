@@ -5,8 +5,10 @@ import { find } from './find'
 import { http } from './http'
 import { trim } from './trim'
 import { rever } from './rever'
+import { remove } from './remove'
 import { extend } from './extend'
 import { getQuery } from './getQuery'
+import { inBefore } from './inBefore'
 import { getCookie } from './getCookie'
 import { setCookie } from './setCookie'
 import { messageBox } from './messageBox'
@@ -19,5 +21,6 @@ export {
     css, extend, find, getCookie,
     setCookie, http, insertAfter,
     messageBox, readSettings,
-    rever, trim, getQuery
+    rever, trim, getQuery,
+    inBefore, remove
 }

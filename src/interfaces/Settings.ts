@@ -36,6 +36,7 @@ export interface WeatherSettings {
 }
 
 export interface ISettings {
+    [key: string]: any
     comments: boolean
     blogsd: boolean
     readersd: boolean

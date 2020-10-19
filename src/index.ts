@@ -1,6 +1,5 @@
-import { qs } from './utils/qs'
-import { http } from './utils/http'
-import { error } from './utils/console'
+import { qs, http, error } from './utils'
+
 import { HTTP, BASE_URL } from './types/base'
 
 import { SessionCheck } from './interfaces/SessionCheck'

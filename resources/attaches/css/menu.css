@@ -229,7 +229,7 @@ details summary:hover {
 }
 
 .sp-checkbox-circle+label, .sp-checkbox-square+label {
-    padding: 12px 5px 12px 22px
+    padding: 11px 5px 12px 30px
 }
 
 .sp-checkbox-checked+label:before, .sp-checkbox-square+label:before {

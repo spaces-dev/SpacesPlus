@@ -1,7 +1,7 @@
 import { css } from './css'
 
 // TODO: interface
-export const ce = (name: any, params: any): HTMLElement => {
+export const ce = (name: any, params?: any): HTMLElement => {
     let Elem = document.createElement(name)
 
     for (let i in params) {
