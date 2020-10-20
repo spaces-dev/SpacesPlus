@@ -1,4 +1,18 @@
-import { ce, qs, find, error, remove, getQuery, setCookie, inBefore, insertAfter, rever } from '../utils'
+import {
+    ce,
+    qs,
+    find,
+    error,
+    rever,
+    remove,
+    inBefore,
+    getQuery,
+    setCookie,
+    delCookie,
+    historyPush,
+    insertAfter,
+    confirmBox
+} from '../utils'
 
 import { _SETTINGS } from '../types/Settings'
 import { _SETSTRINGS } from '../types/setStrings'
@@ -86,39 +100,61 @@ export const settingsMenu = () => {
                                             _SETTINGS.e[id] = checked
                                             setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS.e))
 
+                                            console.log(e.target.id + ": " + e.target.checked)
+
                                             switch (e.target.id) {
                                                 case 'comments':
+                                                    break
                                                 case 'readersd':
+                                                    break
                                                 case 'favorite':
+                                                    break
                                                 case 'rotate':
+                                                    break
                                                 case 'playback':
+                                                    break
                                                 case 'blocked':
+                                                    break
                                                 case 'rscroll':
                                                     scrollMove()
                                                     break
                                                 case 'hrightbar':
+                                                    break
                                                 case 'apidebug':
+                                                    break
                                                 case 'playerdn':
+                                                    break
                                                 case 'nredirect':
+                                                    break
                                                 case 'coins':
+                                                    break
                                                 case 'karma':
+                                                    break
                                                 case 'online':
+                                                    break
                                                 case 'ads':
+                                                    break
                                                 case 'myEvents':
+                                                    break
                                                 case 'friendsOn':
-                                                    friendsOnline(e.target.checked)
+                                                    /*friendsOnline(e.target.checked)
                                                     if (e.target.checked) {
                                                         settingsFriend(e.target)
                                                     } else {
                                                         let frMaxWrap = qs("#SP_PLUS_MAXFRIENDS")
                                                         if (frMaxWrap) { remove(frMaxWrap) }
-                                                    }
+                                                    }*/
                                                     break
                                                 case 'sticker':
+                                                    break
                                                 case 'fixes':
+                                                    break
                                                 case 'bodystyle':
+                                                    break
                                                 case 'msgAlert':
+                                                    break
                                                 case 'weatherWidget':
+                                                    break
                                             }
                                         }
                                     })
@@ -141,6 +177,27 @@ export const settingsMenu = () => {
                                 settingsFriend(qs('#friendsOn'))
                             }
 
+                            // footer buttons area start
+                            let resetSettings = ce('a', {
+                                href: '#',
+                                class: 'stnd-link stnd-link_arr',
+                                id: 'sp_plus_reset',
+                                html: '<span class="b" style="color: #f86934"><span class="sp sp-alert"></span> Сброс настроек<span class="ico ico_arr ico_m"></span></span>',
+                                style: 'font-size: small',
+                                onclick: () => {
+                                    confirmBox('Вы действительно хотите сбросить настройки?', false, () => {
+                                        delCookie('SP_PLUS_SET')
+                                        delCookie('gp_left_btn')
+                                        delCookie('force_ajax_transport')
+                                        delCookie('sandbox')
+                                        document.location.reload()
+                                    })
+                                    return false
+                                }
+                            });
+                            setArea.appendChild(resetSettings)
+                            // footer buttons area end
+
                             // footer start
                             let aboutWidget = ce('div', { class: 'widgets-group widgets-group_top nl wbg' })
                             let content = ce('div', { class: 'content-item3' })
@@ -151,7 +208,7 @@ export const settingsMenu = () => {
 
                             let ver = ce('div', {
                                 style: 'float: right',
-                                html: 'v' + rever(VER)
+                                html: 'v' + VER
                             })
 
                             aboutWidget.appendChild(content)

@@ -1,4 +1,3 @@
-
 export interface Link {
     URL: string
     callstack: string

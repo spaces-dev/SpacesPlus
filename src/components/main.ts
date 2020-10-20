@@ -17,9 +17,8 @@ export const main = () => {
 
     if (_SETTINGS.e.fixes) oldHeader()
     if (_SETTINGS.e.sticker) freeStickers()
-    
+
     sidebarButton()
-    
     setInterval(() => {
         if (_SETTINGS.e.friendsOn) friendsOnline()
         settingsMenu()

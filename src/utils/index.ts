@@ -10,8 +10,11 @@ import { extend } from './extend'
 import { getQuery } from './getQuery'
 import { inBefore } from './inBefore'
 import { getCookie } from './getCookie'
+import { delCookie } from './delCookie'
 import { setCookie } from './setCookie'
+import { confirmBox } from './confirmBox'
 import { messageBox } from './messageBox'
+import { historyPush } from './historyPush'
 import { insertAfter } from './insertAfter'
 import { readSettings } from './readSettings'
 import { log, info, error, debug } from './console'
@@ -20,7 +23,7 @@ export {
     ce, qs, log, info, error, debug,
     css, extend, find, getCookie,
     setCookie, http, insertAfter,
-    messageBox, readSettings,
-    rever, trim, getQuery,
-    inBefore, remove
+    messageBox, readSettings, confirmBox,
+    rever, trim, getQuery, historyPush,
+    inBefore, remove, delCookie
 }
