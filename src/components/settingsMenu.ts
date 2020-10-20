@@ -20,6 +20,7 @@ import { SPACES, PATHNAME, HREF, VER } from '../types/base'
 
 import { scrollMove } from './scrollMove'
 import { friendsOnline } from './friendsOnline'
+import { settingsBackupMenu } from './settingsBackupMenu'
 import { settingsFriend } from './settingsFriends'
 import { changelogMenu } from './changelogMenu'
 
@@ -179,6 +180,32 @@ export const settingsMenu = () => {
                             }
 
                             // footer buttons area start
+
+                            // spaces+ backup start
+                            var SettingsBackup = ce('a', {
+                                href: `${SPACES}/settings/?sp_plus_settings=1&sp_backup=1`,
+                                class: 'stnd-link stnd-link_arr',
+                                id: 'sp_backup',
+                                html: '<span class="b" style="color: #2e7d32"><span class="sp sp-backup-g"></span> Импорт и экспорт параметров<span class="ico ico_arr ico_m"></span></span>',
+                                style: 'font-size: small',
+                                onclick: () => {
+                                    qs('#SP_PLUS_SETHEAD').innerHTML = 'Импорт и экспорт параметров'
+                                    qs('#SP_PLUS_SETHEAD2').innerHTML = `<a href="${SPACES}/settings/?sp_plus_settings=1" style="margin-bottom: 1px">Spaces+</a><span class="location-bar__sep ico"></span> Импорт и экспорт параметров`
+                                    // TODO: ???
+                                    // @ts-ignore
+                                    qs("#SP_PLUS_SETBACK").href = `${SPACES}/settings/?sp_plus_settings=1`
+                                    if (!/(\&)sp_backup=1/i.test(HREF)) {
+                                        historyPush({
+                                            'sp_plus_settings': urlSett,
+                                            'sp_backup': urlSettBackup
+                                        }, `${SPACES}/settings/?sp_plus_settings=1&sp_backup=1`, 'Spaces+: Импорт и экспорт параметров')
+                                    }
+                                    settingsBackupMenu('#SP_PLUS_SETAREA')
+                                    return false
+                                }
+                            })
+                            setArea.appendChild(SettingsBackup)
+                            // spaces+ backup end
 
                             // changelog menu start
                             const ChangeLogMenu = ce('a', {

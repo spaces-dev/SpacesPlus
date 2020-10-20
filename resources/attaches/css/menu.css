@@ -30,6 +30,17 @@
     transform: rotate(90deg) !important
 }
 
+.sp_plus_btn_list {
+    width: 50%;
+    display: inline-block;
+    box-sizing: border-box !important
+}
+
+.sp_plus_err_l {
+    padding-left: 30px;
+    font-size: small
+}
+
 .sp_plus_line_c:before {
     content: '';
     display: block;
