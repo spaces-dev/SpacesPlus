@@ -1,1 +1,1 @@
-export const qs = (e: string) => document.querySelector(e)
+export const qs = (e: string) => (document.querySelector(e) as Element)

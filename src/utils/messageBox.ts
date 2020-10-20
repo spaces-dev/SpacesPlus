@@ -21,7 +21,7 @@ export const messageBox = (html: any, close: boolean, timer: boolean) => {
     }
     if (!timer) {
         setTimeout(() => {
-            Main?.parentNode?.parentNode?.removeChild(Container)
+            Main.parentNode?.parentNode?.removeChild(Container)
         }, 4000)
     }
 }

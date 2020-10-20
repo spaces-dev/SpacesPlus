@@ -13,7 +13,7 @@ export const userStatus = (code: string | undefined) => {
         })
 
         if (code === '01001') unSupported.prepend(noAuthorized)
-        qs('#main_wrap')?.prepend(unSupported)
+        qs('#main_wrap').prepend(unSupported)
         return false
     }
 
@@ -24,7 +24,7 @@ export const userStatus = (code: string | undefined) => {
         })
 
         messageBox.prepend(noAuthorized)
-        qs('#top_info_block')?.prepend(messageBox)
+        qs('#top_info_block').prepend(messageBox)
         return false
     }
 

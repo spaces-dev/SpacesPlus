@@ -13,6 +13,7 @@ import { getCookie } from './getCookie'
 import { delCookie } from './delCookie'
 import { setCookie } from './setCookie'
 import { confirmBox } from './confirmBox'
+import { getUpdater } from './getUpdater'
 import { messageBox } from './messageBox'
 import { historyPush } from './historyPush'
 import { insertAfter } from './insertAfter'
@@ -25,5 +26,5 @@ export {
     setCookie, http, insertAfter,
     messageBox, readSettings, confirmBox,
     rever, trim, getQuery, historyPush,
-    inBefore, remove, delCookie
+    inBefore, remove, delCookie, getUpdater
 }

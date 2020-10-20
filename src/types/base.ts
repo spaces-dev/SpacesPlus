@@ -11,6 +11,7 @@ const REVISION: number = Number(new Date())
 const BASE_URL: string = document.location.hostname
 const DEVICE: IDevice = window.Device || unsafeWindow.Device
 const GITHUB: string = 'spaces-dev.github.io'
+const SPACES: string = `${HTTP}//${BASE_URL}`
 
 class OVERRIDE {
     public static VERSION: number = Number(VER.split('.').join(''))
@@ -27,5 +28,6 @@ export {
     BASE_URL,
     DEVICE,
     GITHUB,
+    SPACES,
     OVERRIDE
 }

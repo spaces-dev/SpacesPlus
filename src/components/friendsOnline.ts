@@ -2,7 +2,7 @@ import { ce, qs, remove, info, error, extend, find, http } from '../utils'
 
 import { FriendsOnline } from '../interfaces/FriendsOnline'
 
-import { HTTP, BASE_URL } from '../types/base'
+import { HTTP, SPACES } from '../types/base'
 import { _SETTINGS } from '../types/Settings'
 
 export const friendsOnline = (t?: boolean) => {
@@ -68,19 +68,17 @@ export const friendsOnline = (t?: boolean) => {
                         class: 'list-link__wrap'
                     })
 
-                    http<FriendsOnline>('GET', `${HTTP}//${BASE_URL}/friends/?S=3`, true).then(e => {
-                        if (e.status === 200) {
-                            let json = e.parsedBody
-                            let tempfriendsList = json?.tabbed_panel.tabs[1].content.list
+                    http<FriendsOnline>('GET', `${SPACES}/friends/?S=3`, true).then(e => {
+                        const json = e.parsedBody
 
-                            // Uncaught (in promise) TypeError: Cannot read property 'tabs'
-                            // of undefine at eval
+                        if (e.status === 200 && json?.tabbed_panel) {
+                            let tempfriendsList = json.tabbed_panel.tabs[1].content.list
 
                             if (tempfriendsList) {
-                                http<FriendsOnline>('GET', `${HTTP}//${BASE_URL}/friends/?P=2&S=3`, true).then(e => {
+                                http<FriendsOnline>('GET', `${SPACES}/friends/?P=2&S=3`, true).then(e => {
 
                                     let disableAvatar = find(document.getElementsByTagName('span'), { className: 's_i s_i_exit' })
-                                    let friendsList = e.parsedBody?.tabbed_panel.tabs[1].content.list
+                                    let friendsList = json.tabbed_panel.tabs[1].content.list
 
                                     friendsList ?
                                         friendsList = extend(tempfriendsList, friendsList) :
@@ -90,26 +88,26 @@ export const friendsOnline = (t?: boolean) => {
 
                                     let lengthList = (
                                         _SETTINGS.e.friendsOnMax >
-                                            friendsList!.length ?
-                                            friendsList!.length :
+                                            friendsList.length ?
+                                            friendsList.length :
                                             _SETTINGS.e.friendsOnMax
                                     )
 
-                                    if (countFriends !== friendsList!.length && reCount < 3) {
+                                    if (countFriends !== friendsList.length && reCount < 3) {
                                         reCount++
                                         setTimeout(() => {
-                                            countFriends = friendsList!.length
+                                            countFriends = friendsList.length
                                             info(`[S+] Количество друзей не точное, пробуем еще раз (${reCount} из 3)`)
                                         }, 1000)
-                                    } else if (countFriends == friendsList!.length) { reCount = 0 }
+                                    } else if (countFriends == friendsList.length) { reCount = 0 }
 
                                     for (let i = 0; i < lengthList; i++) {
                                         frOnDiv.appendChild(ce('a', {
-                                            href: `${HTTP}//${BASE_URL}/mysite/index/${friendsList![i].name}/`,
+                                            href: `${SPACES}/mysite/${friendsList[i].name}`,
                                             class: 'li',
                                             html: (disableAvatar ?
-                                                `<span class="comm_ava m for_avatar"><img src="${friendsList![i].avatar.previewURL}" class="preview s21_20"></span>` : '') +
-                                                `<span class="online-status m"><img class="p14 online_status_ico" src="${HTTP}//spac.me/i/${friendsList![i].online_status.on_img}" alt="(ON)"></span><span class="block-item__title m break-word">${friendsList![i].name}</span>`
+                                                `<span class="comm_ava m for_avatar"><img src="${friendsList[i].avatar.previewURL}" class="preview s21_20"></span>` : '') +
+                                                `<span class="online-status m"><img class="p14 online_status_ico" src="${HTTP}//spac.me/i/${friendsList[i].online_status.on_img}" alt="(ON)"></span><span class="block-item__title m break-word">${friendsList[i].name}</span>`
                                         }))
                                     }
 
@@ -126,7 +124,7 @@ export const friendsOnline = (t?: boolean) => {
                 if (frOnDiv) { remove(frOnDiv) }
             }
         } catch (e) {
-            error('Ошибка (friendsOnline): ' + e)
+            error('Ошибка (friendsOnline.ts): ' + e)
         }
     }
 }

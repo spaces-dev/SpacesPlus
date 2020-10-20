@@ -44,6 +44,16 @@
     position: relative
 }
 
+.sp_plus_c_desc {
+    font-size: small;
+    margin-left: 3rem
+}
+
+.sp_plus_c_wrap {
+    padding: 5px 15px 5px 16px;
+    display: block
+}
+
 ul.list>li {
     margin: 10px
 }
