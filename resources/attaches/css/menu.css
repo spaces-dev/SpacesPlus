@@ -30,6 +30,19 @@
     transform: rotate(90deg) !important
 }
 
+.sp_newbq_l {
+    border-top: 1px solid #c5d3e1 !important;
+}
+
+.sp_font_sm {
+    font-size: small !important
+}
+
+.sp_last_btn {
+    font-size: small;
+    border-bottom: unset !important
+}
+
 .sp_plus_btn_list {
     width: 50%;
     display: inline-block;

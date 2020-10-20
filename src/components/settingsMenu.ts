@@ -22,6 +22,7 @@ import { scrollMove } from './scrollMove'
 import { friendsOnline } from './friendsOnline'
 import { settingsBackupMenu } from './settingsBackupMenu'
 import { settingsFriend } from './settingsFriends'
+import { settingsFeatures } from './settingsFeatures'
 import { changelogMenu } from './changelogMenu'
 
 export const settingsMenu = () => {
@@ -180,14 +181,61 @@ export const settingsMenu = () => {
                             }
 
                             // footer buttons area start
+                            var spacesLabel1 = ce('div', {
+                                class: 'sp_plus_line',
+                                html: '<span class="sp_plus_text">Встроенные возможности сайта</span>'
+                            })
+
+                            var spacesLabel2 = ce('div', {
+                                class: 'sp_plus_line',
+                                html: '<span class="sp_plus_text">Дополнительные функции</span>'
+                            })
+
+                            var spacesLabel3 = ce('div', {
+                                class: 'sp_plus_line',
+                                html: '<span class="sp_plus_text">Прочее</span>'
+                            })
+
+                            setArea.appendChild(spacesLabel1)
+
+                            settingsFeatures(setArea)
+
+                            // TODO: newbequest()
+                            setArea.appendChild(spacesLabel2)
+
+                            // cookie editor start
+                            const CookieEditor = ce("a", {
+                                href: `${SPACES}/settings/?sp_plus_settings=1&sp_cookie_editor=1`,
+                                class: "stnd-link stnd-link_arr sp_last_btn",
+                                id: "sp_cookie_editor",
+                                html: "<span class='b'><span class='sp sp-write-grey'></span> Редактор cookies<span class='ico ico_arr ico_m'></span></span>",
+                                onclick: function () {
+                                    qs("#SP_PLUS_SETHEAD").innerHTML = 'Редактор cookies';
+                                    qs("#SP_PLUS_SETHEAD2").innerHTML = `<a href="${SPACES}/settings/?sp_plus_settings=1" style="margin-bottom: 1px">Spaces+</a><span class="location-bar__sep ico"></span> Редактор cookies`
+                                    // TODO: ???
+                                    // @ts-ignore
+                                    qs("#SP_PLUS_SETBACK").href = `${SPACES}/settings/?sp_plus_settings=1`
+                                    if (!/(\&)sp_cookie_editor=1/i.test(HREF)) {
+                                        historyPush({
+                                            'sp_plus_settings': urlSett,
+                                            'sp_cookie_editor': urlSettEditor
+                                        }, `${SPACES}/settings/?sp_plus_settings=1&sp_cookie_editor=1`, `Spaces+: Редактор cookies`)
+                                    }
+                                    //("#SP_PLUS_SETAREA");
+                                    return false
+                                }
+                            })
+                            setArea.appendChild(CookieEditor)
+                            // cookie editor end
+
+                            setArea.appendChild(spacesLabel3)
 
                             // spaces+ backup start
-                            var SettingsBackup = ce('a', {
+                            const SettingsBackup = ce('a', {
                                 href: `${SPACES}/settings/?sp_plus_settings=1&sp_backup=1`,
-                                class: 'stnd-link stnd-link_arr',
+                                class: 'stnd-link stnd-link_arr sp_font_sm',
                                 id: 'sp_backup',
                                 html: '<span class="b" style="color: #2e7d32"><span class="sp sp-backup-g"></span> Импорт и экспорт параметров<span class="ico ico_arr ico_m"></span></span>',
-                                style: 'font-size: small',
                                 onclick: () => {
                                     qs('#SP_PLUS_SETHEAD').innerHTML = 'Импорт и экспорт параметров'
                                     qs('#SP_PLUS_SETHEAD2').innerHTML = `<a href="${SPACES}/settings/?sp_plus_settings=1" style="margin-bottom: 1px">Spaces+</a><span class="location-bar__sep ico"></span> Импорт и экспорт параметров`
@@ -210,10 +258,9 @@ export const settingsMenu = () => {
                             // changelog menu start
                             const ChangeLogMenu = ce('a', {
                                 href: `${SPACES}/settings/?sp_plus_settings=1&sp_changelog=1`,
-                                class: 'stnd-link stnd-link_arr',
+                                class: 'stnd-link stnd-link_arr sp_font_sm',
                                 id: 'sp_changelog',
                                 html: '<span class="b" style="color: #2196f3"><span class="sp sp-restore-blue"></span> История обновлений<span class="ico ico_arr ico_m"></span></span>',
-                                style: 'font-size: small',
                                 onclick: () => {
                                     qs('#SP_PLUS_SETHEAD').innerHTML = 'История обновлений'
                                     qs('#SP_PLUS_SETHEAD2').innerHTML = `<a href="${SPACES}/settings/?sp_plus_settings=1" style="margin-bottom: 1px">Spaces+</a><span class="location-bar__sep ico"></span> История обновлений`
@@ -236,10 +283,9 @@ export const settingsMenu = () => {
                             // reset button start
                             const ResetSettings = ce('a', {
                                 href: '#',
-                                class: 'stnd-link stnd-link_arr',
+                                class: 'stnd-link stnd-link_arr sp_font_sm',
                                 id: 'sp_plus_reset',
                                 html: '<span class="b" style="color: #f86934"><span class="sp sp-alert"></span> Сброс настроек<span class="ico ico_arr ico_m"></span></span>',
-                                style: 'font-size: small',
                                 onclick: () => {
                                     confirmBox('Вы действительно хотите сбросить настройки?', false, () => {
                                         delCookie('SP_PLUS_SET')
