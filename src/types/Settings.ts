@@ -52,6 +52,7 @@ export let _SETTINGS: ISettings = {
     'fixes': true,
     'bodystyle': true,
     'upVersion': OVERRIDE.VERSION,
+    'videoSpeed': 1,
     'bodystyleSetting': {
         'url': `https://${GITHUB}/src/backgrounds/default.jpg`,
         'color': '#DAE1E8',

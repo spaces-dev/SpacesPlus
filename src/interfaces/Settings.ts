@@ -63,6 +63,7 @@ export interface ISettings {
     fixes: boolean
     bodystyle: boolean
     upVersion: number
+    videoSpeed: number
     bodystyleSetting: BodystyleSetting
     events: Events
     friendsOnMax: number
