@@ -52,7 +52,7 @@ export interface ISettings {
     hrightbar: boolean
     apidebug: boolean
     playerdn: boolean
-    nredirect: boolean
+    dredirect: boolean
     coins: boolean
     karma: boolean
     online: boolean
