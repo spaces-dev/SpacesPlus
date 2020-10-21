@@ -21,6 +21,7 @@
         "clean-webpack-plugin": "^3.0.0",
         "copy-webpack-plugin": "^6.2.1",
         "cross-env": "^7.0.2",
+        "optimize-css-assets-webpack-plugin": "^5.0.4",
         "ts-loader": "^8.0.4",
         "ts-node": "^9.0.0",
         "typescript": "^4.0.2",

@@ -4,7 +4,8 @@ import WebpackUserscript from 'webpack-userscript'
 import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 import userscriptConfig from './userscript.config'
 
-const CopyPlugin = require('copy-webpack-plugin')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const outputPath = path.resolve(__dirname, 'dist')
 const fileName = userscriptConfig.scriptFileName
 const isDev = process.env.NODE_ENV === 'development'
@@ -54,7 +55,13 @@ const config: webpack.Configuration = {
         extensions: ['.ts', '.js']
     },
     optimization: {
-        minimize: !isDev
+        minimize: !isDev,
+        minimizer: [
+            new OptimizeCSSAssetsPlugin({
+                assetNameRegExp: /\.css$/g,
+                cssProcessor: require('cssnano')
+            })
+        ]
     },
     devServer: {
         https: HTTPS,
@@ -69,7 +76,8 @@ const config: webpack.Configuration = {
         liveReload: false
     },
     plugins: [
-        new CopyPlugin({
+        new CleanWebpackPlugin(),
+        new CopyWebpackPlugin({
             patterns: [
                 {
                     from: 'resources/updater.json'
@@ -80,7 +88,6 @@ const config: webpack.Configuration = {
                 }
             ]
         }),
-        new CleanWebpackPlugin(),
         new WebpackUserscript({
             headers: userscriptConfig.scriptHeaders,
             pretty: isDev
