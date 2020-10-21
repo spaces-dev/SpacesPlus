@@ -45,8 +45,10 @@ export interface ISettings {
     blogsd: boolean
     readersd: boolean
     favorite: boolean
-    rotate: boolean
+    grotate: boolean
+    angle: number
     playback: boolean
+    videoSpeed: number
     blocked: boolean
     rscroll: boolean
     hrightbar: boolean
@@ -63,7 +65,6 @@ export interface ISettings {
     fixes: boolean
     bodystyle: boolean
     upVersion: number
-    videoSpeed: number
     bodystyleSetting: BodystyleSetting
     events: Events
     friendsOnMax: number
