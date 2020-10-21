@@ -30,8 +30,12 @@
     transform: rotate(90deg) !important
 }
 
+.mr-14 {
+    margin-right: 14px !important
+}
+
 .sp_newbq_l {
-    border-top: 1px solid #c5d3e1 !important;
+    border-top: 1px solid #c5d3e1 !important
 }
 
 .sp_font_sm {

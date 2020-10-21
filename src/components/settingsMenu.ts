@@ -171,7 +171,7 @@ export const settingsMenu = () => {
                                 href: `${SPACES}/settings/?sp_plus_settings=1&sp_cookie_editor=1`,
                                 class: 'stnd-link stnd-link_arr sp_last_btn',
                                 id: 'sp_cookie_editor',
-                                html: '<span class="b"><span class="sp sp-write-grey"></span> Редактор cookies<span class="ico ico_arr ico_m"></span></span>',
+                                html: '<span class="b"><span class="sp sp-write-grey mr-14"></span>Редактор cookies<span class="ico ico_arr ico_m"></span></span>',
                                 onclick: () => {
                                     qs('#SP_PLUS_SETHEAD').innerHTML = 'Редактор cookies';
                                     qs('#SP_PLUS_SETHEAD2').innerHTML = `<a href="${SPACES}/settings/?sp_plus_settings=1" style="margin-bottom: 1px">Spaces+</a><span class="location-bar__sep ico"></span> Редактор cookies`
@@ -198,7 +198,7 @@ export const settingsMenu = () => {
                                 href: `${SPACES}/settings/?sp_plus_settings=1&sp_backup=1`,
                                 class: 'stnd-link stnd-link_arr sp_font_sm',
                                 id: 'sp_backup',
-                                html: '<span class="b" style="color: #2e7d32"><span class="sp sp-backup-g"></span> Импорт и экспорт параметров<span class="ico ico_arr ico_m"></span></span>',
+                                html: '<span class="b" style="color: #2e7d32"><span class="sp sp-backup-g mr-14"></span>Импорт и экспорт параметров<span class="ico ico_arr ico_m"></span></span>',
                                 onclick: () => {
                                     qs('#SP_PLUS_SETHEAD').innerHTML = 'Импорт и экспорт параметров'
                                     qs('#SP_PLUS_SETHEAD2').innerHTML = `<a href="${SPACES}/settings/?sp_plus_settings=1" style="margin-bottom: 1px">Spaces+</a><span class="location-bar__sep ico"></span> Импорт и экспорт параметров`
@@ -223,7 +223,7 @@ export const settingsMenu = () => {
                                 href: `${SPACES}/settings/?sp_plus_settings=1&sp_changelog=1`,
                                 class: 'stnd-link stnd-link_arr sp_font_sm',
                                 id: 'sp_changelog',
-                                html: '<span class="b" style="color: #2196f3"><span class="sp sp-restore-blue"></span> История обновлений<span class="ico ico_arr ico_m"></span></span>',
+                                html: '<span class="b" style="color: #2196f3"><span class="sp sp-restore-blue mr-14"></span>История обновлений<span class="ico ico_arr ico_m"></span></span>',
                                 onclick: () => {
                                     qs('#SP_PLUS_SETHEAD').innerHTML = 'История обновлений'
                                     qs('#SP_PLUS_SETHEAD2').innerHTML = `<a href="${SPACES}/settings/?sp_plus_settings=1" style="margin-bottom: 1px">Spaces+</a><span class="location-bar__sep ico"></span> История обновлений`
@@ -248,7 +248,7 @@ export const settingsMenu = () => {
                                 href: '#',
                                 class: 'stnd-link stnd-link_arr sp_font_sm',
                                 id: 'sp_plus_reset',
-                                html: '<span class="b" style="color: #f86934"><span class="sp sp-alert"></span> Сброс настроек<span class="ico ico_arr ico_m"></span></span>',
+                                html: '<span class="b" style="color: #f86934"><span class="sp sp-alert mr-14"></span>Сброс настроек<span class="ico ico_arr ico_m"></span></span>',
                                 onclick: () => {
                                     confirmBox('Вы действительно хотите сбросить настройки?', false, () => {
                                         delCookie('SP_PLUS_SET')
