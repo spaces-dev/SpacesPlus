@@ -1,6 +1,6 @@
 import { qs, http, error } from './utils'
 
-import { SPACES } from './types/base'
+import { SPACES } from './types/strings'
 
 import { SessionCheck } from './interfaces/SessionCheck'
 

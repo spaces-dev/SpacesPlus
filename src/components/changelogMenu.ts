@@ -2,7 +2,7 @@ import { ce, qs, error, remove, rever, getUpdater } from '../utils'
 
 import { CheckUpdates } from '../interfaces/CheckUpdates'
 
-import { HTTP } from '../types/base'
+import { HTTP } from '../types/strings'
 
 export const changelogMenu = (id: string) => {
     window.scrollTo(0, 0)

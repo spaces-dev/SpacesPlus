@@ -2,10 +2,16 @@ import { ce, qs, http, setCookie, delCookie, remove, confirmBox, inBefore, error
 
 import { IGetJSON } from '../interfaces/GetJSON'
 
-import { HTTP } from '../types/base'
-import { _SETTINGS } from '../types/Settings'
+import { HTTP } from '../types/strings'
+import { _SETTINGS } from '../types/settings'
 
-// TODO: Возможно вынести в utils
+/**
+ * JSON Validator API (https://gist.github.com/crashmax-off/f86350b8a4b85311ac8676a906b973eb) 
+ * https://crashmax.ru/api/getJSON
+ * TODO: Возможно вынести в utils???
+ * @param data convert json using JSON.stringfy()
+ * @param callback response function
+ */
 const getJSON = (data: string, callback: Function) => {
     try {
         http<IGetJSON>('POST', 'https://crashmax.ru/api/getJSON', false, data).then(e => {
@@ -16,10 +22,13 @@ const getJSON = (data: string, callback: Function) => {
     }
 }
 
-// TODO:
-// Сделать нормальный обработчик ошибок
-// Cохрание без перезагрузки страницы
-// Cохранение .json на рабочий стол
+/**
+ * TODO:
+ * ? Сделать нормальный обработчик ошибок
+ * ? Cохрание без перезагрузки страницы
+ * ? Cохранение .json на рабочий стол
+ * @param id #querySelector
+ */
 export const settingsBackupMenu = (id: string) => {
     window.scrollTo(0, 0)
     const target = qs(id)
@@ -30,14 +39,14 @@ export const settingsBackupMenu = (id: string) => {
             let textarea: any
             let wrap = ce('div', { class: 'content-bl' })
 
-            if (!_SETTINGS.e.hideNotyf.configImport) {
+            if (!_SETTINGS.hideNotyf.configImport) {
                 let hideNotyf = ce('span', {
                     class: 'sp sp-remove-grey pointer right notif_close close_h',
                     style: 'margin: 10px',
                     title: 'Понятно, больше не показывать.',
                     onclick: function () {
-                        _SETTINGS.e.hideNotyf.configImport = true
-                        setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS.e))
+                        _SETTINGS.hideNotyf.configImport = true
+                        setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
                         remove(qs('#SP_CONFIG_JSON'))
                     }
                 })
@@ -111,7 +120,7 @@ export const settingsBackupMenu = (id: string) => {
                 }
             })
 
-            let params = 'value=' + JSON.stringify(_SETTINGS.e)
+            let params = 'value=' + JSON.stringify(_SETTINGS)
             getJSON(params, (json: IGetJSON) => {
                 textarea = ce('textarea', {
                     class: 'text-input',

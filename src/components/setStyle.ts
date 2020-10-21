@@ -1,7 +1,7 @@
 import { qs, ce } from '../utils'
 
-import { ENV, GITHUB, REVISION } from '../types/base'
-import { _SETTINGS } from '../types/Settings'
+import { ENV, GITHUB, REVISION } from '../types/strings'
+import { _SETTINGS } from '../types/settings'
 
 export const setStyle = () => {
     let stl = qs('#SP_PLUS_INJSTYLE') || ce('style', {
@@ -20,11 +20,11 @@ export const setStyle = () => {
         document.getElementsByTagName('head')[0].appendChild(menu)
     }
 
-    if (_SETTINGS.e.bodystyle) {
-        if (_SETTINGS.e.bodystyleSetting.url && _SETTINGS.e.bodystyleSetting.urlchecked)
-            stl.innerHTML = `body,#main_wrap{background-image:url(${_SETTINGS.e.bodystyleSetting.url})}`
-        if (_SETTINGS.e.bodystyleSetting.color && _SETTINGS.e.bodystyleSetting.colorchecked)
-            stl.innerHTML = `body,#main_wrap{background-color:${_SETTINGS.e.bodystyleSetting.color}}`
+    if (_SETTINGS.bodystyle) {
+        if (_SETTINGS.bodystyleSetting.url && _SETTINGS.bodystyleSetting.urlchecked)
+            stl.innerHTML = `body,#main_wrap{background-image:url(${_SETTINGS.bodystyleSetting.url})}`
+        if (_SETTINGS.bodystyleSetting.color && _SETTINGS.bodystyleSetting.colorchecked)
+            stl.innerHTML = `body,#main_wrap{background-color:${_SETTINGS.bodystyleSetting.color}}`
     }
 
     document.getElementsByTagName('head')[0].appendChild(stl)

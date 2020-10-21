@@ -3,66 +3,29 @@ import {
     qs,
     find,
     error,
-    rever,
     remove,
+    getPath,
     inBefore,
     getQuery,
     setCookie,
     delCookie,
+    confirmBox,
     historyPush,
     insertAfter,
-    confirmBox
 } from '../utils'
 
-import { _SETTINGS } from '../types/Settings'
-import { _SETSTRINGS } from '../types/setStrings'
-import { SPACES, PATHNAME, HREF, VER } from '../types/base'
+import { _SETSTRINGS, _SETTINGS } from '../types/settings'
+import { SPACES, HREF, PKG_VERSION } from '../types/strings'
 
 import { scrollMove } from './scrollMove'
 import { friendsOnline } from './friendsOnline'
-import { settingsBackupMenu } from './settingsBackupMenu'
+import { changelogMenu } from './changelogMenu'
 import { settingsFriend } from './settingsFriends'
 import { settingsFeatures } from './settingsFeatures'
-import { changelogMenu } from './changelogMenu'
+import { settingsBackupMenu } from './settingsBackupMenu'
 
 export const settingsMenu = () => {
-
-    const {
-        comments,
-        blogsd,
-        readersd,
-        favorite,
-        rotate,
-        playback,
-        blocked,
-        rscroll,
-        hrightbar,
-        apidebug,
-        playerdn,
-        nredirect,
-        coins,
-        karma,
-        online,
-        ads,
-        myEvents,
-        friendsOn,
-        sticker,
-        fixes,
-        bodystyle,
-        upVersion,
-        bodystyleSetting,
-        events,
-        friendsOnMax,
-        friendsListSH,
-        friendsDisplay,
-        hideNotyf,
-        msgAlert,
-        msgAlertSettings,
-        weatherWidget,
-        weatherSettings
-    } = _SETTINGS.e
-
-    if (PATHNAME === '/settings/' && !qs('#SP_PLUS_SETLINK')) {
+    if (getPath() === '/settings/' && !qs('#SP_PLUS_SETLINK')) {
         try {
             // TODO: interface
             let entryLink: any = find(document.links, { href: `${SPACES}/settings/notification/?` })
@@ -78,7 +41,7 @@ export const settingsMenu = () => {
                     id: 'SP_PLUS_SETLINK',
                     class: entryLink.className,
                     html: '<span>Настройки Spaces+</span><span class="ico ico_arr ico_m"></span>',
-                    onclick: function () {
+                    onclick: () => {
                         // TODO: interface
                         let prnt: any = qs('#SP_PLUS_SETLINK').parentElement?.parentNode?.parentNode?.parentNode
                         if (prnt.id === 'main') {
@@ -91,17 +54,17 @@ export const settingsMenu = () => {
                         const setArea = qs('#SP_PLUS_SETAREA')
                         const eventAlert = qs('#SP_PLUS_ALERT')
                         if (setArea) {
-                            for (let i in _SETTINGS.e) {
+                            for (let i in _SETTINGS) {
                                 if (typeof _SETSTRINGS[i] !== 'undefined') {
                                     let checkbox = ce('input', {
                                         id: i,
                                         type: 'checkbox',
                                         class: 'sp-checkbox-square',
-                                        checked: _SETTINGS.e[i],
+                                        checked: _SETTINGS[i],
                                         onclick: (e: any) => {
                                             const { id, checked } = e.target
-                                            _SETTINGS.e[id] = checked
-                                            setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS.e))
+                                            _SETTINGS[id] = checked
+                                            setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
 
                                             console.log(e.target.id + ": " + e.target.checked)
 
@@ -140,13 +103,13 @@ export const settingsMenu = () => {
                                                 case 'myEvents':
                                                     break
                                                 case 'friendsOn':
-                                                    /*friendsOnline(e.target.checked)
+                                                    friendsOnline(e.target.checked)
                                                     if (e.target.checked) {
                                                         settingsFriend(e.target)
                                                     } else {
                                                         let frMaxWrap = qs("#SP_PLUS_MAXFRIENDS")
                                                         if (frMaxWrap) { remove(frMaxWrap) }
-                                                    }*/
+                                                    }
                                                     break
                                                 case 'sticker':
                                                     break
@@ -176,7 +139,7 @@ export const settingsMenu = () => {
                                 }
                             }
 
-                            if (friendsOn) {
+                            if (_SETTINGS.friendsOn) {
                                 settingsFriend(qs('#friendsOn'))
                             }
 
@@ -204,22 +167,22 @@ export const settingsMenu = () => {
                             setArea.appendChild(spacesLabel2)
 
                             // cookie editor start
-                            const CookieEditor = ce("a", {
+                            const CookieEditor = ce('a', {
                                 href: `${SPACES}/settings/?sp_plus_settings=1&sp_cookie_editor=1`,
-                                class: "stnd-link stnd-link_arr sp_last_btn",
-                                id: "sp_cookie_editor",
-                                html: "<span class='b'><span class='sp sp-write-grey'></span> Редактор cookies<span class='ico ico_arr ico_m'></span></span>",
-                                onclick: function () {
-                                    qs("#SP_PLUS_SETHEAD").innerHTML = 'Редактор cookies';
-                                    qs("#SP_PLUS_SETHEAD2").innerHTML = `<a href="${SPACES}/settings/?sp_plus_settings=1" style="margin-bottom: 1px">Spaces+</a><span class="location-bar__sep ico"></span> Редактор cookies`
+                                class: 'stnd-link stnd-link_arr sp_last_btn',
+                                id: 'sp_cookie_editor',
+                                html: '<span class="b"><span class="sp sp-write-grey"></span> Редактор cookies<span class="ico ico_arr ico_m"></span></span>',
+                                onclick: () => {
+                                    qs('#SP_PLUS_SETHEAD').innerHTML = 'Редактор cookies';
+                                    qs('#SP_PLUS_SETHEAD2').innerHTML = `<a href="${SPACES}/settings/?sp_plus_settings=1" style="margin-bottom: 1px">Spaces+</a><span class="location-bar__sep ico"></span> Редактор cookies`
                                     // TODO: ???
                                     // @ts-ignore
-                                    qs("#SP_PLUS_SETBACK").href = `${SPACES}/settings/?sp_plus_settings=1`
+                                    qs('#SP_PLUS_SETBACK').href = `${SPACES}/settings/?sp_plus_settings=1`
                                     if (!/(\&)sp_cookie_editor=1/i.test(HREF)) {
                                         historyPush({
                                             'sp_plus_settings': urlSett,
                                             'sp_cookie_editor': urlSettEditor
-                                        }, `${SPACES}/settings/?sp_plus_settings=1&sp_cookie_editor=1`, `Spaces+: Редактор cookies`)
+                                        }, `${SPACES}/settings/?sp_plus_settings=1&sp_cookie_editor=1`, 'Spaces+: Редактор cookies')
                                     }
                                     //("#SP_PLUS_SETAREA");
                                     return false
@@ -241,7 +204,7 @@ export const settingsMenu = () => {
                                     qs('#SP_PLUS_SETHEAD2').innerHTML = `<a href="${SPACES}/settings/?sp_plus_settings=1" style="margin-bottom: 1px">Spaces+</a><span class="location-bar__sep ico"></span> Импорт и экспорт параметров`
                                     // TODO: ???
                                     // @ts-ignore
-                                    qs("#SP_PLUS_SETBACK").href = `${SPACES}/settings/?sp_plus_settings=1`
+                                    qs('#SP_PLUS_SETBACK').href = `${SPACES}/settings/?sp_plus_settings=1`
                                     if (!/(\&)sp_backup=1/i.test(HREF)) {
                                         historyPush({
                                             'sp_plus_settings': urlSett,
@@ -302,7 +265,7 @@ export const settingsMenu = () => {
 
                             // footer start
                             let aboutWidget = ce('div', { class: 'widgets-group widgets-group_top nl wbg' })
-                            let ver = ce('div', { style: 'float: right', html: 'v' + VER })
+                            let ver = ce('div', { style: 'float: right', html: 'v' + PKG_VERSION })
                             let content = ce('div', { class: 'content-item3' })
                             let title = ce('div', {
                                 class: 'grey',

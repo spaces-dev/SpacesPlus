@@ -1,3 +1,7 @@
+export type setStrings = {
+    readonly [key: string]: string
+}
+
 export interface BodystyleSetting {
     url: string
     color: string

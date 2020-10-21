@@ -1,6 +1,6 @@
 import { qs, ce } from '../utils'
 
-import { DEVICE } from '../types/base'
+import { DEVICE } from '../types/strings'
 
 export const userStatus = (code: string | undefined) => {
     let noAuthorized = ce('div', { html: 'Для работы <b>Spaces+</b> необходима авторизация!' })

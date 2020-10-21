@@ -2,7 +2,7 @@ import { http, error } from './index'
 
 import { CheckUpdates } from '../interfaces/CheckUpdates'
 
-import { ENV, GITHUB, REVISION } from '../types/base'
+import { ENV, GITHUB, REVISION } from '../types/strings'
 
 export const getUpdater = (callback: Function) => {
     try {

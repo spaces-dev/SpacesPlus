@@ -1,20 +1,19 @@
 import { ce, setCookie, insertAfter, error } from '../utils'
 
 import { friendsOnline } from './friendsOnline'
-import { _SETTINGS } from '../types/Settings'
+import { _SETTINGS } from '../types/settings'
 
 export const settingsFriend = (e?: any) => {
     try {
         let frMaxWrap = ce('div', { id: 'SP_PLUS_MAXFRIENDS' })
         let div = ce('div', { style: 'padding: 11px 15px' })
-        let label = ce('label', { class: 'stnd-link', style: 'border-top: unset' })
 
         let frMax = ce('input', {
             type: 'text',
             class: 'text-input',
             size: 4,
             attr: { maxlength: 2 },
-            value: _SETTINGS.e.friendsOnMax
+            value: _SETTINGS.friendsOnMax
         })
 
         frMax.onchange = frMax.oninput = (e: any) => {
@@ -25,13 +24,9 @@ export const settingsFriend = (e?: any) => {
                     value = 10
                     frMax.className = 'text-input sp-input-error'
                 }
-                /*
-                * TODO: ???
-                * countFriends = 0
-                */
-               _SETTINGS.e.friendsOnMax = value
-                setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS.e))
-                console.log(_SETTINGS.e.friendsOnMax)
+                _SETTINGS.friendsOnMax = value
+                setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
+                console.log(_SETTINGS.friendsOnMax)
                 friendsOnline(true)
             } else {
                 frMax.className = 'text-input sp-input-error'
@@ -43,28 +38,9 @@ export const settingsFriend = (e?: any) => {
             class: 'label'
         })
 
-        let frListSH = ce('input', {
-            type: 'checkbox',
-            id: 'sp_friends_list_sh',
-            class: 'sp-checkbox-square',
-            checked: _SETTINGS.e.friendsListSH,
-            onclick: (e: any) => {
-                _SETTINGS.e.friendsListSH = e.target.checked
-                setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS.e))
-            }
-        })
-
-        let frListSHLbl = ce('label', {
-            attr: { 'for': 'sp_friends_list_sh' },
-            html: 'Скрывать/показывать по клику на счётчике'
-        })
-
         div.appendChild(frMaxLbl)
         div.appendChild(frMax)
-        label.appendChild(frListSH)
-        label.appendChild(frListSHLbl)
         frMaxWrap.appendChild(div)
-        frMaxWrap.appendChild(label)
         insertAfter(frMaxWrap, e.parentNode)
     } catch (e) {
         error('Ошибка (settingsFriends.ts): ' + e)

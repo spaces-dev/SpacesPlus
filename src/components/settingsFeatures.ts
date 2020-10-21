@@ -2,25 +2,25 @@ import { ce, qs, remove, http, getCK, setCookie, getCookie, delCookie, setLocati
 
 import { apiDebugger } from './apiDebugger'
 
-import { _SETTINGS } from '../types/Settings'
-import { HREF, SPACES } from '../types/base'
+import { _SETTINGS } from '../types/settings'
+import { HREF, SPACES } from '../types/strings'
 
 export const settingsFeatures = (root: any) => {
     let wrap = ce('div', { id: 'wrap_spaces_option' })
     let apidebug = ce('a', {
         href: '#',
         class: 'stnd-link stnd-link_arr sp_font_sm',
-        html: _SETTINGS.e.apidebug ?
+        html: _SETTINGS.apidebug ?
             '<span class="b"><span class="sp sp-remove-grey"></span> Отключить отладчик<span class="ico ico_arr ico_m"></span></span>' :
             '<span class="b"><span class="ico ico_settings"></span> Включить отладчик<span class="ico ico_arr ico_m"></span></span>',
         onclick: () => {
-            if (!_SETTINGS.e.apidebug) {
-                _SETTINGS.e.apidebug = true
-                setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS.e))
+            if (!_SETTINGS.apidebug) {
+                _SETTINGS.apidebug = true
+                setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
                 apiDebugger()
                 setLocation(HREF)
             } else {
-                _SETTINGS.e.apidebug = false
+                _SETTINGS.apidebug = false
                 setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
                 remove(qs('#spaces_api_debugger'))
                 setLocation(document.location.href)
