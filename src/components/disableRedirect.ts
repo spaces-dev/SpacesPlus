@@ -6,8 +6,8 @@ export const disableRedirect = () => {
     let urls = find(document.links, { href: `${SPACES}/redirect/?` })
 
     if (urls) {
-        for (let i = 0; i < urls.length; i++) {
-            urls[i].setAttribute('href', getParams(urls[i])['redirect'])
+        for (let url of urls) {
+            url.setAttribute('href', getParams(url)['redirect'])
         }
     }
 }
