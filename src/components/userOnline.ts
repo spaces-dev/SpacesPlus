@@ -29,7 +29,7 @@ export const userOnline = () => {
                         let online = str[0] > 0 ? `${str[0]} ч, ${parseInt(str[1] / (100 / 60), 10)} мин` : `${parseInt(str[1] / (100 / 60), 10)} мин`
                         // @ts-ignore
                         onBlock[0].nextElementSibling.innerHTML = online
-                        info('[S+] Время онлайн: ' + online)
+                        info('Время онлайн: ' + online)
                     }
                 })
             }

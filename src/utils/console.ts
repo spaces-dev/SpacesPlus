@@ -1,7 +1,6 @@
-let date = new Date()
-let prefix = "(" + (date.getHours() < 10 ? '0' : '') + date.getHours() + ':' + (date.getMinutes() < 10 ? '0' : '') + date.getMinutes() + ':' + (date.getSeconds() < 10 ? '0' : '') + date.getSeconds() + ") "
+const date = () => `(${new Date().toString().split(' ')[4]}) [S+] `
 
-export const log = (str: string) => { console.log(prefix + str) }
-export const info = (str: string) => { console.info(prefix + str) }
-export const error = (str: string) => { console.error(prefix + str) }
-export const debug = (str: string) => { console.debug(prefix + str) }
+export const log = (str: string) => console.log(date() + str)
+export const info = (str: string) => console.info(date() + str)
+export const error = (str: string) => console.error(date() + str)
+export const debug = (str: string) => console.debug(date() + str)

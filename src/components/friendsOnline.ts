@@ -29,7 +29,7 @@ export const friendsOnline = (t?: boolean) => {
                 if (frOnDiv) {
                     remove(frOnDiv)
                     countFriends = 0
-                    info('[S+] Убрали панель друзей!')
+                    info('Убрали панель друзей!')
                 }
 
                 friendsForce = 0
@@ -39,7 +39,7 @@ export const friendsOnline = (t?: boolean) => {
                 if (count !== countFriends || (count > 0 && !frOnDiv) || friendsForce >= 700) {
                     if (friendsForce >= 700) {
                         friendsForce = 0
-                        info('[S+] Принудительно обновляем друзей!')
+                        info('Принудительно обновляем друзей!')
                     }
 
                     countFriends = count
@@ -77,7 +77,7 @@ export const friendsOnline = (t?: boolean) => {
                                             reCount++
                                             setTimeout(() => {
                                                 countFriends = friendsList.length
-                                                info(`[S+] Количество друзей не точное, пробуем еще раз (${reCount} из 3)`)
+                                                info(`Количество друзей не точное, пробуем еще раз (${reCount} из 3)`)
                                             }, 1000)
                                         } else if (countFriends === friendsList.length) { reCount = 0 }
 
@@ -91,7 +91,7 @@ export const friendsOnline = (t?: boolean) => {
                                             }))
                                         }
 
-                                        info('[S+] Обновили список друзей!')
+                                        info('Обновили список друзей!')
                                     }
                                 })
                             }
