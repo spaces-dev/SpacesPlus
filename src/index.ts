@@ -3,6 +3,7 @@ import { qs, http, error, readSettings } from './utils'
 import { setStyle } from './components/setStyle'
 import { oldHeader } from './components/oldHeader'
 import { scrollMove } from './components/scrollMove'
+import { userOnline } from './components/userOnline'
 import { userStatus } from './components/userStatus'
 import { checkUpdates } from './components/checkUpdates'
 import { freeStickers } from './components/freeStickers'
@@ -61,6 +62,7 @@ const init = () => {
      * ! Для оптимальной работы выставлен интервал обновления в 200ms
      */
     setInterval(() => {
+        if (_SETTINGS.online) userOnline()
         if (_SETTINGS.rscroll) scrollMove()
         if (_SETTINGS.grotate) galleryRotate()
         if (_SETTINGS.dredirect) disableRedirect()
