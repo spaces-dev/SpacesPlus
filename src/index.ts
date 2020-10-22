@@ -14,6 +14,7 @@ import { settingsMenu } from './components/settingsMenu'
 import { galleryRotate } from './components/galleryRotate'
 import { sidebarButton } from './components/sidebarButton'
 import { friendsOnline } from './components/friendsOnline'
+import { hiddenRightbar } from './components/hiddenRightbar'
 import { playerDownload } from './components/playerDownload'
 import { disableRedirect } from './components/disableRedirect'
 import { videoSpeedPlayback } from './components/videoSpeedPlayback'
@@ -56,10 +57,12 @@ const init = () => {
      * ? Тут перечислены функции, которые срабатывают единоразово,
      * ? далее их изменения отслеживаются в settingsMenu.ts
      */
-    apiDebugger(_SETTINGS.apidebug)
+    scrollMove(_SETTINGS.rscroll)
     oldHeader(_SETTINGS.oldheader)
+    apiDebugger(_SETTINGS.apidebug)
     freeStickers(_SETTINGS.sticker)
     friendsOnline(_SETTINGS.friendsOn)
+    hiddenRightbar(_SETTINGS.hrightbar)
 
     /**
      * ? Тут перечислены функции, которым необходимо постоянно
@@ -70,7 +73,6 @@ const init = () => {
         if (_SETTINGS.coins) coinsAccept()
         if (_SETTINGS.karma) karmaAccept()
         if (_SETTINGS.online) userOnline()
-        if (_SETTINGS.rscroll) scrollMove()
         if (_SETTINGS.grotate) galleryRotate()
         if (_SETTINGS.playerdn) playerDownload()
         if (_SETTINGS.dredirect) disableRedirect()

@@ -2,20 +2,20 @@ import { qs, error } from '../utils'
 
 import { _SETTINGS } from '../types/settings'
 
-export const scrollMove = () => {
-    try {
-        let scroller = qs('#scroll_page')
+export const scrollMove = (b: boolean) => {
+    let scroll = qs('#scroll_page')
 
-        if (scroller && !scroller.hasAttribute('sp-replace')) {
-            scroller.style.left = 'auto'
-            scroller.style.right = '0'
-            scroller.setAttribute('sp-replace', '1')
-        } else if (!_SETTINGS.rscroll && scroller && scroller.hasAttribute('sp-replace')) {
-            scroller.style.left = '0'
-            scroller.style.right = 'auto'
-            scroller.removeAttribute('sp-replace')
+    try {
+        if (b && !scroll.hasAttribute('sp-replace')) {
+            scroll.style.left = 'auto'
+            scroll.style.right = '0'
+            scroll.setAttribute('sp-replace', '1')
+        } else if (!_SETTINGS.rscroll && scroll.hasAttribute('sp-replace')) {
+            scroll.style.left = '0'
+            scroll.style.right = 'auto'
+            scroll.removeAttribute('sp-replace')
         }
     } catch (e) {
-        error('Ошибка (strollMove.ts): ' + e)
+        error('Ошибка (scrollMove.ts): ' + e)
     }
 }

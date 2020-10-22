@@ -15,17 +15,18 @@ import {
     insertAfter,
 } from '../utils'
 
-import { _SETSTRINGS, _SETTINGS } from '../types/settings'
 import { SPACES, PKG_VERSION } from '../types/strings'
+import { _SETSTRINGS, _SETTINGS } from '../types/settings'
 
+import { oldHeader } from './oldHeader'
 import { scrollMove } from './scrollMove'
-import { friendsOnline } from './friendsOnline'
+import { freeStickers } from './freeStickers'
 import { changelogMenu } from './changelogMenu'
+import { friendsOnline } from './friendsOnline'
+import { hiddenRightbar } from './hiddenRightbar'
 import { settingsFriend } from './settingsFriends'
 import { settingsFeatures } from './settingsFeatures'
 import { settingsBackupMenu } from './settingsBackupMenu'
-import { oldHeader } from './oldHeader'
-import { freeStickers } from './freeStickers'
 
 export const settingsMenu = () => {
     if (getPath() === '/settings/' && !qs('#SP_PLUS_SETLINK')) {
@@ -81,26 +82,13 @@ export const settingsMenu = () => {
                                                     break
                                                 case 'favorite':
                                                     break
-                                                case 'grotate':
-                                                    break
-                                                case 'playback':
-                                                    break
                                                 case 'blocked':
                                                     break
                                                 case 'rscroll':
-                                                    scrollMove()
+                                                    scrollMove(checked)
                                                     break
                                                 case 'hrightbar':
-                                                    break
-                                                case 'apidebug':
-                                                    break
-                                                case 'playerdn':
-                                                    break
-                                                case 'nredirect':
-                                                    break
-                                                case 'coins':
-                                                    break
-                                                case 'karma':
+                                                    hiddenRightbar(checked)
                                                     break
                                                 case 'online':
                                                     break
@@ -142,6 +130,7 @@ export const settingsMenu = () => {
                                 }
                             }
 
+                            // Дополнительное меню настроек
                             if (_SETTINGS.friendsOn) {
                                 settingsFriend(qs('#friendsOn'))
                             }
