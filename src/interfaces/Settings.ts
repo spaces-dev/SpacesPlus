@@ -45,24 +45,24 @@ export interface ISettings {
     blogsd: boolean
     readersd: boolean
     favorite: boolean
+    blocked: boolean
     grotate: boolean
     angle: number
-    playback: boolean
-    videoSpeed: number
-    blocked: boolean
-    rscroll: boolean
-    hrightbar: boolean
-    apidebug: boolean
+    oldheader: boolean
     playerdn: boolean
     dredirect: boolean
-    coins: boolean
-    karma: boolean
     online: boolean
+    rscroll: boolean
+    coins: boolean
+    hrightbar: boolean
     ads: boolean
-    myEvents: boolean
-    friendsOn: boolean
+    apidebug: boolean
+    karma: boolean
     sticker: boolean
-    oldheader: boolean
+    playback: boolean
+    videoSpeed: number
+    friendsOn: boolean
+    myEvents: boolean
     bodystyle: boolean
     upVersion: number
     bodystyleSetting: BodystyleSetting
