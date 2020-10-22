@@ -30,6 +30,15 @@
     transform: rotate(90deg) !important
 }
 
+#api_debug {
+    margin-top: 10px !important
+}
+
+#api_debug-result_info {
+    padding: 6px;
+    font-size: small
+}
+
 .mr-14 {
     margin-right: 14px !important
 }
