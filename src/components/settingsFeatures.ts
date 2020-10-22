@@ -1,9 +1,9 @@
-import { ce, qs, remove, http, getCK, setCookie, getCookie, delCookie, setLocation, confirmBox, messageBox } from '../utils'
+import { ce, qs, remove, http, getCK, getHref, setCookie, getCookie, delCookie, setLocation, confirmBox, messageBox } from '../utils'
 
 import { apiDebugger } from './apiDebugger'
 
 import { _SETTINGS } from '../types/settings'
-import { HREF, SPACES } from '../types/strings'
+import { SPACES } from '../types/strings'
 
 export const settingsFeatures = (root: any) => {
     let wrap = ce('div', { id: 'wrap_spaces_option' })
@@ -18,7 +18,7 @@ export const settingsFeatures = (root: any) => {
                 _SETTINGS.apidebug = true
                 setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
                 apiDebugger()
-                setLocation(HREF)
+                setLocation(getHref())
             } else {
                 _SETTINGS.apidebug = false
                 setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))

@@ -5,6 +5,7 @@ import {
     error,
     remove,
     getPath,
+    getHref,
     inBefore,
     getQuery,
     setCookie,
@@ -15,7 +16,7 @@ import {
 } from '../utils'
 
 import { _SETSTRINGS, _SETTINGS } from '../types/settings'
-import { SPACES, HREF, PKG_VERSION } from '../types/strings'
+import { SPACES, PKG_VERSION } from '../types/strings'
 
 import { scrollMove } from './scrollMove'
 import { friendsOnline } from './friendsOnline'
@@ -23,6 +24,8 @@ import { changelogMenu } from './changelogMenu'
 import { settingsFriend } from './settingsFriends'
 import { settingsFeatures } from './settingsFeatures'
 import { settingsBackupMenu } from './settingsBackupMenu'
+import { oldHeader } from './oldHeader'
+import { freeStickers } from './freeStickers'
 
 export const settingsMenu = () => {
     if (getPath() === '/settings/' && !qs('#SP_PLUS_SETLINK')) {
@@ -42,17 +45,20 @@ export const settingsMenu = () => {
                     class: entryLink.className,
                     html: '<span>Настройки Spaces+</span><span class="ico ico_arr ico_m"></span>',
                     onclick: () => {
-                        // TODO: interface
-                        let prnt: any = qs('#SP_PLUS_SETLINK').parentElement?.parentNode?.parentNode?.parentNode
+                        if (!/(\&)sp_plus_settings=1/i.test(getHref())) {
+                            historyPush({
+                                'sp_plus_settings': urlSett,
+                            }, `${SPACES}/settings/?sp_plus_settings=1`, 'Настройки Spaces+')
+                        }
+
+                        let prnt = (qs('#SP_PLUS_SETLINK').parentElement?.parentNode?.parentNode?.parentNode as HTMLElement)
                         if (prnt.id === 'main') {
-                            let hp = qs('#header_path')
-                            if (hp) {
-                                hp.innerHTML = hp.innerHTML.replace('Настройки', `<a href="${SPACES}/settings/" style="margin-bottom: 1px">Настройки</a><span class="location-bar__sep ico"></span><span id="SP_PLUS_SETHEAD2">Spaces+</span>`)
-                            }
+                            qs('#header_path').innerHTML = qs('#header_path').innerHTML.replace('Настройки', `<a href="${SPACES}/settings/" style="margin-bottom: 1px">Настройки</a><span class="location-bar__sep ico"></span><span id="SP_PLUS_SETHEAD2">Spaces+</span>`)
                             prnt.innerHTML = `<div class="widgets-group widgets-group_top js-container__block"><div class="b-title cl b-title_center b-title_first oh"><div class="b-title__item" id="SP_PLUS_SETHEAD">Настройки Spaces+</div></div><div class="content"><div class="list f-c_fll"> <div id="SP_PLUS_SETAREA"></div></div></div></div> <div id="SP_PLUS_ABOUT"></div> <a id="SP_PLUS_SETBACK" href="${SPACES}/settings/?" class="link-return full_link"><span class="ico ico_arrow-back" style="margin: 0px 6px -1px 0px"></span><span class="m">Назад</span></a>`
                         }
+
                         const setArea = qs('#SP_PLUS_SETAREA')
-                        const eventAlert = qs('#SP_PLUS_ALERT')
+                        ////const eventAlert = qs('#SP_PLUS_ALERT')
                         if (setArea) {
                             for (let i in _SETTINGS) {
                                 if (typeof _SETSTRINGS[i] !== 'undefined') {
@@ -66,16 +72,16 @@ export const settingsMenu = () => {
                                             _SETTINGS[id] = checked
                                             setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
 
-                                            console.log(e.target.id + ": " + e.target.checked)
+                                            console.log(id + ": " + checked)
 
-                                            switch (e.target.id) {
+                                            switch (id) {
                                                 case 'comments':
                                                     break
                                                 case 'readersd':
                                                     break
                                                 case 'favorite':
                                                     break
-                                                case 'rotate':
+                                                case 'grotate':
                                                     break
                                                 case 'playback':
                                                     break
@@ -103,17 +109,18 @@ export const settingsMenu = () => {
                                                 case 'myEvents':
                                                     break
                                                 case 'friendsOn':
-                                                    friendsOnline(e.target.checked)
-                                                    if (e.target.checked) {
-                                                        settingsFriend(e.target)
-                                                    } else {
-                                                        let frMaxWrap = qs("#SP_PLUS_MAXFRIENDS")
-                                                        if (frMaxWrap) { remove(frMaxWrap) }
-                                                    }
+                                                    friendsOnline(checked)
+                                                    checked ?
+                                                        settingsFriend(e.target) :
+                                                        remove(qs('#SP_PLUS_MAXFRIENDS'))
                                                     break
                                                 case 'sticker':
+                                                    checked ?
+                                                        freeStickers(checked) :
+                                                        remove(qs('#SP_PLUS_STICKERS'))
                                                     break
-                                                case 'fixes':
+                                                case 'oldheader':
+                                                    oldHeader(checked)
                                                     break
                                                 case 'bodystyle':
                                                     break
@@ -125,11 +132,7 @@ export const settingsMenu = () => {
                                         }
                                     })
 
-                                    let description = ce('label', {
-                                        html: _SETSTRINGS[i],
-                                        attr: { 'for': i }
-                                    })
-
+                                    let description = ce('label', { html: _SETSTRINGS[i], attr: { 'for': i } })
                                     let label = ce('label', { class: 'stnd-link bstrwrap' })
 
                                     label.appendChild(checkbox)
@@ -163,10 +166,11 @@ export const settingsMenu = () => {
 
                             settingsFeatures(setArea)
 
-                            // TODO: newbequest()
+                            // TODO: Сюда нужна проверка квеста новичка
                             setArea.appendChild(spacesLabel2)
 
-                            // cookie editor start
+                            /**
+                             * TODO: Обновить дизайн
                             const CookieEditor = ce('a', {
                                 href: `${SPACES}/settings/?sp_plus_settings=1&sp_cookie_editor=1`,
                                 class: 'stnd-link stnd-link_arr sp_last_btn',
@@ -178,7 +182,7 @@ export const settingsMenu = () => {
                                     // TODO: ???
                                     // @ts-ignore
                                     qs('#SP_PLUS_SETBACK').href = `${SPACES}/settings/?sp_plus_settings=1`
-                                    if (!/(\&)sp_cookie_editor=1/i.test(HREF)) {
+                                    if (!/(\&)sp_cookie_editor=1/i.test(getHref())) {
                                         historyPush({
                                             'sp_plus_settings': urlSett,
                                             'sp_cookie_editor': urlSettEditor
@@ -189,7 +193,7 @@ export const settingsMenu = () => {
                                 }
                             })
                             setArea.appendChild(CookieEditor)
-                            // cookie editor end
+                            */
 
                             setArea.appendChild(spacesLabel3)
 
@@ -205,7 +209,7 @@ export const settingsMenu = () => {
                                     // TODO: ???
                                     // @ts-ignore
                                     qs('#SP_PLUS_SETBACK').href = `${SPACES}/settings/?sp_plus_settings=1`
-                                    if (!/(\&)sp_backup=1/i.test(HREF)) {
+                                    if (!/(\&)sp_backup=1/i.test(getHref())) {
                                         historyPush({
                                             'sp_plus_settings': urlSett,
                                             'sp_backup': urlSettBackup
@@ -230,7 +234,7 @@ export const settingsMenu = () => {
                                     // TODO: ???
                                     // @ts-ignore
                                     qs('#SP_PLUS_SETBACK').href = `${SPACES}/settings/?sp_plus_settings=1`
-                                    if (!/(\&)sp_changelog=1/i.test(HREF)) {
+                                    if (!/(\&)sp_changelog=1/i.test(getHref())) {
                                         historyPush({
                                             'sp_plus_settings': urlSett,
                                             'sp_changelog': urlSettChangeLog
@@ -288,25 +292,30 @@ export const settingsMenu = () => {
                 }
 
                 // outaded start
+                let clickEvent = document.createEvent('MouseEvent')
+
                 if (urlSett) {
                     document.title = 'Настройки Spaces+'
-                    let clickEvent = document.createEvent('MouseEvent')
-                    let clickEvent2 = document.createEvent('MouseEvent')
                     clickEvent.initEvent('click', true, true)
                     baseLink.dispatchEvent(clickEvent)
-                    if (urlSettEditor) {
-                        document.title = 'Spaces+: Редактор cookies'
-                        clickEvent2.initEvent('click', true, true)
-                        qs('#sp_cookie_editor').dispatchEvent(clickEvent2)
-                    } else if (urlSettChangeLog) {
-                        document.title = 'Spaces+: История обновлений'
-                        clickEvent2.initEvent('click', true, true)
-                        qs('#sp_changelog').dispatchEvent(clickEvent2)
-                    } else if (urlSettBackup) {
-                        document.title = 'Spaces+: Импорт и экспорт параметров'
-                        clickEvent2.initEvent('click', true, true)
-                        qs('#sp_backup').dispatchEvent(clickEvent2)
-                    }
+                }
+
+                if (urlSettEditor) {
+                    document.title = 'Spaces+: Редактор cookies'
+                    clickEvent.initEvent('click', true, true)
+                    qs('#sp_cookie_editor')?.dispatchEvent(clickEvent)
+                }
+
+                if (urlSettChangeLog) {
+                    document.title = 'Spaces+: История обновлений'
+                    clickEvent.initEvent('click', true, true)
+                    qs('#sp_changelog')?.dispatchEvent(clickEvent)
+                }
+
+                if (urlSettBackup) {
+                    document.title = 'Spaces+: Импорт и экспорт параметров'
+                    clickEvent.initEvent('click', true, true)
+                    qs('#sp_backup')?.dispatchEvent(clickEvent)
                 }
                 // outaded end
             }

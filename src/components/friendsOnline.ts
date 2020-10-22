@@ -5,16 +5,22 @@ import { FriendsOnline } from '../interfaces/FriendsOnline'
 import { HTTP, SPACES } from '../types/strings'
 import { _SETTINGS } from '../types/settings'
 
+/**
+ * TODO: Переписать логику обновления списка
+ * ! Сейчас обновление проиcходит путем F5
+ * @param t
+ */
 export const friendsOnline = (t?: boolean) => {
-    let frCount: any = qs('#friends_cnt')
-    let frOnDiv: any = qs('#SP_PLUS_FRIENDSSB')
+    let frCount = qs('#friends_cnt')
+    let frOnDiv = qs('#SP_PLUS_FRIENDSSB')
     let friendsForce: number = 0,
         reCount: number,
         count: number = 0,
         countFriends: number = 0
 
+    // @ts-ignore
     if (frCount && !isNaN(frCount.innerHTML)) {
-        count = parseInt(frCount.innerHTML, 10)
+        count = Number(frCount.innerHTML)
     }
 
     if (frCount) {
@@ -37,7 +43,7 @@ export const friendsOnline = (t?: boolean) => {
                     }
 
                     countFriends = count
-                    let parent = frCount.parentNode.parentNode.parentNode
+                    let parent = frCount?.parentNode?.parentNode?.parentNode
                     frOnDiv = frOnDiv || ce('div', { id: 'SP_PLUS_FRIENDSSB', class: 'list-link__wrap' })
 
                     http<FriendsOnline>('GET', `${SPACES}/friends/?S=3`, true).then(e => {
@@ -92,7 +98,7 @@ export const friendsOnline = (t?: boolean) => {
                         }
                     })
 
-                    parent.appendChild(frOnDiv)
+                    parent?.appendChild(frOnDiv)
                 }
             } else if (count === 0) {
                 if (frOnDiv) { remove(frOnDiv) }

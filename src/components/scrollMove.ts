@@ -4,7 +4,7 @@ import { _SETTINGS } from '../types/settings'
 
 export const scrollMove = () => {
     try {
-        const scroller: any = qs('#scroll_page')
+        let scroller = qs('#scroll_page')
 
         if (scroller && !scroller.hasAttribute('sp-replace')) {
             scroller.style.left = 'auto'

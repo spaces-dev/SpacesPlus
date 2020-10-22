@@ -26,7 +26,6 @@ export const settingsFriend = (e?: any) => {
                 }
                 _SETTINGS.friendsOnMax = value
                 setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
-                console.log(_SETTINGS.friendsOnMax)
                 friendsOnline(true)
             } else {
                 frMax.className = 'text-input sp-input-error'

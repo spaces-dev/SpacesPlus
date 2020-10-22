@@ -8,7 +8,6 @@ import { rever } from './rever'
 import { getCK } from './getCK'
 import { remove } from './remove'
 import { extend } from './extend'
-import { getPath } from './getPath'
 import { getQuery } from './getQuery'
 import { inBefore } from './inBefore'
 import { getCookie } from './getCookie'
@@ -22,14 +21,14 @@ import { historyPush } from './historyPush'
 import { setLocation } from './setLocation'
 import { insertAfter } from './insertAfter'
 import { readSettings } from './readSettings'
+import { getPath, getHref } from './getLocation'
 import { log, info, error, debug } from './console'
-
 
 export {
     ce, qs, log, info, error, debug, getCK,
     css, extend, find, getCookie, getParams,
     setCookie, http, insertAfter, setLocation,
     messageBox, readSettings, confirmBox, getPath,
-    rever, trim, getQuery, historyPush,
+    rever, trim, getQuery, historyPush, getHref,
     inBefore, remove, delCookie, getUpdater
 }
