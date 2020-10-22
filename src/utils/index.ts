@@ -4,8 +4,8 @@ import { css } from './css'
 import { find } from './find'
 import { http } from './http'
 import { trim } from './trim'
-import { rever } from './rever'
 import { getCK } from './getCK'
+import { rever } from './rever'
 import { remove } from './remove'
 import { extend } from './extend'
 import { getQuery } from './getQuery'
@@ -15,20 +15,43 @@ import { getParams } from './getParams'
 import { delCookie } from './delCookie'
 import { setCookie } from './setCookie'
 import { confirmBox } from './confirmBox'
-import { getUpdater } from './getUpdater'
 import { messageBox } from './messageBox'
 import { historyPush } from './historyPush'
-import { setLocation } from './setLocation'
 import { insertAfter } from './insertAfter'
+import { setLocation } from './setLocation'
+import { getClassName } from './getClassName'
 import { readSettings } from './readSettings'
 import { getPath, getHref } from './getLocation'
 import { log, info, error, debug } from './console'
 
 export {
-    ce, qs, log, info, error, debug, getCK,
-    css, extend, find, getCookie, getParams,
-    setCookie, http, insertAfter, setLocation,
-    messageBox, readSettings, confirmBox, getPath,
-    rever, trim, getQuery, historyPush, getHref,
-    inBefore, remove, delCookie, getUpdater
+    ce,
+    qs,
+    css,
+    info,
+    log,
+    find,
+    http,
+    trim,
+    debug,
+    error,
+    getCK,
+    rever,
+    extend,
+    remove,
+    getHref,
+    getPath,
+    getQuery,
+    inBefore,
+    getCookie,
+    getParams,
+    setCookie,
+    delCookie,
+    confirmBox,
+    messageBox,
+    historyPush,
+    insertAfter,
+    setLocation,
+    getClassName,
+    readSettings
 }

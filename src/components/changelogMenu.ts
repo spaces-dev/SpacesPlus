@@ -1,5 +1,6 @@
-import { ce, qs, error, remove, rever, getUpdater } from '../utils'
+import { ce, qs, error, remove, rever } from '../utils'
 
+import { getUpdater } from './checkUpdates'
 import { CheckUpdates } from '../interfaces/CheckUpdates'
 
 import { HTTP } from '../types/strings'

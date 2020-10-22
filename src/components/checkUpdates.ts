@@ -1,11 +1,27 @@
 import { _SETTINGS } from '../types/settings'
 import { CheckUpdates } from '../interfaces/CheckUpdates'
 
-import { GITHUB, REVISION, OVERRIDE } from '../types/strings'
+import { ENV, GITHUB, REVISION, OVERRIDE } from '../types/strings'
 
-import { ce, qs, rever, error, setCookie, messageBox } from '../utils'
+import { ce, qs, rever, error, http, setCookie, messageBox } from '../utils'
 
-import { getUpdater } from '../utils/getUpdater'
+/**
+ * Получаем историю обновлений
+ * @param callback
+ */
+export const getUpdater = (callback: Function) => {
+    try {
+        http<CheckUpdates>('GET', `https://${ENV ?? GITHUB}/updater.json?r=${REVISION}`, false).then(e => {
+            const json = e.parsedBody
+
+            if (e.status === 200 && json?.history) {
+                return callback(json)
+            }
+        })
+    } catch (e) {
+        error('Ошибка (getUpdater.ts): ' + e)
+    }
+}
 
 export const checkUpdates = () => {
     try {
@@ -25,7 +41,6 @@ export const checkUpdates = () => {
                         href: '#',
                         class: 'btn btn_white btn_input right sticker-close_btn',
                         html: 'Больше не показывать',
-                        // TODO: any???
                         onclick: (e: any) => {
                             _SETTINGS.upVersion = json.history[0].build
                             setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))

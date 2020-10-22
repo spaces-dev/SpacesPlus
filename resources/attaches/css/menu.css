@@ -96,10 +96,6 @@ ul.list>li {
     }
 }
 
-#main_shadow, #top_info_block {
-    border-left: unset
-}
-
 .border {
     border: 1px solid #b4bed1
 }
