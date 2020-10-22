@@ -19,7 +19,8 @@ const PKG_VERSION = pkg.version
  * Временное хранилище данных
  */
 class OVERRIDE {
-    public static ONLINE_LOCK: any = null
+    public static PLAYER_ID: number = 0
+    public static ONLINE_LOCK: string | null = null
     public static VERSION: number = Number(PKG_VERSION.split('.').join(''))
 }
 

@@ -14,6 +14,7 @@ import { settingsMenu } from './components/settingsMenu'
 import { galleryRotate } from './components/galleryRotate'
 import { sidebarButton } from './components/sidebarButton'
 import { friendsOnline } from './components/friendsOnline'
+import { playerDownload } from './components/playerDownload'
 import { disableRedirect } from './components/disableRedirect'
 import { videoSpeedPlayback } from './components/videoSpeedPlayback'
 
@@ -66,11 +67,12 @@ const init = () => {
      * ! Для оптимальной работы выставлен интервал обновления в 200ms
      */
     setInterval(() => {
-        if(_SETTINGS.coins) coinsAccept()
+        if (_SETTINGS.coins) coinsAccept()
         if (_SETTINGS.karma) karmaAccept()
         if (_SETTINGS.online) userOnline()
         if (_SETTINGS.rscroll) scrollMove()
         if (_SETTINGS.grotate) galleryRotate()
+        if (_SETTINGS.playerdn) playerDownload()
         if (_SETTINGS.dredirect) disableRedirect()
         if (_SETTINGS.playback) videoSpeedPlayback()
         settingsMenu()
