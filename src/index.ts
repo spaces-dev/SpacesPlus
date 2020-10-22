@@ -6,6 +6,8 @@ import { scrollMove } from './components/scrollMove'
 import { userOnline } from './components/userOnline'
 import { userStatus } from './components/userStatus'
 import { apiDebugger } from './components/apiDebugger'
+import { coinsAccept } from './components/coinsAccept'
+import { karmaAccept } from './components/karmaAccept'
 import { checkUpdates } from './components/checkUpdates'
 import { freeStickers } from './components/freeStickers'
 import { settingsMenu } from './components/settingsMenu'
@@ -57,12 +59,15 @@ const init = () => {
     oldHeader(_SETTINGS.oldheader)
     freeStickers(_SETTINGS.sticker)
     friendsOnline(_SETTINGS.friendsOn)
+
     /**
      * ? Тут перечислены функции, которым необходимо постоянно
      * ? отслеживать прочее состояния на странице браузера
      * ! Для оптимальной работы выставлен интервал обновления в 200ms
      */
     setInterval(() => {
+        if(_SETTINGS.coins) coinsAccept()
+        if (_SETTINGS.karma) karmaAccept()
         if (_SETTINGS.online) userOnline()
         if (_SETTINGS.rscroll) scrollMove()
         if (_SETTINGS.grotate) galleryRotate()
