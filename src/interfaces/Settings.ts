@@ -62,7 +62,7 @@ export interface ISettings {
     myEvents: boolean
     friendsOn: boolean
     sticker: boolean
-    fixes: boolean
+    oldheader: boolean
     bodystyle: boolean
     upVersion: number
     bodystyleSetting: BodystyleSetting

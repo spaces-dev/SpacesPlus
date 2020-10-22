@@ -2,56 +2,66 @@ import { ISettings, setStrings } from '../interfaces/Settings'
 import { OVERRIDE, GITHUB } from './strings'
 
 /**
- * readonly strings
+ * * Строки названий функций в меню настроек
+ * ! Положение в объекте НЕ влияет на рассположение в списке настроек
  */
 export const _SETSTRINGS: setStrings = {
     'comments': 'Пакетное удаление комментариев',
     'blogsd': 'Пакетное удаление блогов',
     'readersd': 'Пакетное удаление читателей',
-    'friendsOn': 'Панель друзей онлайн',
-    'myEvents': 'Звук уведомлений',
-    'online': 'Точное время онлайн в анкетах',
-    'ads': 'Скрывать рекламу',
     'favorite': 'Возможность добавить пользователя в закладки',
+    'blocked': 'Открытые разделы удаленных пользователей',
     'grotate': 'Кнопка поворота фото в просмотрщике',
-    'playback': 'Кнопка ускорения видео',
+    'oldheader': 'Старое положение кнопок в шапке',
     'playerdn': 'Кнопка загрузки трека из плеера',
     'dredirect': 'Внешние ссылки без редиректа',
+    'online': 'Точное время онлайн в анкетах',
     'rscroll': 'Прокрутка страницы справа',
-    'hrightbar': 'Скрыть правое меню',
-    'blocked': 'Открытые разделы удаленных пользователей',
     'coins': 'Собирать бонусные монеты',
+    'hrightbar': 'Скрыть правое меню',
+    'ads': 'Скрывать рекламу',
+    'myEvents': 'Звук уведомлений',
+    'playback': 'Кнопка ускорения видео',
     'karma': 'Собирать карму',
+    'friendsOn': 'Панель друзей онлайн',
     'bodystyle': 'Фон сайта',
     'msgAlert': 'Виджет почты',
     'weatherWidget': 'Виджет погоды',
-    'sticker': 'Бесплатные стикеры',
-    'fixes': 'Незначительные исправления'
+    'sticker': 'Бесплатные стикеры'
 }
 
+/**
+ * * Стандартная конфигурация
+ * ? Чтобы пункт настроек появился в списке
+ * ? его необходимо продублировать в _SETSTRINGS
+ * ? если undefined, то он не будет добавлен в список настроек
+ * * for (let i in _SETTINGS) {
+ * *     if (typeof _SETSTRINGS[i] !== 'undefined') {
+ * ! Положение в объекте ВЛИЯЕТ на рассположение в списке настроек
+ */
 export let _SETTINGS: ISettings = {
     'comments': false,
     'blogsd': false,
     'readersd': false,
     'favorite': true,
+    'blocked': true,
     'grotate': true,
     'angle': 0,
-    'playback': true,
-    'videoSpeed': 1,
-    'blocked': true,
-    'rscroll': false,
-    'hrightbar': false,
-    'apidebug': false,
+    'oldheader': true,
     'playerdn': true,
     'dredirect': true,
-    'coins': true,
-    'karma': true,
     'online': true,
+    'rscroll': false,
+    'coins': true,
+    'hrightbar': false,
     'ads': true,
-    'myEvents': false,
-    'friendsOn': true,
+    'apidebug': false,
+    'karma': true,
     'sticker': true,
-    'fixes': true,
+    'playback': true,
+    'videoSpeed': 1,
+    'friendsOn': true,
+    'myEvents': false,
     'bodystyle': true,
     'upVersion': OVERRIDE.VERSION,
     'bodystyleSetting': {
