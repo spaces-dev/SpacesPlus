@@ -167,7 +167,7 @@ export const settingsMenu = () => {
                             settingsFeatures(setArea)
 
                             // TODO: Сюда нужна проверка квеста новичка
-                            setArea.appendChild(spacesLabel2)
+                            // setArea.appendChild(spacesLabel2)
 
                             /**
                              * TODO: Обновить дизайн

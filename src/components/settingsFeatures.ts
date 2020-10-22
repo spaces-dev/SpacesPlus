@@ -1,6 +1,4 @@
-import { ce, qs, remove, http, getCK, getHref, setCookie, getCookie, delCookie, setLocation, confirmBox, messageBox } from '../utils'
-
-import { apiDebugger } from './apiDebugger'
+import { ce, http, getCK, setCookie, getCookie, delCookie, confirmBox, messageBox } from '../utils'
 
 import { _SETTINGS } from '../types/settings'
 import { SPACES } from '../types/strings'
@@ -14,17 +12,9 @@ export const settingsFeatures = (root: any) => {
             '<span class="b"><span class="sp sp-remove-grey mr-14"></span>Отключить отладчик<span class="ico ico_arr ico_m"></span></span>' :
             '<span class="b"><span class="ico ico_settings mr-14"></span>Включить отладчик<span class="ico ico_arr ico_m"></span></span>',
         onclick: () => {
-            if (!_SETTINGS.apidebug) {
-                _SETTINGS.apidebug = true
-                setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
-                apiDebugger()
-                setLocation(getHref())
-            } else {
-                _SETTINGS.apidebug = false
-                setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
-                remove(qs('#spaces_api_debugger'))
-                setLocation(document.location.href)
-            }
+            _SETTINGS.apidebug = !_SETTINGS.apidebug ? true : false
+            setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
+            document.location.reload()
             return false
         }
     })

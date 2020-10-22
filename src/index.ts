@@ -5,6 +5,7 @@ import { oldHeader } from './components/oldHeader'
 import { scrollMove } from './components/scrollMove'
 import { userOnline } from './components/userOnline'
 import { userStatus } from './components/userStatus'
+import { apiDebugger } from './components/apiDebugger'
 import { checkUpdates } from './components/checkUpdates'
 import { freeStickers } from './components/freeStickers'
 import { settingsMenu } from './components/settingsMenu'
@@ -52,6 +53,7 @@ const init = () => {
      * ? Тут перечислены функции, которые срабатывают единоразово,
      * ? далее их изменения отслеживаются в settingsMenu.ts
      */
+    apiDebugger(_SETTINGS.apidebug)
     oldHeader(_SETTINGS.oldheader)
     freeStickers(_SETTINGS.sticker)
     friendsOnline(_SETTINGS.friendsOn)
