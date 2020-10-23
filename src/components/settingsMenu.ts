@@ -202,10 +202,10 @@ export const settingsMenu = () => {
                                 href: `${SPACES}/settings/?sp_plus_settings=1&sp_backup=1`,
                                 class: 'stnd-link stnd-link_arr sp_font_sm',
                                 id: 'sp_backup',
-                                html: '<span class="b" style="color: #2e7d32"><span class="sp sp-backup-g mr-14"></span>Импорт и экспорт параметров<span class="ico ico_arr ico_m"></span></span>',
+                                html: '<span class="b" style="color: #2e7d32"><span class="sp sp-backup-g mr-14"></span>Импорт и экспорт настроек<span class="ico ico_arr ico_m"></span></span>',
                                 onclick: () => {
-                                    qs('#SP_PLUS_SETHEAD').innerHTML = 'Импорт и экспорт параметров'
-                                    qs('#SP_PLUS_SETHEAD2').innerHTML = `<a href="${SPACES}/settings/?sp_plus_settings=1" style="margin-bottom: 1px">Spaces+</a><span class="location-bar__sep ico"></span> Импорт и экспорт параметров`
+                                    qs('#SP_PLUS_SETHEAD').innerHTML = 'Импорт и экспорт настроек'
+                                    qs('#SP_PLUS_SETHEAD2').innerHTML = `<a href="${SPACES}/settings/?sp_plus_settings=1" style="margin-bottom: 1px">Spaces+</a><span class="location-bar__sep ico"></span> Импорт и экспорт настроек`
                                     // TODO: ???
                                     // @ts-ignore
                                     qs('#SP_PLUS_SETBACK').href = `${SPACES}/settings/?sp_plus_settings=1`
@@ -213,7 +213,7 @@ export const settingsMenu = () => {
                                         historyPush({
                                             'sp_plus_settings': urlSett,
                                             'sp_backup': urlSettBackup
-                                        }, `${SPACES}/settings/?sp_plus_settings=1&sp_backup=1`, 'Spaces+: Импорт и экспорт параметров')
+                                        }, `${SPACES}/settings/?sp_plus_settings=1&sp_backup=1`, 'Spaces+: Импорт и экспорт настроек')
                                     }
                                     settingsBackupMenu('#SP_PLUS_SETAREA')
                                     return false
@@ -254,7 +254,7 @@ export const settingsMenu = () => {
                                 id: 'sp_plus_reset',
                                 html: '<span class="b" style="color: #f86934"><span class="sp sp-alert mr-14"></span>Сброс настроек<span class="ico ico_arr ico_m"></span></span>',
                                 onclick: () => {
-                                    confirmBox('Вы действительно хотите сбросить настройки?', false, () => {
+                                    confirmBox('Вы действительно хотите полностью сбросить настройки?', false, () => {
                                         delCookie('SP_PLUS_SET')
                                         delCookie('gp_left_btn')
                                         delCookie('force_ajax_transport')
@@ -313,7 +313,7 @@ export const settingsMenu = () => {
                 }
 
                 if (urlSettBackup) {
-                    document.title = 'Spaces+: Импорт и экспорт параметров'
+                    document.title = 'Spaces+: Импорт и экспорт настроек'
                     clickEvent.initEvent('click', true, true)
                     qs('#sp_backup')?.dispatchEvent(clickEvent)
                 }

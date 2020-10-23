@@ -84,9 +84,9 @@ export const settingsBackupMenu = (id: string) => {
 
             let delSubm = ce('button', {
                 class: 'user__tools-link table__cell sp_btn_line sp_plus_btn_list',
-                html: '<span class="sp sp-restore-g"></span><span style="color: #3ca93c">Сбросить</span>',
+                html: '<span class="sp sp-restore-g"></span><span style="color: #3ca93c; padding-left: 10px">Сбросить настройки</span>',
                 onclick: function () {
-                    confirmBox('Сбросить файл конфигурации?', false, () => {
+                    confirmBox('Вы действительно хотите сбросить файл конфигурации?', false, () => {
                         delCookie('SP_PLUS_SET')
                         document.location.reload()
                     })
@@ -96,7 +96,7 @@ export const settingsBackupMenu = (id: string) => {
 
             let chSubm = ce('button', {
                 class: 'user__tools-link sp_plus_btn_list',
-                html: '<span class="sp sp-ok-blue"></span><span style="color: #57A3EA">Сохранить</span>',
+                html: '<span class="sp sp-ok-blue"></span><span style="color: #57A3EA; padding-left: 10px;">Сохранить</span>',
                 onclick: function () {
                     getJSON(`value=${textarea.value}`, (json: IGetJSON) => {
                         // TODO: Исправить стакаемый список ошибок!
