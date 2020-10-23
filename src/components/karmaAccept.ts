@@ -1,18 +1,21 @@
 import { find, http, remove, info, error } from '../utils'
 
-import { SPACES } from '../types/strings'
+import { SPACES, OVERRIDE } from '../types/strings'
 
-// TODO: Отладка
-export const karmaAccept = async () => {
+export const karmaAccept = () => {
     let karma: any = find(document.links, { href: `${SPACES}/mysite/rate_n_karma/karma/?Accept=` })
 
-    if (karma) {
-        console.log(karma)
+    if (karma && !OVERRIDE.KARMA) {
+        OVERRIDE.KARMA = true
+
         try {
-            await http('GET', karma[0].href, true).then(e => {
-                console.log(e)
-                remove(karma[0].parentNode)
-                info('Cобрали карму!')
+            http('GET', karma[0].href, true).then(e => {
+                if (e.status === 200) {
+                    remove(karma[0].parentNode)
+                    info('Cобрали карму!')
+                }
+
+                OVERRIDE.KARMA = false
             })
         } catch (e) {
             error('Ошибка (karmaAccept.ts): ' + e)
