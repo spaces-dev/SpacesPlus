@@ -4,7 +4,6 @@ import { css } from './css'
 import { find } from './find'
 import { http } from './http'
 import { trim } from './trim'
-import { getCK } from './getCK'
 import { rever } from './rever'
 import { remove } from './remove'
 import { extend } from './extend'
@@ -37,7 +36,6 @@ export {
     trim,
     debug,
     error,
-    getCK,
     rever,
     extend,
     remove,
