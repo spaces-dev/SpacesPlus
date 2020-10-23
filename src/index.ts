@@ -12,6 +12,7 @@ import { karmaAccept } from './components/karmaAccept'
 import { checkUpdates } from './components/checkUpdates'
 import { freeStickers } from './components/freeStickers'
 import { settingsMenu } from './components/settingsMenu'
+import { deleteReaders } from './components/deleteReaders'
 import { galleryRotate } from './components/galleryRotate'
 import { sidebarButton } from './components/sidebarButton'
 import { friendsOnline } from './components/friendsOnline'
@@ -90,12 +91,13 @@ const init = () => {
         if (_SETTINGS.coins) coinsAccept()
         if (_SETTINGS.karma) karmaAccept()
         if (_SETTINGS.online) userOnline()
-        if (_SETTINGS.blogsd || BASE_URL === 'spaces-blogs.com') deleteBlogs()
         if (_SETTINGS.grotate) galleryRotate()
+        if (_SETTINGS.readersd) deleteReaders()
         if (_SETTINGS.comments) deleteComments()
         if (_SETTINGS.playerdn) playerDownload()
         if (_SETTINGS.dredirect) disableRedirect()
         if (_SETTINGS.playback) videoSpeedPlayback()
+        if (_SETTINGS.blogsd || BASE_URL === 'spaces-blogs.com') deleteBlogs()
         settingsMenu()
     }, 200)
 }

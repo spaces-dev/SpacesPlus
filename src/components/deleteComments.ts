@@ -45,7 +45,7 @@ export const deleteComments = () => {
 
                         const chooseAllButton = ce('button', {
                             class: 'user__tools-link table__cell sp_plus_btn_list',
-                            html: '<span class="sp sp-ok-blue"></span><span style="color: #57A3EA; padding-left: 10px">Выбрать все</span>',
+                            html: '<span class="sp sp-ok-blue"></span><span class="sp-ch-text">Выбрать все</span>',
                             onclick: (e: any) => {
                                 let parent = e.target.nodeName === 'SPAN' ? e.target.parentNode : e.target
 
@@ -56,14 +56,14 @@ export const deleteComments = () => {
                                     }
                                 }
 
-                                parent.innerHTML = `<span class="sp sp-ok-blue"></span><span style="color: #57A3EA">${parent.innerHTML.indexOf('Выбрать все') >= 0 ? 'Снять отметки' : 'Выбрать все'}</span>`
+                                parent.innerHTML = `<span class="sp sp-ok-blue"></span><span class="sp-ch-text">${parent.innerHTML.indexOf('Выбрать все') >= 0 ? 'Снять отметки' : 'Выбрать все'}</span>`
                                 return false
                             }
                         })
 
                         const deleteCommentsButton = ce('button', {
                             class: 'user__tools-link table__cell sp_btn_line sp_plus_btn_list',
-                            html: '<span class="ico ico_delete"></span><span style="color: #F86934; padding-left: 10px">Удалить выбранные</span>',
+                            html: '<span class="ico ico_delete"></span><span class="sp-del-text">Удалить выбранные</span>',
                             onclick: () => {
                                 let count: number = 0,
                                     urls: any[] = []

@@ -46,7 +46,7 @@ export const deleteBlogs = () => {
 
                     const chooseAllButton = ce('button', {
                         class: 'user__tools-link table__cell sp_plus_btn_list',
-                        html: '<span class="sp sp-ok-blue"></span><span style="color: #57A3EA; padding-left: 10px">Выбрать все</span>',
+                        html: '<span class="sp sp-ok-blue"></span><span class="sp-ch-text">Выбрать все</span>',
                         onclick: (e: any) => {
                             let parent = e.target.nodeName === 'SPAN' ? e.target.parentNode : e.target
 
@@ -54,14 +54,14 @@ export const deleteBlogs = () => {
                                 parent.innerHTML.indexOf('Выбрать все') >= 0 ? ch.checked = true : ch.checked = false
                             }
 
-                            parent.innerHTML = `<span class="sp sp-ok-blue"></span><span style="color: #57A3EA; padding-left: 10px">${parent.innerHTML.indexOf('Выбрать все') >= 0 ? 'Снять отметки' : 'Выбрать все'}</span>`
+                            parent.innerHTML = `<span class="sp sp-ok-blue"></span><span class="sp-ch-text">${parent.innerHTML.indexOf('Выбрать все') >= 0 ? 'Снять отметки' : 'Выбрать все'}</span>`
                             return false
                         }
                     })
 
                     const deleteBlogsButton = ce('button', {
                         class: 'user__tools-link table__cell sp_btn_line sp_plus_btn_list',
-                        html: '<span class="ico ico_delete"></span><span style="color: #F86934; padding-left: 10px">Удалить выбранные</span>',
+                        html: '<span class="ico ico_delete"></span><span class="sp-del-text">Удалить выбранные</span>',
                         onclick: () => {
                             let count: number = 0,
                                 blogs: any[] = []
@@ -69,8 +69,7 @@ export const deleteBlogs = () => {
                             for (let ch of checkboxArr) {
                                 if (ch.checked) {
                                     // @ts-ignore
-                                    let deleteId = /^SP_DB_([0-9]+)$/i.exec(ch.id)[1]
-                                    blogs.push(deleteId)
+                                    blogs.push(/^SP_DB_([0-9]+)$/i.exec(ch.id)[1])
                                     count++
                                 }
                             }

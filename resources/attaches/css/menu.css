@@ -30,6 +30,23 @@
     transform: rotate(90deg) !important
 }
 
+.sp-ch-text {
+    color: #57A3EA;
+    padding-left: 10px
+}
+
+.sp-del-text {
+    color: #F86934;
+    padding-left: 10px
+}
+
+.sp-ch-readers {
+    right: 50px;
+    top: -42px;
+    padding-left: 8px !important;
+    padding-right: 0px !important
+}
+
 .sp-ch-blogs {
     padding: 13px 5px 12px 30px !important
 }
