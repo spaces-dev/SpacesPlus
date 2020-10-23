@@ -10,6 +10,7 @@ import { remove } from './remove'
 import { extend } from './extend'
 import { getQuery } from './getQuery'
 import { inBefore } from './inBefore'
+import { declOfNum } from './declOfNum'
 import { getCookie } from './getCookie'
 import { getParams } from './getParams'
 import { delCookie } from './delCookie'
@@ -23,6 +24,7 @@ import { getClassName } from './getClassName'
 import { readSettings } from './readSettings'
 import { getPath, getHref } from './getLocation'
 import { log, info, error, debug } from './console'
+
 
 export {
     ce,
@@ -43,6 +45,7 @@ export {
     getPath,
     getQuery,
     inBefore,
+    declOfNum,
     getCookie,
     getParams,
     setCookie,

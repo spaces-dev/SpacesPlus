@@ -20,6 +20,7 @@ const PKG_VERSION = pkg.version
 class OVERRIDE {
     public static KARMA: boolean = false
     public static COINS: boolean = false
+    public static COMMENTS: number = 0
     public static PLAYER_ID: number = 0
     public static ONLINE_LOCK: string | null = null
     public static VERSION: number = Number(PKG_VERSION.split('.').join(''))

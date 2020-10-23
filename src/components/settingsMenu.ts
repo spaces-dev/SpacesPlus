@@ -11,11 +11,12 @@ import {
     setCookie,
     delCookie,
     confirmBox,
+    messageBox,
     historyPush,
     insertAfter,
 } from '../utils'
 
-import { SPACES, PKG_VERSION } from '../types/strings'
+import { DEVICE, SPACES, PKG_VERSION } from '../types/strings'
 import { _SETSTRINGS, _SETTINGS } from '../types/settings'
 
 import { oldHeader } from './oldHeader'
@@ -63,21 +64,31 @@ export const settingsMenu = () => {
                         if (setArea) {
                             for (let i in _SETTINGS) {
                                 if (typeof _SETSTRINGS[i] !== 'undefined') {
+
+                                    /**
+                                    * Проверяем поддерживаемость данных функций на Touch версии сайта
+                                    */
+                                    let unsupported = (DEVICE.id === 3 && (i === 'rscroll' || i === 'hrightbar')) ? true : false
                                     let checkbox = ce('input', {
                                         id: i,
                                         type: 'checkbox',
                                         class: 'sp-checkbox-square',
+                                        attr: { unsupported: unsupported },
                                         checked: _SETTINGS[i],
                                         onclick: (e: any) => {
                                             const { id, checked } = e.target
+
+                                            if (e.target.attributes.unsupported.value === 'true') {
+                                                messageBox('Внимание!', 'Для работы данной функции, необходимо переключиться на компьютерную версию сайта', true, 5)
+                                                return false
+                                            }
+
                                             _SETTINGS[id] = checked
                                             setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
 
                                             console.log(id + ": " + checked)
 
                                             switch (id) {
-                                                case 'comments':
-                                                    break
                                                 case 'readersd':
                                                     break
                                                 case 'favorite':
@@ -121,7 +132,7 @@ export const settingsMenu = () => {
                                     })
 
                                     let description = ce('label', { html: _SETSTRINGS[i], attr: { 'for': i } })
-                                    let label = ce('label', { class: 'stnd-link bstrwrap' })
+                                    let label = ce('label', { class: `stnd-link bstrwrap${unsupported ? ' sp_unsupported' : ''}` })
 
                                     label.appendChild(checkbox)
                                     label.appendChild(description)
@@ -136,17 +147,17 @@ export const settingsMenu = () => {
                             }
 
                             // footer buttons area start
-                            var spacesLabel1 = ce('div', {
+                            let spacesLabel1 = ce('div', {
                                 class: 'sp_plus_line',
                                 html: '<span class="sp_plus_text">Встроенные возможности сайта</span>'
                             })
 
-                            var spacesLabel2 = ce('div', {
+                            /*let spacesLabel2 = ce('div', {
                                 class: 'sp_plus_line',
                                 html: '<span class="sp_plus_text">Дополнительные функции</span>'
-                            })
+                            })*/
 
-                            var spacesLabel3 = ce('div', {
+                            let spacesLabel3 = ce('div', {
                                 class: 'sp_plus_line',
                                 html: '<span class="sp_plus_text">Прочее</span>'
                             })

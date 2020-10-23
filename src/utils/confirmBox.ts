@@ -30,11 +30,7 @@ export const confirmBox = (text: string, warn: boolean, callback: Function) => {
 
     let Main = qs('#SP_PLUS_CONFIRM')
     if (!Main) {
-        Main = ce('div', {
-            class: 'sticker',
-            style: '-webkit-animation: create 0.3s; animation: create 0.3s',
-            id: 'SP_PLUS_CONFIRM'
-        })
+        Main = ce('div', { class: 'sticker sp-sticker-anim', id: 'SP_PLUS_CONFIRM' })
 
         if (!warn) {
             container.appendChild(warningText)

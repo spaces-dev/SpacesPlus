@@ -73,9 +73,9 @@ export const settingsFeatures = (root: any) => {
         html: '<span class="b"><span class="sp sp-remove-grey mr-14"></span>Скрыть квест новичка<span class="ico ico_arr ico_m"></span></span>',
         onclick: function () {
             confirmBox('Вы действительно хотите скрыть квест новичка?', false, () => {
-                http('GET', `${SPACES}/newbequest/?CK=${getCK()}`).then(e => {
-                    if (e.ok) {
-                        messageBox('Успех!<div class="pad_t_a"></div><small>Квест новичка скрыт</small>', true, true)
+                http('GET', `${SPACES}/newbequest/?CK=${getCK()}`, true).then(e => {
+                    if (e.status === 200) {
+                        messageBox('Поздравляем!', 'Квест новичка успешно был скрыт', true, 3)
                     }
                 })
             })

@@ -31,10 +31,7 @@ export const checkUpdates = () => {
             if (_SETTINGS.upVersion) hideVer = _SETTINGS.upVersion
             OVERRIDE.VERSION = Math.max(hideVer, OVERRIDE.VERSION)
             if (json.history[0].build > OVERRIDE.VERSION) {
-                messageBox('Доступна новая версия Spaces+ <sup>' + rever(json.history[0].build) + '</sup><div class="pad_t_a"></div><small class="grey">' + json.history[0].changes + '</small><div id="SP_UPDATER_BUTTONS" class="pad_t_a"><a class="btn btn_green btn_input" href="https://github.com/spaces-dev/' + GITHUB + '/raw/master/spaces-plus.user.js?r=' + REVISION + '" onclick="document.body.removeChild(this.parentNode.parentNode.parentNode); return true"> Обновить</a></div>',
-                    false,
-                    true
-                )
+                messageBox(`Доступна новая версия Spaces+ ${rever(json.history[0].build)}`, `<div class="pad_t_a"></div>${json.history[0].changes}<div id="SP_UPDATER_BUTTONS" class="pad_t_a"><a class="btn btn_green btn_input" href="https://github.com/spaces-dev/${GITHUB}/raw/master/spaces-plus.user.js?r=${REVISION}" onclick="document.body.removeChild(this.parentNode.parentNode.parentNode); return true"> Обновить</a></div>`, true)
 
                 if (qs('#SP_PLUS_ALERT')) {
                     const hide = ce('a', {

@@ -52,8 +52,8 @@ export interface ISettings {
     playerdn: boolean
     dredirect: boolean
     online: boolean
-    rscroll: boolean
     coins: boolean
+    rscroll: boolean
     hrightbar: boolean
     ads: boolean
     apidebug: boolean

@@ -30,6 +30,35 @@
     transform: rotate(90deg) !important
 }
 
+.pointer {
+    cursor: pointer
+}
+
+.sp_unsupported {
+    background: #f9edbf !important
+}
+
+@media all and (min-width:900px) {
+    .sticker {
+        width: 25rem;
+        max-width: 25rem !important
+    }
+}
+
+.sp-sticker-anim {
+    animation-duration: 0.3s;
+    animation-name: fadeIn
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0
+    }
+    to {
+        opacity: 1
+    }
+}
+
 #api_debug {
     margin-top: 10px !important
 }

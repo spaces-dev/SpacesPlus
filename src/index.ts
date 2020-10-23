@@ -14,6 +14,7 @@ import { settingsMenu } from './components/settingsMenu'
 import { galleryRotate } from './components/galleryRotate'
 import { sidebarButton } from './components/sidebarButton'
 import { friendsOnline } from './components/friendsOnline'
+import { deleteComments } from './components/deleteComments'
 import { hiddenRightbar } from './components/hiddenRightbar'
 import { playerDownload } from './components/playerDownload'
 import { disableRedirect } from './components/disableRedirect'
@@ -21,7 +22,7 @@ import { videoSpeedPlayback } from './components/videoSpeedPlayback'
 
 import { SessionCheck } from './interfaces/SessionCheck'
 
-import { SPACES } from './types/strings'
+import { SPACES, DEVICE } from './types/strings'
 import { _SETTINGS } from './types/settings'
 
 /**
@@ -57,12 +58,19 @@ const init = () => {
      * ? Тут перечислены функции, которые срабатывают единоразово,
      * ? далее их изменения отслеживаются в settingsMenu.ts
      */
-    scrollMove(_SETTINGS.rscroll)
     oldHeader(_SETTINGS.oldheader)
     apiDebugger(_SETTINGS.apidebug)
     freeStickers(_SETTINGS.sticker)
     friendsOnline(_SETTINGS.friendsOn)
-    hiddenRightbar(_SETTINGS.hrightbar)
+
+    /**
+     * ? Единоразовая инициализация
+     * ! Только для PC версии сайта
+     */
+    if (DEVICE.id === 4) {
+        scrollMove(_SETTINGS.rscroll)
+        hiddenRightbar(_SETTINGS.hrightbar)
+    }
 
     /**
      * ? Тут перечислены функции, которым необходимо постоянно
@@ -74,6 +82,7 @@ const init = () => {
         if (_SETTINGS.karma) karmaAccept()
         if (_SETTINGS.online) userOnline()
         if (_SETTINGS.grotate) galleryRotate()
+        if (_SETTINGS.comments) deleteComments()
         if (_SETTINGS.playerdn) playerDownload()
         if (_SETTINGS.dredirect) disableRedirect()
         if (_SETTINGS.playback) videoSpeedPlayback()
