@@ -33,8 +33,8 @@ const config: IUserscriptConfig = {
         author: pkg.author.name,
         namespace: 'https://spaces-dev.github.io',
         icon: 'https://spaces-dev.github.io/favicon.png',
-        include: '/^(http|https):\/\/(spaces\.ru|spac\.me|spcs\.me|spaces\.im|gdespaces\.com|spac1\.com|spac1\.net).*$/',
-        match: '*://(spaces.ru|spac.me|spcs.me|spaces.im|gdespaces.com|spac1.com|spac1.net)/*',
+        include: '/^(http|https):\/\/(spaces\.ru|spac\.me|spcs\.me|spaces\.im|gdespaces\.com|spac1\.com|spac1\.net|spaces-blogs\.com).*$/',
+        match: '*://(spaces.ru|spac.me|spcs.me|spaces.im|gdespaces.com|spac1.com|spac1.net|spaces-blogs.com)/*',
         homepageURL: 'https://github.com/spaces-dev/SpacesPlus',
         grant: 'none'
     }

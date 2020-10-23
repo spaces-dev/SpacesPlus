@@ -18,6 +18,7 @@ const PKG_VERSION = pkg.version
  * Временное хранилище данных
  */
 class OVERRIDE {
+    public static CK: string | undefined
     public static KARMA: boolean = false
     public static COINS: boolean = false
     public static COMMENTS: number = 0

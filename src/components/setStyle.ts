@@ -1,6 +1,6 @@
 import { qs, ce } from '../utils'
 
-import { ENV, GITHUB, REVISION } from '../types/strings'
+import { BASE_URL, ENV, GITHUB, REVISION } from '../types/strings'
 import { _SETTINGS } from '../types/settings'
 
 export const setStyle = () => {
@@ -8,6 +8,17 @@ export const setStyle = () => {
         id: 'SP_PLUS_INJSTYLE',
         type: 'text/css'
     })
+
+    if (!qs('#SP_STICKER_CSS') && BASE_URL === 'spaces-blogs.com') {
+        let sticker = qs('#SP_STICKER_CSS') || ce('link', {
+            rel: 'stylesheet',
+            type: 'text/css',
+            id: 'SP_STICKER_CSS',
+            href: `https://${ENV ?? GITHUB}/src/attaches/css/sticker.css?r=${REVISION}`
+        })
+
+        document.getElementsByTagName('head')[0].appendChild(sticker)
+    }
 
     if (!qs('#SP_PLUS_MENU')) {
         let menu = qs('#SP_PLUS_MENU') || ce('link', {

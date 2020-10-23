@@ -3,10 +3,6 @@ export const insertAfter = (elem: any, refElem: any) => {
         next = refElem.nextSibling
 
     if (parent) {
-        if (next) {
-            return parent.insertBefore(elem, next)
-        } else {
-            return parent.appendChild(elem)
-        }
+        return next ? parent.insertBefore(elem, next) : parent.appendChild(elem)
     }
 }

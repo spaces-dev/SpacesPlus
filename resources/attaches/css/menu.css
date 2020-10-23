@@ -30,6 +30,10 @@
     transform: rotate(90deg) !important
 }
 
+.sp-ch-blogs {
+    padding: 13px 5px 12px 30px !important
+}
+
 .pointer {
     cursor: pointer
 }

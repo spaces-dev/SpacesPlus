@@ -7,6 +7,7 @@ import { userOnline } from './components/userOnline'
 import { userStatus } from './components/userStatus'
 import { apiDebugger } from './components/apiDebugger'
 import { coinsAccept } from './components/coinsAccept'
+import { deleteBlogs } from './components/deleteBlogs'
 import { karmaAccept } from './components/karmaAccept'
 import { checkUpdates } from './components/checkUpdates'
 import { freeStickers } from './components/freeStickers'
@@ -22,7 +23,7 @@ import { videoSpeedPlayback } from './components/videoSpeedPlayback'
 
 import { SessionCheck } from './interfaces/SessionCheck'
 
-import { SPACES, DEVICE } from './types/strings'
+import { SPACES, BASE_URL, DEVICE, OVERRIDE } from './types/strings'
 import { _SETTINGS } from './types/settings'
 
 /**
@@ -34,8 +35,16 @@ import { _SETTINGS } from './types/settings'
     if (qs('#main_wrap')) {
         try {
             http<SessionCheck>('POST', `${SPACES}/api/session/check`, false).then((e) => {
-                if (e.status === 200 && userStatus(e.parsedBody?.code)) {
-                    init()
+                if (e.status === 200 && e.parsedBody) {
+                    if (userStatus(e.parsedBody.code)) {
+                        // Сохраняем CK
+                        OVERRIDE.CK = e.parsedBody?.attributes.CK
+
+                        // Инициализируем работу
+                        init()
+                    } else {
+                        console.log(e)
+                    }
                 }
             })
         } catch (e) {
@@ -81,6 +90,7 @@ const init = () => {
         if (_SETTINGS.coins) coinsAccept()
         if (_SETTINGS.karma) karmaAccept()
         if (_SETTINGS.online) userOnline()
+        if (_SETTINGS.blogsd || BASE_URL === 'spaces-blogs.com') deleteBlogs()
         if (_SETTINGS.grotate) galleryRotate()
         if (_SETTINGS.comments) deleteComments()
         if (_SETTINGS.playerdn) playerDownload()

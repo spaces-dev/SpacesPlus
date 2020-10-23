@@ -56,7 +56,7 @@ export const deleteComments = () => {
                                     }
                                 }
 
-                                parent.innerHTML = `<span class='sp sp-ok-blue'></span><span style='color: #57A3EA'>${(parent.innerHTML.indexOf('Выбрать все') >= 0 ? 'Снять отметки' : 'Выбрать все')}</span>`
+                                parent.innerHTML = `<span class="sp sp-ok-blue"></span><span style="color: #57A3EA">${parent.innerHTML.indexOf('Выбрать все') >= 0 ? 'Снять отметки' : 'Выбрать все'}</span>`
                                 return false
                             }
                         })
@@ -65,7 +65,7 @@ export const deleteComments = () => {
                             class: 'user__tools-link table__cell sp_btn_line sp_plus_btn_list',
                             html: '<span class="ico ico_delete"></span><span style="color: #F86934; padding-left: 10px">Удалить выбранные</span>',
                             onclick: () => {
-                                let count = 0,
+                                let count: number = 0,
                                     urls: any[] = []
 
                                 for (let input of inputs) {
@@ -93,7 +93,7 @@ export const deleteComments = () => {
                                         document.location.reload()
                                     })
                                 } else {
-                                    messageBox('Внимание!', 'Отметить галочкой, те комментарии, которые вы хотите удалить и попробуйте еще раз', true, 8)
+                                    messageBox('Внимание!', 'Отметьте галочкой, те комментарии, которые вы хотите удалить и попробуйте еще раз', true, 8)
                                 }
                                 return false
                             }
