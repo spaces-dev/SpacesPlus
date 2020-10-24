@@ -1,5 +1,4 @@
-import { ce } from './ce'
-import { qs } from './qs'
+import { ce, qs } from './index'
 
 /**
  * @param title Заголовок уведомления

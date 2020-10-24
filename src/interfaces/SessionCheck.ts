@@ -35,7 +35,7 @@ export interface Attributes {
     journal_pro_mode: number
 }
 
-export interface SessionCheck {
+export interface ISessionCheck {
     css_files: any[]
     t: number
     time: number

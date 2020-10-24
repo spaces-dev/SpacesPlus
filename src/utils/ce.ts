@@ -1,7 +1,22 @@
 import { css } from './css'
 
-// TODO: interface
-export const ce = (name: any, params?: any): HTMLElement => {
+/**
+ * Основополагающая функция для создания DOM 
+ * ? Пример работы:
+ * * let div = ce('div', {
+ * *     html: 'Hello, World!',
+ * *     class: 'example classes',
+ * *     style: 'background-color: red; padding: 10px; text-align: center',
+ * *     id: 'input',
+ * *     attr: { example: 'attribute' }
+ * * })
+ * *
+ * * Вставляем в начале body
+ * * document.body.prepend(div)
+ * @param name 
+ * @param params 
+ */
+export const ce = (name: any, params?: any): HTMLAnchorElement => {
     let elem = document.createElement(name)
 
     for (let i in params) {

@@ -1,9 +1,9 @@
 import { ce, setCookie, insertAfter, error } from '../utils'
 
 import { friendsOnline } from './friendsOnline'
-import { _SETTINGS } from '../types/settings'
+import { _SETTINGS } from '../settings'
 
-export const settingsFriend = (e?: any) => {
+export const settingsFriends = (e?: any) => {
     try {
         let frMaxWrap = ce('div', { id: 'SP_PLUS_MAXFRIENDS' })
         let div = ce('div', { style: 'padding: 11px 15px' })

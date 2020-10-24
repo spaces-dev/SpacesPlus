@@ -1,6 +1,18 @@
-import { ce, qs, find, http, getPath, insertAfter, declOfNum, confirmBox, messageBox, error, inBefore } from '../utils'
+import {
+    ce,
+    qs,
+    find,
+    http,
+    error,
+    getPath,
+    inBefore,
+    declOfNum,
+    confirmBox,
+    messageBox,
+    insertAfter
+} from '../utils'
 
-import { SPACES, OVERRIDE } from '../types/strings'
+import { SPACES, OVERRIDE } from '../strings'
 
 export const deleteBlogs = () => {
     let p = getPath().split('/')

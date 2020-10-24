@@ -13,21 +13,23 @@ import {
     confirmBox,
     messageBox,
     historyPush,
-    insertAfter,
+    insertAfter
 } from '../utils'
 
-import { DEVICE, SPACES, PKG_VERSION } from '../types/strings'
-import { _SETSTRINGS, _SETTINGS } from '../types/settings'
+import {
+    oldHeader,
+    scrollMove,
+    freeStickers,
+    friendsOnline,
+    hiddenRightbar,
+    settingsFriends,
+    settingsFeatures,
+    settingsBackupMenu,
+    settingsChangelogMenu
+} from './index'
 
-import { oldHeader } from './oldHeader'
-import { scrollMove } from './scrollMove'
-import { freeStickers } from './freeStickers'
-import { changelogMenu } from './changelogMenu'
-import { friendsOnline } from './friendsOnline'
-import { hiddenRightbar } from './hiddenRightbar'
-import { settingsFriend } from './settingsFriends'
-import { settingsFeatures } from './settingsFeatures'
-import { settingsBackupMenu } from './settingsBackupMenu'
+import { DEVICE, SPACES, PKG_VERSION } from '../strings'
+import { _SETSTRINGS, _SETTINGS } from '../settings'
 
 export const settingsMenu = () => {
     if (getPath() === '/settings/' && !qs('#SP_PLUS_SETLINK')) {
@@ -110,7 +112,7 @@ export const settingsMenu = () => {
                                                 case 'friendsOn':
                                                     friendsOnline(checked)
                                                     checked ?
-                                                        settingsFriend(e.target) :
+                                                        settingsFriends(e.target) :
                                                         remove(qs('#SP_PLUS_MAXFRIENDS'))
                                                     break
                                                 case 'sticker':
@@ -143,7 +145,7 @@ export const settingsMenu = () => {
 
                             // Дополнительное меню настроек
                             if (_SETTINGS.friendsOn) {
-                                settingsFriend(qs('#friendsOn'))
+                                settingsFriends(qs('#friendsOn'))
                             }
 
                             // footer buttons area start
@@ -179,8 +181,6 @@ export const settingsMenu = () => {
                                 onclick: () => {
                                     qs('#SP_PLUS_SETHEAD').innerHTML = 'Редактор cookies';
                                     qs('#SP_PLUS_SETHEAD2').innerHTML = `<a href="${SPACES}/settings/?sp_plus_settings=1" style="margin-bottom: 1px">Spaces+</a><span class="location-bar__sep ico"></span> Редактор cookies`
-                                    // TODO: ???
-                                    // @ts-ignore
                                     qs('#SP_PLUS_SETBACK').href = `${SPACES}/settings/?sp_plus_settings=1`
                                     if (!/(\&)sp_cookie_editor=1/i.test(getHref())) {
                                         historyPush({
@@ -206,8 +206,6 @@ export const settingsMenu = () => {
                                 onclick: () => {
                                     qs('#SP_PLUS_SETHEAD').innerHTML = 'Импорт и экспорт настроек'
                                     qs('#SP_PLUS_SETHEAD2').innerHTML = `<a href="${SPACES}/settings/?sp_plus_settings=1" style="margin-bottom: 1px">Spaces+</a><span class="location-bar__sep ico"></span> Импорт и экспорт настроек`
-                                    // TODO: ???
-                                    // @ts-ignore
                                     qs('#SP_PLUS_SETBACK').href = `${SPACES}/settings/?sp_plus_settings=1`
                                     if (!/(\&)sp_backup=1/i.test(getHref())) {
                                         historyPush({
@@ -231,8 +229,6 @@ export const settingsMenu = () => {
                                 onclick: () => {
                                     qs('#SP_PLUS_SETHEAD').innerHTML = 'История обновлений'
                                     qs('#SP_PLUS_SETHEAD2').innerHTML = `<a href="${SPACES}/settings/?sp_plus_settings=1" style="margin-bottom: 1px">Spaces+</a><span class="location-bar__sep ico"></span> История обновлений`
-                                    // TODO: ???
-                                    // @ts-ignore
                                     qs('#SP_PLUS_SETBACK').href = `${SPACES}/settings/?sp_plus_settings=1`
                                     if (!/(\&)sp_changelog=1/i.test(getHref())) {
                                         historyPush({
@@ -240,7 +236,7 @@ export const settingsMenu = () => {
                                             'sp_changelog': urlSettChangeLog
                                         }, `${SPACES}/settings/?sp_plus_settings=1&sp_changelog=1`, 'Spaces+: История обновлений')
                                     }
-                                    changelogMenu('#SP_PLUS_SETAREA')
+                                    settingsChangelogMenu('#SP_PLUS_SETAREA')
                                     return false
                                 }
                             })

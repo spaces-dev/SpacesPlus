@@ -6,8 +6,6 @@ export const setLocation = (url: string) => {
     clickEvent.initEvent('click', true, true)
 
     if (setLink) {
-        // TODO: ???
-        // @ts-ignore
         setLink.href = url
         setLink.dispatchEvent(clickEvent)
     } else {

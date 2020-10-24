@@ -1,11 +1,11 @@
-import { ISettings, setStrings } from '../interfaces/Settings'
+import { ISettings, IStrings } from './interfaces/Settings'
 import { OVERRIDE, GITHUB } from './strings'
 
 /**
  * * Строки названий функций в меню настроек
  * ! Положение в объекте НЕ влияет на рассположение в списке настроек
  */
-export const _SETSTRINGS: setStrings = {
+export const _SETSTRINGS: IStrings = {
     'comments': 'Пакетное удаление комментариев',
     'blogsd': 'Пакетное удаление блогов',
     'readersd': 'Пакетное удаление читателей',
@@ -32,9 +32,9 @@ export const _SETSTRINGS: setStrings = {
 
 /**
  * * Стандартная конфигурация
- * ? Чтобы пункт настроек появился в списке
- * ? его необходимо продублировать в _SETSTRINGS
- * ? если undefined, то он не будет добавлен в список настроек
+ * ? Чтобы пункт настроек появился в списке настроек
+ * ? клюк необходимо продублировать в _SETSTRINGS
+ * ? если ключ undefined, то пункт не будет добавлен список
  * * for (let i in _SETTINGS) {
  * *     if (typeof _SETSTRINGS[i] !== 'undefined') {
  * ! Положение в объекте ВЛИЯЕТ на рассположение в списке настроек

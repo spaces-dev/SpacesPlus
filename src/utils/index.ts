@@ -24,14 +24,13 @@ import { readSettings } from './readSettings'
 import { getPath, getHref } from './getLocation'
 import { log, info, error, debug } from './console'
 
-
 export {
     ce,
     qs,
     css,
-    info,
     log,
     find,
+    info,
     http,
     trim,
     debug,

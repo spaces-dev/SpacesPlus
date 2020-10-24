@@ -1,9 +1,17 @@
-import { _SETTINGS } from '../types/settings'
-import { CheckUpdates } from '../interfaces/CheckUpdates'
+import {
+    ce,
+    qs,
+    http,
+    error,
+    rever,
+    setCookie,
+    messageBox
+} from '../utils'
 
-import { ENV, GITHUB, REVISION, OVERRIDE } from '../types/strings'
+import { ICheckUpdates } from '../interfaces/CheckUpdates'
 
-import { ce, qs, rever, error, http, setCookie, messageBox } from '../utils'
+import { _SETTINGS } from '../settings'
+import { ENV, GITHUB, REVISION, OVERRIDE } from '../strings'
 
 /**
  * Получаем историю обновлений
@@ -11,7 +19,7 @@ import { ce, qs, rever, error, http, setCookie, messageBox } from '../utils'
  */
 export const getUpdater = (callback: Function) => {
     try {
-        http<CheckUpdates>('GET', `https://${ENV ?? GITHUB}/updater.json?r=${REVISION}`, false).then(e => {
+        http<ICheckUpdates>('GET', `https://${ENV ?? GITHUB}/updater.json?r=${REVISION}`, false).then(e => {
             const json = e.parsedBody
 
             if (e.status === 200 && json?.history) {
@@ -25,7 +33,7 @@ export const getUpdater = (callback: Function) => {
 
 export const checkUpdates = () => {
     try {
-        getUpdater((json: CheckUpdates) => {
+        getUpdater((json: ICheckUpdates) => {
             let hideVer = 0
 
             if (_SETTINGS.upVersion) hideVer = _SETTINGS.upVersion

@@ -1,5 +1,5 @@
 import { extend } from './extend'
-import { BASE_URL } from '../types/strings'
+import { BASE_URL } from '../strings'
 
 // TODO: Refactoring & interface
 export const setCookie = (key: string, value: string | null, opts?: any) => {

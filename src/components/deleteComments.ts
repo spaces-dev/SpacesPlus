@@ -1,6 +1,17 @@
-import { ce, qs, find, http, getClassName, messageBox, confirmBox, declOfNum, insertAfter, error } from '../utils'
+import {
+    ce,
+    qs,
+    find,
+    http,
+    error,
+    declOfNum,
+    confirmBox,
+    messageBox,
+    insertAfter,
+    getClassName
+} from '../utils'
 
-import { OVERRIDE, DEVICE } from '../types/strings'
+import { OVERRIDE, DEVICE } from '../strings'
 
 export const deleteComments = () => {
     let childs = getClassName('span.comment_date', false)

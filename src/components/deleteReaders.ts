@@ -1,6 +1,17 @@
-import { ce, qs, find, http, getPath, insertAfter, declOfNum, confirmBox, messageBox, error } from '../utils'
+import {
+    ce,
+    qs,
+    find,
+    http,
+    error,
+    getPath,
+    declOfNum,
+    confirmBox,
+    messageBox,
+    insertAfter
+} from '../utils'
 
-import { SPACES, OVERRIDE } from '../types/strings'
+import { SPACES, OVERRIDE } from '../strings'
 
 export const deleteReaders = () => {
     let buttons = qs('#SP_PLUS_BUTTONS')

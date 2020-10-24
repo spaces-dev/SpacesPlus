@@ -1,6 +1,6 @@
 import { ce, qs, find, error, setCookie } from '../utils'
 
-import { _SETTINGS } from '../types/settings'
+import { _SETTINGS } from '../settings'
 
 export const videoSpeedPlayback = () => {
     let jwcontrols: any = find(document.getElementsByTagName('span'), { className: 'jwcontrols' })

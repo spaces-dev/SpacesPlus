@@ -1,9 +1,9 @@
 import { qs, ce } from '../utils'
 
-import { BASE_URL, ENV, GITHUB, REVISION } from '../types/strings'
-import { _SETTINGS } from '../types/settings'
+import { BASE_URL, ENV, GITHUB, REVISION } from '../strings'
+import { _SETTINGS } from '../settings'
 
-export const setStyle = () => {
+export const setStyles = () => {
     let stl = qs('#SP_PLUS_INJSTYLE') || ce('style', {
         id: 'SP_PLUS_INJSTYLE',
         type: 'text/css'

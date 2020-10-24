@@ -1,5 +1,12 @@
 export const getHref = () => document.location.href
 
+/**
+ * 1 - method
+ * 2 - index
+ * 3 - target
+ * default - pathname
+ * @param name 
+ */
 export const getPath = (name?: 1 | 2 | 3) => {
     let path = document.location.pathname
     let str = path.replace(/\/\s*$/, '').split('/')

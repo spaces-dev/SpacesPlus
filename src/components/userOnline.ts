@@ -1,8 +1,8 @@
 import { find, http, getPath, info, error } from '../utils'
 
-import { UserOnline } from '../interfaces/UserOnline'
+import { IUserOnline } from '../interfaces/UserOnline'
 
-import { SPACES, OVERRIDE } from '../types/strings'
+import { SPACES, OVERRIDE } from '../strings'
 
 export const userOnline = () => {
     let path = getPath()
@@ -10,16 +10,16 @@ export const userOnline = () => {
     let target = `/anketa/index/${nick}/`
 
     if (path !== target) {
-        OVERRIDE.ONLINE_LOCK = null
+        OVERRIDE.ONLINE = null
     }
 
     if (path === target) {
         try {
             let onBlock = find(document.getElementsByClassName('info-item__title'), { innerHTML: 'Время онлайн:' })
-            if (nick && onBlock && OVERRIDE.ONLINE_LOCK !== nick) {
-                OVERRIDE.ONLINE_LOCK = nick
+            if (nick && onBlock && OVERRIDE.ONLINE !== nick) {
+                OVERRIDE.ONLINE = nick
 
-                http<UserOnline>('GET', `${SPACES}/anketa/index/${nick}/`, true).then(e => {
+                http<IUserOnline>('GET', `${SPACES}/anketa/index/${nick}/`, true).then(e => {
                     const response = e.parsedBody?.user_widget?.online_time
 
                     if (response) {

@@ -1,8 +1,8 @@
 import path from 'path'
 import webpack from 'webpack'
 import WebpackUserscript from 'webpack-userscript'
-import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 import userscriptConfig from './userscript.config'
+import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
@@ -25,7 +25,7 @@ const devServerOpenPage: string[] = (() => {
 
 const config: webpack.Configuration = {
     mode: isDev ? 'development' : 'production',
-    entry: path.join(__dirname, 'src/index.ts'),
+    entry: path.join(__dirname, 'src/main.ts'),
     output: {
         path: outputPath,
         filename: `${fileName}.js`
@@ -48,7 +48,7 @@ const config: webpack.Configuration = {
                 test: /\.tsx?$/,
                 use: 'ts-loader',
                 exclude: /node_modules/
-            },
+            }
         ],
     },
     resolve: {
@@ -89,8 +89,7 @@ const config: webpack.Configuration = {
             ]
         }),
         new WebpackUserscript({
-            headers: userscriptConfig.scriptHeaders,
-            pretty: isDev
+            headers: userscriptConfig.scriptHeaders
         })
     ]
 }

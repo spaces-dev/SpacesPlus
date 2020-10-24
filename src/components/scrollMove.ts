@@ -1,6 +1,6 @@
 import { qs, error } from '../utils'
 
-import { _SETTINGS } from '../types/settings'
+import { _SETTINGS } from '../settings'
 
 export const scrollMove = (b: boolean) => {
     let scroll = qs('#scroll_page')

@@ -1,1 +1,1 @@
-export const qs = (e: string) => (document.querySelector(e) as HTMLElement)
+export const qs = (e: string) => (document.querySelector(e) as HTMLAnchorElement)

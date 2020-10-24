@@ -1,6 +1,6 @@
 import { qs, ce, find, insertAfter } from '../utils'
 
-import { SPACES } from '../types/strings'
+import { SPACES } from '../strings'
 
 export const sidebarButton = () => {
     let button = qs('#SP_SETTINGS_BUTTON')

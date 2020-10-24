@@ -1,4 +1,4 @@
-export type setStrings = {
+export type IStrings = {
     readonly [key: string]: string
 }
 

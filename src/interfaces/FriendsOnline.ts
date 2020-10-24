@@ -25,6 +25,6 @@ export interface TabbedPanel {
     tabs: Tab[]
 }
 
-export interface FriendsOnline {
+export interface IFriendsOnline {
     tabbed_panel: TabbedPanel
 }

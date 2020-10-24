@@ -1,10 +1,10 @@
 declare global {
-    const unsafeWindow : Window
-    interface unsafeWindow { Device: UserDevice }
-    interface Window { Device: UserDevice }
+    const unsafeWindow: Window
+    interface unsafeWindow { Device: IDevice }
+    interface Window { Device: IDevice }
 }
 
-export interface UserDevice {
+export interface IDevice {
     id: number
     os: string
     pc: boolean

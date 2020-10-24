@@ -2,6 +2,6 @@ export interface UserWidget {
     online_time: number
 }
 
-export interface UserOnline {
+export interface IUserOnline {
     user_widget: UserWidget
 }

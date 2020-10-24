@@ -1,7 +1,6 @@
-import { error } from './console'
-import { extend } from './extend'
-import { getCookie } from './getCookie'
-import { _SETTINGS } from '../types/settings'
+import { error, extend, getCookie } from './index'
+
+import { _SETTINGS } from '../settings'
 
 export const readSettings = () => {
     let cookieSet = getCookie('SP_PLUS_SET')

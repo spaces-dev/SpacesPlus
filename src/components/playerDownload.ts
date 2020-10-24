@@ -1,6 +1,14 @@
-import { ce, qs, find, remove, insertAfter, info, error } from '../utils'
+import {
+    ce,
+    qs,
+    find,
+    info,
+    error,
+    remove,
+    insertAfter
+} from '../utils'
 
-import { OVERRIDE } from '../types/strings'
+import { OVERRIDE } from '../strings'
 
 export const playerDownload = () => {
     let downPlace = qs('#SP_MUSIC_DOWN')

@@ -1,7 +1,15 @@
-import { ce, http, setCookie, getCookie, delCookie, confirmBox, messageBox } from '../utils'
+import {
+    ce,
+    http,
+    delCookie,
+    getCookie,
+    setCookie,
+    confirmBox,
+    messageBox
+} from '../utils'
 
-import { _SETTINGS } from '../types/settings'
-import { SPACES, OVERRIDE } from '../types/strings'
+import { _SETTINGS } from '../settings'
+import { SPACES, OVERRIDE } from '../strings'
 
 export const settingsFeatures = (root: any) => {
     let wrap = ce('div', { id: 'wrap_spaces_option' })

@@ -1,6 +1,6 @@
 import { find, http, remove, info, error } from '../utils'
 
-import { SPACES, OVERRIDE } from '../types/strings'
+import { SPACES, OVERRIDE } from '../strings'
 
 export const coinsAccept = () => {
     let coins: any = find(document.links, { href: `${SPACES}/services/gift_get/?Link_id=` })

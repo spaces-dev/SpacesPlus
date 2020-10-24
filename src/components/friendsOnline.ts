@@ -1,9 +1,18 @@
-import { ce, qs, remove, info, error, extend, find, http } from '../utils'
+import {
+    ce,
+    qs,
+    find,
+    http,
+    info,
+    error,
+    extend,
+    remove
+} from '../utils'
 
-import { FriendsOnline } from '../interfaces/FriendsOnline'
+import { IFriendsOnline } from '../interfaces/FriendsOnline'
 
-import { HTTP, SPACES } from '../types/strings'
-import { _SETTINGS } from '../types/settings'
+import { HTTP, SPACES } from '../strings'
+import { _SETTINGS } from '../settings'
 
 /**
  * TODO: Переписать логику обновления списка
@@ -46,14 +55,14 @@ export const friendsOnline = (t?: boolean) => {
                     let parent = frCount?.parentNode?.parentNode?.parentNode
                     frOnDiv = frOnDiv || ce('div', { id: 'SP_PLUS_FRIENDSSB', class: 'list-link__wrap' })
 
-                    http<FriendsOnline>('GET', `${SPACES}/friends/?S=3`, true).then(e => {
+                    http<IFriendsOnline>('GET', `${SPACES}/friends/?S=3`, true).then(e => {
                         const json = e.parsedBody
 
                         if (json?.tabbed_panel) {
                             let tempfriendsList = json.tabbed_panel.tabs[1].content.list
 
                             if (tempfriendsList) {
-                                http<FriendsOnline>('GET', `${SPACES}/friends/?P=2&S=3`, true).then(e => {
+                                http<IFriendsOnline>('GET', `${SPACES}/friends/?P=2&S=3`, true).then(e => {
                                     const json2 = e.parsedBody
 
                                     if (json2?.tabbed_panel) {

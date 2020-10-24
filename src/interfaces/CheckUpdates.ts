@@ -4,6 +4,6 @@ export interface History {
     changes: string
 }
 
-export interface CheckUpdates {
+export interface ICheckUpdates {
     history: History[]
 }

@@ -1,9 +1,19 @@
-import { ce, qs, http, setCookie, delCookie, remove, confirmBox, inBefore, error } from '../utils'
+import {
+    ce,
+    qs,
+    http,
+    error,
+    remove,
+    inBefore,
+    delCookie,
+    setCookie,
+    confirmBox
+} from '../utils'
 
 import { IGetJSON } from '../interfaces/GetJSON'
 
-import { HTTP } from '../types/strings'
-import { _SETTINGS } from '../types/settings'
+import { HTTP } from '../strings'
+import { _SETTINGS } from '../settings'
 
 /**
  * JSON Validator API (https://gist.github.com/crashmax-off/f86350b8a4b85311ac8676a906b973eb) 

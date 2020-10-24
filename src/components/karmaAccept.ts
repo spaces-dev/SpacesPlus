@@ -1,6 +1,6 @@
 import { find, http, remove, info, error } from '../utils'
 
-import { SPACES, OVERRIDE } from '../types/strings'
+import { SPACES, OVERRIDE } from '../strings'
 
 export const karmaAccept = () => {
     let karma: any = find(document.links, { href: `${SPACES}/mysite/rate_n_karma/karma/?Accept=` })

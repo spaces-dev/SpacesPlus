@@ -1,6 +1,6 @@
 import { ce, qs, error, setCookie } from '../utils'
 
-import { _SETTINGS } from '../types/settings'
+import { _SETTINGS } from '../settings'
 
 export const galleryRotate = () => {
     let Image = qs('#gallery-container')

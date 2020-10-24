@@ -1,6 +1,6 @@
 import { qs, error } from '../utils'
 
-import { _SETTINGS } from '../types/settings'
+import { _SETTINGS } from '../settings'
 
 export const hiddenRightbar = (b: boolean) => {
     let rightbar = qs('#page_rightbar')

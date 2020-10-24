@@ -1,11 +1,11 @@
 import { ce, qs, error, remove, rever } from '../utils'
 
 import { getUpdater } from './checkUpdates'
-import { CheckUpdates } from '../interfaces/CheckUpdates'
+import { ICheckUpdates } from '../interfaces/CheckUpdates'
 
-import { HTTP } from '../types/strings'
+import { HTTP } from '../strings'
 
-export const changelogMenu = (id: string) => {
+export const settingsChangelogMenu = (id: string) => {
     window.scrollTo(0, 0)
     const target = qs(id)
 
@@ -23,16 +23,17 @@ export const changelogMenu = (id: string) => {
             target.appendChild(wrap)
             wrap.appendChild(preloader)
 
-            getUpdater((json: CheckUpdates) => {
-                for (let i = 0; i < json.history.length; i++) {
+            getUpdater((json: ICheckUpdates) => {
+
+                for (let history of json.history) {
                     let label = ce('label', {
                         class: 'label sp_plus_line_c',
-                        html: `v${rever(json.history[i].build)}<div class="label__desc">${json.history[i].date}</div>`
+                        html: `v${rever(history.build)}<div class="label__desc">${history.date}</div>`
                     })
 
                     let changes = ce('div', {
                         class: 'grey sp_plus_c_desc',
-                        html: json.history[i].changes
+                        html: history.changes
                     })
 
                     div.appendChild(label)

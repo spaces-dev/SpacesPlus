@@ -1,6 +1,6 @@
 import { find, getParams } from '../utils'
 
-import { SPACES } from '../types/strings'
+import { SPACES } from '../strings'
 
 export const disableRedirect = () => {
     let urls = find(document.links, { href: `${SPACES}/redirect/?` })
