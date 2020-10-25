@@ -1,0 +1,32 @@
+{
+    "backgrounds": [
+        "default.jpg",
+        "bananas.jpg",
+        "cats.jpg",
+        "ethnic-binary.jpg",
+        "hearts.jpg",
+        "skull-and-bones.jpg",
+        "water.jpg",
+        "stars.gif",
+        "yellow-leaves.jpg",
+        "10-years.png",
+        "15bg.png",
+        "triangle.jpg",
+        "animal-eyes.jpg",
+        "cube.jpg",
+        "flowers.jpg",
+        "girly-doodles.jpg",
+        "japanese-cranes.jpg",
+        "round-circle.jpg",
+        "cicrle-flowers.jpg",
+        "square-texture.jpg"
+    ],
+    "sounds": [
+        "default.ogg",
+        "vk.ogg",
+        "tg.ogg",
+        "icq.ogg",
+        "push.ogg",
+        "notify.ogg"
+    ]
+}

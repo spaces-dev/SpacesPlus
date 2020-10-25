@@ -159,7 +159,7 @@
 }
 
 .tiled_item-spinner {
-    background: url(/src/attaches/ico/progress.gif);
+    background: url(/src/icons/progress.gif);
     height: 6px;
     position: absolute;
     top: 0;

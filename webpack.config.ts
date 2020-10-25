@@ -80,11 +80,8 @@ const config: webpack.Configuration = {
         new CopyWebpackPlugin({
             patterns: [
                 {
-                    from: 'resources/updater.json'
-                },
-                {
-                    from: 'resources/attaches/',
-                    to: 'src/attaches/'
+                    from: 'resources/',
+                    to: 'src/'
                 }
             ]
         }),

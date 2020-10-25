@@ -14,7 +14,7 @@ export const setStyles = () => {
             rel: 'stylesheet',
             type: 'text/css',
             id: 'SP_STICKER_CSS',
-            href: `https://${ENV ?? GITHUB}/src/attaches/css/sticker.css?r=${REVISION}`
+            href: `https://${ENV ?? GITHUB}/src/css/sticker.css?r=${REVISION}`
         })
 
         document.getElementsByTagName('head')[0].appendChild(sticker)
@@ -25,7 +25,7 @@ export const setStyles = () => {
             rel: 'stylesheet',
             type: 'text/css',
             id: 'SP_PLUS_MENU',
-            href: `https://${ENV ?? GITHUB}/src/attaches/css/menu.css?r=${REVISION}`
+            href: `https://${ENV ?? GITHUB}/src/css/menu.css?r=${REVISION}`
         })
 
         document.getElementsByTagName('head')[0].appendChild(menu)

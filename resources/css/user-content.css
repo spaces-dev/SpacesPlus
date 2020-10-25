@@ -565,12 +565,12 @@ toolbar__dropdown-menu {
     bottom: 0;
     left: 0;
     right: 0;
-    background-image: url(/src/attaches/ico/overlay.png)
+    background-image: url(/src/ico/overlay.png)
 }
 
 .colorpicker-gradient_cursor {
     position: absolute;
-    background-image: url(/src/attaches/ico/cursor.png);
+    background-image: url(/src/ico/cursor.png);
     width: 8px;
     height: 8px;
     margin-top: -4px;
@@ -589,7 +589,7 @@ toolbar__dropdown-menu {
 }
 
 .colorpicker-spectrum {
-    background-image: url(/src/attaches/ico/colors.png);
+    background-image: url(/src/ico/colors.png);
     width: 17px;
     height: 150px;
     display: inline-block;

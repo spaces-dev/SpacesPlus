@@ -320,7 +320,7 @@ details summary:hover {
 }
 
 .sp {
-    background-image: url(/src/attaches/ico/sp-icons.png);
+    background-image: url(/src/ico/sp-icons.png);
     display: inline-block;
     width: 16px;
     height: 16px;
@@ -355,7 +355,7 @@ details summary:hover {
     width: 16px;
     height: 16px;
     background-color: transparent;
-    background-image: url(/src/attaches/ico/sp-icons.png)
+    background-image: url(/src/ico/sp-icons.png)
 }
 
 .sp-checkbox-checked+label:before, .sp-checkbox-circle+label:before {
@@ -366,7 +366,7 @@ details summary:hover {
     width: 16px;
     height: 16px;
     background-color: transparent;
-    background-image: url(/src/attaches/ico/sp-icons.png)
+    background-image: url(/src/ico/sp-icons.png)
 }
 
 .sp-checkbox-square+label:before {
