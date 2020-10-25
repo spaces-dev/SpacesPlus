@@ -36,6 +36,10 @@ const config: IUserscriptConfig = {
         include: '/^(http|https):\/\/(spaces\.ru|spac\.me|spcs\.me|spaces\.im|gdespaces\.com|spac1\.com|spac1\.net|spaces-blogs\.com).*$/',
         match: '*://(spaces.ru|spac.me|spcs.me|spaces.im|gdespaces.com|spac1.com|spac1.net|spaces-blogs.com)/*',
         homepageURL: 'https://github.com/spaces-dev/SpacesPlus',
+        // https://spac.me/js/colorpicker.js
+        require: process.env.NODE_ENV === 'development' ?
+            'https://localhost:8080/src/js/colorpicker.js' :
+            'https://spaces-dev.github.io/src/js/colorpicker.js',
         grant: 'none'
     }
 }

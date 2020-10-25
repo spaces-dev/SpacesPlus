@@ -22,6 +22,7 @@ import { settingsFriends } from './settingsFriends'
 import { disableRedirect } from './disableRedirect'
 import { settingsFeatures } from './settingsFeatures'
 import { videoSpeedPlayback } from './videoSpeedPlayback'
+import { settingsBackground } from './settingsBackground'
 import { settingsBackupMenu } from './settingsBackupMenu'
 import { checkUpdates, getUpdater } from './checkUpdates'
 import { settingsChangelogMenu } from './settingsChangelogMenu'
@@ -53,6 +54,7 @@ export {
     disableRedirect,
     settingsFeatures,
     videoSpeedPlayback,
+    settingsBackground,
     settingsBackupMenu,
     settingsChangelogMenu,
 }

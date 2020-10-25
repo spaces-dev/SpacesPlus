@@ -15,6 +15,7 @@ import { getParams } from './getParams'
 import { delCookie } from './delCookie'
 import { setCookie } from './setCookie'
 import { confirmBox } from './confirmBox'
+import { isValidUrl } from './isValidUrl'
 import { messageBox } from './messageBox'
 import { historyPush } from './historyPush'
 import { insertAfter } from './insertAfter'
@@ -48,6 +49,7 @@ export {
     setCookie,
     delCookie,
     confirmBox,
+    isValidUrl,
     messageBox,
     historyPush,
     insertAfter,

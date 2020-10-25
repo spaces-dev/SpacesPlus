@@ -18,12 +18,14 @@ import {
 
 import {
     oldHeader,
+    setStyles,
     scrollMove,
     freeStickers,
     friendsOnline,
     hiddenRightbar,
     settingsFriends,
     settingsFeatures,
+    settingsBackground,
     settingsBackupMenu,
     settingsChangelogMenu
 } from './index'
@@ -114,6 +116,12 @@ export const settingsMenu = () => {
                                                     oldHeader(checked)
                                                     break
                                                 case 'bodystyle':
+                                                    if (checked) {
+                                                        settingsBackground(e.target)
+                                                    } else {
+                                                        remove(qs('#SP_PLUS_BODYSTYLE'))
+                                                        remove(qs('#SP_PLUS_INJSTYLE'))
+                                                    }
                                                     break
                                                 case 'msgAlert':
                                                     break
@@ -134,9 +142,17 @@ export const settingsMenu = () => {
                             }
 
                             // Дополнительное меню настроек
-                            if (_SETTINGS.friendsOn) {
-                                settingsFriends(qs('#friendsOn'))
+                            if (_SETTINGS.friendsOn) { settingsFriends(qs('#friendsOn')) }
+                            if (_SETTINGS.bodystyle) { settingsBackground(qs('#bodystyle')) }
+                            /*if (_SETTINGS.myEvents) {
+                                evenstSupport(qs('#sp_set_myEvents'))
                             }
+                            if (_SETTINGS.msgAlert) {
+                                msgAlertSettings(qs('#sp_set_msgAlert'))
+                            }
+                            if (_SETTINGS.weatherWidget) {
+                                weatherSettings(qs('#sp_set_weatherWidget'))
+                            }*/
 
                             // footer buttons area start
                             let spacesLabel1 = ce('div', {

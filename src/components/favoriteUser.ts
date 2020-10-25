@@ -16,10 +16,10 @@ import { IUserAnketa } from '../interfaces/UserAnketa'
 import { SPACES, OVERRIDE } from '../strings'
 
 export const favoriteUser = async () => {
-    let href = getHref()
-    let method = getPath(1)
-    let index = getPath(2)
-    let nickname = getPath(3)
+    let href = getHref(),
+        method = getPath(1),
+        index = getPath(2),
+        nickname = getPath(3)
 
     if ((method === 'mysite' || (method === 'anketa' && index !== 'edit') || method === 'activity') && OVERRIDE.FAVORITE !== href) {
         OVERRIDE.FAVORITE = href
@@ -90,6 +90,6 @@ const isFav = async (id: string, name: string, elem: any) => {
             }
         })
     } catch (e) {
-        error('Ошибка (isFav): ')
+        error('Ошибка (isFav): ' + e)
     }
 }
