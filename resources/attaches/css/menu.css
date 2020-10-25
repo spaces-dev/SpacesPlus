@@ -80,12 +80,13 @@
     }
 }
 
-#api_debug {
-    margin-top: 10px !important
+#api_debug-place {
+    background: #ddebf7;
+    padding: 8px;
+    display: none
 }
 
 #api_debug-result_info {
-    padding: 6px;
     font-size: small
 }
 
@@ -288,18 +289,12 @@ input[type=range]::-ms-fill-lower {
 }
 
 @keyframes heartbeat {
-
-    0%,
-    100%,
-    40%,
-    80% {
+    0%, 100%, 40%, 80% {
         -webkit-transform: scale(.75);
         -moz-transform: scale(.75);
         transform: scale(.75)
     }
-
-    20%,
-    60% {
+    20%, 60% {
         -webkit-transform: scale(1);
         -moz-transform: scale(1);
         transform: scale(1)
