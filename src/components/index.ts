@@ -7,6 +7,7 @@ import { apiDebugger } from './apiDebugger'
 import { coinsAccept } from './coinsAccept'
 import { deleteBlogs } from './deleteBlogs'
 import { karmaAccept } from './karmaAccept'
+import { favoriteUser } from './favoriteUser'
 import { freeStickers } from './freeStickers'
 import { settingsMenu } from './settingsMenu'
 import { deleteReaders } from './deleteReaders'
@@ -36,6 +37,7 @@ export {
     deleteBlogs,
     karmaAccept,
     checkUpdates,
+    favoriteUser,
     freeStickers,
     settingsMenu,
     deleteReaders,

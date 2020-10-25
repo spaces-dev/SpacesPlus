@@ -96,7 +96,7 @@ export const settingsBackupMenu = (id: string) => {
                 class: 'user__tools-link table__cell sp_btn_line sp_plus_btn_list',
                 html: '<span class="sp sp-restore-g"></span><span style="color: #3ca93c; padding-left: 10px">Сбросить настройки</span>',
                 onclick: function () {
-                    confirmBox('Вы действительно хотите сбросить файл конфигурации?', false, () => {
+                    confirmBox('Вы действительно хотите сбросить файл конфигурации?', true, () => {
                         delCookie('SP_PLUS_SET')
                         document.location.reload()
                     })

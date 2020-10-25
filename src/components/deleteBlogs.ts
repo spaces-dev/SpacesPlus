@@ -89,7 +89,7 @@ export const deleteBlogs = () => {
                             if (count > 0) {
                                 let con = declOfNum(count, ['', 'а', 'ов'])
 
-                                confirmBox(`Вы действительно хотите удалить ${count} блог${con}?`, false, async () => {
+                                confirmBox(`Вы действительно хотите удалить ${count} блог${con}?`, true, async () => {
                                     messageBox(`Удаляем ${count} блог${con}`, 'Подождите немного... <span style="padding-right: 10px" class="ico ico_spinner"></span>', false)
 
                                     for (let blog of blogs) {

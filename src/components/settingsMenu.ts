@@ -91,21 +91,11 @@ export const settingsMenu = () => {
                                             console.log(id + ": " + checked)
 
                                             switch (id) {
-                                                case 'readersd':
-                                                    break
-                                                case 'favorite':
-                                                    break
-                                                case 'blocked':
-                                                    break
                                                 case 'rscroll':
                                                     scrollMove(checked)
                                                     break
                                                 case 'hrightbar':
                                                     hiddenRightbar(checked)
-                                                    break
-                                                case 'online':
-                                                    break
-                                                case 'ads':
                                                     break
                                                 case 'myEvents':
                                                     break
@@ -250,7 +240,7 @@ export const settingsMenu = () => {
                                 id: 'sp_plus_reset',
                                 html: '<span class="b" style="color: #f86934"><span class="sp sp-alert mr-14"></span>Сброс настроек<span class="ico ico_arr ico_m"></span></span>',
                                 onclick: () => {
-                                    confirmBox('Вы действительно хотите полностью сбросить настройки?', false, () => {
+                                    confirmBox('Вы действительно хотите полностью сбросить настройки?', true, () => {
                                         delCookie('SP_PLUS_SET')
                                         delCookie('gp_left_btn')
                                         delCookie('force_ajax_transport')

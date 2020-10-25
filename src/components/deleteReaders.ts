@@ -88,7 +88,7 @@ export const deleteReaders = () => {
                             if (count > 0) {
                                 let con = declOfNum(count, ['я', 'я', 'ей'])
 
-                                confirmBox(`Вы действительно хотите удалить ${count} читател${con}`, false, async () => {
+                                confirmBox(`Вы действительно хотите удалить ${count} читател${con}`, true, async () => {
                                     messageBox(`Удаляем ${count} читател${con}`, 'Подождите немного... <span style="padding-right: 10px" class="ico ico_spinner"></span>', false)
 
                                     for (let reader of readers) {

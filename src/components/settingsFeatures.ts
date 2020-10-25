@@ -80,7 +80,7 @@ export const settingsFeatures = (root: any) => {
         class: 'stnd-link stnd-link_arr sp_line sp_last_btn sp_newbq_l',
         html: '<span class="b"><span class="sp sp-remove-grey mr-14"></span>Скрыть квест новичка<span class="ico ico_arr ico_m"></span></span>',
         onclick: function () {
-            confirmBox('Вы действительно хотите скрыть квест новичка?', false, () => {
+            confirmBox('Вы действительно хотите скрыть квест новичка?', true, () => {
                 http('GET', `${SPACES}/newbequest/?CK=${OVERRIDE.CK}`, true).then(e => {
                     if (e.status === 200) {
                         messageBox('Поздравляем!', 'Квест новичка успешно был скрыт', true, 3)

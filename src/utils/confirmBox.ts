@@ -32,7 +32,7 @@ export const confirmBox = (text: string, warn: boolean, callback: Function) => {
     if (!Main) {
         Main = ce('div', { class: 'sticker sp-sticker-anim', id: 'SP_PLUS_CONFIRM' })
 
-        if (!warn) {
+        if (warn) {
             container.appendChild(warningText)
         }
 

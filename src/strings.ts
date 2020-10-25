@@ -21,6 +21,7 @@ class OVERRIDE {
     public static CK: string
     public static BANNED: string | null
     public static ONLINE: string | null
+    public static FAVORITE: string | null
     public static KARMA: boolean = false
     public static COINS: boolean = false
     public static COMMENTS: number = 0

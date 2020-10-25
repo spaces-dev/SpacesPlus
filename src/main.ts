@@ -9,6 +9,7 @@ import {
     deleteBlogs,
     karmaAccept,
     checkUpdates,
+    favoriteUser,
     freeStickers,
     settingsMenu,
     deleteReaders,
@@ -37,7 +38,7 @@ import { _SETTINGS } from './settings'
 (() => {
     if (qs('#main_wrap')) {
         try {
-            http<ISessionCheck>('POST', `${SPACES}/api/session/check`, false).then((e) => {
+            http<ISessionCheck>('POST', `${SPACES}/api/session/check`, false).then(e => {
                 if (e.status === 200 && e.parsedBody) {
                     if (userStatus(e.parsedBody.code)) {
                         // Сохраняем CK
@@ -93,6 +94,7 @@ const init = () => {
         if (_SETTINGS.karma) karmaAccept()
         if (_SETTINGS.online) userOnline()
         if (_SETTINGS.grotate) galleryRotate()
+        if (_SETTINGS.favorite) favoriteUser()
         if (_SETTINGS.readersd) deleteReaders()
         if (_SETTINGS.comments) deleteComments()
         if (_SETTINGS.playerdn) playerDownload()

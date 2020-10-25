@@ -1,6 +1,6 @@
 import { find, http, getPath, info, error } from '../utils'
 
-import { IUserOnline } from '../interfaces/UserOnline'
+import { IUserAnketa } from '../interfaces/UserAnketa'
 
 import { SPACES, OVERRIDE } from '../strings'
 
@@ -19,7 +19,7 @@ export const userOnline = () => {
             if (nick && onBlock && OVERRIDE.ONLINE !== nick) {
                 OVERRIDE.ONLINE = nick
 
-                http<IUserOnline>('GET', `${SPACES}/anketa/index/${nick}/`, true).then(e => {
+                http<IUserAnketa>('GET', `${SPACES}/anketa/index/${nick}/`, true).then(e => {
                     const response = e.parsedBody?.user_widget?.online_time
 
                     if (response) {

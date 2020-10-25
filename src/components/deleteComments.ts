@@ -94,7 +94,7 @@ export const deleteComments = () => {
                                 if (count > 0) {
                                     let con = declOfNum(count, ['й', 'я', 'ев'])
 
-                                    confirmBox(`Вы действительно хотите удалить ${count} комментари${con}?`, false, async () => {
+                                    confirmBox(`Вы действительно хотите удалить ${count} комментари${con}?`, true, async () => {
                                         messageBox(`Удаляем ${count} комментари${con}`, 'Подождите немного... <span style="padding-right: 10px" class="ico ico_spinner"></span>', false)
 
                                         for (let url of urls) {
