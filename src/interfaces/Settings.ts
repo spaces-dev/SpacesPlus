@@ -55,7 +55,7 @@ export interface ISettings {
     coins: boolean
     rscroll: boolean
     hrightbar: boolean
-    ads: boolean
+    adblock: boolean
     apidebug: boolean
     karma: boolean
     sticker: boolean

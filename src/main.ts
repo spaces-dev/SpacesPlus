@@ -1,4 +1,5 @@
 import {
+    adBlock,
     setStyles,
     oldHeader,
     scrollMove,
@@ -90,6 +91,7 @@ const init = () => {
      * ! Для оптимальной работы выставлен интервал обновления в 200ms
      */
     setInterval(() => {
+        if (_SETTINGS.adblock) adBlock()
         if (_SETTINGS.coins) coinsAccept()
         if (_SETTINGS.karma) karmaAccept()
         if (_SETTINGS.online) userOnline()

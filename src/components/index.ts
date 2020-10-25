@@ -1,3 +1,4 @@
+import { adBlock } from './adBlock'
 import { oldHeader } from './oldHeader'
 import { setStyles } from './setStyles'
 import { scrollMove } from './scrollMove'
@@ -26,6 +27,7 @@ import { checkUpdates, getUpdater } from './checkUpdates'
 import { settingsChangelogMenu } from './settingsChangelogMenu'
 
 export {
+    adBlock,
     oldHeader,
     setStyles,
     getUpdater,
