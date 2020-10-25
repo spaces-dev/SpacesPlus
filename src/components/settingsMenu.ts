@@ -58,7 +58,7 @@ export const settingsMenu = () => {
                         let prnt = (qs('#SP_PLUS_SETLINK').parentElement?.parentNode?.parentNode?.parentNode as HTMLElement)
                         if (prnt.id === 'main') {
                             qs('#header_path').innerHTML = qs('#header_path').innerHTML.replace('Настройки', `<a href="${SPACES}/settings/" style="margin-bottom: 1px">Настройки</a><span class="location-bar__sep ico"></span><span id="SP_PLUS_SETHEAD2">Spaces+</span>`)
-                            prnt.innerHTML = `<div class="widgets-group widgets-group_top js-container__block"><div class="b-title cl b-title_center b-title_first oh"><div class="b-title__item" id="SP_PLUS_SETHEAD">Настройки Spaces+</div></div><div class="content"><div class="list f-c_fll"> <div id="SP_PLUS_SETAREA"></div></div></div></div> <div id="SP_PLUS_ABOUT"></div> <a id="SP_PLUS_SETBACK" href="${SPACES}/settings/?" class="link-return full_link"><span class="ico ico_arrow-back" style="margin: 0px 6px -1px 0px"></span><span class="m">Назад</span></a>`
+                            prnt.innerHTML = `<div class="widgets-group widgets-group_top js-container__block"><div class="b-title cl b-title_center b-title_first oh"><div class="b-title__item" id="SP_PLUS_SETHEAD">Настройки Spaces+</div></div><div class="content"><div class="list f-c_fll"> <div id="SP_PLUS_SETAREA" class="no-select"></div></div></div></div> <div id="SP_PLUS_ABOUT"></div> <a id="SP_PLUS_SETBACK" href="${SPACES}/settings/?" class="link-return full_link"><span class="ico ico_arrow-back" style="margin: 0px 6px -1px 0px"></span><span class="m">Назад</span></a>`
                         }
 
                         const setArea = qs('#SP_PLUS_SETAREA')
@@ -254,15 +254,27 @@ export const settingsMenu = () => {
                             // reset button end
 
                             // footer start
-                            let aboutWidget = ce('div', { class: 'widgets-group widgets-group_top nl wbg' })
-                            let ver = ce('div', { style: 'float: right', html: 'v' + PKG_VERSION })
-                            let content = ce('div', { class: 'content-item3' })
-                            let title = ce('div', {
-                                class: 'grey',
-                                html: 'Developed by <a href="https://crashmax.ru" target="_blank">crashmax</a> with love ❤️'
-                            })
+                            let clicks: number = 0,
+                                aboutWidget = ce('div', { class: 'widgets-group widgets-group_top nl wbg no-select' }),
+                                ver = ce('div', { style: 'float: right', html: 'v' + PKG_VERSION }),
+                                content = ce('div', { class: 'content-item3' }),
+                                heart = ce('div', {
+                                    html: '❤️',
+                                    class: 'heart',
+                                    onclick: () => {
+                                        clicks++
+                                        if (clicks >= 10) {
+                                            // TODO: Пасхалка
+                                        }
+                                    }
+                                }),
+                                title = ce('div', {
+                                    class: 'grey',
+                                    html: 'Developed by <a href="https://crashmax.ru" target="_blank">crashmax</a> with love '
+                                })
 
                             aboutWidget.appendChild(content)
+                            title.appendChild(heart)
                             content.appendChild(title)
                             title.appendChild(ver)
                             qs('#SP_PLUS_ABOUT').appendChild(aboutWidget)

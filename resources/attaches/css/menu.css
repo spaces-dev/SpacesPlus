@@ -287,7 +287,34 @@ input[type=range]::-ms-fill-lower {
     background-color: #395387
 }
 
-#SP_PLUS_SETAREA {
+@keyframes heartbeat {
+
+    0%,
+    100%,
+    40%,
+    80% {
+        -webkit-transform: scale(.75);
+        -moz-transform: scale(.75);
+        transform: scale(.75)
+    }
+
+    20%,
+    60% {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        transform: scale(1)
+    }
+}
+
+.heart {
+    -webkit-animation: heartbeat 1s infinite;
+    -moz-animation: heartbeat 1s infinite;
+    animation: heartbeat 1s infinite;
+    display: inline-block;
+    cursor: pointer
+}
+
+.no-select {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none
