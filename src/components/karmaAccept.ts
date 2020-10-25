@@ -1,4 +1,4 @@
-import { find, http, remove, info, error } from '../utils'
+import { qs, find, http, remove, info, error } from '../utils'
 
 import { SPACES, OVERRIDE } from '../strings'
 
@@ -12,6 +12,7 @@ export const karmaAccept = () => {
             http('GET', karma[0].href, true).then(e => {
                 if (e.status === 200) {
                     remove(karma[0].parentNode)
+                    qs('#header_path').classList.remove('no-shadow')
                     info('Cобрали карму!')
                 }
 
