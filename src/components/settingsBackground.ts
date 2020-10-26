@@ -43,35 +43,38 @@ export const settingsBackground = (e: any) => {
             id: 'image-input',
             value: _SETTINGS.bodystyleSetting.url,
             style: 'margin-bottom: 7px',
-            class: 'text-input',
-            onchange: addEventListener('oninput', (a: any) => {
-                if ((isValidUrl(a.target.value) && /\.(jpg|jpeg|png|gif)$/i.test(a.target.value)) || trim(a.target.value) === '') {
-                    _SETTINGS.bodystyleSetting.url = trim(a.target.value)
-                    setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
-                    setStyles()
-                    inputImageUrl.className = 'text-input'
-                } else {
-                    inputImageUrl.className = 'text-input sp-input-error'
-                }
-            })
+            class: 'text-input'
+        })
+
+        inputImageUrl.addEventListener('change', (a: any) => {
+            if ((isValidUrl(a.target.value) && /\.(jpg|jpeg|png|gif)$/i.test(a.target.value)) || trim(a.target.value) === '') {
+                _SETTINGS.bodystyleSetting.url = trim(a.target.value)
+                setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
+                setStyles()
+                inputImageUrl.className = 'text-input'
+            } else {
+                inputImageUrl.className = 'text-input sp-input-error'
+            }
         })
 
         let inputColor = ce('input', {
             type: 'text',
             class: 'text-input',
             id: 'color-input',
-            value: _SETTINGS.bodystyleSetting.color,
-            onchange: addEventListener('oninput', (a: any) => {
-                if (/^\#([A-Za-z0-9]{3}|[A-Za-z0-9]{6})$/i.test(a.target.value) || a.target.value === '') {
-                    _SETTINGS.bodystyleSetting.color = trim(a.target.value)
-                    setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
-                    setStyles()
-                    inputColor.className = 'text-input'
-                } else {
-                    inputColor.className = 'text-input sp-input-error'
-                }
-            })
+            value: _SETTINGS.bodystyleSetting.color
         })
+
+        inputColor.addEventListener('change', (a: any) => {
+            if (/^\#([A-Za-z0-9]{3}|[A-Za-z0-9]{6})$/i.test(a.target.value) || a.target.value === '') {
+                _SETTINGS.bodystyleSetting.color = trim(a.target.value)
+                setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
+                setStyles()
+                inputColor.className = 'text-input'
+            } else {
+                inputColor.className = 'text-input sp-input-error'
+            }
+        })
+
 
         let radioImage: any = ce('input', {
             type: 'radio',
@@ -271,7 +274,8 @@ const setColor = () => {
                 // @ts-ignore
                 let picker = new CP(container, false, container)
                 // @ts-ignore
-                qs('#color-input').onchange = qs('#color-input').oninput = (a: any) => {
+
+                qs('#color-input').addEventListener('change', (a: any) => {
                     if (/^\#([A-Za-z0-9]{3}|[A-Za-z0-9]{6})$/i.test(a.target.value) || a.target.value === '') {
                         a.target.className = 'text-input'
                         _SETTINGS.bodystyleSetting.color = trim(a.target.value)
@@ -281,7 +285,8 @@ const setColor = () => {
                     } else {
                         a.target.className = 'text-input sp-input-error'
                     }
-                }
+                })
+
                 picker.enter()
                 picker.set(_SETTINGS.bodystyleSetting.color)
                 picker.on('change', (e: string) => {

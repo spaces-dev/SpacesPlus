@@ -16,7 +16,7 @@ export const settingsFriends = (e?: any) => {
             value: _SETTINGS.friendsOnMax
         })
 
-        frMax.onchange = frMax.oninput = (e: any) => {
+        frMax.addEventListener('change', (e: any) => {
             if (!isNaN(e.target.value)) {
                 let value = Number(e.target.value)
                 frMax.className = 'text-input'
@@ -30,7 +30,7 @@ export const settingsFriends = (e?: any) => {
             } else {
                 frMax.className = 'text-input sp-input-error'
             }
-        }
+        })
 
         let frMaxLbl = ce('label', {
             html: 'Выводить друзей:<div class="label__desc">от 1 до 15</div>',
