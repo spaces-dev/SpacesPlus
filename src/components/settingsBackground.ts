@@ -1,4 +1,14 @@
-import { ce, qs, trim, http, remove, isValidUrl, setCookie, insertAfter, error } from '../utils'
+import {
+    ce,
+    qs,
+    trim,
+    http,
+    remove,
+    error,
+    setCookie,
+    isValidUrl,
+    insertAfter,
+} from '../utils'
 
 import { setStyles } from './setStyles'
 
@@ -9,25 +19,26 @@ import { ENV, GITHUB, REVISION } from '../strings'
 
 export const settingsBackground = (e: any) => {
     try {
+
         let div = ce('div', { class: 'text-input__wrap' }),
             bgWrap = ce('div', { id: 'SP_PLUS_BODYSTYLE' }),
             label = ce('label', { class: 'stnd-link', style: 'border-bottom: none' }),
             label1 = ce('label', { class: 'stnd-link', style: 'border-bottom: none' }),
             bstlWrap = ce('div', { class: 'bstrwrap', style: 'border-bottom: none; padding: 15px' })
 
-        let descInp = ce('label', {
+        let descriptionUrl = ce('label', {
             html: 'Ссылка на изображение:<div class="label__desc">.jpg или .png</div>',
             style: 'margin-right: -17px',
             class: 'label'
         })
 
-        let descCol = ce('label', {
+        let descriptionColor = ce('label', {
             html: 'Цвет фона:<div class="label__desc">#RRGGBB</div>',
             style: 'margin-right: -17px',
             class: 'label'
         })
 
-        let bstyle = ce('input', {
+        let inputImageUrl = ce('input', {
             type: 'text',
             id: 'image-input',
             value: _SETTINGS.bodystyleSetting.url,
@@ -38,14 +49,14 @@ export const settingsBackground = (e: any) => {
                     _SETTINGS.bodystyleSetting.url = trim(a.target.value)
                     setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
                     setStyles()
-                    bstyle.className = 'text-input'
+                    inputImageUrl.className = 'text-input'
                 } else {
-                    bstyle.className = 'text-input sp-input-error'
+                    inputImageUrl.className = 'text-input sp-input-error'
                 }
             })
         })
 
-        let bstylec = ce('input', {
+        let inputColor = ce('input', {
             type: 'text',
             class: 'text-input',
             id: 'color-input',
@@ -55,14 +66,14 @@ export const settingsBackground = (e: any) => {
                     _SETTINGS.bodystyleSetting.color = trim(a.target.value)
                     setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
                     setStyles()
-                    bstylec.className = 'text-input'
+                    inputColor.className = 'text-input'
                 } else {
-                    bstylec.className = 'text-input sp-input-error'
+                    inputColor.className = 'text-input sp-input-error'
                 }
             })
         })
 
-        let inbstyle: any = ce('input', {
+        let radioImage: any = ce('input', {
             type: 'radio',
             id: 'sp_set_bodystyle_URL',
             checked: _SETTINGS.bodystyleSetting.urlchecked,
@@ -70,8 +81,8 @@ export const settingsBackground = (e: any) => {
             onclick: (a: any) => {
                 _SETTINGS.bodystyleSetting.urlchecked = a.target.checked
 
-                if (a.target.checked && inbstylec.checked) {
-                    inbstylec.checked = false
+                if (a.target.checked && radioColor.checked) {
+                    radioColor.checked = false
                     _SETTINGS.bodystyleSetting.colorchecked = false
                 }
 
@@ -86,7 +97,7 @@ export const settingsBackground = (e: any) => {
             }
         })
 
-        let inbstylec: any = ce('input', {
+        let radioColor: any = ce('input', {
             type: 'radio',
             id: 'sp_set_bodystyle_color',
             checked: _SETTINGS.bodystyleSetting.colorchecked,
@@ -95,8 +106,8 @@ export const settingsBackground = (e: any) => {
 
                 _SETTINGS.bodystyleSetting.colorchecked = a.target.checked
 
-                if (a.target.checked && inbstyle.checked) {
-                    inbstyle.checked = false
+                if (a.target.checked && radioImage.checked) {
+                    radioImage.checked = false
                     _SETTINGS.bodystyleSetting.urlchecked = false
                 }
 
@@ -121,13 +132,13 @@ export const settingsBackground = (e: any) => {
             html: 'Подобрать цвет'
         })
 
-        div.appendChild(descInp)
-        div.appendChild(bstyle)
-        div.appendChild(descCol)
-        div.appendChild(bstylec)
-        label.appendChild(inbstyle)
+        div.appendChild(descriptionUrl)
+        div.appendChild(inputImageUrl)
+        div.appendChild(descriptionColor)
+        div.appendChild(inputColor)
+        label.appendChild(radioImage)
         label.appendChild(lblstylelbl)
-        label1.appendChild(inbstylec)
+        label1.appendChild(radioColor)
         label1.appendChild(lblstyleclbl)
         bstlWrap.appendChild(div)
         bgWrap.appendChild(bstlWrap)
@@ -230,7 +241,7 @@ const setColor = () => {
             document.getElementsByTagName('head')[0].appendChild(style)
             document.getElementsByTagName('head')[0].appendChild(style2)
 
-            var SPB = qs('#SP_PLUS_BODYSTYLE'),
+            let bodyStyle = qs('#SP_PLUS_BODYSTYLE'),
                 stdnC = ce('div', { id: 'SP_WRAP_COLOR', style: 'border-top: 1px solid #cdd4e1' }),
                 table = ce('table', { class: 'table__wrap bb-colorpicker' }),
                 tbody = ce('tbody'),
@@ -254,11 +265,11 @@ const setColor = () => {
             tbody.appendChild(tr)
             table.appendChild(tbody)
             stdnC.appendChild(table)
-            SPB.appendChild(stdnC)
+            bodyStyle.appendChild(stdnC)
 
             setTimeout(() => {
                 // @ts-ignore
-                const picker = new CP(container, false, container)
+                let picker = new CP(container, false, container)
                 // @ts-ignore
                 qs('#color-input').onchange = qs('#color-input').oninput = (a: any) => {
                     if (/^\#([A-Za-z0-9]{3}|[A-Za-z0-9]{6})$/i.test(a.target.value) || a.target.value === '') {
@@ -274,7 +285,7 @@ const setColor = () => {
                 picker.enter()
                 picker.set(_SETTINGS.bodystyleSetting.color)
                 picker.on('change', (e: string) => {
-                    let color = e.toUpperCase()
+                    const color = e.toUpperCase()
                     // @ts-ignore
                     qs('#color-input').value = '#' + color
                     // @ts-ignore
