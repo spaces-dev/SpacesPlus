@@ -19,7 +19,7 @@ import { ENV, GITHUB, REVISION, OVERRIDE } from '../strings'
  */
 export const getUpdater = (callback: Function) => {
     try {
-        http<ICheckUpdates>('GET', `https://${ENV ?? GITHUB}/src/updater.json?r=${REVISION}`, false).then(e => {
+        http<ICheckUpdates>('GET', `https://${ENV ?? GITHUB}/updater.json?r=${REVISION}`, false).then(e => {
             const json = e.parsedBody
 
             if (e.status === 200 && json?.history) {

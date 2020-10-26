@@ -80,8 +80,7 @@ const config: webpack.Configuration = {
         new CopyWebpackPlugin({
             patterns: [
                 {
-                    from: 'resources/',
-                    to: 'src/'
+                    from: 'resources/'
                 }
             ]
         }),
