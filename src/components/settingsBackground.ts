@@ -15,7 +15,7 @@ import { setStyles } from './setStyles'
 import { IAssets } from '../interfaces/Assets'
 
 import { _SETTINGS } from '../settings'
-import { ENV, GITHUB, REVISION } from '../strings'
+import { ENV_PATH, REVISION } from '../strings'
 
 export const settingsBackground = (e: any) => {
     try {
@@ -169,7 +169,7 @@ const setImage = async () => {
                 rel: 'stylesheet',
                 type: 'text/css',
                 id: 'SP_PLUS_IMAGE_STYLE',
-                href: `https://${ENV ?? GITHUB}/css/bodystyle.css?r=${REVISION}`
+                href: `${ENV_PATH}/css/bodystyle.css?r=${REVISION}`
             })
 
             document.getElementsByTagName('head')[0].appendChild(style)
@@ -178,7 +178,7 @@ const setImage = async () => {
                 gd = ce('div', { class: 'js-gallery_skip wbg oh tiles_block tiles_wrapper' }),
                 stdnI = ce('div', { id: 'SP_WRAP_IMAGE', style: 'border-top: 1px solid #cdd4e1' })
 
-            await http<IAssets>('GET', `https://${ENV ?? GITHUB}/data.json?r=${REVISION}`, false).then(e => {
+            await http<IAssets>('GET', `${ENV_PATH}/data.json?r=${REVISION}`, false).then(e => {
 
                 if (e.status === 200 && e.parsedBody?.backgrounds) {
                     for (let i of e.parsedBody?.backgrounds) {
@@ -189,7 +189,7 @@ const setImage = async () => {
                             img = ce('img', {
                                 class: 'preview s201_200',
                                 style: 'cursor: pointer',
-                                src: `https://${ENV ?? GITHUB}/backgrounds/${i}`,
+                                src: `https://${ENV_PATH}/backgrounds/${i}`,
                                 onclick: (e: any) => {
                                     // @ts-ignore
                                     qs('#image-input').value = e.target.src
@@ -231,14 +231,14 @@ const setColor = () => {
                 rel: 'stylesheet',
                 type: 'text/css',
                 id: 'SP_PLUS_CP_STYLE',
-                href: `https://${ENV ?? GITHUB}/css/toolbar.css?r=${REVISION}`
+                href: `${ENV_PATH}/css/toolbar.css?r=${REVISION}`
             })
 
             let style2 = ce('link', {
                 rel: 'stylesheet',
                 type: 'text/css',
                 id: 'SP_PLUS_CP_STYLE_2',
-                href: `https://${ENV ?? GITHUB}/css/user-content.css?r=${REVISION}`
+                href: `${ENV_PATH}/css/user-content.css?r=${REVISION}`
             })
 
             document.getElementsByTagName('head')[0].appendChild(style)

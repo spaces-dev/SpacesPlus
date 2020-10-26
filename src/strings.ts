@@ -4,15 +4,15 @@ import pkg from '../package.json'
 /**
  * Константы
  */
-const ENV = process.env.NODE_ENV === 'development' ? 'localhost:8080' : null
 const BETA: boolean = false
 const HTTP: string = document.location.protocol
-const REVISION: number = Number(new Date())
 const BASE_URL: string = document.location.hostname
-const DEVICE: IDevice = window.Device || unsafeWindow.Device
-const GITHUB: string = 'spaces-dev.github.io/SpacesPlus'
 const SPACES: string = `${HTTP}//${BASE_URL}`
 const PKG_VERSION = pkg.version
+const GITHUB: string = pkg.homepage
+const REVISION: number = Number(new Date())
+const DEVICE: IDevice = window.Device || unsafeWindow.Device
+const ENV_PATH = process.env.NODE_ENV === 'development' ? 'https://localhost:8080' : GITHUB
 
 /**
  * Временное хранилище данных
@@ -30,13 +30,13 @@ class OVERRIDE {
 }
 
 export {
-    ENV,
     BETA,
     HTTP,
     DEVICE,
     GITHUB,
     SPACES,
     BASE_URL,
+    ENV_PATH,
     REVISION,
     OVERRIDE,
     PKG_VERSION,

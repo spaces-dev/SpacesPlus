@@ -1,6 +1,6 @@
 import { qs, ce } from '../utils'
 
-import { BASE_URL, ENV, GITHUB, REVISION } from '../strings'
+import { BASE_URL, ENV_PATH, REVISION } from '../strings'
 import { _SETTINGS } from '../settings'
 
 export const setStyles = () => {
@@ -14,7 +14,7 @@ export const setStyles = () => {
             rel: 'stylesheet',
             type: 'text/css',
             id: 'SP_STICKER_CSS',
-            href: `https://${ENV ?? GITHUB}/css/sticker.css?r=${REVISION}`
+            href: `${ENV_PATH}/css/sticker.css?r=${REVISION}`
         })
 
         document.getElementsByTagName('head')[0].appendChild(sticker)
@@ -25,7 +25,7 @@ export const setStyles = () => {
             rel: 'stylesheet',
             type: 'text/css',
             id: 'SP_PLUS_MENU',
-            href: `https://${ENV ?? GITHUB}/css/menu.css?r=${REVISION}`
+            href: `${ENV_PATH}/css/menu.css?r=${REVISION}`
         })
 
         document.getElementsByTagName('head')[0].appendChild(menu)

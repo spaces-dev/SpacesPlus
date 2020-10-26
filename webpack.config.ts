@@ -1,3 +1,4 @@
+import url from 'url'
 import path from 'path'
 import webpack from 'webpack'
 import WebpackUserscript from 'webpack-userscript'
@@ -9,19 +10,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const outputPath = path.resolve(__dirname, 'dist')
 const fileName = userscriptConfig.scriptFileName
 const isDev = process.env.NODE_ENV === 'development'
+const isChrome = false
 const PORT = 8080
-const HTTPS = true
-
-const devServerOpenPage: string[] = (() => {
-    const pages: string[] = []
-    if (userscriptConfig.openScriptInstallPage) {
-        pages.push(`${HTTPS ? 'https' : 'http'}://localhost:${PORT}/${fileName}.proxy.user.js`)
-    }
-    if (userscriptConfig.openTargetPage) {
-        pages.push(userscriptConfig.openTargetPage)
-    }
-    return pages
-})()
 
 const config: webpack.Configuration = {
     mode: isDev ? 'development' : 'production',
@@ -64,13 +54,11 @@ const config: webpack.Configuration = {
         ]
     },
     devServer: {
-        https: HTTPS,
+        https: true,
         port: PORT,
         headers: { 'Access-Control-Allow-Origin': '*' },
         writeToDisk: true,
         contentBase: outputPath,
-        open: !!(userscriptConfig.openTargetPage && userscriptConfig.openScriptInstallPage),
-        openPage: devServerOpenPage,
         hot: false,
         inline: false,
         liveReload: false
@@ -85,7 +73,14 @@ const config: webpack.Configuration = {
             ]
         }),
         new WebpackUserscript({
-            headers: userscriptConfig.scriptHeaders
+            headers: userscriptConfig.scriptHeaders,
+            proxyScript: {
+                // file:/// using for Google Chrome else https:// for Mozilla Firefox
+                baseUrl: isChrome ?
+                    `${url.pathToFileURL(outputPath)}` :
+                    `https://localhost:${PORT}`,
+                enable: isDev
+            }
         })
     ]
 }

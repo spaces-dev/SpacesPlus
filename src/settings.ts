@@ -1,5 +1,5 @@
 import { ISettings, IStrings } from './interfaces/Settings'
-import { OVERRIDE, GITHUB } from './strings'
+import { ENV_PATH, OVERRIDE } from './strings'
 
 /**
  * * Строки названий функций в меню настроек
@@ -65,13 +65,13 @@ export let _SETTINGS: ISettings = {
     'bodystyle': true,
     'upVersion': OVERRIDE.VERSION,
     'bodystyleSetting': {
-        'url': `https://${GITHUB}/backgrounds/default.jpg`,
+        'url': `${ENV_PATH}/backgrounds/default.jpg`,
         'color': '#DAE1E8',
         'urlchecked': true,
         'colorchecked': false
     },
     'events': {
-        'url': `https://${GITHUB}/sounds/default.ogg`,
+        'url': `${ENV_PATH}/sounds/default.ogg`,
         'volume': 70,
         'mail': true,
         'journal': true,

@@ -7,16 +7,6 @@ interface IUserscriptConfig {
     /** script file name, without file extension*/
     scriptFileName: string
     /** 
-     * url that userscript works on
-     *  webpack will auto open this url after running npm run dev if it's set
-     **/
-    openTargetPage?: string
-    /**
-     * whether open user script install page after running npm run dev
-     *  you only need to install the user script once unless you changed the script headers or script file name
-     **/
-    openScriptInstallPage?: boolean
-    /** 
      * user script headers
      *  including script name, description, match url, grants and so on
      *  see https://www.tampermonkey.net/documentation.php for details
@@ -26,8 +16,6 @@ interface IUserscriptConfig {
 
 const config: IUserscriptConfig = {
     scriptFileName: pkg.name,
-    openTargetPage: 'https://spaces.im',
-    openScriptInstallPage: false,
     scriptHeaders: {
         name: 'Spaces+',
         description: pkg.description,
