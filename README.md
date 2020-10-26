@@ -1,21 +1,51 @@
-Configure you browser: Chrome
------------------------------
+SpacesPlus — Powerfull userscript for Spaces.ru
+===============================================
 
-1. enable insecure localhost: navigate to `chrome://flags/#allow-insecure-localhost`, enable insecure localhost
-2. enable file url access of extensions: navigate to `chrome://extensions/?id=dhdgffkkebhmkfjojejmpbldmpobfkfo`(Chrome manage extensions page of `Tampermonkey`) and enable `Allow access to file URLs` (you need to manual reload page when dev userscript, see [#475](https://github.com/Tampermonkey/tampermonkey/issues/475#issuecomment-348594785) for more detail)
+![GitHub](https://img.shields.io/github/license/spaces-dev/SpacesPlus?label=License)
 
-Development
+- Возможности:
+    - Пакетное удаление комментариев
+    - Пакетное удаление блогов
+    - Пакетное удаление читателей
+    - Возможность добавлять пользователей в закладки
+    - Кнопка поворота фото в просмотрщике
+    - Кнопка ускорения видео
+    - Открытые разделы удаленных пользователей
+    - Прокрутка страницы справа
+    - Скрытие правого меню
+    - Кнопка загрузки трека из плеера
+    - Переход через внешние ссылки без редиректа
+    - Автоматический сбор бонусных монет
+    - Автоматическое подтверждение кармы
+    - ~~Темная тема~~
+    - Точное время онлайн в анкетах
+    - Блокировщик рекламы
+    - Возможность изменять звук уведомлений
+    - Панель друзей онлайн
+    - Бесплатные стикеры
+    - Возвращает кнопку почту и ленты на свои прежние места
+    - Возможность изменять фон сайта
+    - Виджет почты
+    - Виджет погоды
+- Встроенные возможности сайта:
+    - API Отладчик
+    - Вход в Beta-песочницу
+    - Включение полосы загрузки страницы как на телефоне
+    - Закрепить аудиоплеер в левом меню
+    - Скрытие квеста новичка
+- Дополнительно:
+    - Редактор cookies
+
+Разработка:
 -----------
+1. Установите зависимости `npm install`
+2. Запустить сервер для разработки `npm run dev`
+3. Откройте `https://localhost:8080/spaces-plus.proxy.user.js` в браузере (нажмите `Advanced` -> `continue`, если отображается предупреждение безопасности), чтобы установить прокси-скрипт.
+4. Код для разработки в папке `src`, перезагрузите веб-страницу после изменений в коде.
+5. Для сборки используйте `npm run build`
+6. Для полноценной разработки необходимо будет создать [GitHub Pages](https://pages.github.com)
 
-1. install dependencies by run `npm i`
-2. open dev server by run `npm run dev`
-3. open `https://127.0.0.1/[userscript-name].proxy.user.js` in browser(click  `Advanced` -> `proceed` if it shows a security warning ) to install the proxy script. by setting `openScriptInstallPage` to true in `userscript.config.ts` it will open that page automatically for you.
-4. open your target webpage to see the effect. by setting `openTargetPage` to as your target url in `userscript.config.ts` it will open that page automatically for you.
-5. config userscript by modifying `userscript.config.ts`, you need to rerun `npm run dev` to make it take effect
-6. config webpack by modifying `webpack.config.ts`, you need to rerun `npm run dev` to make it take effect
-7. dev code in `src` folder, reload your target webpage after userscript changed
-
-Build
------
-
-run cmd `npm run build`, your userscript should be in `dist` folder with extension `.user.js`
+Конфигурация браузера Google Chrome:
+-----------------------------------
+1. Включите insecure-localhost: перейдите к `chrome://flags/#allow-insecure-localhost` и включите insecure-localhost.
+2. Включите доступ к URL-адресу файла для расширения: перейдите к `chrome://extensions/?id=dhdgffkkebhmkfjojejmpbldmpobfkfo` (Страница управления [Tampermonkey](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)) и включите `Allow access to file URLs` (если вам нужно вручную перезагрузить страницу при разработке пользовательского скрипта, см. [#475](https://github.com/Tampermonkey/tampermonkey/issues/475#issuecomment-348594785) для более подробной информации)
