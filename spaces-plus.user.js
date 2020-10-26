@@ -175,29 +175,29 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PKG_VERSION = exports.OVERRIDE = exports.REVISION = exports.BASE_URL = exports.SPACES = exports.GITHUB = exports.DEVICE = exports.HTTP = exports.BETA = exports.ENV = void 0;
+exports.PKG_VERSION = exports.OVERRIDE = exports.REVISION = exports.ENV_PATH = exports.BASE_URL = exports.SPACES = exports.GITHUB = exports.DEVICE = exports.HTTP = exports.BETA = void 0;
 const package_json_1 = __importDefault(__webpack_require__(26));
 /**
  * Константы
  */
-const ENV =  false ? undefined : null;
-exports.ENV = ENV;
 const BETA = false;
 exports.BETA = BETA;
 const HTTP = document.location.protocol;
 exports.HTTP = HTTP;
-const REVISION = Number(new Date());
-exports.REVISION = REVISION;
 const BASE_URL = document.location.hostname;
 exports.BASE_URL = BASE_URL;
-const DEVICE = window.Device || unsafeWindow.Device;
-exports.DEVICE = DEVICE;
-const GITHUB = 'spaces-dev.github.io/SpacesPlus';
-exports.GITHUB = GITHUB;
 const SPACES = `${HTTP}//${BASE_URL}`;
 exports.SPACES = SPACES;
 const PKG_VERSION = package_json_1.default.version;
 exports.PKG_VERSION = PKG_VERSION;
+const GITHUB = package_json_1.default.homepage;
+exports.GITHUB = GITHUB;
+const REVISION = Number(new Date());
+exports.REVISION = REVISION;
+const DEVICE = window.Device || unsafeWindow.Device;
+exports.DEVICE = DEVICE;
+const ENV_PATH =  false ? undefined : GITHUB;
+exports.ENV_PATH = ENV_PATH;
 /**
  * Временное хранилище данных
  */
@@ -283,13 +283,13 @@ exports._SETTINGS = {
     'bodystyle': true,
     'upVersion': strings_1.OVERRIDE.VERSION,
     'bodystyleSetting': {
-        'url': `https://${strings_1.GITHUB}/backgrounds/default.jpg`,
+        'url': `${strings_1.ENV_PATH}/backgrounds/default.jpg`,
         'color': '#DAE1E8',
         'urlchecked': true,
         'colorchecked': false
     },
     'events': {
-        'url': `https://${strings_1.GITHUB}/sounds/default.ogg`,
+        'url': `${strings_1.ENV_PATH}/sounds/default.ogg`,
         'volume': 70,
         'mail': true,
         'journal': true,
@@ -518,7 +518,7 @@ exports.setStyles = () => {
             rel: 'stylesheet',
             type: 'text/css',
             id: 'SP_STICKER_CSS',
-            href: `https://${strings_1.ENV !== null && strings_1.ENV !== void 0 ? strings_1.ENV : strings_1.GITHUB}/css/sticker.css?r=${strings_1.REVISION}`
+            href: `${strings_1.ENV_PATH}/css/sticker.css?r=${strings_1.REVISION}`
         });
         document.getElementsByTagName('head')[0].appendChild(sticker);
     }
@@ -527,7 +527,7 @@ exports.setStyles = () => {
             rel: 'stylesheet',
             type: 'text/css',
             id: 'SP_PLUS_MENU',
-            href: `https://${strings_1.ENV !== null && strings_1.ENV !== void 0 ? strings_1.ENV : strings_1.GITHUB}/css/menu.css?r=${strings_1.REVISION}`
+            href: `${strings_1.ENV_PATH}/css/menu.css?r=${strings_1.REVISION}`
         });
         document.getElementsByTagName('head')[0].appendChild(menu);
     }
@@ -662,7 +662,7 @@ const strings_1 = __webpack_require__(1);
  */
 exports.getUpdater = (callback) => {
     try {
-        utils_1.http('GET', `https://${strings_1.ENV !== null && strings_1.ENV !== void 0 ? strings_1.ENV : strings_1.GITHUB}/updater.json?r=${strings_1.REVISION}`, false).then(e => {
+        utils_1.http('GET', `${strings_1.ENV_PATH}/updater.json?r=${strings_1.REVISION}`, false).then(e => {
             const json = e.parsedBody;
             if (e.status === 200 && (json === null || json === void 0 ? void 0 : json.history)) {
                 return callback(json);
@@ -681,7 +681,7 @@ exports.checkUpdates = () => {
                 hideVer = settings_1._SETTINGS.upVersion;
             strings_1.OVERRIDE.VERSION = Math.max(hideVer, strings_1.OVERRIDE.VERSION);
             if (json.history[0].build > strings_1.OVERRIDE.VERSION) {
-                utils_1.messageBox(`Доступна новая версия Spaces+ ${utils_1.rever(json.history[0].build)}`, `<div class="pad_t_a"></div>${json.history[0].changes}<div id="SP_UPDATER_BUTTONS" class="pad_t_a"><a class="btn btn_green btn_input" href="https://github.com/spaces-dev/${strings_1.GITHUB}/raw/master/spaces-plus.user.js?r=${strings_1.REVISION}" onclick="document.body.removeChild(this.parentNode.parentNode.parentNode); return true"> Обновить</a></div>`, true);
+                utils_1.messageBox(`Доступна новая версия Spaces+ ${utils_1.rever(json.history[0].build)}`, `<div class="pad_t_a"></div>${json.history[0].changes}<div id="SP_UPDATER_BUTTONS" class="pad_t_a"><a class="btn btn_green btn_input" href="${strings_1.ENV_PATH}/spaces-plus.user.js?r=${strings_1.REVISION}" onclick="document.body.removeChild(this.parentNode.parentNode.parentNode); return true"> Обновить</a></div>`, true);
                 if (utils_1.qs('#SP_PLUS_ALERT')) {
                     const hide = utils_1.ce('a', {
                         href: '#',
@@ -2729,18 +2729,18 @@ const setImage = async () => {
                 rel: 'stylesheet',
                 type: 'text/css',
                 id: 'SP_PLUS_IMAGE_STYLE',
-                href: `https://${strings_1.ENV !== null && strings_1.ENV !== void 0 ? strings_1.ENV : strings_1.GITHUB}/css/bodystyle.css?r=${strings_1.REVISION}`
+                href: `${strings_1.ENV_PATH}/css/bodystyle.css?r=${strings_1.REVISION}`
             });
             document.getElementsByTagName('head')[0].appendChild(style);
             let SPB = utils_1.qs('#SP_PLUS_BODYSTYLE'), gd = utils_1.ce('div', { class: 'js-gallery_skip wbg oh tiles_block tiles_wrapper' }), stdnI = utils_1.ce('div', { id: 'SP_WRAP_IMAGE', style: 'border-top: 1px solid #cdd4e1' });
-            await utils_1.http('GET', `https://${strings_1.ENV !== null && strings_1.ENV !== void 0 ? strings_1.ENV : strings_1.GITHUB}/data.json?r=${strings_1.REVISION}`, false).then(e => {
+            await utils_1.http('GET', `${strings_1.ENV_PATH}/data.json?r=${strings_1.REVISION}`, false).then(e => {
                 var _a, _b;
                 if (e.status === 200 && ((_a = e.parsedBody) === null || _a === void 0 ? void 0 : _a.backgrounds)) {
                     for (let i of (_b = e.parsedBody) === null || _b === void 0 ? void 0 : _b.backgrounds) {
                         let d1 = utils_1.ce('div', { class: 'js-file_item tiled_item tiled_item-200' }), d2 = utils_1.ce('div', { class: 'tiled_inner t_center relative' }), s3 = utils_1.ce('span', { class: 'relative', style: 'display: inline-block;max-width: 100%; width: 100%' }), ds1 = utils_1.ce('div', { class: 'tiled-preview border' }), img = utils_1.ce('img', {
                             class: 'preview s201_200',
                             style: 'cursor: pointer',
-                            src: `https://${strings_1.ENV !== null && strings_1.ENV !== void 0 ? strings_1.ENV : strings_1.GITHUB}/backgrounds/${i}`,
+                            src: `https://${strings_1.ENV_PATH}/backgrounds/${i}`,
                             onclick: (e) => {
                                 // @ts-ignore
                                 utils_1.qs('#image-input').value = e.target.src;
@@ -2777,13 +2777,13 @@ const setColor = () => {
                 rel: 'stylesheet',
                 type: 'text/css',
                 id: 'SP_PLUS_CP_STYLE',
-                href: `https://${strings_1.ENV !== null && strings_1.ENV !== void 0 ? strings_1.ENV : strings_1.GITHUB}/css/toolbar.css?r=${strings_1.REVISION}`
+                href: `${strings_1.ENV_PATH}/css/toolbar.css?r=${strings_1.REVISION}`
             });
             let style2 = utils_1.ce('link', {
                 rel: 'stylesheet',
                 type: 'text/css',
                 id: 'SP_PLUS_CP_STYLE_2',
-                href: `https://${strings_1.ENV !== null && strings_1.ENV !== void 0 ? strings_1.ENV : strings_1.GITHUB}/css/user-content.css?r=${strings_1.REVISION}`
+                href: `${strings_1.ENV_PATH}/css/user-content.css?r=${strings_1.REVISION}`
             });
             document.getElementsByTagName('head')[0].appendChild(style);
             document.getElementsByTagName('head')[0].appendChild(style2);
