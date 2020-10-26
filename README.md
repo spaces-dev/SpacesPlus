@@ -1,7 +1,9 @@
 SpacesPlus — Powerfull userscript for Spaces.ru
 ===============================================
 
-![GitHub](https://img.shields.io/github/license/spaces-dev/SpacesPlus?label=License)
+![Version](https://img.shields.io/github/package-json/v/spaces-dev/SpacesPlus?color=blue)
+![Travis](https://img.shields.io/travis/spaces-dev/SpacesPlus)
+![GitHub](https://img.shields.io/github/license/spaces-dev/SpacesPlus?label=License&color=brightgreen)
 
 - Возможности:
     - Пакетное удаление комментариев

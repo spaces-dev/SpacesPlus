@@ -10,7 +10,7 @@ const HTTP: string = document.location.protocol
 const REVISION: number = Number(new Date())
 const BASE_URL: string = document.location.hostname
 const DEVICE: IDevice = window.Device || unsafeWindow.Device
-const GITHUB: string = 'spaces-dev.github.io'
+const GITHUB: string = 'spaces-dev.github.io/SpacesPlus'
 const SPACES: string = `${HTTP}//${BASE_URL}`
 const PKG_VERSION = pkg.version
 
