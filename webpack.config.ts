@@ -24,22 +24,11 @@ const config: webpack.Configuration = {
     module: {
         rules: [
             {
-                test: /\.js$/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: [
-                            ['@babel/preset-env']
-                        ]
-                    }
-                }
-            },
-            {
-                test: /\.tsx?$/,
-                use: 'ts-loader',
+                test: /\.(ts|js)$/,
+                loader: 'ts-loader',
                 exclude: /node_modules/
             }
-        ],
+        ]
     },
     resolve: {
         extensions: ['.ts', '.js']
