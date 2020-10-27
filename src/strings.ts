@@ -24,6 +24,7 @@ class OVERRIDE {
     public static FAVORITE: string | null
     public static KARMA: boolean = false
     public static COINS: boolean = false
+    public static EVENTS: number = 0
     public static COMMENTS: number = 0
     public static PLAYER_ID: number = 0
     public static VERSION: number = Number(PKG_VERSION.split('.').join(''))

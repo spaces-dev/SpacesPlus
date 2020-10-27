@@ -10,9 +10,10 @@ import { extend } from './extend'
 import { getQuery } from './getQuery'
 import { inBefore } from './inBefore'
 import { declOfNum } from './declOfNum'
+import { delCookie } from './delCookie'
 import { getCookie } from './getCookie'
 import { getParams } from './getParams'
-import { delCookie } from './delCookie'
+import { playSound } from './playSound'
 import { setCookie } from './setCookie'
 import { confirmBox } from './confirmBox'
 import { isValidUrl } from './isValidUrl'
@@ -44,10 +45,11 @@ export {
     getQuery,
     inBefore,
     declOfNum,
+    delCookie,
     getCookie,
     getParams,
+    playSound,
     setCookie,
-    delCookie,
     confirmBox,
     isValidUrl,
     messageBox,

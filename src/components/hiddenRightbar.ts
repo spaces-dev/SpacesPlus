@@ -8,7 +8,7 @@ export const hiddenRightbar = (b: boolean) => {
     /**
      * Отключаем виджет погоды, если скрываем правое меню
      */
-    if (b && _SETTINGS.weatherWidget) qs('#weatherWidget').click()
+    if (b && _SETTINGS.weather) qs('#weather').click()
 
     try {
         if (b && !rightbar.hasAttribute('sp-hidden-rightbar')) {

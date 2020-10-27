@@ -9,6 +9,7 @@ import {
     coinsAccept,
     deleteBlogs,
     karmaAccept,
+    soundEvents,
     checkUpdates,
     favoriteUser,
     freeStickers,
@@ -96,14 +97,15 @@ const init = () => {
         if (_SETTINGS.coins) coinsAccept()
         if (_SETTINGS.karma) karmaAccept()
         if (_SETTINGS.online) userOnline()
+        if (_SETTINGS.myEvents) soundEvents()
         if (_SETTINGS.grotate) galleryRotate()
         if (_SETTINGS.favorite) favoriteUser()
+        if (_SETTINGS.weather) weatherWidget()
         if (_SETTINGS.readersd) deleteReaders()
         if (_SETTINGS.comments) deleteComments()
         if (_SETTINGS.playerdn) playerDownload()
         if (_SETTINGS.dredirect) disableRedirect()
         if (_SETTINGS.playback) videoSpeedPlayback()
-        if (_SETTINGS.weatherWidget) weatherWidget()
         if (_SETTINGS.blogsd || BASE_URL === 'spaces-blogs.com') deleteBlogs()
         settingsMenu()
     }, 200)

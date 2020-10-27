@@ -20,13 +20,12 @@ export const _SETSTRINGS: IStrings = {
     'rscroll': 'Прокрутка страницы справа',
     'hrightbar': 'Скрыть правое меню',
     'adblock': 'Скрывать рекламу',
-    'myEvents': 'Звук уведомлений',
+    'notify': 'Уведомления',
     'playback': 'Кнопка ускорения видео',
     'karma': 'Собирать карму',
     'friendsOn': 'Панель друзей онлайн',
     'bodystyle': 'Фон сайта',
-    'msgAlert': 'Виджет почты',
-    'weatherWidget': 'Виджет погоды',
+    'weather': 'Виджет погоды',
     'sticker': 'Бесплатные стикеры'
 }
 
@@ -61,7 +60,7 @@ export let _SETTINGS: ISettings = {
     'playback': true,
     'videoSpeed': 1,
     'friendsOn': true,
-    'myEvents': false,
+    'notify': false,
     'bodystyle': true,
     'upVersion': OVERRIDE.VERSION,
     'bodystyleSetting': {
@@ -72,27 +71,18 @@ export let _SETTINGS: ISettings = {
     },
     'events': {
         'url': `${ENV_PATH}/sounds/default.ogg`,
-        'volume': 70,
+        'volume': 50,
         'mail': true,
         'journal': true,
-        'feed': false,
-        'notifications': false
+        'feed': false
     },
     'friendsOnMax': 10,
-    'friendsListSH': true,
     'friendsDisplay': true,
     'hideNotyf': {
         'cookieEditor': false,
         'configImport': false
     },
-    'msgAlert': false,
-    'msgAlertSettings': {
-        'alertPosition': 4,
-        'maxAlert': 3,
-        'animDelay': 3,
-        'alertDelay': 3
-    },
-    'weatherWidget': false,
+    'weather': false,
     'weatherSettings': {
         'interval': 600,
         'time': 0,

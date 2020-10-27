@@ -121,7 +121,7 @@ export const settingsBackupMenu = (id: string) => {
                     class: 'text-input',
                     id: 'SP_BACKUP_JSON',
                     cols: '17',
-                    rows: '65',
+                    rows: '63',
                     html: json.result.data
                 })
 

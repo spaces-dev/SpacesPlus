@@ -22,6 +22,7 @@ import {
     freeStickers,
     friendsOnline,
     hiddenRightbar,
+    settingsEvents,
     settingsFriends,
     settingsWeather,
     settingsFeatures,
@@ -64,16 +65,16 @@ export const settingsMenu = () => {
                         }
 
                         const setArea = qs('#SP_PLUS_SETAREA')
-                        ////const eventAlert = qs('#SP_PLUS_ALERT')
+
                         if (setArea) {
                             for (let i in _SETTINGS) {
                                 if (_SETSTRINGS[i] !== undefined) {
 
                                     /**
-                                    * Проверяем поддерживаемость данных функций (rscroll, hrightbar, weatherWidget) на Touch версии сайта
+                                    * Проверяем поддерживаемость данных функций (rscroll, hrightbar, weather) на Touch версии сайта
                                     * Если функция не поддерживается на текущей версии сайта и она включена, то отключаем её
                                     */
-                                    let unsupported = (DEVICE.id === 3 && (i === 'rscroll' || i === 'hrightbar' || i === 'weatherWidget')) ? true : false
+                                    let unsupported = (DEVICE.id === 3 && (i === 'rscroll' || i === 'hrightbar' || i === 'weather')) ? true : false
 
                                     let checkbox = ce('input', {
                                         id: i,
@@ -101,7 +102,10 @@ export const settingsMenu = () => {
                                                 case 'hrightbar':
                                                     hiddenRightbar(checked)
                                                     break
-                                                case 'myEvents':
+                                                case 'notify':
+                                                    checked ?
+                                                        settingsEvents(e.target) :
+                                                        remove(qs("#SP_PLUS_EVENTS"))
                                                     break
                                                 case 'friendsOn':
                                                     friendsOnline(checked)
@@ -125,9 +129,7 @@ export const settingsMenu = () => {
                                                         remove(qs('#SP_PLUS_INJSTYLE'))
                                                     }
                                                     break
-                                                case 'msgAlert':
-                                                    break
-                                                case 'weatherWidget':
+                                                case 'weather':
                                                     if (checked) {
                                                         settingsWeather(e.target)
                                                     } else {
@@ -147,6 +149,7 @@ export const settingsMenu = () => {
                                     setArea.appendChild(label)
                                     setArea.appendChild(label)
 
+                                    // отключаем неподдерживаемые функции
                                     if (unsupported && _SETTINGS[i]) qs('#' + i).click()
                                 }
                             }
@@ -154,60 +157,26 @@ export const settingsMenu = () => {
                             // Выпадающие доп. меню настроек
                             if (_SETTINGS.friendsOn) { settingsFriends(qs('#friendsOn')) }
                             if (_SETTINGS.bodystyle) { settingsBackground(qs('#bodystyle')) }
-                            // if (_SETTINGS.myEvents) { evenstSupport(qs('#myEvents')) }
-                            // if (_SETTINGS.msgAlert) { msgAlertSettings(qs('#msgAlert')) }
-                            if (_SETTINGS.weatherWidget) { settingsWeather(qs('#weatherWidget')) }
+                            if (_SETTINGS.notify) { settingsEvents(qs('#notify')) }
+                            if (_SETTINGS.weather) { settingsWeather(qs('#weather')) }
 
-                            // footer buttons area start
                             let spacesLabel1 = ce('div', {
                                 class: 'sp_plus_line',
                                 html: '<span class="sp_plus_text">Встроенные возможности сайта</span>'
                             })
 
-                            /*let spacesLabel2 = ce('div', {
-                                class: 'sp_plus_line',
-                                html: '<span class="sp_plus_text">Дополнительные функции</span>'
-                            })*/
-
-                            let spacesLabel3 = ce('div', {
+                            let spacesLabel2 = ce('div', {
                                 class: 'sp_plus_line',
                                 html: '<span class="sp_plus_text">Прочее</span>'
                             })
 
                             setArea.appendChild(spacesLabel1)
 
-                            settingsFeatures(setArea)
-
                             // TODO: Сюда нужна проверка квеста новичка
-                            // setArea.appendChild(spacesLabel2)
+                            settingsFeatures(setArea)
+                            
+                            setArea.appendChild(spacesLabel2)
 
-                            /**
-                             * TODO: Обновить дизайн
-                            const CookieEditor = ce('a', {
-                                href: `${SPACES}/settings/?sp_plus_settings=1&sp_cookie_editor=1`,
-                                class: 'stnd-link stnd-link_arr sp_last_btn',
-                                id: 'sp_cookie_editor',
-                                html: '<span class="b"><span class="sp sp-write-grey mr-14"></span>Редактор cookies<span class="ico ico_arr ico_m"></span></span>',
-                                onclick: () => {
-                                    qs('#SP_PLUS_SETHEAD').innerHTML = 'Редактор cookies';
-                                    qs('#SP_PLUS_SETHEAD2').innerHTML = `<a href="${SPACES}/settings/?sp_plus_settings=1" style="margin-bottom: 1px">Spaces+</a><span class="location-bar__sep ico"></span> Редактор cookies`
-                                    qs('#SP_PLUS_SETBACK').href = `${SPACES}/settings/?sp_plus_settings=1`
-                                    if (!/(\&)sp_cookie_editor=1/i.test(getHref())) {
-                                        historyPush({
-                                            'sp_plus_settings': urlSett,
-                                            'sp_cookie_editor': urlSettEditor
-                                        }, `${SPACES}/settings/?sp_plus_settings=1&sp_cookie_editor=1`, 'Spaces+: Редактор cookies')
-                                    }
-                                    //("#SP_PLUS_SETAREA");
-                                    return false
-                                }
-                            })
-                            setArea.appendChild(CookieEditor)
-                            */
-
-                            setArea.appendChild(spacesLabel3)
-
-                            // spaces+ backup start
                             const SettingsBackup = ce('a', {
                                 href: `${SPACES}/settings/?sp_plus_settings=1&sp_backup=1`,
                                 class: 'stnd-link stnd-link_arr sp_font_sm',
@@ -228,9 +197,7 @@ export const settingsMenu = () => {
                                 }
                             })
                             setArea.appendChild(SettingsBackup)
-                            // spaces+ backup end
 
-                            // changelog menu start
                             const ChangeLogMenu = ce('a', {
                                 href: `${SPACES}/settings/?sp_plus_settings=1&sp_changelog=1`,
                                 class: 'stnd-link stnd-link_arr sp_font_sm',
@@ -251,9 +218,7 @@ export const settingsMenu = () => {
                                 }
                             })
                             setArea.appendChild(ChangeLogMenu)
-                            // changelog menu end
 
-                            // reset button start
                             const ResetSettings = ce('a', {
                                 href: '#',
                                 class: 'stnd-link stnd-link_arr sp_font_sm',
@@ -271,9 +236,7 @@ export const settingsMenu = () => {
                                 }
                             })
                             setArea.appendChild(ResetSettings)
-                            // reset button end
 
-                            // footer start
                             let clicks: number = 0,
                                 aboutWidget = ce('div', { class: 'widgets-group widgets-group_top nl wbg no-select' }),
                                 ver = ce('div', { style: 'float: right', html: 'v' + PKG_VERSION }),
@@ -298,7 +261,6 @@ export const settingsMenu = () => {
                             content.appendChild(title)
                             title.appendChild(ver)
                             qs('#SP_PLUS_ABOUT').appendChild(aboutWidget)
-                            // footer end
                         }
                         return false
                     }
@@ -309,7 +271,6 @@ export const settingsMenu = () => {
                     insertAfter(ce('br'), baseLink)
                 }
 
-                // outaded start
                 let clickEvent = document.createEvent('MouseEvent')
 
                 if (urlSett) {
@@ -335,7 +296,6 @@ export const settingsMenu = () => {
                     clickEvent.initEvent('click', true, true)
                     qs('#sp_backup')?.dispatchEvent(clickEvent)
                 }
-                // outaded end
             }
         } catch (e) {
             error('Ошибка (SETTINGS): ' + e)

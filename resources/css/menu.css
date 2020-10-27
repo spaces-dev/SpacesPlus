@@ -127,6 +127,11 @@
     margin-right: 14px !important
 }
 
+.sp_noborder {
+    border-top: unset !important;
+    border-bottom: unset !important
+}
+
 .sp_newbq_l {
     border-top: 1px solid #c5d3e1 !important
 }

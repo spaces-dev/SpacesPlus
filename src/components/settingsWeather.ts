@@ -10,20 +10,14 @@ import {
     insertAfter
 } from '../utils'
 
-import { hiddenRightbar } from './hiddenRightbar'
-
 import { IWhois } from '../interfaces/Whois'
 import { IWeather } from '../interfaces/Weather'
 
 import { _SETTINGS } from '../settings'
 
-interface Checked {
-    checked: boolean
-}
-
 /**
  * Инициализация выпадающего доп. меню настроек виджета погоды
- * @param e #weatherWidget
+ * @param e #weather
  */
 export const settingsWeather = async (e: any) => {
 
@@ -66,7 +60,6 @@ export const settingsWeather = async (e: any) => {
         class: 'text-input',
         style: 'margin-bottom: 7px',
         size: '32',
-        id: 'key-input',
         value: _SETTINGS.weatherSettings.key
     })
 
@@ -90,7 +83,7 @@ export const settingsWeather = async (e: any) => {
         class: 'text-input',
         style: 'margin-bottom: 7px',
         size: '32',
-        id: 'city-input',
+        id: 'SP-CITY-INPUT',
         value: _SETTINGS.weatherSettings.city
     })
 
@@ -117,7 +110,6 @@ export const settingsWeather = async (e: any) => {
         class: 'text-input',
         style: 'margin-bottom: 7px',
         size: '4',
-        id: 'key-input',
         value: _SETTINGS.weatherSettings.interval / 60
     })
 
@@ -165,13 +157,13 @@ export const getWeather = async () => {
             }
 
             // @ts-ignore Костыль ебаный!
-            if (qs('#city-input')) { qs('#city-input').value = json.name }
+            if (qs('#SP-CITY-INPUT')) { qs('#SP-CITY-INPUT').value = json.name }
+            if (qs('#SP_WIDGET_WEATHER')) remove(qs('#SP_WIDGET_WEATHER'))
 
             if (json?.cod === 200) {
                 _SETTINGS.weatherSettings.city = json.name
                 setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
                 setCookie('SP_WEATHER', JSON.stringify(json))
-                remove(qs('#SP_WIDGET_WEATHER'))
             }
         })
     } catch (e) {

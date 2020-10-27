@@ -15,7 +15,6 @@ export interface Events {
     mail: boolean
     journal: boolean
     feed: boolean
-    notifications: boolean
 }
 
 export interface HideNotyf {
@@ -62,17 +61,14 @@ export interface ISettings {
     playback: boolean
     videoSpeed: number
     friendsOn: boolean
-    myEvents: boolean
+    notify: boolean
     bodystyle: boolean
     upVersion: number
     bodystyleSetting: BodystyleSetting
     events: Events
     friendsOnMax: number
-    friendsListSH: boolean
     friendsDisplay: boolean
     hideNotyf: HideNotyf
-    msgAlert: boolean
-    msgAlertSettings: MsgAlertSettings
-    weatherWidget: boolean
+    weather: boolean
     weatherSettings: WeatherSettings
 }

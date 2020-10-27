@@ -1,6 +1,6 @@
 import { qs, ce } from '../utils'
 
-import { BASE_URL, ENV_PATH, REVISION } from '../strings'
+import { ENV_PATH, REVISION } from '../strings'
 import { _SETTINGS } from '../settings'
 
 export const setStyles = () => {
@@ -9,8 +9,8 @@ export const setStyles = () => {
         type: 'text/css'
     })
 
-    if (!qs('#SP_STICKER_CSS') && BASE_URL === 'spaces-blogs.com') {
-        let sticker = qs('#SP_STICKER_CSS') || ce('link', {
+    if (!qs('#SP_STICKER_CSS')) {
+        let sticker = ce('link', {
             rel: 'stylesheet',
             type: 'text/css',
             id: 'SP_STICKER_CSS',
@@ -21,7 +21,7 @@ export const setStyles = () => {
     }
 
     if (!qs('#SP_PLUS_MENU')) {
-        let menu = qs('#SP_PLUS_MENU') || ce('link', {
+        let menu = ce('link', {
             rel: 'stylesheet',
             type: 'text/css',
             id: 'SP_PLUS_MENU',
