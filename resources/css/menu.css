@@ -30,6 +30,35 @@
     transform: rotate(90deg) !important
 }
 
+.sp_bg-items {
+    display: inline-block;
+    max-width: 100%;
+    width: 100%
+}
+
+.sp_weather-img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
+.sp_weather-container {
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 18px
+}
+
+.sp_weather-table>tbody>tr>td {
+    width: 7rem;
+    max-width: 7rem;
+    padding-top: 4px;
+    overflow: hidden
+}
+
+.sp_weather-table>tbody>tr>td:last-child {
+    text-align: right
+}
+
 .sp-ch-text {
     color: #57A3EA;
     padding-left: 10px
@@ -524,10 +553,4 @@ input[type=color] {
 
 .sp-write-grey {
     background-position: -64px -48px
-}
-
-.sp-w-table>tbody>tr>td {
-    width: 7rem;
-    max-width: 7rem;
-    overflow: hidden
 }

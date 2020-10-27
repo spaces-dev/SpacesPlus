@@ -18,12 +18,12 @@ import {
 
 import {
     oldHeader,
-    setStyles,
     scrollMove,
     freeStickers,
     friendsOnline,
     hiddenRightbar,
     settingsFriends,
+    settingsWeather,
     settingsFeatures,
     settingsBackground,
     settingsBackupMenu,
@@ -126,6 +126,12 @@ export const settingsMenu = () => {
                                                 case 'msgAlert':
                                                     break
                                                 case 'weatherWidget':
+                                                    if (checked) {
+                                                        settingsWeather(e.target)
+                                                    } else {
+                                                        remove(qs("#SP_WIDGET_WEATHER"))
+                                                        remove(qs("#SP_WEATHER_SETTINGS"))
+                                                    }
                                                     break
                                             }
                                         }
@@ -141,18 +147,12 @@ export const settingsMenu = () => {
                                 }
                             }
 
-                            // Дополнительное меню настроек
+                            // Выпадающие доп. меню настроек
                             if (_SETTINGS.friendsOn) { settingsFriends(qs('#friendsOn')) }
                             if (_SETTINGS.bodystyle) { settingsBackground(qs('#bodystyle')) }
-                            /*if (_SETTINGS.myEvents) {
-                                evenstSupport(qs('#sp_set_myEvents'))
-                            }
-                            if (_SETTINGS.msgAlert) {
-                                msgAlertSettings(qs('#sp_set_msgAlert'))
-                            }
-                            if (_SETTINGS.weatherWidget) {
-                                weatherSettings(qs('#sp_set_weatherWidget'))
-                            }*/
+                            // if (_SETTINGS.myEvents) { evenstSupport(qs('#myEvents')) }
+                            // if (_SETTINGS.msgAlert) { msgAlertSettings(qs('#msgAlert')) }
+                            if (_SETTINGS.weatherWidget) { settingsWeather(qs('#weatherWidget')) }
 
                             // footer buttons area start
                             let spacesLabel1 = ce('div', {

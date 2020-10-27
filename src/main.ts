@@ -17,6 +17,7 @@ import {
     galleryRotate,
     sidebarButton,
     friendsOnline,
+    weatherWidget,
     deleteComments,
     hiddenRightbar,
     playerDownload,
@@ -102,6 +103,7 @@ const init = () => {
         if (_SETTINGS.playerdn) playerDownload()
         if (_SETTINGS.dredirect) disableRedirect()
         if (_SETTINGS.playback) videoSpeedPlayback()
+        if (_SETTINGS.weatherWidget) weatherWidget()
         if (_SETTINGS.blogsd || BASE_URL === 'spaces-blogs.com') deleteBlogs()
         settingsMenu()
     }, 200)

@@ -65,7 +65,7 @@ export let _SETTINGS: ISettings = {
     'bodystyle': true,
     'upVersion': OVERRIDE.VERSION,
     'bodystyleSetting': {
-        'url': `${ENV_PATH}/backgrounds/default.jpg`,
+        'url': `${ENV_PATH}/backgrounds/default.png`,
         'color': '#DAE1E8',
         'urlchecked': true,
         'colorchecked': false

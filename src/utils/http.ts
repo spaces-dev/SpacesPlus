@@ -15,9 +15,5 @@ export async function http<T>(method: 'GET' | 'POST', url: string, proxy: boolea
         error('Ошибка http.ts: ' + e)
     }
 
-    if (!response.ok) {
-        throw new Error(response.statusText)
-    }
-
     return response
 }

@@ -15,17 +15,20 @@ import { deleteReaders } from './deleteReaders'
 import { friendsOnline } from './friendsOnline'
 import { galleryRotate } from './galleryRotate'
 import { sidebarButton } from './sidebarButton'
+import { weatherWidget } from './weatherWidget'
 import { deleteComments } from './deleteComments'
 import { hiddenRightbar } from './hiddenRightbar'
 import { playerDownload } from './playerDownload'
-import { settingsFriends } from './settingsFriends'
 import { disableRedirect } from './disableRedirect'
+import { settingsFriends } from './settingsFriends'
+import { settingsWeather } from './settingsWeather'
 import { settingsFeatures } from './settingsFeatures'
 import { videoSpeedPlayback } from './videoSpeedPlayback'
 import { settingsBackground } from './settingsBackground'
 import { settingsBackupMenu } from './settingsBackupMenu'
 import { checkUpdates, getUpdater } from './checkUpdates'
 import { settingsChangelogMenu } from './settingsChangelogMenu'
+
 
 export {
     adBlock,
@@ -47,11 +50,13 @@ export {
     friendsOnline,
     galleryRotate,
     sidebarButton,
+    weatherWidget,
     deleteComments,
     hiddenRightbar,
     playerDownload,
-    settingsFriends,
     disableRedirect,
+    settingsFriends,
+    settingsWeather,
     settingsFeatures,
     videoSpeedPlayback,
     settingsBackground,

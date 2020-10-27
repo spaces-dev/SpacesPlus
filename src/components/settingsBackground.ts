@@ -184,12 +184,12 @@ const setImage = async () => {
                     for (let i of e.parsedBody?.backgrounds) {
                         let d1 = ce('div', { class: 'js-file_item tiled_item tiled_item-200' }),
                             d2 = ce('div', { class: 'tiled_inner t_center relative' }),
-                            s3 = ce('span', { class: 'relative', style: 'display: inline-block;max-width: 100%; width: 100%' }),
+                            s3 = ce('span', { class: 'relative sp_bg-items' }),
                             ds1 = ce('div', { class: 'tiled-preview border' }),
                             img = ce('img', {
                                 class: 'preview s201_200',
                                 style: 'cursor: pointer',
-                                src: `https://${ENV_PATH}/backgrounds/${i}`,
+                                src: `${ENV_PATH}/backgrounds/${i}`,
                                 onclick: (e: any) => {
                                     // @ts-ignore
                                     qs('#image-input').value = e.target.src
