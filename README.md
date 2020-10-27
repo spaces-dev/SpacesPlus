@@ -3,7 +3,7 @@ SpacesPlus — Powerfull userscript for Spaces.ru
 
 ![Version](https://img.shields.io/github/package-json/v/spaces-dev/SpacesPlus?color=blue)
 ![Travis](https://img.shields.io/travis/spaces-dev/SpacesPlus)
-![GitHub](https://img.shields.io/github/license/spaces-dev/SpacesPlus?label=License&color=brightgreen)
+![GitHub](https://img.shields.io/github/license/spaces-dev/SpacesPlus?label=license&color=brightgreen)
 
 - Возможности:
     - Пакетное удаление комментариев
@@ -36,18 +36,24 @@ SpacesPlus — Powerfull userscript for Spaces.ru
     - Закрепить аудиоплеер в левом меню
     - Скрытие квеста новичка
 - Дополнительно:
-    - Редактор cookies
+    - ~~Редактор cookies~~
 
 Разработка:
 -----------
 1. Установите зависимости `npm install`
 2. Запустить сервер для разработки `npm run dev`
-3. Откройте `https://localhost:8080/spaces-plus.proxy.user.js` в браузере (нажмите `Advanced` -> `continue`, если отображается предупреждение безопасности), чтобы установить прокси-скрипт.
-4. Код для разработки в папке `src`, перезагрузите веб-страницу после изменений в коде.
-5. Для сборки используйте `npm run build`
-6. Для полноценной разработки необходимо будет создать [GitHub Pages](https://pages.github.com)
+3. Откройте `https://localhost:8080/spaces-plus.proxy.user.js` в браузере (нажмите `Advanced` -> `continue`, если отображается предупреждение безопасности), чтобы установить прокси-скрипт
+4. Код для разработки находится в папке `src`, для применения изменений обновляйте страницу браузера
+5. Для сборки используйте `npm run build` (для публикации сборки необходимо будет создать [GitHub Pages](https://pages.github.com))
 
-Конфигурация браузера Google Chrome:
+Конфигурация Google Chrome (рекомендуется):
 -----------------------------------
-1. Включите insecure-localhost: перейдите к `chrome://flags/#allow-insecure-localhost` и включите insecure-localhost.
-2. Включите доступ к URL-адресу файла для расширения: перейдите к `chrome://extensions/?id=dhdgffkkebhmkfjojejmpbldmpobfkfo` (Страница управления [Tampermonkey](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)) и включите `Allow access to file URLs` (если вам нужно вручную перезагрузить страницу при разработке пользовательского скрипта, см. [#475](https://github.com/Tampermonkey/tampermonkey/issues/475#issuecomment-348594785) для более подробной информации)
+1. В файле `webpack.config.ts` измените переменную `isChrome` на `true`
+2. Включите insecure-localhost: перейдите к `chrome://flags/#allow-insecure-localhost` и включите insecure-localhost.
+3. Включите доступ к URL-адресу файла для расширения: перейдите к `chrome://extensions/?id=dhdgffkkebhmkfjojejmpbldmpobfkfo` (Страница управления [Tampermonkey](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)) и включите `Allow access to file URLs` (если вам нужно вручную перезагрузить страницу браузера при разработке скрипта, см. [#475](https://github.com/Tampermonkey/tampermonkey/issues/475#issuecomment-348594785) для более подробной информации)
+
+Конфигурация Mozilla Firefox:
+--------------------------------------
+1. В файле `webpack.config.ts` переменная `isChrome` должна быть `false`
+2. Для установки расширения используйте [Tampermonkey](https://addons.mozilla.org/en-US/firefox/addon/tampermonkey/)
+3. Для обновления внесенных изменений требуется несколько раз обновлять страницу браузера (не самый продуктивный браузер для разработки)
