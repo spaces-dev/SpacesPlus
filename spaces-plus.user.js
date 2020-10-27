@@ -96,7 +96,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 14);
+/******/ 	return __webpack_require__(__webpack_require__.s = 13);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -107,55 +107,55 @@
 
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.readSettings = exports.getClassName = exports.setLocation = exports.insertAfter = exports.historyPush = exports.messageBox = exports.isValidUrl = exports.confirmBox = exports.delCookie = exports.setCookie = exports.getParams = exports.getCookie = exports.declOfNum = exports.inBefore = exports.getQuery = exports.getPath = exports.getHref = exports.remove = exports.extend = exports.rever = exports.error = exports.debug = exports.trim = exports.http = exports.info = exports.find = exports.log = exports.css = exports.qs = exports.ce = void 0;
-const ce_1 = __webpack_require__(16);
+const ce_1 = __webpack_require__(15);
 Object.defineProperty(exports, "ce", { enumerable: true, get: function () { return ce_1.ce; } });
-const qs_1 = __webpack_require__(17);
+const qs_1 = __webpack_require__(16);
 Object.defineProperty(exports, "qs", { enumerable: true, get: function () { return qs_1.qs; } });
 const css_1 = __webpack_require__(5);
 Object.defineProperty(exports, "css", { enumerable: true, get: function () { return css_1.css; } });
-const find_1 = __webpack_require__(18);
+const find_1 = __webpack_require__(17);
 Object.defineProperty(exports, "find", { enumerable: true, get: function () { return find_1.find; } });
-const http_1 = __webpack_require__(19);
+const http_1 = __webpack_require__(18);
 Object.defineProperty(exports, "http", { enumerable: true, get: function () { return http_1.http; } });
 const trim_1 = __webpack_require__(6);
 Object.defineProperty(exports, "trim", { enumerable: true, get: function () { return trim_1.trim; } });
-const rever_1 = __webpack_require__(20);
+const rever_1 = __webpack_require__(19);
 Object.defineProperty(exports, "rever", { enumerable: true, get: function () { return rever_1.rever; } });
-const remove_1 = __webpack_require__(21);
+const remove_1 = __webpack_require__(20);
 Object.defineProperty(exports, "remove", { enumerable: true, get: function () { return remove_1.remove; } });
 const extend_1 = __webpack_require__(7);
 Object.defineProperty(exports, "extend", { enumerable: true, get: function () { return extend_1.extend; } });
-const getQuery_1 = __webpack_require__(22);
+const getQuery_1 = __webpack_require__(21);
 Object.defineProperty(exports, "getQuery", { enumerable: true, get: function () { return getQuery_1.getQuery; } });
-const inBefore_1 = __webpack_require__(23);
+const inBefore_1 = __webpack_require__(22);
 Object.defineProperty(exports, "inBefore", { enumerable: true, get: function () { return inBefore_1.inBefore; } });
-const declOfNum_1 = __webpack_require__(24);
+const declOfNum_1 = __webpack_require__(23);
 Object.defineProperty(exports, "declOfNum", { enumerable: true, get: function () { return declOfNum_1.declOfNum; } });
-const getCookie_1 = __webpack_require__(25);
+const getCookie_1 = __webpack_require__(24);
 Object.defineProperty(exports, "getCookie", { enumerable: true, get: function () { return getCookie_1.getCookie; } });
-const getParams_1 = __webpack_require__(26);
+const getParams_1 = __webpack_require__(25);
 Object.defineProperty(exports, "getParams", { enumerable: true, get: function () { return getParams_1.getParams; } });
-const delCookie_1 = __webpack_require__(27);
+const delCookie_1 = __webpack_require__(26);
 Object.defineProperty(exports, "delCookie", { enumerable: true, get: function () { return delCookie_1.delCookie; } });
 const setCookie_1 = __webpack_require__(8);
 Object.defineProperty(exports, "setCookie", { enumerable: true, get: function () { return setCookie_1.setCookie; } });
-const confirmBox_1 = __webpack_require__(29);
+const confirmBox_1 = __webpack_require__(28);
 Object.defineProperty(exports, "confirmBox", { enumerable: true, get: function () { return confirmBox_1.confirmBox; } });
-const isValidUrl_1 = __webpack_require__(30);
+const isValidUrl_1 = __webpack_require__(29);
 Object.defineProperty(exports, "isValidUrl", { enumerable: true, get: function () { return isValidUrl_1.isValidUrl; } });
-const messageBox_1 = __webpack_require__(31);
+const messageBox_1 = __webpack_require__(30);
 Object.defineProperty(exports, "messageBox", { enumerable: true, get: function () { return messageBox_1.messageBox; } });
-const historyPush_1 = __webpack_require__(32);
+const historyPush_1 = __webpack_require__(31);
 Object.defineProperty(exports, "historyPush", { enumerable: true, get: function () { return historyPush_1.historyPush; } });
-const insertAfter_1 = __webpack_require__(33);
+const insertAfter_1 = __webpack_require__(32);
 Object.defineProperty(exports, "insertAfter", { enumerable: true, get: function () { return insertAfter_1.insertAfter; } });
-const setLocation_1 = __webpack_require__(34);
+const setLocation_1 = __webpack_require__(33);
 Object.defineProperty(exports, "setLocation", { enumerable: true, get: function () { return setLocation_1.setLocation; } });
-const getClassName_1 = __webpack_require__(35);
+const getClassName_1 = __webpack_require__(34);
 Object.defineProperty(exports, "getClassName", { enumerable: true, get: function () { return getClassName_1.getClassName; } });
-const readSettings_1 = __webpack_require__(36);
+const readSettings_1 = __webpack_require__(35);
 Object.defineProperty(exports, "readSettings", { enumerable: true, get: function () { return readSettings_1.readSettings; } });
-const getLocation_1 = __webpack_require__(37);
+const getLocation_1 = __webpack_require__(36);
 Object.defineProperty(exports, "getPath", { enumerable: true, get: function () { return getLocation_1.getPath; } });
 Object.defineProperty(exports, "getHref", { enumerable: true, get: function () { return getLocation_1.getHref; } });
 const console_1 = __webpack_require__(3);
@@ -176,7 +176,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PKG_VERSION = exports.OVERRIDE = exports.REVISION = exports.ENV_PATH = exports.BASE_URL = exports.SPACES = exports.GITHUB = exports.DEVICE = exports.HTTP = exports.BETA = void 0;
-const package_json_1 = __importDefault(__webpack_require__(28));
+const package_json_1 = __importDefault(__webpack_require__(27));
 /**
  * Константы
  */
@@ -345,45 +345,45 @@ exports.debug = (str) => console.debug(date() + str);
 
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.settingsChangelogMenu = exports.settingsBackupMenu = exports.settingsBackground = exports.videoSpeedPlayback = exports.settingsFeatures = exports.settingsWeather = exports.settingsFriends = exports.disableRedirect = exports.playerDownload = exports.hiddenRightbar = exports.deleteComments = exports.weatherWidget = exports.sidebarButton = exports.galleryRotate = exports.friendsOnline = exports.deleteReaders = exports.settingsMenu = exports.freeStickers = exports.favoriteUser = exports.checkUpdates = exports.karmaAccept = exports.deleteBlogs = exports.coinsAccept = exports.apiDebugger = exports.userOnline = exports.userStatus = exports.scrollMove = exports.getUpdater = exports.setStyles = exports.oldHeader = exports.adBlock = void 0;
-const adBlock_1 = __webpack_require__(15);
+const adBlock_1 = __webpack_require__(14);
 Object.defineProperty(exports, "adBlock", { enumerable: true, get: function () { return adBlock_1.adBlock; } });
-const oldHeader_1 = __webpack_require__(38);
+const oldHeader_1 = __webpack_require__(37);
 Object.defineProperty(exports, "oldHeader", { enumerable: true, get: function () { return oldHeader_1.oldHeader; } });
 const setStyles_1 = __webpack_require__(9);
 Object.defineProperty(exports, "setStyles", { enumerable: true, get: function () { return setStyles_1.setStyles; } });
-const scrollMove_1 = __webpack_require__(39);
+const scrollMove_1 = __webpack_require__(38);
 Object.defineProperty(exports, "scrollMove", { enumerable: true, get: function () { return scrollMove_1.scrollMove; } });
-const userStatus_1 = __webpack_require__(40);
+const userStatus_1 = __webpack_require__(39);
 Object.defineProperty(exports, "userStatus", { enumerable: true, get: function () { return userStatus_1.userStatus; } });
-const userOnline_1 = __webpack_require__(41);
+const userOnline_1 = __webpack_require__(40);
 Object.defineProperty(exports, "userOnline", { enumerable: true, get: function () { return userOnline_1.userOnline; } });
-const apiDebugger_1 = __webpack_require__(42);
+const apiDebugger_1 = __webpack_require__(41);
 Object.defineProperty(exports, "apiDebugger", { enumerable: true, get: function () { return apiDebugger_1.apiDebugger; } });
-const coinsAccept_1 = __webpack_require__(43);
+const coinsAccept_1 = __webpack_require__(42);
 Object.defineProperty(exports, "coinsAccept", { enumerable: true, get: function () { return coinsAccept_1.coinsAccept; } });
-const deleteBlogs_1 = __webpack_require__(44);
+const deleteBlogs_1 = __webpack_require__(43);
 Object.defineProperty(exports, "deleteBlogs", { enumerable: true, get: function () { return deleteBlogs_1.deleteBlogs; } });
-const karmaAccept_1 = __webpack_require__(45);
+const karmaAccept_1 = __webpack_require__(44);
 Object.defineProperty(exports, "karmaAccept", { enumerable: true, get: function () { return karmaAccept_1.karmaAccept; } });
-const favoriteUser_1 = __webpack_require__(46);
+const favoriteUser_1 = __webpack_require__(45);
 Object.defineProperty(exports, "favoriteUser", { enumerable: true, get: function () { return favoriteUser_1.favoriteUser; } });
-const freeStickers_1 = __webpack_require__(47);
+const freeStickers_1 = __webpack_require__(46);
 Object.defineProperty(exports, "freeStickers", { enumerable: true, get: function () { return freeStickers_1.freeStickers; } });
-const settingsMenu_1 = __webpack_require__(48);
+const settingsMenu_1 = __webpack_require__(47);
 Object.defineProperty(exports, "settingsMenu", { enumerable: true, get: function () { return settingsMenu_1.settingsMenu; } });
-const deleteReaders_1 = __webpack_require__(49);
+const deleteReaders_1 = __webpack_require__(48);
 Object.defineProperty(exports, "deleteReaders", { enumerable: true, get: function () { return deleteReaders_1.deleteReaders; } });
 const friendsOnline_1 = __webpack_require__(10);
 Object.defineProperty(exports, "friendsOnline", { enumerable: true, get: function () { return friendsOnline_1.friendsOnline; } });
-const galleryRotate_1 = __webpack_require__(50);
+const galleryRotate_1 = __webpack_require__(49);
 Object.defineProperty(exports, "galleryRotate", { enumerable: true, get: function () { return galleryRotate_1.galleryRotate; } });
-const sidebarButton_1 = __webpack_require__(51);
+const sidebarButton_1 = __webpack_require__(50);
 Object.defineProperty(exports, "sidebarButton", { enumerable: true, get: function () { return sidebarButton_1.sidebarButton; } });
-const weatherWidget_1 = __webpack_require__(52);
+const weatherWidget_1 = __webpack_require__(51);
 Object.defineProperty(exports, "weatherWidget", { enumerable: true, get: function () { return weatherWidget_1.weatherWidget; } });
-const deleteComments_1 = __webpack_require__(53);
+const deleteComments_1 = __webpack_require__(52);
 Object.defineProperty(exports, "deleteComments", { enumerable: true, get: function () { return deleteComments_1.deleteComments; } });
-const hiddenRightbar_1 = __webpack_require__(12);
+const hiddenRightbar_1 = __webpack_require__(53);
 Object.defineProperty(exports, "hiddenRightbar", { enumerable: true, get: function () { return hiddenRightbar_1.hiddenRightbar; } });
 const playerDownload_1 = __webpack_require__(54);
 Object.defineProperty(exports, "playerDownload", { enumerable: true, get: function () { return playerDownload_1.playerDownload; } });
@@ -401,7 +401,7 @@ const settingsBackground_1 = __webpack_require__(59);
 Object.defineProperty(exports, "settingsBackground", { enumerable: true, get: function () { return settingsBackground_1.settingsBackground; } });
 const settingsBackupMenu_1 = __webpack_require__(60);
 Object.defineProperty(exports, "settingsBackupMenu", { enumerable: true, get: function () { return settingsBackupMenu_1.settingsBackupMenu; } });
-const checkUpdates_1 = __webpack_require__(13);
+const checkUpdates_1 = __webpack_require__(12);
 Object.defineProperty(exports, "checkUpdates", { enumerable: true, get: function () { return checkUpdates_1.checkUpdates; } });
 Object.defineProperty(exports, "getUpdater", { enumerable: true, get: function () { return checkUpdates_1.getUpdater; } });
 const settingsChangelogMenu_1 = __webpack_require__(61);
@@ -658,23 +658,20 @@ exports.friendsOnline = (t) => {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getWeather = exports.settingsWeather = void 0;
 const utils_1 = __webpack_require__(0);
-const hiddenRightbar_1 = __webpack_require__(12);
 const settings_1 = __webpack_require__(2);
 /**
- * Инициализация выпадающего меню доп. настроек виджета погоды
+ * Инициализация выпадающего доп. меню настроек виджета погоды
  * @param e #weatherWidget
  */
 exports.settingsWeather = async (e) => {
     /**
-     * Отключаем скрытие прового меню, если оно скрыто
+     * Отключаем скрытие правого меню, если оно скрыто
      */
-    if (settings_1._SETTINGS.hrightbar) {
-        settings_1._SETTINGS.hrightbar = false;
-        utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
-        hiddenRightbar_1.hiddenRightbar(false);
-    }
+    if (settings_1._SETTINGS.hrightbar)
+        utils_1.qs('#hrightbar').click();
     /**
      * Инициализация ¯\_(ツ)_/¯
+     * Получаем город
      */
     if (settings_1._SETTINGS.weatherSettings.city === null) {
         try {
@@ -694,7 +691,11 @@ exports.settingsWeather = async (e) => {
             utils_1.error('Ошибка (ipwhois): ' + e);
         }
     }
-    let masWarp = utils_1.ce('div', { id: 'SP_WEATHER_SETTINGS', style: 'padding: 11px 15px' });
+    let masWarp = utils_1.ce('div', { id: 'SP_WEATHER_SETTINGS', class: 'sp_settings-wrap' });
+    let locationLbl = utils_1.ce('label', {
+        html: 'API-Ключ:<div class="label__desc"><a href="https://openweathermap.org/appid" target="_blank">Получить ключ</a></div>',
+        class: 'label'
+    });
     let apiKey = utils_1.ce('input', {
         type: 'text',
         class: 'text-input',
@@ -703,12 +704,8 @@ exports.settingsWeather = async (e) => {
         id: 'key-input',
         value: settings_1._SETTINGS.weatherSettings.key
     });
-    let locationLbl = utils_1.ce('label', {
-        html: 'API-Ключ:<div class="label__desc"><a href="https://openweathermap.org/appid" target="_blank">Получить ключ</a></div>',
-        class: 'label'
-    });
     apiKey.addEventListener('keypress', (e) => {
-        if (13 == e.keyCode) {
+        if (e.keyCode === 13) {
             if (/^[a-f0-9]{32}$/i.test(e.target.value) || utils_1.trim(e.target.value) === '') {
                 settings_1._SETTINGS.weatherSettings.key = e.target.value;
                 utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
@@ -730,7 +727,7 @@ exports.settingsWeather = async (e) => {
         value: settings_1._SETTINGS.weatherSettings.city
     });
     cityInp.addEventListener('keypress', (e) => {
-        if (13 == e.keyCode) {
+        if (e.keyCode === 13) {
             if (/^([a-zA-Zа-яА-ЯёЁ]+[-]?[a-zA-Zа-яА-ЯёЁ]*[-]?[a-zA-Zа-яА-ЯёЁ]*[-]?[a-zA-Zа-яА-ЯёЁ]*)$/i.test(e.target.value) || utils_1.trim(e.target.value) === '') {
                 settings_1._SETTINGS.weatherSettings.city = e.target.value;
                 utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
@@ -742,10 +739,34 @@ exports.settingsWeather = async (e) => {
             }
         }
     });
+    let intervalLbl = utils_1.ce('label', {
+        html: 'Интервал обновления:<div class="label__desc">в минутах</a></div>',
+        class: 'label'
+    });
+    let interval = utils_1.ce('input', {
+        type: 'text',
+        class: 'text-input',
+        style: 'margin-bottom: 7px',
+        size: '4',
+        id: 'key-input',
+        value: settings_1._SETTINGS.weatherSettings.interval / 60
+    });
+    interval.addEventListener('change', (e) => {
+        if (/^[0-9]{1,3}$/i.test(e.target.value) || utils_1.trim(e.target.value) === '') {
+            settings_1._SETTINGS.weatherSettings.interval = e.target.value * 60;
+            utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
+            interval.className = 'text-input';
+        }
+        else {
+            interval.className = 'text-input sp-input-error';
+        }
+    });
     masWarp.appendChild(cityLbl);
     masWarp.appendChild(cityInp);
     masWarp.appendChild(locationLbl);
     masWarp.appendChild(apiKey);
+    masWarp.appendChild(intervalLbl);
+    masWarp.appendChild(interval);
     utils_1.insertAfter(masWarp, e.parentNode);
 };
 /**
@@ -757,13 +778,18 @@ exports.getWeather = async () => {
         let url = `https://api.openweathermap.org/data/2.5/weather?lang=${language}&units=${units}&q=${city}&appid=${key}`;
         await utils_1.http('GET', url, false).then(e => {
             const json = e.parsedBody;
+            // Город не найден
+            if (e.status === 404) {
+                utils_1.messageBox('Виджет погоды', `Город <b>${city}</b> не найден`, true, 5);
+                return false;
+            }
+            // если есть другие ошибки
             if (json === null || json === void 0 ? void 0 : json.message) {
                 utils_1.messageBox('Виджет погоды', json.message, true, 5);
-                return;
+                return false;
             }
             // @ts-ignore Костыль ебаный!
-            if (utils_1.qs('#key-input') && utils_1.qs('#city-input')) {
-                utils_1.qs('#key-input').value = key;
+            if (utils_1.qs('#city-input')) {
                 utils_1.qs('#city-input').value = json.name;
             }
             if ((json === null || json === void 0 ? void 0 : json.cod) === 200) {
@@ -782,34 +808,6 @@ exports.getWeather = async () => {
 
 /***/ }),
 /* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.hiddenRightbar = void 0;
-const utils_1 = __webpack_require__(0);
-const settings_1 = __webpack_require__(2);
-exports.hiddenRightbar = (b) => {
-    let rightbar = utils_1.qs('#page_rightbar');
-    try {
-        if (b && !rightbar.hasAttribute('sp-hidden-rightbar')) {
-            rightbar.style.display = 'none';
-            rightbar.setAttribute('sp-hidden-rightbar', '1');
-        }
-        else if (!settings_1._SETTINGS.hrightbar && rightbar.hasAttribute('sp-hidden-rightbar')) {
-            rightbar.style.display = 'block';
-            rightbar.removeAttribute('sp-hidden-rightbar');
-        }
-    }
-    catch (e) {
-        utils_1.error('Ошибка (hidderRightbar.ts): ' + e);
-    }
-};
-
-
-/***/ }),
-/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -869,7 +867,7 @@ exports.checkUpdates = () => {
 
 
 /***/ }),
-/* 14 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -970,7 +968,7 @@ const init = () => {
 
 
 /***/ }),
-/* 15 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1000,7 +998,7 @@ exports.adBlock = () => {
 
 
 /***/ }),
-/* 16 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1051,7 +1049,7 @@ exports.ce = (name, params) => {
 
 
 /***/ }),
-/* 17 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1062,7 +1060,7 @@ exports.qs = (e) => document.querySelector(e);
 
 
 /***/ }),
-/* 18 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1084,7 +1082,7 @@ exports.find = (obj, obj2) => {
 
 
 /***/ }),
-/* 19 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1111,7 +1109,7 @@ exports.http = http;
 
 
 /***/ }),
-/* 20 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1122,7 +1120,7 @@ exports.rever = (s) => s ? s.toString().split('').join('.') : s;
 
 
 /***/ }),
-/* 21 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1133,7 +1131,7 @@ exports.remove = (e) => e.parentNode.removeChild(e);
 
 
 /***/ }),
-/* 22 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1162,7 +1160,7 @@ exports.getQuery = (name) => {
 
 
 /***/ }),
-/* 23 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1176,7 +1174,7 @@ exports.inBefore = (elem, refElem) => {
 
 
 /***/ }),
-/* 24 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1190,7 +1188,7 @@ exports.declOfNum = (number, titles) => {
 
 
 /***/ }),
-/* 25 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1204,7 +1202,7 @@ exports.getCookie = (name) => {
 
 
 /***/ }),
-/* 26 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1226,7 +1224,7 @@ exports.getParams = (url) => {
 
 
 /***/ }),
-/* 27 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1238,13 +1236,13 @@ exports.delCookie = (name) => setCookie_1.setCookie(name, null, { expires: -1 })
 
 
 /***/ }),
-/* 28 */
+/* 27 */
 /***/ (function(module) {
 
 module.exports = JSON.parse("{\"name\":\"spaces-plus\",\"description\":\"🚀 Powerfull userscript for Spaces.ru\",\"homepage\":\"https://spaces-dev.github.io/SpacesPlus\",\"version\":\"3.0.0\",\"author\":{\"name\":\"Vitalij Ryndin\",\"email\":\"sys@crashmax.ru\",\"url\":\"https://crashmax.ru\"},\"scripts\":{\"dev\":\"cross-env NODE_ENV=development webpack-dev-server --config-name main --host localhost --watch-poll\",\"build\":\"cross-env NODE_ENV=production webpack --progress\"},\"devDependencies\":{\"@babel/core\":\"^7.11.6\",\"@babel/preset-env\":\"^7.11.5\",\"@types/node\":\"^14.11.8\",\"@types/webpack\":\"^4.41.22\",\"@types/webpack-dev-server\":\"^3.11.0\",\"babel-loader\":\"^8.1.0\",\"clean-webpack-plugin\":\"^3.0.0\",\"copy-webpack-plugin\":\"^6.2.1\",\"cross-env\":\"^7.0.2\",\"optimize-css-assets-webpack-plugin\":\"^5.0.4\",\"ts-loader\":\"^8.0.4\",\"ts-node\":\"^9.0.0\",\"typescript\":\"^4.0.2\",\"webpack\":\"^4.44.2\",\"webpack-cli\":\"^3.3.12\",\"webpack-dev-server\":\"^3.11.0\",\"webpack-userscript\":\"^2.5.6\"}}");
 
 /***/ }),
-/* 29 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1291,7 +1289,7 @@ exports.confirmBox = (text, warn, callback) => {
 
 
 /***/ }),
-/* 30 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1306,7 +1304,7 @@ exports.isValidUrl = (url) => {
 
 
 /***/ }),
-/* 31 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1345,7 +1343,7 @@ exports.messageBox = (title, content, close, timer) => {
 
 
 /***/ }),
-/* 32 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1365,7 +1363,7 @@ exports.historyPush = (state, url, title) => {
 
 
 /***/ }),
-/* 33 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1379,7 +1377,7 @@ exports.insertAfter = (elem, refElem) => {
 
 
 /***/ }),
-/* 34 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1404,7 +1402,7 @@ exports.setLocation = (url) => {
 
 
 /***/ }),
-/* 35 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1426,7 +1424,7 @@ exports.getClassName = (data, t) => {
 
 
 /***/ }),
-/* 36 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1451,7 +1449,7 @@ exports.readSettings = () => {
 
 
 /***/ }),
-/* 37 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1483,7 +1481,7 @@ exports.getPath = (name) => {
 
 
 /***/ }),
-/* 38 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1505,7 +1503,7 @@ exports.oldHeader = (b) => {
 
 
 /***/ }),
-/* 39 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1535,7 +1533,7 @@ exports.scrollMove = (b) => {
 
 
 /***/ }),
-/* 40 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1571,7 +1569,7 @@ exports.userStatus = (code) => {
 
 
 /***/ }),
-/* 41 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1615,7 +1613,7 @@ exports.userOnline = () => {
 
 
 /***/ }),
-/* 42 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1635,7 +1633,7 @@ exports.apiDebugger = (b) => {
 
 
 /***/ }),
-/* 43 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1665,7 +1663,7 @@ exports.coinsAccept = () => {
 
 
 /***/ }),
-/* 44 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1762,7 +1760,7 @@ exports.deleteBlogs = () => {
 
 
 /***/ }),
-/* 45 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1793,7 +1791,7 @@ exports.karmaAccept = () => {
 
 
 /***/ }),
-/* 46 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1881,7 +1879,7 @@ const isFav = async (id, name, elem) => {
 
 
 /***/ }),
-/* 47 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1903,7 +1901,7 @@ exports.freeStickers = (b) => {
 
 
 /***/ }),
-/* 48 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1947,11 +1945,12 @@ exports.settingsMenu = () => {
                         ////const eventAlert = qs('#SP_PLUS_ALERT')
                         if (setArea) {
                             for (let i in settings_1._SETTINGS) {
-                                if (typeof settings_1._SETSTRINGS[i] !== 'undefined') {
+                                if (settings_1._SETSTRINGS[i] !== undefined) {
                                     /**
-                                    * Проверяем поддерживаемость данных функций на Touch версии сайта
+                                    * Проверяем поддерживаемость данных функций (rscroll, hrightbar, weatherWidget) на Touch версии сайта
+                                    * Если функция не поддерживается на текущей версии сайта и она включена, то отключаем её
                                     */
-                                    let unsupported = (strings_1.DEVICE.id === 3 && (i === 'rscroll' || i === 'hrightbar')) ? true : false;
+                                    let unsupported = (strings_1.DEVICE.id === 3 && (i === 'rscroll' || i === 'hrightbar' || i === 'weatherWidget')) ? true : false;
                                     let checkbox = utils_1.ce('input', {
                                         id: i,
                                         type: 'checkbox',
@@ -1960,7 +1959,7 @@ exports.settingsMenu = () => {
                                         checked: settings_1._SETTINGS[i],
                                         onclick: (e) => {
                                             const { id, checked } = e.target;
-                                            if (e.target.attributes.unsupported.value === 'true') {
+                                            if (e.target.attributes.unsupported.value === 'true' && checked) {
                                                 utils_1.messageBox('Внимание!', 'Для работы данной функции, необходимо переключиться на компьютерную версию сайта', true, 5);
                                                 return false;
                                             }
@@ -2019,6 +2018,8 @@ exports.settingsMenu = () => {
                                     label.appendChild(description);
                                     setArea.appendChild(label);
                                     setArea.appendChild(label);
+                                    if (unsupported && settings_1._SETTINGS[i])
+                                        utils_1.qs('#' + i).click();
                                 }
                             }
                             // Выпадающие доп. меню настроек
@@ -2198,7 +2199,7 @@ exports.settingsMenu = () => {
 
 
 /***/ }),
-/* 49 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2293,7 +2294,7 @@ exports.deleteReaders = () => {
 
 
 /***/ }),
-/* 50 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2332,7 +2333,7 @@ exports.galleryRotate = () => {
 
 
 /***/ }),
-/* 51 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2362,7 +2363,7 @@ exports.sidebarButton = () => {
 
 
 /***/ }),
-/* 52 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2424,7 +2425,7 @@ const toUpper = (str) => str[0].toUpperCase() + str.substring(1);
 
 
 /***/ }),
-/* 53 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2530,6 +2531,39 @@ exports.deleteComments = () => {
 
 
 /***/ }),
+/* 53 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.hiddenRightbar = void 0;
+const utils_1 = __webpack_require__(0);
+const settings_1 = __webpack_require__(2);
+exports.hiddenRightbar = (b) => {
+    let rightbar = utils_1.qs('#page_rightbar');
+    /**
+     * Отключаем виджет погоды, если скрываем правое меню
+     */
+    if (b && settings_1._SETTINGS.weatherWidget)
+        utils_1.qs('#weatherWidget').click();
+    try {
+        if (b && !rightbar.hasAttribute('sp-hidden-rightbar')) {
+            rightbar.style.display = 'none';
+            rightbar.setAttribute('sp-hidden-rightbar', '1');
+        }
+        else if (!settings_1._SETTINGS.hrightbar && rightbar.hasAttribute('sp-hidden-rightbar')) {
+            rightbar.style.display = 'block';
+            rightbar.removeAttribute('sp-hidden-rightbar');
+        }
+    }
+    catch (e) {
+        utils_1.error('Ошибка (hidderRightbar.ts): ' + e);
+    }
+};
+
+
+/***/ }),
 /* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2609,7 +2643,7 @@ const settings_1 = __webpack_require__(2);
 exports.settingsFriends = (e) => {
     try {
         let frMaxWrap = utils_1.ce('div', { id: 'SP_PLUS_MAXFRIENDS' });
-        let div = utils_1.ce('div', { style: 'padding: 11px 15px' });
+        let div = utils_1.ce('div', { class: 'sp_settings-wrap' });
         let frMax = utils_1.ce('input', {
             type: 'text',
             class: 'text-input',
@@ -3226,7 +3260,7 @@ const handleErrors = (target, errorsBlock, json) => {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.settingsChangelogMenu = void 0;
 const utils_1 = __webpack_require__(0);
-const checkUpdates_1 = __webpack_require__(13);
+const checkUpdates_1 = __webpack_require__(12);
 const strings_1 = __webpack_require__(1);
 exports.settingsChangelogMenu = (id) => {
     window.scrollTo(0, 0);
