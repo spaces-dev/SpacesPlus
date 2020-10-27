@@ -17,23 +17,24 @@ import { IWeather } from '../interfaces/Weather'
 
 import { _SETTINGS } from '../settings'
 
+interface Checked {
+    checked: boolean
+}
+
 /**
- * Инициализация выпадающего меню доп. настроек виджета погоды
+ * Инициализация выпадающего доп. меню настроек виджета погоды
  * @param e #weatherWidget
  */
 export const settingsWeather = async (e: any) => {
 
     /**
-     * Отключаем скрытие прового меню, если оно скрыто
+     * Отключаем скрытие правого меню, если оно скрыто
      */
-    if (_SETTINGS.hrightbar) {
-        _SETTINGS.hrightbar = false
-        setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
-        hiddenRightbar(false)
-    }
+    if (_SETTINGS.hrightbar) qs('#hrightbar').click()
 
     /**
      * Инициализация ¯\_(ツ)_/¯
+     * Получаем город
      */
     if (_SETTINGS.weatherSettings.city === null) {
         try {
@@ -53,7 +54,12 @@ export const settingsWeather = async (e: any) => {
         }
     }
 
-    let masWarp = ce('div', { id: 'SP_WEATHER_SETTINGS', style: 'padding: 11px 15px' })
+    let masWarp = ce('div', { id: 'SP_WEATHER_SETTINGS', class: 'sp_settings-wrap' })
+
+    let locationLbl = ce('label', {
+        html: 'API-Ключ:<div class="label__desc"><a href="https://openweathermap.org/appid" target="_blank">Получить ключ</a></div>',
+        class: 'label'
+    })
 
     let apiKey = ce('input', {
         type: 'text',
@@ -64,13 +70,8 @@ export const settingsWeather = async (e: any) => {
         value: _SETTINGS.weatherSettings.key
     })
 
-    let locationLbl = ce('label', {
-        html: 'API-Ключ:<div class="label__desc"><a href="https://openweathermap.org/appid" target="_blank">Получить ключ</a></div>',
-        class: 'label'
-    })
-
     apiKey.addEventListener('keypress', (e: any) => {
-        if (13 == e.keyCode) {
+        if (e.keyCode === 13) {
             if (/^[a-f0-9]{32}$/i.test(e.target.value) || trim(e.target.value) === '') {
                 _SETTINGS.weatherSettings.key = e.target.value
                 setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
@@ -94,7 +95,7 @@ export const settingsWeather = async (e: any) => {
     })
 
     cityInp.addEventListener('keypress', (e: any) => {
-        if (13 == e.keyCode) {
+        if (e.keyCode === 13) {
             if (/^([a-zA-Zа-яА-ЯёЁ]+[-]?[a-zA-Zа-яА-ЯёЁ]*[-]?[a-zA-Zа-яА-ЯёЁ]*[-]?[a-zA-Zа-яА-ЯёЁ]*)$/i.test(e.target.value) || trim(e.target.value) === '') {
                 _SETTINGS.weatherSettings.city = e.target.value
                 setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
@@ -106,10 +107,36 @@ export const settingsWeather = async (e: any) => {
         }
     })
 
+    let intervalLbl = ce('label', {
+        html: 'Интервал обновления:<div class="label__desc">в минутах</a></div>',
+        class: 'label'
+    })
+
+    let interval = ce('input', {
+        type: 'text',
+        class: 'text-input',
+        style: 'margin-bottom: 7px',
+        size: '4',
+        id: 'key-input',
+        value: _SETTINGS.weatherSettings.interval / 60
+    })
+
+    interval.addEventListener('change', (e: any) => {
+        if (/^[0-9]{1,3}$/i.test(e.target.value) || trim(e.target.value) === '') {
+            _SETTINGS.weatherSettings.interval = e.target.value * 60
+            setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
+            interval.className = 'text-input'
+        } else {
+            interval.className = 'text-input sp-input-error'
+        }
+    })
+
     masWarp.appendChild(cityLbl)
     masWarp.appendChild(cityInp)
     masWarp.appendChild(locationLbl)
     masWarp.appendChild(apiKey)
+    masWarp.appendChild(intervalLbl)
+    masWarp.appendChild(interval)
     insertAfter(masWarp, e.parentNode)
 }
 
@@ -125,13 +152,20 @@ export const getWeather = async () => {
         await http<IWeather>('GET', url, false).then(e => {
             const json = e.parsedBody
 
+            // Город не найден
+            if (e.status === 404) {
+                messageBox('Виджет погоды', `Город <b>${city}</b> не найден`, true, 5)
+                return false
+            }
+
+            // если есть другие ошибки
             if (json?.message) {
                 messageBox('Виджет погоды', json.message, true, 5)
-                return
+                return false
             }
 
             // @ts-ignore Костыль ебаный!
-            if (qs('#key-input') && qs('#city-input')) { qs('#key-input').value = key; qs('#city-input').value = json.name }
+            if (qs('#city-input')) { qs('#city-input').value = json.name }
 
             if (json?.cod === 200) {
                 _SETTINGS.weatherSettings.city = json.name

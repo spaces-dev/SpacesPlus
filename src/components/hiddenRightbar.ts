@@ -5,6 +5,11 @@ import { _SETTINGS } from '../settings'
 export const hiddenRightbar = (b: boolean) => {
     let rightbar = qs('#page_rightbar')
 
+    /**
+     * Отключаем виджет погоды, если скрываем правое меню
+     */
+    if (b && _SETTINGS.weatherWidget) qs('#weatherWidget').click()
+
     try {
         if (b && !rightbar.hasAttribute('sp-hidden-rightbar')) {
             rightbar.style.display = 'none'

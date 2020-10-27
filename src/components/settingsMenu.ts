@@ -67,12 +67,14 @@ export const settingsMenu = () => {
                         ////const eventAlert = qs('#SP_PLUS_ALERT')
                         if (setArea) {
                             for (let i in _SETTINGS) {
-                                if (typeof _SETSTRINGS[i] !== 'undefined') {
+                                if (_SETSTRINGS[i] !== undefined) {
 
                                     /**
-                                    * Проверяем поддерживаемость данных функций на Touch версии сайта
+                                    * Проверяем поддерживаемость данных функций (rscroll, hrightbar, weatherWidget) на Touch версии сайта
+                                    * Если функция не поддерживается на текущей версии сайта и она включена, то отключаем её
                                     */
-                                    let unsupported = (DEVICE.id === 3 && (i === 'rscroll' || i === 'hrightbar')) ? true : false
+                                    let unsupported = (DEVICE.id === 3 && (i === 'rscroll' || i === 'hrightbar' || i === 'weatherWidget')) ? true : false
+
                                     let checkbox = ce('input', {
                                         id: i,
                                         type: 'checkbox',
@@ -82,7 +84,7 @@ export const settingsMenu = () => {
                                         onclick: (e: any) => {
                                             const { id, checked } = e.target
 
-                                            if (e.target.attributes.unsupported.value === 'true') {
+                                            if (e.target.attributes.unsupported.value === 'true' && checked) {
                                                 messageBox('Внимание!', 'Для работы данной функции, необходимо переключиться на компьютерную версию сайта', true, 5)
                                                 return false
                                             }
@@ -144,6 +146,8 @@ export const settingsMenu = () => {
                                     label.appendChild(description)
                                     setArea.appendChild(label)
                                     setArea.appendChild(label)
+
+                                    if (unsupported && _SETTINGS[i]) qs('#' + i).click()
                                 }
                             }
 

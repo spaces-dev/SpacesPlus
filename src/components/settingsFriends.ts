@@ -6,7 +6,7 @@ import { _SETTINGS } from '../settings'
 export const settingsFriends = (e?: any) => {
     try {
         let frMaxWrap = ce('div', { id: 'SP_PLUS_MAXFRIENDS' })
-        let div = ce('div', { style: 'padding: 11px 15px' })
+        let div = ce('div', { class: 'sp_settings-wrap' })
 
         let frMax = ce('input', {
             type: 'text',

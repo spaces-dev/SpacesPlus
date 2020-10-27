@@ -30,6 +30,10 @@
     transform: rotate(90deg) !important
 }
 
+.sp_settings-wrap {
+    padding: 11px 15px
+}
+
 .sp_bg-items {
     display: inline-block;
     max-width: 100%;
@@ -49,8 +53,8 @@
 }
 
 .sp_weather-table>tbody>tr>td {
-    width: 7rem;
-    max-width: 7rem;
+    width: 100%;
+    max-width: inherit;
     padding-top: 4px;
     overflow: hidden
 }
