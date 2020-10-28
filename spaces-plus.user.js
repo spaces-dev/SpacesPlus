@@ -390,16 +390,16 @@ const settingsWeather_1 = __webpack_require__(11);
 Object.defineProperty(exports, "settingsWeather", { enumerable: true, get: function () { return settingsWeather_1.settingsWeather; } });
 const settingsFeatures_1 = __webpack_require__(59);
 Object.defineProperty(exports, "settingsFeatures", { enumerable: true, get: function () { return settingsFeatures_1.settingsFeatures; } });
-const videoSpeedPlayback_1 = __webpack_require__(60);
+const videoSpeedPlayback_1 = __webpack_require__(61);
 Object.defineProperty(exports, "videoSpeedPlayback", { enumerable: true, get: function () { return videoSpeedPlayback_1.videoSpeedPlayback; } });
-const settingsBackground_1 = __webpack_require__(61);
+const settingsBackground_1 = __webpack_require__(62);
 Object.defineProperty(exports, "settingsBackground", { enumerable: true, get: function () { return settingsBackground_1.settingsBackground; } });
-const settingsBackupMenu_1 = __webpack_require__(62);
+const settingsBackupMenu_1 = __webpack_require__(63);
 Object.defineProperty(exports, "settingsBackupMenu", { enumerable: true, get: function () { return settingsBackupMenu_1.settingsBackupMenu; } });
 const checkUpdates_1 = __webpack_require__(12);
 Object.defineProperty(exports, "checkUpdates", { enumerable: true, get: function () { return checkUpdates_1.checkUpdates; } });
 Object.defineProperty(exports, "getUpdater", { enumerable: true, get: function () { return checkUpdates_1.getUpdater; } });
-const settingsChangelogMenu_1 = __webpack_require__(63);
+const settingsChangelogMenu_1 = __webpack_require__(64);
 Object.defineProperty(exports, "settingsChangelogMenu", { enumerable: true, get: function () { return settingsChangelogMenu_1.settingsChangelogMenu; } });
 
 
@@ -2221,7 +2221,7 @@ exports.settingsMenu = () => {
                                 html: '<span class="sp_plus_text">Прочее</span>'
                             });
                             setArea.appendChild(spacesLabel1);
-                            // TODO: Сюда нужна проверка квеста новичка
+                            // Встроенные возможности сайта
                             index_1.settingsFeatures(setArea);
                             setArea.appendChild(spacesLabel2);
                             const SettingsBackup = utils_1.ce('a', {
@@ -2982,6 +2982,7 @@ exports.settingsFriends = (e) => {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.settingsFeatures = void 0;
 const utils_1 = __webpack_require__(0);
+const newbeeQuest_1 = __webpack_require__(60);
 const settings_1 = __webpack_require__(2);
 const strings_1 = __webpack_require__(1);
 exports.settingsFeatures = (root) => {
@@ -3041,18 +3042,17 @@ exports.settingsFeatures = (root) => {
             return false;
         }
     });
-    // TODO: Добавить проверку квеста новичка!
     let nbqLink = utils_1.ce('a', {
         href: '#',
         style: 'display: none',
         id: 'sp_newbequest_togl',
         class: 'stnd-link stnd-link_arr sp_line sp_last_btn sp_newbq_l',
         html: '<span class="b"><span class="sp sp-remove-grey mr-14"></span>Скрыть квест новичка<span class="ico ico_arr ico_m"></span></span>',
-        onclick: function () {
+        onclick: () => {
             utils_1.confirmBox('Вы действительно хотите скрыть квест новичка?', true, () => {
                 utils_1.http('GET', `${strings_1.SPACES}/newbequest/?CK=${strings_1.OVERRIDE.CK}`, true).then(e => {
                     if (e.status === 200) {
-                        utils_1.messageBox('Поздравляем!', 'Квест новичка успешно был скрыт', true, 3);
+                        utils_1.messageBox('Поздравляем!', 'Квест новичка был успешно скрыт', true, 5);
                     }
                 });
             });
@@ -3065,11 +3065,41 @@ exports.settingsFeatures = (root) => {
     wrap.appendChild(glbWrap);
     wrap.appendChild(nbqLink);
     root.appendChild(wrap);
+    // Проверяем скрыт ли квест новичка
+    newbeeQuest_1.newbeeQuest();
 };
 
 
 /***/ }),
 /* 60 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.newbeeQuest = void 0;
+const utils_1 = __webpack_require__(0);
+const strings_1 = __webpack_require__(1);
+exports.newbeeQuest = async () => {
+    let newbequest = utils_1.qs('#sp_newbequest_togl');
+    if (newbequest) {
+        try {
+            await utils_1.http('GET', `${strings_1.SPACES}/mysite/`, true).then(e => {
+                var _a;
+                if ((_a = e.parsedBody) === null || _a === void 0 ? void 0 : _a.owner_widget.newbee_quest_widget) {
+                    newbequest.style.display = 'block';
+                }
+            });
+        }
+        catch (e) {
+            utils_1.error('Ошибка newbeeQuest.ts: ' + e);
+        }
+    }
+};
+
+
+/***/ }),
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3110,7 +3140,7 @@ exports.videoSpeedPlayback = () => {
 
 
 /***/ }),
-/* 61 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3380,7 +3410,7 @@ const setColor = () => {
 
 
 /***/ }),
-/* 62 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3543,7 +3573,7 @@ const handleErrors = (target, errorsBlock, json) => {
 
 
 /***/ }),
-/* 63 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
