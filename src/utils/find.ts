@@ -1,4 +1,10 @@
-// TODO: interface
+/**
+ * Используется для поиска в DOM
+ * Пример поиска бонусных монет:
+ * * let coins: any = find(document.links, { href: 'https://spaces.ru/services/gift_get/?Link_id=' })
+ * @param obj 
+ * @param obj2 
+ */
 export const find = (obj: any, obj2: any) => {
     let list = []
 

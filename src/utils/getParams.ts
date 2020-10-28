@@ -1,3 +1,7 @@
+/**
+ * Получаем GET параметры из ссылки
+ * @param url
+ */
 export const getParams = (url: string) => {
     const params: any = {}
     let parser = document.createElement('a')

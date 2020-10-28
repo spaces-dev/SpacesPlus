@@ -1,4 +1,4 @@
-export type IStrings = {
+export type ISettingsStrings = {
     readonly [key: string]: string
 }
 
@@ -20,13 +20,6 @@ export interface Events {
 export interface HideNotyf {
     cookieEditor: boolean
     configImport: boolean
-}
-
-export interface MsgAlertSettings {
-    alertPosition: number
-    maxAlert: number
-    animDelay: number
-    alertDelay: number
 }
 
 export interface WeatherSettings {

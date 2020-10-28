@@ -99,7 +99,7 @@ export const deleteBlogs = () => {
                                     document.location.reload()
                                 })
                             } else {
-                                messageBox('Внимание!', 'Отметьте галочкой, те блоги, которые вы хотите удалить и попробуйте еще раз', true, 8)
+                                messageBox('Внимание!', 'Отметьте галочкой, те блоги, которые вы хотите удалить и попробуйте еще раз', true, 5)
                             }
                             return false
                         }

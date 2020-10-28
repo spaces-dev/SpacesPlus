@@ -1,3 +1,9 @@
+/**
+ * Поиск чего-то там ¯\_(ツ)_/¯
+ * getClassName('span.comment_date', false)
+ * @param data
+ * @param t
+ */
 export const getClassName = (data: string, t: boolean) => {
     let list = [],
         str = data.split('.'),

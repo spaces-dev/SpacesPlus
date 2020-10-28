@@ -2,6 +2,9 @@ import { error, extend, getCookie } from './index'
 
 import { _SETTINGS } from '../settings'
 
+/**
+ * Используется для инициализации настроек скрипта
+ */
 export const readSettings = () => {
     let cookieSet = getCookie('SP_PLUS_SET')
 

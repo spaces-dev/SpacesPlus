@@ -1,7 +1,12 @@
 import { extend } from './extend'
 import { BASE_URL } from '../strings'
 
-// TODO: Refactoring & interface
+/**
+ * Создание куки
+ * @param key Название куки
+ * @param value Строка с значениеми куки должна быть как JSON.stringfy()
+ * @param opts { expires: -1 } для сброса (используется в delCookie.ts)
+ */
 export const setCookie = (key: string, value: string | null, opts?: any) => {
     opts = extend({
         path: '/',

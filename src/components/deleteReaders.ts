@@ -98,7 +98,7 @@ export const deleteReaders = () => {
                                     document.location.reload()
                                 })
                             } else {
-                                messageBox('Внимание!', 'Отметьте галочкой, теx читателей, которых вы хотите удалить и попробуйте еще раз', true, 8)
+                                messageBox('Внимание!', 'Отметьте галочкой, теx читателей, которых вы хотите удалить и попробуйте еще раз', true, 5)
                             }
                             return false
                         }

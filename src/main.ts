@@ -44,7 +44,7 @@ import { _SETTINGS } from './settings'
             http<ISessionCheck>('POST', `${SPACES}/api/session/check`, false).then(e => {
                 if (e.status === 200 && e.parsedBody) {
                     if (userStatus(e.parsedBody.code)) {
-                        // Сохраняем CK
+                        // Временно храним CK для работы функций
                         OVERRIDE.CK = e.parsedBody?.attributes.CK
                         // Инициализируем работу
                         init()
@@ -97,7 +97,7 @@ const init = () => {
         if (_SETTINGS.coins) coinsAccept()
         if (_SETTINGS.karma) karmaAccept()
         if (_SETTINGS.online) userOnline()
-        if (_SETTINGS.myEvents) soundEvents()
+        if (_SETTINGS.events) soundEvents()
         if (_SETTINGS.grotate) galleryRotate()
         if (_SETTINGS.favorite) favoriteUser()
         if (_SETTINGS.weather) weatherWidget()

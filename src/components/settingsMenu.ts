@@ -227,6 +227,7 @@ export const settingsMenu = () => {
                                 onclick: () => {
                                     confirmBox('Вы действительно хотите полностью сбросить настройки?', true, () => {
                                         delCookie('SP_PLUS_SET')
+                                        delCookie('SP_WEATHER')
                                         delCookie('gp_left_btn')
                                         delCookie('force_ajax_transport')
                                         delCookie('sandbox')

@@ -25,8 +25,8 @@ export const weatherWidget = () => {
         getWeather()
     }
 
-    if (!widget && page_rightbar) {
-        // @ts-ignore
+    if (!widget && page_rightbar && getCookie('SP_WEATHER')) {
+        // @ts-ignore Костылище
         const w: IWeather = JSON.parse(getCookie('SP_WEATHER'))
 
         let widgets_group = ce('div', {
@@ -43,7 +43,7 @@ export const weatherWidget = () => {
         let content = ce('div', {
             class: 'content',
             style: 'padding: 0px 16px 16px 16px',
-            html: `<img src="https://openweathermap.org/img/wn/${w.weather[0].icon}@2x.png" class="sp_weather-img"><div class="grey sp_weather-container"><p>${Math.round(w.main.temp)}°C</p><p>${toUpper(w.weather[0].description)}</p></div><table class="grey sp_weather-table"><tbody><tr><td>Облачность: </td><td>${w.clouds.all}%</td></tr><tr><td>Влажность: </td><td>${w.main.humidity}%</td></tr><tr><td>Давление: </td><td>${Math.round(w.main.pressure * 0.75)}'mmHg</td></tr><tr><td>Ветер: </td><td>${w.wind.speed}m/sec</td></tr></tbody></table>`
+            html: `<img src="https://openweathermap.org/img/wn/${w.weather[0].icon}@2x.png" class="sp_weather-img"><div class="grey sp_weather-container"><p>${Math.round(w.main.temp)}°C</p><p>${toUpper(w.weather[0].description)}</p></div><table class="grey sp_weather-table"><tbody><tr><td>Облачность: </td><td>${w.clouds.all}%</td></tr><tr><td>Влажность: </td><td>${w.main.humidity}%</td></tr><tr><td>Давление: </td><td>${Math.round(w.main.pressure * 0.75)}mmHg</td></tr><tr><td>Ветер: </td><td>${w.wind.speed}m/sec</td></tr></tbody></table>`
         })
 
         widgets_group.appendChild(widget_header)

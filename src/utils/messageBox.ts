@@ -8,13 +8,18 @@ import { ce, qs, remove } from './index'
  */
 export const messageBox = (title: string, content: string, close: boolean, timer?: number) => {
     let Alert = qs('#SP_PLUS_ALERT')
-    let Container = ce('div', { class: 'sticker w400 sp-sticker-anim' })
+    let Confirm = qs('#SP_PLUS_CONFIRM')
+    let Container = ce('div', {
+        class: 'sticker w400 sp-sticker-anim',
+        id: 'SP_PLUS_ALERT',
+    })
 
-    if (Alert) { remove(Alert) }
+    // Скрываем раннее созданные уводомления
+    if (Alert) remove(Alert)
+    if (Confirm) remove(Confirm)
 
     let Main = ce('div', {
         class: 'content-item3 wbg oh',
-        id: 'SP_PLUS_ALERT',
         html: (close ?
             '<span class="sp sp-remove-grey pointer right notif_close close_h" onclick="document.body.removeChild(this.parentNode.parentNode)" title="Закрыть"></span>' :
             '') + `${title}<div class="pad_t_a"></div><small class="grey">${content}</small>`
@@ -23,6 +28,7 @@ export const messageBox = (title: string, content: string, close: boolean, timer
     Container.appendChild(Main)
     document.body.appendChild(Container)
 
+    // Автоматического закрытие уведомления
     if (timer !== undefined) {
         setTimeout(() => {
             Main.parentNode?.parentNode?.removeChild(Container)

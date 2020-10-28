@@ -8,7 +8,7 @@ const BETA: boolean = false
 const HTTP: string = document.location.protocol
 const BASE_URL: string = document.location.hostname
 const SPACES: string = `${HTTP}//${BASE_URL}`
-const PKG_VERSION = pkg.version
+const PKG_VERSION: string = pkg.version
 const GITHUB: string = pkg.homepage
 const REVISION: number = Number(new Date())
 const DEVICE: IDevice = window.Device || unsafeWindow.Device
@@ -18,16 +18,16 @@ const ENV_PATH = process.env.NODE_ENV === 'development' ? 'https://localhost:808
  * Временное хранилище данных
  */
 class OVERRIDE {
-    public static CK: string
-    public static BANNED: string | null
-    public static ONLINE: string | null
-    public static FAVORITE: string | null
-    public static KARMA: boolean = false
-    public static COINS: boolean = false
-    public static EVENTS: number = 0
-    public static COMMENTS: number = 0
-    public static PLAYER_ID: number = 0
-    public static VERSION: number = Number(PKG_VERSION.split('.').join(''))
+    static CK: string
+    static BANNED: string | null
+    static ONLINE: string | null
+    static FAVORITE: string | null
+    static KARMA: boolean = false
+    static COINS: boolean = false
+    static EVENTS: number = 0
+    static PLAYER: number = 0
+    static COMMENTS: number = 0
+    static VERSION: number = Number(PKG_VERSION.split('.').join(''))
 }
 
 export {
@@ -38,7 +38,7 @@ export {
     SPACES,
     BASE_URL,
     ENV_PATH,
-    REVISION,
     OVERRIDE,
+    REVISION,
     PKG_VERSION,
 }

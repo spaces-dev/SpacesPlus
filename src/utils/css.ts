@@ -1,6 +1,10 @@
 import { trim } from './trim'
 
-// TODO: interface
+/**
+ * Используется в ce.ts для создание стилей
+ * @param elem 
+ * @param css 
+ */
 export const css = (elem: any, css: any) => {
     let list = css.split(';')
 

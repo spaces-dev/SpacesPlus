@@ -28,7 +28,7 @@ export const playerDownload = () => {
             let tdIc = find(player.getElementsByTagName('td'), { className: 'ico_td' })
 
             if (tdIc && !downPlace) {
-                OVERRIDE.PLAYER_ID = trId
+                OVERRIDE.PLAYER = trId
                 let dwnTd = ce('td', {
                     id: 'SP_MUSIC_DOWN',
                     class: 'ico_td',
@@ -37,8 +37,8 @@ export const playerDownload = () => {
                 })
 
                 insertAfter(dwnTd, tdIc[0])
-            } else if (downPlace && OVERRIDE.PLAYER_ID !== trId) {
-                OVERRIDE.PLAYER_ID = trId
+            } else if (downPlace && OVERRIDE.PLAYER !== trId) {
+                OVERRIDE.PLAYER = trId
                 info('Обновили ссылку на трек!')
                 downPlace.onclick = () => { location.href = trScr }
             }

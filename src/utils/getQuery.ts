@@ -1,7 +1,11 @@
 import { error } from './console'
 
+/**
+ * Ищем определенный GET параметр в ссылке
+ * @param name 
+ */
 export const getQuery = (name: any) => {
-    var r: string | undefined, query = document.location.search
+    let r: string | undefined, query = document.location.search
 
     try {
         name = name.toLowerCase()
