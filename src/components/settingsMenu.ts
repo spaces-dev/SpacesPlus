@@ -172,9 +172,9 @@ export const settingsMenu = () => {
 
                             setArea.appendChild(spacesLabel1)
 
-                            // TODO: Сюда нужна проверка квеста новичка
+                            // Встроенные возможности сайта
                             settingsFeatures(setArea)
-                            
+
                             setArea.appendChild(spacesLabel2)
 
                             const SettingsBackup = ce('a', {

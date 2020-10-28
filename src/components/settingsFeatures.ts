@@ -8,6 +8,8 @@ import {
     messageBox
 } from '../utils'
 
+import { newbeeQuest } from './newbeeQuest'
+
 import { _SETTINGS } from '../settings'
 import { SPACES, OVERRIDE } from '../strings'
 
@@ -72,18 +74,17 @@ export const settingsFeatures = (root: any) => {
         }
     })
 
-    // TODO: Добавить проверку квеста новичка!
     let nbqLink = ce('a', {
         href: '#',
         style: 'display: none',
         id: 'sp_newbequest_togl',
         class: 'stnd-link stnd-link_arr sp_line sp_last_btn sp_newbq_l',
         html: '<span class="b"><span class="sp sp-remove-grey mr-14"></span>Скрыть квест новичка<span class="ico ico_arr ico_m"></span></span>',
-        onclick: function () {
+        onclick: () => {
             confirmBox('Вы действительно хотите скрыть квест новичка?', true, () => {
                 http('GET', `${SPACES}/newbequest/?CK=${OVERRIDE.CK}`, true).then(e => {
                     if (e.status === 200) {
-                        messageBox('Поздравляем!', 'Квест новичка успешно был скрыт', true, 3)
+                        messageBox('Поздравляем!', 'Квест новичка был успешно скрыт', true, 5)
                     }
                 })
             })
@@ -97,4 +98,7 @@ export const settingsFeatures = (root: any) => {
     wrap.appendChild(glbWrap)
     wrap.appendChild(nbqLink)
     root.appendChild(wrap)
+
+    // Проверяем скрыт ли квест новичка
+    newbeeQuest()
 }
