@@ -230,7 +230,6 @@ exports._SETSTRINGS = {
     'blogsd': 'Пакетное удаление блогов',
     'readersd': 'Пакетное удаление читателей',
     'favorite': 'Возможность добавить пользователя в закладки',
-    'blocked': 'Открытые разделы удаленных пользователей',
     'grotate': 'Кнопка поворота фото в просмотрщике',
     'oldheader': 'Старое положение кнопок в шапке',
     'playerdn': 'Кнопка загрузки трека из плеера',
@@ -262,7 +261,6 @@ exports._SETTINGS = {
     'blogsd': false,
     'readersd': false,
     'favorite': true,
-    'blocked': true,
     'grotate': true,
     'angle': 0,
     'oldheader': true,
@@ -677,7 +675,7 @@ const settings_1 = __webpack_require__(2);
  */
 exports.settingsWeather = async (e) => {
     /**
-     * Отключаем скрытие правого меню, если оно скрыто
+     * Отключаем скрытие правого меню, если оно включено
      */
     if (settings_1._SETTINGS.hrightbar)
         utils_1.qs('#hrightbar').click();
@@ -717,7 +715,7 @@ exports.settingsWeather = async (e) => {
     });
     apiKey.addEventListener('keypress', (e) => {
         if (e.keyCode === 13) {
-            if (/^[a-f0-9]{32}$/i.test(e.target.value) || utils_1.trim(e.target.value) === '') {
+            if (/^[a-f0-9]{32}$/i.test(e.target.value) || utils_1.trim(e.target.value) !== '') {
                 settings_1._SETTINGS.weatherSettings.key = e.target.value;
                 utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
                 exports.getWeather();
@@ -739,7 +737,7 @@ exports.settingsWeather = async (e) => {
     });
     cityInp.addEventListener('keypress', (e) => {
         if (e.keyCode === 13) {
-            if (/^([a-zA-Zа-яА-ЯёЁ]+[-]?[a-zA-Zа-яА-ЯёЁ]*[-]?[a-zA-Zа-яА-ЯёЁ]*[-]?[a-zA-Zа-яА-ЯёЁ]*)$/i.test(e.target.value) || utils_1.trim(e.target.value) === '') {
+            if (/^([a-zA-Zа-яА-ЯёЁ]+[-]?[a-zA-Zа-яА-ЯёЁ]*[-]?[a-zA-Zа-яА-ЯёЁ]*[-]?[a-zA-Zа-яА-ЯёЁ]*)$/i.test(e.target.value) || utils_1.trim(e.target.value) !== '') {
                 settings_1._SETTINGS.weatherSettings.city = e.target.value;
                 utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
                 exports.getWeather();
@@ -762,7 +760,7 @@ exports.settingsWeather = async (e) => {
         value: settings_1._SETTINGS.weatherSettings.interval / 60
     });
     interval.addEventListener('change', (e) => {
-        if (/^[0-9]{1,3}$/i.test(e.target.value) || utils_1.trim(e.target.value) === '') {
+        if (/^[0-9]{1,3}$/i.test(e.target.value) || utils_1.trim(e.target.value) !== '') {
             settings_1._SETTINGS.weatherSettings.interval = e.target.value * 60;
             utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
             interval.className = 'text-input';
@@ -1404,10 +1402,13 @@ exports.confirmBox = (text, warn, callback) => {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.isValidUrl = void 0;
+/**
+ * Проверяем валидность ссылок
+ * @param url ссылка
+ */
 exports.isValidUrl = (url) => {
-    let regURLrf = /^(?:(?:https?|ftp|telnet):\/\/(?:[а-я0-9_-]{1,32}(?::[а-я0-9_-]{1,32})?@)?)?(?:(?:[а-я0-9-]{1,128}\.)+(?:рф)|(?! 0)(?:(?! 0[^.]|255)[ 0-9]{1,3}\.){3}(?! 0|255)[ 0-9]{1,3})(?:\/[a-zа-я0-9.,_@%&?+=\~\/-]*)?(?:#[^ \'\"&<>]*)?$/i;
-    let regURL = /^(?:(?:https?|ftp|telnet):\/\/(?:[a-z0-9_-]{1,32}(?::[a-z0-9_-]{1,32})?@)?)?(?:(?:[a-z0-9-]{1,128}\.)+(?:com|net|org|mil|edu|arpa|ru|gov|biz|info|aero|inc|name|[a-z]{2})|(?! 0)(?:(?! 0[^.]|255)[ 0-9]{1,3}\.){3}(?! 0|255)[ 0-9]{1,3})(?:\/[a-zа-я0-9.,_@%&?+=\~\/-]*)?(?:#[^ \'\"&<>]*)?$/i;
-    return regURLrf.test(url) || regURL.test(url);
+    let regURL = url.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)/g);
+    return regURL !== null;
 };
 
 
@@ -1446,7 +1447,7 @@ exports.messageBox = (title, content, close, timer) => {
     });
     Container.appendChild(Main);
     document.body.appendChild(Container);
-    // Автоматического закрытие уведомления
+    // Автоматическое закрытие уведомления
     if (timer !== undefined) {
         setTimeout(() => {
             var _a, _b;
@@ -2792,8 +2793,8 @@ exports.settingsEvents = (e) => {
             value: settings_1._SETTINGS.events.url,
             class: 'text-input'
         });
-        eventsUrl.onchange = eventsUrl.oninput = (e) => {
-            if ((utils_1.isValidUrl(e.target.value) && /\.(ogg|mp3|wav)$/i.test(e.target.value)) || utils_1.trim(e.target.value) == '') {
+        eventsUrl.addEventListener('change', (e) => {
+            if ((utils_1.isValidUrl(e.target.value) && /\.(ogg|mp3|wav)$/i.test(e.target.value)) || utils_1.trim(e.target.value) !== '') {
                 settings_1._SETTINGS.events.url = utils_1.trim(e.target.value);
                 utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
                 eventsUrl.className = 'text-input';
@@ -2801,7 +2802,7 @@ exports.settingsEvents = (e) => {
             else {
                 eventsUrl.className = 'text-input sp-input-error';
             }
-        };
+        });
         let testPlay = utils_1.ce('span', {
             class: 'text-input__btn',
             html: '<span class="js-ico sp sp-play-green"></span>',
@@ -3172,7 +3173,7 @@ exports.settingsBackground = (e) => {
             class: 'text-input'
         });
         inputImageUrl.addEventListener('change', (a) => {
-            if ((utils_1.isValidUrl(a.target.value) && /\.(jpg|jpeg|png|gif)$/i.test(a.target.value)) || utils_1.trim(a.target.value) === '') {
+            if ((utils_1.isValidUrl(a.target.value) && /\.(jpg|jpeg|png|gif)$/i.test(a.target.value)) || utils_1.trim(a.target.value) !== '') {
                 settings_1._SETTINGS.bodystyleSetting.url = utils_1.trim(a.target.value);
                 utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
                 setStyles_1.setStyles();
@@ -3188,9 +3189,9 @@ exports.settingsBackground = (e) => {
             id: 'color-input',
             value: settings_1._SETTINGS.bodystyleSetting.color
         });
-        inputColor.addEventListener('change', (a) => {
-            if (/^\#([A-Za-z0-9]{3}|[A-Za-z0-9]{6})$/i.test(a.target.value) || a.target.value === '') {
-                settings_1._SETTINGS.bodystyleSetting.color = utils_1.trim(a.target.value);
+        inputColor.addEventListener('input', (e) => {
+            if (/^\#([A-Za-z0-9]{3,6})$/i.test(e.target.value)) {
+                settings_1._SETTINGS.bodystyleSetting.color = e.target.value;
                 utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
                 setStyles_1.setStyles();
                 inputColor.className = 'text-input';
