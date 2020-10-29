@@ -1719,11 +1719,8 @@ exports.userOnline = () => {
                     var _a, _b;
                     const response = (_b = (_a = e.parsedBody) === null || _a === void 0 ? void 0 : _a.user_widget) === null || _b === void 0 ? void 0 : _b.online_time;
                     if (response) {
-                        // @ts-ignore
-                        let str = parseFloat(response / 3600).toFixed(2).split('.');
-                        // @ts-ignore
-                        let online = str[0] > 0 ? `${str[0]} ч, ${parseInt(str[1] / (100 / 60), 10)} мин` : `${parseInt(str[1] / (100 / 60), 10)} мин`;
-                        // @ts-ignore
+                        let str = (response / 3600).toFixed(2).split('.');
+                        let online = str[0] > 0 ? `${str[0]} ч, ${Math.trunc(str[1] / (100 / 60))} мин` : `${Math.trunc(str[1] / (100 / 60))} мин`;
                         onBlock[0].nextElementSibling.innerHTML = online;
                         utils_1.info('Время онлайн: ' + online);
                     }
@@ -1812,13 +1809,11 @@ exports.deleteBlogs = () => {
                         let checkbox = utils_1.ce('input', {
                             class: 'sp-cbfb sp-checkbox-square',
                             type: 'checkbox',
-                            // @ts-ignore
                             id: 'SP_DB_' + /\&id=([0-9]+)/i.exec(link.href)[1]
                         });
                         let label = utils_1.ce('label', {
                             class: 'sp-ch-blogs',
                             style: 'margin: 1px',
-                            // @ts-ignore
                             attr: { 'for': 'SP_DB_' + /\&id=([0-9]+)/i.exec(link.href)[1] }
                         });
                         utils_1.insertAfter(checkbox, link);
@@ -1850,7 +1845,6 @@ exports.deleteBlogs = () => {
                             let count = 0, blogs = [];
                             for (let ch of checkboxArr) {
                                 if (ch.checked) {
-                                    // @ts-ignore
                                     blogs.push(/^SP_DB_([0-9]+)$/i.exec(ch.id)[1]);
                                     count++;
                                 }
@@ -2362,12 +2356,10 @@ exports.deleteReaders = () => {
                     let bChbx = utils_1.ce('input', {
                         type: 'checkbox',
                         class: 'sp-cbfr sp-checkbox-square',
-                        // @ts-ignore
                         id: 'SP_DR_' + /(\?|&)user=([A-Za-z0-9\_]+)/i.exec(link.href)[2]
                     });
                     let ckbxlb = utils_1.ce('label', {
                         style: 'margin-left: 0px',
-                        // @ts-ignore
                         attr: { 'for': 'SP_DR_' + /(\?|&)user=([A-Za-z0-9\_]+)/i.exec(link.href)[2] }
                     });
                     chWrap.appendChild(bChbx);
@@ -2400,7 +2392,6 @@ exports.deleteReaders = () => {
                             let count = 0, readers = [];
                             for (let ch of checkboxArr) {
                                 if (ch.checked) {
-                                    // @ts-ignore
                                     readers.push(/^SP_DR_([A-Za-z0-9\_]+)$/i.exec(ch.id)[1]);
                                     count++;
                                 }
@@ -2576,6 +2567,7 @@ exports.deleteComments = void 0;
 const utils_1 = __webpack_require__(0);
 const strings_1 = __webpack_require__(1);
 exports.deleteComments = () => {
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
     let childs = utils_1.getClassName('span.comment_date', false);
     let buttons = utils_1.qs('#SP_PLUS_BUTTONS');
     try {
@@ -2586,12 +2578,11 @@ exports.deleteComments = () => {
                 if (delLinks) {
                     for (let child of childs) {
                         if (child.getElementsByTagName('input').length === 0) {
-                            // @ts-ignore
-                            let DC = `DC_${(strings_1.DEVICE.id === 4 ? child.parentNode.parentNode.parentNode.parentNode.parentNode.id : child.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id)}`;
+                            // Нихуевый костыль!
+                            let DC = `DC_${(strings_1.DEVICE.id === 4 ? (_e = (_d = (_c = (_b = (_a = child === null || child === void 0 ? void 0 : child.parentElement) === null || _a === void 0 ? void 0 : _a.parentElement) === null || _b === void 0 ? void 0 : _b.parentElement) === null || _c === void 0 ? void 0 : _c.parentElement) === null || _d === void 0 ? void 0 : _d.parentElement) === null || _e === void 0 ? void 0 : _e.id : (_m = (_l = (_k = (_j = (_h = (_g = (_f = child.parentElement) === null || _f === void 0 ? void 0 : _f.parentElement) === null || _g === void 0 ? void 0 : _g.parentElement) === null || _h === void 0 ? void 0 : _h.parentElement) === null || _j === void 0 ? void 0 : _j.parentElement) === null || _k === void 0 ? void 0 : _k.parentElement) === null || _l === void 0 ? void 0 : _l.parentElement) === null || _m === void 0 ? void 0 : _m.id)}`;
                             let checkbox = utils_1.ce('input', {
                                 type: 'checkbox',
                                 class: 'sp-cbfc sp-checkbox-square',
-                                // @ts-ignore
                                 id: DC
                             });
                             child.appendChild(checkbox);
@@ -2612,10 +2603,10 @@ exports.deleteComments = () => {
                             class: 'user__tools-link table__cell sp_plus_btn_list',
                             html: '<span class="sp sp-ok-blue"></span><span class="sp-ch-text">Выбрать все</span>',
                             onclick: (e) => {
+                                var _a, _b, _c;
                                 let parent = e.target.nodeName === 'SPAN' ? e.target.parentNode : e.target;
                                 for (let input of inputs) {
-                                    // @ts-ignore
-                                    if (input.type === 'checkbox' && /DC_([0-9]+)/gi.test(input.id) && input.parentNode.parentNode.parentNode.style.display !== 'none') {
+                                    if (input.type === 'checkbox' && /DC_([0-9]+)/gi.test(input.id) && ((_c = (_b = (_a = input === null || input === void 0 ? void 0 : input.parentElement) === null || _a === void 0 ? void 0 : _a.parentElement) === null || _b === void 0 ? void 0 : _b.parentElement) === null || _c === void 0 ? void 0 : _c.style.display) !== 'none') {
                                         parent.innerHTML.indexOf('Выбрать все') >= 0 ? input.checked = true : input.checked = false;
                                     }
                                 }
@@ -3360,7 +3351,6 @@ const setColor = () => {
             setTimeout(() => {
                 // @ts-ignore
                 let picker = new CP(container, false, container);
-                // @ts-ignore
                 utils_1.qs('#color-input').addEventListener('change', (a) => {
                     if (/^\#([A-Za-z0-9]{3}|[A-Za-z0-9]{6})$/i.test(a.target.value) || a.target.value === '') {
                         a.target.className = 'text-input';
@@ -3485,16 +3475,13 @@ exports.settingsBackupMenu = (id) => {
             let saveButton = utils_1.ce('button', {
                 class: 'user__tools-link sp_plus_btn_list',
                 html: '<span class="sp sp-ok-blue"></span><span style="color: #57A3EA; padding-left: 10px;">Сохранить</span>',
-                onclick: function () {
+                onclick: () => {
                     getJSON(`value=${textarea.value}`, (json) => {
-                        // TODO:
-                        //// Исправить стакаемый список ошибок!
                         // Костыль ¯\_(ツ)_/¯
                         if (utils_1.qs('#JSON_ERROR_BLOCK')) {
                             errorsBlock.innerHTML = '<span class="sp sp-alert"></span> Невалидный JSON<br /><br />';
                             utils_1.remove(utils_1.qs('#JSON_ERROR_BLOCK'));
                         }
-                        //
                         if (json.result.valid) {
                             utils_1.setCookie('SP_PLUS_SET', textarea.value);
                             utils_1.messageBox('Импорт и экспорт настроек', 'Настройки были успешно сохранены', true, 3);
