@@ -53,15 +53,15 @@ export const settingsEvents = (e: any) => {
             class: 'text-input'
         })
 
-        eventsUrl.onchange = eventsUrl.oninput = (e: any) => {
-            if ((isValidUrl(e.target.value) && /\.(ogg|mp3|wav)$/i.test(e.target.value)) || trim(e.target.value) == '') {
+        eventsUrl.addEventListener('change', (e: any) => {
+            if ((isValidUrl(e.target.value) && /\.(ogg|mp3|wav)$/i.test(e.target.value)) || trim(e.target.value) !== '') {
                 _SETTINGS.events.url = trim(e.target.value)
                 setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
                 eventsUrl.className = 'text-input'
             } else {
                 eventsUrl.className = 'text-input sp-input-error'
             }
-        }
+        })
 
         let testPlay = ce('span', {
             class: 'text-input__btn',

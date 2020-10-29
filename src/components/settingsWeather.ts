@@ -22,7 +22,7 @@ import { _SETTINGS } from '../settings'
 export const settingsWeather = async (e: any) => {
 
     /**
-     * Отключаем скрытие правого меню, если оно скрыто
+     * Отключаем скрытие правого меню, если оно включено
      */
     if (_SETTINGS.hrightbar) qs('#hrightbar').click()
 
@@ -65,7 +65,7 @@ export const settingsWeather = async (e: any) => {
 
     apiKey.addEventListener('keypress', (e: any) => {
         if (e.keyCode === 13) {
-            if (/^[a-f0-9]{32}$/i.test(e.target.value) || trim(e.target.value) === '') {
+            if (/^[a-f0-9]{32}$/i.test(e.target.value) || trim(e.target.value) !== '') {
                 _SETTINGS.weatherSettings.key = e.target.value
                 setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
                 getWeather()
@@ -89,7 +89,7 @@ export const settingsWeather = async (e: any) => {
 
     cityInp.addEventListener('keypress', (e: any) => {
         if (e.keyCode === 13) {
-            if (/^([a-zA-Zа-яА-ЯёЁ]+[-]?[a-zA-Zа-яА-ЯёЁ]*[-]?[a-zA-Zа-яА-ЯёЁ]*[-]?[a-zA-Zа-яА-ЯёЁ]*)$/i.test(e.target.value) || trim(e.target.value) === '') {
+            if (/^([a-zA-Zа-яА-ЯёЁ]+[-]?[a-zA-Zа-яА-ЯёЁ]*[-]?[a-zA-Zа-яА-ЯёЁ]*[-]?[a-zA-Zа-яА-ЯёЁ]*)$/i.test(e.target.value) || trim(e.target.value) !== '') {
                 _SETTINGS.weatherSettings.city = e.target.value
                 setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
                 getWeather()
@@ -114,7 +114,7 @@ export const settingsWeather = async (e: any) => {
     })
 
     interval.addEventListener('change', (e: any) => {
-        if (/^[0-9]{1,3}$/i.test(e.target.value) || trim(e.target.value) === '') {
+        if (/^[0-9]{1,3}$/i.test(e.target.value) || trim(e.target.value) !== '') {
             _SETTINGS.weatherSettings.interval = e.target.value * 60
             setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
             interval.className = 'text-input'

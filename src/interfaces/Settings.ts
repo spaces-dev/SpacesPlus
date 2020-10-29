@@ -37,7 +37,6 @@ export interface ISettings {
     blogsd: boolean
     readersd: boolean
     favorite: boolean
-    blocked: boolean
     grotate: boolean
     angle: number
     oldheader: boolean

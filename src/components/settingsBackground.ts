@@ -47,7 +47,7 @@ export const settingsBackground = (e: any) => {
         })
 
         inputImageUrl.addEventListener('change', (a: any) => {
-            if ((isValidUrl(a.target.value) && /\.(jpg|jpeg|png|gif)$/i.test(a.target.value)) || trim(a.target.value) === '') {
+            if ((isValidUrl(a.target.value) && /\.(jpg|jpeg|png|gif)$/i.test(a.target.value)) || trim(a.target.value) !== '') {
                 _SETTINGS.bodystyleSetting.url = trim(a.target.value)
                 setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
                 setStyles()
@@ -64,9 +64,9 @@ export const settingsBackground = (e: any) => {
             value: _SETTINGS.bodystyleSetting.color
         })
 
-        inputColor.addEventListener('change', (a: any) => {
-            if (/^\#([A-Za-z0-9]{3}|[A-Za-z0-9]{6})$/i.test(a.target.value) || a.target.value === '') {
-                _SETTINGS.bodystyleSetting.color = trim(a.target.value)
+        inputColor.addEventListener('input', (e: any) => {
+            if (/^\#([A-Za-z0-9]{3,6})$/i.test(e.target.value)) {
+                _SETTINGS.bodystyleSetting.color = e.target.value
                 setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
                 setStyles()
                 inputColor.className = 'text-input'

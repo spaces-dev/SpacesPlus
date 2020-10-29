@@ -28,7 +28,7 @@ export const messageBox = (title: string, content: string, close: boolean, timer
     Container.appendChild(Main)
     document.body.appendChild(Container)
 
-    // Автоматического закрытие уведомления
+    // Автоматическое закрытие уведомления
     if (timer !== undefined) {
         setTimeout(() => {
             Main.parentNode?.parentNode?.removeChild(Container)
