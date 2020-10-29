@@ -40,5 +40,5 @@ export {
     ENV_PATH,
     OVERRIDE,
     REVISION,
-    PKG_VERSION,
+    PKG_VERSION
 }

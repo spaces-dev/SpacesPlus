@@ -273,7 +273,6 @@ const setColor = () => {
             setTimeout(() => {
                 // @ts-ignore
                 let picker = new CP(container, false, container)
-                // @ts-ignore
 
                 qs('#color-input').addEventListener('change', (a: any) => {
                     if (/^\#([A-Za-z0-9]{3}|[A-Za-z0-9]{6})$/i.test(a.target.value) || a.target.value === '') {

@@ -64,5 +64,5 @@ export {
     videoSpeedPlayback,
     settingsBackground,
     settingsBackupMenu,
-    settingsChangelogMenu,
+    settingsChangelogMenu
 }

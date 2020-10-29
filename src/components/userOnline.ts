@@ -23,12 +23,9 @@ export const userOnline = () => {
                     const response = e.parsedBody?.user_widget?.online_time
 
                     if (response) {
-                        // @ts-ignore
-                        let str = parseFloat(response / 3600).toFixed(2).split('.')
-                        // @ts-ignore
-                        let online = str[0] > 0 ? `${str[0]} ч, ${parseInt(str[1] / (100 / 60), 10)} мин` : `${parseInt(str[1] / (100 / 60), 10)} мин`
-                        // @ts-ignore
-                        onBlock[0].nextElementSibling.innerHTML = online
+                        let str: any = (response / 3600).toFixed(2).split('.')
+                        let online = str[0] > 0 ? `${str[0]} ч, ${Math.trunc(str[1] / (100 / 60))} мин` : `${Math.trunc(str[1] / (100 / 60))} мин`
+                        onBlock![0].nextElementSibling.innerHTML = online
                         info('Время онлайн: ' + online)
                     }
                 })

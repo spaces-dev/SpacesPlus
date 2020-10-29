@@ -94,16 +94,13 @@ export const settingsBackupMenu = (id: string) => {
             let saveButton = ce('button', {
                 class: 'user__tools-link sp_plus_btn_list',
                 html: '<span class="sp sp-ok-blue"></span><span style="color: #57A3EA; padding-left: 10px;">Сохранить</span>',
-                onclick: function () {
+                onclick: () => {
                     getJSON(`value=${textarea.value}`, (json: IGetJSON) => {
-                        // TODO:
-                        //// Исправить стакаемый список ошибок!
                         // Костыль ¯\_(ツ)_/¯
                         if (qs('#JSON_ERROR_BLOCK')) {
                             errorsBlock.innerHTML = '<span class="sp sp-alert"></span> Невалидный JSON<br /><br />'
                             remove(qs('#JSON_ERROR_BLOCK'))
                         }
-                        //
 
                         if (json.result.valid) {
                             setCookie('SP_PLUS_SET', textarea.value)

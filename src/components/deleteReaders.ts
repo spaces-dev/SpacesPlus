@@ -31,14 +31,12 @@ export const deleteReaders = () => {
                     let bChbx = ce('input', {
                         type: 'checkbox',
                         class: 'sp-cbfr sp-checkbox-square',
-                        // @ts-ignore
-                        id: 'SP_DR_' + /(\?|&)user=([A-Za-z0-9\_]+)/i.exec(link.href)[2]
+                        id: 'SP_DR_' + /(\?|&)user=([A-Za-z0-9\_]+)/i.exec(link.href)![2]
                     })
 
                     let ckbxlb = ce('label', {
                         style: 'margin-left: 0px',
-                        // @ts-ignore
-                        attr: { 'for': 'SP_DR_' + /(\?|&)user=([A-Za-z0-9\_]+)/i.exec(link.href)[2] }
+                        attr: { 'for': 'SP_DR_' + /(\?|&)user=([A-Za-z0-9\_]+)/i.exec(link.href)![2] }
                     })
 
                     chWrap.appendChild(bChbx)
@@ -79,8 +77,7 @@ export const deleteReaders = () => {
 
                             for (let ch of checkboxArr) {
                                 if (ch.checked) {
-                                    // @ts-ignore
-                                    readers.push(/^SP_DR_([A-Za-z0-9\_]+)$/i.exec(ch.id)[1])
+                                    readers.push(/^SP_DR_([A-Za-z0-9\_]+)$/i.exec(ch.id)![1])
                                     count++
                                 }
                             }

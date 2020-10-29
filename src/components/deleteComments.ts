@@ -27,12 +27,11 @@ export const deleteComments = () => {
 
                     for (let child of childs) {
                         if (child.getElementsByTagName('input').length === 0) {
-                            // @ts-ignore
-                            let DC = `DC_${(DEVICE.id === 4 ? child.parentNode.parentNode.parentNode.parentNode.parentNode.id : child.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id)}`
+                            // Нихуевый костыль!
+                            let DC = `DC_${(DEVICE.id === 4 ? child?.parentElement?.parentElement?.parentElement?.parentElement?.parentElement?.id : child.parentElement?.parentElement?.parentElement?.parentElement?.parentElement?.parentElement?.parentElement?.id)}`
                             let checkbox = ce('input', {
                                 type: 'checkbox',
                                 class: 'sp-cbfc sp-checkbox-square',
-                                // @ts-ignore
                                 id: DC
                             })
 
@@ -61,8 +60,7 @@ export const deleteComments = () => {
                                 let parent = e.target.nodeName === 'SPAN' ? e.target.parentNode : e.target
 
                                 for (let input of inputs) {
-                                    // @ts-ignore
-                                    if (input.type === 'checkbox' && /DC_([0-9]+)/gi.test(input.id) && input.parentNode.parentNode.parentNode.style.display !== 'none') {
+                                    if (input.type === 'checkbox' && /DC_([0-9]+)/gi.test(input.id) && input?.parentElement?.parentElement?.parentElement?.style.display !== 'none') {
                                         parent.innerHTML.indexOf('Выбрать все') >= 0 ? input.checked = true : input.checked = false
                                     }
                                 }

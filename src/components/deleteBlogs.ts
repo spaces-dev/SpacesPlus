@@ -33,15 +33,13 @@ export const deleteBlogs = () => {
                         let checkbox = ce('input', {
                             class: 'sp-cbfb sp-checkbox-square',
                             type: 'checkbox',
-                            // @ts-ignore
-                            id: 'SP_DB_' + /\&id=([0-9]+)/i.exec(link.href)[1]
+                            id: 'SP_DB_' + /\&id=([0-9]+)/i.exec(link.href)![1]
                         })
 
                         let label = ce('label', {
                             class: 'sp-ch-blogs',
                             style: 'margin: 1px',
-                            // @ts-ignore
-                            attr: { 'for': 'SP_DB_' + /\&id=([0-9]+)/i.exec(link.href)[1] }
+                            attr: { 'for': 'SP_DB_' + /\&id=([0-9]+)/i.exec(link.href)![1] }
                         })
 
                         insertAfter(checkbox, link)
@@ -80,8 +78,7 @@ export const deleteBlogs = () => {
 
                             for (let ch of checkboxArr) {
                                 if (ch.checked) {
-                                    // @ts-ignore
-                                    blogs.push(/^SP_DB_([0-9]+)$/i.exec(ch.id)[1])
+                                    blogs.push(/^SP_DB_([0-9]+)$/i.exec(ch.id)![1])
                                     count++
                                 }
                             }
