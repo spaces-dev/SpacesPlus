@@ -21,6 +21,7 @@ import { messageBox } from './messageBox'
 import { historyPush } from './historyPush'
 import { insertAfter } from './insertAfter'
 import { getClassName } from './getClassName'
+import { modifyObject } from './modifyObject' 
 import { readSettings } from './readSettings'
 import { getPath, getHref } from './getLocation'
 import { log, info, error, debug } from './console'
@@ -55,5 +56,6 @@ export {
     historyPush,
     insertAfter,
     getClassName,
+    modifyObject,
     readSettings
 }
