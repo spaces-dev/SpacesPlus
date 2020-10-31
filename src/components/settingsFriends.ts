@@ -17,16 +17,11 @@ export const settingsFriends = (e?: any) => {
         })
 
         frMax.addEventListener('change', (e: any) => {
-            if (!isNaN(e.target.value)) {
-                let value = Number(e.target.value)
-                frMax.className = 'text-input'
-                if (value > 15 || value < 1) {
-                    value = 10
-                    frMax.className = 'text-input sp-input-error'
-                }
-                _SETTINGS.friendsOnMax = value
+            if (/^([1-9]|1[0-5])$/i.test(e.target.value)) {
+                _SETTINGS.friendsOnMax = e.target.value
                 setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
                 friendsOnline(true)
+                frMax.className = 'text-input'
             } else {
                 frMax.className = 'text-input sp-input-error'
             }

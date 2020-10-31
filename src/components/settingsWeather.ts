@@ -101,7 +101,7 @@ export const settingsWeather = async (e: any) => {
     })
 
     let intervalLbl = ce('label', {
-        html: 'Интервал обновления:<div class="label__desc">в минутах</a></div>',
+        html: 'Интервал обновления:<div class="label__desc">от 1 до 360 минут</a></div>',
         class: 'label'
     })
 
@@ -109,12 +109,14 @@ export const settingsWeather = async (e: any) => {
         type: 'text',
         class: 'text-input',
         style: 'margin-bottom: 7px',
-        size: '4',
+        size: 4,
+        attr: { maxlength: 3 },
         value: _SETTINGS.weatherSettings.interval / 60
     })
 
     interval.addEventListener('change', (e: any) => {
-        if (/^[0-9]{1,3}$/i.test(e.target.value) || trim(e.target.value) !== '') {
+        // от 1 минуты до 360 минут ¯\_(ツ)_/¯
+        if (/^([1-9]|[1-8][0-9]|9[0-9]|[12][0-9]{2}|3[0-5][0-9]|360)$/i.test(e.target.value)) {
             _SETTINGS.weatherSettings.interval = e.target.value * 60
             setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
             interval.className = 'text-input'

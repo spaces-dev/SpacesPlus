@@ -28,6 +28,7 @@ import {
     settingsFeatures,
     settingsBackground,
     settingsBackupMenu,
+    settingsRecentSmiles,
     settingsChangelogMenu
 } from './index'
 
@@ -107,6 +108,11 @@ export const settingsMenu = () => {
                                                         settingsEvents(e.target) :
                                                         remove(qs("#SP_PLUS_EVENTS"))
                                                     break
+                                                case 'recents':
+                                                    checked ?
+                                                        settingsRecentSmiles(e.target) :
+                                                        remove(qs("#SP_RECENTS_SETTINGS"))
+                                                    break
                                                 case 'friendsOn':
                                                     friendsOnline(checked)
                                                     checked ?
@@ -155,10 +161,11 @@ export const settingsMenu = () => {
                             }
 
                             // Выпадающие доп. меню настроек
-                            if (_SETTINGS.friendsOn) { settingsFriends(qs('#friendsOn')) }
-                            if (_SETTINGS.bodystyle) { settingsBackground(qs('#bodystyle')) }
-                            if (_SETTINGS.notify) { settingsEvents(qs('#notify')) }
-                            if (_SETTINGS.weather) { settingsWeather(qs('#weather')) }
+                            if (_SETTINGS.recents) settingsRecentSmiles(qs('#recents'))
+                            if (_SETTINGS.friendsOn) settingsFriends(qs('#friendsOn'))
+                            if (_SETTINGS.bodystyle) settingsBackground(qs('#bodystyle'))
+                            if (_SETTINGS.notify) settingsEvents(qs('#notify'))
+                            if (_SETTINGS.weather) settingsWeather(qs('#weather'))
 
                             let spacesLabel1 = ce('div', {
                                 class: 'sp_plus_line',

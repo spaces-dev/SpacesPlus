@@ -14,6 +14,7 @@ import {
     favoriteUser,
     freeStickers,
     settingsMenu,
+    recentSmiles,
     deleteReaders,
     galleryRotate,
     sidebarButton,
@@ -98,6 +99,7 @@ const init = () => {
         if (_SETTINGS.karma) karmaAccept()
         if (_SETTINGS.online) userOnline()
         if (_SETTINGS.events) soundEvents()
+        if (_SETTINGS.recents) recentSmiles()
         if (_SETTINGS.grotate) galleryRotate()
         if (_SETTINGS.favorite) favoriteUser()
         if (_SETTINGS.weather) weatherWidget()

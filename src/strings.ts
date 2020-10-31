@@ -1,5 +1,6 @@
-import { IDevice } from './interfaces/Device'
 import pkg from '../package.json'
+
+import { IDevice } from './interfaces/Device'
 
 /**
  * Константы

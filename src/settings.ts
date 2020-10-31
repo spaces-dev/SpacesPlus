@@ -1,5 +1,6 @@
-import { ISettings, ISettingsStrings } from './interfaces/Settings'
 import { ENV_PATH, OVERRIDE } from './strings'
+
+import { ISettings, ISettingsStrings } from './interfaces/Settings'
 
 /**
  * * Названия функций в меню настроек
@@ -21,6 +22,7 @@ export const _SETSTRINGS: ISettingsStrings = {
     'adblock': 'Скрывать рекламу',
     'notify': 'Уведомления',
     'playback': 'Кнопка ускорения видео',
+    'recents': 'Ранее использованные смайлики',
     'karma': 'Собирать карму',
     'friendsOn': 'Панель друзей онлайн',
     'bodystyle': 'Фон сайта',
@@ -57,10 +59,15 @@ export let _SETTINGS: ISettings = {
     'sticker': true,
     'playback': true,
     'videoSpeed': 1,
+    'recents': true,
     'friendsOn': true,
     'notify': false,
     'bodystyle': true,
     'upVersion': OVERRIDE.VERSION,
+    'recentSmiles': {
+        'show': false,
+        'max': 30
+    },
     'bodystyleSetting': {
         'url': `${ENV_PATH}/backgrounds/default.png`,
         'color': '#DAE1E8',

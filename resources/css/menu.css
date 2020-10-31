@@ -127,6 +127,26 @@
     margin-right: 14px !important
 }
 
+.sp_recent-del {
+    float: left;
+    margin: 3px 0px 0px 5px;
+    cursor: pointer
+}
+
+.sp_recent-smile-btn {
+    padding: 0px 8px 2px 0px;
+    cursor: pointer
+}
+
+.sp_recent-smile {
+    padding: 2px;
+    cursor: pointer
+}
+
+.smiles_menu {
+    margin-bottom: 10px
+}
+
 .sp_noborder {
     border-top: unset !important;
     border-bottom: unset !important

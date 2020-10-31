@@ -2,6 +2,11 @@ export type ISettingsStrings = {
     readonly [key: string]: string
 }
 
+export interface RecentSmiles {
+    show: boolean
+    max: number
+}
+
 export interface BodystyleSetting {
     url: string
     color: string
@@ -52,10 +57,12 @@ export interface ISettings {
     sticker: boolean
     playback: boolean
     videoSpeed: number
+    recents: boolean
     friendsOn: boolean
     notify: boolean
     bodystyle: boolean
     upVersion: number
+    recentSmiles: RecentSmiles
     bodystyleSetting: BodystyleSetting
     events: Events
     friendsOnMax: number

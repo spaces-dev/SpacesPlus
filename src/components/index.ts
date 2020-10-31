@@ -11,6 +11,7 @@ import { karmaAccept } from './karmaAccept'
 import { soundEvents } from './soundEvents'
 import { favoriteUser } from './favoriteUser'
 import { freeStickers } from './freeStickers'
+import { recentSmiles } from './recentSmiles'
 import { settingsMenu } from './settingsMenu'
 import { deleteReaders } from './deleteReaders'
 import { friendsOnline } from './friendsOnline'
@@ -29,6 +30,7 @@ import { videoSpeedPlayback } from './videoSpeedPlayback'
 import { settingsBackground } from './settingsBackground'
 import { settingsBackupMenu } from './settingsBackupMenu'
 import { checkUpdates, getUpdater } from './checkUpdates'
+import { settingsRecentSmiles } from './settingsRecentSmiles'
 import { settingsChangelogMenu } from './settingsChangelogMenu'
 
 export {
@@ -47,6 +49,7 @@ export {
     checkUpdates,
     favoriteUser,
     freeStickers,
+    recentSmiles,
     settingsMenu,
     deleteReaders,
     friendsOnline,
@@ -64,5 +67,6 @@ export {
     videoSpeedPlayback,
     settingsBackground,
     settingsBackupMenu,
+    settingsRecentSmiles,
     settingsChangelogMenu
 }
