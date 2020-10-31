@@ -286,7 +286,7 @@ exports._SETTINGS = {
     'upVersion': strings_1.OVERRIDE.VERSION,
     'recentSmiles': {
         'show': false,
-        'max': 30
+        'max': 60
     },
     'bodystyleSetting': {
         'url': `${strings_1.ENV_PATH}/backgrounds/default.png`,
@@ -2214,20 +2214,19 @@ exports.recentSmiles = () => {
                     else {
                         let smilesNotFound = utils_1.ce('div', {
                             style: 'color: #a4b7c4; text-align: center',
-                            html: `<img src="${strings_1.HTTP}//spac.me/i//st/compdude11.gif"></br></br>Список ранее использованных смайликов пуст</br>Используйте смайлики из разделов, чтобы добавить их сюда</br></br>`
+                            html: `<img src="${strings_1.HTTP}//spac.me/i/st/compdude11.gif"></br></br>Список ранее использованных смайликов пуст</br>Используйте смайлики из меню смайликов, чтобы добавить их сюда</br></br>`
                         });
                         smilesBody.append(smilesNotFound);
                     }
                 }
             });
-            // Кнопка ранее использованных смайлов
+            // Кнопка открытия
             smilesMenu.prepend(recentTab);
-            // Показываем ранее использованные смайлы, если они у нас имеются
-            if (settings_1._SETTINGS.recentSmiles.show && Object.keys(smilesStorage).length > 0) {
-                // Кнопка очистки ранее использованных смайликов
-                smilesMenu.prepend(recentDelete);
+            // Кнопка очистки
+            smilesMenu.prepend(recentDelete);
+            // Принудительно показываем смайлы смайлы, если доп. настройка включена и они у нас имеются
+            if (settings_1._SETTINGS.recentSmiles.show && Object.keys(smilesStorage).length > 0)
                 utils_1.qs('#SP_RECENT_SMILES').click();
-            }
         }
     }
     catch (e) {
@@ -2321,11 +2320,12 @@ exports.settingsMenu = () => {
                                                         index_1.settingsEvents(e.target) :
                                                         utils_1.remove(utils_1.qs("#SP_PLUS_EVENTS"));
                                                     break;
-                                                case 'recents':
+                                                // TODO: Меню настроек на доработку!    
+                                                /*case 'recents':
                                                     checked ?
-                                                        index_1.settingsRecentSmiles(e.target) :
-                                                        utils_1.remove(utils_1.qs("#SP_RECENTS_SETTINGS"));
-                                                    break;
+                                                        settingsRecentSmiles(e.target) :
+                                                        remove(qs("#SP_RECENTS_SETTINGS"))
+                                                    break*/
                                                 case 'friendsOn':
                                                     index_1.friendsOnline(checked);
                                                     checked ?
@@ -2373,8 +2373,8 @@ exports.settingsMenu = () => {
                                 }
                             }
                             // Выпадающие доп. меню настроек
-                            if (settings_1._SETTINGS.recents)
-                                index_1.settingsRecentSmiles(utils_1.qs('#recents'));
+                            // TODO: Доработать меню настроек
+                            //if (_SETTINGS.recents) settingsRecentSmiles(qs('#recents'))
                             if (settings_1._SETTINGS.friendsOn)
                                 index_1.settingsFriends(utils_1.qs('#friendsOn'));
                             if (settings_1._SETTINGS.bodystyle)
@@ -2456,12 +2456,8 @@ exports.settingsMenu = () => {
                             let clicks = 0, aboutWidget = utils_1.ce('div', { class: 'widgets-group widgets-group_top nl wbg no-select' }), ver = utils_1.ce('div', { style: 'float: right', html: 'v' + strings_1.PKG_VERSION }), content = utils_1.ce('div', { class: 'content-item3' }), heart = utils_1.ce('div', {
                                 html: '❤️',
                                 class: 'heart',
-                                onclick: () => {
-                                    clicks++;
-                                    if (clicks >= 10) {
-                                        // TODO: Пасхалка
-                                    }
-                                }
+                                onclick: () => { if (++clicks >= 10)
+                                    document.location.href = 'https://t.me/spaces_dev'; }
                             }), title = utils_1.ce('div', {
                                 class: 'grey',
                                 html: 'Developed by <a href="https://crashmax.ru" target="_blank">crashmax</a> with love '
@@ -3755,7 +3751,7 @@ exports.settingsRecentSmiles = (e) => {
         value: settings_1._SETTINGS.recentSmiles.max
     });
     maxSave.addEventListener('change', (e) => {
-        if (/^([1-4][0-9]|50)$/i.test(e.target.value)) {
+        if (/^([1-5][0-9]|60)$/i.test(e.target.value)) {
             settings_1._SETTINGS.recentSmiles.max = e.target.value;
             utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
             maxSave.className = 'text-input';
