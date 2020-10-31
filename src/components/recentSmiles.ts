@@ -37,11 +37,11 @@ export const recentSmiles = () => {
                     if (_SETTINGS.sticker) document.querySelectorAll('.stickers_list>div').forEach(e => e.remove())
 
                     // Ищем все смайлики в списке смайлов
-                    let smiles: any = document.querySelectorAll('img[smile^=":"]')
+                    let smiles = document.querySelectorAll('img[smile^=":"]')
                     if (smiles) eventSmiles(smiles, smilesStorage)
 
                     // Ищем каталоги смайлов
-                    let cats: any = document.querySelectorAll('a[href^="#sm-cat="]')
+                    let cats = document.querySelectorAll('a[href^="#sm-cat="]')
                     for (let cat of cats) {
                         cat.addEventListener('click', () => {
                             eventSmiles(smiles, smilesStorage)
@@ -95,7 +95,7 @@ export const recentSmiles = () => {
                     } else {
                         let smilesNotFound = ce('div', {
                             style: 'color: #a4b7c4; text-align: center',
-                            html: `<img src="${HTTP}//spac.me/i//st/compdude11.gif"></br></br>Список ранее использованных смайликов пуст</br>Используйте смайлики из разделов, чтобы добавить их сюда</br></br>`
+                            html: `<img src="${HTTP}//spac.me/i/st/compdude11.gif"></br></br>Список ранее использованных смайликов пуст</br>Используйте смайлики из меню смайликов, чтобы добавить их сюда</br></br>`
                         })
 
                         smilesBody.append(smilesNotFound)
@@ -103,17 +103,14 @@ export const recentSmiles = () => {
                 }
             })
 
-            // Кнопка ранее использованных смайлов
+            // Кнопка открытия
             smilesMenu.prepend(recentTab)
 
-            // Показываем ранее использованные смайлы, если они у нас имеются
-            if (_SETTINGS.recentSmiles.show && Object.keys(smilesStorage).length > 0) {
+            // Кнопка очистки
+            smilesMenu.prepend(recentDelete)
 
-                // Кнопка очистки ранее использованных смайликов
-                smilesMenu.prepend(recentDelete)
-
-                qs('#SP_RECENT_SMILES').click()
-            }
+            // Принудительно показываем смайлы смайлы, если доп. настройка включена и они у нас имеются
+            if (_SETTINGS.recentSmiles.show && Object.keys(smilesStorage).length > 0) qs('#SP_RECENT_SMILES').click()
         }
 
     } catch (e) {
@@ -121,7 +118,7 @@ export const recentSmiles = () => {
     }
 }
 
-const eventSmiles = (smiles: any, storage: any) => {
+const eventSmiles = (smiles: any, storage: object[]) => {
     for (let smile of smiles) {
         smile.addEventListener('click', () => {
             let modified = modifyObject(storage, smile.src, smile.attributes.smile.value, 0)

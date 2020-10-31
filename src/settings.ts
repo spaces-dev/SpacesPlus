@@ -66,7 +66,7 @@ export let _SETTINGS: ISettings = {
     'upVersion': OVERRIDE.VERSION,
     'recentSmiles': {
         'show': false,
-        'max': 30
+        'max': 60
     },
     'bodystyleSetting': {
         'url': `${ENV_PATH}/backgrounds/default.png`,

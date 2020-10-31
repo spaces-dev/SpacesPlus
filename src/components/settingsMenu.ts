@@ -108,11 +108,12 @@ export const settingsMenu = () => {
                                                         settingsEvents(e.target) :
                                                         remove(qs("#SP_PLUS_EVENTS"))
                                                     break
-                                                case 'recents':
+                                                // TODO: Меню настроек на доработку!    
+                                                /*case 'recents':
                                                     checked ?
                                                         settingsRecentSmiles(e.target) :
                                                         remove(qs("#SP_RECENTS_SETTINGS"))
-                                                    break
+                                                    break*/
                                                 case 'friendsOn':
                                                     friendsOnline(checked)
                                                     checked ?
@@ -161,7 +162,8 @@ export const settingsMenu = () => {
                             }
 
                             // Выпадающие доп. меню настроек
-                            if (_SETTINGS.recents) settingsRecentSmiles(qs('#recents'))
+                            // TODO: Доработать меню настроек
+                            //if (_SETTINGS.recents) settingsRecentSmiles(qs('#recents'))
                             if (_SETTINGS.friendsOn) settingsFriends(qs('#friendsOn'))
                             if (_SETTINGS.bodystyle) settingsBackground(qs('#bodystyle'))
                             if (_SETTINGS.notify) settingsEvents(qs('#notify'))
@@ -252,12 +254,7 @@ export const settingsMenu = () => {
                                 heart = ce('div', {
                                     html: '❤️',
                                     class: 'heart',
-                                    onclick: () => {
-                                        clicks++
-                                        if (clicks >= 10) {
-                                            // TODO: Пасхалка
-                                        }
-                                    }
+                                    onclick: () => { if (++clicks >= 10) document.location.href = 'https://t.me/spaces_dev' }
                                 }),
                                 title = ce('div', {
                                     class: 'grey',

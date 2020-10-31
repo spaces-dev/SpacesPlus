@@ -20,7 +20,7 @@ export const settingsRecentSmiles = (e: any) => {
     })
 
     maxSave.addEventListener('change', (e: any) => {
-        if (/^([1-4][0-9]|50)$/i.test(e.target.value)) {
+        if (/^([1-5][0-9]|60)$/i.test(e.target.value)) {
             _SETTINGS.recentSmiles.max = e.target.value
             setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
             maxSave.className = 'text-input'
