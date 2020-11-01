@@ -2175,7 +2175,7 @@ exports.recentSmiles = () => {
             }
             let smilesBody = utils_1.qs('.smiles_menu-body');
             let recentDelete = utils_1.ce('span', {
-                class: 'js-ico ico_mail ico_mail_garbage sp_recent-del',
+                class: 'sp sp-grey-del trash-btn',
                 onclick: () => {
                     utils_1.confirmBox('Вы действительно хотите очистить ранее использованные смайлики?', true, () => {
                         localStorage.removeItem('sp_recent_smiles');
@@ -2204,8 +2204,10 @@ exports.recentSmiles = () => {
                                     smile: smile
                                 },
                                 onclick: () => {
+                                    var _a;
                                     // Добавляем смайлик в поле ввода
-                                    document.querySelector('textarea[tabindex="1"]').value += smile + ' ';
+                                    let input = (_a = utils_1.qs('textarea[tabindex="1"]')) !== null && _a !== void 0 ? _a : utils_1.qs('textarea[name="msg"]');
+                                    input.value += smile + ' ';
                                 }
                             });
                             smilesBody.append(smileElem);
@@ -2224,7 +2226,7 @@ exports.recentSmiles = () => {
             smilesMenu.prepend(recentTab);
             // Кнопка очистки
             smilesMenu.prepend(recentDelete);
-            // Принудительно показываем смайлы смайлы, если доп. настройка включена и они у нас имеются
+            // Принудительно показываем ранее использованные смайлы, если доп. настройка включена и они у нас имеются
             if (settings_1._SETTINGS.recentSmiles.show && Object.keys(smilesStorage).length > 0)
                 utils_1.qs('#SP_RECENT_SMILES').click();
         }
