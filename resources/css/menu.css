@@ -30,6 +30,12 @@
     transform: rotate(90deg) !important
 }
 
+.trash-btn {
+    float: left;
+    margin: 2px 2px 0px 6px !important;
+    cursor: pointer
+}
+
 .sp_settings-wrap {
     padding: 11px 15px
 }
@@ -127,19 +133,13 @@
     margin-right: 14px !important
 }
 
-.sp_recent-del {
-    float: left;
-    margin: 3px 0px 0px 5px;
-    cursor: pointer
-}
-
 .sp_recent-smile-btn {
     padding: 0px 8px 2px 0px;
     cursor: pointer
 }
 
 .sp_recent-smile {
-    padding: 2px;
+    margin: 2px;
     cursor: pointer
 }
 
@@ -582,4 +582,8 @@ input[type=color] {
 
 .sp-write-grey {
     background-position: -64px -48px
+}
+
+.sp-grey-del {
+    background-position: 0px -48px
 }

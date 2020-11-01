@@ -53,7 +53,7 @@ export const recentSmiles = () => {
             let smilesBody = qs('.smiles_menu-body')
 
             let recentDelete = ce('span', {
-                class: 'js-ico ico_mail ico_mail_garbage sp_recent-del',
+                class: 'sp sp-grey-del trash-btn',
                 onclick: () => {
                     confirmBox('Вы действительно хотите очистить ранее использованные смайлики?', true, () => {
                         localStorage.removeItem('sp_recent_smiles')
@@ -86,7 +86,8 @@ export const recentSmiles = () => {
                                 },
                                 onclick: () => {
                                     // Добавляем смайлик в поле ввода
-                                    (document.querySelector('textarea[tabindex="1"]') as HTMLInputElement).value += smile + ' '
+                                    let input: any = qs('textarea[tabindex="1"]') ?? qs('textarea[name="msg"]')
+                                    input.value += smile + ' '
                                 }
                             })
 
@@ -109,7 +110,7 @@ export const recentSmiles = () => {
             // Кнопка очистки
             smilesMenu.prepend(recentDelete)
 
-            // Принудительно показываем смайлы смайлы, если доп. настройка включена и они у нас имеются
+            // Принудительно показываем ранее использованные смайлы, если доп. настройка включена и они у нас имеются
             if (_SETTINGS.recentSmiles.show && Object.keys(smilesStorage).length > 0) qs('#SP_RECENT_SMILES').click()
         }
 
