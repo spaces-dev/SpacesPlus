@@ -2705,7 +2705,7 @@ exports.weatherWidget = () => {
         });
         let widget_header = utils_1.ce('div', {
             class: 'b-title cl b-title_first oh',
-            html: `<a href="https://openweathermap.org/city/${w.id}" target="_blank" class="b-title__link"><h6 class="span">Погода в г. ${w.name}</h6></span></a>`
+            html: `<a href="https://openweathermap.org/city/${w.id}" target="_blank" class="b-title__link" style="white-space: unset"><h6 class="span">Погода в г. ${w.name}</h6></span></a>`
         });
         let content = utils_1.ce('div', {
             class: 'content',
