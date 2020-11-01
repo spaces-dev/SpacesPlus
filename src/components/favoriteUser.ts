@@ -77,9 +77,9 @@ const isFav = async (id: string, name: string, elem: any) => {
                 elem.firstElementChild.href = json.delete_URL
                 elem.firstElementChild.title = 'Удалить из закладок'
                 elem.firstElementChild.innerHTML = '<span class="sp sp-fav-on"></span><span style="color: #61a961"> В закладках</span>'
-                elem.firstElementChild.onclick = () => {
+                elem.onclick = () => {
                     confirmBox(`Вы действительно хотите удалить пользователя <b>${name}</b> из закладок?`, false, async () => {
-                        await http('GET', json.delete_URL, true).then(e => {
+                        await http('GET', json.delete_URL, false).then(e => {
                             e.status === 200 ?
                                 document.location.reload() :
                                 console.log(e)
