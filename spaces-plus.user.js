@@ -206,8 +206,6 @@ exports.ENV_PATH = ENV_PATH;
 class OVERRIDE {
 }
 exports.OVERRIDE = OVERRIDE;
-OVERRIDE.KARMA = false;
-OVERRIDE.COINS = false;
 OVERRIDE.EVENTS = 0;
 OVERRIDE.PLAYER = 0;
 OVERRIDE.COMMENTS = 0;
@@ -1004,11 +1002,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.adBlock = void 0;
 const utils_1 = __webpack_require__(0);
 exports.adBlock = () => {
-    let ad = utils_1.find(document.links, { title: 'Реклама' });
     try {
-        if (ad) {
-            utils_1.remove(ad[0].parentNode);
-        }
+        // Ищем рекламу по атрибуту title и удаляем
+        document.querySelectorAll('a[title*="Реклама"').forEach(e => { var _a; return (_a = e.parentElement) === null || _a === void 0 ? void 0 : _a.remove(); });
+        // Удаляем виджет ВК в правой панели
+        document.querySelectorAll('#vk_groups').forEach(e => { var _a; return (_a = e.parentElement) === null || _a === void 0 ? void 0 : _a.remove(); });
+        // Патчим HTTP для удаления рекламы
         if (!utils_1.qs('#SP_PLUS_ADBLOCK')) {
             let protoAd = utils_1.ce('script', {
                 type: 'text/javascript',
@@ -1823,22 +1822,14 @@ exports.coinsAccept = void 0;
 const utils_1 = __webpack_require__(0);
 const strings_1 = __webpack_require__(1);
 exports.coinsAccept = () => {
-    let coins = utils_1.find(document.links, { href: `${strings_1.SPACES}/services/gift_get/?Link_id=` });
-    if (coins && !strings_1.OVERRIDE.COINS) {
-        strings_1.OVERRIDE.COINS = true;
-        try {
-            utils_1.http('GET', coins[0].href, true).then(e => {
-                if (e.status === 200) {
-                    utils_1.remove(coins[0].parentNode);
-                    utils_1.info('Собрали монетку!');
-                }
-                strings_1.OVERRIDE.COINS = false;
-            });
-        }
-        catch (e) {
-            utils_1.error('Ошибка (coinsAccept.ts): ' + e);
-        }
-    }
+    document.querySelectorAll(`a[href*='${strings_1.SPACES}/services/gift_get/?Link_id='`).forEach(e => {
+        var _a;
+        // Подтверждаем монетку
+        e.click();
+        // Удаляем элемент
+        (_a = e.parentElement) === null || _a === void 0 ? void 0 : _a.remove();
+        utils_1.info('Собрали монетку!');
+    });
 };
 
 
@@ -1947,23 +1938,14 @@ exports.karmaAccept = void 0;
 const utils_1 = __webpack_require__(0);
 const strings_1 = __webpack_require__(1);
 exports.karmaAccept = () => {
-    let karma = utils_1.find(document.links, { href: `${strings_1.SPACES}/mysite/rate_n_karma/karma/?Accept=` });
-    if (karma && !strings_1.OVERRIDE.KARMA) {
-        strings_1.OVERRIDE.KARMA = true;
-        try {
-            utils_1.http('GET', karma[0].href, true).then(e => {
-                if (e.status === 200) {
-                    utils_1.remove(karma[0].parentNode);
-                    utils_1.qs('#header_path').classList.remove('no-shadow');
-                    utils_1.info('Cобрали карму!');
-                }
-                strings_1.OVERRIDE.KARMA = false;
-            });
-        }
-        catch (e) {
-            utils_1.error('Ошибка (karmaAccept.ts): ' + e);
-        }
-    }
+    document.querySelectorAll(`a[href*='${strings_1.SPACES}/mysite/rate_n_karma/karma/?Accept='`).forEach(e => {
+        var _a;
+        // Подтверждаем карму
+        e.click();
+        // Удаляем элемент
+        (_a = e.parentElement) === null || _a === void 0 ? void 0 : _a.remove();
+        utils_1.info('Собрали карму!');
+    });
 };
 
 
