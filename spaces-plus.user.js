@@ -1680,15 +1680,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.oldHeader = void 0;
 const utils_1 = __webpack_require__(0);
 exports.oldHeader = (b) => {
-    let navi = utils_1.find(document.links, { className: 'horiz-menu__link' });
-    if (navi) {
-        let elem1 = navi[2].cloneNode(true);
-        let elem2 = navi[4].cloneNode(true);
-        if (b || !b && navi[2].pathname === '/mail/') {
-            navi[4].replaceWith(elem1);
-            navi[2].replaceWith(elem2);
+    utils_1.qsa('a[class="horiz-menu__link"').forEach((v, k, p) => {
+        // Клонируем ленту
+        let elem1 = p[2].cloneNode(true);
+        // Клонируем почту
+        let elem2 = p[4].cloneNode(true);
+        // @ts-ignore Костылище!
+        if (b || !b && p[2].pathname === '/mail/') {
+            p[4].replaceWith(elem1);
+            p[2].replaceWith(elem2);
         }
-    }
+    });
 };
 
 
@@ -2651,22 +2653,17 @@ exports.sidebarButton = void 0;
 const utils_1 = __webpack_require__(0);
 const strings_1 = __webpack_require__(1);
 exports.sidebarButton = () => {
-    let button = utils_1.qs('#SP_SETTINGS_BUTTON');
-    let disableIcons = utils_1.find(document.getElementsByTagName('span'), { className: 's_i s_i_exit' });
-    // TODO: type
-    let target = utils_1.find(document.links, { href: `${strings_1.SPACES}/services/?` });
-    if (target && !button) {
+    // Место для вставки кнопки
+    utils_1.qsa(`li.li>a[href*="${strings_1.SPACES}/services/"]`).forEach(e => {
+        // Включены ли иконки на левой панели
+        let disableIcons = !!utils_1.qs('span.s_i_exit') ? '<span class="sp sp-ico"></span>' : '';
+        // Создаем кнопку быстрого доступа в настройки Spaces+
         let link = utils_1.ce('li', {
             class: 'li',
-            id: 'SP_SETTINGS_BUTTON',
-            html: `<a href="${strings_1.SPACES}/settings/?sp_plus_settings=1" title="Настройки Spaces+">${(disableIcons ? '<span class="sp sp-ico"></span>' : '')}<span class="m s_i_text"> Spaces+</span></a>`
+            html: `<a href="${strings_1.SPACES}/settings/?sp_plus_settings=1" title="Настройки Spaces+">${disableIcons}<span class="m s_i_text"> Spaces+</span></a>`
         });
-        target = target[0].parentNode;
-        utils_1.insertAfter(link, target);
-        if (target.nextElementSibling.nodeName === 'BR') {
-            utils_1.insertAfter(utils_1.ce('br'), link);
-        }
-    }
+        utils_1.insertAfter(link, e.parentElement);
+    });
 };
 
 
@@ -2890,7 +2887,7 @@ exports.playerDownload = () => {
             let jspl = JSON.parse(data);
             trId = parseInt(jstr.id, 10);
             let trScr = jspl.playlist.playlist[trId].src;
-            let tdIc = utils_1.find(player.getElementsByTagName('td'), { className: 'ico_td' });
+            let tdIc = utils_1.qsa('td.ico_td');
             if (tdIc && !downPlace) {
                 strings_1.OVERRIDE.PLAYER = trId;
                 let dwnTd = utils_1.ce('td', {
