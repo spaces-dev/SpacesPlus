@@ -1,15 +1,15 @@
-import { find } from '../utils'
+import { qsa } from '../utils'
 
 export const oldHeader = (b: boolean) => {
-    let navi = find(document.links, { className: 'horiz-menu__link' })
+    qsa('a[class="horiz-menu__link"').forEach((v, k, p) => {
 
-    if (navi) {
-        let elem1 = navi[2].cloneNode(true)
-        let elem2 = navi[4].cloneNode(true)
+        // Клонируем ленту
+        let elem1 = p[2].cloneNode(true)
 
-        if (b || !b && navi[2].pathname === '/mail/') {
-            navi[4].replaceWith(elem1)
-            navi[2].replaceWith(elem2)
-        }
-    }
+        // Клонируем почту
+        let elem2 = p[4].cloneNode(true)
+
+        // @ts-ignore Костылище!
+        if (b || !b && p[2].pathname === '/mail/') { p[4].replaceWith(elem1); p[2].replaceWith(elem2) }
+    })
 }
