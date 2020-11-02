@@ -12,8 +12,7 @@ import {
     delCookie,
     confirmBox,
     messageBox,
-    historyPush,
-    insertAfter
+    historyPush
 } from '../utils'
 
 import {
@@ -28,7 +27,6 @@ import {
     settingsFeatures,
     settingsBackground,
     settingsBackupMenu,
-    settingsRecentSmiles,
     settingsChangelogMenu
 } from './index'
 
@@ -38,11 +36,11 @@ import { _SETSTRINGS, _SETTINGS } from '../settings'
 export const settingsMenu = () => {
     if (getPath() === '/settings/' && !qs('#SP_PLUS_SETLINK')) {
         try {
-            // TODO: interface
-            let entryLink: any = find(document.links, { href: `${SPACES}/settings/notification/?` })
 
-            if (entryLink) {
-                entryLink = entryLink[0]
+            // Ищем таргер для инициализации меню настроек
+            const targetLink = qs(`a[href*="${SPACES}/settings/notification/?"`)
+
+            if (targetLink) {
                 const urlSett = getQuery('sp_plus_settings')
                 const urlSettEditor = getQuery('sp_cookie_editor')
                 const urlSettChangeLog = getQuery('sp_changelog')
@@ -50,7 +48,7 @@ export const settingsMenu = () => {
                 const baseLink = ce('a', {
                     href: `${SPACES}/settings/?sp_plus_settings=1`,
                     id: 'SP_PLUS_SETLINK',
-                    class: entryLink.className,
+                    class: targetLink.className,
                     html: '<span>Настройки Spaces+</span><span class="ico ico_arr ico_m"></span>',
                     onclick: () => {
                         if (!/(\&)sp_plus_settings=1/i.test(getHref())) {
@@ -273,10 +271,8 @@ export const settingsMenu = () => {
                     }
                 })
 
-                inBefore(baseLink, entryLink)
-                if (entryLink.nextElementSibling.nodeName === 'BR') {
-                    insertAfter(ce('br'), baseLink)
-                }
+                // Вставляем "Настройки Spaces+" перед "Уведомления"
+                inBefore(baseLink, targetLink)
 
                 let clickEvent = document.createEvent('MouseEvent')
 

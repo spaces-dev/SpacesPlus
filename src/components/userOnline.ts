@@ -1,4 +1,4 @@
-import { find, http, getPath, info, error } from '../utils'
+import { qsa, http, getPath, info, error } from '../utils'
 
 import { IUserAnketa } from '../interfaces/UserAnketa'
 
@@ -9,14 +9,13 @@ export const userOnline = () => {
     let nick = getPath(3)
     let target = `/anketa/index/${nick}/`
 
-    if (path !== target) {
-        OVERRIDE.ONLINE = null
-    }
+    if (path !== target) OVERRIDE.ONLINE = null
 
-    if (path === target) {
+    if (path === target && OVERRIDE.ONLINE !== nick) {
         try {
-            let onBlock = find(document.getElementsByClassName('info-item__title'), { innerHTML: 'Время онлайн:' })
-            if (nick && onBlock && OVERRIDE.ONLINE !== nick) {
+            let onBlock = Array.from(qsa('div.info-item__title')).filter(e => e.textContent === 'Время онлайн:')
+
+            if (nick && onBlock) {
                 OVERRIDE.ONLINE = nick
 
                 http<IUserAnketa>('GET', `${SPACES}/anketa/index/${nick}/`, true).then(e => {
@@ -25,7 +24,8 @@ export const userOnline = () => {
                     if (response) {
                         let str: any = (response / 3600).toFixed(2).split('.')
                         let online = str[0] > 0 ? `${str[0]} ч, ${Math.trunc(str[1] / (100 / 60))} мин` : `${Math.trunc(str[1] / (100 / 60))} мин`
-                        onBlock![0].nextElementSibling.innerHTML = online
+                        // @ts-ignore Костыль!
+                        onBlock[0].nextElementSibling.textContent = online
                         info('Время онлайн: ' + online)
                     }
                 })

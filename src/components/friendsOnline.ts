@@ -1,7 +1,6 @@
 import {
     ce,
     qs,
-    find,
     http,
     info,
     error,
@@ -66,7 +65,8 @@ export const friendsOnline = (t?: boolean) => {
                                     const json2 = e.parsedBody
 
                                     if (json2?.tabbed_panel) {
-                                        let disableAvatar = find(document.getElementsByTagName('span'), { className: 's_i s_i_exit' })
+                                        // Включены ли иконки на левой панели
+                                        let disableAvatar = qs('span.s_i_exit') ? true : false
                                         let friendsList = json2.tabbed_panel.tabs[1].content.list
 
                                         friendsList ?
