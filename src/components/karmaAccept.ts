@@ -1,15 +1,19 @@
-import { info } from '../utils'
+import { qsa, error, info } from '../utils'
 
 import { SPACES } from '../strings'
 
 export const karmaAccept = () => {
-    document.querySelectorAll(`a[href*='${SPACES}/mysite/rate_n_karma/karma/?Accept='`).forEach(e => {
-        // Подтверждаем карму
-        (e as HTMLElement).click()
+    try {
+        qsa(`a[href*='${SPACES}/mysite/rate_n_karma/karma/?Accept='`).forEach(e => {
+            // Подтверждаем карму
+            (e as HTMLElement).click()
 
-        // Удаляем элемент
-        e.parentElement?.remove()
+            // Удаляем элемент
+            e.parentElement?.remove()
 
-        info('Собрали карму!')
-    })
+            info('Собрали карму!')
+        })
+    } catch (e) {
+        error('Ошибка (karmaAccept.ts): ' + e)
+    }
 }

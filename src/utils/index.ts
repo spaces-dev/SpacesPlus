@@ -1,9 +1,9 @@
 import { ce } from './ce'
-import { qs } from './qs'
 import { css } from './css'
 import { find } from './find'
 import { http } from './http'
 import { trim } from './trim'
+import { qs, qsa } from './qs'
 import { rever } from './rever'
 import { remove } from './remove'
 import { extend } from './extend'
@@ -29,6 +29,7 @@ import { log, info, error, debug } from './console'
 export {
     ce,
     qs,
+    qsa,
     css,
     log,
     find,

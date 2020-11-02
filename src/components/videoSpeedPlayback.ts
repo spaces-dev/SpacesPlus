@@ -1,18 +1,17 @@
-import { ce, qs, find, error, setCookie } from '../utils'
+import { ce, qs, error, setCookie } from '../utils'
 
 import { _SETTINGS } from '../settings'
 
 export const videoSpeedPlayback = () => {
-    let jwcontrols: any = find(document.getElementsByTagName('span'), { className: 'jwcontrols' })
+    let jwcontrols = qs('span.jwcontrols')
     let playback = qs('#SP_PLAYBACK_VIDEO')
 
     try {
-        if (playback) {
-            document.querySelector('video')!.playbackRate = _SETTINGS.videoSpeed
-        }
+        if (playback) (qs('video') as HTMLVideoElement).playbackRate = _SETTINGS.videoSpeed
 
-        if (jwcontrols !== null && playback === null) {
-            let target: any = find(document.getElementsByTagName('span'), { className: 'jwtext jwduration jwhidden' })
+        if (jwcontrols && !playback) {
+            let target = qs('span[class*="jwtext jwduration jwhidden"]')
+
             let buttonPlayback = ce('span', {
                 class: 'jwtext jwduration jwhidden',
                 id: 'SP_PLAYBACK_VIDEO',
@@ -26,7 +25,7 @@ export const videoSpeedPlayback = () => {
                 }
             })
 
-            target[0].after(buttonPlayback)
+            target.after(buttonPlayback)
         }
     } catch (e) {
         error('Ошибка (videoSpeedPlayback.ts): ' + e)

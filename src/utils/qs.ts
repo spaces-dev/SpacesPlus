@@ -1,5 +1,11 @@
 /**
  * querySelector _/ ( •_•) /
- * @param e селектор
+ * @param e
  */
-export const qs = (e: string) => (document.querySelector(e) as HTMLAnchorElement)
+export const qs = (e: string) => (document.querySelector(e) as HTMLElement)
+
+/**
+ * querySelectorAll ᕦ(ツ)ᕤ
+ * @param e
+ */
+export const qsa = (e: string) => (document.querySelectorAll(e) as NodeList)

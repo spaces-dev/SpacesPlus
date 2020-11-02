@@ -194,6 +194,7 @@ export const settingsMenu = () => {
                                 onclick: () => {
                                     qs('#SP_PLUS_SETHEAD').innerHTML = 'Импорт и экспорт настроек'
                                     qs('#SP_PLUS_SETHEAD2').innerHTML = `<a href="${SPACES}/settings/?sp_plus_settings=1" style="margin-bottom: 1px">Spaces+</a><span class="location-bar__sep ico"></span> Импорт и экспорт настроек`
+                                    // @ts-ignore
                                     qs('#SP_PLUS_SETBACK').href = `${SPACES}/settings/?sp_plus_settings=1`
                                     if (!/(\&)sp_backup=1/i.test(getHref())) {
                                         historyPush({
@@ -215,6 +216,7 @@ export const settingsMenu = () => {
                                 onclick: () => {
                                     qs('#SP_PLUS_SETHEAD').innerHTML = 'История обновлений'
                                     qs('#SP_PLUS_SETHEAD2').innerHTML = `<a href="${SPACES}/settings/?sp_plus_settings=1" style="margin-bottom: 1px">Spaces+</a><span class="location-bar__sep ico"></span> История обновлений`
+                                    // @ts-ignore
                                     qs('#SP_PLUS_SETBACK').href = `${SPACES}/settings/?sp_plus_settings=1`
                                     if (!/(\&)sp_changelog=1/i.test(getHref())) {
                                         historyPush({

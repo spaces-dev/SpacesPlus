@@ -1,15 +1,18 @@
-import { ce, qs, error } from '../utils'
+import { ce, qs, qsa, error } from '../utils'
 
 export const adBlock = () => {
     try {
 
-        // Ищем рекламу по атрибуту title и удаляем
-        document.querySelectorAll('a[title*="Реклама"').forEach(e => e.parentElement?.remove())
+        // Удаляем всплывающую рекламу
+        qsa('img[src*="static/i/close3.png"]').forEach(e => e.parentElement?.parentElement?.remove())
+
+        // Удаляем рекламу по атрибуту title
+        qsa('a[title*="Реклама"').forEach(e => e.parentElement?.remove())
 
         // Удаляем виджет ВК в правой панели
-        document.querySelectorAll('#vk_groups').forEach(e => e.parentElement?.remove())
+        qsa('#vk_groups').forEach(e => e.parentElement?.remove())
 
-        // Патчим HTTP для удаления рекламы
+        // Прототипируем XMLHttpRequest для блокировки рекламы
         if (!qs('#SP_PLUS_ADBLOCK')) {
             let protoAd = ce('script', {
                 type: 'text/javascript',
