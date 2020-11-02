@@ -10,6 +10,6 @@ export const oldHeader = (b: boolean) => {
         let elem2 = p[4].cloneNode(true)
 
         // @ts-ignore Костылище!
-        if (b || !b && p[2].pathname === '/mail/') { p[4].replaceWith(elem1); p[2].replaceWith(elem2) }
+        if (b || (!b && p[2].pathname === '/mail/')) { p[4].replaceWith(elem1); p[2].replaceWith(elem2) }
     })
 }
