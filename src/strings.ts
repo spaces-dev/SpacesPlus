@@ -23,8 +23,6 @@ class OVERRIDE {
     static BANNED: string | null
     static ONLINE: string | null
     static FAVORITE: string | null
-    static KARMA: boolean = false
-    static COINS: boolean = false
     static EVENTS: number = 0
     static PLAYER: number = 0
     static COMMENTS: number = 0

@@ -1,25 +1,15 @@
-import { qs, find, http, remove, info, error } from '../utils'
+import { info } from '../utils'
 
-import { SPACES, OVERRIDE } from '../strings'
+import { SPACES } from '../strings'
 
 export const karmaAccept = () => {
-    let karma: any = find(document.links, { href: `${SPACES}/mysite/rate_n_karma/karma/?Accept=` })
+    document.querySelectorAll(`a[href*='${SPACES}/mysite/rate_n_karma/karma/?Accept='`).forEach(e => {
+        // Подтверждаем карму
+        (e as HTMLElement).click()
 
-    if (karma && !OVERRIDE.KARMA) {
-        OVERRIDE.KARMA = true
+        // Удаляем элемент
+        e.parentElement?.remove()
 
-        try {
-            http('GET', karma[0].href, true).then(e => {
-                if (e.status === 200) {
-                    remove(karma[0].parentNode)
-                    qs('#header_path').classList.remove('no-shadow')
-                    info('Cобрали карму!')
-                }
-
-                OVERRIDE.KARMA = false
-            })
-        } catch (e) {
-            error('Ошибка (karmaAccept.ts): ' + e)
-        }
-    }
+        info('Собрали карму!')
+    })
 }

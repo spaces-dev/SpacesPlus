@@ -1,11 +1,15 @@
-import { ce, qs, find, error, remove } from '../utils'
+import { ce, qs, error } from '../utils'
 
 export const adBlock = () => {
-    let ad = find(document.links, { title: 'Реклама' })
-
     try {
-        if (ad) { remove(ad[0].parentNode) }
 
+        // Ищем рекламу по атрибуту title и удаляем
+        document.querySelectorAll('a[title*="Реклама"').forEach(e => e.parentElement?.remove())
+
+        // Удаляем виджет ВК в правой панели
+        document.querySelectorAll('#vk_groups').forEach(e => e.parentElement?.remove())
+
+        // Патчим HTTP для удаления рекламы
         if (!qs('#SP_PLUS_ADBLOCK')) {
             let protoAd = ce('script', {
                 type: 'text/javascript',

@@ -1,24 +1,15 @@
-import { find, http, remove, info, error } from '../utils'
+import { info } from '../utils'
 
-import { SPACES, OVERRIDE } from '../strings'
+import { SPACES } from '../strings'
 
 export const coinsAccept = () => {
-    let coins: any = find(document.links, { href: `${SPACES}/services/gift_get/?Link_id=` })
+    document.querySelectorAll(`a[href*='${SPACES}/services/gift_get/?Link_id='`).forEach(e => {
+        // Подтверждаем монетку
+        (e as HTMLElement).click()
 
-    if (coins && !OVERRIDE.COINS) {
-        OVERRIDE.COINS = true
+        // Удаляем элемент
+        e.parentElement?.remove()
 
-        try {
-            http('GET', coins[0].href, true).then(e => {
-                if (e.status === 200) {
-                    remove(coins[0].parentNode)
-                    info('Собрали монетку!')
-                }
-
-                OVERRIDE.COINS = false
-            })
-        } catch (e) {
-            error('Ошибка (coinsAccept.ts): ' + e)
-        }
-    }
+        info('Собрали монетку!')
+    })
 }
