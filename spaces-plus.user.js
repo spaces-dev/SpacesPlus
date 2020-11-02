@@ -106,19 +106,20 @@
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.readSettings = exports.modifyObject = exports.getClassName = exports.insertAfter = exports.historyPush = exports.messageBox = exports.isValidUrl = exports.confirmBox = exports.setCookie = exports.playSound = exports.getParams = exports.getCookie = exports.delCookie = exports.declOfNum = exports.inBefore = exports.getQuery = exports.getPath = exports.getHref = exports.remove = exports.extend = exports.rever = exports.error = exports.debug = exports.trim = exports.http = exports.info = exports.find = exports.log = exports.css = exports.qs = exports.ce = void 0;
+exports.readSettings = exports.modifyObject = exports.getClassName = exports.insertAfter = exports.historyPush = exports.messageBox = exports.isValidUrl = exports.confirmBox = exports.setCookie = exports.playSound = exports.getParams = exports.getCookie = exports.delCookie = exports.declOfNum = exports.inBefore = exports.getQuery = exports.getPath = exports.getHref = exports.remove = exports.extend = exports.rever = exports.error = exports.debug = exports.trim = exports.http = exports.info = exports.find = exports.log = exports.css = exports.qsa = exports.qs = exports.ce = void 0;
 const ce_1 = __webpack_require__(15);
 Object.defineProperty(exports, "ce", { enumerable: true, get: function () { return ce_1.ce; } });
-const qs_1 = __webpack_require__(16);
-Object.defineProperty(exports, "qs", { enumerable: true, get: function () { return qs_1.qs; } });
 const css_1 = __webpack_require__(5);
 Object.defineProperty(exports, "css", { enumerable: true, get: function () { return css_1.css; } });
-const find_1 = __webpack_require__(17);
+const find_1 = __webpack_require__(16);
 Object.defineProperty(exports, "find", { enumerable: true, get: function () { return find_1.find; } });
-const http_1 = __webpack_require__(18);
+const http_1 = __webpack_require__(17);
 Object.defineProperty(exports, "http", { enumerable: true, get: function () { return http_1.http; } });
 const trim_1 = __webpack_require__(6);
 Object.defineProperty(exports, "trim", { enumerable: true, get: function () { return trim_1.trim; } });
+const qs_1 = __webpack_require__(18);
+Object.defineProperty(exports, "qs", { enumerable: true, get: function () { return qs_1.qs; } });
+Object.defineProperty(exports, "qsa", { enumerable: true, get: function () { return qs_1.qsa; } });
 const rever_1 = __webpack_require__(19);
 Object.defineProperty(exports, "rever", { enumerable: true, get: function () { return rever_1.rever; } });
 const remove_1 = __webpack_require__(20);
@@ -1003,11 +1004,13 @@ exports.adBlock = void 0;
 const utils_1 = __webpack_require__(0);
 exports.adBlock = () => {
     try {
-        // Ищем рекламу по атрибуту title и удаляем
-        document.querySelectorAll('a[title*="Реклама"').forEach(e => { var _a; return (_a = e.parentElement) === null || _a === void 0 ? void 0 : _a.remove(); });
+        // Удаляем всплывающую рекламу
+        utils_1.qsa('img[src*="static/i/close3.png"]').forEach(e => { var _a, _b; return (_b = (_a = e.parentElement) === null || _a === void 0 ? void 0 : _a.parentElement) === null || _b === void 0 ? void 0 : _b.remove(); });
+        // Удаляем рекламу по атрибуту title
+        utils_1.qsa('a[title*="Реклама"').forEach(e => { var _a; return (_a = e.parentElement) === null || _a === void 0 ? void 0 : _a.remove(); });
         // Удаляем виджет ВК в правой панели
-        document.querySelectorAll('#vk_groups').forEach(e => { var _a; return (_a = e.parentElement) === null || _a === void 0 ? void 0 : _a.remove(); });
-        // Патчим HTTP для удаления рекламы
+        utils_1.qsa('#vk_groups').forEach(e => { var _a; return (_a = e.parentElement) === null || _a === void 0 ? void 0 : _a.remove(); });
+        // Прототипируем XMLHttpRequest для блокировки рекламы
         if (!utils_1.qs('#SP_PLUS_ADBLOCK')) {
             let protoAd = utils_1.ce('script', {
                 type: 'text/javascript',
@@ -1081,21 +1084,6 @@ exports.ce = (name, params) => {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.qs = void 0;
-/**
- * querySelector _/ ( •_•) /
- * @param e селектор
- */
-exports.qs = (e) => document.querySelector(e);
-
-
-/***/ }),
-/* 17 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
 exports.find = void 0;
 /**
  * Используется для поиска в DOM
@@ -1118,7 +1106,7 @@ exports.find = (obj, obj2) => {
 
 
 /***/ }),
-/* 18 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1153,6 +1141,26 @@ async function http(method, url, proxy, body) {
     return response;
 }
 exports.http = http;
+
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.qsa = exports.qs = void 0;
+/**
+ * querySelector _/ ( •_•) /
+ * @param e
+ */
+exports.qs = (e) => document.querySelector(e);
+/**
+ * querySelectorAll ᕦ(ツ)ᕤ
+ * @param e
+ */
+exports.qsa = (e) => document.querySelectorAll(e);
 
 
 /***/ }),
@@ -1822,14 +1830,19 @@ exports.coinsAccept = void 0;
 const utils_1 = __webpack_require__(0);
 const strings_1 = __webpack_require__(1);
 exports.coinsAccept = () => {
-    document.querySelectorAll(`a[href*='${strings_1.SPACES}/services/gift_get/?Link_id='`).forEach(e => {
-        var _a;
-        // Подтверждаем монетку
-        e.click();
-        // Удаляем элемент
-        (_a = e.parentElement) === null || _a === void 0 ? void 0 : _a.remove();
-        utils_1.info('Собрали монетку!');
-    });
+    try {
+        utils_1.qsa(`a[href*='${strings_1.SPACES}/services/gift_get/?Link_id='`).forEach(e => {
+            var _a;
+            // Подтверждаем монетку
+            e.click();
+            // Удаляем элемент
+            (_a = e.parentElement) === null || _a === void 0 ? void 0 : _a.remove();
+            utils_1.info('Собрали монетку!');
+        });
+    }
+    catch (e) {
+        utils_1.error('Ошибка (coinsAccept.ts): ' + e);
+    }
 };
 
 
@@ -1938,14 +1951,19 @@ exports.karmaAccept = void 0;
 const utils_1 = __webpack_require__(0);
 const strings_1 = __webpack_require__(1);
 exports.karmaAccept = () => {
-    document.querySelectorAll(`a[href*='${strings_1.SPACES}/mysite/rate_n_karma/karma/?Accept='`).forEach(e => {
-        var _a;
-        // Подтверждаем карму
-        e.click();
-        // Удаляем элемент
-        (_a = e.parentElement) === null || _a === void 0 ? void 0 : _a.remove();
-        utils_1.info('Собрали карму!');
-    });
+    try {
+        utils_1.qsa(`a[href*='${strings_1.SPACES}/mysite/rate_n_karma/karma/?Accept='`).forEach(e => {
+            var _a;
+            // Подтверждаем карму
+            e.click();
+            // Удаляем элемент
+            (_a = e.parentElement) === null || _a === void 0 ? void 0 : _a.remove();
+            utils_1.info('Собрали карму!');
+        });
+    }
+    catch (e) {
+        utils_1.error('Ошибка (karmaAccept.ts): ' + e);
+    }
 };
 
 
@@ -2387,6 +2405,7 @@ exports.settingsMenu = () => {
                                 onclick: () => {
                                     utils_1.qs('#SP_PLUS_SETHEAD').innerHTML = 'Импорт и экспорт настроек';
                                     utils_1.qs('#SP_PLUS_SETHEAD2').innerHTML = `<a href="${strings_1.SPACES}/settings/?sp_plus_settings=1" style="margin-bottom: 1px">Spaces+</a><span class="location-bar__sep ico"></span> Импорт и экспорт настроек`;
+                                    // @ts-ignore
                                     utils_1.qs('#SP_PLUS_SETBACK').href = `${strings_1.SPACES}/settings/?sp_plus_settings=1`;
                                     if (!/(\&)sp_backup=1/i.test(utils_1.getHref())) {
                                         utils_1.historyPush({
@@ -2407,6 +2426,7 @@ exports.settingsMenu = () => {
                                 onclick: () => {
                                     utils_1.qs('#SP_PLUS_SETHEAD').innerHTML = 'История обновлений';
                                     utils_1.qs('#SP_PLUS_SETHEAD2').innerHTML = `<a href="${strings_1.SPACES}/settings/?sp_plus_settings=1" style="margin-bottom: 1px">Spaces+</a><span class="location-bar__sep ico"></span> История обновлений`;
+                                    // @ts-ignore
                                     utils_1.qs('#SP_PLUS_SETBACK').href = `${strings_1.SPACES}/settings/?sp_plus_settings=1`;
                                     if (!/(\&)sp_changelog=1/i.test(utils_1.getHref())) {
                                         utils_1.historyPush({
@@ -3252,14 +3272,13 @@ exports.videoSpeedPlayback = void 0;
 const utils_1 = __webpack_require__(0);
 const settings_1 = __webpack_require__(2);
 exports.videoSpeedPlayback = () => {
-    let jwcontrols = utils_1.find(document.getElementsByTagName('span'), { className: 'jwcontrols' });
+    let jwcontrols = utils_1.qs('span.jwcontrols');
     let playback = utils_1.qs('#SP_PLAYBACK_VIDEO');
     try {
-        if (playback) {
-            document.querySelector('video').playbackRate = settings_1._SETTINGS.videoSpeed;
-        }
-        if (jwcontrols !== null && playback === null) {
-            let target = utils_1.find(document.getElementsByTagName('span'), { className: 'jwtext jwduration jwhidden' });
+        if (playback)
+            utils_1.qs('video').playbackRate = settings_1._SETTINGS.videoSpeed;
+        if (jwcontrols && !playback) {
+            let target = utils_1.qs('span[class*="jwtext jwduration jwhidden"]');
             let buttonPlayback = utils_1.ce('span', {
                 class: 'jwtext jwduration jwhidden',
                 id: 'SP_PLAYBACK_VIDEO',
@@ -3273,7 +3292,7 @@ exports.videoSpeedPlayback = () => {
                     return false;
                 }
             });
-            target[0].after(buttonPlayback);
+            target.after(buttonPlayback);
         }
     }
     catch (e) {
