@@ -1,25 +1,21 @@
-import { qs, ce, find, insertAfter } from '../utils'
+import { qs, ce, qsa, insertAfter } from '../utils'
 
 import { SPACES } from '../strings'
 
 export const sidebarButton = () => {
-    let button = qs('#SP_SETTINGS_BUTTON')
-    let disableIcons = find(document.getElementsByTagName('span'), { className: 's_i s_i_exit' })
-    // TODO: type
-    let target: any = find(document.links, { href: `${SPACES}/services/?` })
 
-    if (target && !button) {
+    // Место для вставки кнопки
+    qsa(`li.li>a[href*="${SPACES}/services/"]`).forEach(e => {
+
+        // Включены ли иконки на левой панели
+        let disableIcons = !!qs('span.s_i_exit') ? '<span class="sp sp-ico"></span>' : ''
+
+        // Создаем кнопку быстрого доступа в настройки Spaces+
         let link = ce('li', {
             class: 'li',
-            id: 'SP_SETTINGS_BUTTON',
-            html: `<a href="${SPACES}/settings/?sp_plus_settings=1" title="Настройки Spaces+">${(disableIcons ? '<span class="sp sp-ico"></span>' : '')}<span class="m s_i_text"> Spaces+</span></a>`
+            html: `<a href="${SPACES}/settings/?sp_plus_settings=1" title="Настройки Spaces+">${disableIcons}<span class="m s_i_text"> Spaces+</span></a>`
         })
 
-        target = target[0].parentNode
-        insertAfter(link, target)
-
-        if (target.nextElementSibling.nodeName === 'BR') {
-            insertAfter(ce('br'), link)
-        }
-    }
+        insertAfter(link, e.parentElement)
+    })
 }
