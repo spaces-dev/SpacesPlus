@@ -619,7 +619,8 @@ exports.friendsOnline = (t) => {
                                 utils_1.http('GET', `${strings_1.SPACES}/friends/?P=2&S=3`, true).then(e => {
                                     const json2 = e.parsedBody;
                                     if (json2 === null || json2 === void 0 ? void 0 : json2.tabbed_panel) {
-                                        let disableAvatar = utils_1.find(document.getElementsByTagName('span'), { className: 's_i s_i_exit' });
+                                        // Включены ли иконки на левой панели
+                                        let disableAvatar = utils_1.qs('span.s_i_exit') ? true : false;
                                         let friendsList = json2.tabbed_panel.tabs[1].content.list;
                                         friendsList ?
                                             friendsList = utils_1.extend(tempfriendsList, friendsList) :
@@ -1774,13 +1775,12 @@ exports.userOnline = () => {
     let path = utils_1.getPath();
     let nick = utils_1.getPath(3);
     let target = `/anketa/index/${nick}/`;
-    if (path !== target) {
+    if (path !== target)
         strings_1.OVERRIDE.ONLINE = null;
-    }
-    if (path === target) {
+    if (path === target && strings_1.OVERRIDE.ONLINE !== nick) {
         try {
-            let onBlock = utils_1.find(document.getElementsByClassName('info-item__title'), { innerHTML: 'Время онлайн:' });
-            if (nick && onBlock && strings_1.OVERRIDE.ONLINE !== nick) {
+            let onBlock = Array.from(utils_1.qsa('div.info-item__title')).filter(e => e.textContent === 'Время онлайн:');
+            if (nick && onBlock) {
                 strings_1.OVERRIDE.ONLINE = nick;
                 utils_1.http('GET', `${strings_1.SPACES}/anketa/index/${nick}/`, true).then(e => {
                     var _a, _b;
@@ -1788,7 +1788,8 @@ exports.userOnline = () => {
                     if (response) {
                         let str = (response / 3600).toFixed(2).split('.');
                         let online = str[0] > 0 ? `${str[0]} ч, ${Math.trunc(str[1] / (100 / 60))} мин` : `${Math.trunc(str[1] / (100 / 60))} мин`;
-                        onBlock[0].nextElementSibling.innerHTML = online;
+                        // @ts-ignore Костыль!
+                        onBlock[0].nextElementSibling.textContent = online;
                         utils_1.info('Время онлайн: ' + online);
                     }
                 });
@@ -2263,10 +2264,9 @@ exports.settingsMenu = () => {
     var _a, _b, _c;
     if (utils_1.getPath() === '/settings/' && !utils_1.qs('#SP_PLUS_SETLINK')) {
         try {
-            // TODO: interface
-            let entryLink = utils_1.find(document.links, { href: `${strings_1.SPACES}/settings/notification/?` });
-            if (entryLink) {
-                entryLink = entryLink[0];
+            // Ищем таргер для инициализации меню настроек
+            const targetLink = utils_1.qs(`a[href*="${strings_1.SPACES}/settings/notification/?"`);
+            if (targetLink) {
                 const urlSett = utils_1.getQuery('sp_plus_settings');
                 const urlSettEditor = utils_1.getQuery('sp_cookie_editor');
                 const urlSettChangeLog = utils_1.getQuery('sp_changelog');
@@ -2274,7 +2274,7 @@ exports.settingsMenu = () => {
                 const baseLink = utils_1.ce('a', {
                     href: `${strings_1.SPACES}/settings/?sp_plus_settings=1`,
                     id: 'SP_PLUS_SETLINK',
-                    class: entryLink.className,
+                    class: targetLink.className,
                     html: '<span>Настройки Spaces+</span><span class="ico ico_arr ico_m"></span>',
                     onclick: () => {
                         var _a, _b, _c;
@@ -2477,10 +2477,8 @@ exports.settingsMenu = () => {
                         return false;
                     }
                 });
-                utils_1.inBefore(baseLink, entryLink);
-                if (entryLink.nextElementSibling.nodeName === 'BR') {
-                    utils_1.insertAfter(utils_1.ce('br'), baseLink);
-                }
+                // Вставляем "Настройки Spaces+" перед "Уведомления"
+                utils_1.inBefore(baseLink, targetLink);
                 let clickEvent = document.createEvent('MouseEvent');
                 if (urlSett) {
                     document.title = 'Настройки Spaces+';
@@ -3076,12 +3074,8 @@ exports.disableRedirect = void 0;
 const utils_1 = __webpack_require__(0);
 const strings_1 = __webpack_require__(1);
 exports.disableRedirect = () => {
-    let urls = utils_1.find(document.links, { href: `${strings_1.SPACES}/redirect/?` });
-    if (urls) {
-        for (let url of urls) {
-            url.setAttribute('href', utils_1.getParams(url)['redirect']);
-        }
-    }
+    // @ts-ignore Все еще костыль, но так лучше
+    utils_1.qsa(`a[href*="${strings_1.SPACES}/redirect/"`).forEach(e => e.href = utils_1.getParams(e)['redirect']);
 };
 
 
