@@ -1,7 +1,7 @@
 import {
     ce,
     qs,
-    find,
+    qsa,
     info,
     error,
     remove,
@@ -25,7 +25,7 @@ export const playerDownload = () => {
 
             trId = parseInt(jstr.id, 10)
             let trScr = jspl.playlist.playlist[trId].src
-            let tdIc = find(player.getElementsByTagName('td'), { className: 'ico_td' })
+            let tdIc = qsa('td.ico_td')
 
             if (tdIc && !downPlace) {
                 OVERRIDE.PLAYER = trId
