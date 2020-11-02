@@ -27,6 +27,9 @@
         "tg.ogg",
         "icq.ogg",
         "push.ogg",
-        "notify.ogg"
+        "notify.ogg",
+        "beep-quiet.ogg",
+        "beep-normal.ogg",
+        "beep-loud.ogg"
     ]
 }
