@@ -1680,18 +1680,22 @@ exports.getPath = (name) => {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.oldHeader = void 0;
 const utils_1 = __webpack_require__(0);
+/**
+ * ? Меняет местами кнопки почты и ленты местами (старое расположение)
+ * ! molimawka, Я был дураком, Извини! ¯\_(ツ)_/¯
+ * @param b On/Off
+ */
 exports.oldHeader = (b) => {
-    utils_1.qsa('a[class="horiz-menu__link"').forEach((v, k, p) => {
-        // Клонируем ленту
-        let elem1 = p[2].cloneNode(true);
-        // Клонируем почту
-        let elem2 = p[4].cloneNode(true);
-        // @ts-ignore Костылище!
-        if (b || (!b && p[2].pathname === '/mail/')) {
-            p[4].replaceWith(elem1);
-            p[2].replaceWith(elem2);
-        }
-    });
+    // кнопки шапки
+    let p = utils_1.qsa('a[class="horiz-menu__link"');
+    // Клонируем ленту
+    let tab1 = p[2].cloneNode(true);
+    // Клонируем почту
+    let tab2 = p[4].cloneNode(true);
+    if (b || p[2].pathname === '/mail/') {
+        p[4].replaceWith(tab1);
+        p[2].replaceWith(tab2);
+    }
 };
 
 
@@ -2612,25 +2616,30 @@ exports.galleryRotate = void 0;
 const utils_1 = __webpack_require__(0);
 const settings_1 = __webpack_require__(2);
 exports.galleryRotate = () => {
+    // просмотрщик изображений
     let Image = utils_1.qs('#gallery-container');
+    // кнопка поворота
     let Rotate = utils_1.qs('#SP_IMAGE_ROTATE');
+    // видеоплеер
     let Video = utils_1.qs('.player-dummy_wrap');
     try {
-        if (Rotate) {
-            Image.className = 'accel-3d rotate' + settings_1._SETTINGS.angle;
-        }
-        if (Image !== null && Rotate === null && !Video) {
+        // встявляем кнопку поворота при условии что есть просмотрщик и главное что это не видеоплеер
+        if (Image && !Rotate && !Video) {
             let buttonRotate = utils_1.ce('a', {
                 class: 'gallery__tools_button',
                 id: 'SP_IMAGE_ROTATE',
                 title: 'Повернуть',
                 html: '<span class="ico_gallery ico_gallery_reload m"></span>',
                 onclick: () => {
+                    // градус поворота (0, 90, 180, 270)
                     settings_1._SETTINGS.angle = (settings_1._SETTINGS.angle + 90) % 360;
                     utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
+                    // применяем класс для повора изображения
+                    Image.className = 'accel-3d rotate' + settings_1._SETTINGS.angle;
                     return false;
                 }
             });
+            // вставляем кнопку поворота после кнопки скачивания
             utils_1.qs('#g_dloadlink').after(buttonRotate);
         }
     }
@@ -3139,29 +3148,32 @@ const utils_1 = __webpack_require__(0);
 const newbeeQuest_1 = __webpack_require__(62);
 const settings_1 = __webpack_require__(2);
 const strings_1 = __webpack_require__(1);
+// Встроенные возможности сайта
 exports.settingsFeatures = (root) => {
     let wrap = utils_1.ce('div', { id: 'wrap_spaces_option' });
+    // API Отладчик
     let apidebug = utils_1.ce('a', {
         href: '#',
         class: 'stnd-link stnd-link_arr sp_font_sm',
-        html: settings_1._SETTINGS.apidebug ?
-            '<span class="b"><span class="sp sp-remove-grey mr-14"></span>Отключить отладчик<span class="ico ico_arr ico_m"></span></span>' :
-            '<span class="b"><span class="ico ico_settings mr-14"></span>Включить отладчик<span class="ico ico_arr ico_m"></span></span>',
+        html: btnWrap(settings_1._SETTINGS.apidebug ?
+            '<span class="sp sp-remove-grey mr-14"></span>Отключить отладчик' :
+            '<span class="ico ico_settings mr-14"></span>Включить отладчик'),
         onclick: () => {
-            settings_1._SETTINGS.apidebug = !settings_1._SETTINGS.apidebug ? true : false;
+            settings_1._SETTINGS.apidebug = settings_1._SETTINGS.apidebug ? false : true;
             utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
             document.location.reload();
             return false;
         }
     });
     const beta = utils_1.getCookie('sandbox');
+    // Вход в бета песочницу
     let sndbeta = utils_1.ce('a', {
         href: '#',
         class: 'stnd-link stnd-link_arr sp_font_sm',
         id: 'sp_spacesAction_beta',
-        html: beta ?
-            '<span class="b"><span class="sp sp-exit-grey mr-14"></span>Выйти из песочницы<span class="ico ico_arr ico_m"></span></span>' :
-            '<span class="b"><span class="sp sp-enter-grey mr-14"></span>Beta-песочница<span> - открытое тестирование нововведений сайта<span class="ico ico_arr ico_m"></span></span></span>',
+        html: btnWrap(beta ?
+            '<span class="sp sp-exit-grey mr-14"></span>Выйти из песочницы' :
+            '<span class="sp sp-enter-grey mr-14"></span>Beta-песочница<span> - открытое тестирование нововведений сайта'),
         onclick: () => {
             beta ? utils_1.delCookie('sandbox') : utils_1.setCookie('sandbox', 'beta');
             document.location.reload();
@@ -3169,13 +3181,14 @@ exports.settingsFeatures = (root) => {
         }
     });
     const fat = utils_1.getCookie('force_ajax_transport');
+    // вкл/выкл полосы загрузки
     let fatWrap = utils_1.ce('a', {
         href: '#',
         class: 'stnd-link stnd-link_arr sp_font_sm',
         id: 'sp_spacesFAT',
-        html: fat ?
-            '<span class="b"><span class="sp sp-remove-grey mr-14"></span>Убрать полосу загрузки<span class="ico ico_arr ico_m"></span></span>' :
-            '<span class="b"><span class="ico ico_ok_grey mr-14"></span>Добавить полосу загрузки страницы<span class="ico ico_arr ico_m"></span><span>',
+        html: btnWrap(fat ?
+            '<span class="sp sp-remove-grey mr-14"></span>Убрать полосу загрузки' :
+            '<span class="ico ico_ok_grey mr-14"></span>Добавить полосу загрузки страницы'),
         onclick: () => {
             fat ? utils_1.delCookie('force_ajax_transport') : utils_1.setCookie('force_ajax_transport', '1');
             document.location.reload();
@@ -3183,13 +3196,14 @@ exports.settingsFeatures = (root) => {
         }
     });
     const glb = utils_1.getCookie('gp_left_btn');
+    // закреп/откреп плеера из левой панели
     let glbWrap = utils_1.ce('a', {
         href: '#',
         class: 'stnd-link stnd-link_arr sp_last_btn',
         id: 'sp_spacesGLB',
-        html: glb ?
-            '<span class="b"><span class="sp sp-remove-grey mr-14"></span>Убрать плеер из левой панели<span class="ico ico_arr ico_m"></span></span>' :
-            '<span class="b"><span class="ico ico_ok_grey mr-14"></span>Закрепить плеер на левой панели<span class="ico ico_arr ico_m"></span></span>',
+        html: btnWrap(glb ?
+            '<span class="sp sp-remove-grey mr-14"></span>Убрать плеер из левой панели' :
+            '<span class="ico ico_ok_grey mr-14"></span>Закрепить плеер на левой панели'),
         onclick: () => {
             glb ? utils_1.delCookie('gp_left_btn') : utils_1.setCookie('gp_left_btn', '1');
             document.location.reload();
@@ -3201,13 +3215,12 @@ exports.settingsFeatures = (root) => {
         style: 'display: none',
         id: 'sp_newbequest_togl',
         class: 'stnd-link stnd-link_arr sp_line sp_last_btn sp_newbq_l',
-        html: '<span class="b"><span class="sp sp-remove-grey mr-14"></span>Скрыть квест новичка<span class="ico ico_arr ico_m"></span></span>',
+        html: btnWrap('<span class="sp sp-remove-grey mr-14"></span>Скрыть квест новичка'),
         onclick: () => {
             utils_1.confirmBox('Вы действительно хотите скрыть квест новичка?', true, () => {
                 utils_1.http('GET', `${strings_1.SPACES}/newbequest/?CK=${strings_1.OVERRIDE.CK}`, true).then(e => {
-                    if (e.status === 200) {
+                    if (e.status === 200)
                         utils_1.messageBox('Поздравляем!', 'Квест новичка был успешно скрыт', true, 5);
-                    }
                 });
             });
             return false;
@@ -3222,6 +3235,11 @@ exports.settingsFeatures = (root) => {
     // Проверяем скрыт ли квест новичка
     newbeeQuest_1.newbeeQuest();
 };
+/**
+ * Обертка кнопок
+ * @param str
+ */
+const btnWrap = (str) => `<span class="b">${str}<span class="ico ico_arr ico_m"></span></span>`;
 
 
 /***/ }),
