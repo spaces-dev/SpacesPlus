@@ -7,8 +7,7 @@ import {
     inBefore,
     delCookie,
     setCookie,
-    confirmBox,
-    messageBox
+    confirmBox
 } from '../utils'
 
 import { IGetJSON } from '../interfaces/GetJSON'
@@ -17,10 +16,7 @@ import { HTTP } from '../strings'
 import { _SETTINGS } from '../settings'
 
 /**
- * TODO:
- * ? Сделать нормальный обработчик ошибок
- * ? Cохрание без перезагрузки страницы
- * ? Cохранение .json на рабочий стол
+ * Меню сохранения/восстановления файла настроек
  * @param id #SP_PLUS_SETAREA
  */
 export const settingsBackupMenu = (id: string) => {
@@ -104,7 +100,17 @@ export const settingsBackupMenu = (id: string) => {
 
                         if (json.result.valid) {
                             setCookie('SP_PLUS_SET', textarea.value)
-                            messageBox('Импорт и экспорт настроек', 'Настройки были успешно сохранены', true, 3)
+                            confirmBox('Настройки были успешно обновлены</br>Хотите сохранить файл настроек на рабочий стол?', false, () => {
+                                let blob = ce('a', {
+                                    attr: {
+                                        href: URL.createObjectURL(new Blob([textarea.value], { type: 'text/plain' })),
+                                        download: 'spaces-plus.json'
+                                    }
+                                })
+
+                                blob.click()
+                                blob.remove()
+                            })
                         } else {
                             handleErrors(target, errorsBlock, json)
                         }
@@ -118,7 +124,7 @@ export const settingsBackupMenu = (id: string) => {
                     class: 'text-input',
                     id: 'SP_BACKUP_JSON',
                     cols: '17',
-                    rows: '60',
+                    rows: '25',
                     html: json.result.data
                 })
 
