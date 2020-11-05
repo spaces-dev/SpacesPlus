@@ -10,6 +10,7 @@ import {
     deleteBlogs,
     karmaAccept,
     soundEvents,
+    betaFeatures,
     checkUpdates,
     favoriteUser,
     freeStickers,
@@ -95,6 +96,7 @@ const init = () => {
      */
     setInterval(() => {
         if (_SETTINGS.adblock) adBlock()
+        if (_SETTINGS.beta) betaFeatures()
         if (_SETTINGS.coins) coinsAccept()
         if (_SETTINGS.karma) karmaAccept()
         if (_SETTINGS.online) userOnline()

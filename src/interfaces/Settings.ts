@@ -62,6 +62,7 @@ export interface ISettings {
     notify: boolean
     bodystyle: boolean
     upVersion: number
+    beta: boolean
     recentSmiles: RecentSmiles
     bodystyleSetting: BodystyleSetting
     events: Events

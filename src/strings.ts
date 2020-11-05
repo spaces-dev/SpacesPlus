@@ -5,7 +5,6 @@ import { IDevice } from './interfaces/Device'
 /**
  * Константы
  */
-const BETA: boolean = false
 const HTTP: string = document.location.protocol
 const BASE_URL: string = document.location.hostname
 const SPACES: string = `${HTTP}//${BASE_URL}`
@@ -30,7 +29,6 @@ class OVERRIDE {
 }
 
 export {
-    BETA,
     HTTP,
     DEVICE,
     GITHUB,

@@ -64,6 +64,7 @@ export let _SETTINGS: ISettings = {
     'notify': false,
     'bodystyle': true,
     'upVersion': OVERRIDE.VERSION,
+    'beta': false,
     'recentSmiles': {
         'show': false,
         'max': 60

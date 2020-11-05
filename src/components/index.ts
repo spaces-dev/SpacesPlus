@@ -9,6 +9,7 @@ import { coinsAccept } from './coinsAccept'
 import { deleteBlogs } from './deleteBlogs'
 import { karmaAccept } from './karmaAccept'
 import { soundEvents } from './soundEvents'
+import { betaFeatures } from './betaFeatures'
 import { favoriteUser } from './favoriteUser'
 import { freeStickers } from './freeStickers'
 import { recentSmiles } from './recentSmiles'
@@ -46,6 +47,7 @@ export {
     deleteBlogs,
     karmaAccept,
     soundEvents,
+    betaFeatures,
     checkUpdates,
     favoriteUser,
     freeStickers,
