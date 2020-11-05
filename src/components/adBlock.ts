@@ -4,10 +4,10 @@ export const adBlock = () => {
     try {
 
         // Удаляем всплывающую рекламу
-        qsa('img[src*="static/i/close3.png"]').forEach(e => e.parentElement?.parentElement?.remove())
+        qsa('img[src$="static/i/close3.png"]').forEach(e => e.parentElement?.parentElement?.remove())
 
         // Удаляем рекламу по атрибуту title
-        qsa('a[title*="Реклама"').forEach(e => e.parentElement?.remove())
+        qsa('a[title="Реклама"').forEach(e => e.parentElement?.remove())
 
         // Удаляем виджет ВК в правой панели
         qsa('#vk_groups').forEach(e => e.parentElement?.remove())
