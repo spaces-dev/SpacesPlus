@@ -10,7 +10,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const outputPath = path.resolve(__dirname, 'dist')
 const fileName = userscriptConfig.scriptFileName
 const isDev = process.env.NODE_ENV === 'development'
-const isChrome = false
+const isChrome = true
 const PORT = 8080
 
 const config: webpack.Configuration = {
