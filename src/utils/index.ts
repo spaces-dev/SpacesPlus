@@ -7,6 +7,7 @@ import { qs, qsa } from './qs'
 import { rever } from './rever'
 import { remove } from './remove'
 import { extend } from './extend'
+import { toUpper } from './toUpper'
 import { getQuery } from './getQuery'
 import { inBefore } from './inBefore'
 import { declOfNum } from './declOfNum'
@@ -22,6 +23,7 @@ import { historyPush } from './historyPush'
 import { insertAfter } from './insertAfter'
 import { getClassName } from './getClassName'
 import { modifyObject } from './modifyObject' 
+import { notification } from './notification'
 import { readSettings } from './readSettings'
 import { getPath, getHref } from './getLocation'
 import { log, info, error, debug } from './console'
@@ -43,6 +45,7 @@ export {
     remove,
     getHref,
     getPath,
+    toUpper,
     getQuery,
     inBefore,
     declOfNum,
@@ -58,5 +61,6 @@ export {
     insertAfter,
     getClassName,
     modifyObject,
+    notification,
     readSettings
 }

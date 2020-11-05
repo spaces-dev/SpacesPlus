@@ -1,4 +1,4 @@
-import { ce, qs, getCookie } from '../utils'
+import { ce, qs, toUpper, getCookie } from '../utils'
 
 import { getWeather } from './settingsWeather'
 
@@ -56,9 +56,3 @@ export const weatherWidget = () => {
  * unix время
  */
 const unixTime = () => Math.round(new Date().getTime() / 1000.0)
-
-/**
- * Первый символ в строке делаем toUpperCase
- * @param str
- */
-const toUpper = (str: string) => str[0].toUpperCase() + str.substring(1)
