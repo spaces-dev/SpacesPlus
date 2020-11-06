@@ -242,6 +242,7 @@ exports._SETSTRINGS = {
     'rscroll': 'Прокрутка страницы справа',
     'hrightbar': 'Скрыть правое меню',
     'adblock': 'Скрывать рекламу',
+    'stickyheader': 'Закрепить шапку',
     'notify': 'Уведомления',
     'playback': 'Кнопка ускорения видео',
     'recents': 'Ранее использованные смайлики',
@@ -275,6 +276,7 @@ exports._SETTINGS = {
     'rscroll': false,
     'hrightbar': false,
     'adblock': true,
+    'stickyheader': true,
     'apidebug': false,
     'karma': true,
     'sticker': true,
@@ -343,7 +345,7 @@ exports.debug = (str) => console.debug(date() + str);
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.settingsChangelogMenu = exports.settingsRecentSmiles = exports.settingsBackupMenu = exports.settingsBackground = exports.videoSpeedPlayback = exports.settingsFeatures = exports.settingsWeather = exports.settingsFriends = exports.disableRedirect = exports.settingsEvents = exports.playerDownload = exports.hiddenRightbar = exports.deleteComments = exports.weatherWidget = exports.sidebarButton = exports.galleryRotate = exports.friendsOnline = exports.deleteReaders = exports.settingsMenu = exports.recentSmiles = exports.freeStickers = exports.favoriteUser = exports.checkUpdates = exports.betaFeatures = exports.soundEvents = exports.karmaAccept = exports.deleteBlogs = exports.coinsAccept = exports.apiDebugger = exports.userOnline = exports.userStatus = exports.scrollMove = exports.getUpdater = exports.setStyles = exports.oldHeader = exports.adBlock = void 0;
+exports.settingsChangelogMenu = exports.settingsRecentSmiles = exports.settingsBackupMenu = exports.settingsBackground = exports.videoSpeedPlayback = exports.settingsFeatures = exports.settingsWeather = exports.settingsFriends = exports.disableRedirect = exports.settingsEvents = exports.playerDownload = exports.hiddenRightbar = exports.deleteComments = exports.weatherWidget = exports.sidebarButton = exports.galleryRotate = exports.friendsOnline = exports.deleteReaders = exports.stickyHeader = exports.settingsMenu = exports.recentSmiles = exports.freeStickers = exports.favoriteUser = exports.checkUpdates = exports.betaFeatures = exports.soundEvents = exports.karmaAccept = exports.deleteBlogs = exports.coinsAccept = exports.apiDebugger = exports.userOnline = exports.userStatus = exports.scrollMove = exports.getUpdater = exports.setStyles = exports.oldHeader = exports.adBlock = void 0;
 const adBlock_1 = __webpack_require__(14);
 Object.defineProperty(exports, "adBlock", { enumerable: true, get: function () { return adBlock_1.adBlock; } });
 const oldHeader_1 = __webpack_require__(40);
@@ -376,44 +378,46 @@ const recentSmiles_1 = __webpack_require__(52);
 Object.defineProperty(exports, "recentSmiles", { enumerable: true, get: function () { return recentSmiles_1.recentSmiles; } });
 const settingsMenu_1 = __webpack_require__(53);
 Object.defineProperty(exports, "settingsMenu", { enumerable: true, get: function () { return settingsMenu_1.settingsMenu; } });
-const deleteReaders_1 = __webpack_require__(54);
+const stickyHeader_1 = __webpack_require__(54);
+Object.defineProperty(exports, "stickyHeader", { enumerable: true, get: function () { return stickyHeader_1.stickyHeader; } });
+const deleteReaders_1 = __webpack_require__(55);
 Object.defineProperty(exports, "deleteReaders", { enumerable: true, get: function () { return deleteReaders_1.deleteReaders; } });
 const friendsOnline_1 = __webpack_require__(10);
 Object.defineProperty(exports, "friendsOnline", { enumerable: true, get: function () { return friendsOnline_1.friendsOnline; } });
-const galleryRotate_1 = __webpack_require__(55);
+const galleryRotate_1 = __webpack_require__(56);
 Object.defineProperty(exports, "galleryRotate", { enumerable: true, get: function () { return galleryRotate_1.galleryRotate; } });
-const sidebarButton_1 = __webpack_require__(56);
+const sidebarButton_1 = __webpack_require__(57);
 Object.defineProperty(exports, "sidebarButton", { enumerable: true, get: function () { return sidebarButton_1.sidebarButton; } });
-const weatherWidget_1 = __webpack_require__(57);
+const weatherWidget_1 = __webpack_require__(58);
 Object.defineProperty(exports, "weatherWidget", { enumerable: true, get: function () { return weatherWidget_1.weatherWidget; } });
-const deleteComments_1 = __webpack_require__(58);
+const deleteComments_1 = __webpack_require__(59);
 Object.defineProperty(exports, "deleteComments", { enumerable: true, get: function () { return deleteComments_1.deleteComments; } });
-const hiddenRightbar_1 = __webpack_require__(59);
+const hiddenRightbar_1 = __webpack_require__(60);
 Object.defineProperty(exports, "hiddenRightbar", { enumerable: true, get: function () { return hiddenRightbar_1.hiddenRightbar; } });
-const playerDownload_1 = __webpack_require__(60);
+const playerDownload_1 = __webpack_require__(61);
 Object.defineProperty(exports, "playerDownload", { enumerable: true, get: function () { return playerDownload_1.playerDownload; } });
-const settingsEvents_1 = __webpack_require__(61);
+const settingsEvents_1 = __webpack_require__(62);
 Object.defineProperty(exports, "settingsEvents", { enumerable: true, get: function () { return settingsEvents_1.settingsEvents; } });
-const disableRedirect_1 = __webpack_require__(62);
+const disableRedirect_1 = __webpack_require__(63);
 Object.defineProperty(exports, "disableRedirect", { enumerable: true, get: function () { return disableRedirect_1.disableRedirect; } });
-const settingsFriends_1 = __webpack_require__(63);
+const settingsFriends_1 = __webpack_require__(64);
 Object.defineProperty(exports, "settingsFriends", { enumerable: true, get: function () { return settingsFriends_1.settingsFriends; } });
 const settingsWeather_1 = __webpack_require__(11);
 Object.defineProperty(exports, "settingsWeather", { enumerable: true, get: function () { return settingsWeather_1.settingsWeather; } });
-const settingsFeatures_1 = __webpack_require__(64);
+const settingsFeatures_1 = __webpack_require__(65);
 Object.defineProperty(exports, "settingsFeatures", { enumerable: true, get: function () { return settingsFeatures_1.settingsFeatures; } });
-const videoSpeedPlayback_1 = __webpack_require__(66);
+const videoSpeedPlayback_1 = __webpack_require__(67);
 Object.defineProperty(exports, "videoSpeedPlayback", { enumerable: true, get: function () { return videoSpeedPlayback_1.videoSpeedPlayback; } });
-const settingsBackground_1 = __webpack_require__(67);
+const settingsBackground_1 = __webpack_require__(68);
 Object.defineProperty(exports, "settingsBackground", { enumerable: true, get: function () { return settingsBackground_1.settingsBackground; } });
-const settingsBackupMenu_1 = __webpack_require__(68);
+const settingsBackupMenu_1 = __webpack_require__(69);
 Object.defineProperty(exports, "settingsBackupMenu", { enumerable: true, get: function () { return settingsBackupMenu_1.settingsBackupMenu; } });
 const checkUpdates_1 = __webpack_require__(12);
 Object.defineProperty(exports, "checkUpdates", { enumerable: true, get: function () { return checkUpdates_1.checkUpdates; } });
 Object.defineProperty(exports, "getUpdater", { enumerable: true, get: function () { return checkUpdates_1.getUpdater; } });
-const settingsRecentSmiles_1 = __webpack_require__(69);
+const settingsRecentSmiles_1 = __webpack_require__(70);
 Object.defineProperty(exports, "settingsRecentSmiles", { enumerable: true, get: function () { return settingsRecentSmiles_1.settingsRecentSmiles; } });
-const settingsChangelogMenu_1 = __webpack_require__(70);
+const settingsChangelogMenu_1 = __webpack_require__(71);
 Object.defineProperty(exports, "settingsChangelogMenu", { enumerable: true, get: function () { return settingsChangelogMenu_1.settingsChangelogMenu; } });
 
 
@@ -950,6 +954,7 @@ const init = () => {
     components_1.apiDebugger(settings_1._SETTINGS.apidebug);
     components_1.freeStickers(settings_1._SETTINGS.sticker);
     components_1.friendsOnline(settings_1._SETTINGS.friendsOn);
+    components_1.stickyHeader(settings_1._SETTINGS.stickyheader);
     /**
      * ? Единоразовая инициализация
      * ! Только для PC версии сайта
@@ -1013,9 +1018,9 @@ const utils_1 = __webpack_require__(0);
 exports.adBlock = () => {
     try {
         // Удаляем всплывающую рекламу
-        utils_1.qsa('img[src*="static/i/close3.png"]').forEach(e => { var _a, _b; return (_b = (_a = e.parentElement) === null || _a === void 0 ? void 0 : _a.parentElement) === null || _b === void 0 ? void 0 : _b.remove(); });
+        utils_1.qsa('img[src$="static/i/close3.png"]').forEach(e => { var _a, _b; return (_b = (_a = e.parentElement) === null || _a === void 0 ? void 0 : _a.parentElement) === null || _b === void 0 ? void 0 : _b.remove(); });
         // Удаляем рекламу по атрибуту title
-        utils_1.qsa('a[title*="Реклама"').forEach(e => { var _a; return (_a = e.parentElement) === null || _a === void 0 ? void 0 : _a.remove(); });
+        utils_1.qsa('a[title="Реклама"').forEach(e => { var _a; return (_a = e.parentElement) === null || _a === void 0 ? void 0 : _a.remove(); });
         // Удаляем виджет ВК в правой панели
         utils_1.qsa('#vk_groups').forEach(e => { var _a; return (_a = e.parentElement) === null || _a === void 0 ? void 0 : _a.remove(); });
         // Прототипируем XMLHttpRequest для блокировки рекламы
@@ -2412,6 +2417,9 @@ exports.settingsMenu = () => {
                                                         index_1.freeStickers(checked) :
                                                         utils_1.remove(utils_1.qs('#SP_PLUS_STICKERS'));
                                                     break;
+                                                case 'stickyheader':
+                                                    index_1.stickyHeader(checked);
+                                                    break;
                                                 case 'oldheader':
                                                     index_1.oldHeader(checked);
                                                     break;
@@ -2587,6 +2595,49 @@ exports.settingsMenu = () => {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.stickyHeader = void 0;
+const utils_1 = __webpack_require__(0);
+exports.stickyHeader = (b) => {
+    let wrapAll = utils_1.qs('#wrap_all');
+    let leftNav = utils_1.qs('#left_nav');
+    let header = utils_1.qs('#header_elements');
+    let mainShadow = utils_1.qs('#main_shadow');
+    let infoBlock = utils_1.qs('#top_info_block');
+    let sidebarLogo = utils_1.qs('div.sidebar-logo');
+    try {
+        if (b && !header.hasAttribute('sp-sticky-header')) {
+            // фиксированное положение блока (при смене версии сайта)
+            utils_1.css(infoBlock, `position: fixed; width: ${mainShadow.clientWidth}px; z-index: 9999;`);
+            // опускаем основной контейнер
+            utils_1.css(mainShadow, 'padding-top: 45px;');
+            // стили для логотипа
+            utils_1.css(sidebarLogo, `position: fixed; width: ${leftNav.clientWidth}px; top: 0px; z-index: 9999;`);
+            // стили для шапки
+            utils_1.css(header, `position: fixed; width: ${mainShadow.clientWidth - leftNav.clientWidth + 1}px; left: ${wrapAll.offsetLeft + leftNav.clientWidth}px; top: 0px; z-index: 9999;`);
+            header.setAttribute('sp-sticky-header', '1');
+        }
+        else if (header.hasAttribute('sp-sticky-header')) {
+            // удаление применных стилей
+            header.removeAttribute('style');
+            infoBlock.removeAttribute('style');
+            mainShadow.removeAttribute('style');
+            sidebarLogo.removeAttribute('style');
+            header.removeAttribute('sp-sticky-header');
+        }
+    }
+    catch (e) {
+        utils_1.error('Ошибка (stickyHeader.ts): ' + e);
+    }
+};
+
+
+/***/ }),
+/* 55 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteReaders = void 0;
 const utils_1 = __webpack_require__(0);
 const strings_1 = __webpack_require__(1);
@@ -2673,7 +2724,7 @@ exports.deleteReaders = () => {
 
 
 /***/ }),
-/* 55 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2717,7 +2768,7 @@ exports.galleryRotate = () => {
 
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2742,7 +2793,7 @@ exports.sidebarButton = () => {
 
 
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2799,7 +2850,7 @@ const unixTime = () => Math.round(new Date().getTime() / 1000.0);
 
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2905,7 +2956,7 @@ exports.deleteComments = () => {
 
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2926,7 +2977,7 @@ exports.hiddenRightbar = (b) => {
             rightbar.style.display = 'none';
             rightbar.setAttribute('sp-hidden-rightbar', '1');
         }
-        else if (!settings_1._SETTINGS.hrightbar && rightbar.hasAttribute('sp-hidden-rightbar')) {
+        else if (rightbar.hasAttribute('sp-hidden-rightbar')) {
             rightbar.style.display = 'block';
             rightbar.removeAttribute('sp-hidden-rightbar');
         }
@@ -2938,7 +2989,7 @@ exports.hiddenRightbar = (b) => {
 
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2984,7 +3035,7 @@ exports.playerDownload = () => {
 
 
 /***/ }),
-/* 61 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3135,7 +3186,7 @@ exports.settingsEvents = (e) => {
 
 
 /***/ }),
-/* 62 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3151,7 +3202,7 @@ exports.disableRedirect = () => {
 
 
 /***/ }),
-/* 63 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3199,7 +3250,7 @@ exports.settingsFriends = (e) => {
 
 
 /***/ }),
-/* 64 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3207,7 +3258,7 @@ exports.settingsFriends = (e) => {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.settingsFeatures = void 0;
 const utils_1 = __webpack_require__(0);
-const newbeeQuest_1 = __webpack_require__(65);
+const newbeeQuest_1 = __webpack_require__(66);
 const settings_1 = __webpack_require__(2);
 const strings_1 = __webpack_require__(1);
 // Встроенные возможности сайта
@@ -3305,7 +3356,7 @@ const btnWrap = (str) => `<span class="b">${str}<span class="ico ico_arr ico_m">
 
 
 /***/ }),
-/* 65 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3333,7 +3384,7 @@ exports.newbeeQuest = async () => {
 
 
 /***/ }),
-/* 66 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3373,7 +3424,7 @@ exports.videoSpeedPlayback = () => {
 
 
 /***/ }),
-/* 67 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3642,7 +3693,7 @@ const setColor = () => {
 
 
 /***/ }),
-/* 68 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3808,7 +3859,7 @@ const handleErrors = (target, errorsBlock, json) => {
 
 
 /***/ }),
-/* 69 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3847,7 +3898,7 @@ exports.settingsRecentSmiles = (e) => {
 
 
 /***/ }),
-/* 70 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
