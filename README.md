@@ -1,4 +1,4 @@
-SpacesPlus — Powerfull userscript for Spaces.ru
+SpacesPlus — Powerful userscript for Spaces.ru
 ===============================================
 
 ![Version](https://img.shields.io/github/package-json/v/spaces-dev/SpacesPlus?color=blue)
@@ -25,7 +25,9 @@ SpacesPlus — Powerfull userscript for Spaces.ru
     - Возможность изменять звук уведомлений
     - Панель друзей онлайн
     - Бесплатные стикеры
+    - Закрепление шапки
     - Возвращает кнопку почту и ленты на свои прежние места
+    - Панель ранее использованных смайликов
     - Возможность изменять фон сайта
     - ~~Виджет почты~~
     - Виджет погоды
