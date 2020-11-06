@@ -57,7 +57,7 @@ import { _SETTINGS } from './settings'
                 }
             })
         } catch (e) {
-            error('Ошибка (index.ts): ' + e)
+            error('Ошибка (main.ts): ' + e)
         }
     }
 })()

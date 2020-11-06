@@ -1,4 +1,4 @@
-export type ISettingsStrings = {
+export type ISetString = {
     readonly [key: string]: string
 }
 

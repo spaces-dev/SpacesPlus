@@ -22,7 +22,7 @@ export const messageBox = (title: string, content: string, close: boolean, timer
         class: 'content-item3 wbg oh',
         html: (close ?
             '<span class="sp sp-remove-grey pointer right notif_close close_h" onclick="document.body.removeChild(this.parentNode.parentNode)" title="Закрыть"></span>' :
-            '') + `${title}<div class="pad_t_a"></div><small class="grey">${content}</small>`
+            '') + `${title}<div class="pad_t_a"></div><span style="font-size: 13px" class="grey">${content}</span>`
     })
 
     Container.appendChild(Main)

@@ -32,7 +32,7 @@ import {
 } from './index'
 
 import { DEVICE, SPACES, PKG_VERSION } from '../strings'
-import { _SETSTRINGS, _SETTINGS } from '../settings'
+import { _DESCSTRINGS, _SETSTRINGS, _SETTINGS } from '../settings'
 
 export const settingsMenu = () => {
     if (getPath() === '/settings/' && !qs('#SP_PLUS_SETLINK')) {
@@ -155,6 +155,22 @@ export const settingsMenu = () => {
 
                                     label.appendChild(checkbox)
                                     label.appendChild(description)
+
+                                    // кнопка 'описание функции'
+                                    if (_DESCSTRINGS[i] !== undefined) {
+
+                                        let info = ce('a', {
+                                            href: '#',
+                                            class: 'sp sp-info sp_info-btn',
+                                            onclick: () => {
+                                                messageBox(_SETSTRINGS[i], _DESCSTRINGS[i], true)
+                                                return false
+                                            }
+                                        })
+
+                                        label.appendChild(info)
+                                    }
+
                                     setArea.appendChild(label)
                                     setArea.appendChild(label)
 
