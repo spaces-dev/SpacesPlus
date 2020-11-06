@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        Spaces+
-// @version     3.0.0
+// @version     3.1.0
 // @author      Vitalij Ryndin
-// @description 🚀 Powerfull userscript for Spaces.ru
+// @description 🚀 Powerful userscript for Spaces.ru
 // @homepage    https://spaces-dev.github.io/SpacesPlus
 // @match       *://(spaces.ru|spac.me|spcs.me|spaces.im|gdespaces.com|spac1.com|spac1.net|spaces-blogs.com)/*
 // @namespace   https://spaces-dev.github.io/SpacesPlus
@@ -902,16 +902,16 @@ exports.checkUpdates = () => {
                 hideVer = settings_1._SETTINGS.upVersion;
             strings_1.OVERRIDE.VERSION = Math.max(hideVer, strings_1.OVERRIDE.VERSION);
             if (json.history[0].build > strings_1.OVERRIDE.VERSION) {
-                utils_1.messageBox(`Доступна новая версия Spaces+ ${utils_1.rever(json.history[0].build)}`, `<div class="pad_t_a"></div>${json.history[0].changes}<div id="SP_UPDATER_BUTTONS" class="pad_t_a"><a class="btn btn_green btn_input" href="${strings_1.ENV_PATH}/spaces-plus.user.js?r=${strings_1.REVISION}" onclick="document.body.removeChild(this.parentNode.parentNode.parentNode); return true"> Обновить</a></div>`, true);
+                utils_1.messageBox(`Доступна новая версия Spaces+ ${utils_1.rever(json.history[0].build)}`, `<div class="pad_t_a"></div>${json.history[0].changes}<div id="SP_UPDATER_BUTTONS" class="pad_t_a"><a class="btn btn_green btn_input" href="${strings_1.ENV_PATH}/spaces-plus.user.js?r=${strings_1.REVISION}" onclick="document.body.removeChild(this.parentNode.parentNode.parentNode.parentNode)">Обновить</a></div>`, true);
                 if (utils_1.qs('#SP_PLUS_ALERT')) {
                     const hide = utils_1.ce('a', {
                         href: '#',
                         class: 'btn btn_white btn_input right sticker-close_btn',
                         html: 'Больше не показывать',
-                        onclick: (e) => {
+                        onclick: () => {
                             settings_1._SETTINGS.upVersion = json.history[0].build;
                             utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
-                            document.body.removeChild(e.target.parentNode.parentNode.parentNode);
+                            utils_1.qs('#SP_PLUS_ALERT').remove();
                             return false;
                         }
                     });
@@ -1351,7 +1351,7 @@ exports.delCookie = (name) => setCookie_1.setCookie(name, null, { expires: -1 })
 /* 26 */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"name\":\"spaces-plus\",\"description\":\"🚀 Powerfull userscript for Spaces.ru\",\"homepage\":\"https://spaces-dev.github.io/SpacesPlus\",\"version\":\"3.0.0\",\"author\":{\"name\":\"Vitalij Ryndin\",\"email\":\"sys@crashmax.ru\",\"url\":\"https://crashmax.ru\"},\"scripts\":{\"dev\":\"cross-env NODE_ENV=development webpack-dev-server --config-name main --host localhost --watch-poll\",\"build\":\"cross-env NODE_ENV=production webpack --progress\"},\"devDependencies\":{\"@types/node\":\"^14.11.8\",\"@types/webpack\":\"^4.41.22\",\"@types/webpack-dev-server\":\"^3.11.0\",\"clean-webpack-plugin\":\"^3.0.0\",\"copy-webpack-plugin\":\"^6.2.1\",\"cross-env\":\"^7.0.2\",\"optimize-css-assets-webpack-plugin\":\"^5.0.4\",\"ts-loader\":\"^8.0.4\",\"ts-node\":\"^9.0.0\",\"typescript\":\"^4.0.2\",\"webpack\":\"^4.44.2\",\"webpack-cli\":\"^3.3.12\",\"webpack-dev-server\":\"^3.11.0\",\"webpack-userscript\":\"^2.5.6\"}}");
+module.exports = JSON.parse("{\"name\":\"spaces-plus\",\"description\":\"🚀 Powerful userscript for Spaces.ru\",\"homepage\":\"https://spaces-dev.github.io/SpacesPlus\",\"version\":\"3.1.0\",\"author\":{\"name\":\"Vitalij Ryndin\",\"email\":\"sys@crashmax.ru\",\"url\":\"https://crashmax.ru\"},\"scripts\":{\"dev\":\"cross-env NODE_ENV=development webpack-dev-server --config-name main --host localhost --watch-poll\",\"build\":\"cross-env NODE_ENV=production webpack --progress\"},\"devDependencies\":{\"@types/node\":\"^14.11.8\",\"@types/webpack\":\"^4.41.22\",\"@types/webpack-dev-server\":\"^3.11.0\",\"clean-webpack-plugin\":\"^3.0.0\",\"copy-webpack-plugin\":\"^6.2.1\",\"cross-env\":\"^7.0.2\",\"optimize-css-assets-webpack-plugin\":\"^5.0.4\",\"ts-loader\":\"^8.0.4\",\"ts-node\":\"^9.0.0\",\"typescript\":\"^4.0.2\",\"webpack\":\"^4.44.2\",\"webpack-cli\":\"^3.3.12\",\"webpack-dev-server\":\"^3.11.0\",\"webpack-userscript\":\"^2.5.6\"}}");
 
 /***/ }),
 /* 27 */

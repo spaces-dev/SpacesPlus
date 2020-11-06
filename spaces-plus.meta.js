@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        Spaces+
-// @version     3.0.0
+// @version     3.1.0
 // @author      Vitalij Ryndin
-// @description 🚀 Powerfull userscript for Spaces.ru
+// @description 🚀 Powerful userscript for Spaces.ru
 // @homepage    https://spaces-dev.github.io/SpacesPlus
 // @match       *://(spaces.ru|spac.me|spcs.me|spaces.im|gdespaces.com|spac1.com|spac1.net|spaces-blogs.com)/*
 // @namespace   https://spaces-dev.github.io/SpacesPlus
