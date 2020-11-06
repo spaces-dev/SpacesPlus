@@ -15,6 +15,7 @@ import {
     favoriteUser,
     freeStickers,
     settingsMenu,
+    stickyHeader,
     recentSmiles,
     deleteReaders,
     galleryRotate,
@@ -79,6 +80,7 @@ const init = () => {
     apiDebugger(_SETTINGS.apidebug)
     freeStickers(_SETTINGS.sticker)
     friendsOnline(_SETTINGS.friendsOn)
+    stickyHeader(_SETTINGS.stickyheader)
 
     /**
      * ? Единоразовая инициализация

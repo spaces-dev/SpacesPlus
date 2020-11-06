@@ -19,6 +19,7 @@ import {
     oldHeader,
     scrollMove,
     freeStickers,
+    stickyHeader,
     friendsOnline,
     hiddenRightbar,
     settingsEvents,
@@ -122,6 +123,9 @@ export const settingsMenu = () => {
                                                     checked ?
                                                         freeStickers(checked) :
                                                         remove(qs('#SP_PLUS_STICKERS'))
+                                                    break
+                                                case 'stickyheader':
+                                                    stickyHeader(checked)
                                                     break
                                                 case 'oldheader':
                                                     oldHeader(checked)

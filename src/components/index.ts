@@ -14,6 +14,7 @@ import { favoriteUser } from './favoriteUser'
 import { freeStickers } from './freeStickers'
 import { recentSmiles } from './recentSmiles'
 import { settingsMenu } from './settingsMenu'
+import { stickyHeader } from './stickyHeader'
 import { deleteReaders } from './deleteReaders'
 import { friendsOnline } from './friendsOnline'
 import { galleryRotate } from './galleryRotate'
@@ -53,6 +54,7 @@ export {
     freeStickers,
     recentSmiles,
     settingsMenu,
+    stickyHeader,
     deleteReaders,
     friendsOnline,
     galleryRotate,

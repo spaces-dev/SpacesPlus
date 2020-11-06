@@ -52,6 +52,7 @@ export interface ISettings {
     rscroll: boolean
     hrightbar: boolean
     adblock: boolean
+    stickyheader: boolean
     apidebug: boolean
     karma: boolean
     sticker: boolean
