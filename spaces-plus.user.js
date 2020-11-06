@@ -222,8 +222,36 @@ OVERRIDE.VERSION = Number(PKG_VERSION.split('.').join(''));
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-exports._SETTINGS = exports._SETSTRINGS = void 0;
+exports._SETTINGS = exports._SETSTRINGS = exports._DESCSTRINGS = void 0;
 const strings_1 = __webpack_require__(1);
+/**
+ * * Описание настроек
+ * ! Указывать описание для каждого пункта настроек НЕ обязательно
+ */
+exports._DESCSTRINGS = {
+    'comments': 'Функция будет полезна тем, кто часто удаляет много комментариев. Работает в любом месте, где у Вас есть возможность удалять комментарии, будь это ваш блог или гостевая.',
+    'blogsd': `Функция позволяет удалять сразу несколько блогов.</br></br><img src="${strings_1.ENV_PATH}/screens/sort-blogs.png"></br>Работает только в <a href="${strings_1.SPACES}/diary/view/?Short=0&sort=0">"Расширенном виде"</a> (нажмите на ссылку, чтобы включить этот вид - откроется страница с вашими блогами).`,
+    'readersd': 'Функция позволяет удалять сразу несколько читателей, может быть вам это пригодиться.',
+    'favorite': `<img src="${strings_1.ENV_PATH}/screens/favorite-user.png"></br>Функция добавляет на страницу каждого пользователя кнопку "В закладки". Повторно нажав на кнопку, Вы сможете удалить пользователя из закладок.`,
+    'grotate': `<img src="${strings_1.ENV_PATH}/screens/rotate-image.png"></br>Добавляется кнопка в просмотрщик фотографий, с помощью ее можно поворачивать изображение.`,
+    'oldheader': 'Функция меняет кнопку почты и ленты местами, как было раньше.',
+    'playerdn': `<img src="${strings_1.ENV_PATH}/screens/player-download.png"></br>Добавляется кнопка в аудиоплеер, которая позволяет скачивать воспроизведенный вами трек.`,
+    'dredirect': 'Функция избавляем Вас от назойливого предупреждения, когда вы хотите перейти по внешней ссылке.',
+    'online': 'Функция позволяет смотреть точное время онлайн у пользователей в анкетах.',
+    'coins': 'Функция в автоматическом режиме ищет и собирает бонусные монеты.',
+    'rscroll': 'Перемещает полосу автоскролла на правую сторону.',
+    'hrightbar': 'Функция скрывает правое меню (страница становиться на 25% шире).</br></br>Конфликтует c функцией "Виджет погоды".',
+    'adblock': 'Функция полностью скрывает назойливую рекламу и не только.',
+    'stickyheader': 'Функция закрепляет шапку сайта.',
+    'notify': `<img src="${strings_1.ENV_PATH}/screens/browser-permissions.png"></br>Для работы, в настройках браузера необходимо разрешить сайту использовать "Уведомления" и "Звук".</br></br>Функция позволяет изменять звук уведомлений (указывайте прямую ссылку на файл!), настраивать громкость звука и отмечать из каких разделов получать уведомления.`,
+    'playback': `<img src="${strings_1.ENV_PATH}/screens/video-speed.png"></br>В видеоплеере добавляется кнопка ускорения видео, примерно как на YouTube.`,
+    'recents': `<img src="${strings_1.ENV_PATH}/screens/recent-smiles.png"></br>В меню смайликов добавляется раздел с ранее использованными смайликами, для добавления используйте смайлики/стикеры из меню смайликов.`,
+    'karma': 'Функция в автоматическом режиме подтверждает назойливую карму.',
+    'friendsOn': `<img src="${strings_1.ENV_PATH}/screens/friends-online.png"></br>Функция добавляет в левое меню панель с друзьями онлайн. Для работы необходимо включить раздел <a href="${strings_1.SPACES}/sidebar/links/?T=4">Друзья</a>, если он у вас выключен.</br></br>Панель ограничена от 1 до 15 друзей онлайн.`,
+    'bodystyle': 'Позволяет украшать фон сайта на свой вкус. В подборке имеется 20 изображений для фона, также Вы можете переключиться на цветной фон.',
+    'weather': `<img src="${strings_1.ENV_PATH}/screens/weather-widget.png"></br>Отображает информацию о текущем состоянии погоды, температура, облачность, влажность, давление и ветер.</br></br>Имеется возможность изменить город, API-Ключ и интервал обновления погоды.`,
+    'sticker': `Функция позволяет бесплатно использовать стикеры. Работает в почте (при отправки из <a href="${strings_1.SPACES}/mail/write/">"Новое сообщение"</a> не работает!), в комментариях, при создании блогов или тем на форуме.`
+};
 /**
  * * Названия функций в меню настроек
  * ! Положение в объекте НЕ влияет на рассположение в списке настроек
@@ -933,7 +961,7 @@ const settings_1 = __webpack_require__(2);
             });
         }
         catch (e) {
-            utils_1.error('Ошибка (index.ts): ' + e);
+            utils_1.error('Ошибка (main.ts): ' + e);
         }
     }
 })();
@@ -1494,7 +1522,7 @@ exports.messageBox = (title, content, close, timer) => {
         class: 'content-item3 wbg oh',
         html: (close ?
             '<span class="sp sp-remove-grey pointer right notif_close close_h" onclick="document.body.removeChild(this.parentNode.parentNode)" title="Закрыть"></span>' :
-            '') + `${title}<div class="pad_t_a"></div><small class="grey">${content}</small>`
+            '') + `${title}<div class="pad_t_a"></div><span style="font-size: 13px" class="grey">${content}</span>`
     });
     Container.appendChild(Main);
     document.body.appendChild(Container);
@@ -2448,6 +2476,18 @@ exports.settingsMenu = () => {
                                     let label = utils_1.ce('label', { class: `stnd-link bstrwrap${unsupported ? ' sp_unsupported' : ''}` });
                                     label.appendChild(checkbox);
                                     label.appendChild(description);
+                                    // кнопка 'описание функции'
+                                    if (settings_1._DESCSTRINGS[i] !== undefined) {
+                                        let info = utils_1.ce('a', {
+                                            href: '#',
+                                            class: 'sp sp-info sp_info-btn',
+                                            onclick: () => {
+                                                utils_1.messageBox(settings_1._SETSTRINGS[i], settings_1._DESCSTRINGS[i], true);
+                                                return false;
+                                            }
+                                        });
+                                        label.appendChild(info);
+                                    }
                                     setArea.appendChild(label);
                                     setArea.appendChild(label);
                                     // отключаем неподдерживаемые функции
@@ -2836,7 +2876,7 @@ exports.weatherWidget = () => {
         let content = utils_1.ce('div', {
             class: 'content',
             style: 'padding: 0px 16px 16px 16px',
-            html: `<img src="https://openweathermap.org/img/wn/${w.weather[0].icon}@2x.png" class="sp_weather-img"><div class="grey sp_weather-container"><p>${Math.round(w.main.temp)}°C</p><p>${utils_1.toUpper(w.weather[0].description)}</p></div><table class="grey sp_weather-table"><tbody><tr><td>Облачность: </td><td>${w.clouds.all}%</td></tr><tr><td>Влажность: </td><td>${w.main.humidity}%</td></tr><tr><td>Давление: </td><td>${Math.round(w.main.pressure * 0.75)}mmHg</td></tr><tr><td>Ветер: </td><td>${w.wind.speed}m/sec</td></tr></tbody></table>`
+            html: `<img src="https://openweathermap.org/img/wn/${w.weather[0].icon}@2x.png" class="sp_img-center"><div class="grey sp_weather-container"><p>${Math.round(w.main.temp)}°C</p><p>${utils_1.toUpper(w.weather[0].description)}</p></div><table class="grey sp_weather-table"><tbody><tr><td>Облачность: </td><td>${w.clouds.all}%</td></tr><tr><td>Влажность: </td><td>${w.main.humidity}%</td></tr><tr><td>Давление: </td><td>${Math.round(w.main.pressure * 0.75)}mmHg</td></tr><tr><td>Ветер: </td><td>${w.wind.speed}m/sec</td></tr></tbody></table>`
         });
         widgets_group.appendChild(widget_header);
         widgets_group.appendChild(content);
