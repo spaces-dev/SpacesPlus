@@ -8,7 +8,7 @@ import { apiDebugger } from './apiDebugger'
 import { coinsAccept } from './coinsAccept'
 import { deleteBlogs } from './deleteBlogs'
 import { karmaAccept } from './karmaAccept'
-import { soundEvents } from './soundEvents'
+import { soundNotify } from './soundNotify'
 import { betaFeatures } from './betaFeatures'
 import { favoriteUser } from './favoriteUser'
 import { freeStickers } from './freeStickers'
@@ -23,7 +23,7 @@ import { weatherWidget } from './weatherWidget'
 import { deleteComments } from './deleteComments'
 import { hiddenRightbar } from './hiddenRightbar'
 import { playerDownload } from './playerDownload'
-import { settingsEvents } from './settingsEvents'
+import { settingsNotify } from './settingsNotify'
 import { disableRedirect } from './disableRedirect'
 import { settingsFriends } from './settingsFriends'
 import { settingsWeather } from './settingsWeather'
@@ -47,7 +47,7 @@ export {
     coinsAccept,
     deleteBlogs,
     karmaAccept,
-    soundEvents,
+    soundNotify,
     betaFeatures,
     checkUpdates,
     favoriteUser,
@@ -63,7 +63,7 @@ export {
     deleteComments,
     hiddenRightbar,
     playerDownload,
-    settingsEvents,
+    settingsNotify,
     disableRedirect,
     settingsFriends,
     settingsWeather,

@@ -12,7 +12,7 @@ import {
 import { BASE_URL } from '../strings'
 import { _SETTINGS } from '../settings'
 
-export const settingsEvents = (e: any) => {
+export const settingsNotify = (e: any) => {
     try {
 
         if (!('Notification' in window)) {
@@ -49,13 +49,13 @@ export const settingsEvents = (e: any) => {
 
         let eventsUrl = ce('input', {
             type: 'text',
-            value: _SETTINGS.events.url,
+            value: _SETTINGS.notifySet.url,
             class: 'text-input'
         })
 
         eventsUrl.addEventListener('change', (e: any) => {
             if ((isValidUrl(e.target.value) && /\.(ogg|mp3|wav)$/i.test(e.target.value)) || trim(e.target.value) !== '') {
-                _SETTINGS.events.url = trim(e.target.value)
+                _SETTINGS.notifySet.url = trim(e.target.value)
                 setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
                 eventsUrl.className = 'text-input'
             } else {
@@ -69,14 +69,14 @@ export const settingsEvents = (e: any) => {
             style: 'margin-left: 7px; font-size: small; top: 23px',
             title: 'Прослушать',
             onclick: () => {
-                playSound(_SETTINGS.events.url, _SETTINGS.events.volume)
+                playSound(_SETTINGS.notifySet.url, _SETTINGS.notifySet.volume)
                 return false
             }
         })
 
         let volume = ce('div', {
             class: 'label__desc',
-            html: _SETTINGS.events.volume + '%'
+            html: _SETTINGS.notifySet.volume + '%'
         })
 
         let volRange = ce('input', {
@@ -84,7 +84,7 @@ export const settingsEvents = (e: any) => {
             min: 0,
             max: 100,
             step: 1,
-            value: _SETTINGS.events.volume
+            value: _SETTINGS.notifySet.volume
         })
 
         volRange.onchange = volRange.oninput = (e: any) => {
@@ -92,7 +92,7 @@ export const settingsEvents = (e: any) => {
                 let setVol = parseInt(e.target.value, 10)
                 if (setVol < 0 || setVol > 100) setVol = 70
                 volume.innerHTML = setVol + '%'
-                _SETTINGS.events.volume = setVol
+                _SETTINGS.notifySet.volume = setVol
                 setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
             }
         }
@@ -101,9 +101,9 @@ export const settingsEvents = (e: any) => {
             type: 'checkbox',
             id: 'sp_event_mail',
             class: 'sp-checkbox-square',
-            checked: _SETTINGS.events.mail,
+            checked: _SETTINGS.notifySet.mail,
             onclick: (e: any) => {
-                _SETTINGS.events.mail = e.target.checked
+                _SETTINGS.notifySet.mail = e.target.checked
                 setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
             }
         })
@@ -117,9 +117,9 @@ export const settingsEvents = (e: any) => {
             type: 'checkbox',
             id: 'sp_event_journal',
             class: 'sp-checkbox-square',
-            checked: _SETTINGS.events.journal,
+            checked: _SETTINGS.notifySet.journal,
             onclick: (e: any) => {
-                _SETTINGS.events.journal = e.target.checked
+                _SETTINGS.notifySet.journal = e.target.checked
                 setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
             }
         })
@@ -133,9 +133,9 @@ export const settingsEvents = (e: any) => {
             type: 'checkbox',
             id: 'sp_event_feed',
             class: 'sp-checkbox-square',
-            checked: _SETTINGS.events.feed,
+            checked: _SETTINGS.notifySet.feed,
             onclick: (e: any) => {
-                _SETTINGS.events.feed = e.target.checked
+                _SETTINGS.notifySet.feed = e.target.checked
                 setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
             }
         })

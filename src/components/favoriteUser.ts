@@ -38,7 +38,7 @@ export const favoriteUser = async () => {
                             id: 'SP_PLUS_INFAVORITE',
                             html: `<a href="${SPACES}/bookmarks/add/?object_id=${json.id}&object_type=11" class="stnd-link" title="Добавить в закладки"><span class="sp sp-fav"></span> B закладки</a>`,
                             onclick: () => {
-                                confirmBox(`Вы действительно хотите добавить пользователя <b>${json.name}</b> в закладки?`, false, async () => {
+                                confirmBox(`Добавить пользователя <b>${json.name}</b> в закладки?`, false, async () => {
                                     await http('POST', `${SPACES}/ajax/bookmarks/add/`, false, `object_id=${json.id}&object_type=11&show_all_tags_state=0&new_tags=Люди&cfms=Добавить&CK=${OVERRIDE.CK}`).then(e => {
                                         e.status === 200 ?
                                             isFav(json.id, json.name, favoriteButton) :

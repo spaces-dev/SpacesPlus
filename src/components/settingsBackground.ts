@@ -41,14 +41,14 @@ export const settingsBackground = (e: any) => {
         let inputImageUrl = ce('input', {
             type: 'text',
             id: 'image-input',
-            value: _SETTINGS.bodystyleSetting.url,
+            value: _SETTINGS.bodystyleSet.url,
             style: 'margin-bottom: 7px',
             class: 'text-input'
         })
 
         inputImageUrl.addEventListener('change', (a: any) => {
             if ((isValidUrl(a.target.value) && /\.(jpg|jpeg|png|gif)$/i.test(a.target.value)) || trim(a.target.value) !== '') {
-                _SETTINGS.bodystyleSetting.url = trim(a.target.value)
+                _SETTINGS.bodystyleSet.url = trim(a.target.value)
                 setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
                 setStyles()
                 inputImageUrl.className = 'text-input'
@@ -61,12 +61,12 @@ export const settingsBackground = (e: any) => {
             type: 'text',
             class: 'text-input',
             id: 'color-input',
-            value: _SETTINGS.bodystyleSetting.color
+            value: _SETTINGS.bodystyleSet.color
         })
 
         inputColor.addEventListener('input', (e: any) => {
             if (/^\#([A-Za-z0-9]{3,6})$/i.test(e.target.value)) {
-                _SETTINGS.bodystyleSetting.color = e.target.value
+                _SETTINGS.bodystyleSet.color = e.target.value
                 setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
                 setStyles()
                 inputColor.className = 'text-input'
@@ -79,19 +79,19 @@ export const settingsBackground = (e: any) => {
         let radioImage: any = ce('input', {
             type: 'radio',
             id: 'sp_set_bodystyle_URL',
-            checked: _SETTINGS.bodystyleSetting.urlchecked,
+            checked: _SETTINGS.bodystyleSet.urlchecked,
             class: 'sp-checkbox-circle',
             onclick: (a: any) => {
-                _SETTINGS.bodystyleSetting.urlchecked = a.target.checked
+                _SETTINGS.bodystyleSet.urlchecked = a.target.checked
 
                 if (a.target.checked && radioColor.checked) {
                     radioColor.checked = false
-                    _SETTINGS.bodystyleSetting.colorchecked = false
+                    _SETTINGS.bodystyleSet.colorchecked = false
                 }
 
                 setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
 
-                if (_SETTINGS.bodystyleSetting.urlchecked) {
+                if (_SETTINGS.bodystyleSet.urlchecked) {
                     setStyles()
                     setImage()
                 } else {
@@ -103,20 +103,20 @@ export const settingsBackground = (e: any) => {
         let radioColor: any = ce('input', {
             type: 'radio',
             id: 'sp_set_bodystyle_color',
-            checked: _SETTINGS.bodystyleSetting.colorchecked,
+            checked: _SETTINGS.bodystyleSet.colorchecked,
             class: 'sp-checkbox-circle',
             onclick: (a: any) => {
 
-                _SETTINGS.bodystyleSetting.colorchecked = a.target.checked
+                _SETTINGS.bodystyleSet.colorchecked = a.target.checked
 
                 if (a.target.checked && radioImage.checked) {
                     radioImage.checked = false
-                    _SETTINGS.bodystyleSetting.urlchecked = false
+                    _SETTINGS.bodystyleSet.urlchecked = false
                 }
 
                 setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
 
-                if (_SETTINGS.bodystyleSetting.colorchecked) {
+                if (_SETTINGS.bodystyleSet.colorchecked) {
                     setStyles()
                     setColor()
                 } else {
@@ -149,8 +149,8 @@ export const settingsBackground = (e: any) => {
         bgWrap.appendChild(label1)
         insertAfter(bgWrap, e.parentNode)
 
-        if (_SETTINGS.bodystyleSetting.urlchecked) { setImage() }
-        if (_SETTINGS.bodystyleSetting.colorchecked) { setColor() }
+        if (_SETTINGS.bodystyleSet.urlchecked) { setImage() }
+        if (_SETTINGS.bodystyleSet.colorchecked) { setColor() }
     } catch (e) {
         error('Ошибка (settingsBackground.ts): ' + e)
     }
@@ -193,7 +193,7 @@ const setImage = async () => {
                                 onclick: (e: any) => {
                                     // @ts-ignore
                                     qs('#image-input').value = e.target.src
-                                    _SETTINGS.bodystyleSetting.url = e.target.src
+                                    _SETTINGS.bodystyleSet.url = e.target.src
                                     setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
                                     setStyles()
                                 }
@@ -277,17 +277,17 @@ const setColor = () => {
                 qs('#color-input').addEventListener('change', (a: any) => {
                     if (/^\#([A-Za-z0-9]{3}|[A-Za-z0-9]{6})$/i.test(a.target.value) || a.target.value === '') {
                         a.target.className = 'text-input'
-                        _SETTINGS.bodystyleSetting.color = trim(a.target.value)
+                        _SETTINGS.bodystyleSet.color = trim(a.target.value)
                         setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
                         setStyles()
-                        picker.set(_SETTINGS.bodystyleSetting.color)
+                        picker.set(_SETTINGS.bodystyleSet.color)
                     } else {
                         a.target.className = 'text-input sp-input-error'
                     }
                 })
 
                 picker.enter()
-                picker.set(_SETTINGS.bodystyleSetting.color)
+                picker.set(_SETTINGS.bodystyleSet.color)
                 picker.on('change', (e: string) => {
                     const color = e.toUpperCase()
                     // @ts-ignore
@@ -295,7 +295,7 @@ const setColor = () => {
                     // @ts-ignore
                     qs('input[name=color]').value = '#' + color
                     qs('.colorpicker-color').style.backgroundColor = '#' + color
-                    _SETTINGS.bodystyleSetting.color = '#' + color
+                    _SETTINGS.bodystyleSet.color = '#' + color
                     setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
                     setStyles()
                 })
@@ -310,7 +310,7 @@ const setColor = () => {
                         // @ts-ignore
                         qs('input[name=color]').value = value
                         qs('.colorpicker-color').style.backgroundColor = value
-                        _SETTINGS.bodystyleSetting.color = value
+                        _SETTINGS.bodystyleSet.color = value
                         setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
                         setStyles()
                         picker.set(value)

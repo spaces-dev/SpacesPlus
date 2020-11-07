@@ -76,10 +76,10 @@ export const friendsOnline = (t?: boolean) => {
                                         frOnDiv.innerHTML = ''
 
                                         let lengthList = (
-                                            _SETTINGS.friendsOnMax >
+                                            _SETTINGS.friendsSet.max >
                                                 friendsList.length ?
                                                 friendsList.length :
-                                                _SETTINGS.friendsOnMax
+                                                _SETTINGS.friendsSet.max
                                         )
 
                                         if (countFriends !== friendsList.length && reCount < 3) {

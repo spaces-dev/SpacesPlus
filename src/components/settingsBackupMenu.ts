@@ -30,13 +30,13 @@ export const settingsBackupMenu = (id: string) => {
             target.innerHTML = ''
 
             // Предупреждение для ламеров
-            if (!_SETTINGS.hideNotyf.configImport) {
-                let hideNotyf = ce('span', {
+            if (!_SETTINGS.hideNotify.configImport) {
+                let hideNotify = ce('span', {
                     class: 'sp sp-remove-grey pointer right notif_close close_h',
                     style: 'margin: 10px',
                     title: 'Понятно, больше не показывать.',
                     onclick: () => {
-                        _SETTINGS.hideNotyf.configImport = true
+                        _SETTINGS.hideNotify.configImport = true
                         setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
                         remove(qs('#SP_CONFIG_JSON'))
                     }
@@ -49,7 +49,7 @@ export const settingsBackupMenu = (id: string) => {
                 })
 
                 let infoDiv = ce('div', { id: 'SP_CONFIG_JSON' })
-                infoDiv.appendChild(hideNotyf)
+                infoDiv.appendChild(hideNotify)
                 target.appendChild(infoDiv)
                 infoDiv.appendChild(smallInfo)
             }

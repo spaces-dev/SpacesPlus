@@ -30,13 +30,13 @@ export const settingsWeather = async (e: any) => {
      * Инициализация ¯\_(ツ)_/¯
      * Получаем город
      */
-    if (_SETTINGS.weatherSettings.city === null) {
+    if (_SETTINGS.weatherSet.city === null) {
         try {
             await http<IWhois>('GET', 'https://ipwhois.app/json/?objects=city,success&lang=ru', false).then(e => {
                 const json = e.parsedBody
 
                 if (json?.success) {
-                    _SETTINGS.weatherSettings.city = json.city
+                    _SETTINGS.weatherSet.city = json.city
                     setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
                     getWeather()
                 } else {
@@ -60,13 +60,13 @@ export const settingsWeather = async (e: any) => {
         class: 'text-input',
         style: 'margin-bottom: 7px',
         size: '32',
-        value: _SETTINGS.weatherSettings.key
+        value: _SETTINGS.weatherSet.key
     })
 
     apiKey.addEventListener('keypress', (e: any) => {
         if (e.keyCode === 13) {
             if (/^[a-f0-9]{32}$/i.test(e.target.value) || trim(e.target.value) !== '') {
-                _SETTINGS.weatherSettings.key = e.target.value
+                _SETTINGS.weatherSet.key = e.target.value
                 setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
                 getWeather()
                 apiKey.className = 'text-input'
@@ -84,13 +84,13 @@ export const settingsWeather = async (e: any) => {
         style: 'margin-bottom: 7px',
         size: '32',
         id: 'SP-CITY-INPUT',
-        value: _SETTINGS.weatherSettings.city
+        value: _SETTINGS.weatherSet.city
     })
 
     cityInp.addEventListener('keypress', (e: any) => {
         if (e.keyCode === 13) {
             if (/^([a-zA-Zа-яА-ЯёЁ]+[-]?[a-zA-Zа-яА-ЯёЁ]*[-]?[a-zA-Zа-яА-ЯёЁ]*[-]?[a-zA-Zа-яА-ЯёЁ]*)$/i.test(e.target.value) || trim(e.target.value) !== '') {
-                _SETTINGS.weatherSettings.city = e.target.value
+                _SETTINGS.weatherSet.city = e.target.value
                 setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
                 getWeather()
                 cityInp.className = 'text-input'
@@ -111,13 +111,13 @@ export const settingsWeather = async (e: any) => {
         style: 'margin-bottom: 7px',
         size: 4,
         attr: { maxlength: 3 },
-        value: _SETTINGS.weatherSettings.interval / 60
+        value: _SETTINGS.weatherSet.interval / 60
     })
 
     interval.addEventListener('change', (e: any) => {
         // от 1 минуты до 360 минут ¯\_(ツ)_/¯
         if (/^([1-9]|[1-8][0-9]|9[0-9]|[12][0-9]{2}|3[0-5][0-9]|360)$/i.test(e.target.value)) {
-            _SETTINGS.weatherSettings.interval = e.target.value * 60
+            _SETTINGS.weatherSet.interval = e.target.value * 60
             setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
             interval.className = 'text-input'
         } else {
@@ -138,7 +138,7 @@ export const settingsWeather = async (e: any) => {
  * Получаем погоду через openweathermap.org
  */
 export const getWeather = async () => {
-    const { language, units, city, key } = _SETTINGS.weatherSettings
+    const { language, units, city, key } = _SETTINGS.weatherSet
 
     try {
         let url = `https://api.openweathermap.org/data/2.5/weather?lang=${language}&units=${units}&q=${city}&appid=${key}`
@@ -163,7 +163,7 @@ export const getWeather = async () => {
             if (qs('#SP_WIDGET_WEATHER')) remove(qs('#SP_WIDGET_WEATHER'))
 
             if (json?.cod === 200) {
-                _SETTINGS.weatherSettings.city = json.name
+                _SETTINGS.weatherSet.city = json.name
                 setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
                 setCookie('SP_WEATHER', JSON.stringify(json))
             }

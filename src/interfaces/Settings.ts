@@ -1,20 +1,8 @@
-export type ISetString = {
+export type ISetStrings = {
     readonly [key: string]: string
 }
 
-export interface RecentSmiles {
-    show: boolean
-    max: number
-}
-
-export interface BodystyleSetting {
-    url: string
-    color: string
-    urlchecked: boolean
-    colorchecked: boolean
-}
-
-export interface Events {
+export interface NotifySet {
     url: string
     volume: number
     mail: boolean
@@ -22,12 +10,27 @@ export interface Events {
     feed: boolean
 }
 
-export interface HideNotyf {
-    cookieEditor: boolean
+export interface RecentSmiles {
+    show: boolean
+    max: number
+}
+
+export interface FriendsSet {
+    max: number
+}
+
+export interface HideNotify {
     configImport: boolean
 }
 
-export interface WeatherSettings {
+export interface BodystyleSet {
+    url: string
+    color: string
+    urlchecked: boolean
+    colorchecked: boolean
+}
+
+export interface WeatherSet {
     interval: number
     time: number
     city: string | null
@@ -39,11 +42,8 @@ export interface WeatherSettings {
 export interface ISettings {
     [key: string]: any
     comments: boolean
-    blogsd: boolean
     readersd: boolean
-    favorite: boolean
-    grotate: boolean
-    angle: number
+    blogsd: boolean
     oldheader: boolean
     playerdn: boolean
     dredirect: boolean
@@ -51,6 +51,9 @@ export interface ISettings {
     coins: boolean
     rscroll: boolean
     hrightbar: boolean
+    favorite: boolean
+    grotate: boolean
+    angle: number
     adblock: boolean
     stickyheader: boolean
     apidebug: boolean
@@ -58,18 +61,17 @@ export interface ISettings {
     sticker: boolean
     playback: boolean
     videoSpeed: number
-    recents: boolean
-    friendsOn: boolean
-    notify: boolean
-    bodystyle: boolean
     upVersion: number
     beta: boolean
+    hideNotify: HideNotify
+    recents: boolean
     recentSmiles: RecentSmiles
-    bodystyleSetting: BodystyleSetting
-    events: Events
-    friendsOnMax: number
-    friendsDisplay: boolean
-    hideNotyf: HideNotyf
+    friendsOn: boolean
+    friendsSet: FriendsSet
+    notify: boolean
+    notifySet: NotifySet
+    bodystyle: boolean
+    bodystyleSet: BodystyleSet
     weather: boolean
-    weatherSettings: WeatherSettings
+    weatherSet: WeatherSet
 }

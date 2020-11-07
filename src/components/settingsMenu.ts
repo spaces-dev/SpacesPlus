@@ -22,7 +22,7 @@ import {
     stickyHeader,
     friendsOnline,
     hiddenRightbar,
-    settingsEvents,
+    settingsNotify,
     settingsFriends,
     settingsWeather,
     settingsFeatures,
@@ -104,7 +104,7 @@ export const settingsMenu = () => {
                                                     break
                                                 case 'notify':
                                                     checked ?
-                                                        settingsEvents(e.target) :
+                                                        settingsNotify(e.target) :
                                                         remove(qs("#SP_PLUS_EVENTS"))
                                                     break
                                                 // TODO: Меню настроек на доработку!    
@@ -184,7 +184,7 @@ export const settingsMenu = () => {
                             //if (_SETTINGS.recents) settingsRecentSmiles(qs('#recents'))
                             if (_SETTINGS.friendsOn) settingsFriends(qs('#friendsOn'))
                             if (_SETTINGS.bodystyle) settingsBackground(qs('#bodystyle'))
-                            if (_SETTINGS.notify) settingsEvents(qs('#notify'))
+                            if (_SETTINGS.notify) settingsNotify(qs('#notify'))
                             if (_SETTINGS.weather) settingsWeather(qs('#weather'))
 
                             let spacesLabel1 = ce('div', {

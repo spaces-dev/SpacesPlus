@@ -14,13 +14,13 @@ export const weatherWidget = () => {
 
     /**
      * Из текущего времени вычитаем время последней проверки погоды, если оно больше интервала, то обновляем виджет погоды
-     * _SETTINGS.weatherSettings.city !== null не пускаем, пока не узнаем город через ipwhois
+     * _SETTINGS.weatherSet.city !== null не пускаем, пока не узнаем город через ipwhois
      */
-    if (((unixTime() - _SETTINGS.weatherSettings.time) >
-        _SETTINGS.weatherSettings.interval) &&
-        _SETTINGS.weatherSettings.city !== null) {
+    if (((unixTime() - _SETTINGS.weatherSet.time) >
+        _SETTINGS.weatherSet.interval) &&
+        _SETTINGS.weatherSet.city !== null) {
         // обновляем время
-        _SETTINGS.weatherSettings.time = unixTime()
+        _SETTINGS.weatherSet.time = unixTime()
         // обновляем виджет
         getWeather()
     }

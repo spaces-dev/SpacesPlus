@@ -13,12 +13,12 @@ export const settingsFriends = (e?: any) => {
             class: 'text-input',
             size: 4,
             attr: { maxlength: 2 },
-            value: _SETTINGS.friendsOnMax
+            value: _SETTINGS.friendsSet.max
         })
 
         frMax.addEventListener('change', (e: any) => {
             if (/^([1-9]|1[0-5])$/i.test(e.target.value)) {
-                _SETTINGS.friendsOnMax = e.target.value
+                _SETTINGS.friendsSet.max = e.target.value
                 setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
                 friendsOnline(true)
                 frMax.className = 'text-input'

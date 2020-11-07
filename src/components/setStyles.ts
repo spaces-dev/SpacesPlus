@@ -32,10 +32,10 @@ export const setStyles = () => {
     }
 
     if (_SETTINGS.bodystyle) {
-        if (_SETTINGS.bodystyleSetting.url && _SETTINGS.bodystyleSetting.urlchecked)
-            stl.innerHTML = `body,#main_wrap{background-image:url(${_SETTINGS.bodystyleSetting.url})}`
-        if (_SETTINGS.bodystyleSetting.color && _SETTINGS.bodystyleSetting.colorchecked)
-            stl.innerHTML = `body,#main_wrap{background-color:${_SETTINGS.bodystyleSetting.color}}`
+        if (_SETTINGS.bodystyleSet.url && _SETTINGS.bodystyleSet.urlchecked)
+            stl.innerHTML = `body,#main_wrap{background-image:url(${_SETTINGS.bodystyleSet.url})}`
+        if (_SETTINGS.bodystyleSet.color && _SETTINGS.bodystyleSet.colorchecked)
+            stl.innerHTML = `body,#main_wrap{background-color:${_SETTINGS.bodystyleSet.color}}`
     }
 
     document.getElementsByTagName('head')[0].appendChild(stl)

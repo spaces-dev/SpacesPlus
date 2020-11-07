@@ -1,17 +1,15 @@
 import { SPACES, ENV_PATH, OVERRIDE } from './strings'
 
-import { ISettings, ISetString } from './interfaces/Settings'
+import { ISettings, ISetStrings } from './interfaces/Settings'
 
 /**
  * * Описание настроек
  * ! Указывать описание для каждого пункта настроек НЕ обязательно
  */
-export const _DESCSTRINGS: ISetString = {
-    'comments': 'Функция будет полезна тем, кто часто удаляет много комментариев. Работает в любом месте, где у Вас есть возможность удалять комментарии, будь это ваш блог или гостевая.',
+export const _DESCSTRINGS: ISetStrings = {
     'blogsd': `Функция позволяет удалять сразу несколько блогов.</br></br><img src="${ENV_PATH}/screens/sort-blogs.png"></br>Работает только в <a href="${SPACES}/diary/view/?Short=0&sort=0">"Расширенном виде"</a> (нажмите на ссылку, чтобы включить этот вид - откроется страница с вашими блогами).`,
     'readersd': 'Функция позволяет удалять сразу несколько читателей, может быть вам это пригодиться.',
-    'favorite': `<img src="${ENV_PATH}/screens/favorite-user.png"></br>Функция добавляет на страницу каждого пользователя кнопку "В закладки". Повторно нажав на кнопку, Вы сможете удалить пользователя из закладок.`,
-    'grotate': `<img src="${ENV_PATH}/screens/rotate-image.png"></br>Добавляется кнопка в просмотрщик фотографий, с помощью ее можно поворачивать изображение.`,
+    'comments': 'Функция будет полезна тем, кто часто удаляет много комментариев. Работает в любом месте, где у Вас есть возможность удалять комментарии, будь это ваш блог или гостевая.',
     'oldheader': 'Функция меняет кнопку почты и ленты местами, как было раньше.',
     'playerdn': `<img src="${ENV_PATH}/screens/player-download.png"></br>Добавляется кнопка в аудиоплеер, которая позволяет скачивать воспроизведенный вами трек.`,
     'dredirect': 'Функция избавляем Вас от назойливого предупреждения, когда вы хотите перейти по внешней ссылке.',
@@ -19,11 +17,13 @@ export const _DESCSTRINGS: ISetString = {
     'coins': 'Функция в автоматическом режиме ищет и собирает бонусные монеты.',
     'rscroll': 'Перемещает полосу автоскролла на правую сторону.',
     'hrightbar': 'Функция скрывает правое меню (страница становиться на 25% шире).</br></br>Конфликтует c функцией "Виджет погоды".',
+    'favorite': `<img src="${ENV_PATH}/screens/favorite-user.png"></br>Функция добавляет на страницу каждого пользователя кнопку "В закладки". Повторно нажав на кнопку, Вы сможете удалить пользователя из закладок.`,
+    'grotate': `<img src="${ENV_PATH}/screens/rotate-image.png"></br>Добавляется кнопка в просмотрщик фотографий, с помощью ее можно поворачивать изображение.`,
     'adblock': 'Функция полностью скрывает назойливую рекламу и не только.',
     'stickyheader': 'Функция закрепляет шапку сайта.',
     'notify': `<img src="${ENV_PATH}/screens/browser-permissions.png"></br>Для работы, в настройках браузера необходимо разрешить сайту использовать "Уведомления" и "Звук".</br></br>Функция позволяет изменять звук уведомлений (указывайте прямую ссылку на файл!), настраивать громкость звука и отмечать из каких разделов получать уведомления.`,
     'playback': `<img src="${ENV_PATH}/screens/video-speed.png"></br>В видеоплеере добавляется кнопка ускорения видео, примерно как на YouTube.`,
-    'recents': `<img src="${ENV_PATH}/screens/recent-smiles.png"></br>В меню смайликов добавляется раздел с ранее использованными смайликами, для добавления используйте смайлики/стикеры из меню смайликов.`,
+    'recents': `<img src="${ENV_PATH}/screens/recent-smiles.png"></br>В меню смайликов добавляется раздел с ранее использованными смайликами, для добавления в раздел, используйте смайлики/стикеры из меню смайликов.`,
     'karma': 'Функция в автоматическом режиме подтверждает назойливую карму.',
     'friendsOn': `<img src="${ENV_PATH}/screens/friends-online.png"></br>Функция добавляет в левое меню панель с друзьями онлайн. Для работы необходимо включить раздел <a href="${SPACES}/sidebar/links/?T=4">Друзья</a>, если он у вас выключен.</br></br>Панель ограничена от 1 до 15 друзей онлайн.`,
     'bodystyle': 'Позволяет украшать фон сайта на свой вкус. В подборке имеется 20 изображений для фона, также Вы можете переключиться на цветной фон.',
@@ -35,12 +35,10 @@ export const _DESCSTRINGS: ISetString = {
  * * Названия функций в меню настроек
  * ! Положение в объекте НЕ влияет на рассположение в списке настроек
  */
-export const _SETSTRINGS: ISetString = {
-    'comments': 'Пакетное удаление комментариев',
+export const _SETSTRINGS: ISetStrings = {
     'blogsd': 'Пакетное удаление блогов',
     'readersd': 'Пакетное удаление читателей',
-    'favorite': 'Возможность добавить пользователя в закладки',
-    'grotate': 'Кнопка поворота фото в просмотрщике',
+    'comments': 'Пакетное удаление комментариев',
     'oldheader': 'Старое положение кнопок в шапке',
     'playerdn': 'Кнопка загрузки трека из плеера',
     'dredirect': 'Внешние ссылки без редиректа',
@@ -48,6 +46,8 @@ export const _SETSTRINGS: ISetString = {
     'coins': 'Собирать бонусные монеты',
     'rscroll': 'Прокрутка страницы справа',
     'hrightbar': 'Скрыть правое меню',
+    'favorite': 'Добавить в закладки',
+    'grotate': 'Поворот фотографий',
     'adblock': 'Скрывать рекламу',
     'stickyheader': 'Закрепить шапку',
     'notify': 'Уведомления',
@@ -70,12 +70,9 @@ export const _SETSTRINGS: ISetString = {
  * ! Положение в объекте ВЛИЯЕТ на рассположение в списке настроек
  */
 export let _SETTINGS: ISettings = {
-    'comments': false,
     'blogsd': false,
     'readersd': false,
-    'favorite': true,
-    'grotate': true,
-    'angle': 0,
+    'comments': false,
     'oldheader': true,
     'playerdn': true,
     'dredirect': true,
@@ -83,6 +80,9 @@ export let _SETTINGS: ISettings = {
     'coins': true,
     'rscroll': false,
     'hrightbar': false,
+    'favorite': true,
+    'grotate': true,
+    'angle': 0,
     'adblock': true,
     'stickyheader': true,
     'apidebug': false,
@@ -90,37 +90,37 @@ export let _SETTINGS: ISettings = {
     'sticker': true,
     'playback': true,
     'videoSpeed': 1,
-    'recents': true,
-    'friendsOn': true,
-    'notify': false,
-    'bodystyle': true,
     'upVersion': OVERRIDE.VERSION,
     'beta': false,
+    'hideNotify': {
+        'configImport': false
+    },
+    'recents': true,
     'recentSmiles': {
         'show': false,
         'max': 60
     },
-    'bodystyleSetting': {
-        'url': `${ENV_PATH}/backgrounds/default.png`,
-        'color': '#DAE1E8',
-        'urlchecked': true,
-        'colorchecked': false
+    'friendsOn': true,
+    'friendsSet': {
+        'max': 10
     },
-    'events': {
+    'notify': false,
+    'notifySet': {
         'url': `${ENV_PATH}/sounds/default.ogg`,
         'volume': 50,
         'mail': true,
         'journal': true,
         'feed': false
     },
-    'friendsOnMax': 10,
-    'friendsDisplay': true,
-    'hideNotyf': {
-        'cookieEditor': false,
-        'configImport': false
+    'bodystyle': true,
+    'bodystyleSet': {
+        'url': `${ENV_PATH}/backgrounds/default.png`,
+        'color': '#DAE1E8',
+        'urlchecked': true,
+        'colorchecked': false
     },
     'weather': false,
-    'weatherSettings': {
+    'weatherSet': {
         'interval': 600,
         'time': 0,
         'city': null,
