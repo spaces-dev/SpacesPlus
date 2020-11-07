@@ -50,12 +50,12 @@ SpacesPlus — Powerful userscript for Spaces.ru
 
 Конфигурация Google Chrome (рекомендуется):
 -----------------------------------
-1. В файле `webpack.config.ts` измените переменную `isChrome` на `true`
+1. В файле `userscript.config.ts` измените значение `isChrome` на `true`
 2. Включите insecure-localhost: перейдите к `chrome://flags/#allow-insecure-localhost` и включите insecure-localhost.
 3. Включите доступ к URL-адресу файла для расширения: перейдите к `chrome://extensions/?id=dhdgffkkebhmkfjojejmpbldmpobfkfo` (Страница управления [Tampermonkey](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)) и включите `Allow access to file URLs` (если вам нужно вручную перезагрузить страницу браузера при разработке скрипта, см. [#475](https://github.com/Tampermonkey/tampermonkey/issues/475#issuecomment-348594785) для более подробной информации)
 
 Конфигурация Mozilla Firefox:
 --------------------------------------
-1. В файле `webpack.config.ts` переменная `isChrome` должна быть `false`
+1. В файле `userscript.config.ts` значение `isChrome` должно быть `false`
 2. Для установки расширения используйте [Tampermonkey](https://addons.mozilla.org/en-US/firefox/addon/tampermonkey/)
 3. Для обновления внесенных изменений требуется несколько раз обновлять страницу браузера (не самый продуктивный браузер для разработки)

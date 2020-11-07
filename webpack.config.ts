@@ -1,24 +1,20 @@
 import url from 'url'
 import path from 'path'
-import webpack from 'webpack'
 import WebpackUserscript from 'webpack-userscript'
-import userscriptConfig from './userscript.config'
+import { UserScriptConfig } from './userscript.config'
 import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 
+const { isDev, isChrome, devPath, devPort, scriptFileName, scriptHeaders } = UserScriptConfig
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const outputPath = path.resolve(__dirname, 'dist')
-const fileName = userscriptConfig.scriptFileName
-const isDev = process.env.NODE_ENV === 'development'
-const isChrome = true
-const PORT = 8080
 
-const config: webpack.Configuration = {
+module.exports = {
     mode: isDev ? 'development' : 'production',
     entry: path.join(__dirname, 'src/main.ts'),
     output: {
         path: outputPath,
-        filename: `${fileName}.js`
+        filename: `${scriptFileName}.js`
     },
     target: 'web',
     module: {
@@ -44,7 +40,7 @@ const config: webpack.Configuration = {
     },
     devServer: {
         https: true,
-        port: PORT,
+        port: devPort,
         headers: { 'Access-Control-Allow-Origin': '*' },
         writeToDisk: true,
         contentBase: outputPath,
@@ -62,16 +58,12 @@ const config: webpack.Configuration = {
             ]
         }),
         new WebpackUserscript({
-            headers: userscriptConfig.scriptHeaders,
+            headers: scriptHeaders,
             proxyScript: {
                 // file:/// using for Google Chrome else https:// for Mozilla Firefox
-                baseUrl: isChrome ?
-                    `${url.pathToFileURL(outputPath)}` :
-                    `https://localhost:${PORT}`,
+                baseUrl: isChrome ? `${url.pathToFileURL(outputPath)}` : devPath,
                 enable: isDev
             }
         })
     ]
 }
-
-export default config
