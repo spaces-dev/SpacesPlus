@@ -570,6 +570,10 @@ input[type=color] {
     background-position: -16px -48px
 }
 
+.sp-ok-grey {
+    background-position: -16px -64px
+}
+
 .sp-play-green {
     background-position: -32px -48px
 }

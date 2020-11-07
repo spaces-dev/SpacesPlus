@@ -58,7 +58,7 @@ export const settingsFeatures = (root: any) => {
         id: 'sp_spacesFAT',
         html: btnWrap(fat ?
             '<span class="sp sp-remove-grey mr-14"></span>Убрать полосу загрузки' :
-            '<span class="ico ico_ok_grey mr-14"></span>Добавить полосу загрузки страницы'),
+            '<span class="sp sp-ok-grey mr-14"></span>Добавить полосу загрузки страницы'),
         onclick: () => {
             fat ? delCookie('force_ajax_transport') : setCookie('force_ajax_transport', '1')
             document.location.reload()
@@ -75,7 +75,7 @@ export const settingsFeatures = (root: any) => {
         id: 'sp_spacesGLB',
         html: btnWrap(glb ?
             '<span class="sp sp-remove-grey mr-14"></span>Убрать плеер из левой панели' :
-            '<span class="ico ico_ok_grey mr-14"></span>Закрепить плеер на левой панели'),
+            '<span class="sp sp-ok-grey mr-14"></span>Закрепить плеер на левой панели'),
         onclick: () => {
             glb ? delCookie('gp_left_btn') : setCookie('gp_left_btn', '1')
             document.location.reload()
@@ -83,6 +83,7 @@ export const settingsFeatures = (root: any) => {
         }
     })
 
+    // кнопка скрытия квеста новичка
     let nbqLink = ce('a', {
         href: '#',
         style: 'display: none',
