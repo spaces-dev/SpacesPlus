@@ -229,11 +229,9 @@ const strings_1 = __webpack_require__(1);
  * ! Указывать описание для каждого пункта настроек НЕ обязательно
  */
 exports._DESCSTRINGS = {
-    'comments': 'Функция будет полезна тем, кто часто удаляет много комментариев. Работает в любом месте, где у Вас есть возможность удалять комментарии, будь это ваш блог или гостевая.',
     'blogsd': `Функция позволяет удалять сразу несколько блогов.</br></br><img src="${strings_1.ENV_PATH}/screens/sort-blogs.png"></br>Работает только в <a href="${strings_1.SPACES}/diary/view/?Short=0&sort=0">"Расширенном виде"</a> (нажмите на ссылку, чтобы включить этот вид - откроется страница с вашими блогами).`,
     'readersd': 'Функция позволяет удалять сразу несколько читателей, может быть вам это пригодиться.',
-    'favorite': `<img src="${strings_1.ENV_PATH}/screens/favorite-user.png"></br>Функция добавляет на страницу каждого пользователя кнопку "В закладки". Повторно нажав на кнопку, Вы сможете удалить пользователя из закладок.`,
-    'grotate': `<img src="${strings_1.ENV_PATH}/screens/rotate-image.png"></br>Добавляется кнопка в просмотрщик фотографий, с помощью ее можно поворачивать изображение.`,
+    'comments': 'Функция будет полезна тем, кто часто удаляет много комментариев. Работает в любом месте, где у Вас есть возможность удалять комментарии, будь это ваш блог или гостевая.',
     'oldheader': 'Функция меняет кнопку почты и ленты местами, как было раньше.',
     'playerdn': `<img src="${strings_1.ENV_PATH}/screens/player-download.png"></br>Добавляется кнопка в аудиоплеер, которая позволяет скачивать воспроизведенный вами трек.`,
     'dredirect': 'Функция избавляем Вас от назойливого предупреждения, когда вы хотите перейти по внешней ссылке.',
@@ -241,11 +239,13 @@ exports._DESCSTRINGS = {
     'coins': 'Функция в автоматическом режиме ищет и собирает бонусные монеты.',
     'rscroll': 'Перемещает полосу автоскролла на правую сторону.',
     'hrightbar': 'Функция скрывает правое меню (страница становиться на 25% шире).</br></br>Конфликтует c функцией "Виджет погоды".',
+    'favorite': `<img src="${strings_1.ENV_PATH}/screens/favorite-user.png"></br>Функция добавляет на страницу каждого пользователя кнопку "В закладки". Повторно нажав на кнопку, Вы сможете удалить пользователя из закладок.`,
+    'grotate': `<img src="${strings_1.ENV_PATH}/screens/rotate-image.png"></br>Добавляется кнопка в просмотрщик фотографий, с помощью ее можно поворачивать изображение.`,
     'adblock': 'Функция полностью скрывает назойливую рекламу и не только.',
     'stickyheader': 'Функция закрепляет шапку сайта.',
     'notify': `<img src="${strings_1.ENV_PATH}/screens/browser-permissions.png"></br>Для работы, в настройках браузера необходимо разрешить сайту использовать "Уведомления" и "Звук".</br></br>Функция позволяет изменять звук уведомлений (указывайте прямую ссылку на файл!), настраивать громкость звука и отмечать из каких разделов получать уведомления.`,
     'playback': `<img src="${strings_1.ENV_PATH}/screens/video-speed.png"></br>В видеоплеере добавляется кнопка ускорения видео, примерно как на YouTube.`,
-    'recents': `<img src="${strings_1.ENV_PATH}/screens/recent-smiles.png"></br>В меню смайликов добавляется раздел с ранее использованными смайликами, для добавления используйте смайлики/стикеры из меню смайликов.`,
+    'recents': `<img src="${strings_1.ENV_PATH}/screens/recent-smiles.png"></br>В меню смайликов добавляется раздел с ранее использованными смайликами, для добавления в раздел, используйте смайлики/стикеры из меню смайликов.`,
     'karma': 'Функция в автоматическом режиме подтверждает назойливую карму.',
     'friendsOn': `<img src="${strings_1.ENV_PATH}/screens/friends-online.png"></br>Функция добавляет в левое меню панель с друзьями онлайн. Для работы необходимо включить раздел <a href="${strings_1.SPACES}/sidebar/links/?T=4">Друзья</a>, если он у вас выключен.</br></br>Панель ограничена от 1 до 15 друзей онлайн.`,
     'bodystyle': 'Позволяет украшать фон сайта на свой вкус. В подборке имеется 20 изображений для фона, также Вы можете переключиться на цветной фон.',
@@ -257,11 +257,9 @@ exports._DESCSTRINGS = {
  * ! Положение в объекте НЕ влияет на рассположение в списке настроек
  */
 exports._SETSTRINGS = {
-    'comments': 'Пакетное удаление комментариев',
     'blogsd': 'Пакетное удаление блогов',
     'readersd': 'Пакетное удаление читателей',
-    'favorite': 'Возможность добавить пользователя в закладки',
-    'grotate': 'Кнопка поворота фото в просмотрщике',
+    'comments': 'Пакетное удаление комментариев',
     'oldheader': 'Старое положение кнопок в шапке',
     'playerdn': 'Кнопка загрузки трека из плеера',
     'dredirect': 'Внешние ссылки без редиректа',
@@ -269,6 +267,8 @@ exports._SETSTRINGS = {
     'coins': 'Собирать бонусные монеты',
     'rscroll': 'Прокрутка страницы справа',
     'hrightbar': 'Скрыть правое меню',
+    'favorite': 'Добавить в закладки',
+    'grotate': 'Поворот фотографий',
     'adblock': 'Скрывать рекламу',
     'stickyheader': 'Закрепить шапку',
     'notify': 'Уведомления',
@@ -290,12 +290,9 @@ exports._SETSTRINGS = {
  * ! Положение в объекте ВЛИЯЕТ на рассположение в списке настроек
  */
 exports._SETTINGS = {
-    'comments': false,
     'blogsd': false,
     'readersd': false,
-    'favorite': true,
-    'grotate': true,
-    'angle': 0,
+    'comments': false,
     'oldheader': true,
     'playerdn': true,
     'dredirect': true,
@@ -303,6 +300,9 @@ exports._SETTINGS = {
     'coins': true,
     'rscroll': false,
     'hrightbar': false,
+    'favorite': true,
+    'grotate': true,
+    'angle': 0,
     'adblock': true,
     'stickyheader': true,
     'apidebug': false,
@@ -310,37 +310,37 @@ exports._SETTINGS = {
     'sticker': true,
     'playback': true,
     'videoSpeed': 1,
-    'recents': true,
-    'friendsOn': true,
-    'notify': false,
-    'bodystyle': true,
     'upVersion': strings_1.OVERRIDE.VERSION,
     'beta': false,
+    'hideNotify': {
+        'configImport': false
+    },
+    'recents': true,
     'recentSmiles': {
         'show': false,
         'max': 60
     },
-    'bodystyleSetting': {
-        'url': `${strings_1.ENV_PATH}/backgrounds/default.png`,
-        'color': '#DAE1E8',
-        'urlchecked': true,
-        'colorchecked': false
+    'friendsOn': true,
+    'friendsSet': {
+        'max': 10
     },
-    'events': {
+    'notify': false,
+    'notifySet': {
         'url': `${strings_1.ENV_PATH}/sounds/default.ogg`,
         'volume': 50,
         'mail': true,
         'journal': true,
         'feed': false
     },
-    'friendsOnMax': 10,
-    'friendsDisplay': true,
-    'hideNotyf': {
-        'cookieEditor': false,
-        'configImport': false
+    'bodystyle': true,
+    'bodystyleSet': {
+        'url': `${strings_1.ENV_PATH}/backgrounds/default.png`,
+        'color': '#DAE1E8',
+        'urlchecked': true,
+        'colorchecked': false
     },
     'weather': false,
-    'weatherSettings': {
+    'weatherSet': {
         'interval': 600,
         'time': 0,
         'city': null,
@@ -373,7 +373,7 @@ exports.debug = (str) => console.debug(date() + str);
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.settingsChangelogMenu = exports.settingsRecentSmiles = exports.settingsBackupMenu = exports.settingsBackground = exports.videoSpeedPlayback = exports.settingsFeatures = exports.settingsWeather = exports.settingsFriends = exports.disableRedirect = exports.settingsEvents = exports.playerDownload = exports.hiddenRightbar = exports.deleteComments = exports.weatherWidget = exports.sidebarButton = exports.galleryRotate = exports.friendsOnline = exports.deleteReaders = exports.stickyHeader = exports.settingsMenu = exports.recentSmiles = exports.freeStickers = exports.favoriteUser = exports.checkUpdates = exports.betaFeatures = exports.soundEvents = exports.karmaAccept = exports.deleteBlogs = exports.coinsAccept = exports.apiDebugger = exports.userOnline = exports.userStatus = exports.scrollMove = exports.getUpdater = exports.setStyles = exports.oldHeader = exports.adBlock = void 0;
+exports.settingsChangelogMenu = exports.settingsRecentSmiles = exports.settingsBackupMenu = exports.settingsBackground = exports.videoSpeedPlayback = exports.settingsFeatures = exports.settingsWeather = exports.settingsFriends = exports.disableRedirect = exports.settingsNotify = exports.playerDownload = exports.hiddenRightbar = exports.deleteComments = exports.weatherWidget = exports.sidebarButton = exports.galleryRotate = exports.friendsOnline = exports.deleteReaders = exports.stickyHeader = exports.settingsMenu = exports.recentSmiles = exports.freeStickers = exports.favoriteUser = exports.checkUpdates = exports.betaFeatures = exports.soundNotify = exports.karmaAccept = exports.deleteBlogs = exports.coinsAccept = exports.apiDebugger = exports.userOnline = exports.userStatus = exports.scrollMove = exports.getUpdater = exports.setStyles = exports.oldHeader = exports.adBlock = void 0;
 const adBlock_1 = __webpack_require__(14);
 Object.defineProperty(exports, "adBlock", { enumerable: true, get: function () { return adBlock_1.adBlock; } });
 const oldHeader_1 = __webpack_require__(40);
@@ -394,8 +394,8 @@ const deleteBlogs_1 = __webpack_require__(46);
 Object.defineProperty(exports, "deleteBlogs", { enumerable: true, get: function () { return deleteBlogs_1.deleteBlogs; } });
 const karmaAccept_1 = __webpack_require__(47);
 Object.defineProperty(exports, "karmaAccept", { enumerable: true, get: function () { return karmaAccept_1.karmaAccept; } });
-const soundEvents_1 = __webpack_require__(48);
-Object.defineProperty(exports, "soundEvents", { enumerable: true, get: function () { return soundEvents_1.soundEvents; } });
+const soundNotify_1 = __webpack_require__(48);
+Object.defineProperty(exports, "soundNotify", { enumerable: true, get: function () { return soundNotify_1.soundNotify; } });
 const betaFeatures_1 = __webpack_require__(49);
 Object.defineProperty(exports, "betaFeatures", { enumerable: true, get: function () { return betaFeatures_1.betaFeatures; } });
 const favoriteUser_1 = __webpack_require__(50);
@@ -424,8 +424,8 @@ const hiddenRightbar_1 = __webpack_require__(60);
 Object.defineProperty(exports, "hiddenRightbar", { enumerable: true, get: function () { return hiddenRightbar_1.hiddenRightbar; } });
 const playerDownload_1 = __webpack_require__(61);
 Object.defineProperty(exports, "playerDownload", { enumerable: true, get: function () { return playerDownload_1.playerDownload; } });
-const settingsEvents_1 = __webpack_require__(62);
-Object.defineProperty(exports, "settingsEvents", { enumerable: true, get: function () { return settingsEvents_1.settingsEvents; } });
+const settingsNotify_1 = __webpack_require__(62);
+Object.defineProperty(exports, "settingsNotify", { enumerable: true, get: function () { return settingsNotify_1.settingsNotify; } });
 const disableRedirect_1 = __webpack_require__(63);
 Object.defineProperty(exports, "disableRedirect", { enumerable: true, get: function () { return disableRedirect_1.disableRedirect; } });
 const settingsFriends_1 = __webpack_require__(64);
@@ -594,10 +594,10 @@ exports.setStyles = () => {
         document.getElementsByTagName('head')[0].appendChild(menu);
     }
     if (settings_1._SETTINGS.bodystyle) {
-        if (settings_1._SETTINGS.bodystyleSetting.url && settings_1._SETTINGS.bodystyleSetting.urlchecked)
-            stl.innerHTML = `body,#main_wrap{background-image:url(${settings_1._SETTINGS.bodystyleSetting.url})}`;
-        if (settings_1._SETTINGS.bodystyleSetting.color && settings_1._SETTINGS.bodystyleSetting.colorchecked)
-            stl.innerHTML = `body,#main_wrap{background-color:${settings_1._SETTINGS.bodystyleSetting.color}}`;
+        if (settings_1._SETTINGS.bodystyleSet.url && settings_1._SETTINGS.bodystyleSet.urlchecked)
+            stl.innerHTML = `body,#main_wrap{background-image:url(${settings_1._SETTINGS.bodystyleSet.url})}`;
+        if (settings_1._SETTINGS.bodystyleSet.color && settings_1._SETTINGS.bodystyleSet.colorchecked)
+            stl.innerHTML = `body,#main_wrap{background-color:${settings_1._SETTINGS.bodystyleSet.color}}`;
     }
     document.getElementsByTagName('head')[0].appendChild(stl);
 };
@@ -663,10 +663,10 @@ exports.friendsOnline = (t) => {
                                             friendsList = utils_1.extend(tempfriendsList, friendsList) :
                                             friendsList = tempfriendsList;
                                         frOnDiv.innerHTML = '';
-                                        let lengthList = (settings_1._SETTINGS.friendsOnMax >
+                                        let lengthList = (settings_1._SETTINGS.friendsSet.max >
                                             friendsList.length ?
                                             friendsList.length :
-                                            settings_1._SETTINGS.friendsOnMax);
+                                            settings_1._SETTINGS.friendsSet.max);
                                         if (countFriends !== friendsList.length && reCount < 3) {
                                             reCount++;
                                             setTimeout(() => {
@@ -732,12 +732,12 @@ exports.settingsWeather = async (e) => {
      * Инициализация ¯\_(ツ)_/¯
      * Получаем город
      */
-    if (settings_1._SETTINGS.weatherSettings.city === null) {
+    if (settings_1._SETTINGS.weatherSet.city === null) {
         try {
             await utils_1.http('GET', 'https://ipwhois.app/json/?objects=city,success&lang=ru', false).then(e => {
                 const json = e.parsedBody;
                 if (json === null || json === void 0 ? void 0 : json.success) {
-                    settings_1._SETTINGS.weatherSettings.city = json.city;
+                    settings_1._SETTINGS.weatherSet.city = json.city;
                     utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
                     exports.getWeather();
                 }
@@ -760,12 +760,12 @@ exports.settingsWeather = async (e) => {
         class: 'text-input',
         style: 'margin-bottom: 7px',
         size: '32',
-        value: settings_1._SETTINGS.weatherSettings.key
+        value: settings_1._SETTINGS.weatherSet.key
     });
     apiKey.addEventListener('keypress', (e) => {
         if (e.keyCode === 13) {
             if (/^[a-f0-9]{32}$/i.test(e.target.value) || utils_1.trim(e.target.value) !== '') {
-                settings_1._SETTINGS.weatherSettings.key = e.target.value;
+                settings_1._SETTINGS.weatherSet.key = e.target.value;
                 utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
                 exports.getWeather();
                 apiKey.className = 'text-input';
@@ -782,12 +782,12 @@ exports.settingsWeather = async (e) => {
         style: 'margin-bottom: 7px',
         size: '32',
         id: 'SP-CITY-INPUT',
-        value: settings_1._SETTINGS.weatherSettings.city
+        value: settings_1._SETTINGS.weatherSet.city
     });
     cityInp.addEventListener('keypress', (e) => {
         if (e.keyCode === 13) {
             if (/^([a-zA-Zа-яА-ЯёЁ]+[-]?[a-zA-Zа-яА-ЯёЁ]*[-]?[a-zA-Zа-яА-ЯёЁ]*[-]?[a-zA-Zа-яА-ЯёЁ]*)$/i.test(e.target.value) || utils_1.trim(e.target.value) !== '') {
-                settings_1._SETTINGS.weatherSettings.city = e.target.value;
+                settings_1._SETTINGS.weatherSet.city = e.target.value;
                 utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
                 exports.getWeather();
                 cityInp.className = 'text-input';
@@ -807,12 +807,12 @@ exports.settingsWeather = async (e) => {
         style: 'margin-bottom: 7px',
         size: 4,
         attr: { maxlength: 3 },
-        value: settings_1._SETTINGS.weatherSettings.interval / 60
+        value: settings_1._SETTINGS.weatherSet.interval / 60
     });
     interval.addEventListener('change', (e) => {
         // от 1 минуты до 360 минут ¯\_(ツ)_/¯
         if (/^([1-9]|[1-8][0-9]|9[0-9]|[12][0-9]{2}|3[0-5][0-9]|360)$/i.test(e.target.value)) {
-            settings_1._SETTINGS.weatherSettings.interval = e.target.value * 60;
+            settings_1._SETTINGS.weatherSet.interval = e.target.value * 60;
             utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
             interval.className = 'text-input';
         }
@@ -832,7 +832,7 @@ exports.settingsWeather = async (e) => {
  * Получаем погоду через openweathermap.org
  */
 exports.getWeather = async () => {
-    const { language, units, city, key } = settings_1._SETTINGS.weatherSettings;
+    const { language, units, city, key } = settings_1._SETTINGS.weatherSet;
     try {
         let url = `https://api.openweathermap.org/data/2.5/weather?lang=${language}&units=${units}&q=${city}&appid=${key}`;
         await utils_1.http('GET', url, false).then(e => {
@@ -854,7 +854,7 @@ exports.getWeather = async () => {
             if (utils_1.qs('#SP_WIDGET_WEATHER'))
                 utils_1.remove(utils_1.qs('#SP_WIDGET_WEATHER'));
             if ((json === null || json === void 0 ? void 0 : json.cod) === 200) {
-                settings_1._SETTINGS.weatherSettings.city = json.name;
+                settings_1._SETTINGS.weatherSet.city = json.name;
                 utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
                 utils_1.setCookie('SP_WEATHER', JSON.stringify(json));
             }
@@ -1007,8 +1007,8 @@ const init = () => {
             components_1.karmaAccept();
         if (settings_1._SETTINGS.online)
             components_1.userOnline();
-        if (settings_1._SETTINGS.events)
-            components_1.soundEvents();
+        if (settings_1._SETTINGS.notify)
+            components_1.soundNotify();
         if (settings_1._SETTINGS.recents)
             components_1.recentSmiles();
         if (settings_1._SETTINGS.grotate)
@@ -2063,11 +2063,11 @@ exports.karmaAccept = () => {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.soundEvents = void 0;
+exports.soundNotify = void 0;
 const utils_1 = __webpack_require__(0);
 const strings_1 = __webpack_require__(1);
 const settings_1 = __webpack_require__(2);
-exports.soundEvents = () => {
+exports.soundNotify = () => {
     try {
         // счетчики почты, журнала и ленты
         const notif = {
@@ -2078,13 +2078,13 @@ exports.soundEvents = () => {
         let counter = 0;
         for (let i in notif) {
             // @ts-ignore
-            if (notif[i] && settings_1._SETTINGS.events[i] && notif[i].innerHTML !== '' && !isNaN(notif[i].innerHTML)) {
+            if (notif[i] && settings_1._SETTINGS.notifySet[i] && notif[i].innerHTML !== '' && !isNaN(notif[i].innerHTML)) {
                 counter = counter + parseInt(notif[i].innerHTML, 10);
             }
         }
         if (counter > strings_1.OVERRIDE.EVENTS) {
             // звук уведомления
-            utils_1.playSound(settings_1._SETTINGS.events.url, settings_1._SETTINGS.events.volume);
+            utils_1.playSound(settings_1._SETTINGS.notifySet.url, settings_1._SETTINGS.notifySet.volume);
             let string = utils_1.declOfNum(counter, ['новое событие', 'новых события', 'новых событий']);
             // создаем новое уведомление
             utils_1.notification(`${utils_1.toUpper(string)} на Spaces!`, `У Вас ${counter} ${string}!`, 5);
@@ -2153,7 +2153,7 @@ exports.favoriteUser = async () => {
                             id: 'SP_PLUS_INFAVORITE',
                             html: `<a href="${strings_1.SPACES}/bookmarks/add/?object_id=${json.id}&object_type=11" class="stnd-link" title="Добавить в закладки"><span class="sp sp-fav"></span> B закладки</a>`,
                             onclick: () => {
-                                utils_1.confirmBox(`Вы действительно хотите добавить пользователя <b>${json.name}</b> в закладки?`, false, async () => {
+                                utils_1.confirmBox(`Добавить пользователя <b>${json.name}</b> в закладки?`, false, async () => {
                                     await utils_1.http('POST', `${strings_1.SPACES}/ajax/bookmarks/add/`, false, `object_id=${json.id}&object_type=11&show_all_tags_state=0&new_tags=Люди&cfms=Добавить&CK=${strings_1.OVERRIDE.CK}`).then(e => {
                                         e.status === 200 ?
                                             isFav(json.id, json.name, favoriteButton) :
@@ -2425,7 +2425,7 @@ exports.settingsMenu = () => {
                                                     break;
                                                 case 'notify':
                                                     checked ?
-                                                        index_1.settingsEvents(e.target) :
+                                                        index_1.settingsNotify(e.target) :
                                                         utils_1.remove(utils_1.qs("#SP_PLUS_EVENTS"));
                                                     break;
                                                 // TODO: Меню настроек на доработку!    
@@ -2503,7 +2503,7 @@ exports.settingsMenu = () => {
                             if (settings_1._SETTINGS.bodystyle)
                                 index_1.settingsBackground(utils_1.qs('#bodystyle'));
                             if (settings_1._SETTINGS.notify)
-                                index_1.settingsEvents(utils_1.qs('#notify'));
+                                index_1.settingsNotify(utils_1.qs('#notify'));
                             if (settings_1._SETTINGS.weather)
                                 index_1.settingsWeather(utils_1.qs('#weather'));
                             let spacesLabel1 = utils_1.ce('div', {
@@ -2736,7 +2736,7 @@ exports.deleteReaders = () => {
                             }
                             if (count > 0) {
                                 let con = utils_1.declOfNum(count, ['я', 'я', 'ей']);
-                                utils_1.confirmBox(`Вы действительно хотите удалить ${count} читател${con}`, true, async () => {
+                                utils_1.confirmBox(`Вы действительно хотите удалить ${count} читател${con}?`, true, async () => {
                                     utils_1.messageBox(`Удаляем ${count} читател${con}`, 'Подождите немного... <span style="padding-right: 10px" class="ico ico_spinner"></span>', false);
                                     for (let reader of readers) {
                                         await utils_1.http('POST', `${strings_1.SPACES}/lenta/reader_delete/?user=${reader}`, false, `&CK=${strings_1.OVERRIDE.CK}&cfms=Удалить`);
@@ -2851,13 +2851,13 @@ exports.weatherWidget = () => {
     let page_rightbar = utils_1.qs('#page_rightbar');
     /**
      * Из текущего времени вычитаем время последней проверки погоды, если оно больше интервала, то обновляем виджет погоды
-     * _SETTINGS.weatherSettings.city !== null не пускаем, пока не узнаем город через ipwhois
+     * _SETTINGS.weatherSet.city !== null не пускаем, пока не узнаем город через ipwhois
      */
-    if (((unixTime() - settings_1._SETTINGS.weatherSettings.time) >
-        settings_1._SETTINGS.weatherSettings.interval) &&
-        settings_1._SETTINGS.weatherSettings.city !== null) {
+    if (((unixTime() - settings_1._SETTINGS.weatherSet.time) >
+        settings_1._SETTINGS.weatherSet.interval) &&
+        settings_1._SETTINGS.weatherSet.city !== null) {
         // обновляем время
-        settings_1._SETTINGS.weatherSettings.time = unixTime();
+        settings_1._SETTINGS.weatherSet.time = unixTime();
         // обновляем виджет
         settingsWeather_1.getWeather();
     }
@@ -3081,11 +3081,11 @@ exports.playerDownload = () => {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.settingsEvents = void 0;
+exports.settingsNotify = void 0;
 const utils_1 = __webpack_require__(0);
 const strings_1 = __webpack_require__(1);
 const settings_1 = __webpack_require__(2);
-exports.settingsEvents = (e) => {
+exports.settingsNotify = (e) => {
     try {
         if (!('Notification' in window)) {
             utils_1.messageBox('Внимание!', 'Ваш браузер не поддерживает уведомления', true, 5);
@@ -3114,12 +3114,12 @@ exports.settingsEvents = (e) => {
         let label3 = utils_1.ce('label', { class: 'stnd-link sp_noborder' });
         let eventsUrl = utils_1.ce('input', {
             type: 'text',
-            value: settings_1._SETTINGS.events.url,
+            value: settings_1._SETTINGS.notifySet.url,
             class: 'text-input'
         });
         eventsUrl.addEventListener('change', (e) => {
             if ((utils_1.isValidUrl(e.target.value) && /\.(ogg|mp3|wav)$/i.test(e.target.value)) || utils_1.trim(e.target.value) !== '') {
-                settings_1._SETTINGS.events.url = utils_1.trim(e.target.value);
+                settings_1._SETTINGS.notifySet.url = utils_1.trim(e.target.value);
                 utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
                 eventsUrl.className = 'text-input';
             }
@@ -3133,20 +3133,20 @@ exports.settingsEvents = (e) => {
             style: 'margin-left: 7px; font-size: small; top: 23px',
             title: 'Прослушать',
             onclick: () => {
-                utils_1.playSound(settings_1._SETTINGS.events.url, settings_1._SETTINGS.events.volume);
+                utils_1.playSound(settings_1._SETTINGS.notifySet.url, settings_1._SETTINGS.notifySet.volume);
                 return false;
             }
         });
         let volume = utils_1.ce('div', {
             class: 'label__desc',
-            html: settings_1._SETTINGS.events.volume + '%'
+            html: settings_1._SETTINGS.notifySet.volume + '%'
         });
         let volRange = utils_1.ce('input', {
             type: 'range',
             min: 0,
             max: 100,
             step: 1,
-            value: settings_1._SETTINGS.events.volume
+            value: settings_1._SETTINGS.notifySet.volume
         });
         volRange.onchange = volRange.oninput = (e) => {
             if (!isNaN(e.target.value)) {
@@ -3154,7 +3154,7 @@ exports.settingsEvents = (e) => {
                 if (setVol < 0 || setVol > 100)
                     setVol = 70;
                 volume.innerHTML = setVol + '%';
-                settings_1._SETTINGS.events.volume = setVol;
+                settings_1._SETTINGS.notifySet.volume = setVol;
                 utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
             }
         };
@@ -3162,9 +3162,9 @@ exports.settingsEvents = (e) => {
             type: 'checkbox',
             id: 'sp_event_mail',
             class: 'sp-checkbox-square',
-            checked: settings_1._SETTINGS.events.mail,
+            checked: settings_1._SETTINGS.notifySet.mail,
             onclick: (e) => {
-                settings_1._SETTINGS.events.mail = e.target.checked;
+                settings_1._SETTINGS.notifySet.mail = e.target.checked;
                 utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
             }
         });
@@ -3176,9 +3176,9 @@ exports.settingsEvents = (e) => {
             type: 'checkbox',
             id: 'sp_event_journal',
             class: 'sp-checkbox-square',
-            checked: settings_1._SETTINGS.events.journal,
+            checked: settings_1._SETTINGS.notifySet.journal,
             onclick: (e) => {
-                settings_1._SETTINGS.events.journal = e.target.checked;
+                settings_1._SETTINGS.notifySet.journal = e.target.checked;
                 utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
             }
         });
@@ -3190,9 +3190,9 @@ exports.settingsEvents = (e) => {
             type: 'checkbox',
             id: 'sp_event_feed',
             class: 'sp-checkbox-square',
-            checked: settings_1._SETTINGS.events.feed,
+            checked: settings_1._SETTINGS.notifySet.feed,
             onclick: (e) => {
-                settings_1._SETTINGS.events.feed = e.target.checked;
+                settings_1._SETTINGS.notifySet.feed = e.target.checked;
                 utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
             }
         });
@@ -3261,11 +3261,11 @@ exports.settingsFriends = (e) => {
             class: 'text-input',
             size: 4,
             attr: { maxlength: 2 },
-            value: settings_1._SETTINGS.friendsOnMax
+            value: settings_1._SETTINGS.friendsSet.max
         });
         frMax.addEventListener('change', (e) => {
             if (/^([1-9]|1[0-5])$/i.test(e.target.value)) {
-                settings_1._SETTINGS.friendsOnMax = e.target.value;
+                settings_1._SETTINGS.friendsSet.max = e.target.value;
                 utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
                 friendsOnline_1.friendsOnline(true);
                 frMax.className = 'text-input';
@@ -3341,7 +3341,7 @@ exports.settingsFeatures = (root) => {
         id: 'sp_spacesFAT',
         html: btnWrap(fat ?
             '<span class="sp sp-remove-grey mr-14"></span>Убрать полосу загрузки' :
-            '<span class="ico ico_ok_grey mr-14"></span>Добавить полосу загрузки страницы'),
+            '<span class="sp sp-ok-grey mr-14"></span>Добавить полосу загрузки страницы'),
         onclick: () => {
             fat ? utils_1.delCookie('force_ajax_transport') : utils_1.setCookie('force_ajax_transport', '1');
             document.location.reload();
@@ -3356,13 +3356,14 @@ exports.settingsFeatures = (root) => {
         id: 'sp_spacesGLB',
         html: btnWrap(glb ?
             '<span class="sp sp-remove-grey mr-14"></span>Убрать плеер из левой панели' :
-            '<span class="ico ico_ok_grey mr-14"></span>Закрепить плеер на левой панели'),
+            '<span class="sp sp-ok-grey mr-14"></span>Закрепить плеер на левой панели'),
         onclick: () => {
             glb ? utils_1.delCookie('gp_left_btn') : utils_1.setCookie('gp_left_btn', '1');
             document.location.reload();
             return false;
         }
     });
+    // кнопка скрытия квеста новичка
     let nbqLink = utils_1.ce('a', {
         href: '#',
         style: 'display: none',
@@ -3491,13 +3492,13 @@ exports.settingsBackground = (e) => {
         let inputImageUrl = utils_1.ce('input', {
             type: 'text',
             id: 'image-input',
-            value: settings_1._SETTINGS.bodystyleSetting.url,
+            value: settings_1._SETTINGS.bodystyleSet.url,
             style: 'margin-bottom: 7px',
             class: 'text-input'
         });
         inputImageUrl.addEventListener('change', (a) => {
             if ((utils_1.isValidUrl(a.target.value) && /\.(jpg|jpeg|png|gif)$/i.test(a.target.value)) || utils_1.trim(a.target.value) !== '') {
-                settings_1._SETTINGS.bodystyleSetting.url = utils_1.trim(a.target.value);
+                settings_1._SETTINGS.bodystyleSet.url = utils_1.trim(a.target.value);
                 utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
                 setStyles_1.setStyles();
                 inputImageUrl.className = 'text-input';
@@ -3510,11 +3511,11 @@ exports.settingsBackground = (e) => {
             type: 'text',
             class: 'text-input',
             id: 'color-input',
-            value: settings_1._SETTINGS.bodystyleSetting.color
+            value: settings_1._SETTINGS.bodystyleSet.color
         });
         inputColor.addEventListener('input', (e) => {
             if (/^\#([A-Za-z0-9]{3,6})$/i.test(e.target.value)) {
-                settings_1._SETTINGS.bodystyleSetting.color = e.target.value;
+                settings_1._SETTINGS.bodystyleSet.color = e.target.value;
                 utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
                 setStyles_1.setStyles();
                 inputColor.className = 'text-input';
@@ -3526,16 +3527,16 @@ exports.settingsBackground = (e) => {
         let radioImage = utils_1.ce('input', {
             type: 'radio',
             id: 'sp_set_bodystyle_URL',
-            checked: settings_1._SETTINGS.bodystyleSetting.urlchecked,
+            checked: settings_1._SETTINGS.bodystyleSet.urlchecked,
             class: 'sp-checkbox-circle',
             onclick: (a) => {
-                settings_1._SETTINGS.bodystyleSetting.urlchecked = a.target.checked;
+                settings_1._SETTINGS.bodystyleSet.urlchecked = a.target.checked;
                 if (a.target.checked && radioColor.checked) {
                     radioColor.checked = false;
-                    settings_1._SETTINGS.bodystyleSetting.colorchecked = false;
+                    settings_1._SETTINGS.bodystyleSet.colorchecked = false;
                 }
                 utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
-                if (settings_1._SETTINGS.bodystyleSetting.urlchecked) {
+                if (settings_1._SETTINGS.bodystyleSet.urlchecked) {
                     setStyles_1.setStyles();
                     setImage();
                 }
@@ -3547,16 +3548,16 @@ exports.settingsBackground = (e) => {
         let radioColor = utils_1.ce('input', {
             type: 'radio',
             id: 'sp_set_bodystyle_color',
-            checked: settings_1._SETTINGS.bodystyleSetting.colorchecked,
+            checked: settings_1._SETTINGS.bodystyleSet.colorchecked,
             class: 'sp-checkbox-circle',
             onclick: (a) => {
-                settings_1._SETTINGS.bodystyleSetting.colorchecked = a.target.checked;
+                settings_1._SETTINGS.bodystyleSet.colorchecked = a.target.checked;
                 if (a.target.checked && radioImage.checked) {
                     radioImage.checked = false;
-                    settings_1._SETTINGS.bodystyleSetting.urlchecked = false;
+                    settings_1._SETTINGS.bodystyleSet.urlchecked = false;
                 }
                 utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
-                if (settings_1._SETTINGS.bodystyleSetting.colorchecked) {
+                if (settings_1._SETTINGS.bodystyleSet.colorchecked) {
                     setStyles_1.setStyles();
                     setColor();
                 }
@@ -3586,10 +3587,10 @@ exports.settingsBackground = (e) => {
         bgWrap.appendChild(label);
         bgWrap.appendChild(label1);
         utils_1.insertAfter(bgWrap, e.parentNode);
-        if (settings_1._SETTINGS.bodystyleSetting.urlchecked) {
+        if (settings_1._SETTINGS.bodystyleSet.urlchecked) {
             setImage();
         }
-        if (settings_1._SETTINGS.bodystyleSetting.colorchecked) {
+        if (settings_1._SETTINGS.bodystyleSet.colorchecked) {
             setColor();
         }
     }
@@ -3623,7 +3624,7 @@ const setImage = async () => {
                             onclick: (e) => {
                                 // @ts-ignore
                                 utils_1.qs('#image-input').value = e.target.src;
-                                settings_1._SETTINGS.bodystyleSetting.url = e.target.src;
+                                settings_1._SETTINGS.bodystyleSet.url = e.target.src;
                                 utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
                                 setStyles_1.setStyles();
                             }
@@ -3686,17 +3687,17 @@ const setColor = () => {
                 utils_1.qs('#color-input').addEventListener('change', (a) => {
                     if (/^\#([A-Za-z0-9]{3}|[A-Za-z0-9]{6})$/i.test(a.target.value) || a.target.value === '') {
                         a.target.className = 'text-input';
-                        settings_1._SETTINGS.bodystyleSetting.color = utils_1.trim(a.target.value);
+                        settings_1._SETTINGS.bodystyleSet.color = utils_1.trim(a.target.value);
                         utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
                         setStyles_1.setStyles();
-                        picker.set(settings_1._SETTINGS.bodystyleSetting.color);
+                        picker.set(settings_1._SETTINGS.bodystyleSet.color);
                     }
                     else {
                         a.target.className = 'text-input sp-input-error';
                     }
                 });
                 picker.enter();
-                picker.set(settings_1._SETTINGS.bodystyleSetting.color);
+                picker.set(settings_1._SETTINGS.bodystyleSet.color);
                 picker.on('change', (e) => {
                     const color = e.toUpperCase();
                     // @ts-ignore
@@ -3704,7 +3705,7 @@ const setColor = () => {
                     // @ts-ignore
                     utils_1.qs('input[name=color]').value = '#' + color;
                     utils_1.qs('.colorpicker-color').style.backgroundColor = '#' + color;
-                    settings_1._SETTINGS.bodystyleSetting.color = '#' + color;
+                    settings_1._SETTINGS.bodystyleSet.color = '#' + color;
                     utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
                     setStyles_1.setStyles();
                 });
@@ -3717,7 +3718,7 @@ const setColor = () => {
                         // @ts-ignore
                         utils_1.qs('input[name=color]').value = value;
                         utils_1.qs('.colorpicker-color').style.backgroundColor = value;
-                        settings_1._SETTINGS.bodystyleSetting.color = value;
+                        settings_1._SETTINGS.bodystyleSet.color = value;
                         utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
                         setStyles_1.setStyles();
                         picker.set(value);
@@ -3756,13 +3757,13 @@ exports.settingsBackupMenu = (id) => {
             // Очищаем #SP_PLUS_SETAREA
             target.innerHTML = '';
             // Предупреждение для ламеров
-            if (!settings_1._SETTINGS.hideNotyf.configImport) {
-                let hideNotyf = utils_1.ce('span', {
+            if (!settings_1._SETTINGS.hideNotify.configImport) {
+                let hideNotify = utils_1.ce('span', {
                     class: 'sp sp-remove-grey pointer right notif_close close_h',
                     style: 'margin: 10px',
                     title: 'Понятно, больше не показывать.',
                     onclick: () => {
-                        settings_1._SETTINGS.hideNotyf.configImport = true;
+                        settings_1._SETTINGS.hideNotify.configImport = true;
                         utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
                         utils_1.remove(utils_1.qs('#SP_CONFIG_JSON'));
                     }
@@ -3773,7 +3774,7 @@ exports.settingsBackupMenu = (id) => {
                     html: '<span class="sp sp-alert"></span>Внимание!</br></br><div style="font-size: small">Редактирование только для опытных пользователей, если что-то пошло не так, следует сделать полный сброс настроек.</div>'
                 });
                 let infoDiv = utils_1.ce('div', { id: 'SP_CONFIG_JSON' });
-                infoDiv.appendChild(hideNotyf);
+                infoDiv.appendChild(hideNotify);
                 target.appendChild(infoDiv);
                 infoDiv.appendChild(smallInfo);
             }
