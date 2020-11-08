@@ -1435,7 +1435,7 @@ const index_1 = __webpack_require__(0);
 exports.confirmBox = (text, warn, callback) => {
     let Alert = index_1.qs('#SP_PLUS_ALERT');
     let Confirm = index_1.qs('#SP_PLUS_CONFIRM');
-    let succesBtn = index_1.ce('button', { html: 'Да', href: '#', class: 'btn btn_red btn_input' });
+    let successBtn = index_1.ce('button', { html: 'Да', href: '#', class: 'btn btn_red btn_input' });
     let cancelBtn = index_1.ce('a', { html: 'Отмена', href: '#', class: 'btn btn_white btn_input right sticker-close_btn' });
     let warningText = index_1.ce('small', { class: 'pad_t_a grey', html: 'Это действие нельзя будет отменить.' });
     let container = index_1.ce('div', { class: 'content-item3 wbg oh', html: text + '<div class="pad_t_a"></div>' });
@@ -1446,7 +1446,7 @@ exports.confirmBox = (text, warn, callback) => {
     if (Confirm)
         index_1.remove(Confirm);
     // Подтверждение сообщения
-    succesBtn.onclick = () => {
+    successBtn.onclick = () => {
         if (index_1.qs('#SP_PLUS_CONFIRM')) {
             callback();
             index_1.remove(index_1.qs('#SP_PLUS_CONFIRM'));
@@ -1466,7 +1466,7 @@ exports.confirmBox = (text, warn, callback) => {
     if (warn)
         container.appendChild(warningText);
     container.appendChild(br);
-    container.appendChild(succesBtn);
+    container.appendChild(successBtn);
     container.appendChild(cancelBtn);
     Main.appendChild(container);
     document.body.appendChild(Main);
@@ -1945,81 +1945,92 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteBlogs = void 0;
 const utils_1 = __webpack_require__(0);
 const strings_1 = __webpack_require__(1);
+/**
+ * TODO: Типизировать поля!
+ */
 exports.deleteBlogs = () => {
     let p = utils_1.getPath().split('/');
-    let buttons = utils_1.qs('#SP_PLUS_BUTTONS');
-    if ((p[1] === 'diary' && p[2] === null) ||
-        (p[1] === 'diary' && p[2] === 'view') &&
-            !buttons) {
+    let buttons = utils_1.qs('#SP_PLUS_BUTTONS_B');
+    // сброс кнопок
+    if (p[2] !== 'view' && buttons)
+        utils_1.remove(buttons);
+    if (p[1] === 'diary' && p[2] === 'view' && !utils_1.qs('input[id^="SP_DB_"')) {
         try {
-            let links = utils_1.find(document.links, { href: `${strings_1.SPACES}/diary/editaccess/?Link_id=` });
-            if (links && !buttons) {
+            // кнопки "Настройки доступа"
+            let links = utils_1.qsa(`a[href^="${strings_1.SPACES}/diary/editaccess/?"`);
+            if (links.length > 0) {
                 let checkboxArr = [];
+                // создаем чекбоксы
                 for (let link of links) {
                     if (link.className) {
+                        let blogId = `SP_DB_${utils_1.getParams(link.href)['id']}`;
                         let checkbox = utils_1.ce('input', {
                             class: 'sp-cbfb sp-checkbox-square',
                             type: 'checkbox',
-                            id: 'SP_DB_' + /\&id=([0-9]+)/i.exec(link.href)[1]
+                            id: blogId
                         });
                         let label = utils_1.ce('label', {
                             class: 'sp-ch-blogs',
                             style: 'margin: 1px',
-                            attr: { 'for': 'SP_DB_' + /\&id=([0-9]+)/i.exec(link.href)[1] }
+                            attr: { 'for': blogId }
                         });
                         utils_1.insertAfter(checkbox, link);
                         utils_1.insertAfter(label, checkbox);
                         checkboxArr.push(checkbox);
                     }
                 }
-                if (!buttons) {
-                    let buttonsDiv = utils_1.ce('div', {
-                        class: 'widgets-group user__tools_last',
-                        id: 'SP_PLUS_BUTTONS'
-                    });
-                    const chooseAllButton = utils_1.ce('button', {
-                        class: 'user__tools-link table__cell sp_plus_btn_list',
-                        html: '<span class="sp sp-ok-blue"></span><span class="sp-ch-text">Выбрать все</span>',
-                        onclick: (e) => {
-                            let parent = e.target.nodeName === 'SPAN' ? e.target.parentNode : e.target;
-                            for (let ch of checkboxArr) {
-                                parent.innerHTML.indexOf('Выбрать все') >= 0 ? ch.checked = true : ch.checked = false;
-                            }
-                            parent.innerHTML = `<span class="sp sp-ok-blue"></span><span class="sp-ch-text">${parent.innerHTML.indexOf('Выбрать все') >= 0 ? 'Снять отметки' : 'Выбрать все'}</span>`;
-                            return false;
+                // блок кнопок управления
+                let buttonsDiv = utils_1.ce('div', {
+                    class: 'widgets-group user__tools_last',
+                    id: 'SP_PLUS_BUTTONS_B'
+                });
+                // кнопка "Выбрать Все"
+                const chooseAllButton = utils_1.ce('button', {
+                    class: 'user__tools-link table__cell sp_plus_btn_list',
+                    html: '<span class="sp sp-ok-blue"></span><span class="sp-ch-text">Выбрать все</span>',
+                    onclick: (e) => {
+                        let parent = e.target.nodeName === 'SPAN' ? e.target.parentNode : e.target;
+                        for (let ch of checkboxArr) {
+                            ch.checked = parent.innerHTML.indexOf('Выбрать все') >= 0 ? true : false;
                         }
-                    });
-                    const deleteBlogsButton = utils_1.ce('button', {
-                        class: 'user__tools-link table__cell sp_btn_line sp_plus_btn_list',
-                        html: '<span class="ico ico_delete"></span><span class="sp-del-text">Удалить выбранные</span>',
-                        onclick: () => {
-                            let count = 0, blogs = [];
-                            for (let ch of checkboxArr) {
-                                if (ch.checked) {
-                                    blogs.push(/^SP_DB_([0-9]+)$/i.exec(ch.id)[1]);
-                                    count++;
+                        parent.innerHTML = `<span class="sp sp-ok-blue"></span><span class="sp-ch-text">${parent.innerHTML.indexOf('Выбрать все') >= 0 ? 'Снять отметки' : 'Выбрать все'}</span>`;
+                        return false;
+                    }
+                });
+                // кнопка "Удалить выбранные"
+                const deleteBlogsButton = utils_1.ce('button', {
+                    class: 'user__tools-link table__cell sp_btn_line sp_plus_btn_list',
+                    html: '<span class="ico ico_delete"></span><span class="sp-del-text">Удалить выбранные</span>',
+                    onclick: () => {
+                        let count = 0, blogs = [];
+                        for (let ch of checkboxArr) {
+                            if (ch.checked) {
+                                blogs.push(/^SP_DB_([0-9]+)$/i.exec(ch.id)[1]);
+                                count++;
+                            }
+                        }
+                        if (count > 0) {
+                            let con = utils_1.declOfNum(count, ['', 'а', 'ов']);
+                            utils_1.confirmBox(`Вы действительно хотите удалить ${count} блог${con}?`, true, async () => {
+                                utils_1.messageBox(`Удаляем ${count} блог${con}`, 'Подождите немного... <span style="padding-right: 10px" class="ico ico_spinner"></span>', false);
+                                for (let blog of blogs) {
+                                    await utils_1.http('GET', `${strings_1.SPACES}/diary/delete/?CK=${strings_1.OVERRIDE.CK}&id=${blog}&Sure=1`, true);
                                 }
-                            }
-                            if (count > 0) {
-                                let con = utils_1.declOfNum(count, ['', 'а', 'ов']);
-                                utils_1.confirmBox(`Вы действительно хотите удалить ${count} блог${con}?`, true, async () => {
-                                    utils_1.messageBox(`Удаляем ${count} блог${con}`, 'Подождите немного... <span style="padding-right: 10px" class="ico ico_spinner"></span>', false);
-                                    for (let blog of blogs) {
-                                        await utils_1.http('GET', `${strings_1.SPACES}/diary/delete/?CK=${strings_1.OVERRIDE.CK}&id=${blog}&Sure=1`, true);
-                                    }
-                                    document.location.reload();
-                                });
-                            }
-                            else {
-                                utils_1.messageBox('Внимание!', 'Отметьте галочкой, те блоги, которые вы хотите удалить и попробуйте еще раз', true, 5);
-                            }
-                            return false;
+                                document.location.reload();
+                            });
                         }
-                    });
-                    buttonsDiv.appendChild(deleteBlogsButton);
-                    buttonsDiv.appendChild(chooseAllButton);
-                    utils_1.inBefore(buttonsDiv, utils_1.qs('div.pgn'));
-                }
+                        else {
+                            utils_1.messageBox('Внимание!', 'Отметьте галочкой, те блоги, которые вы хотите удалить и попробуйте еще раз', true, 5);
+                        }
+                        return false;
+                    }
+                });
+                // костыль
+                if (buttons)
+                    utils_1.remove(buttons);
+                buttonsDiv.appendChild(deleteBlogsButton);
+                buttonsDiv.appendChild(chooseAllButton);
+                utils_1.qs('#siteContent').append(buttonsDiv);
             }
         }
         catch (e) {
@@ -2646,14 +2657,32 @@ exports.stickyHeader = (b) => {
     let sidebarLogo = utils_1.qs('div.sidebar-logo');
     try {
         if (b && !header.hasAttribute('sp-sticky-header')) {
-            // фиксированное положение блока (при смене версии сайта)
-            utils_1.css(infoBlock, `position: fixed; width: ${mainShadow.clientWidth}px; z-index: 9999;`);
             // опускаем основной контейнер
-            utils_1.css(mainShadow, 'padding-top: 45px;');
+            utils_1.css(mainShadow, 'padding-top: 45px');
+            // фиксированное положение блока (при смене версии сайта)
+            utils_1.css(infoBlock, `
+                position: fixed;
+                width: ${mainShadow.clientWidth}px;
+                z-index: 9999
+            `);
             // стили для логотипа
-            utils_1.css(sidebarLogo, `position: fixed; width: ${leftNav.clientWidth}px; top: 0px; z-index: 9999;`);
+            utils_1.css(sidebarLogo, `
+                position: fixed;
+                width: ${leftNav.clientWidth + 1}px;
+                left: ${wrapAll.offsetLeft}px;
+                top: 0px;
+                box-shadow: 0px 2px 2px rgba(93,109,157,0.2);
+                z-index: 9999
+            `);
             // стили для шапки
-            utils_1.css(header, `position: fixed; width: ${mainShadow.clientWidth - leftNav.clientWidth + 1}px; left: ${wrapAll.offsetLeft + leftNav.clientWidth}px; top: 0px; z-index: 9999;`);
+            utils_1.css(header, `
+                position: fixed;
+                width: ${mainShadow.clientWidth - leftNav.clientWidth + 1}px;
+                left: ${wrapAll.offsetLeft + leftNav.clientWidth}px;
+                top: 0px;
+                box-shadow: 0px 2px 2px rgba(93,109,157,0.2);
+                z-index: 9999
+            `);
             header.setAttribute('sp-sticky-header', '1');
         }
         else if (header.hasAttribute('sp-sticky-header')) {
@@ -2681,35 +2710,40 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteReaders = void 0;
 const utils_1 = __webpack_require__(0);
 const strings_1 = __webpack_require__(1);
+/**
+ * TODO: Типизировать поля!
+ */
 exports.deleteReaders = () => {
-    let buttons = utils_1.qs('#SP_PLUS_BUTTONS');
+    var _a, _b;
+    let buttons = utils_1.qs('#SP_PLUS_BUTTONS_R');
     if (utils_1.getPath() === '/lenta/readers/' && !buttons) {
         try {
-            let links = utils_1.find(document.links, { href: `${strings_1.SPACES}/lenta/reader_delete/?` });
+            let links = utils_1.qsa(`a[href^="${strings_1.SPACES}/lenta/reader_delete/?"`);
             if (links && !buttons) {
                 let checkboxArr = [];
                 for (let link of links) {
                     link.style.textAlign = 'center';
                     let chWrap = utils_1.ce('label', { class: 'stnd-link icon-link sp-ch-readers' });
+                    let userId = `SP_DR_${utils_1.getParams(link.href)['user']}`;
                     let bChbx = utils_1.ce('input', {
                         type: 'checkbox',
                         class: 'sp-cbfr sp-checkbox-square',
-                        id: 'SP_DR_' + /(\?|&)user=([A-Za-z0-9\_]+)/i.exec(link.href)[2]
+                        id: userId
                     });
                     let ckbxlb = utils_1.ce('label', {
                         style: 'margin-left: 0px',
-                        attr: { 'for': 'SP_DR_' + /(\?|&)user=([A-Za-z0-9\_]+)/i.exec(link.href)[2] }
+                        attr: { 'for': userId }
                     });
                     chWrap.appendChild(bChbx);
                     chWrap.appendChild(ckbxlb);
                     utils_1.insertAfter(chWrap, link);
                     checkboxArr.push(bChbx);
                 }
-                let lastParent = links[links.length - 1].parentNode.parentNode;
+                let lastParent = (_b = (_a = links[links.length - 1]) === null || _a === void 0 ? void 0 : _a.parentNode) === null || _b === void 0 ? void 0 : _b.parentNode;
                 if (lastParent) {
                     let buttonsDiv = utils_1.ce('div', {
                         class: 'user__tools_last',
-                        id: 'SP_PLUS_BUTTONS'
+                        id: 'SP_PLUS_BUTTONS_R'
                     });
                     const chooseAllButton = utils_1.ce('button', {
                         class: 'user__tools-link table__cell sp_plus_btn_list',
@@ -2717,7 +2751,7 @@ exports.deleteReaders = () => {
                         onclick: (e) => {
                             let parent = e.target.nodeName === 'SPAN' ? e.target.parentNode : e.target;
                             for (let ch of checkboxArr) {
-                                parent.innerHTML.indexOf('Выбрать все') >= 0 ? ch.checked = true : ch.checked = false;
+                                ch.checked = parent.innerHTML.indexOf('Выбрать все') >= 0 ? true : false;
                             }
                             parent.innerHTML = `<span class="sp sp-ok-blue"></span><span class="sp-ch-text">${parent.innerHTML.indexOf('Выбрать все') >= 0 ? 'Снять отметки' : 'Выбрать все'}</span>`;
                             return false;
