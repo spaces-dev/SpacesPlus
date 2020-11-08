@@ -9,7 +9,7 @@ import { ce, qs, remove } from './index'
 export const confirmBox = (text: string, warn: boolean, callback: Function) => {
     let Alert = qs('#SP_PLUS_ALERT')
     let Confirm = qs('#SP_PLUS_CONFIRM')
-    let succesBtn = ce('button', { html: 'Да', href: '#', class: 'btn btn_red btn_input' })
+    let successBtn = ce('button', { html: 'Да', href: '#', class: 'btn btn_red btn_input' })
     let cancelBtn = ce('a', { html: 'Отмена', href: '#', class: 'btn btn_white btn_input right sticker-close_btn' })
     let warningText = ce('small', { class: 'pad_t_a grey', html: 'Это действие нельзя будет отменить.' })
     let container = ce('div', { class: 'content-item3 wbg oh', html: text + '<div class="pad_t_a"></div>' })
@@ -20,7 +20,7 @@ export const confirmBox = (text: string, warn: boolean, callback: Function) => {
     if (Confirm) remove(Confirm)
 
     // Подтверждение сообщения
-    succesBtn.onclick = () => {
+    successBtn.onclick = () => {
         if (qs('#SP_PLUS_CONFIRM')) {
             callback()
             remove(qs('#SP_PLUS_CONFIRM'))
@@ -43,7 +43,7 @@ export const confirmBox = (text: string, warn: boolean, callback: Function) => {
     if (warn) container.appendChild(warningText)
 
     container.appendChild(br)
-    container.appendChild(succesBtn)
+    container.appendChild(successBtn)
     container.appendChild(cancelBtn)
 
     Main.appendChild(container)
