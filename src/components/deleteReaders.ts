@@ -1,10 +1,11 @@
 import {
     ce,
     qs,
-    find,
+    qsa,
     http,
     error,
     getPath,
+    getParams,
     declOfNum,
     confirmBox,
     messageBox,
@@ -13,12 +14,15 @@ import {
 
 import { SPACES, OVERRIDE } from '../strings'
 
+/**
+ * TODO: Типизировать поля!
+ */
 export const deleteReaders = () => {
-    let buttons = qs('#SP_PLUS_BUTTONS')
+    let buttons = qs('#SP_PLUS_BUTTONS_R')
 
     if (getPath() === '/lenta/readers/' && !buttons) {
         try {
-            let links = find(document.links, { href: `${SPACES}/lenta/reader_delete/?` })
+            let links: any = qsa(`a[href^="${SPACES}/lenta/reader_delete/?"`)
 
             if (links && !buttons) {
                 let checkboxArr: any[] = []
@@ -28,15 +32,17 @@ export const deleteReaders = () => {
 
                     let chWrap = ce('label', { class: 'stnd-link icon-link sp-ch-readers' })
 
+                    let userId = `SP_DR_${getParams(link.href)['user']}`
+
                     let bChbx = ce('input', {
                         type: 'checkbox',
                         class: 'sp-cbfr sp-checkbox-square',
-                        id: 'SP_DR_' + /(\?|&)user=([A-Za-z0-9\_]+)/i.exec(link.href)![2]
+                        id: userId
                     })
 
                     let ckbxlb = ce('label', {
                         style: 'margin-left: 0px',
-                        attr: { 'for': 'SP_DR_' + /(\?|&)user=([A-Za-z0-9\_]+)/i.exec(link.href)![2] }
+                        attr: { 'for': userId }
                     })
 
                     chWrap.appendChild(bChbx)
@@ -45,12 +51,12 @@ export const deleteReaders = () => {
                     checkboxArr.push(bChbx)
                 }
 
-                let lastParent = links[links.length - 1].parentNode.parentNode
+                let lastParent = links[links.length - 1]?.parentNode?.parentNode
 
                 if (lastParent) {
                     let buttonsDiv = ce('div', {
                         class: 'user__tools_last',
-                        id: 'SP_PLUS_BUTTONS'
+                        id: 'SP_PLUS_BUTTONS_R'
                     })
 
                     const chooseAllButton = ce('button', {
@@ -60,7 +66,7 @@ export const deleteReaders = () => {
                             let parent = e.target.nodeName === 'SPAN' ? e.target.parentNode : e.target
 
                             for (let ch of checkboxArr) {
-                                parent.innerHTML.indexOf('Выбрать все') >= 0 ? ch.checked = true : ch.checked = false
+                                ch.checked = parent.innerHTML.indexOf('Выбрать все') >= 0 ? true : false
                             }
 
                             parent.innerHTML = `<span class="sp sp-ok-blue"></span><span class="sp-ch-text">${parent.innerHTML.indexOf('Выбрать все') >= 0 ? 'Снять отметки' : 'Выбрать все'}</span>`
