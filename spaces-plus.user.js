@@ -990,11 +990,11 @@ const init = () => {
         components_1.hiddenRightbar(settings_1._SETTINGS.hrightbar);
     }
     /**
-     * ? Тут перечислены функции, которым необходимо постоянно
-     * ? отслеживать прочее состояния на странице браузера
-     * ! Для оптимальной работы выставлен интервал обновления в 200ms
+     * ? Тут перечислены функции, которым необходимо постоянно отслеживать
+     * ? прочее состояния на странице браузера
+     * TODO: MutationObserver
      */
-    setInterval(() => {
+    const observer = new MutationObserver(() => {
         if (settings_1._SETTINGS.adblock)
             components_1.adBlock();
         if (settings_1._SETTINGS.beta)
@@ -1028,7 +1028,11 @@ const init = () => {
         if (settings_1._SETTINGS.blogsd || strings_1.BASE_URL === 'spaces-blogs.com')
             components_1.deleteBlogs();
         components_1.settingsMenu();
-    }, 200);
+    });
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
 };
 
 
