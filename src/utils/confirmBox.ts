@@ -22,8 +22,8 @@ export const confirmBox = (text: string, warn: boolean, callback: Function) => {
     // Подтверждение сообщения
     successBtn.onclick = () => {
         if (qs('#SP_PLUS_CONFIRM')) {
-            callback()
             remove(qs('#SP_PLUS_CONFIRM'))
+            callback()
             return false
         }
         return true

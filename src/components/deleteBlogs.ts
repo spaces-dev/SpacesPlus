@@ -98,12 +98,13 @@ export const deleteBlogs = () => {
                         }
 
                         if (count > 0) {
-                            let con = declOfNum(count, ['', 'а', 'ов'])
 
-                            confirmBox(`Вы действительно хотите удалить ${count} блог${con}?`, true, async () => {
-                                messageBox(`Удаляем ${count} блог${con}`, 'Подождите немного... <span style="padding-right: 10px" class="ico ico_spinner"></span>', false)
+                            confirmBox(`Вы действительно хотите удалить ${count} ${declStr(count)}?`, true, async () => {
+
+                                let allCount = count
 
                                 for (let blog of blogs) {
+                                    messageBox(`Осталось удалить ${count--} из ${allCount} ${declStr(count)}`, 'Подождите немного... <span style="padding-right: 10px" class="ico ico_spinner"></span>', false)
                                     await http('GET', `${SPACES}/diary/delete/?CK=${OVERRIDE.CK}&id=${blog}&Sure=1`, true)
                                 }
 
@@ -128,3 +129,5 @@ export const deleteBlogs = () => {
         }
     }
 }
+
+const declStr = (count: number) => 'блог' + declOfNum(count, ['', 'а', 'ов'])

@@ -3,8 +3,8 @@ import {
     qs,
     trim,
     http,
-    remove,
     error,
+    remove,
     setCookie,
     isValidUrl,
     insertAfter,
@@ -214,7 +214,7 @@ const setImage = async () => {
             })
         }
     } catch (e) {
-        console.error('Ошибка (setImage): ' + e)
+        error('Ошибка (setImage): ' + e)
     }
 }
 

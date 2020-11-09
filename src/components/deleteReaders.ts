@@ -89,12 +89,13 @@ export const deleteReaders = () => {
                             }
 
                             if (count > 0) {
-                                let con = declOfNum(count, ['я', 'я', 'ей'])
 
-                                confirmBox(`Вы действительно хотите удалить ${count} читател${con}?`, true, async () => {
-                                    messageBox(`Удаляем ${count} читател${con}`, 'Подождите немного... <span style="padding-right: 10px" class="ico ico_spinner"></span>', false)
+                                confirmBox(`Вы действительно хотите удалить ${count} ${declStr(count)}?`, true, async () => {
+
+                                    let allCount = count
 
                                     for (let reader of readers) {
+                                        messageBox(`Осталось удалить ${count--} из ${allCount} ${declStr(count)}`, 'Подождите немного... <span style="padding-right: 10px" class="ico ico_spinner"></span>', false)
                                         await http('POST', `${SPACES}/lenta/reader_delete/?user=${reader}`, false, `&CK=${OVERRIDE.CK}&cfms=Удалить`)
                                     }
 
@@ -117,3 +118,5 @@ export const deleteReaders = () => {
         }
     }
 }
+
+const declStr = (count: number) => 'читател' + declOfNum(count, ['я', 'я', 'ей'])

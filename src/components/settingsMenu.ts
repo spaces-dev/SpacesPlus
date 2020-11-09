@@ -1,7 +1,6 @@
 import {
     ce,
     qs,
-    find,
     error,
     remove,
     getPath,
@@ -92,8 +91,6 @@ export const settingsMenu = () => {
 
                                             _SETTINGS[id] = checked
                                             setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
-
-                                            console.log(id + ": " + checked)
 
                                             switch (id) {
                                                 case 'rscroll':
