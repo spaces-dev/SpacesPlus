@@ -92,11 +92,11 @@ const init = () => {
     }
 
     /**
-     * ? Тут перечислены функции, которым необходимо постоянно
-     * ? отслеживать прочее состояния на странице браузера
-     * ! Для оптимальной работы выставлен интервал обновления в 200ms
+     * ? Тут перечислены функции, которым необходимо постоянно отслеживать
+     * ? прочее состояния на странице браузера
+     * TODO: MutationObserver
      */
-    setInterval(() => {
+    const observer = new MutationObserver(() => {
         if (_SETTINGS.adblock) adBlock()
         if (_SETTINGS.beta) betaFeatures()
         if (_SETTINGS.coins) coinsAccept()
@@ -114,5 +114,10 @@ const init = () => {
         if (_SETTINGS.playback) videoSpeedPlayback()
         if (_SETTINGS.blogsd || BASE_URL === 'spaces-blogs.com') deleteBlogs()
         settingsMenu()
-    }, 200)
+    })
+
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true
+    })
 }
