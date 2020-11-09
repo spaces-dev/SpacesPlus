@@ -231,18 +231,10 @@ const setColor = () => {
                 rel: 'stylesheet',
                 type: 'text/css',
                 id: 'SP_PLUS_CP_STYLE',
-                href: `${ENV_PATH}/css/toolbar.css?r=${REVISION}`
-            })
-
-            let style2 = ce('link', {
-                rel: 'stylesheet',
-                type: 'text/css',
-                id: 'SP_PLUS_CP_STYLE_2',
                 href: `${ENV_PATH}/css/user-content.css?r=${REVISION}`
             })
 
             document.getElementsByTagName('head')[0].appendChild(style)
-            document.getElementsByTagName('head')[0].appendChild(style2)
 
             let bodyStyle = qs('#SP_PLUS_BODYSTYLE'),
                 stdnC = ce('div', { id: 'SP_WRAP_COLOR', style: 'border-top: 1px solid #cdd4e1' }),
