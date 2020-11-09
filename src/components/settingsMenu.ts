@@ -39,7 +39,7 @@ export const settingsMenu = () => {
         try {
 
             // Ищем таргер для инициализации меню настроек
-            const targetLink = qs(`a[href*="${SPACES}/settings/notification/?"`)
+            const targetLink = qs(`a[href^="${SPACES}/settings/notification/"`)
 
             if (targetLink) {
                 const urlSett = getQuery('sp_plus_settings')

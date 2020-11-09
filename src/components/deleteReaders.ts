@@ -22,7 +22,7 @@ export const deleteReaders = () => {
 
     if (getPath() === '/lenta/readers/' && !buttons) {
         try {
-            let links: any = qsa(`a[href^="${SPACES}/lenta/reader_delete/?"`)
+            let links: any = qsa(`a[href^="${SPACES}/lenta/reader_delete/"`)
 
             if (links && !buttons) {
                 let checkboxArr: any[] = []

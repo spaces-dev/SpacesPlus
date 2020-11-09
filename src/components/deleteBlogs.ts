@@ -30,7 +30,7 @@ export const deleteBlogs = () => {
         try {
 
             // кнопки "Настройки доступа"
-            let links: any = qsa(`a[href^="${SPACES}/diary/editaccess/?"`)
+            let links: any = qsa(`a[href^="${SPACES}/diary/editaccess/"`)
 
             if (links.length > 0) {
 

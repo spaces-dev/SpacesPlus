@@ -5,7 +5,7 @@ import { SPACES } from '../strings'
 export const sidebarButton = () => {
 
     // Место для вставки кнопки
-    qsa(`li.li>a[href*="${SPACES}/services/"]`).forEach(e => {
+    qsa(`li.li>a[href^="${SPACES}/services/"]`).forEach(e => {
 
         // Включены ли иконки на левой панели
         let disableIcons = !!qs('span.s_i_exit') ? '<span class="sp sp-ico"></span>' : ''
