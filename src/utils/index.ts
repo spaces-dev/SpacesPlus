@@ -1,6 +1,5 @@
 import { ce } from './ce'
 import { css } from './css'
-import { find } from './find'
 import { http } from './http'
 import { trim } from './trim'
 import { qs, qsa } from './qs'
@@ -34,7 +33,6 @@ export {
     qsa,
     css,
     log,
-    find,
     info,
     http,
     trim,
