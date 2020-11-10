@@ -7,7 +7,7 @@ import {
     remove,
     setCookie,
     isValidUrl,
-    insertAfter,
+    insertAfter
 } from '../utils'
 
 import { setStyles } from './setStyles'
@@ -236,18 +236,76 @@ const setColor = () => {
 
             document.getElementsByTagName('head')[0].appendChild(style)
 
+            let colorsTd = ce('div', {
+                class: 'stnd-block'
+            })
+
             let bodyStyle = qs('#SP_PLUS_BODYSTYLE'),
                 stdnC = ce('div', { id: 'SP_WRAP_COLOR', style: 'border-top: 1px solid #cdd4e1' }),
                 table = ce('table', { class: 'table__wrap bb-colorpicker' }),
                 tbody = ce('tbody'),
                 tr = ce('tr'),
-                td1 = ce('td', { class: 'table__cell' }),
-                td1div = ce('div', {
-                    class: 'stnd-block',
-                    html: '<div><div style="background-color:#90CAF9" data-tag="fon" data-val="#90CAF9" class="js-bb_color toolbar-color pointer"></div> <div style="background-color:#80DEEA" data-tag="fon" data-val="#80DEEA" class="js-bb_color toolbar-color pointer"></div> <div style="background-color:#A5D6A7" data-tag="fon" data-val="#A5D6A7" class="js-bb_color toolbar-color pointer"></div> <div style="background-color:#FFF59D" data-tag="fon" data-val="#FFF59D" class="js-bb_color toolbar-color pointer"></div> <div style="background-color:#FFCC80" data-tag="fon" data-val="#FFCC80" class="js-bb_color toolbar-color pointer"></div> <div style="background-color:#FFAB91" data-tag="fon" data-val="#FFAB91" class="js-bb_color toolbar-color pointer"></div> <div style="background-color:#CE93D8" data-tag="fon" data-val="#CE93D8" class="js-bb_color toolbar-color pointer"></div> </div> <div> <div style="background-color:#2196F3" data-tag="fon" data-val="#2196F3" class="js-bb_color toolbar-color pointer"></div> <div style="background-color:#00BCD4" data-tag="fon" data-val="#00BCD4" class="js-bb_color toolbar-color pointer"></div> <div style="background-color:#4CAF50" data-tag="fon" data-val="#4CAF50" class="js-bb_color toolbar-color pointer"></div> <div style="background-color:#FFEB3B" data-tag="fon" data-val="#FFEB3B" class="js-bb_color toolbar-color pointer"></div> <div style="background-color:#FF9800" data-tag="fon" data-val="#FF9800" class="js-bb_color toolbar-color pointer"></div> <div style="background-color:#F44336" data-tag="fon" data-val="#F44336" class="js-bb_color toolbar-color pointer"></div> <div style="background-color:#9C27B0" data-tag="fon" data-val="#9C27B0" class="js-bb_color toolbar-color pointer"></div> </div> <div> <div style="background-color:#1565C0" data-tag="fon" data-val="#1565C0" class="js-bb_color toolbar-color pointer"></div> <div style="background-color:#00838F" data-tag="fon" data-val="#00838F" class="js-bb_color toolbar-color pointer"></div> <div style="background-color:#2E7D32" data-tag="fon" data-val="#2E7D32" class="js-bb_color toolbar-color pointer"></div> <div style="background-color:#F9A825" data-tag="fon" data-val="#F9A825" class="js-bb_color toolbar-color pointer"></div> <div style="background-color:#EF6C00" data-tag="fon" data-val="#EF6C00" class="js-bb_color toolbar-color pointer"></div> <div style="background-color:#C62828" data-tag="fon" data-val="#C62828" class="js-bb_color toolbar-color pointer"></div> <div style="background-color:#6A1B9A" data-tag="fon" data-val="#6A1B9A" class="js-bb_color toolbar-color pointer"></div> </div> <div> <div style="background-color:#ECF0F1" data-tag="fon" data-val="#ECF0F1" class="js-bb_color toolbar-color pointer"></div> <div style="background-color:#CFD8DC" data-tag="fon" data-val="#CFD8DC" class="js-bb_color toolbar-color pointer"></div> <div style="background-color:#B0BEC5" data-tag="fon" data-val="#B0BEC5" class="js-bb_color toolbar-color pointer"></div> <div style="background-color:#97A6B0" data-tag="fon" data-val="#97A6B0" class="js-bb_color toolbar-color pointer"></div> <div style="background-color:#546E7A" data-tag="fon" data-val="#546E7A" class="js-bb_color toolbar-color pointer"></div> <div style="background-color:#44565E" data-tag="fon" data-val="#44565E" class="js-bb_color toolbar-color pointer"></div> <div style="background-color:#3A474C" data-tag="fon" data-val="#3A474C" class="js-bb_color toolbar-color pointer"></div></div>'
-                })
+                td1 = ce('td', { class: 'table__cell' })
 
-            td1.appendChild(td1div)
+            // цвета для быстрого выбора
+            const colors = [
+                [
+                    "#90CAF9",
+                    "#80DEEA",
+                    "#A5D6A7",
+                    "#FFF59D",
+                    "#FFCC80",
+                    "#FFAB91",
+                    "#CE93D8"
+                ],
+                [
+                    "#2196F3",
+                    "#00BCD4",
+                    "#4CAF50",
+                    "#FFEB3B",
+                    "#FF9800",
+                    "#F44336",
+                    "#9C27B0",
+                ],
+                [
+                    "#1565C0",
+                    "#00838F",
+                    "#2E7D32",
+                    "#F9A825",
+                    "#EF6C00",
+                    "#C62828",
+                    "#6A1B9A"
+                ],
+                [
+                    "#ECF0F1",
+                    "#CFD8DC",
+                    "#B0BEC5",
+                    "#97A6B0",
+                    "#546E7A",
+                    "#44565E",
+                    "#3A474C"
+                ]
+            ]
+
+            for (let color of colors) {
+
+                for (let i in color) {
+                    let dd = ce('div', {
+                        style: `background-color: ${color[i]}`,
+                        class: 'js-bb_color toolbar-color pointer',
+                        attr: {
+                            'data-val': color[i],
+                            'data-tag': 'fon'
+                        }
+                    })
+
+                    colorsTd.appendChild(dd)
+                }
+
+                colorsTd.appendChild(ce('br'))
+            }
+
+            td1.appendChild(colorsTd)
             tr.appendChild(td1)
 
             let td2 = ce('td', { class: 'table__cell table__cell_last' }),
@@ -292,10 +350,10 @@ const setColor = () => {
                     setStyles()
                 })
 
-                const colors: any = document.querySelectorAll('.js-bb_color')
+                const colorsBtn = document.querySelectorAll('.js-bb_color')
 
-                for (let color of colors) {
-                    color.onclick = (e: any) => {
+                for (let color of colorsBtn) {
+                    color.addEventListener('click', (e: any) => {
                         let value = e.target.getAttribute('data-val')
                         // @ts-ignore
                         qs('#color-input').value = value
@@ -306,7 +364,7 @@ const setColor = () => {
                         setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
                         setStyles()
                         picker.set(value)
-                    }
+                    })
                 }
             }, 100)
         }

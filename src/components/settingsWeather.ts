@@ -26,27 +26,8 @@ export const settingsWeather = async (e: any) => {
      */
     if (_SETTINGS.hrightbar) qs('#hrightbar').click()
 
-    /**
-     * Инициализация ¯\_(ツ)_/¯
-     * Получаем город
-     */
-    if (_SETTINGS.weatherSet.city === null) {
-        try {
-            await http<IWhois>('GET', 'https://ipwhois.app/json/?objects=city,success&lang=ru', false).then(e => {
-                const json = e.parsedBody
-
-                if (json?.success) {
-                    _SETTINGS.weatherSet.city = json.city
-                    setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
-                    getWeather()
-                } else {
-                    messageBox('Ошибка ipwhois', 'Обратитесь к разработчику!', true)
-                }
-            })
-        } catch (e) {
-            error('Ошибка (ipwhois): ' + e)
-        }
-    }
+    // Инициализация
+    _SETTINGS.weatherSet.city ?? ipWhois()
 
     let masWarp = ce('div', { id: 'SP_WEATHER_SETTINGS', class: 'sp_settings-wrap' })
 
@@ -158,8 +139,7 @@ export const getWeather = async () => {
                 return false
             }
 
-            // @ts-ignore Костыль ебаный!
-            if (qs('#SP-CITY-INPUT')) { qs('#SP-CITY-INPUT').value = json.name }
+            if (qs('#SP-CITY-INPUT')) { (qs('#SP-CITY-INPUT') as HTMLInputElement).value = json!.name }
             if (qs('#SP_WIDGET_WEATHER')) remove(qs('#SP_WIDGET_WEATHER'))
 
             if (json?.cod === 200) {
@@ -170,5 +150,27 @@ export const getWeather = async () => {
         })
     } catch (e) {
         error('Ошибка (openweathermap): ' + e)
+    }
+}
+
+/**
+ * Инициализация виджета погоды ¯\_(ツ)_/¯
+ * Получаем город пользователя
+ */
+export const ipWhois = async () => {
+    try {
+        await http<IWhois>('GET', 'https://ipwhois.app/json/?objects=city,success&lang=ru', false).then(e => {
+            const json = e.parsedBody
+
+            if (json?.success) {
+                _SETTINGS.weatherSet.city = json.city
+                setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
+                getWeather()
+            } else {
+                messageBox('Ошибка ipWhois', 'Обратитесь к разработчику!', true)
+            }
+        })
+    } catch (e) {
+        error('Ошибка (ipWhois): ' + e)
     }
 }

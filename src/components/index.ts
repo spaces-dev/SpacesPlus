@@ -26,17 +26,18 @@ import { playerDownload } from './playerDownload'
 import { settingsNotify } from './settingsNotify'
 import { disableRedirect } from './disableRedirect'
 import { settingsFriends } from './settingsFriends'
-import { settingsWeather } from './settingsWeather'
 import { settingsFeatures } from './settingsFeatures'
 import { videoSpeedPlayback } from './videoSpeedPlayback'
 import { settingsBackground } from './settingsBackground'
 import { settingsBackupMenu } from './settingsBackupMenu'
 import { checkUpdates, getUpdater } from './checkUpdates'
+import { settingsWeather, ipWhois } from './settingsWeather'
 import { settingsRecentSmiles } from './settingsRecentSmiles'
 import { settingsChangelogMenu } from './settingsChangelogMenu'
 
 export {
     adBlock,
+    ipWhois,
     oldHeader,
     setStyles,
     getUpdater,
