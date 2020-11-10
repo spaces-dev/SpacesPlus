@@ -371,7 +371,7 @@ exports.debug = (str) => console.debug(date() + str);
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.settingsChangelogMenu = exports.settingsRecentSmiles = exports.settingsBackupMenu = exports.settingsBackground = exports.videoSpeedPlayback = exports.settingsFeatures = exports.settingsWeather = exports.settingsFriends = exports.disableRedirect = exports.settingsNotify = exports.playerDownload = exports.hiddenRightbar = exports.deleteComments = exports.weatherWidget = exports.sidebarButton = exports.galleryRotate = exports.friendsOnline = exports.deleteReaders = exports.stickyHeader = exports.settingsMenu = exports.recentSmiles = exports.freeStickers = exports.favoriteUser = exports.checkUpdates = exports.betaFeatures = exports.soundNotify = exports.karmaAccept = exports.deleteBlogs = exports.coinsAccept = exports.apiDebugger = exports.userOnline = exports.userStatus = exports.scrollMove = exports.getUpdater = exports.setStyles = exports.oldHeader = exports.adBlock = void 0;
+exports.settingsChangelogMenu = exports.settingsRecentSmiles = exports.settingsBackupMenu = exports.settingsBackground = exports.videoSpeedPlayback = exports.settingsFeatures = exports.settingsWeather = exports.settingsFriends = exports.disableRedirect = exports.settingsNotify = exports.playerDownload = exports.hiddenRightbar = exports.deleteComments = exports.weatherWidget = exports.sidebarButton = exports.galleryRotate = exports.friendsOnline = exports.deleteReaders = exports.stickyHeader = exports.settingsMenu = exports.recentSmiles = exports.freeStickers = exports.favoriteUser = exports.checkUpdates = exports.betaFeatures = exports.soundNotify = exports.karmaAccept = exports.deleteBlogs = exports.coinsAccept = exports.apiDebugger = exports.userOnline = exports.userStatus = exports.scrollMove = exports.getUpdater = exports.setStyles = exports.oldHeader = exports.ipWhois = exports.adBlock = void 0;
 const adBlock_1 = __webpack_require__(14);
 Object.defineProperty(exports, "adBlock", { enumerable: true, get: function () { return adBlock_1.adBlock; } });
 const oldHeader_1 = __webpack_require__(39);
@@ -428,8 +428,6 @@ const disableRedirect_1 = __webpack_require__(62);
 Object.defineProperty(exports, "disableRedirect", { enumerable: true, get: function () { return disableRedirect_1.disableRedirect; } });
 const settingsFriends_1 = __webpack_require__(63);
 Object.defineProperty(exports, "settingsFriends", { enumerable: true, get: function () { return settingsFriends_1.settingsFriends; } });
-const settingsWeather_1 = __webpack_require__(11);
-Object.defineProperty(exports, "settingsWeather", { enumerable: true, get: function () { return settingsWeather_1.settingsWeather; } });
 const settingsFeatures_1 = __webpack_require__(64);
 Object.defineProperty(exports, "settingsFeatures", { enumerable: true, get: function () { return settingsFeatures_1.settingsFeatures; } });
 const videoSpeedPlayback_1 = __webpack_require__(66);
@@ -441,6 +439,9 @@ Object.defineProperty(exports, "settingsBackupMenu", { enumerable: true, get: fu
 const checkUpdates_1 = __webpack_require__(12);
 Object.defineProperty(exports, "checkUpdates", { enumerable: true, get: function () { return checkUpdates_1.checkUpdates; } });
 Object.defineProperty(exports, "getUpdater", { enumerable: true, get: function () { return checkUpdates_1.getUpdater; } });
+const settingsWeather_1 = __webpack_require__(11);
+Object.defineProperty(exports, "settingsWeather", { enumerable: true, get: function () { return settingsWeather_1.settingsWeather; } });
+Object.defineProperty(exports, "ipWhois", { enumerable: true, get: function () { return settingsWeather_1.ipWhois; } });
 const settingsRecentSmiles_1 = __webpack_require__(69);
 Object.defineProperty(exports, "settingsRecentSmiles", { enumerable: true, get: function () { return settingsRecentSmiles_1.settingsRecentSmiles; } });
 const settingsChangelogMenu_1 = __webpack_require__(70);
@@ -713,7 +714,7 @@ exports.friendsOnline = (t) => {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getWeather = exports.settingsWeather = void 0;
+exports.ipWhois = exports.getWeather = exports.settingsWeather = void 0;
 const utils_1 = __webpack_require__(0);
 const settings_1 = __webpack_require__(2);
 /**
@@ -721,33 +722,14 @@ const settings_1 = __webpack_require__(2);
  * @param e #weather
  */
 exports.settingsWeather = async (e) => {
+    var _a;
     /**
      * Отключаем скрытие правого меню, если оно включено
      */
     if (settings_1._SETTINGS.hrightbar)
         utils_1.qs('#hrightbar').click();
-    /**
-     * Инициализация ¯\_(ツ)_/¯
-     * Получаем город
-     */
-    if (settings_1._SETTINGS.weatherSet.city === null) {
-        try {
-            await utils_1.http('GET', 'https://ipwhois.app/json/?objects=city,success&lang=ru', false).then(e => {
-                const json = e.parsedBody;
-                if (json === null || json === void 0 ? void 0 : json.success) {
-                    settings_1._SETTINGS.weatherSet.city = json.city;
-                    utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
-                    exports.getWeather();
-                }
-                else {
-                    utils_1.messageBox('Ошибка ipwhois', 'Обратитесь к разработчику!', true);
-                }
-            });
-        }
-        catch (e) {
-            utils_1.error('Ошибка (ipwhois): ' + e);
-        }
-    }
+    // Инициализация
+    (_a = settings_1._SETTINGS.weatherSet.city) !== null && _a !== void 0 ? _a : exports.ipWhois();
     let masWarp = utils_1.ce('div', { id: 'SP_WEATHER_SETTINGS', class: 'sp_settings-wrap' });
     let locationLbl = utils_1.ce('label', {
         html: 'API-Ключ:<div class="label__desc"><a href="https://openweathermap.org/appid" target="_blank">Получить ключ</a></div>',
@@ -845,7 +827,6 @@ exports.getWeather = async () => {
                 utils_1.messageBox('Виджет погоды', json.message, true, 5);
                 return false;
             }
-            // @ts-ignore Костыль ебаный!
             if (utils_1.qs('#SP-CITY-INPUT')) {
                 utils_1.qs('#SP-CITY-INPUT').value = json.name;
             }
@@ -860,6 +841,28 @@ exports.getWeather = async () => {
     }
     catch (e) {
         utils_1.error('Ошибка (openweathermap): ' + e);
+    }
+};
+/**
+ * Инициализация виджета погоды ¯\_(ツ)_/¯
+ * Получаем город пользователя
+ */
+exports.ipWhois = async () => {
+    try {
+        await utils_1.http('GET', 'https://ipwhois.app/json/?objects=city,success&lang=ru', false).then(e => {
+            const json = e.parsedBody;
+            if (json === null || json === void 0 ? void 0 : json.success) {
+                settings_1._SETTINGS.weatherSet.city = json.city;
+                utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
+                exports.getWeather();
+            }
+            else {
+                utils_1.messageBox('Ошибка ipWhois', 'Обратитесь к разработчику!', true);
+            }
+        });
+    }
+    catch (e) {
+        utils_1.error('Ошибка (ipWhois): ' + e);
     }
 };
 
@@ -1970,7 +1973,7 @@ exports.deleteBlogs = () => {
                 // кнопка "Удалить выбранные"
                 const deleteBlogsButton = utils_1.ce('button', {
                     class: 'user__tools-link table__cell sp_btn_line sp_plus_btn_list',
-                    html: '<span class="ico ico_delete"></span><span class="sp-del-text">Удалить выбранные</span>',
+                    html: '<span class="sp sp-remove-red"></span><span class="sp-del-text">Удалить выбранные</span>',
                     onclick: () => {
                         let count = 0, blogs = [];
                         for (let ch of checkboxArr) {
@@ -2729,7 +2732,7 @@ exports.deleteReaders = () => {
                     });
                     const deleteReadersButton = utils_1.ce('button', {
                         class: 'user__tools-link table__cell sp_btn_line sp_plus_btn_list',
-                        html: '<span class="ico ico_delete"></span><span class="sp-del-text">Удалить выбранных</span>',
+                        html: '<span class="sp sp-remove-red"></span><span class="sp-del-text">Удалить выбранных</span>',
                         onclick: () => {
                             let count = 0, readers = [];
                             for (let ch of checkboxArr) {
@@ -2866,22 +2869,53 @@ exports.weatherWidget = () => {
         // обновляем виджет
         settingsWeather_1.getWeather();
     }
-    if (!widget && page_rightbar && utils_1.getCookie('SP_WEATHER')) {
-        // @ts-ignore Костылище
-        const w = JSON.parse(utils_1.getCookie('SP_WEATHER'));
+    if (!widget && page_rightbar && cookieWeather()) {
+        let { id, name, main, wind, weather, clouds } = cookieWeather();
         let widgets_group = utils_1.ce('div', {
             class: 'widgets-group_top js-container__block',
             style: 'box-shadow: 0px 3px 5px rgba(93,109,157,0.3)',
             id: 'SP_WIDGET_WEATHER'
         });
+        // шапка виджета
         let widget_header = utils_1.ce('div', {
             class: 'b-title cl b-title_first oh',
-            html: `<a href="https://openweathermap.org/city/${w.id}" target="_blank" class="b-title__link" style="white-space: unset"><h6 class="span">Погода в г. ${w.name}</h6></span></a>`
+            html: `
+                <a href="https://openweathermap.org/city/${id}" target="_blank" class="b-title__link" style="white-space: unset">
+                    <h6 class="span">Погода в г. ${name}</h6>
+                </a>
+            `
         });
+        // контейнер
         let content = utils_1.ce('div', {
             class: 'content',
             style: 'padding: 0px 16px 16px 16px',
-            html: `<img src="https://openweathermap.org/img/wn/${w.weather[0].icon}@2x.png" class="sp_img-center"><div class="grey sp_weather-container"><p>${Math.round(w.main.temp)}°C</p><p>${utils_1.toUpper(w.weather[0].description)}</p></div><table class="grey sp_weather-table"><tbody><tr><td>Облачность: </td><td>${w.clouds.all}%</td></tr><tr><td>Влажность: </td><td>${w.main.humidity}%</td></tr><tr><td>Давление: </td><td>${Math.round(w.main.pressure * 0.75)}mmHg</td></tr><tr><td>Ветер: </td><td>${w.wind.speed}m/sec</td></tr></tbody></table>`
+            html: `
+                <img src="https://openweathermap.org/img/wn/${weather[0].icon}@2x.png" class="sp_img-center">
+                    <div class="grey sp_weather-container">
+                    <p>${Math.round(main.temp)}°C</p>
+                    <p>${utils_1.toUpper(weather[0].description)}</p>
+                </div>
+                <table class="grey sp_weather-table">
+                    <tbody>
+                        <tr>
+                            <td>Облачность: </td>
+                            <td>${clouds.all}%</td>
+                        </tr>
+                        <tr>
+                            <td>Влажность: </td>
+                            <td>${main.humidity}%</td>
+                        </tr>
+                        <tr>
+                            <td>Давление: </td>
+                            <td>${Math.round(main.pressure * 0.75)}mmHg</td>
+                        </tr>
+                        <tr>
+                            <td>Ветер: </td>
+                            <td>${wind.speed}m/sec</td>
+                        </tr>
+                    </tbody>
+                </table>
+            `
         });
         widgets_group.appendChild(widget_header);
         widgets_group.appendChild(content);
@@ -2892,6 +2926,18 @@ exports.weatherWidget = () => {
  * unix время
  */
 const unixTime = () => Math.round(new Date().getTime() / 1000.0);
+/**
+ * получаем данные погоды из cookies, если не нашли, то инициализуем виджет по новой
+ */
+const cookieWeather = () => {
+    const data = utils_1.getCookie('SP_WEATHER');
+    if (data !== undefined) {
+        return JSON.parse(data);
+    }
+    else {
+        settingsWeather_1.ipWhois();
+    }
+};
 
 
 /***/ }),
@@ -2906,11 +2952,12 @@ const utils_1 = __webpack_require__(0);
 const strings_1 = __webpack_require__(1);
 exports.deleteComments = () => {
     var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
+    let targetComm = utils_1.qs('h2.span');
     let childs = utils_1.qsa('span.comment_date');
     let delLinks = utils_1.qsa('a[class="ajax_delete"');
-    let targetComm = utils_1.qs('h2.span');
+    let delBtns = utils_1.qsa(`a[href^="${strings_1.SPACES}/comment/delete/"`);
     try {
-        if (childs && delLinks && (targetComm === null || targetComm === void 0 ? void 0 : targetComm.textContent) === 'Комментарии') {
+        if (childs && delLinks && delBtns.length > 0 && (targetComm === null || targetComm === void 0 ? void 0 : targetComm.textContent) === 'Комментарии') {
             for (let child of childs) {
                 // к новым комментариям добавляем чекбоксы
                 if (!child.getElementsByTagName('input').length) {
@@ -2958,7 +3005,7 @@ exports.deleteComments = () => {
                 });
                 const deleteCommentsButton = utils_1.ce('button', {
                     class: 'user__tools-link table__cell sp_btn_line sp_plus_btn_list',
-                    html: '<span class="ico ico_delete"></span><span class="sp-del-text">Удалить выбранные</span>',
+                    html: '<span class="sp sp-remove-red"></span><span class="sp-del-text">Удалить выбранные</span>',
                     onclick: () => {
                         var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
                         let inputs = utils_1.qsa('input[id^="DC_"]'), count = 0, urls = [];
@@ -3072,7 +3119,7 @@ exports.playerDownload = () => {
                 let dwnTd = utils_1.ce('td', {
                     id: 'SP_MUSIC_DOWN',
                     class: 'ico_td',
-                    innerHTML: '<span class="ico ico_download2" title="Скачать"></span>',
+                    innerHTML: '<span style="margin: 0px 6px 0px 0px !important" class="sp sp-download-darkblue" title="Скачать"></span>',
                     onclick: () => { location.href = trScr; }
                 });
                 utils_1.insertAfter(dwnTd, tdIc[0]);
@@ -3148,8 +3195,8 @@ exports.settingsNotify = (e) => {
         });
         let testPlay = utils_1.ce('span', {
             class: 'text-input__btn',
-            html: '<span class="js-ico sp sp-play-green"></span>',
-            style: 'margin-left: 7px; font-size: small; top: 23px',
+            html: '<span class="sp sp-play-green"></span>',
+            style: 'top: 23px',
             title: 'Прослушать',
             onclick: () => {
                 utils_1.playSound(settings_1._SETTINGS.notifySet.url, settings_1._SETTINGS.notifySet.volume);
@@ -3329,7 +3376,7 @@ exports.settingsFeatures = (root) => {
         class: 'stnd-link stnd-link_arr sp_font_sm',
         html: btnWrap(settings_1._SETTINGS.apidebug ?
             '<span class="sp sp-remove-grey mr-14"></span>Отключить отладчик' :
-            '<span class="ico ico_settings mr-14"></span>Включить отладчик'),
+            '<span class="sp sp-settings mr-14"></span>Включить отладчик'),
         onclick: () => {
             settings_1._SETTINGS.apidebug = settings_1._SETTINGS.apidebug ? false : true;
             utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
@@ -3679,11 +3726,64 @@ const setColor = () => {
                 href: `${strings_1.ENV_PATH}/css/user-content.css?r=${strings_1.REVISION}`
             });
             document.getElementsByTagName('head')[0].appendChild(style);
-            let bodyStyle = utils_1.qs('#SP_PLUS_BODYSTYLE'), stdnC = utils_1.ce('div', { id: 'SP_WRAP_COLOR', style: 'border-top: 1px solid #cdd4e1' }), table = utils_1.ce('table', { class: 'table__wrap bb-colorpicker' }), tbody = utils_1.ce('tbody'), tr = utils_1.ce('tr'), td1 = utils_1.ce('td', { class: 'table__cell' }), td1div = utils_1.ce('div', {
-                class: 'stnd-block',
-                html: '<div><div style="background-color:#90CAF9" data-tag="fon" data-val="#90CAF9" class="js-bb_color toolbar-color pointer"></div> <div style="background-color:#80DEEA" data-tag="fon" data-val="#80DEEA" class="js-bb_color toolbar-color pointer"></div> <div style="background-color:#A5D6A7" data-tag="fon" data-val="#A5D6A7" class="js-bb_color toolbar-color pointer"></div> <div style="background-color:#FFF59D" data-tag="fon" data-val="#FFF59D" class="js-bb_color toolbar-color pointer"></div> <div style="background-color:#FFCC80" data-tag="fon" data-val="#FFCC80" class="js-bb_color toolbar-color pointer"></div> <div style="background-color:#FFAB91" data-tag="fon" data-val="#FFAB91" class="js-bb_color toolbar-color pointer"></div> <div style="background-color:#CE93D8" data-tag="fon" data-val="#CE93D8" class="js-bb_color toolbar-color pointer"></div> </div> <div> <div style="background-color:#2196F3" data-tag="fon" data-val="#2196F3" class="js-bb_color toolbar-color pointer"></div> <div style="background-color:#00BCD4" data-tag="fon" data-val="#00BCD4" class="js-bb_color toolbar-color pointer"></div> <div style="background-color:#4CAF50" data-tag="fon" data-val="#4CAF50" class="js-bb_color toolbar-color pointer"></div> <div style="background-color:#FFEB3B" data-tag="fon" data-val="#FFEB3B" class="js-bb_color toolbar-color pointer"></div> <div style="background-color:#FF9800" data-tag="fon" data-val="#FF9800" class="js-bb_color toolbar-color pointer"></div> <div style="background-color:#F44336" data-tag="fon" data-val="#F44336" class="js-bb_color toolbar-color pointer"></div> <div style="background-color:#9C27B0" data-tag="fon" data-val="#9C27B0" class="js-bb_color toolbar-color pointer"></div> </div> <div> <div style="background-color:#1565C0" data-tag="fon" data-val="#1565C0" class="js-bb_color toolbar-color pointer"></div> <div style="background-color:#00838F" data-tag="fon" data-val="#00838F" class="js-bb_color toolbar-color pointer"></div> <div style="background-color:#2E7D32" data-tag="fon" data-val="#2E7D32" class="js-bb_color toolbar-color pointer"></div> <div style="background-color:#F9A825" data-tag="fon" data-val="#F9A825" class="js-bb_color toolbar-color pointer"></div> <div style="background-color:#EF6C00" data-tag="fon" data-val="#EF6C00" class="js-bb_color toolbar-color pointer"></div> <div style="background-color:#C62828" data-tag="fon" data-val="#C62828" class="js-bb_color toolbar-color pointer"></div> <div style="background-color:#6A1B9A" data-tag="fon" data-val="#6A1B9A" class="js-bb_color toolbar-color pointer"></div> </div> <div> <div style="background-color:#ECF0F1" data-tag="fon" data-val="#ECF0F1" class="js-bb_color toolbar-color pointer"></div> <div style="background-color:#CFD8DC" data-tag="fon" data-val="#CFD8DC" class="js-bb_color toolbar-color pointer"></div> <div style="background-color:#B0BEC5" data-tag="fon" data-val="#B0BEC5" class="js-bb_color toolbar-color pointer"></div> <div style="background-color:#97A6B0" data-tag="fon" data-val="#97A6B0" class="js-bb_color toolbar-color pointer"></div> <div style="background-color:#546E7A" data-tag="fon" data-val="#546E7A" class="js-bb_color toolbar-color pointer"></div> <div style="background-color:#44565E" data-tag="fon" data-val="#44565E" class="js-bb_color toolbar-color pointer"></div> <div style="background-color:#3A474C" data-tag="fon" data-val="#3A474C" class="js-bb_color toolbar-color pointer"></div></div>'
+            let colorsTd = utils_1.ce('div', {
+                class: 'stnd-block'
             });
-            td1.appendChild(td1div);
+            let bodyStyle = utils_1.qs('#SP_PLUS_BODYSTYLE'), stdnC = utils_1.ce('div', { id: 'SP_WRAP_COLOR', style: 'border-top: 1px solid #cdd4e1' }), table = utils_1.ce('table', { class: 'table__wrap bb-colorpicker' }), tbody = utils_1.ce('tbody'), tr = utils_1.ce('tr'), td1 = utils_1.ce('td', { class: 'table__cell' });
+            // цвета для быстрого выбора
+            const colors = [
+                [
+                    "#90CAF9",
+                    "#80DEEA",
+                    "#A5D6A7",
+                    "#FFF59D",
+                    "#FFCC80",
+                    "#FFAB91",
+                    "#CE93D8"
+                ],
+                [
+                    "#2196F3",
+                    "#00BCD4",
+                    "#4CAF50",
+                    "#FFEB3B",
+                    "#FF9800",
+                    "#F44336",
+                    "#9C27B0",
+                ],
+                [
+                    "#1565C0",
+                    "#00838F",
+                    "#2E7D32",
+                    "#F9A825",
+                    "#EF6C00",
+                    "#C62828",
+                    "#6A1B9A"
+                ],
+                [
+                    "#ECF0F1",
+                    "#CFD8DC",
+                    "#B0BEC5",
+                    "#97A6B0",
+                    "#546E7A",
+                    "#44565E",
+                    "#3A474C"
+                ]
+            ];
+            for (let color of colors) {
+                for (let i in color) {
+                    let dd = utils_1.ce('div', {
+                        style: `background-color: ${color[i]}`,
+                        class: 'js-bb_color toolbar-color pointer',
+                        attr: {
+                            'data-val': color[i],
+                            'data-tag': 'fon'
+                        }
+                    });
+                    colorsTd.appendChild(dd);
+                }
+                colorsTd.appendChild(utils_1.ce('br'));
+            }
+            td1.appendChild(colorsTd);
             tr.appendChild(td1);
             let td2 = utils_1.ce('td', { class: 'table__cell table__cell_last' }), stnd = utils_1.ce('div', { class: 'stnd-block' }), container = utils_1.ce('div', { class: 'js-bb_colorpicker' });
             stnd.appendChild(container);
@@ -3721,9 +3821,9 @@ const setColor = () => {
                     utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
                     setStyles_1.setStyles();
                 });
-                const colors = document.querySelectorAll('.js-bb_color');
-                for (let color of colors) {
-                    color.onclick = (e) => {
+                const colorsBtn = document.querySelectorAll('.js-bb_color');
+                for (let color of colorsBtn) {
+                    color.addEventListener('click', (e) => {
                         let value = e.target.getAttribute('data-val');
                         // @ts-ignore
                         utils_1.qs('#color-input').value = value;
@@ -3734,7 +3834,7 @@ const setColor = () => {
                         utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
                         setStyles_1.setStyles();
                         picker.set(value);
-                    };
+                    });
                 }
             }, 100);
         }
