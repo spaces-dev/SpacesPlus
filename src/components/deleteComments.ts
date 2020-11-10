@@ -13,12 +13,13 @@ import {
 import { SPACES, DEVICE } from '../strings'
 
 export const deleteComments = () => {
+    let targetComm = qs('h2.span')
     let childs = qsa('span.comment_date')
     let delLinks = qsa('a[class="ajax_delete"')
-    let targetComm = qs('h2.span')
+    let delBtns = qsa(`a[href^="${SPACES}/comment/delete/"`)
 
     try {
-        if (childs && delLinks && targetComm?.textContent === 'Комментарии') {
+        if (childs && delLinks && delBtns.length > 0 && targetComm?.textContent === 'Комментарии') {
 
             for (let child of childs) {
 
@@ -73,7 +74,7 @@ export const deleteComments = () => {
 
                 const deleteCommentsButton = ce('button', {
                     class: 'user__tools-link table__cell sp_btn_line sp_plus_btn_list',
-                    html: '<span class="ico ico_delete"></span><span class="sp-del-text">Удалить выбранные</span>',
+                    html: '<span class="sp sp-remove-red"></span><span class="sp-del-text">Удалить выбранные</span>',
                     onclick: () => {
                         let inputs: any = qsa('input[id^="DC_"]'),
                             count: number = 0,
