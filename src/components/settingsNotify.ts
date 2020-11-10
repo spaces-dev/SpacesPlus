@@ -65,8 +65,8 @@ export const settingsNotify = (e: any) => {
 
         let testPlay = ce('span', {
             class: 'text-input__btn',
-            html: '<span class="js-ico sp sp-play-green"></span>',
-            style: 'margin-left: 7px; font-size: small; top: 23px',
+            html: '<span class="sp sp-play-green"></span>',
+            style: 'top: 23px',
             title: 'Прослушать',
             onclick: () => {
                 playSound(_SETTINGS.notifySet.url, _SETTINGS.notifySet.volume)

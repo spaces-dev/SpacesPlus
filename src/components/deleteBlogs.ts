@@ -85,7 +85,7 @@ export const deleteBlogs = () => {
                 // кнопка "Удалить выбранные"
                 const deleteBlogsButton = ce('button', {
                     class: 'user__tools-link table__cell sp_btn_line sp_plus_btn_list',
-                    html: '<span class="ico ico_delete"></span><span class="sp-del-text">Удалить выбранные</span>',
+                    html: '<span class="sp sp-remove-red"></span><span class="sp-del-text">Удалить выбранные</span>',
                     onclick: () => {
                         let count: number = 0,
                             blogs: any[] = []

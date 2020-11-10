@@ -23,7 +23,7 @@ export const settingsFeatures = (root: any) => {
         class: 'stnd-link stnd-link_arr sp_font_sm',
         html: btnWrap(_SETTINGS.apidebug ?
             '<span class="sp sp-remove-grey mr-14"></span>Отключить отладчик' :
-            '<span class="ico ico_settings mr-14"></span>Включить отладчик'),
+            '<span class="sp sp-settings mr-14"></span>Включить отладчик'),
         onclick: () => {
             _SETTINGS.apidebug = _SETTINGS.apidebug ? false : true
             setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))

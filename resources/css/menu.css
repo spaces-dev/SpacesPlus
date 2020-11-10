@@ -575,11 +575,20 @@ input[type=color] {
 }
 
 .sp-play-green {
-    background-position: -32px -48px
+    background-position: -32px -48px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -8px;
+    margin-left: -8px
 }
 
 .sp-remove-grey {
     background-position: -48px -48px
+}
+
+.sp-remove-red {
+    background-position: -32px -64px
 }
 
 .sp-restore-blue {
@@ -600,4 +609,8 @@ input[type=color] {
 
 .sp-info {
     background-position: 0px -64px
+}
+
+.sp-settings {
+    background-position: -48px -64px
 }
