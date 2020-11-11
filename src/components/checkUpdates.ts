@@ -53,7 +53,7 @@ export const checkUpdates = () => {
                             return false
                         }
                     })
-                    qs('#SP_UPDATER_BUTTONS')!.appendChild(hide)
+                    qs('#SP_UPDATER_BUTTONS').appendChild(hide)
                 }
             }
         })

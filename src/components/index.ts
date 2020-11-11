@@ -7,6 +7,7 @@ import { userOnline } from './userOnline'
 import { apiDebugger } from './apiDebugger'
 import { coinsAccept } from './coinsAccept'
 import { deleteBlogs } from './deleteBlogs'
+import { firstLaunch } from './firstLaunch'
 import { karmaAccept } from './karmaAccept'
 import { soundNotify } from './soundNotify'
 import { betaFeatures } from './betaFeatures'
@@ -47,6 +48,7 @@ export {
     apiDebugger,
     coinsAccept,
     deleteBlogs,
+    firstLaunch,
     karmaAccept,
     soundNotify,
     betaFeatures,
