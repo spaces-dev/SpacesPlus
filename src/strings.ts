@@ -24,7 +24,6 @@ class OVERRIDE {
     static FAVORITE: string | null
     static EVENTS: number = 0
     static PLAYER: number = 0
-    static COMMENTS: number = 0
     static VERSION: number = Number(PKG_VERSION.split('.').join(''))
 }
 
