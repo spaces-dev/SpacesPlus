@@ -12,7 +12,7 @@ export const css = (elem: any, css: string) => {
         if (trim(list[i]) !== '') {
             let valList = trim(list[i]).split(':')
 
-            if (valList[0].indexOf('-') >= 0) {
+            if (valList[0].indexOf('-') !== -1) {
                 valList[0] = valList[0].replace(/\-([a-z]{1})/g, (e) => {
                     return e.replace('-', '').toUpperCase()
                 })

@@ -66,10 +66,10 @@ export const deleteReaders = () => {
                             let parent = e.target.nodeName === 'SPAN' ? e.target.parentNode : e.target
 
                             for (let ch of checkboxArr) {
-                                (ch as HTMLInputElement).checked = parent.innerHTML.indexOf('Выбрать все') >= 0 ? true : false
+                                (ch as HTMLInputElement).checked = parent.innerHTML.indexOf('Выбрать все') !== -1 ? true : false
                             }
 
-                            parent.innerHTML = `<span class="sp sp-ok-blue"></span><span class="sp-ch-text">${parent.innerHTML.indexOf('Выбрать все') >= 0 ? 'Снять отметки' : 'Выбрать все'}</span>`
+                            parent.innerHTML = `<span class="sp sp-ok-blue"></span><span class="sp-ch-text">${parent.innerHTML.indexOf('Выбрать все') !== -1 ? 'Снять отметки' : 'Выбрать все'}</span>`
                             return false
                         }
                     })

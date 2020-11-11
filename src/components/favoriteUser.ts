@@ -28,7 +28,8 @@ export const favoriteUser = async () => {
 
         try {
             let tbBlock: any = getClassName('td.table__cell table__cell_last', true)
-            if (nickname && tbBlock && tbBlock[0].innerHTML.indexOf('Вперёд') < 0 && !inFavorite) {
+
+            if (nickname && tbBlock && !inFavorite) {
 
                 await http<IUserAnketa>('GET', `${SPACES}/anketa/index/${nickname}`, true).then(e => {
                     const json = e.parsedBody?.user_widget

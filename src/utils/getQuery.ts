@@ -9,7 +9,7 @@ export const getQuery = (name: string) => {
 
     try {
         name = name.toLowerCase()
-        if (query.toLowerCase().indexOf(name) >= 1) {
+        if (query.toLowerCase().indexOf(name) !== -1) {
             query.substring(1).split('&').forEach((param) => {
                 let params = param.split('=')
                 if (params[0].toLowerCase() === name) {

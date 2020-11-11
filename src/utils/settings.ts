@@ -25,7 +25,7 @@ export const readSettings = () => {
 export const setSettings = (key: string, value: string | number | boolean) => {
     try {
 
-        if (key.indexOf('.') >= 0) {
+        if (key.indexOf('.') !== -1) {
 
             let i = key.split('.')
 
