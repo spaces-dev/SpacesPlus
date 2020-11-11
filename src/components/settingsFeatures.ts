@@ -5,7 +5,8 @@ import {
     getCookie,
     setCookie,
     confirmBox,
-    messageBox
+    messageBox,
+    setSettings
 } from '../utils'
 
 import { newbeeQuest } from './newbeeQuest'
@@ -14,7 +15,7 @@ import { _SETTINGS } from '../settings'
 import { SPACES, OVERRIDE } from '../strings'
 
 // Встроенные возможности сайта
-export const settingsFeatures = (root: any) => {
+export const settingsFeatures = (root: Element) => {
     let wrap = ce('div', { id: 'wrap_spaces_option' })
 
     // API Отладчик
@@ -25,8 +26,7 @@ export const settingsFeatures = (root: any) => {
             '<span class="sp sp-remove-grey mr-14"></span>Отключить отладчик' :
             '<span class="sp sp-settings mr-14"></span>Включить отладчик'),
         onclick: () => {
-            _SETTINGS.apidebug = _SETTINGS.apidebug ? false : true
-            setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
+            setSettings('apidebug', _SETTINGS.apidebug ? false : true)
             document.location.reload()
             return false
         }

@@ -7,11 +7,11 @@ import {
     getHref,
     inBefore,
     getQuery,
-    setCookie,
     delCookie,
     confirmBox,
     messageBox,
-    historyPush
+    historyPush,
+    setSettings
 } from '../utils'
 
 import {
@@ -89,8 +89,7 @@ export const settingsMenu = () => {
                                                 return false
                                             }
 
-                                            _SETTINGS[id] = checked
-                                            setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
+                                            setSettings(id, checked)
 
                                             switch (id) {
                                                 case 'rscroll':

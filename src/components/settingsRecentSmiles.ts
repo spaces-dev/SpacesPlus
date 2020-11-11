@@ -1,8 +1,8 @@
-import { ce, setCookie, insertAfter } from '../utils'
+import { ce, insertAfter, setSettings } from '../utils'
 
 import { _SETTINGS } from '../settings'
 
-export const settingsRecentSmiles = (e: any) => {
+export const settingsRecentSmiles = (e: Element) => {
 
     let masWarp = ce('div', { id: 'SP_RECENTS_SETTINGS', class: 'sp_settings-wrap' })
 
@@ -21,11 +21,10 @@ export const settingsRecentSmiles = (e: any) => {
 
     maxSave.addEventListener('change', (e: any) => {
         if (/^([1-5][0-9]|60)$/i.test(e.target.value)) {
-            _SETTINGS.recentSmiles.max = e.target.value
-            setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
-            maxSave.className = 'text-input'
+            setSettings('recentSmiles.max', e.target.value)
+            maxSave.classList.remove('sp-input-error')
         } else {
-            maxSave.className = 'text-input sp-input-error'
+            maxSave.classList.add('sp-input-error')
         }
     })
 

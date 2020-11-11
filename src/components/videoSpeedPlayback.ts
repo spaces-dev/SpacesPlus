@@ -1,4 +1,4 @@
-import { ce, qs, error, setCookie } from '../utils'
+import { ce, qs, error, setSettings } from '../utils'
 
 import { _SETTINGS } from '../settings'
 
@@ -17,10 +17,10 @@ export const videoSpeedPlayback = () => {
                 id: 'SP_PLAYBACK_VIDEO',
                 html: 'x' + _SETTINGS.videoSpeed,
                 onclick: () => {
-                    _SETTINGS.videoSpeed = (_SETTINGS.videoSpeed + 0.25) % 2.25
-                    if (_SETTINGS.videoSpeed === 0) _SETTINGS.videoSpeed = 0.5
-                    setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
-                    buttonPlayback.innerHTML = 'x' + _SETTINGS.videoSpeed
+                    let videoSpeed = (_SETTINGS.videoSpeed + 0.25) % 2.25
+                    if (videoSpeed === 0) videoSpeed = 0.5
+                    setSettings('videoSpeed', videoSpeed)
+                    buttonPlayback.innerHTML = 'x' + videoSpeed
                     return false
                 }
             })

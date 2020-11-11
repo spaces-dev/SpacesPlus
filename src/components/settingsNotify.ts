@@ -1,18 +1,17 @@
 import {
     ce,
-    trim,
     error,
     playSound,
-    setCookie,
     messageBox,
     isValidUrl,
-    insertAfter
+    insertAfter,
+    setSettings
 } from '../utils'
 
 import { BASE_URL } from '../strings'
 import { _SETTINGS } from '../settings'
 
-export const settingsNotify = (e: any) => {
+export const settingsNotify = (e: Element) => {
     try {
 
         if (!('Notification' in window)) {
@@ -53,13 +52,12 @@ export const settingsNotify = (e: any) => {
             class: 'text-input'
         })
 
-        eventsUrl.addEventListener('change', (e: any) => {
-            if ((isValidUrl(e.target.value) && /\.(ogg|mp3|wav)$/i.test(e.target.value)) || trim(e.target.value) !== '') {
-                _SETTINGS.notifySet.url = trim(e.target.value)
-                setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
-                eventsUrl.className = 'text-input'
+        eventsUrl.addEventListener('input', (e: any) => {
+            if (isValidUrl(e.target.value) && /\.(ogg|mp3|wav)$/i.test(e.target.value)) {
+                setSettings('notifySet.url', e.target.value)
+                eventsUrl.classList.remove('sp-input-error')
             } else {
-                eventsUrl.className = 'text-input sp-input-error'
+                eventsUrl.classList.add('sp-input-error')
             }
         })
 
@@ -68,15 +66,12 @@ export const settingsNotify = (e: any) => {
             html: '<span class="sp sp-play-green"></span>',
             style: 'top: 23px',
             title: 'Прослушать',
-            onclick: () => {
-                playSound(_SETTINGS.notifySet.url, _SETTINGS.notifySet.volume)
-                return false
-            }
+            onclick: () => playSound(_SETTINGS.notifySet.url, _SETTINGS.notifySet.volume)
         })
 
         let volume = ce('div', {
             class: 'label__desc',
-            html: _SETTINGS.notifySet.volume + '%'
+            html: `${_SETTINGS.notifySet.volume}%`
         })
 
         let volRange = ce('input', {
@@ -87,25 +82,21 @@ export const settingsNotify = (e: any) => {
             value: _SETTINGS.notifySet.volume
         })
 
-        volRange.onchange = volRange.oninput = (e: any) => {
+        volRange.addEventListener('input', (e: any) => {
             if (!isNaN(e.target.value)) {
                 let setVol = parseInt(e.target.value, 10)
                 if (setVol < 0 || setVol > 100) setVol = 70
                 volume.innerHTML = setVol + '%'
-                _SETTINGS.notifySet.volume = setVol
-                setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
+                setSettings('notifySet.volume', setVol)
             }
-        }
+        })
 
         let mailEvent = ce('input', {
             type: 'checkbox',
             id: 'sp_event_mail',
             class: 'sp-checkbox-square',
             checked: _SETTINGS.notifySet.mail,
-            onclick: (e: any) => {
-                _SETTINGS.notifySet.mail = e.target.checked
-                setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
-            }
+            onclick: (e: any) => setSettings('notifySet.mail', e.target.checked)
         })
 
         let mailEventLbl = ce('label', {
@@ -118,10 +109,7 @@ export const settingsNotify = (e: any) => {
             id: 'sp_event_journal',
             class: 'sp-checkbox-square',
             checked: _SETTINGS.notifySet.journal,
-            onclick: (e: any) => {
-                _SETTINGS.notifySet.journal = e.target.checked
-                setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
-            }
+            onclick: (e: any) => setSettings('notifySet.journal', e.target.checked)
         })
 
         let jourEventLbl = ce('label', {
@@ -134,10 +122,7 @@ export const settingsNotify = (e: any) => {
             id: 'sp_event_feed',
             class: 'sp-checkbox-square',
             checked: _SETTINGS.notifySet.feed,
-            onclick: (e: any) => {
-                _SETTINGS.notifySet.feed = e.target.checked
-                setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
-            }
+            onclick: (e: any) => setSettings('notifySet.feed', e.target.checked)
         })
 
         let feedEventLbl = ce('label', {

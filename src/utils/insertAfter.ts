@@ -9,7 +9,7 @@
  * @param elem 
  * @param refElem 
  */
-export const insertAfter = (elem: any, refElem: any) => {
+export const insertAfter = (elem: Element, refElem: any) => {
     let parent = refElem.parentNode,
         next = refElem.nextSibling
 

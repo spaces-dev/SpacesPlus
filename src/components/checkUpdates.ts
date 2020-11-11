@@ -4,8 +4,9 @@ import {
     http,
     error,
     rever,
-    setCookie,
-    messageBox
+    remove,
+    messageBox,
+    setSettings
 } from '../utils'
 
 import { ICheckUpdates } from '../interfaces/CheckUpdates'
@@ -47,9 +48,8 @@ export const checkUpdates = () => {
                         class: 'btn btn_white btn_input right sticker-close_btn',
                         html: 'Больше не показывать',
                         onclick: () => {
-                            _SETTINGS.upVersion = json.history[0].build
-                            setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
-                            qs('#SP_PLUS_ALERT').remove()
+                            setSettings('upVersion', json.history[0].build)
+                            remove(qs('#SP_PLUS_ALERT'))
                             return false
                         }
                     })

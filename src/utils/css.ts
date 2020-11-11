@@ -5,7 +5,7 @@ import { trim } from './trim'
  * @param elem 
  * @param css 
  */
-export const css = (elem: any, css: any) => {
+export const css = (elem: any, css: string) => {
     let list = css.split(';')
 
     for (let i in list) {

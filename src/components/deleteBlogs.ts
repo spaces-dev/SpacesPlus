@@ -30,17 +30,17 @@ export const deleteBlogs = () => {
         try {
 
             // кнопки "Настройки доступа"
-            let links: any = qsa(`a[href^="${SPACES}/diary/editaccess/"`)
+            let links = qsa(`a[href^="${SPACES}/diary/editaccess/"`)
 
             if (links.length > 0) {
 
-                let checkboxArr: any = []
+                let checkboxArr: Element[] = []
 
                 // создаем чекбоксы
                 for (let link of links) {
                     if (link.className) {
 
-                        let blogId = `SP_DB_${getParams(link.href)['id']}`
+                        let blogId = `SP_DB_${getParams((link as HTMLLinkElement).href)['id']}`
 
                         let checkbox = ce('input', {
                             class: 'sp-cbfb sp-checkbox-square',
@@ -74,7 +74,7 @@ export const deleteBlogs = () => {
                         let parent = e.target.nodeName === 'SPAN' ? e.target.parentNode : e.target
 
                         for (let ch of checkboxArr) {
-                            ch.checked = parent.innerHTML.indexOf('Выбрать все') >= 0 ? true : false
+                            (ch as HTMLInputElement).checked = parent.innerHTML.indexOf('Выбрать все') >= 0 ? true : false
                         }
 
                         parent.innerHTML = `<span class="sp sp-ok-blue"></span><span class="sp-ch-text">${parent.innerHTML.indexOf('Выбрать все') >= 0 ? 'Снять отметки' : 'Выбрать все'}</span>`
@@ -88,10 +88,10 @@ export const deleteBlogs = () => {
                     html: '<span class="sp sp-remove-red"></span><span class="sp-del-text">Удалить выбранные</span>',
                     onclick: () => {
                         let count: number = 0,
-                            blogs: any[] = []
+                            blogs: string[] = []
 
                         for (let ch of checkboxArr) {
-                            if (ch.checked) {
+                            if ((ch as HTMLInputElement).checked) {
                                 blogs.push(/^SP_DB_([0-9]+)$/i.exec(ch.id)![1])
                                 count++
                             }

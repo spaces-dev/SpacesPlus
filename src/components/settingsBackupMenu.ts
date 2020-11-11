@@ -7,7 +7,8 @@ import {
     inBefore,
     delCookie,
     setCookie,
-    confirmBox
+    confirmBox,
+    setSettings
 } from '../utils'
 
 import { IGetJSON } from '../interfaces/GetJSON'
@@ -36,8 +37,7 @@ export const settingsBackupMenu = (id: string) => {
                     style: 'margin: 10px',
                     title: 'Понятно, больше не показывать.',
                     onclick: () => {
-                        _SETTINGS.hideNotify.configImport = true
-                        setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
+                        setSettings('hideNotify.configImport', true)
                         remove(qs('#SP_CONFIG_JSON'))
                     }
                 })
@@ -54,8 +54,7 @@ export const settingsBackupMenu = (id: string) => {
                 infoDiv.appendChild(smallInfo)
             }
 
-            let textarea: any,
-                wrap = ce('div', { class: 'content-bl' }),
+            let wrap = ce('div', { class: 'content-bl' }),
                 preloader = ce('div', {
                     class: 't_center',
                     id: 'SP_JSON_PRELOADER',
@@ -91,7 +90,12 @@ export const settingsBackupMenu = (id: string) => {
                 class: 'user__tools-link sp_plus_btn_list',
                 html: '<span class="sp sp-ok-blue"></span><span style="color: #57A3EA; padding-left: 10px;">Сохранить</span>',
                 onclick: () => {
-                    getJSON(`value=${textarea.value}`, (json: IGetJSON) => {
+                    let area = (qs('#SP_BACKUP_JSON') as HTMLInputElement).value,
+                        confirm = qs('#SP_PLUS_CONFIRM')
+
+                    if (confirm) remove(confirm)
+
+                    getJSON(`value=${area}`, (json: IGetJSON) => {
                         // Костыль ¯\_(ツ)_/¯
                         if (qs('#JSON_ERROR_BLOCK')) {
                             errorsBlock.innerHTML = '<span class="sp sp-alert"></span> Невалидный JSON<br /><br />'
@@ -99,11 +103,11 @@ export const settingsBackupMenu = (id: string) => {
                         }
 
                         if (json.result.valid) {
-                            setCookie('SP_PLUS_SET', textarea.value)
+                            setCookie('SP_PLUS_SET', area)
                             confirmBox('Настройки были успешно обновлены</br>Хотите сохранить файл настроек на рабочий стол?', false, () => {
                                 let blob = ce('a', {
                                     attr: {
-                                        href: URL.createObjectURL(new Blob([textarea.value], { type: 'text/plain' })),
+                                        href: URL.createObjectURL(new Blob([area], { type: 'text/plain' })),
                                         download: 'spaces-plus.json'
                                     }
                                 })
@@ -120,7 +124,8 @@ export const settingsBackupMenu = (id: string) => {
             })
 
             getJSON(`value=${JSON.stringify(_SETTINGS)}`, (json: IGetJSON) => {
-                textarea = ce('textarea', {
+
+                let textarea = ce('textarea', {
                     class: 'text-input',
                     id: 'SP_BACKUP_JSON',
                     cols: '17',
@@ -128,20 +133,15 @@ export const settingsBackupMenu = (id: string) => {
                     html: json.result.data
                 })
 
-                if (json.result.valid) {
-                    target.appendChild(wrap)
-                    wrap.appendChild(tiw)
-                    tiw.appendChild(cl)
-                    cl.appendChild(textarea)
-                    remove(qs('#SP_JSON_PRELOADER'))
-                } else {
-                    handleErrors(target, errorsBlock, json)
-                }
-
                 target.appendChild(wrap)
                 wrap.appendChild(tiw)
                 tiw.appendChild(cl)
                 cl.appendChild(textarea)
+
+                json.result.valid ?
+                    remove(qs('#SP_JSON_PRELOADER')) :
+                    handleErrors(target, errorsBlock, json)
+
                 buttonsDiv.appendChild(restoreButton)
                 buttonsDiv.appendChild(saveButton)
                 inBefore(buttonsDiv, qs('#SP_PLUS_ABOUT'))
@@ -175,7 +175,7 @@ const getJSON = (data: string, callback: Function) => {
  * @param errorsBlock #JSON_ERROR_BLOCK
  * @param json http response
  */
-const handleErrors = (target: any, errorsBlock: any, json: IGetJSON) => {
+const handleErrors = (target: Element, errorsBlock: Element, json: IGetJSON) => {
     target.appendChild(errorsBlock)
     for (let err of json.result.errors) {
         let error = ce('div', {

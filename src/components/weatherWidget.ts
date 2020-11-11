@@ -2,8 +2,7 @@ import {
     ce,
     qs,
     toUpper,
-    getCookie,
-    setCookie
+    getCookie
 } from '../utils'
 
 import { getWeather, ipWhois } from './settingsWeather'

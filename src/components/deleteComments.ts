@@ -60,11 +60,11 @@ export const deleteComments = () => {
                     class: 'user__tools-link table__cell sp_plus_btn_list',
                     html: '<span class="sp sp-ok-blue"></span><span class="sp-ch-text">Выбрать все</span>',
                     onclick: (e: any) => {
-                        let inputs: any = qsa('input[id^="DC_"]')
+                        let inputs = qsa('input[id^="DC_"]')
                         let parent = e.target.nodeName === 'SPAN' ? e.target.parentNode : e.target
 
                         for (let input of inputs) {
-                            input.checked = parent.innerHTML.indexOf('Выбрать все') >= 0 ? true : false
+                            (input as HTMLInputElement).checked = parent.innerHTML.indexOf('Выбрать все') >= 0 ? true : false
                         }
 
                         parent.innerHTML = `<span class="sp sp-ok-blue"></span><span class="sp-ch-text">${parent.innerHTML.indexOf('Выбрать все') >= 0 ? 'Снять отметки' : 'Выбрать все'}</span>`
@@ -76,12 +76,12 @@ export const deleteComments = () => {
                     class: 'user__tools-link table__cell sp_btn_line sp_plus_btn_list',
                     html: '<span class="sp sp-remove-red"></span><span class="sp-del-text">Удалить выбранные</span>',
                     onclick: () => {
-                        let inputs: any = qsa('input[id^="DC_"]'),
+                        let inputs = qsa('input[id^="DC_"]'),
                             count: number = 0,
                             urls: string[] = []
 
                         for (let input of inputs) {
-                            if (input.checked) {
+                            if ((input as HTMLInputElement).checked) {
 
                                 Array.prototype.slice.call((DEVICE.id === 4 ?
                                     // костыль для PC

@@ -1,4 +1,4 @@
-import { ce, qs, error, setCookie } from '../utils'
+import { ce, qs, error, setSettings } from '../utils'
 
 import { _SETTINGS } from '../settings'
 
@@ -24,8 +24,7 @@ export const galleryRotate = () => {
                 html: '<span class="ico_gallery ico_gallery_reload m"></span>',
                 onclick: () => {
                     // градус поворота (0, 90, 180, 270)
-                    _SETTINGS.angle = (_SETTINGS.angle + 90) % 360
-                    setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
+                    setSettings('angle', (_SETTINGS.angle + 90) % 360)
 
                     // применяем класс для повора изображения
                     Image.className = 'accel-3d rotate' + _SETTINGS.angle

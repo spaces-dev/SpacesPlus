@@ -23,9 +23,9 @@ import { insertAfter } from './insertAfter'
 import { getClassName } from './getClassName'
 import { modifyObject } from './modifyObject' 
 import { notification } from './notification'
-import { readSettings } from './readSettings'
 import { getPath, getHref } from './getLocation'
 import { log, info, error, debug } from './console'
+import { readSettings, setSettings } from './settings'
 
 export {
     ce,
@@ -57,6 +57,7 @@ export {
     messageBox,
     historyPush,
     insertAfter,
+    setSettings,
     getClassName,
     modifyObject,
     notification,

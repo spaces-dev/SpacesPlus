@@ -1,9 +1,9 @@
-import { ce, setCookie, insertAfter, error } from '../utils'
+import { ce, insertAfter, error, setSettings } from '../utils'
 
 import { friendsOnline } from './friendsOnline'
 import { _SETTINGS } from '../settings'
 
-export const settingsFriends = (e?: any) => {
+export const settingsFriends = (e: Element) => {
     try {
         let frMaxWrap = ce('div', { id: 'SP_PLUS_MAXFRIENDS' })
         let div = ce('div', { class: 'sp_settings-wrap' })
@@ -18,12 +18,11 @@ export const settingsFriends = (e?: any) => {
 
         frMax.addEventListener('change', (e: any) => {
             if (/^([1-9]|1[0-5])$/i.test(e.target.value)) {
-                _SETTINGS.friendsSet.max = e.target.value
-                setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
+                setSettings('friendsSet.max', e.target.value)
                 friendsOnline(true)
-                frMax.className = 'text-input'
+                frMax.classList.remove('sp-input-error')
             } else {
-                frMax.className = 'text-input sp-input-error'
+                frMax.classList.add('sp-input-error')
             }
         })
 

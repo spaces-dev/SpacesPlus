@@ -2,12 +2,12 @@ import {
     ce,
     qs,
     http,
-    trim,
     error,
     remove,
     setCookie,
     messageBox,
-    insertAfter
+    insertAfter,
+    setSettings
 } from '../utils'
 
 import { IWhois } from '../interfaces/Whois'
@@ -19,7 +19,7 @@ import { _SETTINGS } from '../settings'
  * Инициализация выпадающего доп. меню настроек виджета погоды
  * @param e #weather
  */
-export const settingsWeather = async (e: any) => {
+export const settingsWeather = async (e: Element) => {
 
     /**
      * Отключаем скрытие правого меню, если оно включено
@@ -46,13 +46,12 @@ export const settingsWeather = async (e: any) => {
 
     apiKey.addEventListener('keypress', (e: any) => {
         if (e.keyCode === 13) {
-            if (/^[a-f0-9]{32}$/i.test(e.target.value) || trim(e.target.value) !== '') {
-                _SETTINGS.weatherSet.key = e.target.value
-                setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
+            if (/^[a-f0-9]{32}$/i.test(e.target.value)) {
+                setSettings('weatherSet.key', e.target.value)
                 getWeather()
-                apiKey.className = 'text-input'
+                apiKey.classList.remove('sp-input-error')
             } else {
-                apiKey.className = 'text-input sp-input-error'
+                apiKey.classList.add('sp-input-error')
             }
         }
     })
@@ -70,13 +69,12 @@ export const settingsWeather = async (e: any) => {
 
     cityInp.addEventListener('keypress', (e: any) => {
         if (e.keyCode === 13) {
-            if (/^([a-zA-Zа-яА-ЯёЁ]+[-]?[a-zA-Zа-яА-ЯёЁ]*[-]?[a-zA-Zа-яА-ЯёЁ]*[-]?[a-zA-Zа-яА-ЯёЁ]*)$/i.test(e.target.value) || trim(e.target.value) !== '') {
-                _SETTINGS.weatherSet.city = e.target.value
-                setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
+            if (/^([a-zA-Zа-яА-ЯёЁ]+[-]?[a-zA-Zа-яА-ЯёЁ]*[-]?[a-zA-Zа-яА-ЯёЁ]*[-]?[a-zA-Zа-яА-ЯёЁ]*)$/i.test(e.target.value)) {
+                setSettings('weatherSet.city', e.target.value)
                 getWeather()
-                cityInp.className = 'text-input'
+                cityInp.classList.remove('sp-input-error')
             } else {
-                cityInp.className = 'text-input sp-input-error'
+                cityInp.classList.add('sp-input-error')
             }
         }
     })
@@ -95,14 +93,13 @@ export const settingsWeather = async (e: any) => {
         value: _SETTINGS.weatherSet.interval / 60
     })
 
-    interval.addEventListener('change', (e: any) => {
+    interval.addEventListener('input', (e: any) => {
         // от 1 минуты до 360 минут ¯\_(ツ)_/¯
         if (/^([1-9]|[1-8][0-9]|9[0-9]|[12][0-9]{2}|3[0-5][0-9]|360)$/i.test(e.target.value)) {
-            _SETTINGS.weatherSet.interval = e.target.value * 60
-            setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
-            interval.className = 'text-input'
+            setSettings('weatherSet.interval', e.target.value * 60)
+            interval.classList.remove('sp-input-error')
         } else {
-            interval.className = 'text-input sp-input-error'
+            interval.classList.add('sp-input-error')
         }
     })
 
@@ -143,8 +140,7 @@ export const getWeather = async () => {
             if (qs('#SP_WIDGET_WEATHER')) remove(qs('#SP_WIDGET_WEATHER'))
 
             if (json?.cod === 200) {
-                _SETTINGS.weatherSet.city = json.name
-                setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
+                setSettings('weatherSet.city', json.name)
                 setCookie('SP_WEATHER', JSON.stringify(json))
             }
         })
@@ -163,8 +159,7 @@ export const ipWhois = async () => {
             const json = e.parsedBody
 
             if (json?.success) {
-                _SETTINGS.weatherSet.city = json.city
-                setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
+                setSettings('weatherSet.city', json.city)
                 getWeather()
             } else {
                 messageBox('Ошибка ipWhois', 'Обратитесь к разработчику!', true)

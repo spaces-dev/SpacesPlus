@@ -4,7 +4,7 @@ import { error } from './console'
  * Ищем определенный GET параметр в ссылке
  * @param name 
  */
-export const getQuery = (name: any) => {
+export const getQuery = (name: string) => {
     let r: string | undefined, query = document.location.search
 
     try {

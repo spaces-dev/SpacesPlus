@@ -86,8 +86,8 @@ export const recentSmiles = () => {
                                 },
                                 onclick: () => {
                                     // Добавляем смайлик в поле ввода
-                                    let input: any = qs('textarea[tabindex="1"]') ?? qs('textarea[name="msg"]')
-                                    input.value += smile + ' '
+                                    let input = qs('textarea[tabindex="1"]') ?? qs('textarea[name="msg"]');
+                                    (input as HTMLInputElement).value += smile + ' '
                                 }
                             })
 
