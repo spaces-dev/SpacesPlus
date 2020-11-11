@@ -106,7 +106,7 @@
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.readSettings = exports.notification = exports.modifyObject = exports.getClassName = exports.insertAfter = exports.historyPush = exports.messageBox = exports.isValidUrl = exports.confirmBox = exports.setCookie = exports.playSound = exports.getParams = exports.getCookie = exports.delCookie = exports.declOfNum = exports.inBefore = exports.getQuery = exports.toUpper = exports.getPath = exports.getHref = exports.remove = exports.extend = exports.rever = exports.error = exports.debug = exports.trim = exports.http = exports.info = exports.log = exports.css = exports.qsa = exports.qs = exports.ce = void 0;
+exports.readSettings = exports.notification = exports.modifyObject = exports.getClassName = exports.setSettings = exports.insertAfter = exports.historyPush = exports.messageBox = exports.isValidUrl = exports.confirmBox = exports.setCookie = exports.playSound = exports.getParams = exports.getCookie = exports.delCookie = exports.declOfNum = exports.inBefore = exports.getQuery = exports.toUpper = exports.getPath = exports.getHref = exports.remove = exports.extend = exports.rever = exports.error = exports.debug = exports.trim = exports.http = exports.info = exports.log = exports.css = exports.qsa = exports.qs = exports.ce = void 0;
 const ce_1 = __webpack_require__(15);
 Object.defineProperty(exports, "ce", { enumerable: true, get: function () { return ce_1.ce; } });
 const css_1 = __webpack_require__(5);
@@ -158,9 +158,7 @@ const modifyObject_1 = __webpack_require__(35);
 Object.defineProperty(exports, "modifyObject", { enumerable: true, get: function () { return modifyObject_1.modifyObject; } });
 const notification_1 = __webpack_require__(36);
 Object.defineProperty(exports, "notification", { enumerable: true, get: function () { return notification_1.notification; } });
-const readSettings_1 = __webpack_require__(37);
-Object.defineProperty(exports, "readSettings", { enumerable: true, get: function () { return readSettings_1.readSettings; } });
-const getLocation_1 = __webpack_require__(38);
+const getLocation_1 = __webpack_require__(37);
 Object.defineProperty(exports, "getPath", { enumerable: true, get: function () { return getLocation_1.getPath; } });
 Object.defineProperty(exports, "getHref", { enumerable: true, get: function () { return getLocation_1.getHref; } });
 const console_1 = __webpack_require__(3);
@@ -168,6 +166,9 @@ Object.defineProperty(exports, "log", { enumerable: true, get: function () { ret
 Object.defineProperty(exports, "info", { enumerable: true, get: function () { return console_1.info; } });
 Object.defineProperty(exports, "error", { enumerable: true, get: function () { return console_1.error; } });
 Object.defineProperty(exports, "debug", { enumerable: true, get: function () { return console_1.debug; } });
+const settings_1 = __webpack_require__(38);
+Object.defineProperty(exports, "readSettings", { enumerable: true, get: function () { return settings_1.readSettings; } });
+Object.defineProperty(exports, "setSettings", { enumerable: true, get: function () { return settings_1.setSettings; } });
 
 
 /***/ }),
@@ -209,7 +210,6 @@ class OVERRIDE {
 exports.OVERRIDE = OVERRIDE;
 OVERRIDE.EVENTS = 0;
 OVERRIDE.PLAYER = 0;
-OVERRIDE.COMMENTS = 0;
 OVERRIDE.VERSION = Number(PKG_VERSION.split('.').join(''));
 
 
@@ -744,14 +744,13 @@ exports.settingsWeather = async (e) => {
     });
     apiKey.addEventListener('keypress', (e) => {
         if (e.keyCode === 13) {
-            if (/^[a-f0-9]{32}$/i.test(e.target.value) || utils_1.trim(e.target.value) !== '') {
-                settings_1._SETTINGS.weatherSet.key = e.target.value;
-                utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
+            if (/^[a-f0-9]{32}$/i.test(e.target.value)) {
+                utils_1.setSettings('weatherSet.key', e.target.value);
                 exports.getWeather();
-                apiKey.className = 'text-input';
+                apiKey.classList.remove('sp-input-error');
             }
             else {
-                apiKey.className = 'text-input sp-input-error';
+                apiKey.classList.add('sp-input-error');
             }
         }
     });
@@ -766,14 +765,13 @@ exports.settingsWeather = async (e) => {
     });
     cityInp.addEventListener('keypress', (e) => {
         if (e.keyCode === 13) {
-            if (/^([a-zA-Zа-яА-ЯёЁ]+[-]?[a-zA-Zа-яА-ЯёЁ]*[-]?[a-zA-Zа-яА-ЯёЁ]*[-]?[a-zA-Zа-яА-ЯёЁ]*)$/i.test(e.target.value) || utils_1.trim(e.target.value) !== '') {
-                settings_1._SETTINGS.weatherSet.city = e.target.value;
-                utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
+            if (/^([a-zA-Zа-яА-ЯёЁ]+[-]?[a-zA-Zа-яА-ЯёЁ]*[-]?[a-zA-Zа-яА-ЯёЁ]*[-]?[a-zA-Zа-яА-ЯёЁ]*)$/i.test(e.target.value)) {
+                utils_1.setSettings('weatherSet.city', e.target.value);
                 exports.getWeather();
-                cityInp.className = 'text-input';
+                cityInp.classList.remove('sp-input-error');
             }
             else {
-                cityInp.className = 'text-input sp-input-error';
+                cityInp.classList.add('sp-input-error');
             }
         }
     });
@@ -789,15 +787,14 @@ exports.settingsWeather = async (e) => {
         attr: { maxlength: 3 },
         value: settings_1._SETTINGS.weatherSet.interval / 60
     });
-    interval.addEventListener('change', (e) => {
+    interval.addEventListener('input', (e) => {
         // от 1 минуты до 360 минут ¯\_(ツ)_/¯
         if (/^([1-9]|[1-8][0-9]|9[0-9]|[12][0-9]{2}|3[0-5][0-9]|360)$/i.test(e.target.value)) {
-            settings_1._SETTINGS.weatherSet.interval = e.target.value * 60;
-            utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
-            interval.className = 'text-input';
+            utils_1.setSettings('weatherSet.interval', e.target.value * 60);
+            interval.classList.remove('sp-input-error');
         }
         else {
-            interval.className = 'text-input sp-input-error';
+            interval.classList.add('sp-input-error');
         }
     });
     masWarp.appendChild(cityLbl);
@@ -833,8 +830,7 @@ exports.getWeather = async () => {
             if (utils_1.qs('#SP_WIDGET_WEATHER'))
                 utils_1.remove(utils_1.qs('#SP_WIDGET_WEATHER'));
             if ((json === null || json === void 0 ? void 0 : json.cod) === 200) {
-                settings_1._SETTINGS.weatherSet.city = json.name;
-                utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
+                utils_1.setSettings('weatherSet.city', json.name);
                 utils_1.setCookie('SP_WEATHER', JSON.stringify(json));
             }
         });
@@ -852,8 +848,7 @@ exports.ipWhois = async () => {
         await utils_1.http('GET', 'https://ipwhois.app/json/?objects=city,success&lang=ru', false).then(e => {
             const json = e.parsedBody;
             if (json === null || json === void 0 ? void 0 : json.success) {
-                settings_1._SETTINGS.weatherSet.city = json.city;
-                utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
+                utils_1.setSettings('weatherSet.city', json.city);
                 exports.getWeather();
             }
             else {
@@ -910,9 +905,8 @@ exports.checkUpdates = () => {
                         class: 'btn btn_white btn_input right sticker-close_btn',
                         html: 'Больше не показывать',
                         onclick: () => {
-                            settings_1._SETTINGS.upVersion = json.history[0].build;
-                            utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
-                            utils_1.qs('#SP_PLUS_ALERT').remove();
+                            utils_1.setSettings('upVersion', json.history[0].build);
+                            utils_1.remove(utils_1.qs('#SP_PLUS_ALERT'));
                             return false;
                         }
                     });
@@ -1204,7 +1198,7 @@ exports.remove = void 0;
  * removeChild ಠ_ಠ
  * @param e
  */
-exports.remove = (e) => e.parentNode.removeChild(e);
+exports.remove = (e) => e.parentElement.removeChild(e);
 
 
 /***/ }),
@@ -1669,34 +1663,6 @@ exports.notification = (title, body, time) => {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.readSettings = void 0;
-const index_1 = __webpack_require__(0);
-const settings_1 = __webpack_require__(2);
-/**
- * Используется для инициализации настроек скрипта
- */
-exports.readSettings = () => {
-    let cookieSet = index_1.getCookie('SP_PLUS_SET');
-    try {
-        if (cookieSet) {
-            cookieSet = JSON.parse(cookieSet);
-            // @ts-ignore
-            settings_1._SETTINGS = index_1.extend(settings_1._SETTINGS, cookieSet);
-        }
-    }
-    catch (e) {
-        index_1.error('Ошибка (readSettings.ts): ' + e);
-    }
-};
-
-
-/***/ }),
-/* 38 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
 exports.getPath = exports.getHref = void 0;
 /**
  * Получаем полную ссылку
@@ -1722,6 +1688,52 @@ exports.getPath = (name) => {
             return str[3];
         default:
             return path;
+    }
+};
+
+
+/***/ }),
+/* 38 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.setSettings = exports.readSettings = void 0;
+const index_1 = __webpack_require__(0);
+const settings_1 = __webpack_require__(2);
+/**
+ * Используется для инициализации настроек скрипта
+ */
+exports.readSettings = () => {
+    let cookieSet = index_1.getCookie('SP_PLUS_SET');
+    try {
+        if (cookieSet) {
+            cookieSet = JSON.parse(cookieSet);
+            // @ts-ignore
+            settings_1._SETTINGS = index_1.extend(settings_1._SETTINGS, cookieSet);
+        }
+    }
+    catch (e) {
+        index_1.error('Ошибка (readSettings.ts): ' + e);
+    }
+};
+/**
+ * Используется для изменения настроек
+ */
+exports.setSettings = (key, value) => {
+    try {
+        if (key.indexOf('.') >= 0) {
+            let i = key.split('.');
+            settings_1._SETTINGS[i[0]][i[1]] = value;
+        }
+        else {
+            settings_1._SETTINGS[key] = value;
+        }
+        index_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
+    }
+    catch (e) {
+        index_1.error('Ошибка (setSettings.ts): ' + e);
     }
 };
 
@@ -2398,8 +2410,7 @@ exports.settingsMenu = () => {
                                                 utils_1.messageBox('Внимание!', 'Для работы данной функции, необходимо переключиться на компьютерную версию сайта', true, 5);
                                                 return false;
                                             }
-                                            settings_1._SETTINGS[id] = checked;
-                                            utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
+                                            utils_1.setSettings(id, checked);
                                             switch (id) {
                                                 case 'rscroll':
                                                     index_1.scrollMove(checked);
@@ -2798,8 +2809,7 @@ exports.galleryRotate = () => {
                 html: '<span class="ico_gallery ico_gallery_reload m"></span>',
                 onclick: () => {
                     // градус поворота (0, 90, 180, 270)
-                    settings_1._SETTINGS.angle = (settings_1._SETTINGS.angle + 90) % 360;
-                    utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
+                    utils_1.setSettings('angle', (settings_1._SETTINGS.angle + 90) % 360);
                     // применяем класс для повора изображения
                     Image.className = 'accel-3d rotate' + settings_1._SETTINGS.angle;
                     return false;
@@ -3183,14 +3193,13 @@ exports.settingsNotify = (e) => {
             value: settings_1._SETTINGS.notifySet.url,
             class: 'text-input'
         });
-        eventsUrl.addEventListener('change', (e) => {
-            if ((utils_1.isValidUrl(e.target.value) && /\.(ogg|mp3|wav)$/i.test(e.target.value)) || utils_1.trim(e.target.value) !== '') {
-                settings_1._SETTINGS.notifySet.url = utils_1.trim(e.target.value);
-                utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
-                eventsUrl.className = 'text-input';
+        eventsUrl.addEventListener('input', (e) => {
+            if (utils_1.isValidUrl(e.target.value) && /\.(ogg|mp3|wav)$/i.test(e.target.value)) {
+                utils_1.setSettings('notifySet.url', e.target.value);
+                eventsUrl.classList.remove('sp-input-error');
             }
             else {
-                eventsUrl.className = 'text-input sp-input-error';
+                eventsUrl.classList.add('sp-input-error');
             }
         });
         let testPlay = utils_1.ce('span', {
@@ -3198,14 +3207,11 @@ exports.settingsNotify = (e) => {
             html: '<span class="sp sp-play-green"></span>',
             style: 'top: 23px',
             title: 'Прослушать',
-            onclick: () => {
-                utils_1.playSound(settings_1._SETTINGS.notifySet.url, settings_1._SETTINGS.notifySet.volume);
-                return false;
-            }
+            onclick: () => utils_1.playSound(settings_1._SETTINGS.notifySet.url, settings_1._SETTINGS.notifySet.volume)
         });
         let volume = utils_1.ce('div', {
             class: 'label__desc',
-            html: settings_1._SETTINGS.notifySet.volume + '%'
+            html: `${settings_1._SETTINGS.notifySet.volume}%`
         });
         let volRange = utils_1.ce('input', {
             type: 'range',
@@ -3214,25 +3220,21 @@ exports.settingsNotify = (e) => {
             step: 1,
             value: settings_1._SETTINGS.notifySet.volume
         });
-        volRange.onchange = volRange.oninput = (e) => {
+        volRange.addEventListener('input', (e) => {
             if (!isNaN(e.target.value)) {
                 let setVol = parseInt(e.target.value, 10);
                 if (setVol < 0 || setVol > 100)
                     setVol = 70;
                 volume.innerHTML = setVol + '%';
-                settings_1._SETTINGS.notifySet.volume = setVol;
-                utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
+                utils_1.setSettings('notifySet.volume', setVol);
             }
-        };
+        });
         let mailEvent = utils_1.ce('input', {
             type: 'checkbox',
             id: 'sp_event_mail',
             class: 'sp-checkbox-square',
             checked: settings_1._SETTINGS.notifySet.mail,
-            onclick: (e) => {
-                settings_1._SETTINGS.notifySet.mail = e.target.checked;
-                utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
-            }
+            onclick: (e) => utils_1.setSettings('notifySet.mail', e.target.checked)
         });
         let mailEventLbl = utils_1.ce('label', {
             attr: { 'for': 'sp_event_mail' },
@@ -3243,10 +3245,7 @@ exports.settingsNotify = (e) => {
             id: 'sp_event_journal',
             class: 'sp-checkbox-square',
             checked: settings_1._SETTINGS.notifySet.journal,
-            onclick: (e) => {
-                settings_1._SETTINGS.notifySet.journal = e.target.checked;
-                utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
-            }
+            onclick: (e) => utils_1.setSettings('notifySet.journal', e.target.checked)
         });
         let jourEventLbl = utils_1.ce('label', {
             attr: { 'for': 'sp_event_journal' },
@@ -3257,10 +3256,7 @@ exports.settingsNotify = (e) => {
             id: 'sp_event_feed',
             class: 'sp-checkbox-square',
             checked: settings_1._SETTINGS.notifySet.feed,
-            onclick: (e) => {
-                settings_1._SETTINGS.notifySet.feed = e.target.checked;
-                utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
-            }
+            onclick: (e) => utils_1.setSettings('notifySet.feed', e.target.checked)
         });
         let feedEventLbl = utils_1.ce('label', {
             attr: { 'for': 'sp_event_feed' },
@@ -3331,13 +3327,12 @@ exports.settingsFriends = (e) => {
         });
         frMax.addEventListener('change', (e) => {
             if (/^([1-9]|1[0-5])$/i.test(e.target.value)) {
-                settings_1._SETTINGS.friendsSet.max = e.target.value;
-                utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
+                utils_1.setSettings('friendsSet.max', e.target.value);
                 friendsOnline_1.friendsOnline(true);
-                frMax.className = 'text-input';
+                frMax.classList.remove('sp-input-error');
             }
             else {
-                frMax.className = 'text-input sp-input-error';
+                frMax.classList.add('sp-input-error');
             }
         });
         let frMaxLbl = utils_1.ce('label', {
@@ -3378,8 +3373,7 @@ exports.settingsFeatures = (root) => {
             '<span class="sp sp-remove-grey mr-14"></span>Отключить отладчик' :
             '<span class="sp sp-settings mr-14"></span>Включить отладчик'),
         onclick: () => {
-            settings_1._SETTINGS.apidebug = settings_1._SETTINGS.apidebug ? false : true;
-            utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
+            utils_1.setSettings('apidebug', settings_1._SETTINGS.apidebug ? false : true);
             document.location.reload();
             return false;
         }
@@ -3513,11 +3507,11 @@ exports.videoSpeedPlayback = () => {
                 id: 'SP_PLAYBACK_VIDEO',
                 html: 'x' + settings_1._SETTINGS.videoSpeed,
                 onclick: () => {
-                    settings_1._SETTINGS.videoSpeed = (settings_1._SETTINGS.videoSpeed + 0.25) % 2.25;
-                    if (settings_1._SETTINGS.videoSpeed === 0)
-                        settings_1._SETTINGS.videoSpeed = 0.5;
-                    utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
-                    buttonPlayback.innerHTML = 'x' + settings_1._SETTINGS.videoSpeed;
+                    let videoSpeed = (settings_1._SETTINGS.videoSpeed + 0.25) % 2.25;
+                    if (videoSpeed === 0)
+                        videoSpeed = 0.5;
+                    utils_1.setSettings('videoSpeed', videoSpeed);
+                    buttonPlayback.innerHTML = 'x' + videoSpeed;
                     return false;
                 }
             });
@@ -3562,15 +3556,14 @@ exports.settingsBackground = (e) => {
             style: 'margin-bottom: 7px',
             class: 'text-input'
         });
-        inputImageUrl.addEventListener('change', (a) => {
-            if ((utils_1.isValidUrl(a.target.value) && /\.(jpg|jpeg|png|gif)$/i.test(a.target.value)) || utils_1.trim(a.target.value) !== '') {
-                settings_1._SETTINGS.bodystyleSet.url = utils_1.trim(a.target.value);
-                utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
+        inputImageUrl.addEventListener('change', (e) => {
+            if (utils_1.isValidUrl(e.target.value) && /\.(jpg|jpeg|png|gif)$/i.test(e.target.value)) {
+                utils_1.setSettings('bodystyleSet.url', e.target.value);
                 setStyles_1.setStyles();
-                inputImageUrl.className = 'text-input';
+                inputImageUrl.classList.remove('sp-input-error');
             }
             else {
-                inputImageUrl.className = 'text-input sp-input-error';
+                inputImageUrl.classList.add('sp-input-error');
             }
         });
         let inputColor = utils_1.ce('input', {
@@ -3581,13 +3574,12 @@ exports.settingsBackground = (e) => {
         });
         inputColor.addEventListener('input', (e) => {
             if (/^\#([A-Za-z0-9]{3,6})$/i.test(e.target.value)) {
-                settings_1._SETTINGS.bodystyleSet.color = e.target.value;
-                utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
+                utils_1.setSettings('bodystyleSet.color', e.target.value);
                 setStyles_1.setStyles();
-                inputColor.className = 'text-input';
+                inputColor.classList.remove('sp-input-error');
             }
             else {
-                inputColor.className = 'text-input sp-input-error';
+                inputColor.classList.add('sp-input-error');
             }
         });
         let radioImage = utils_1.ce('input', {
@@ -3595,13 +3587,12 @@ exports.settingsBackground = (e) => {
             id: 'sp_set_bodystyle_URL',
             checked: settings_1._SETTINGS.bodystyleSet.urlchecked,
             class: 'sp-checkbox-circle',
-            onclick: (a) => {
-                settings_1._SETTINGS.bodystyleSet.urlchecked = a.target.checked;
-                if (a.target.checked && radioColor.checked) {
+            onclick: (e) => {
+                utils_1.setSettings('bodystyleSet.urlchecked', e.target.checked);
+                if (e.target.checked && radioColor.checked) {
                     radioColor.checked = false;
-                    settings_1._SETTINGS.bodystyleSet.colorchecked = false;
+                    utils_1.setSettings('bodystyleSet.colorchecked', false);
                 }
-                utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
                 if (settings_1._SETTINGS.bodystyleSet.urlchecked) {
                     setStyles_1.setStyles();
                     setImage();
@@ -3616,13 +3607,12 @@ exports.settingsBackground = (e) => {
             id: 'sp_set_bodystyle_color',
             checked: settings_1._SETTINGS.bodystyleSet.colorchecked,
             class: 'sp-checkbox-circle',
-            onclick: (a) => {
-                settings_1._SETTINGS.bodystyleSet.colorchecked = a.target.checked;
-                if (a.target.checked && radioImage.checked) {
+            onclick: (e) => {
+                utils_1.setSettings('bodystyleSet.colorchecked', e.target.checked);
+                if (e.target.checked && radioImage.checked) {
                     radioImage.checked = false;
-                    settings_1._SETTINGS.bodystyleSet.urlchecked = false;
+                    utils_1.setSettings('bodystyleSet.urlchecked', false);
                 }
-                utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
                 if (settings_1._SETTINGS.bodystyleSet.colorchecked) {
                     setStyles_1.setStyles();
                     setColor();
@@ -3688,10 +3678,8 @@ const setImage = async () => {
                             style: 'cursor: pointer',
                             src: `${strings_1.ENV_PATH}/backgrounds/${i}`,
                             onclick: (e) => {
-                                // @ts-ignore
                                 utils_1.qs('#image-input').value = e.target.src;
-                                settings_1._SETTINGS.bodystyleSet.url = e.target.src;
-                                utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
+                                utils_1.setSettings('bodystyleSet.url', e.target.src);
                                 setStyles_1.setStyles();
                             }
                         });
@@ -3796,42 +3784,31 @@ const setColor = () => {
             setTimeout(() => {
                 // @ts-ignore
                 let picker = new CP(container, false, container);
-                utils_1.qs('#color-input').addEventListener('change', (a) => {
-                    if (/^\#([A-Za-z0-9]{3}|[A-Za-z0-9]{6})$/i.test(a.target.value) || a.target.value === '') {
-                        a.target.className = 'text-input';
-                        settings_1._SETTINGS.bodystyleSet.color = utils_1.trim(a.target.value);
-                        utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
+                utils_1.qs('#color-input').addEventListener('change', (e) => {
+                    if (/^\#([A-Za-z0-9]{3}|[A-Za-z0-9]{6})$/i.test(e.target.value)) {
+                        utils_1.setSettings('bodystyleSet.color', e.target.value);
                         setStyles_1.setStyles();
                         picker.set(settings_1._SETTINGS.bodystyleSet.color);
+                        e.target.classList.remove('sp-input-error');
                     }
                     else {
-                        a.target.className = 'text-input sp-input-error';
+                        e.target.classList.add('sp-input-error');
                     }
                 });
                 picker.enter();
                 picker.set(settings_1._SETTINGS.bodystyleSet.color);
                 picker.on('change', (e) => {
-                    const color = e.toUpperCase();
-                    // @ts-ignore
-                    utils_1.qs('#color-input').value = '#' + color;
-                    // @ts-ignore
-                    utils_1.qs('input[name=color]').value = '#' + color;
-                    utils_1.qs('.colorpicker-color').style.backgroundColor = '#' + color;
-                    settings_1._SETTINGS.bodystyleSet.color = '#' + color;
-                    utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
+                    const value = `#${e.toUpperCase()}`;
+                    setValues(value);
+                    utils_1.setSettings('bodystyleSet.color', value);
                     setStyles_1.setStyles();
                 });
                 const colorsBtn = document.querySelectorAll('.js-bb_color');
                 for (let color of colorsBtn) {
                     color.addEventListener('click', (e) => {
                         let value = e.target.getAttribute('data-val');
-                        // @ts-ignore
-                        utils_1.qs('#color-input').value = value;
-                        // @ts-ignore
-                        utils_1.qs('input[name=color]').value = value;
-                        utils_1.qs('.colorpicker-color').style.backgroundColor = value;
-                        settings_1._SETTINGS.bodystyleSet.color = value;
-                        utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
+                        setValues(value);
+                        utils_1.setSettings('bodystyleSet.color', value);
                         setStyles_1.setStyles();
                         picker.set(value);
                     });
@@ -3842,6 +3819,11 @@ const setColor = () => {
     catch (e) {
         utils_1.error('Ошибка (setColor): ' + e);
     }
+};
+const setValues = (color) => {
+    utils_1.qs('input[name=color]').value = color;
+    utils_1.qs('#color-input').value = color;
+    utils_1.qs('.colorpicker-color').style.backgroundColor = color;
 };
 
 
@@ -3875,8 +3857,7 @@ exports.settingsBackupMenu = (id) => {
                     style: 'margin: 10px',
                     title: 'Понятно, больше не показывать.',
                     onclick: () => {
-                        settings_1._SETTINGS.hideNotify.configImport = true;
-                        utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
+                        utils_1.setSettings('hideNotify.configImport', true);
                         utils_1.remove(utils_1.qs('#SP_CONFIG_JSON'));
                     }
                 });
@@ -3890,7 +3871,7 @@ exports.settingsBackupMenu = (id) => {
                 target.appendChild(infoDiv);
                 infoDiv.appendChild(smallInfo);
             }
-            let textarea, wrap = utils_1.ce('div', { class: 'content-bl' }), preloader = utils_1.ce('div', {
+            let wrap = utils_1.ce('div', { class: 'content-bl' }), preloader = utils_1.ce('div', {
                 class: 't_center',
                 id: 'SP_JSON_PRELOADER',
                 html: `<img src="${strings_1.HTTP}//spac.me/i/preloader.gif">`
@@ -3918,18 +3899,21 @@ exports.settingsBackupMenu = (id) => {
                 class: 'user__tools-link sp_plus_btn_list',
                 html: '<span class="sp sp-ok-blue"></span><span style="color: #57A3EA; padding-left: 10px;">Сохранить</span>',
                 onclick: () => {
-                    getJSON(`value=${textarea.value}`, (json) => {
+                    let area = utils_1.qs('#SP_BACKUP_JSON').value, confirm = utils_1.qs('#SP_PLUS_CONFIRM');
+                    if (confirm)
+                        utils_1.remove(confirm);
+                    getJSON(`value=${area}`, (json) => {
                         // Костыль ¯\_(ツ)_/¯
                         if (utils_1.qs('#JSON_ERROR_BLOCK')) {
                             errorsBlock.innerHTML = '<span class="sp sp-alert"></span> Невалидный JSON<br /><br />';
                             utils_1.remove(utils_1.qs('#JSON_ERROR_BLOCK'));
                         }
                         if (json.result.valid) {
-                            utils_1.setCookie('SP_PLUS_SET', textarea.value);
+                            utils_1.setCookie('SP_PLUS_SET', area);
                             utils_1.confirmBox('Настройки были успешно обновлены</br>Хотите сохранить файл настроек на рабочий стол?', false, () => {
                                 let blob = utils_1.ce('a', {
                                     attr: {
-                                        href: URL.createObjectURL(new Blob([textarea.value], { type: 'text/plain' })),
+                                        href: URL.createObjectURL(new Blob([area], { type: 'text/plain' })),
                                         download: 'spaces-plus.json'
                                     }
                                 });
@@ -3945,27 +3929,20 @@ exports.settingsBackupMenu = (id) => {
                 }
             });
             getJSON(`value=${JSON.stringify(settings_1._SETTINGS)}`, (json) => {
-                textarea = utils_1.ce('textarea', {
+                let textarea = utils_1.ce('textarea', {
                     class: 'text-input',
                     id: 'SP_BACKUP_JSON',
                     cols: '17',
                     rows: '25',
                     html: json.result.data
                 });
-                if (json.result.valid) {
-                    target.appendChild(wrap);
-                    wrap.appendChild(tiw);
-                    tiw.appendChild(cl);
-                    cl.appendChild(textarea);
-                    utils_1.remove(utils_1.qs('#SP_JSON_PRELOADER'));
-                }
-                else {
-                    handleErrors(target, errorsBlock, json);
-                }
                 target.appendChild(wrap);
                 wrap.appendChild(tiw);
                 tiw.appendChild(cl);
                 cl.appendChild(textarea);
+                json.result.valid ?
+                    utils_1.remove(utils_1.qs('#SP_JSON_PRELOADER')) :
+                    handleErrors(target, errorsBlock, json);
                 buttonsDiv.appendChild(restoreButton);
                 buttonsDiv.appendChild(saveButton);
                 utils_1.inBefore(buttonsDiv, utils_1.qs('#SP_PLUS_ABOUT'));
@@ -4036,12 +4013,11 @@ exports.settingsRecentSmiles = (e) => {
     });
     maxSave.addEventListener('change', (e) => {
         if (/^([1-5][0-9]|60)$/i.test(e.target.value)) {
-            settings_1._SETTINGS.recentSmiles.max = e.target.value;
-            utils_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
-            maxSave.className = 'text-input';
+            utils_1.setSettings('recentSmiles.max', e.target.value);
+            maxSave.classList.remove('sp-input-error');
         }
         else {
-            maxSave.className = 'text-input sp-input-error';
+            maxSave.classList.add('sp-input-error');
         }
     });
     masWarp.appendChild(maxSabeLbl);
