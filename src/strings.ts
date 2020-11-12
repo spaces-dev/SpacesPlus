@@ -1,5 +1,6 @@
 import pkg from '../package.json'
 
+import { IFirebase } from './interfaces/Firebase'
 import { IDevice } from './interfaces/Device'
 
 /**
@@ -13,6 +14,31 @@ const GITHUB: string = pkg.homepage
 const REVISION: number = Number(new Date())
 const DEVICE: IDevice = window.Device || unsafeWindow.Device
 const ENV_PATH = process.env.NODE_ENV === 'development' ? 'https://localhost:8080' : GITHUB
+
+/**
+ * Домены сайта
+ */
+const DOMAINS: string[] = [
+    'spaces-blogs.com',
+    'gdespaces.com',
+    'spaces.ru',
+    'spaces.im',
+    'spac1.net',
+    'spcs.me'
+]
+
+/**
+ * Firebase конфигурация
+ */
+const FirebaseConfig: IFirebase = {
+    apiKey: 'AIzaSyB8iDAyd-mMrSnBDKj_qasTjw268mk1d14',
+    authDomain: 'spacesplus.firebaseapp.com',
+    databaseURL: 'https://spacesplus.firebaseio.com',
+    projectId: 'spacesplus',
+    storageBucket: 'spacesplus.appspot.com',
+    messagingSenderId: '855455546501',
+    appId: '1:855455546501:web:89bbef7d9a9a03b3c2fdec'
+}
 
 /**
  * Временное хранилище данных
@@ -32,9 +58,11 @@ export {
     DEVICE,
     GITHUB,
     SPACES,
+    DOMAINS,
     BASE_URL,
     ENV_PATH,
     OVERRIDE,
     REVISION,
-    PKG_VERSION
+    PKG_VERSION,
+    FirebaseConfig
 }
