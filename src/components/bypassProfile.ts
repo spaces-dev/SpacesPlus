@@ -3,7 +3,6 @@ import {
     qs,
     cors,
     error,
-    remove,
     getPath,
     inBefore,
     getClassName
@@ -43,7 +42,7 @@ export const bypassProfile = () => {
                         onclick: () => false
                     }))
 
-                    remove(bl)
+                    bl.remove()
 
                     // выполняем CORS запрос и получаем HTML профиля
                     cors({
@@ -57,11 +56,14 @@ export const bypassProfile = () => {
                         // Вставляем "новый" контент профиля
                         qs('#main_content').innerHTML = response
 
+                        // Удаляем ненужную панель c кнопками
+                        qs('.user__tools').remove()
+
                         // Удаляем вкладку "Активности"
                         qs(`a[href^="${SPACES}/activity"`).parentElement?.remove()
 
                         // Удаляем кнопку "Написать"
-                        qs(`a[href^="${SPACES}/mail/new_message/"`).remove()
+                        qs('.btn-single__wrap').remove()
                     })
 
                     return false
