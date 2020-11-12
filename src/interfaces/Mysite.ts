@@ -7,3 +7,8 @@ export interface UserWidget {
 export interface IUserAnketa {
     user_widget: UserWidget
 }
+
+export interface IUserProfile {
+    location: string
+    content: string
+}

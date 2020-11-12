@@ -18,6 +18,7 @@ import {
     settingsMenu,
     stickyHeader,
     recentSmiles,
+    bypassProfile,
     deleteReaders,
     galleryRotate,
     sidebarButton,
@@ -112,6 +113,7 @@ const init = () => {
         if (_SETTINGS.readersd) deleteReaders()
         if (_SETTINGS.comments) deleteComments()
         if (_SETTINGS.playerdn) playerDownload()
+        if (_SETTINGS.userbypass) bypassProfile()
         if (_SETTINGS.dredirect) disableRedirect()
         if (_SETTINGS.playback) videoSpeedPlayback()
         if (_SETTINGS.blogsd || BASE_URL === 'spaces-blogs.com') deleteBlogs()

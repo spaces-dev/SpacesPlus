@@ -1,6 +1,6 @@
 import { qsa, http, getPath, info, error } from '../utils'
 
-import { IUserAnketa } from '../interfaces/UserAnketa'
+import { IUserAnketa } from '../interfaces/Mysite'
 
 import { SPACES, OVERRIDE } from '../strings'
 

@@ -11,7 +11,7 @@ import {
 } from '../utils'
 
 import { IBookmarks } from '../interfaces/Bookmarks'
-import { IUserAnketa } from '../interfaces/UserAnketa'
+import { IUserAnketa } from '../interfaces/Mysite'
 
 import { SPACES, OVERRIDE } from '../strings'
 

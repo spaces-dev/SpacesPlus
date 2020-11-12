@@ -16,6 +16,7 @@ import { freeStickers } from './freeStickers'
 import { recentSmiles } from './recentSmiles'
 import { settingsMenu } from './settingsMenu'
 import { stickyHeader } from './stickyHeader'
+import { bypassProfile } from './bypassProfile'
 import { deleteReaders } from './deleteReaders'
 import { friendsOnline } from './friendsOnline'
 import { galleryRotate } from './galleryRotate'
@@ -58,6 +59,7 @@ export {
     recentSmiles,
     settingsMenu,
     stickyHeader,
+    bypassProfile,
     deleteReaders,
     friendsOnline,
     galleryRotate,

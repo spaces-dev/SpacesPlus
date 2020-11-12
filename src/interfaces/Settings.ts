@@ -52,6 +52,7 @@ export interface ISettings {
     rscroll: boolean
     hrightbar: boolean
     favorite: boolean
+    userbypass: boolean
     grotate: boolean
     angle: number
     adblock: boolean

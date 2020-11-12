@@ -48,6 +48,7 @@ class OVERRIDE {
     static BANNED: string | null
     static ONLINE: string | null
     static FAVORITE: string | null
+    static PROFILE: string | null
     static EVENTS: number = 0
     static PLAYER: number = 0
     static VERSION: number = Number(PKG_VERSION.split('.').join(''))
