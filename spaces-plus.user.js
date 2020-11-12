@@ -181,7 +181,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PKG_VERSION = exports.REVISION = exports.OVERRIDE = exports.ENV_PATH = exports.BASE_URL = exports.SPACES = exports.GITHUB = exports.DEVICE = exports.HTTP = void 0;
+exports.FirebaseConfig = exports.PKG_VERSION = exports.REVISION = exports.OVERRIDE = exports.ENV_PATH = exports.BASE_URL = exports.DOMAINS = exports.SPACES = exports.GITHUB = exports.DEVICE = exports.HTTP = void 0;
 const package_json_1 = __importDefault(__webpack_require__(25));
 /**
  * Константы
@@ -202,6 +202,31 @@ const DEVICE = window.Device || unsafeWindow.Device;
 exports.DEVICE = DEVICE;
 const ENV_PATH =  false ? undefined : GITHUB;
 exports.ENV_PATH = ENV_PATH;
+/**
+ * Домены сайта
+ */
+const DOMAINS = [
+    'spaces-blogs.com',
+    'gdespaces.com',
+    'spaces.ru',
+    'spaces.im',
+    'spac1.net',
+    'spcs.me'
+];
+exports.DOMAINS = DOMAINS;
+/**
+ * Firebase конфигурация
+ */
+const FirebaseConfig = {
+    apiKey: 'AIzaSyB8iDAyd-mMrSnBDKj_qasTjw268mk1d14',
+    authDomain: 'spacesplus.firebaseapp.com',
+    databaseURL: 'https://spacesplus.firebaseio.com',
+    projectId: 'spacesplus',
+    storageBucket: 'spacesplus.appspot.com',
+    messagingSenderId: '855455546501',
+    appId: '1:855455546501:web:89bbef7d9a9a03b3c2fdec'
+};
+exports.FirebaseConfig = FirebaseConfig;
 /**
  * Временное хранилище данных
  */
@@ -1321,7 +1346,7 @@ exports.delCookie = (name) => setCookie_1.setCookie(name, null, { expires: -1 })
 /* 25 */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"name\":\"spaces-plus\",\"description\":\"🚀 Powerful userscript for Spaces.ru\",\"homepage\":\"https://spaces-dev.github.io/SpacesPlus\",\"version\":\"3.1.0\",\"author\":{\"name\":\"Vitalij Ryndin\",\"email\":\"sys@crashmax.ru\",\"url\":\"https://crashmax.ru\"},\"scripts\":{\"dev\":\"cross-env NODE_ENV=development webpack-dev-server --config-name main --host localhost --watch-poll\",\"build\":\"cross-env NODE_ENV=production webpack --progress\"},\"devDependencies\":{\"@types/node\":\"^14.11.8\",\"@types/webpack\":\"^4.41.22\",\"@types/webpack-dev-server\":\"^3.11.0\",\"clean-webpack-plugin\":\"^3.0.0\",\"copy-webpack-plugin\":\"^6.2.1\",\"cross-env\":\"^7.0.2\",\"optimize-css-assets-webpack-plugin\":\"^5.0.4\",\"ts-loader\":\"^8.0.4\",\"ts-node\":\"^9.0.0\",\"typescript\":\"^4.0.2\",\"webpack\":\"^4.44.2\",\"webpack-cli\":\"^3.3.12\",\"webpack-dev-server\":\"^3.11.0\",\"webpack-userscript\":\"^2.5.6\"}}");
+module.exports = JSON.parse("{\"name\":\"spaces-plus\",\"description\":\"🚀 Powerful userscript for Spaces.ru\",\"homepage\":\"https://spaces-dev.github.io/SpacesPlus\",\"version\":\"3.1.0\",\"author\":{\"name\":\"Vitalij Ryndin\",\"email\":\"sys@crashmax.ru\",\"url\":\"https://crashmax.ru\"},\"scripts\":{\"dev\":\"cross-env NODE_ENV=development webpack-dev-server --config-name main --host localhost --watch-poll\",\"build\":\"cross-env NODE_ENV=production webpack --progress\"},\"devDependencies\":{\"@types/node\":\"^14.11.8\",\"@types/webpack\":\"^4.41.22\",\"@types/webpack-dev-server\":\"^3.11.0\",\"clean-webpack-plugin\":\"^3.0.0\",\"copy-webpack-plugin\":\"^6.2.1\",\"cross-env\":\"^7.0.2\",\"optimize-css-assets-webpack-plugin\":\"^5.0.4\",\"ts-loader\":\"^8.0.4\",\"ts-node\":\"^9.0.0\",\"typescript\":\"^4.0.2\",\"webpack\":\"^4.44.2\",\"webpack-cli\":\"^3.3.12\",\"webpack-dev-server\":\"^3.11.0\",\"webpack-userscript\":\"^2.5.6\",\"webpack-zip-files-plugin\":\"^1.0.0\"}}");
 
 /***/ }),
 /* 26 */
@@ -2041,7 +2066,8 @@ const utils_1 = __webpack_require__(0);
 const strings_1 = __webpack_require__(1);
 exports.firstLaunch = () => {
     try {
-        if (utils_1.getCookie('SP_LAUNCH') === undefined) {
+        // показываем приветствие, если отсутсвует кука и если BASE_URL не в залупе!
+        if (utils_1.getCookie('SP_LAUNCH') === undefined && strings_1.BASE_URL !== 'spaces-blogs.com') {
             utils_1.messageBox('Спасибо за установку Spaces+', `
                 <b style="color: #f86934">ВНИМАНИЕ!</b></br></br>
                 Во избежания подделок, которые могут воровать пароли пользователей, скрипт скачивать только с официального <a href="https://spaces-dev.github.io" target="_blank">сайта</a></br></br>
