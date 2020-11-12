@@ -69,7 +69,7 @@ module.exports = {
         }),
         new ZipFilesPlugin({
             entries: [{ src: outputPath, dist: '/' }],
-            output: 'dist/spaces-plus',
+            output: path.join(outputPath, 'spaces-plus'),
             format: 'zip'
         })
     ]
