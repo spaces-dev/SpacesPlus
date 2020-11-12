@@ -33,10 +33,19 @@ export const bypassProfile = () => {
                     // запоминает ник
                     OVERRIDE.PROFILE = nickname
 
-                    // удаляем кнопки
-                    remove(qs('.user__tools'))
+                    // Меняем кнопку на время загрузки
+                    let bl = qs('#SP_PLUS_INBL')
 
-                    // выполняем CORS запрос и получаем HTML профиля пользователя
+                    bl.after(ce('td', {
+                        class: 'table__cell',
+                        id: 'SP_PLUS_INBL',
+                        html: `<a href="#" class="stnd-link stnd-link_disabled" title="Загрузка"><span style="padding-right: 10px" class="ico ico_spinner"></span> Загрузка</a>`,
+                        onclick: () => false
+                    }))
+
+                    remove(bl)
+
+                    // выполняем CORS запрос и получаем HTML профиля
                     cors({
                         method: 'GET',
                         url: `https://cors-anywhere.herokuapp.com/${SPACES}/ajax/mysite/index/${nickname}/`
@@ -47,9 +56,6 @@ export const bypassProfile = () => {
 
                         // Вставляем "новый" контент профиля
                         qs('#main_content').innerHTML = response
-
-                        // Удаляем ненужную панель c кнопками
-                        remove(qs('.user__tools'))
 
                         // Удаляем вкладку "Активности"
                         qs(`a[href^="${SPACES}/activity"`).parentElement?.remove()
