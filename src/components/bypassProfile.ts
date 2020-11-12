@@ -17,7 +17,7 @@ export const bypassProfile = () => {
     try {
 
         let tbBlock: any = getClassName('td.table__cell table__cell_last', true),
-            blLink = qs(`a[href^="${SPACES}/blacklist/en_details/"`),
+            blLink = qs(`a[href^="${SPACES}/blacklist/"`),
             inBL = qs('#SP_PLUS_INBL')
 
         if (getPath(1) === 'mysite' && blLink && tbBlock && !inBL) {
