@@ -2,7 +2,6 @@ import {
     ce,
     qs,
     error,
-    remove,
     getPath,
     getHref,
     inBefore,
@@ -101,24 +100,24 @@ export const settingsMenu = () => {
                                                 case 'notify':
                                                     checked ?
                                                         settingsNotify(e.target) :
-                                                        remove(qs("#SP_PLUS_EVENTS"))
+                                                        qs("#SP_PLUS_EVENTS").remove()
                                                     break
                                                 // TODO: Меню настроек на доработку!    
                                                 /*case 'recents':
                                                     checked ?
                                                         settingsRecentSmiles(e.target) :
-                                                        remove(qs("#SP_RECENTS_SETTINGS"))
+                                                        qs("#SP_RECENTS_SETTINGS").remove()
                                                     break*/
                                                 case 'friendsOn':
                                                     friendsOnline(checked)
                                                     checked ?
                                                         settingsFriends(e.target) :
-                                                        remove(qs('#SP_PLUS_MAXFRIENDS'))
+                                                        qs('#SP_PLUS_MAXFRIENDS').remove()
                                                     break
                                                 case 'sticker':
                                                     checked ?
                                                         freeStickers(checked) :
-                                                        remove(qs('#SP_PLUS_STICKERS'))
+                                                        qs('#SP_PLUS_STICKERS').remove()
                                                     break
                                                 case 'stickyheader':
                                                     stickyHeader(checked)
@@ -130,16 +129,16 @@ export const settingsMenu = () => {
                                                     if (checked) {
                                                         settingsBackground(e.target)
                                                     } else {
-                                                        remove(qs('#SP_PLUS_BODYSTYLE'))
-                                                        remove(qs('#SP_PLUS_INJSTYLE'))
+                                                        qs('#SP_PLUS_BODYSTYLE').remove()
+                                                        qs('#SP_PLUS_INJSTYLE').remove()
                                                     }
                                                     break
                                                 case 'weather':
                                                     if (checked) {
                                                         settingsWeather(e.target)
                                                     } else {
-                                                        remove(qs("#SP_WIDGET_WEATHER"))
-                                                        remove(qs("#SP_WEATHER_SETTINGS"))
+                                                        qs("#SP_WIDGET_WEATHER").remove()
+                                                        qs("#SP_WEATHER_SETTINGS").remove()
                                                     }
                                                     break
                                             }

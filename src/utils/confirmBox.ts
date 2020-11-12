@@ -1,4 +1,4 @@
-import { ce, qs, remove } from './index'
+import { ce, qs } from './index'
 
 /**
  * Всплывающее окно с кнопками Да/Отмена
@@ -16,26 +16,20 @@ export const confirmBox = (text: string, warn: boolean, callback: Function) => {
     let br = ce('div', { class: 'pad_t_a' })
 
     // Скрываем раннее созданные уводомления
-    if (Alert) remove(Alert)
-    if (Confirm) remove(Confirm)
+    Alert?.remove()
+    Confirm?.remove()
 
     // Подтверждение сообщения
     successBtn.onclick = () => {
-        if (qs('#SP_PLUS_CONFIRM')) {
-            remove(qs('#SP_PLUS_CONFIRM'))
-            callback()
-            return false
-        }
-        return true
+        rm()
+        callback()
+        return false
     }
 
     // Отмена сообщения - закрытие окна
     cancelBtn.onclick = () => {
-        if (qs('#SP_PLUS_CONFIRM')) {
-            remove(qs('#SP_PLUS_CONFIRM'))
-            return false
-        }
-        return true
+        rm()
+        return false
     }
 
     let Main = ce('div', { class: 'sticker sp-sticker-anim', id: 'SP_PLUS_CONFIRM' })
@@ -49,3 +43,5 @@ export const confirmBox = (text: string, warn: boolean, callback: Function) => {
     Main.appendChild(container)
     document.body.appendChild(Main)
 }
+
+const rm = () => qs('#SP_PLUS_CONFIRM').remove()

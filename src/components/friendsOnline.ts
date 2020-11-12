@@ -4,8 +4,7 @@ import {
     http,
     info,
     error,
-    extend,
-    remove
+    extend
 } from '../utils'
 
 import { IFriendsOnline } from '../interfaces/FriendsOnline'
@@ -35,7 +34,7 @@ export const friendsOnline = (t?: boolean) => {
         try {
             if (!t) {
                 if (frOnDiv) {
-                    remove(frOnDiv)
+                    frOnDiv.remove()
                     countFriends = 0
                     info('Убрали панель друзей!')
                 }
@@ -110,7 +109,7 @@ export const friendsOnline = (t?: boolean) => {
                     parent?.appendChild(frOnDiv)
                 }
             } else if (count === 0) {
-                if (frOnDiv) { remove(frOnDiv) }
+                frOnDiv?.remove()
             }
         } catch (e) {
             error('Ошибка (friendsOnline.ts): ' + e)

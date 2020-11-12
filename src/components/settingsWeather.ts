@@ -3,7 +3,6 @@ import {
     qs,
     http,
     error,
-    remove,
     setCookie,
     messageBox,
     insertAfter,
@@ -137,7 +136,7 @@ export const getWeather = async () => {
             }
 
             if (qs('#SP-CITY-INPUT')) { (qs('#SP-CITY-INPUT') as HTMLInputElement).value = json!.name }
-            if (qs('#SP_WIDGET_WEATHER')) remove(qs('#SP_WIDGET_WEATHER'))
+            qs('#SP_WIDGET_WEATHER')?.remove()
 
             if (json?.cod === 200) {
                 setSettings('weatherSet.city', json.name)

@@ -3,7 +3,6 @@ import {
     qs,
     http,
     error,
-    remove,
     isValidUrl,
     insertAfter,
     setSettings
@@ -90,7 +89,7 @@ export const settingsBackground = (e: Element) => {
                     setStyles()
                     setImage()
                 } else {
-                    remove(qs('#SP_WRAP_IMAGE'))
+                    qs('#SP_WRAP_IMAGE').remove()
                 }
             }
         })
@@ -112,7 +111,7 @@ export const settingsBackground = (e: Element) => {
                     setStyles()
                     setColor()
                 } else {
-                    remove(qs('#SP_WRAP_COLOR'))
+                    qs('#SP_WRAP_COLOR').remove()
                 }
             }
         })
@@ -153,8 +152,8 @@ const setImage = async () => {
         if (!qs('#SP_WRAP_IMAGE')) {
 
             if (qs('#SP_WRAP_COLOR')) {
-                remove(qs('#SP_WRAP_COLOR'))
-                remove(qs('#SP_PLUS_CP_STYLE'))
+                qs('#SP_WRAP_COLOR').remove()
+                qs('#SP_PLUS_CP_STYLE').remove()
             }
 
             let style = ce('link', {
@@ -213,8 +212,8 @@ const setColor = () => {
         if (!qs('#SP_WRAP_COLOR')) {
 
             if (qs('#SP_WRAP_IMAGE')) {
-                remove(qs('#SP_WRAP_IMAGE'))
-                remove(qs('#SP_PLUS_IMAGE_STYLE'))
+                qs('#SP_WRAP_IMAGE').remove()
+                qs('#SP_PLUS_IMAGE_STYLE').remove()
             }
 
             let style = ce('link', {

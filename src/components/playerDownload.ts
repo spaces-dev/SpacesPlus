@@ -4,7 +4,6 @@ import {
     qsa,
     info,
     error,
-    remove,
     insertAfter
 } from '../utils'
 
@@ -44,7 +43,7 @@ export const playerDownload = () => {
             }
         }
     } catch (e) {
-        if (downPlace) { remove(downPlace) }
+        downPlace?.remove()
         error('Ошибка (playerDownload.ts): ' + e)
     }
 }

@@ -1,4 +1,4 @@
-import { ce, qs, error, remove, rever } from '../utils'
+import { ce, qs, error, rever } from '../utils'
 
 import { getUpdater } from './checkUpdates'
 import { ICheckUpdates } from '../interfaces/CheckUpdates'
@@ -40,7 +40,7 @@ export const settingsChangelogMenu = (id: string) => {
                     div.appendChild(changes)
                 }
 
-                remove(qs('#SP_JSON_PRELOADER'))
+                qs('#SP_JSON_PRELOADER').remove()
             })
         } catch (e) {
             error('Ошибка (changelogMenu.ts): ' + e)

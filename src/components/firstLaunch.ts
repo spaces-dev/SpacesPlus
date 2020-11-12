@@ -2,7 +2,6 @@ import {
     ce,
     qs,
     error,
-    remove,
     getCookie,
     setCookie,
     messageBox
@@ -28,7 +27,7 @@ export const firstLaunch = () => {
                     href: `${SPACES}/settings/?sp_plus_settings=1`,
                     class: 'btn btn_white btn_input right sticker-close_btn',
                     html: 'Перейти к настройкам',
-                    onclick: () => remove(qs('#SP_PLUS_ALERT'))
+                    onclick: () => qs('#SP_PLUS_ALERT').remove()
                 })
                 qs('#SP_LAUNCH_BUTTON').appendChild(goTo)
             }

@@ -4,7 +4,6 @@ import {
     http,
     error,
     rever,
-    remove,
     messageBox,
     setSettings
 } from '../utils'
@@ -49,7 +48,7 @@ export const checkUpdates = () => {
                         html: 'Больше не показывать',
                         onclick: () => {
                             setSettings('upVersion', json.history[0].build)
-                            remove(qs('#SP_PLUS_ALERT'))
+                            qs('#SP_PLUS_ALERT').remove()
                             return false
                         }
                     })

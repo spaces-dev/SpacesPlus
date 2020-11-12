@@ -3,7 +3,6 @@ import {
     qs,
     http,
     error,
-    remove,
     inBefore,
     delCookie,
     setCookie,
@@ -38,7 +37,7 @@ export const settingsBackupMenu = (id: string) => {
                     title: 'Понятно, больше не показывать.',
                     onclick: () => {
                         setSettings('hideNotify.configImport', true)
-                        remove(qs('#SP_CONFIG_JSON'))
+                        qs('#SP_CONFIG_JSON').remove()
                     }
                 })
 
@@ -93,13 +92,13 @@ export const settingsBackupMenu = (id: string) => {
                     let area = (qs('#SP_BACKUP_JSON') as HTMLInputElement).value,
                         confirm = qs('#SP_PLUS_CONFIRM')
 
-                    if (confirm) remove(confirm)
+                    confirm?.remove()
 
                     getJSON(`value=${area}`, (json: IGetJSON) => {
                         // Костыль ¯\_(ツ)_/¯
                         if (qs('#JSON_ERROR_BLOCK')) {
                             errorsBlock.innerHTML = '<span class="sp sp-alert"></span> Невалидный JSON<br /><br />'
-                            remove(qs('#JSON_ERROR_BLOCK'))
+                            qs('#JSON_ERROR_BLOCK').remove()
                         }
 
                         if (json.result.valid) {
@@ -139,7 +138,7 @@ export const settingsBackupMenu = (id: string) => {
                 cl.appendChild(textarea)
 
                 json.result.valid ?
-                    remove(qs('#SP_JSON_PRELOADER')) :
+                    qs('#SP_JSON_PRELOADER').remove() :
                     handleErrors(target, errorsBlock, json)
 
                 buttonsDiv.appendChild(restoreButton)

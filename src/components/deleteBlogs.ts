@@ -4,7 +4,6 @@ import {
     qsa,
     http,
     error,
-    remove,
     getPath,
     declOfNum,
     getParams,
@@ -23,7 +22,7 @@ export const deleteBlogs = () => {
     let buttons = qs('#SP_PLUS_BUTTONS_B')
 
     // сброс кнопок
-    if (p[2] !== 'view' && buttons) remove(buttons)
+    if (p[2] !== 'view' && buttons) buttons.remove()
 
     if (p[1] === 'diary' && p[2] === 'view' && !qs('input[id^="SP_DB_"')) {
 
@@ -118,7 +117,7 @@ export const deleteBlogs = () => {
                 })
 
                 // костыль
-                if (buttons) remove(buttons)
+                buttons?.remove()
 
                 buttonsDiv.appendChild(deleteBlogsButton)
                 buttonsDiv.appendChild(chooseAllButton)

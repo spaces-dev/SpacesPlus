@@ -5,7 +5,6 @@ import { http } from './http'
 import { trim } from './trim'
 import { qs, qsa } from './qs'
 import { rever } from './rever'
-import { remove } from './remove'
 import { extend } from './extend'
 import { toUpper } from './toUpper'
 import { getQuery } from './getQuery'
@@ -42,7 +41,6 @@ export {
     error,
     rever,
     extend,
-    remove,
     getHref,
     getPath,
     toUpper,

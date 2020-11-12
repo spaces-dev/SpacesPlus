@@ -1,4 +1,4 @@
-import { ce, qs, remove } from './index'
+import { ce, qs } from './index'
 
 /**
  * @param title Заголовок уведомления
@@ -15,8 +15,8 @@ export const messageBox = (title: string, content: string, close: boolean, timer
     })
 
     // Скрываем раннее созданные уводомления
-    if (Alert) remove(Alert)
-    if (Confirm) remove(Confirm)
+    Alert?.remove()
+    Confirm?.remove()
 
     let Main = ce('div', {
         class: 'content-item3 wbg oh',
