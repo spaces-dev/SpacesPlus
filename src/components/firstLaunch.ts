@@ -8,11 +8,13 @@ import {
     messageBox
 } from '../utils'
 
-import { SPACES } from '../strings'
+import { SPACES, BASE_URL } from '../strings'
 
 export const firstLaunch = () => {
     try {
-        if (getCookie('SP_LAUNCH') === undefined) {
+
+        // показываем приветствие, если отсутсвует кука и если BASE_URL не в залупе!
+        if (getCookie('SP_LAUNCH') === undefined && BASE_URL !== 'spaces-blogs.com') {
 
             messageBox('Спасибо за установку Spaces+', `
                 <b style="color: #f86934">ВНИМАНИЕ!</b></br></br>
