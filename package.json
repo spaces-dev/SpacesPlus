@@ -26,6 +26,7 @@
         "webpack": "^4.44.2",
         "webpack-cli": "^3.3.12",
         "webpack-dev-server": "^3.11.0",
-        "webpack-userscript": "^2.5.6"
+        "webpack-userscript": "^2.5.6",
+        "webpack-zip-files-plugin": "^1.0.0"
     }
 }

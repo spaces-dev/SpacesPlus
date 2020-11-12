@@ -6,6 +6,7 @@ import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 
 const { isDev, isChrome, devPath, devPort, scriptFileName, scriptHeaders } = UserScriptConfig
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const ZipFilesPlugin = require('webpack-zip-files-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const outputPath = path.resolve(__dirname, 'dist')
 
@@ -53,7 +54,8 @@ module.exports = {
         new CopyWebpackPlugin({
             patterns: [
                 {
-                    from: 'resources/'
+                    from: 'resources/',
+                    to: outputPath
                 }
             ]
         }),
@@ -64,6 +66,11 @@ module.exports = {
                 baseUrl: isChrome ? `${url.pathToFileURL(outputPath)}` : devPath,
                 enable: isDev
             }
+        }),
+        new ZipFilesPlugin({
+            entries: [{ src: outputPath, dist: '/' }],
+            output: 'dist/spaces-plus',
+            format: 'zip'
         })
     ]
 }
