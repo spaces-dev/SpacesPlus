@@ -20,7 +20,6 @@ import { isValidUrl } from './isValidUrl'
 import { messageBox } from './messageBox'
 import { historyPush } from './historyPush'
 import { insertAfter } from './insertAfter'
-import { getClassName } from './getClassName'
 import { modifyObject } from './modifyObject' 
 import { notification } from './notification'
 import { getPath, getHref } from './getLocation'
@@ -58,7 +57,6 @@ export {
     historyPush,
     insertAfter,
     setSettings,
-    getClassName,
     modifyObject,
     notification,
     readSettings
