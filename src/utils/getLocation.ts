@@ -1,3 +1,5 @@
+import { BASE_PATH } from '../strings'
+
 /**
  * Получаем полную ссылку
  */

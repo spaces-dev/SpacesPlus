@@ -1,13 +1,13 @@
 import {
     ce,
     qs,
+    qsa,
     http,
     error,
     getPath,
     getHref,
     inBefore,
-    confirmBox,
-    getClassName
+    confirmBox
 } from '../utils'
 
 import { IBookmarks } from '../interfaces/Bookmarks'
@@ -24,12 +24,11 @@ export const favoriteUser = async () => {
     if ((method === 'mysite' || (method === 'anketa' && index !== 'edit') || method === 'activity') && OVERRIDE.FAVORITE !== href) {
         OVERRIDE.FAVORITE = href
 
-        let inFavorite = qs('#SP_PLUS_INFAVORITE')
-
         try {
-            let tbBlock: any = getClassName('td.table__cell table__cell_last', true)
+            let inFavorite = qs('#SP_PLUS_INFAVORITE'),
+                tdBlock: any = qsa('td.table__cell_last')
 
-            if (nickname && tbBlock && !inFavorite) {
+            if (nickname && tdBlock && !inFavorite) {
 
                 await http<IUserAnketa>('GET', `${SPACES}/anketa/index/${nickname}`, true).then(e => {
                     const json = e.parsedBody?.user_widget
@@ -51,10 +50,10 @@ export const favoriteUser = async () => {
                         })
 
                         isFav(json.id, json.name, favoriteButton)
-                        if (!inFavorite) { inBefore(favoriteButton, tbBlock[0]) }
+                        if (!inFavorite) { inBefore(favoriteButton, tdBlock[1]) }
 
-                        let clds = tbBlock[0].parentNode.childNodes
-                        for (let x in clds) { if (clds[x].nodeName === 'TD') clds[x].width = '25%' }
+                        let clds = (tdBlock[1].parentElement.childNodes as NodeList)
+                        for (let x in clds) { if (clds[x].nodeName === 'TD') (clds[x] as HTMLTableCellElement).width = '25%' }
                     }
                 })
             }

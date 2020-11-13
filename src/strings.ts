@@ -28,6 +28,44 @@ const DOMAINS: string[] = [
 ]
 
 /**
+ * Базовые пути разделов сайта
+ */
+const BASE_PATH: string[] = [
+    'sz',
+    'app',
+    'rklm',
+    'tags',
+    'mail',
+    'info',
+    'comm',
+    'chat',
+    'files',
+    'video',
+    'users',
+    'diary',
+    'lenta',
+    'mysite',
+    'dating',
+    'forums',
+    'anketa',
+    'journal',
+    'musicat',
+    'pictures',
+    'activity',
+    'settings',
+    'friends',
+    'services',
+    'devices',
+    'bookmarks',
+    'music.user',
+    'online_help',
+    'sections.city',
+    'sidebar.types',
+    'gifts.user_list',
+    'guestbook.index'
+]
+
+/**
  * Firebase конфигурация
  */
 const FirebaseConfig: IFirebase = {
@@ -48,7 +86,8 @@ class OVERRIDE {
     static BANNED: string | null
     static ONLINE: string | null
     static FAVORITE: string | null
-    static PROFILE: string | null
+    static NICKNAME: string | null
+    static CONTENT: string
     static EVENTS: number = 0
     static PLAYER: number = 0
     static VERSION: number = Number(PKG_VERSION.split('.').join(''))
@@ -64,6 +103,7 @@ export {
     ENV_PATH,
     OVERRIDE,
     REVISION,
+    BASE_PATH,
     PKG_VERSION,
     FirebaseConfig
 }

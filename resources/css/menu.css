@@ -552,6 +552,12 @@ input[type=color] {
     .sp-fav-on {
         display: none
     }
+    .sp-eye-grey {
+        display: none
+    }
+    .bp.ico_spinner {
+        display: none
+    }
 }
 
 .sp-fav {

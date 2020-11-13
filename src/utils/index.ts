@@ -1,6 +1,5 @@
 import { ce } from './ce'
 import { css } from './css'
-import { cors } from './cors'
 import { http } from './http'
 import { trim } from './trim'
 import { qs, qsa } from './qs'
@@ -32,7 +31,6 @@ export {
     qsa,
     css,
     log,
-    cors,
     info,
     http,
     trim,
