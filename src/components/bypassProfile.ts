@@ -66,7 +66,7 @@ export const bypassProfile = () => {
 // https://gist.github.com/crashmax-off/5cf3ce71d784924c8c9c6843bf5ff7df
 const getProfile = async (nickname: string) => {
 
-    if (OVERRIDE.NICKNAME !== nickname && OVERRIDE.CONTENT === undefined) {
+    if (OVERRIDE.NICKNAME !== nickname || OVERRIDE.CONTENT === undefined) {
 
         // запоминает ник
         OVERRIDE.NICKNAME = nickname
