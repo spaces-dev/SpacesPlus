@@ -2786,7 +2786,7 @@ exports.bypassProfile = () => {
 // выполняем CORS запрос и получаем HTML профиля
 // https://gist.github.com/crashmax-off/5cf3ce71d784924c8c9c6843bf5ff7df
 const getProfile = async (nickname) => {
-    if (strings_1.OVERRIDE.NICKNAME !== nickname && strings_1.OVERRIDE.CONTENT === undefined) {
+    if (strings_1.OVERRIDE.NICKNAME !== nickname || strings_1.OVERRIDE.CONTENT === undefined) {
         // запоминает ник
         strings_1.OVERRIDE.NICKNAME = nickname;
         await utils_1.http('GET', `https://crashmax.ru/api/proxy?url=${strings_1.SPACES}/ajax/mysite/index/${nickname}/`, false).then(e => {
