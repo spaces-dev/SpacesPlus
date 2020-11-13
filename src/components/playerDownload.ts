@@ -10,12 +10,12 @@ import {
 import { OVERRIDE } from '../strings'
 
 export const playerDownload = () => {
-    let downPlace = qs('#SP_MUSIC_DOWN')
 
     try {
         let trId: number = 0,
             track = sessionStorage.getItem('music:track'),
             data = sessionStorage.getItem('music:playlist'),
+            downPlace = qs('#SP_MUSIC_DOWN'),
             player = qs('#gp_main_player')
 
         if (player && track && data) {
@@ -43,7 +43,6 @@ export const playerDownload = () => {
             }
         }
     } catch (e) {
-        downPlace?.remove()
         error('Ошибка (playerDownload.ts): ' + e)
     }
 }
