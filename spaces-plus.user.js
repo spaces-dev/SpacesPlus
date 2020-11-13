@@ -2797,14 +2797,14 @@ const getProfile = async (nickname) => {
                 strings_1.OVERRIDE.CONTENT = e.parsedBody.contents.content.replace(/spac1\.net|spaces-blogs\.com/gi, str => str = strings_1.BASE_URL);
             }
             else {
-                utils_1.messageBox('Просмотр профилей', `Ошибка загрузки профиля! Обратитесь к разработчику`, true);
+                utils_1.messageBox('Просмотр профилей', 'Ошибка загрузки профиля! Обратитесь к разработчику', true);
             }
         });
     }
     setContent(strings_1.OVERRIDE.CONTENT);
 };
 const setContent = (str) => {
-    var _a;
+    var _a, _b, _c;
     // Вставляем "новый" профиль
     utils_1.qs('#main_content').innerHTML = str;
     // Костыль по восстановлению аватарки
@@ -2813,8 +2813,10 @@ const setContent = (str) => {
     avatar.src = avatar.dataset.s;
     // Удаляем ненужную панель c кнопками
     utils_1.qs('.user__tools').remove();
+    // Удаляем кнопку "Сделать подарок"
+    (_b = (_a = utils_1.qs('span[class$="ico_gifts"').parentElement) === null || _a === void 0 ? void 0 : _a.parentElement) === null || _b === void 0 ? void 0 : _b.remove();
     // Удаляем вкладку "Активности"
-    (_a = utils_1.qs(`a[href^="${strings_1.SPACES}/activity"`).parentElement) === null || _a === void 0 ? void 0 : _a.remove();
+    (_c = utils_1.qs(`a[href^="${strings_1.SPACES}/activity"`).parentElement) === null || _c === void 0 ? void 0 : _c.remove();
     // Удаляем кнопку "Написать"
     utils_1.qs('.btn-single__wrap').remove();
 };
