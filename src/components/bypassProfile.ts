@@ -78,7 +78,7 @@ const getProfile = async (nickname: string) => {
                 // Заменяем уебанские домены на пользовательский
                 OVERRIDE.CONTENT = e.parsedBody!.contents.content.replace(/spac1\.net|spaces-blogs\.com/gi, str => str = BASE_URL)
             } else {
-                messageBox('Просмотр профилей', `Ошибка загрузки профиля! Обратитесь к разработчику`, true)
+                messageBox('Просмотр профилей', 'Ошибка загрузки профиля! Обратитесь к разработчику', true)
             }
         })
     }
@@ -98,6 +98,9 @@ const setContent = (str: string) => {
 
     // Удаляем ненужную панель c кнопками
     qs('.user__tools').remove()
+
+    // Удаляем кнопку "Сделать подарок"
+    qs('span[class$="ico_gifts"').parentElement?.parentElement?.remove()
 
     // Удаляем вкладку "Активности"
     qs(`a[href^="${SPACES}/activity"`).parentElement?.remove()
