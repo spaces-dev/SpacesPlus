@@ -91,7 +91,7 @@ export const friendsOnline = (t?: boolean) => {
 
                                         for (let i = 0; i < lengthList; i++) {
                                             frOnDiv.appendChild(ce('a', {
-                                                href: `${SPACES}/mysite/${friendsList[i].name}`,
+                                                href: `${SPACES}/mysite/index/${friendsList[i].name}`,
                                                 class: 'li',
                                                 html: (disableAvatar ?
                                                     `<span class="comm_ava m for_avatar"><img src="${friendsList[i].avatar.previewURL}" class="preview s21_20"></span>` : '') +
