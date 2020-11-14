@@ -74,11 +74,11 @@ const init = () => {
      * ! Технические функции
      * ? Срабатывают один раз после загрузки страницы
      */
-    setStyles()
     firstLaunch()
     checkUpdates()
     sidebarButton()
     readSettings()
+    setStyles()
 
     /**
      * ? Тут перечислены функции, которые срабатывают единоразово
