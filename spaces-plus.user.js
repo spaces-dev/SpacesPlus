@@ -2748,11 +2748,11 @@ const strings_1 = __webpack_require__(1);
 exports.bypassProfile = () => {
     var _a, _b, _c;
     try {
-        let tdBlock = utils_1.qsa('td.table__cell_last'), blLink = utils_1.qs(`a[href^="${strings_1.SPACES}/blacklist/"`), rsLink = utils_1.qs(`a[href^="${strings_1.SPACES}/info/rules/"`), inBL = utils_1.qs('#SP_PLUS_INBL'), inBL2 = utils_1.qs('#SP_PLUS_INBL2');
+        let tdBlock = utils_1.qsa('td.table__cell_last'), blackListLink = utils_1.qs(`a[href^="${strings_1.SPACES}/blacklist/"`), rulesLink = utils_1.qs(`a[href^="${strings_1.SPACES}/info/rules/"`), noAccessIco = utils_1.qs('div.ico_noaccess_xlarge'), inButton = utils_1.qs('#SP_PLUS_INBL');
         if (utils_1.getPath(1) === 'mysite' && tdBlock) {
             let nickname = utils_1.getPath(3);
             // Показать профиль, если он недоступен по причине пидорас (в чёрном списке)
-            if (blLink && !inBL) {
+            if (blackListLink && !inButton) {
                 let button = utils_1.ce('td', {
                     class: 'table__cell',
                     id: 'SP_PLUS_INBL',
@@ -2781,12 +2781,14 @@ exports.bypassProfile = () => {
                     utils_1.qs('#SP_PLUS_INBL').click();
             }
             // Показать доступные ссылки в профиле, если он в бане
-            if (rsLink && !inBL2 && !utils_1.qs('#SP_LIST_LINK')) {
+            if ((rulesLink || noAccessIco) && !blackListLink && !utils_1.qs('#SP_LIST_LINK')) {
+                // фикс двойного бордера
+                utils_1.qs('div.user__tools').style.borderTop = 'none';
                 // костыль для получения ника пользователя
                 // иногда в ссылке бывает не ник, а его id
                 let nickname = utils_1.qs('#location_bar_1_0');
                 if (nickname.textContent !== null) {
-                    setUrls(utils_1.trim(nickname.textContent));
+                    setUrls(utils_1.trim(nickname.textContent), blackListLink, rulesLink);
                 }
             }
         }
@@ -2837,45 +2839,77 @@ const setContent = (content) => {
     utils_1.qs('.btn-single__wrap').remove();
 };
 // Ссылки у заблокированного профиля
-const setUrls = (nickname) => {
-    const urls = [
+const setUrls = (e, lnk1, lnk2) => {
+    let urls = [
         {
             'ico': 'forum',
             'text': 'Темы и комментарии',
-            'path': '/forums/search_user/?query='
+            'path': `/forums/search_user/?query=${e}`
         },
         {
             'ico': 'comm',
             'text': 'Сообщества',
-            'path': '/comm/list/user/'
+            'path': `/comm/list/user/${e}`
         },
         {
             'ico': 'friends',
             'text': 'Друзья',
-            'path': '/friends/?name='
+            'path': `/friends/?name=${e}`
         },
         {
             'ico': 'readers',
             'text': 'Читатели',
-            'path': '/lenta/readers/?user='
+            'path': `/lenta/readers/?user=${e}`
         },
         {
             'ico': 'gifts',
             'text': 'Подарки',
-            'path': '/gifts/user_list/'
+            'path': `/gifts/user_list/${e}`
         }
     ];
+    let urls2 = [
+        {
+            'ico': 'blog',
+            'text': 'Личный блог',
+            'path': `/diary/view/user/${e}/list/-/`
+        },
+        {
+            'ico': 'photo',
+            'text': 'Фотографии',
+            'path': `/pictures/user/${e}/list/-/`
+        },
+        {
+            'ico': 'music',
+            'text': 'Музыка',
+            'path': `/music/user/${e}/list/-/`
+        },
+        {
+            'ico': 'video',
+            'text': 'Видео',
+            'path': `/video/user/${e}/list/-/`
+        },
+        {
+            'ico': 'file',
+            'text': 'Файлы',
+            'path': `/files/user/${e}/list/-/`
+        }
+    ];
+    // конкатим второй массив, если аккаунт покинут
+    if (lnk1 === null && lnk2 === null)
+        urls = urls2.concat(urls);
     utils_1.qs('div.js-pending-item').append(utils_1.ce('div', {
         id: 'SP_LIST_LINK',
         class: 'widgets-group links-group'
     }));
+    // создаем ссылки
     for (let url of urls) {
+        let { ico, text, path } = url;
         let link = utils_1.ce('a', {
-            href: strings_1.SPACES + url.path + nickname,
+            href: strings_1.SPACES + path,
             class: 'list-link stnd-link_arr list-link-darkblue c-darkblue',
             html: `
-                <span class="js-ico  ico ico_${url.ico}"></span>
-                <span class="t js-text">${url.text}</span>
+                <span class="js-ico  ico ico_${ico}"></span>
+                <span class="t js-text">${text}</span>
                 <span class="ico ico_arr"></span>
             `
         });
