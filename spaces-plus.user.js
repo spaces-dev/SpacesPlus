@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        Spaces+
-// @version     3.1.0
+// @version     3.1.1
 // @author      Vitalij Ryndin
 // @description 🚀 Powerful userscript for Spaces.ru
 // @homepage    https://spaces-dev.github.io/SpacesPlus
@@ -177,7 +177,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FirebaseConfig = exports.PKG_VERSION = exports.BASE_PATH = exports.REVISION = exports.OVERRIDE = exports.ENV_PATH = exports.BASE_URL = exports.DOMAINS = exports.SPACES = exports.GITHUB = exports.DEVICE = exports.HTTP = void 0;
+exports.FirebaseConfig = exports.PKG_VERSION = exports.BASE_PATH = exports.REVISION = exports.ENV_PATH = exports.BASE_URL = exports.DOMAINS = exports.SPACES = exports.GITHUB = exports.DEVICE = exports.HTTP = exports.DATA = void 0;
 const package_json_1 = __importDefault(__webpack_require__(24));
 /**
  * Константы
@@ -264,12 +264,22 @@ exports.FirebaseConfig = FirebaseConfig;
 /**
  * Временное хранилище данных
  */
-class OVERRIDE {
-}
-exports.OVERRIDE = OVERRIDE;
-OVERRIDE.EVENTS = 0;
-OVERRIDE.PLAYER = 0;
-OVERRIDE.VERSION = Number(PKG_VERSION.split('.').join(''));
+const DATA = {
+    // наш CK
+    CK: '',
+    // наш Никнейм
+    USERNAME: '',
+    BANNED: null,
+    ONLINE: null,
+    FAVORITE: null,
+    NICKNAME: null,
+    CONTENT: null,
+    EVENTS: 0,
+    PLAYER: 0,
+    // версия из package.json
+    VERSION: Number(PKG_VERSION.split('.').join(''))
+};
+exports.DATA = DATA;
 
 
 /***/ }),
@@ -297,7 +307,7 @@ exports._DESCSTRINGS = {
     'rscroll': 'Перемещает полосу автоскролла на правую сторону.',
     'hrightbar': 'Функция скрывает правое меню (страница становиться на 25% шире).</br></br>Конфликтует c функцией "Виджет погоды".',
     'favorite': `<img src="${strings_1.ENV_PATH}/screens/favorite-user.png"></br>Функция добавляет на страницу каждого пользователя кнопку "В закладки". Повторно нажав на кнопку, Вы сможете удалить пользователя из закладок.`,
-    'userbypass': `<img src="${strings_1.ENV_PATH}/screens/bypass-profile.png"></br>Функция позволяет просматривать разделы пользователя, если даже он у Вас в черном списке.`,
+    'userbypass': `<img src="${strings_1.ENV_PATH}/screens/bypass-profile.png"></br>Функция позволяет просматривать разделы у заблокированных/удаленных пользователей, даже если он у Вас в черном списке.`,
     'grotate': `<img src="${strings_1.ENV_PATH}/screens/rotate-image.png"></br>Добавляется кнопка в просмотрщик фотографий, с помощью ее можно поворачивать изображение.`,
     'adblock': 'Функция полностью скрывает назойливую рекламу и не только.',
     'stickyheader': 'Функция закрепляет шапку сайта.',
@@ -370,7 +380,7 @@ exports._SETTINGS = {
     'sticker': true,
     'playback': true,
     'videoSpeed': 1,
-    'upVersion': strings_1.OVERRIDE.VERSION,
+    'upVersion': strings_1.DATA.VERSION,
     'beta': false,
     'hideNotify': {
         'configImport': false
@@ -960,8 +970,8 @@ exports.checkUpdates = () => {
             let hideVer = 0;
             if (settings_1._SETTINGS.upVersion)
                 hideVer = settings_1._SETTINGS.upVersion;
-            strings_1.OVERRIDE.VERSION = Math.max(hideVer, strings_1.OVERRIDE.VERSION);
-            if (json.history[0].build > strings_1.OVERRIDE.VERSION) {
+            strings_1.DATA.VERSION = Math.max(hideVer, strings_1.DATA.VERSION);
+            if (json.history[0].build > strings_1.DATA.VERSION) {
                 utils_1.messageBox(`Доступна новая версия Spaces+ ${utils_1.rever(json.history[0].build)}`, `<div class="pad_t_a"></div>${json.history[0].changes}<div id="SP_UPDATER_BUTTONS" class="pad_t_a"><a class="btn btn_green btn_input" href="${strings_1.ENV_PATH}/spaces-plus.user.js?r=${strings_1.REVISION}" onclick="document.body.removeChild(this.parentNode.parentNode.parentNode.parentNode)">Обновить</a></div>`, true);
                 if (utils_1.qs('#SP_PLUS_ALERT')) {
                     const hide = utils_1.ce('a', {
@@ -1005,11 +1015,13 @@ const settings_1 = __webpack_require__(2);
     if (utils_1.qs('#main_wrap')) {
         try {
             utils_1.http('POST', `${strings_1.SPACES}/api/session/check`, false).then(e => {
-                var _a;
+                var _a, _b;
                 if (e.status === 200 && e.parsedBody) {
                     if (components_1.userStatus(e.parsedBody.code)) {
-                        // Временно храним CK для работы функций
-                        strings_1.OVERRIDE.CK = (_a = e.parsedBody) === null || _a === void 0 ? void 0 : _a.attributes.CK;
+                        // Временно храним ник
+                        strings_1.DATA.USERNAME = (_a = e.parsedBody) === null || _a === void 0 ? void 0 : _a.attributes.name;
+                        // Временно храним CK
+                        strings_1.DATA.CK = (_b = e.parsedBody) === null || _b === void 0 ? void 0 : _b.attributes.CK;
                         // Инициализируем работу
                         init();
                     }
@@ -1370,7 +1382,7 @@ exports.delCookie = (name) => setCookie_1.setCookie(name, null, { expires: -1 })
 /* 24 */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"name\":\"spaces-plus\",\"description\":\"🚀 Powerful userscript for Spaces.ru\",\"homepage\":\"https://spaces-dev.github.io/SpacesPlus\",\"version\":\"3.1.0\",\"author\":{\"name\":\"Vitalij Ryndin\",\"email\":\"sys@crashmax.ru\",\"url\":\"https://crashmax.ru\"},\"scripts\":{\"dev\":\"cross-env NODE_ENV=development webpack-dev-server --config-name main --host localhost --watch-poll\",\"build\":\"cross-env NODE_ENV=production webpack --progress\"},\"devDependencies\":{\"@types/node\":\"^14.11.8\",\"@types/webpack\":\"^4.41.22\",\"@types/webpack-dev-server\":\"^3.11.0\",\"clean-webpack-plugin\":\"^3.0.0\",\"copy-webpack-plugin\":\"^6.2.1\",\"cross-env\":\"^7.0.2\",\"optimize-css-assets-webpack-plugin\":\"^5.0.4\",\"ts-loader\":\"^8.0.4\",\"ts-node\":\"^9.0.0\",\"typescript\":\"^4.0.2\",\"webpack\":\"^4.44.2\",\"webpack-cli\":\"^3.3.12\",\"webpack-dev-server\":\"^3.11.0\",\"webpack-userscript\":\"^2.5.6\",\"webpack-zip-files-plugin\":\"^1.0.0\"}}");
+module.exports = JSON.parse("{\"name\":\"spaces-plus\",\"description\":\"🚀 Powerful userscript for Spaces.ru\",\"homepage\":\"https://spaces-dev.github.io/SpacesPlus\",\"version\":\"3.1.1\",\"author\":{\"name\":\"Vitalij Ryndin\",\"email\":\"sys@crashmax.ru\",\"url\":\"https://crashmax.ru\"},\"scripts\":{\"dev\":\"cross-env NODE_ENV=development webpack-dev-server --config-name main --host localhost --watch-poll\",\"build\":\"cross-env NODE_ENV=production webpack --progress\"},\"devDependencies\":{\"@types/node\":\"^14.11.8\",\"@types/webpack\":\"^4.41.22\",\"@types/webpack-dev-server\":\"^3.11.0\",\"clean-webpack-plugin\":\"^3.0.0\",\"copy-webpack-plugin\":\"^6.2.1\",\"cross-env\":\"^7.0.2\",\"optimize-css-assets-webpack-plugin\":\"^5.0.4\",\"ts-loader\":\"^8.0.4\",\"ts-node\":\"^9.0.0\",\"typescript\":\"^4.0.2\",\"webpack\":\"^4.44.2\",\"webpack-cli\":\"^3.3.12\",\"webpack-dev-server\":\"^3.11.0\",\"webpack-userscript\":\"^2.5.6\",\"webpack-zip-files-plugin\":\"^1.0.0\"}}");
 
 /***/ }),
 /* 25 */
@@ -1862,12 +1874,12 @@ exports.userOnline = () => {
     let nick = utils_1.getPath(3);
     let target = `/anketa/index/${nick}/`;
     if (path !== target)
-        strings_1.OVERRIDE.ONLINE = null;
-    if (path === target && strings_1.OVERRIDE.ONLINE !== nick) {
+        strings_1.DATA.ONLINE = null;
+    if (path === target && strings_1.DATA.ONLINE !== nick) {
         try {
             let onBlock = Array.from(utils_1.qsa('div.info-item__title')).filter(e => e.textContent === 'Время онлайн:');
             if (nick && onBlock) {
-                strings_1.OVERRIDE.ONLINE = nick;
+                strings_1.DATA.ONLINE = nick;
                 utils_1.http('GET', `${strings_1.SPACES}/anketa/index/${nick}/`, true).then(e => {
                     var _a, _b;
                     const response = (_b = (_a = e.parsedBody) === null || _a === void 0 ? void 0 : _a.user_widget) === null || _b === void 0 ? void 0 : _b.online_time;
@@ -2014,7 +2026,7 @@ exports.deleteBlogs = () => {
                                 let allCount = count;
                                 for (let blog of blogs) {
                                     utils_1.messageBox(`Осталось удалить ${count--} из ${allCount} ${declStr(count)}`, 'Подождите немного... <span style="padding-right: 10px" class="ico ico_spinner"></span>', false);
-                                    await utils_1.http('GET', `${strings_1.SPACES}/diary/delete/?CK=${strings_1.OVERRIDE.CK}&id=${blog}&Sure=1`, true);
+                                    await utils_1.http('GET', `${strings_1.SPACES}/diary/delete/?CK=${strings_1.DATA.CK}&id=${blog}&Sure=1`, true);
                                 }
                                 document.location.reload();
                             });
@@ -2131,16 +2143,16 @@ exports.soundNotify = () => {
                 counter = counter + parseInt(notif[i].innerHTML, 10);
             }
         }
-        if (counter > strings_1.OVERRIDE.EVENTS) {
+        if (counter > strings_1.DATA.EVENTS) {
             // звук уведомления
             utils_1.playSound(settings_1._SETTINGS.notifySet.url, settings_1._SETTINGS.notifySet.volume);
             let string = utils_1.declOfNum(counter, ['новое событие', 'новых события', 'новых событий']);
             // создаем новое уведомление
             utils_1.notification(`${utils_1.toUpper(string)} на Spaces!`, `У Вас ${counter} ${string}!`, 5);
-            strings_1.OVERRIDE.EVENTS = counter;
+            strings_1.DATA.EVENTS = counter;
         }
-        else if (counter < strings_1.OVERRIDE.EVENTS) {
-            strings_1.OVERRIDE.EVENTS = counter;
+        else if (counter < strings_1.DATA.EVENTS) {
+            strings_1.DATA.EVENTS = counter;
         }
     }
     catch (e) {
@@ -2187,8 +2199,12 @@ const utils_1 = __webpack_require__(0);
 const strings_1 = __webpack_require__(1);
 exports.favoriteUser = async () => {
     let href = utils_1.getHref(), method = utils_1.getPath(1), index = utils_1.getPath(2), nickname = utils_1.getPath(3);
-    if ((method === 'mysite' || (method === 'anketa' && index !== 'edit') || method === 'activity') && strings_1.OVERRIDE.FAVORITE !== href) {
-        strings_1.OVERRIDE.FAVORITE = href;
+    if ((method === 'mysite' ||
+        (method === 'anketa' && index !== 'edit') ||
+        method === 'activity') &&
+        strings_1.DATA.FAVORITE !== href &&
+        strings_1.DATA.USERNAME !== utils_1.trim(utils_1.qs('#location_bar_1_0').textContent)) {
+        strings_1.DATA.FAVORITE = href;
         try {
             let inFavorite = utils_1.qs('#SP_PLUS_INFAVORITE'), tdBlock = utils_1.qsa('td.table__cell_last');
             if (nickname && tdBlock && !inFavorite) {
@@ -2202,7 +2218,7 @@ exports.favoriteUser = async () => {
                             html: `<a href="${strings_1.SPACES}/bookmarks/add/?object_id=${json.id}&object_type=11" class="stnd-link" title="Добавить в закладки"><span class="sp sp-fav"></span> B закладки</a>`,
                             onclick: () => {
                                 utils_1.confirmBox(`Добавить пользователя <b>${json.name}</b> в закладки?`, false, async () => {
-                                    await utils_1.http('POST', `${strings_1.SPACES}/ajax/bookmarks/add/`, false, `object_id=${json.id}&object_type=11&show_all_tags_state=0&new_tags=Люди&cfms=Добавить&CK=${strings_1.OVERRIDE.CK}`).then(e => {
+                                    await utils_1.http('POST', `${strings_1.SPACES}/ajax/bookmarks/add/`, false, `object_id=${json.id}&object_type=11&show_all_tags_state=0&new_tags=Люди&cfms=Добавить&CK=${strings_1.DATA.CK}`).then(e => {
                                         e.status === 200 ?
                                             isFav(json.id, json.name, favoriteButton) :
                                             console.log(e);
@@ -2231,7 +2247,7 @@ exports.favoriteUser = async () => {
     else if (method !== 'mysite' &&
         method !== 'anketa' &&
         method !== 'activity') {
-        strings_1.OVERRIDE.FAVORITE = null;
+        strings_1.DATA.FAVORITE = null;
     }
 };
 const isFav = async (id, name, elem) => {
@@ -2777,19 +2793,17 @@ exports.bypassProfile = () => {
                     if (clds[x].nodeName === 'TD')
                         clds[x].width = '25%';
                 }
-                if (strings_1.OVERRIDE.NICKNAME === nickname)
+                if (strings_1.DATA.NICKNAME === nickname)
                     utils_1.qs('#SP_PLUS_INBL').click();
             }
             // Показать доступные ссылки в профиле, если он в бане
             if ((rulesLink || noAccessIco) && !blackListLink && !utils_1.qs('#SP_LIST_LINK')) {
                 // фикс двойного бордера
                 utils_1.qs('div.user__tools').style.borderTop = 'none';
+                setUrls(
                 // костыль для получения ника пользователя
                 // иногда в ссылке бывает не ник, а его id
-                let nickname = utils_1.qs('#location_bar_1_0');
-                if (nickname.textContent !== null) {
-                    setUrls(utils_1.trim(nickname.textContent), blackListLink, rulesLink);
-                }
+                utils_1.trim(utils_1.qs('#location_bar_1_0').textContent), blackListLink, rulesLink);
             }
         }
         else {
@@ -2804,39 +2818,38 @@ exports.bypassProfile = () => {
 // выполняем CORS запрос и получаем HTML профиля
 // https://gist.github.com/crashmax-off/5cf3ce71d784924c8c9c6843bf5ff7df
 const getProfile = async (nickname) => {
-    if (strings_1.OVERRIDE.NICKNAME !== nickname || strings_1.OVERRIDE.CONTENT === undefined) {
+    var _a, _b, _c;
+    if (strings_1.DATA.NICKNAME !== nickname || strings_1.DATA.CONTENT === undefined) {
         // запоминает ник
-        strings_1.OVERRIDE.NICKNAME = nickname;
+        strings_1.DATA.NICKNAME = nickname;
         await utils_1.http('GET', `https://crashmax.ru/api/proxy?url=${strings_1.SPACES}/ajax/mysite/index/${nickname}/`, false).then(e => {
             var _a;
             let status = (_a = e.parsedBody) === null || _a === void 0 ? void 0 : _a.status.http_code;
             if (status === 200) {
                 // Заменяем уебанские домены на пользовательский
-                strings_1.OVERRIDE.CONTENT = e.parsedBody.contents.content.replace(/spac1\.net|spaces-blogs\.com/gi, str => str = strings_1.BASE_URL);
+                strings_1.DATA.CONTENT = e.parsedBody.contents.content.replace(/spac1\.net|spaces-blogs\.com/gi, str => str = strings_1.BASE_URL);
             }
             else {
                 utils_1.messageBox('Просмотр профилей', 'Ошибка загрузки профиля! Обратитесь к разработчику', true);
             }
         });
     }
-    setContent(strings_1.OVERRIDE.CONTENT);
-};
-const setContent = (content) => {
-    var _a, _b, _c;
-    // Вставляем "новый" профиль
-    utils_1.qs('#main_content').innerHTML = content;
-    // Костыль по восстановлению аватарки
-    let avatar = utils_1.qs('img[data-s*="101.100.0"');
-    // @ts-ignore
-    avatar.src = avatar.dataset.s;
-    // Удаляем ненужную панель c кнопками
-    utils_1.qs('.user__tools').remove();
-    // Удаляем кнопку "Сделать подарок"
-    (_b = (_a = utils_1.qs('span[class$="ico_gifts"').parentElement) === null || _a === void 0 ? void 0 : _a.parentElement) === null || _b === void 0 ? void 0 : _b.remove();
-    // Удаляем вкладку "Активности"
-    (_c = utils_1.qs(`a[href^="${strings_1.SPACES}/activity"`).parentElement) === null || _c === void 0 ? void 0 : _c.remove();
-    // Удаляем кнопку "Написать"
-    utils_1.qs('.btn-single__wrap').remove();
+    if (strings_1.DATA.CONTENT !== null) {
+        // Вставляем "новый" профиль
+        utils_1.qs('#main_content').innerHTML = strings_1.DATA.CONTENT;
+        // Костыль по восстановлению аватарки
+        let avatar = utils_1.qs('img[data-s*="101.100.0"');
+        // @ts-ignore
+        avatar.src = avatar.dataset.s;
+        // Удаляем ненужную панель c кнопками
+        utils_1.qs('.user__tools').remove();
+        // Удаляем кнопку "Сделать подарок"
+        (_b = (_a = utils_1.qs('span[class$="ico_gifts"').parentElement) === null || _a === void 0 ? void 0 : _a.parentElement) === null || _b === void 0 ? void 0 : _b.remove();
+        // Удаляем вкладку "Активности"
+        (_c = utils_1.qs(`a[href^="${strings_1.SPACES}/activity"`).parentElement) === null || _c === void 0 ? void 0 : _c.remove();
+        // Удаляем кнопку "Написать"
+        utils_1.qs('.btn-single__wrap').remove();
+    }
 };
 // Ссылки у заблокированного профиля
 const setUrls = (e, lnk1, lnk2) => {
@@ -2991,7 +3004,7 @@ exports.deleteReaders = () => {
                                     let allCount = count;
                                     for (let reader of readers) {
                                         utils_1.messageBox(`Осталось удалить ${count--} из ${allCount} ${declStr(count)}`, 'Подождите немного... <span style="padding-right: 10px" class="ico ico_spinner"></span>', false);
-                                        await utils_1.http('POST', `${strings_1.SPACES}/lenta/reader_delete/?user=${reader}`, false, `&CK=${strings_1.OVERRIDE.CK}&cfms=Удалить`);
+                                        await utils_1.http('POST', `${strings_1.SPACES}/lenta/reader_delete/?user=${reader}`, false, `&CK=${strings_1.DATA.CK}&cfms=Удалить`);
                                     }
                                     document.location.reload();
                                 });
@@ -3356,21 +3369,21 @@ exports.playerDownload = () => {
             let jspl = JSON.parse(data);
             trId = parseInt(jstr.id, 10);
             let trScr = jspl.playlist.playlist[trId].src;
-            let tdIc = utils_1.qsa('td.ico_td');
+            let tdIc = utils_1.qs('a.js-music_repeat');
             if (tdIc && !downPlace) {
-                strings_1.OVERRIDE.PLAYER = trId;
+                strings_1.DATA.PLAYER = trId;
                 let dwnTd = utils_1.ce('td', {
                     id: 'SP_MUSIC_DOWN',
                     class: 'ico_td',
                     innerHTML: '<span style="margin: 0px 6px 0px 0px !important" class="sp sp-download-darkblue" title="Скачать"></span>',
-                    onclick: () => { location.href = trScr; }
+                    onclick: () => location.href = trScr
                 });
-                utils_1.insertAfter(dwnTd, tdIc[0]);
+                utils_1.insertAfter(dwnTd, tdIc.parentElement);
             }
-            else if (downPlace && strings_1.OVERRIDE.PLAYER !== trId) {
-                strings_1.OVERRIDE.PLAYER = trId;
+            else if (downPlace && strings_1.DATA.PLAYER !== trId) {
+                strings_1.DATA.PLAYER = trId;
                 utils_1.info('Обновили ссылку на трек!');
-                downPlace.onclick = () => { location.href = trScr; };
+                downPlace.onclick = () => location.href = trScr;
             }
         }
     }
@@ -3616,7 +3629,7 @@ exports.settingsFeatures = (root) => {
         id: 'sp_spacesAction_beta',
         html: btnWrap(beta ?
             '<span class="sp sp-exit-grey mr-14"></span>Выйти из песочницы' :
-            '<span class="sp sp-enter-grey mr-14"></span>Beta-песочница<span> - открытое тестирование нововведений сайта'),
+            '<span class="sp sp-enter-grey mr-14"></span>Войти в песочницу'),
         onclick: () => {
             beta ? utils_1.delCookie('sandbox') : utils_1.setCookie('sandbox', 'beta');
             document.location.reload();
@@ -3662,7 +3675,7 @@ exports.settingsFeatures = (root) => {
         html: btnWrap('<span class="sp sp-remove-grey mr-14"></span>Скрыть квест новичка'),
         onclick: () => {
             utils_1.confirmBox('Вы действительно хотите скрыть квест новичка?', true, () => {
-                utils_1.http('GET', `${strings_1.SPACES}/newbequest/?CK=${strings_1.OVERRIDE.CK}`, true).then(e => {
+                utils_1.http('GET', `${strings_1.SPACES}/newbequest/?CK=${strings_1.DATA.CK}`, true).then(e => {
                     if (e.status === 200)
                         utils_1.messageBox('Поздравляем!', 'Квест новичка был успешно скрыт', true, 5);
                 });
