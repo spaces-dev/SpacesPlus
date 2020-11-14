@@ -2746,37 +2746,53 @@ exports.bypassProfile = void 0;
 const utils_1 = __webpack_require__(0);
 const strings_1 = __webpack_require__(1);
 exports.bypassProfile = () => {
-    var _a, _b;
+    var _a, _b, _c;
     try {
-        let tdBlock = utils_1.qsa('td.table__cell_last'), blLink = utils_1.qs(`a[href^="${strings_1.SPACES}/blacklist/"`), inBL = utils_1.qs('#SP_PLUS_INBL');
-        if (utils_1.getPath(1) === 'mysite' && blLink && tdBlock && !inBL) {
+        let tdBlock = utils_1.qsa('td.table__cell_last'), blLink = utils_1.qs(`a[href^="${strings_1.SPACES}/blacklist/"`), rsLink = utils_1.qs(`a[href^="${strings_1.SPACES}/info/rules/"`), inBL = utils_1.qs('#SP_PLUS_INBL'), inBL2 = utils_1.qs('#SP_PLUS_INBL2');
+        if (utils_1.getPath(1) === 'mysite' && tdBlock) {
             let nickname = utils_1.getPath(3);
-            let bypassBL = utils_1.ce('td', {
-                class: 'table__cell',
-                id: 'SP_PLUS_INBL',
-                html: `<a href="#" class="stnd-link" title="Показать профиль"><span class="sp sp-eye-grey"></span> Показать</a>`,
-                onclick: () => {
-                    // Меняем кнопку на время загрузки
-                    let bl = utils_1.qs('#SP_PLUS_INBL');
-                    bl.after(utils_1.ce('td', {
-                        class: 'table__cell',
-                        id: 'SP_PLUS_INBL',
-                        html: `<a href="#" class="stnd-link stnd-link_disabled" title="Загрузка"><span class="ico bp ico_spinner"></span> Загрузка</a>`,
-                        onclick: () => false
-                    }));
-                    bl.remove();
-                    getProfile(nickname);
-                    return false;
+            // Показать профиль, если он недоступен по причине пидорас (в чёрном списке)
+            if (blLink && !inBL) {
+                let button = utils_1.ce('td', {
+                    class: 'table__cell',
+                    id: 'SP_PLUS_INBL',
+                    html: `<a href="#" class="stnd-link" title="Показать профиль"><span class="sp sp-eye-grey"></span> Показать</a>`,
+                    onclick: () => {
+                        button.after(utils_1.ce('td', {
+                            class: 'table__cell',
+                            id: 'SP_PLUS_INBL',
+                            html: `<a href="#" class="stnd-link stnd-link_disabled" title="Загрузка"><span class="ico bp ico_spinner"></span> Загрузка</a>`,
+                            onclick: () => false
+                        }));
+                        button.remove();
+                        // получаем данные профиля через прокси запрос
+                        getProfile(nickname);
+                        return false;
+                    }
+                });
+                utils_1.inBefore(button, tdBlock[1]);
+                let clds = (_b = (_a = tdBlock[1]) === null || _a === void 0 ? void 0 : _a.parentElement) === null || _b === void 0 ? void 0 : _b.childNodes;
+                // 'width' is deprecated ???
+                for (let x in clds) {
+                    if (clds[x].nodeName === 'TD')
+                        clds[x].width = '25%';
                 }
-            });
-            utils_1.inBefore(bypassBL, tdBlock[1]);
-            let clds = (_b = (_a = tdBlock[1]) === null || _a === void 0 ? void 0 : _a.parentElement) === null || _b === void 0 ? void 0 : _b.childNodes;
-            for (let x in clds) {
-                if (clds[x].nodeName === 'TD')
-                    clds[x].width = '25%';
+                if (strings_1.OVERRIDE.NICKNAME === nickname)
+                    utils_1.qs('#SP_PLUS_INBL').click();
             }
-            if (strings_1.OVERRIDE.NICKNAME === nickname)
-                utils_1.qs('#SP_PLUS_INBL').click();
+            // Показать доступные ссылки в профиле, если он в бане
+            if (rsLink && !inBL2 && !utils_1.qs('#SP_LIST_LINK')) {
+                // костыль для получения ника пользователя
+                // иногда в ссылке бывает не ник, а его id
+                let nickname = utils_1.qs('#location_bar_1_0');
+                if (nickname.textContent !== null) {
+                    setUrls(utils_1.trim(nickname.textContent));
+                }
+            }
+        }
+        else {
+            // удаляем список ссылок
+            (_c = utils_1.qs('#SP_LIST_LINK')) === null || _c === void 0 ? void 0 : _c.remove();
         }
     }
     catch (e) {
@@ -2803,10 +2819,10 @@ const getProfile = async (nickname) => {
     }
     setContent(strings_1.OVERRIDE.CONTENT);
 };
-const setContent = (str) => {
+const setContent = (content) => {
     var _a, _b, _c;
     // Вставляем "новый" профиль
-    utils_1.qs('#main_content').innerHTML = str;
+    utils_1.qs('#main_content').innerHTML = content;
     // Костыль по восстановлению аватарки
     let avatar = utils_1.qs('img[data-s*="101.100.0"');
     // @ts-ignore
@@ -2819,6 +2835,52 @@ const setContent = (str) => {
     (_c = utils_1.qs(`a[href^="${strings_1.SPACES}/activity"`).parentElement) === null || _c === void 0 ? void 0 : _c.remove();
     // Удаляем кнопку "Написать"
     utils_1.qs('.btn-single__wrap').remove();
+};
+// Ссылки у заблокированного профиля
+const setUrls = (nickname) => {
+    const urls = [
+        {
+            'ico': 'forum',
+            'text': 'Темы и комментарии',
+            'path': '/forums/search_user/?query='
+        },
+        {
+            'ico': 'comm',
+            'text': 'Сообщества',
+            'path': '/comm/list/user/'
+        },
+        {
+            'ico': 'friends',
+            'text': 'Друзья',
+            'path': '/friends/?name='
+        },
+        {
+            'ico': 'readers',
+            'text': 'Читатели',
+            'path': '/lenta/readers/?user='
+        },
+        {
+            'ico': 'gifts',
+            'text': 'Подарки',
+            'path': '/gifts/user_list/'
+        }
+    ];
+    utils_1.qs('div.js-pending-item').append(utils_1.ce('div', {
+        id: 'SP_LIST_LINK',
+        class: 'widgets-group links-group'
+    }));
+    for (let url of urls) {
+        let link = utils_1.ce('a', {
+            href: strings_1.SPACES + url.path + nickname,
+            class: 'list-link stnd-link_arr list-link-darkblue c-darkblue',
+            html: `
+                <span class="js-ico  ico ico_${url.ico}"></span>
+                <span class="t js-text">${url.text}</span>
+                <span class="ico ico_arr"></span>
+            `
+        });
+        utils_1.qs('#SP_LIST_LINK').append(link);
+    }
 };
 
 
@@ -3855,40 +3917,40 @@ const setColor = () => {
             // цвета для быстрого выбора
             const colors = [
                 [
-                    "#90CAF9",
-                    "#80DEEA",
-                    "#A5D6A7",
-                    "#FFF59D",
-                    "#FFCC80",
-                    "#FFAB91",
-                    "#CE93D8"
+                    '#90CAF9',
+                    '#80DEEA',
+                    '#A5D6A7',
+                    '#FFF59D',
+                    '#FFCC80',
+                    '#FFAB91',
+                    '#CE93D8'
                 ],
                 [
-                    "#2196F3",
-                    "#00BCD4",
-                    "#4CAF50",
-                    "#FFEB3B",
-                    "#FF9800",
-                    "#F44336",
-                    "#9C27B0",
+                    '#2196F3',
+                    '#00BCD4',
+                    '#4CAF50',
+                    '#FFEB3B',
+                    '#FF9800',
+                    '#F44336',
+                    '#9C27B0',
                 ],
                 [
-                    "#1565C0",
-                    "#00838F",
-                    "#2E7D32",
-                    "#F9A825",
-                    "#EF6C00",
-                    "#C62828",
-                    "#6A1B9A"
+                    '#1565C0',
+                    '#00838F',
+                    '#2E7D32',
+                    '#F9A825',
+                    '#EF6C00',
+                    '#C62828',
+                    '#6A1B9A'
                 ],
                 [
-                    "#ECF0F1",
-                    "#CFD8DC",
-                    "#B0BEC5",
-                    "#97A6B0",
-                    "#546E7A",
-                    "#44565E",
-                    "#3A474C"
+                    '#ECF0F1',
+                    '#CFD8DC',
+                    '#B0BEC5',
+                    '#97A6B0',
+                    '#546E7A',
+                    '#44565E',
+                    '#3A474C'
                 ]
             ];
             for (let color of colors) {
