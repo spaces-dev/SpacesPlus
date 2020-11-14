@@ -754,7 +754,7 @@ exports.friendsOnline = (t) => {
                                         }
                                         for (let i = 0; i < lengthList; i++) {
                                             frOnDiv.appendChild(utils_1.ce('a', {
-                                                href: `${strings_1.SPACES}/mysite/${friendsList[i].name}`,
+                                                href: `${strings_1.SPACES}/mysite/index/${friendsList[i].name}`,
                                                 class: 'li',
                                                 html: (disableAvatar ?
                                                     `<span class="comm_ava m for_avatar"><img src="${friendsList[i].avatar.previewURL}" class="preview s21_20"></span>` : '') +
@@ -1041,11 +1041,11 @@ const init = () => {
      * ! Технические функции
      * ? Срабатывают один раз после загрузки страницы
      */
-    components_1.setStyles();
     components_1.firstLaunch();
     components_1.checkUpdates();
     components_1.sidebarButton();
     utils_1.readSettings();
+    components_1.setStyles();
     /**
      * ? Тут перечислены функции, которые срабатывают единоразово
      * ? далее их изменения отслеживаются в components/settingsMenu.ts
