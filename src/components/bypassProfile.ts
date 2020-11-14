@@ -66,17 +66,13 @@ export const bypassProfile = () => {
                 // фикс двойного бордера
                 qs('div.user__tools').style.borderTop = 'none'
 
-                // костыль для получения ника пользователя
-                // иногда в ссылке бывает не ник, а его id
-                let nickname = qs('#location_bar_1_0')
-
-                if (nickname.textContent !== null) {
-                    setUrls(
-                        trim(nickname.textContent),
-                        blackListLink,
-                        rulesLink
-                    )
-                }
+                setUrls(
+                    // костыль для получения ника пользователя
+                    // иногда в ссылке бывает не ник, а его id
+                    trim(qs('#location_bar_1_0').textContent),
+                    blackListLink,
+                    rulesLink
+                )
             }
         } else {
             // удаляем список ссылок
@@ -87,7 +83,6 @@ export const bypassProfile = () => {
         error('Ошибка (bypassProfile.ts): ' + e)
     }
 }
-
 
 // выполняем CORS запрос и получаем HTML профиля
 // https://gist.github.com/crashmax-off/5cf3ce71d784924c8c9c6843bf5ff7df

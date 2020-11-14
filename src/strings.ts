@@ -1,7 +1,8 @@
 import pkg from '../package.json'
 
-import { IFirebase } from './interfaces/Firebase'
+import { IData } from './interfaces/Data'
 import { IDevice } from './interfaces/Device'
+import { IFirebase } from './interfaces/Firebase'
 
 /**
  * Константы
@@ -78,23 +79,15 @@ const FirebaseConfig: IFirebase = {
     appId: '1:855455546501:web:89bbef7d9a9a03b3c2fdec'
 }
 
-interface IData {
-    CK: string | null
-    BANNED: string | null
-    ONLINE: string | null
-    FAVORITE: string | null
-    NICKNAME: string | null
-    CONTENT: string | null
-    EVENTS: number
-    PLAYER: number
-    VERSION: number
-}
-
 /**
  * Временное хранилище данных
  */
 const DATA: IData = {
-    CK: null,
+    // наш CK
+    CK: '',
+    // наш Никнейм
+    USERNAME: '',
+
     BANNED: null,
     ONLINE: null,
     FAVORITE: null,
@@ -102,6 +95,8 @@ const DATA: IData = {
     CONTENT: null,
     EVENTS: 0,
     PLAYER: 0,
+
+    // версия из package.json
     VERSION: Number(PKG_VERSION.split('.').join(''))
 }
 

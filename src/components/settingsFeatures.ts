@@ -41,7 +41,7 @@ export const settingsFeatures = (root: Element) => {
         id: 'sp_spacesAction_beta',
         html: btnWrap(beta ?
             '<span class="sp sp-exit-grey mr-14"></span>Выйти из песочницы' :
-            '<span class="sp sp-enter-grey mr-14"></span>Beta-песочница<span> - открытое тестирование нововведений сайта'),
+            '<span class="sp sp-enter-grey mr-14"></span>Войти в песочницу'),
         onclick: () => {
             beta ? delCookie('sandbox') : setCookie('sandbox', 'beta')
             document.location.reload()

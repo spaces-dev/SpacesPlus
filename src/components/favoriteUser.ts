@@ -3,6 +3,7 @@ import {
     qs,
     qsa,
     http,
+    trim,
     error,
     getPath,
     getHref,
@@ -21,7 +22,12 @@ export const favoriteUser = async () => {
         index = getPath(2),
         nickname = getPath(3)
 
-    if ((method === 'mysite' || (method === 'anketa' && index !== 'edit') || method === 'activity') && DATA.FAVORITE !== href) {
+    if ((method === 'mysite' ||
+        (method === 'anketa' && index !== 'edit') ||
+        method === 'activity') &&
+        DATA.FAVORITE !== href &&
+        DATA.USERNAME !== trim(qs('#location_bar_1_0').textContent)) {
+
         DATA.FAVORITE = href
 
         try {

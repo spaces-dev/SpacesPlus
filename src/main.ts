@@ -49,8 +49,13 @@ import { _SETTINGS } from './settings'
             http<ISessionCheck>('POST', `${SPACES}/api/session/check`, false).then(e => {
                 if (e.status === 200 && e.parsedBody) {
                     if (userStatus(e.parsedBody.code)) {
-                        // Временно храним CK для работы функций
+
+                        // Временно храним ник
+                        DATA.USERNAME = e.parsedBody?.attributes.name
+
+                        // Временно храним CK
                         DATA.CK = e.parsedBody?.attributes.CK
+
                         // Инициализируем работу
                         init()
                     } else {
