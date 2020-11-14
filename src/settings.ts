@@ -1,4 +1,4 @@
-import { SPACES, ENV_PATH, OVERRIDE } from './strings'
+import { SPACES, ENV_PATH, DATA } from './strings'
 
 import { ISettings, ISetStrings } from './interfaces/Settings'
 
@@ -93,7 +93,7 @@ export let _SETTINGS: ISettings = {
     'sticker': true,
     'playback': true,
     'videoSpeed': 1,
-    'upVersion': OVERRIDE.VERSION,
+    'upVersion': DATA.VERSION,
     'beta': false,
     'hideNotify': {
         'configImport': false

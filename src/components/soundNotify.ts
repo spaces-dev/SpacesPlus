@@ -7,7 +7,7 @@ import {
     notification
 } from '../utils'
 
-import { OVERRIDE } from '../strings'
+import { DATA } from '../strings'
 import { _SETTINGS } from '../settings'
 
 export const soundNotify = () => {
@@ -27,7 +27,7 @@ export const soundNotify = () => {
             if (notif[i] && _SETTINGS.notifySet[i] && notif[i].innerHTML !== '' && !isNaN(notif[i].innerHTML)) { counter = counter + parseInt(notif[i].innerHTML, 10) }
         }
 
-        if (counter > OVERRIDE.EVENTS) {
+        if (counter > DATA.EVENTS) {
 
             // звук уведомления
             playSound(_SETTINGS.notifySet.url, _SETTINGS.notifySet.volume)
@@ -37,9 +37,9 @@ export const soundNotify = () => {
             // создаем новое уведомление
             notification(`${toUpper(string)} на Spaces!`, `У Вас ${counter} ${string}!`, 5)
 
-            OVERRIDE.EVENTS = counter
-        } else if (counter < OVERRIDE.EVENTS) {
-            OVERRIDE.EVENTS = counter
+            DATA.EVENTS = counter
+        } else if (counter < DATA.EVENTS) {
+            DATA.EVENTS = counter
         }
     } catch (e) {
         error('Ошибка (soundEvents.ts): ' + e)

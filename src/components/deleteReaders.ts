@@ -12,7 +12,7 @@ import {
     insertAfter
 } from '../utils'
 
-import { SPACES, OVERRIDE } from '../strings'
+import { SPACES, DATA } from '../strings'
 
 /**
  * TODO: Типизировать поля!
@@ -96,7 +96,7 @@ export const deleteReaders = () => {
 
                                     for (let reader of readers) {
                                         messageBox(`Осталось удалить ${count--} из ${allCount} ${declStr(count)}`, 'Подождите немного... <span style="padding-right: 10px" class="ico ico_spinner"></span>', false)
-                                        await http('POST', `${SPACES}/lenta/reader_delete/?user=${reader}`, false, `&CK=${OVERRIDE.CK}&cfms=Удалить`)
+                                        await http('POST', `${SPACES}/lenta/reader_delete/?user=${reader}`, false, `&CK=${DATA.CK}&cfms=Удалить`)
                                     }
 
                                     document.location.reload()

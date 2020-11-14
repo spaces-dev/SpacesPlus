@@ -13,7 +13,7 @@ import {
 import { IBookmarks } from '../interfaces/Bookmarks'
 import { IUserAnketa } from '../interfaces/Mysite'
 
-import { SPACES, OVERRIDE } from '../strings'
+import { SPACES, DATA } from '../strings'
 
 export const favoriteUser = async () => {
     let href = getHref(),
@@ -21,8 +21,8 @@ export const favoriteUser = async () => {
         index = getPath(2),
         nickname = getPath(3)
 
-    if ((method === 'mysite' || (method === 'anketa' && index !== 'edit') || method === 'activity') && OVERRIDE.FAVORITE !== href) {
-        OVERRIDE.FAVORITE = href
+    if ((method === 'mysite' || (method === 'anketa' && index !== 'edit') || method === 'activity') && DATA.FAVORITE !== href) {
+        DATA.FAVORITE = href
 
         try {
             let inFavorite = qs('#SP_PLUS_INFAVORITE'),
@@ -39,7 +39,7 @@ export const favoriteUser = async () => {
                             html: `<a href="${SPACES}/bookmarks/add/?object_id=${json.id}&object_type=11" class="stnd-link" title="Добавить в закладки"><span class="sp sp-fav"></span> B закладки</a>`,
                             onclick: () => {
                                 confirmBox(`Добавить пользователя <b>${json.name}</b> в закладки?`, false, async () => {
-                                    await http('POST', `${SPACES}/ajax/bookmarks/add/`, false, `object_id=${json.id}&object_type=11&show_all_tags_state=0&new_tags=Люди&cfms=Добавить&CK=${OVERRIDE.CK}`).then(e => {
+                                    await http('POST', `${SPACES}/ajax/bookmarks/add/`, false, `object_id=${json.id}&object_type=11&show_all_tags_state=0&new_tags=Люди&cfms=Добавить&CK=${DATA.CK}`).then(e => {
                                         e.status === 200 ?
                                             isFav(json.id, json.name, favoriteButton) :
                                             console.log(e)
@@ -64,7 +64,7 @@ export const favoriteUser = async () => {
         method !== 'mysite' &&
         method !== 'anketa' &&
         method !== 'activity') {
-        OVERRIDE.FAVORITE = null
+        DATA.FAVORITE = null
     }
 }
 

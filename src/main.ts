@@ -35,7 +35,7 @@ import { qs, http, error, readSettings } from './utils'
 
 import { ISessionCheck } from './interfaces/SessionCheck'
 
-import { SPACES, BASE_URL, DEVICE, OVERRIDE } from './strings'
+import { SPACES, BASE_URL, DEVICE, DATA } from './strings'
 import { _SETTINGS } from './settings'
 
 /**
@@ -50,7 +50,7 @@ import { _SETTINGS } from './settings'
                 if (e.status === 200 && e.parsedBody) {
                     if (userStatus(e.parsedBody.code)) {
                         // Временно храним CK для работы функций
-                        OVERRIDE.CK = e.parsedBody?.attributes.CK
+                        DATA.CK = e.parsedBody?.attributes.CK
                         // Инициализируем работу
                         init()
                     } else {

@@ -13,7 +13,7 @@ import {
 import { IProxy } from '../interfaces/Proxy'
 import { IUserProfile } from '../interfaces/Mysite'
 
-import { SPACES, BASE_URL, OVERRIDE } from '../strings'
+import { SPACES, BASE_URL, DATA } from '../strings'
 
 export const bypassProfile = () => {
     try {
@@ -57,7 +57,7 @@ export const bypassProfile = () => {
                 // 'width' is deprecated ???
                 for (let x in clds) { if (clds[x].nodeName === 'TD') (clds[x] as HTMLTableCellElement).width = '25%' }
 
-                if (OVERRIDE.NICKNAME === nickname) qs('#SP_PLUS_INBL').click()
+                if (DATA.NICKNAME === nickname) qs('#SP_PLUS_INBL').click()
             }
 
             // Показать доступные ссылки в профиле, если он в бане
@@ -93,47 +93,44 @@ export const bypassProfile = () => {
 // https://gist.github.com/crashmax-off/5cf3ce71d784924c8c9c6843bf5ff7df
 const getProfile = async (nickname: string) => {
 
-    if (OVERRIDE.NICKNAME !== nickname || OVERRIDE.CONTENT === undefined) {
+    if (DATA.NICKNAME !== nickname || DATA.CONTENT === undefined) {
 
         // запоминает ник
-        OVERRIDE.NICKNAME = nickname
+        DATA.NICKNAME = nickname
 
         await http<IProxy<IUserProfile>>('GET', `https://crashmax.ru/api/proxy?url=${SPACES}/ajax/mysite/index/${nickname}/`, false).then(e => {
             let status = e.parsedBody?.status.http_code
 
             if (status === 200) {
                 // Заменяем уебанские домены на пользовательский
-                OVERRIDE.CONTENT = e.parsedBody!.contents.content.replace(/spac1\.net|spaces-blogs\.com/gi, str => str = BASE_URL)
+                DATA.CONTENT = e.parsedBody!.contents.content.replace(/spac1\.net|spaces-blogs\.com/gi, str => str = BASE_URL)
             } else {
                 messageBox('Просмотр профилей', 'Ошибка загрузки профиля! Обратитесь к разработчику', true)
             }
         })
     }
 
-    setContent(OVERRIDE.CONTENT)
-}
+    if (DATA.CONTENT !== null) {
+        // Вставляем "новый" профиль
+        qs('#main_content').innerHTML = DATA.CONTENT
 
-const setContent = (content: string) => {
+        // Костыль по восстановлению аватарки
+        let avatar = qs('img[data-s*="101.100.0"')
+        // @ts-ignore
+        avatar.src = avatar.dataset.s
 
-    // Вставляем "новый" профиль
-    qs('#main_content').innerHTML = content
+        // Удаляем ненужную панель c кнопками
+        qs('.user__tools').remove()
 
-    // Костыль по восстановлению аватарки
-    let avatar = qs('img[data-s*="101.100.0"')
-    // @ts-ignore
-    avatar.src = avatar.dataset.s
+        // Удаляем кнопку "Сделать подарок"
+        qs('span[class$="ico_gifts"').parentElement?.parentElement?.remove()
 
-    // Удаляем ненужную панель c кнопками
-    qs('.user__tools').remove()
+        // Удаляем вкладку "Активности"
+        qs(`a[href^="${SPACES}/activity"`).parentElement?.remove()
 
-    // Удаляем кнопку "Сделать подарок"
-    qs('span[class$="ico_gifts"').parentElement?.parentElement?.remove()
-
-    // Удаляем вкладку "Активности"
-    qs(`a[href^="${SPACES}/activity"`).parentElement?.remove()
-
-    // Удаляем кнопку "Написать"
-    qs('.btn-single__wrap').remove()
+        // Удаляем кнопку "Написать"
+        qs('.btn-single__wrap').remove()
+    }
 }
 
 // Ссылки у заблокированного профиля

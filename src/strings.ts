@@ -78,22 +78,35 @@ const FirebaseConfig: IFirebase = {
     appId: '1:855455546501:web:89bbef7d9a9a03b3c2fdec'
 }
 
+interface IData {
+    CK: string | null
+    BANNED: string | null
+    ONLINE: string | null
+    FAVORITE: string | null
+    NICKNAME: string | null
+    CONTENT: string | null
+    EVENTS: number
+    PLAYER: number
+    VERSION: number
+}
+
 /**
  * Временное хранилище данных
  */
-class OVERRIDE {
-    static CK: string
-    static BANNED: string | null
-    static ONLINE: string | null
-    static FAVORITE: string | null
-    static NICKNAME: string | null
-    static CONTENT: string
-    static EVENTS: number = 0
-    static PLAYER: number = 0
-    static VERSION: number = Number(PKG_VERSION.split('.').join(''))
+const DATA: IData = {
+    CK: null,
+    BANNED: null,
+    ONLINE: null,
+    FAVORITE: null,
+    NICKNAME: null,
+    CONTENT: null,
+    EVENTS: 0,
+    PLAYER: 0,
+    VERSION: Number(PKG_VERSION.split('.').join(''))
 }
 
 export {
+    DATA,
     HTTP,
     DEVICE,
     GITHUB,
@@ -101,7 +114,6 @@ export {
     DOMAINS,
     BASE_URL,
     ENV_PATH,
-    OVERRIDE,
     REVISION,
     BASE_PATH,
     PKG_VERSION,

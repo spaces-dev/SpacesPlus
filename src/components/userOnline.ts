@@ -2,21 +2,21 @@ import { qsa, http, getPath, info, error } from '../utils'
 
 import { IUserAnketa } from '../interfaces/Mysite'
 
-import { SPACES, OVERRIDE } from '../strings'
+import { SPACES, DATA } from '../strings'
 
 export const userOnline = () => {
     let path = getPath()
     let nick = getPath(3)
     let target = `/anketa/index/${nick}/`
 
-    if (path !== target) OVERRIDE.ONLINE = null
+    if (path !== target) DATA.ONLINE = null
 
-    if (path === target && OVERRIDE.ONLINE !== nick) {
+    if (path === target && DATA.ONLINE !== nick) {
         try {
             let onBlock = Array.from(qsa('div.info-item__title')).filter(e => e.textContent === 'Время онлайн:')
 
             if (nick && onBlock) {
-                OVERRIDE.ONLINE = nick
+                DATA.ONLINE = nick
 
                 http<IUserAnketa>('GET', `${SPACES}/anketa/index/${nick}/`, true).then(e => {
                     const response = e.parsedBody?.user_widget?.online_time

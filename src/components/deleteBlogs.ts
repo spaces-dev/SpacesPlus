@@ -12,7 +12,7 @@ import {
     insertAfter
 } from '../utils'
 
-import { SPACES, OVERRIDE } from '../strings'
+import { SPACES, DATA } from '../strings'
 
 /**
  * TODO: Типизировать поля!
@@ -104,7 +104,7 @@ export const deleteBlogs = () => {
 
                                 for (let blog of blogs) {
                                     messageBox(`Осталось удалить ${count--} из ${allCount} ${declStr(count)}`, 'Подождите немного... <span style="padding-right: 10px" class="ico ico_spinner"></span>', false)
-                                    await http('GET', `${SPACES}/diary/delete/?CK=${OVERRIDE.CK}&id=${blog}&Sure=1`, true)
+                                    await http('GET', `${SPACES}/diary/delete/?CK=${DATA.CK}&id=${blog}&Sure=1`, true)
                                 }
 
                                 document.location.reload()
