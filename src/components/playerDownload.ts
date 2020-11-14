@@ -7,7 +7,7 @@ import {
     insertAfter
 } from '../utils'
 
-import { OVERRIDE } from '../strings'
+import { DATA } from '../strings'
 
 export const playerDownload = () => {
 
@@ -24,22 +24,22 @@ export const playerDownload = () => {
 
             trId = parseInt(jstr.id, 10)
             let trScr = jspl.playlist.playlist[trId].src
-            let tdIc = qsa('td.ico_td')
+            let tdIc = qs('a.js-music_repeat')
 
             if (tdIc && !downPlace) {
-                OVERRIDE.PLAYER = trId
+                DATA.PLAYER = trId
                 let dwnTd = ce('td', {
                     id: 'SP_MUSIC_DOWN',
                     class: 'ico_td',
                     innerHTML: '<span style="margin: 0px 6px 0px 0px !important" class="sp sp-download-darkblue" title="Скачать"></span>',
-                    onclick: () => { location.href = trScr }
+                    onclick: () => location.href = trScr
                 })
 
-                insertAfter(dwnTd, tdIc[0])
-            } else if (downPlace && OVERRIDE.PLAYER !== trId) {
-                OVERRIDE.PLAYER = trId
+                insertAfter(dwnTd, tdIc.parentElement)
+            } else if (downPlace && DATA.PLAYER !== trId) {
+                DATA.PLAYER = trId
                 info('Обновили ссылку на трек!')
-                downPlace.onclick = () => { location.href = trScr }
+                downPlace.onclick = () => location.href = trScr
             }
         }
     } catch (e) {
