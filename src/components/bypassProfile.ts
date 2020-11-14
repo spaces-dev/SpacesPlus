@@ -19,16 +19,16 @@ export const bypassProfile = () => {
     try {
 
         let tdBlock = qsa('td.table__cell_last'),
-            blLink = qs(`a[href^="${SPACES}/blacklist/"`),
-            rsLink = qs(`a[href^="${SPACES}/info/rules/"`),
-            inBL = qs('#SP_PLUS_INBL'),
-            inBL2 = qs('#SP_PLUS_INBL2')
+            blackListLink = qs(`a[href^="${SPACES}/blacklist/"`),
+            rulesLink = qs(`a[href^="${SPACES}/info/rules/"`),
+            noAccessIco = qs('div.ico_noaccess_xlarge'),
+            inButton = qs('#SP_PLUS_INBL')
 
         if (getPath(1) === 'mysite' && tdBlock) {
             let nickname = getPath(3)
 
             // Показать профиль, если он недоступен по причине пидорас (в чёрном списке)
-            if (blLink && !inBL) {
+            if (blackListLink && !inButton) {
 
                 let button = ce('td', {
                     class: 'table__cell',
@@ -61,14 +61,21 @@ export const bypassProfile = () => {
             }
 
             // Показать доступные ссылки в профиле, если он в бане
-            if (rsLink && !inBL2 && !qs('#SP_LIST_LINK')) {
+            if ((rulesLink || noAccessIco) && !blackListLink && !qs('#SP_LIST_LINK')) {
+
+                // фикс двойного бордера
+                qs('div.user__tools').style.borderTop = 'none'
 
                 // костыль для получения ника пользователя
                 // иногда в ссылке бывает не ник, а его id
                 let nickname = qs('#location_bar_1_0')
 
                 if (nickname.textContent !== null) {
-                    setUrls(trim(nickname.textContent))
+                    setUrls(
+                        trim(nickname.textContent),
+                        blackListLink,
+                        rulesLink
+                    )
                 }
             }
         } else {
@@ -130,49 +137,83 @@ const setContent = (content: string) => {
 }
 
 // Ссылки у заблокированного профиля
-const setUrls = (nickname: string) => {
+const setUrls = (e: string, lnk1: HTMLElement, lnk2: HTMLElement) => {
 
-    const urls = [
+    let urls = [
         {
             'ico': 'forum',
             'text': 'Темы и комментарии',
-            'path': '/forums/search_user/?query='
+            'path': `/forums/search_user/?query=${e}`
         },
         {
             'ico': 'comm',
             'text': 'Сообщества',
-            'path': '/comm/list/user/'
+            'path': `/comm/list/user/${e}`
         },
         {
             'ico': 'friends',
             'text': 'Друзья',
-            'path': '/friends/?name='
+            'path': `/friends/?name=${e}`
         },
         {
             'ico': 'readers',
             'text': 'Читатели',
-            'path': '/lenta/readers/?user='
+            'path': `/lenta/readers/?user=${e}`
         },
         {
             'ico': 'gifts',
             'text': 'Подарки',
-            'path': '/gifts/user_list/'
+            'path': `/gifts/user_list/${e}`
         }
     ]
+
+    let urls2 = [
+        {
+            'ico': 'blog',
+            'text': 'Личный блог',
+            'path': `/diary/view/user/${e}/list/-/`
+        },
+        {
+            'ico': 'photo',
+            'text': 'Фотографии',
+            'path': `/pictures/user/${e}/list/-/`
+        },
+        {
+            'ico': 'music',
+            'text': 'Музыка',
+            'path': `/music/user/${e}/list/-/`
+        },
+        {
+            'ico': 'video',
+            'text': 'Видео',
+            'path': `/video/user/${e}/list/-/`
+        },
+        {
+            'ico': 'file',
+            'text': 'Файлы',
+            'path': `/files/user/${e}/list/-/`
+        }
+    ]
+
+    // конкатим второй массив, если аккаунт покинут
+    if (lnk1 === null && lnk2 === null) urls = urls2.concat(urls)
 
     qs('div.js-pending-item').append(ce('div', {
         id: 'SP_LIST_LINK',
         class: 'widgets-group links-group'
     }))
 
+    // создаем ссылки
     for (let url of urls) {
 
+        let { ico, text, path } = url
+
         let link = ce('a', {
-            href: SPACES + url.path + nickname,
+            href: SPACES + path,
             class: 'list-link stnd-link_arr list-link-darkblue c-darkblue',
             html: `
-                <span class="js-ico  ico ico_${url.ico}"></span>
-                <span class="t js-text">${url.text}</span>
+                <span class="js-ico  ico ico_${ico}"></span>
+                <span class="t js-text">${text}</span>
                 <span class="ico ico_arr"></span>
             `
         })
