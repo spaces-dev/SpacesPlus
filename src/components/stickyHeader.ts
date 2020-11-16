@@ -1,46 +1,58 @@
 import { qs, css, error } from '../utils'
 
 export const stickyHeader = (b: boolean) => {
-    let wrapAll = qs('#wrap_all')
-    let leftNav = qs('#left_nav')
-    let header = qs('#header_elements')
-    let mainShadow = qs('#main_shadow')
-    let infoBlock = qs('#top_info_block')
-    let sidebarLogo = qs('div.sidebar-logo')
-
     try {
+
+        let wrapAll = qs('#wrap_all'),
+            leftNav = qs('#left_nav'),
+            header = qs('#header_elements'),
+            mainShadow = qs('#main_shadow'),
+            infoBlock = qs('#top_info_block'),
+            sidebarLogo = qs('div.sidebar-logo')
+
         if (b && !header.hasAttribute('sp-sticky-header')) {
 
-            // опускаем основной контейнер
-            css(mainShadow, 'padding-top: 45px')
+            // отслеживаем изменения размеров страницы
+            const resizeBody = new ResizeObserver(e => {
 
-            // фиксированное положение блока (при смене версии сайта)
-            css(infoBlock, `
-                position: fixed;
-                width: ${mainShadow.clientWidth}px;
-                z-index: 9999
-            `)
+                window.requestAnimationFrame(() => {
+                    if (!Array.isArray(e) || !e.length) {
+                        return
+                    }
 
-            // стили для логотипа
-            css(sidebarLogo, `
-                position: fixed;
-                width: ${leftNav.clientWidth + 1}px;
-                left: ${wrapAll.offsetLeft}px;
-                top: 0px;
-                box-shadow: 0px 2px 2px rgba(93,109,157,0.2);
-                z-index: 9999
-            `)
+                    // опускаем основной контейнер
+                    css(mainShadow, 'padding-top: 45px')
 
-            // стили для шапки
-            css(header, `
-                position: fixed;
-                width: ${mainShadow.clientWidth - leftNav.clientWidth + 1}px;
-                left: ${wrapAll.offsetLeft + leftNav.clientWidth}px;
-                top: 0px;
-                box-shadow: 0px 2px 2px rgba(93,109,157,0.2);
-                z-index: 9999
-            `)
+                    // фиксированное положение блока (при смене версии сайта)
+                    css(infoBlock, `
+                        position: fixed;
+                        width: ${mainShadow.clientWidth}px;
+                        z-index: 9999
+                    `)
 
+                    // стили для логотипа
+                    css(sidebarLogo, `
+                        position: fixed;
+                        width: ${leftNav.clientWidth + 1}px;
+                        left: ${wrapAll.offsetLeft}px;
+                        top: 0px;
+                        box-shadow: 0px 2px 2px rgba(93,109,157,0.2);
+                        z-index: 9999
+                    `)
+
+                    // стили для шапки
+                    css(header, `
+                        position: fixed;
+                        width: ${mainShadow.clientWidth - leftNav.clientWidth + 1}px;
+                        left: ${wrapAll.offsetLeft + leftNav.clientWidth}px;
+                        top: 0px;
+                        box-shadow: 0px 2px 2px rgba(93,109,157,0.2);
+                        z-index: 9999
+                    `)
+                })
+            })
+
+            resizeBody.observe(document.body)
             header.setAttribute('sp-sticky-header', '1')
         } else if (header.hasAttribute('sp-sticky-header')) {
 
