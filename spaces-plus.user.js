@@ -1382,7 +1382,7 @@ exports.delCookie = (name) => setCookie_1.setCookie(name, null, { expires: -1 })
 /* 24 */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"name\":\"spaces-plus\",\"description\":\"🚀 Powerful userscript for Spaces.ru\",\"homepage\":\"https://spaces-dev.github.io/SpacesPlus\",\"version\":\"3.1.1\",\"author\":{\"name\":\"Vitalij Ryndin\",\"email\":\"sys@crashmax.ru\",\"url\":\"https://crashmax.ru\"},\"scripts\":{\"dev\":\"cross-env NODE_ENV=development webpack-dev-server --config-name main --host localhost --watch-poll\",\"build\":\"cross-env NODE_ENV=production webpack --progress\"},\"devDependencies\":{\"@types/node\":\"^14.11.8\",\"@types/webpack\":\"^4.41.22\",\"@types/webpack-dev-server\":\"^3.11.0\",\"clean-webpack-plugin\":\"^3.0.0\",\"copy-webpack-plugin\":\"^6.2.1\",\"cross-env\":\"^7.0.2\",\"optimize-css-assets-webpack-plugin\":\"^5.0.4\",\"ts-loader\":\"^8.0.4\",\"ts-node\":\"^9.0.0\",\"typescript\":\"^4.0.2\",\"webpack\":\"^4.44.2\",\"webpack-cli\":\"^3.3.12\",\"webpack-dev-server\":\"^3.11.0\",\"webpack-userscript\":\"^2.5.6\",\"webpack-zip-files-plugin\":\"^1.0.0\"}}");
+module.exports = JSON.parse("{\"name\":\"spaces-plus\",\"description\":\"🚀 Powerful userscript for Spaces.ru\",\"homepage\":\"https://spaces-dev.github.io/SpacesPlus\",\"version\":\"3.1.1\",\"author\":{\"name\":\"Vitalij Ryndin\",\"email\":\"sys@crashmax.ru\",\"url\":\"https://crashmax.ru\"},\"scripts\":{\"dev\":\"cross-env NODE_ENV=development webpack-dev-server --config-name main --host localhost --watch-poll\",\"build\":\"cross-env NODE_ENV=production webpack --progress\"},\"devDependencies\":{\"@types/node\":\"^14.11.8\",\"@types/webpack\":\"^4.41.22\",\"@types/webpack-dev-server\":\"^3.11.0\",\"clean-webpack-plugin\":\"^3.0.0\",\"copy-webpack-plugin\":\"^6.2.1\",\"cross-env\":\"^7.0.2\",\"optimize-css-assets-webpack-plugin\":\"^5.0.4\",\"ts-loader\":\"^8.0.4\",\"ts-node\":\"^9.0.0\",\"typescript\":\"^4.0.2\",\"webpack\":\"^4.44.2\",\"webpack-cli\":\"^3.3.12\",\"webpack-dev-server\":\"^3.11.0\",\"webpack-userscript\":\"^2.5.6\",\"webpack-zip-files-plugin\":\"^1.0.0\"},\"dependencies\":{\"@types/resize-observer-browser\":\"^0.1.4\"}}");
 
 /***/ }),
 /* 25 */
@@ -2700,40 +2700,44 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.stickyHeader = void 0;
 const utils_1 = __webpack_require__(0);
 exports.stickyHeader = (b) => {
-    let wrapAll = utils_1.qs('#wrap_all');
-    let leftNav = utils_1.qs('#left_nav');
-    let header = utils_1.qs('#header_elements');
-    let mainShadow = utils_1.qs('#main_shadow');
-    let infoBlock = utils_1.qs('#top_info_block');
-    let sidebarLogo = utils_1.qs('div.sidebar-logo');
     try {
+        let wrapAll = utils_1.qs('#wrap_all'), leftNav = utils_1.qs('#left_nav'), header = utils_1.qs('#header_elements'), mainShadow = utils_1.qs('#main_shadow'), infoBlock = utils_1.qs('#top_info_block'), sidebarLogo = utils_1.qs('div.sidebar-logo');
         if (b && !header.hasAttribute('sp-sticky-header')) {
-            // опускаем основной контейнер
-            utils_1.css(mainShadow, 'padding-top: 45px');
-            // фиксированное положение блока (при смене версии сайта)
-            utils_1.css(infoBlock, `
-                position: fixed;
-                width: ${mainShadow.clientWidth}px;
-                z-index: 9999
-            `);
-            // стили для логотипа
-            utils_1.css(sidebarLogo, `
-                position: fixed;
-                width: ${leftNav.clientWidth + 1}px;
-                left: ${wrapAll.offsetLeft}px;
-                top: 0px;
-                box-shadow: 0px 2px 2px rgba(93,109,157,0.2);
-                z-index: 9999
-            `);
-            // стили для шапки
-            utils_1.css(header, `
-                position: fixed;
-                width: ${mainShadow.clientWidth - leftNav.clientWidth + 1}px;
-                left: ${wrapAll.offsetLeft + leftNav.clientWidth}px;
-                top: 0px;
-                box-shadow: 0px 2px 2px rgba(93,109,157,0.2);
-                z-index: 9999
-            `);
+            // отслеживаем изменения размеров страницы
+            const resizeBody = new ResizeObserver(e => {
+                window.requestAnimationFrame(() => {
+                    if (!Array.isArray(e) || !e.length) {
+                        return;
+                    }
+                    // опускаем основной контейнер
+                    utils_1.css(mainShadow, 'padding-top: 45px');
+                    // фиксированное положение блока (при смене версии сайта)
+                    utils_1.css(infoBlock, `
+                        position: fixed;
+                        width: ${mainShadow.clientWidth}px;
+                        z-index: 9999
+                    `);
+                    // стили для логотипа
+                    utils_1.css(sidebarLogo, `
+                        position: fixed;
+                        width: ${leftNav.clientWidth + 1}px;
+                        left: ${wrapAll.offsetLeft}px;
+                        top: 0px;
+                        box-shadow: 0px 2px 2px rgba(93,109,157,0.2);
+                        z-index: 9999
+                    `);
+                    // стили для шапки
+                    utils_1.css(header, `
+                        position: fixed;
+                        width: ${mainShadow.clientWidth - leftNav.clientWidth + 1}px;
+                        left: ${wrapAll.offsetLeft + leftNav.clientWidth}px;
+                        top: 0px;
+                        box-shadow: 0px 2px 2px rgba(93,109,157,0.2);
+                        z-index: 9999
+                    `);
+                });
+            });
+            resizeBody.observe(document.body);
             header.setAttribute('sp-sticky-header', '1');
         }
         else if (header.hasAttribute('sp-sticky-header')) {
