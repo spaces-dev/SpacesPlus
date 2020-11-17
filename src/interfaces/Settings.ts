@@ -44,6 +44,7 @@ export interface ISettings {
     comments: boolean
     readersd: boolean
     blogsd: boolean
+    blockedfiles: boolean
     oldheader: boolean
     playerdn: boolean
     dredirect: boolean

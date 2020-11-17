@@ -12,6 +12,7 @@ import {
     karmaAccept,
     soundNotify,
     betaFeatures,
+    blockedFiles,
     checkUpdates,
     favoriteUser,
     freeStickers,
@@ -122,6 +123,7 @@ const init = () => {
         if (_SETTINGS.dredirect) disableRedirect()
         if (_SETTINGS.playback) videoSpeedPlayback()
         if (_SETTINGS.blogsd || BASE_URL === 'spaces-blogs.com') deleteBlogs()
+        if (_SETTINGS.blockedfiles || BASE_URL === 'spac1.net') blockedFiles()
         settingsMenu()
     }, 200)
 }

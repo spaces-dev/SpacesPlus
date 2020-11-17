@@ -11,6 +11,7 @@ import { firstLaunch } from './firstLaunch'
 import { karmaAccept } from './karmaAccept'
 import { soundNotify } from './soundNotify'
 import { betaFeatures } from './betaFeatures'
+import { blockedFiles } from './blockedFiles'
 import { favoriteUser } from './favoriteUser'
 import { freeStickers } from './freeStickers'
 import { recentSmiles } from './recentSmiles'
@@ -53,6 +54,7 @@ export {
     karmaAccept,
     soundNotify,
     betaFeatures,
+    blockedFiles,
     checkUpdates,
     favoriteUser,
     freeStickers,
