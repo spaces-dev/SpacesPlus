@@ -14,6 +14,7 @@
     },
     "devDependencies": {
         "@types/node": "^14.11.8",
+        "@types/resize-observer-browser": "^0.1.4",
         "@types/webpack": "^4.41.22",
         "@types/webpack-dev-server": "^3.11.0",
         "clean-webpack-plugin": "^3.0.0",
@@ -28,8 +29,5 @@
         "webpack-dev-server": "^3.11.0",
         "webpack-userscript": "^2.5.6",
         "webpack-zip-files-plugin": "^1.0.0"
-    },
-    "dependencies": {
-        "@types/resize-observer-browser": "^0.1.4"
     }
 }
