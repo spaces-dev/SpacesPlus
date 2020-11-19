@@ -42,6 +42,6 @@ export const soundNotify = () => {
             DATA.EVENTS = counter
         }
     } catch (e) {
-        error('Ошибка (soundEvents.ts): ' + e)
+        error('soundEvents.ts', e)
     }
 }

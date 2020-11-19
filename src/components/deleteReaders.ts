@@ -3,6 +3,7 @@ import {
     qs,
     qsa,
     http,
+    info,
     error,
     getPath,
     getParams,
@@ -96,7 +97,10 @@ export const deleteReaders = () => {
 
                                     for (let reader of readers) {
                                         messageBox(`Осталось удалить ${count--} из ${allCount} ${declStr(count)}`, 'Подождите немного... <span style="padding-right: 10px" class="ico ico_spinner"></span>', false)
-                                        await http('POST', `${SPACES}/lenta/reader_delete/?user=${reader}`, false, `&CK=${DATA.CK}&cfms=Удалить`)
+
+                                        await http('POST', `${SPACES}/lenta/reader_delete/?user=${reader}`, false, `&CK=${DATA.CK}&cfms=Удалить`).then(e => {
+                                            info('Удалили читателя', e)
+                                        })
                                     }
 
                                     document.location.reload()
@@ -114,7 +118,7 @@ export const deleteReaders = () => {
                 }
             }
         } catch (e) {
-            error('Ошибка (deleteReaders.ts): ' + e)
+            error('deleteReaders.ts', e)
         }
     }
 }

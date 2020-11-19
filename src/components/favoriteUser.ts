@@ -4,9 +4,9 @@ import {
     qsa,
     http,
     trim,
+    info,
     error,
     getPath,
-    getHref,
     inBefore,
     confirmBox
 } from '../utils'
@@ -17,60 +17,77 @@ import { IUserAnketa } from '../interfaces/Mysite'
 import { SPACES, DATA } from '../strings'
 
 export const favoriteUser = async () => {
-    let href = getHref(),
-        method = getPath(1),
-        index = getPath(2),
-        nickname = getPath(3)
+    try {
 
-    if ((method === 'mysite' ||
-        (method === 'anketa' && index !== 'edit') ||
-        method === 'activity') &&
-        DATA.FAVORITE !== href &&
-        DATA.USERNAME !== trim(qs('#location_bar_1_0').textContent)) {
+        let method = getPath(1),
+            index = getPath(2),
+            nickname = getPath(3),
+            inFavorite = qs('#SP_PLUS_INFAVORITE'),
+            tdBlock: any = qsa('td.table__cell_last')
 
-        DATA.FAVORITE = href
-
-        try {
-            let inFavorite = qs('#SP_PLUS_INFAVORITE'),
-                tdBlock: any = qsa('td.table__cell_last')
+        if ((method === 'mysite' ||
+            (method === 'anketa' && index !== 'edit') ||
+            method === 'activity') &&
+            DATA.USERNAME !== trim(qs('#location_bar_1_0').textContent)) {
 
             if (nickname && tdBlock && !inFavorite) {
 
+                let favoriteButton = ce('td', {
+                    class: 'table__cell stnd-link_disabled',
+                    id: 'SP_PLUS_INFAVORITE'
+                })
+
+                let loader = ce('a', {
+                    href: '#',
+                    id: 'SP_FV_LOADER',
+                    class: 'stnd-link',
+                    html: `
+                        <span class="ico bp ico_spinner"></span>
+                        <span class="t js-text">Загрузка</span>
+                    `
+                })
+
+                favoriteButton.appendChild(loader)
+                inBefore(favoriteButton, tdBlock[1])
+
+                let clds = (tdBlock[1].parentElement.childNodes as NodeList)
+                for (let x in clds) { if (clds[x].nodeName === 'TD') (clds[x] as HTMLTableCellElement).width = '25%' }
+
                 await http<IUserAnketa>('GET', `${SPACES}/anketa/index/${nickname}`, true).then(e => {
                     const json = e.parsedBody?.user_widget
+
                     if (json) {
-                        let favoriteButton = inFavorite || ce('td', {
-                            class: 'table__cell',
-                            id: 'SP_PLUS_INFAVORITE',
-                            html: `<a href="${SPACES}/bookmarks/add/?object_id=${json.id}&object_type=11" class="stnd-link" title="Добавить в закладки"><span class="sp sp-fav"></span> B закладки</a>`,
+                        let favoriteLink = ce('a', {
+                            href: `${SPACES}/bookmarks/add/?object_id=${json.id}&object_type=11`,
+                            class: 'stnd-link',
+                            attr: { title: 'Добавить в закладки' },
+                            html: `<span class="sp sp-fav"></span> B закладки`,
                             onclick: () => {
                                 confirmBox(`Добавить пользователя <b>${json.name}</b> в закладки?`, false, async () => {
                                     await http('POST', `${SPACES}/ajax/bookmarks/add/`, false, `object_id=${json.id}&object_type=11&show_all_tags_state=0&new_tags=Люди&cfms=Добавить&CK=${DATA.CK}`).then(e => {
                                         e.status === 200 ?
                                             isFav(json.id, json.name, favoriteButton) :
-                                            console.log(e)
+                                            error('bookmarks/add', e)
                                     })
                                 })
+
                                 return false
                             }
                         })
 
                         isFav(json.id, json.name, favoriteButton)
-                        if (!inFavorite) { inBefore(favoriteButton, tdBlock[1]) }
 
-                        let clds = (tdBlock[1].parentElement.childNodes as NodeList)
-                        for (let x in clds) { if (clds[x].nodeName === 'TD') (clds[x] as HTMLTableCellElement).width = '25%' }
+                        qs('#SP_FV_LOADER').remove()
+                        qs('#SP_PLUS_INFAVORITE').classList.remove('stnd-link_disabled')
+                        favoriteButton.appendChild(favoriteLink)
                     }
+
+                    info('anketa/index', e)
                 })
             }
-        } catch (e) {
-            error('Ошибка (favoriteUser.ts): ' + e)
         }
-    } else if (
-        method !== 'mysite' &&
-        method !== 'anketa' &&
-        method !== 'activity') {
-        DATA.FAVORITE = null
+    } catch (e) {
+        error('favoriteUser.ts', e)
     }
 }
 
@@ -88,14 +105,17 @@ const isFav = async (id: string, name: string, elem: any) => {
                         await http('GET', json.delete_URL, false).then(e => {
                             e.status === 200 ?
                                 document.location.reload() :
-                                console.log(e)
+                                error('bookmarks/remove', e)
                         })
                     })
+
                     return false
                 }
             }
+
+            info('В закладках?', e)
         })
     } catch (e) {
-        error('Ошибка (isFav): ' + e)
+        error('isFav', e)
     }
 }

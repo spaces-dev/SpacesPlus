@@ -28,6 +28,7 @@ import { hiddenRightbar } from './hiddenRightbar'
 import { playerDownload } from './playerDownload'
 import { settingsNotify } from './settingsNotify'
 import { disableRedirect } from './disableRedirect'
+import { settingsLogMenu } from './settingsLogMenu'
 import { settingsFriends } from './settingsFriends'
 import { settingsFeatures } from './settingsFeatures'
 import { videoSpeedPlayback } from './videoSpeedPlayback'
@@ -36,7 +37,6 @@ import { settingsBackupMenu } from './settingsBackupMenu'
 import { checkUpdates, getUpdater } from './checkUpdates'
 import { settingsWeather, ipWhois } from './settingsWeather'
 import { settingsRecentSmiles } from './settingsRecentSmiles'
-import { settingsChangelogMenu } from './settingsChangelogMenu'
 
 export {
     adBlock,
@@ -72,12 +72,12 @@ export {
     playerDownload,
     settingsNotify,
     disableRedirect,
+    settingsLogMenu,
     settingsFriends,
     settingsWeather,
     settingsFeatures,
     videoSpeedPlayback,
     settingsBackground,
     settingsBackupMenu,
-    settingsRecentSmiles,
-    settingsChangelogMenu
+    settingsRecentSmiles
 }

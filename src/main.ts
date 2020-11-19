@@ -32,21 +32,34 @@ import {
     videoSpeedPlayback
 } from './components'
 
-import { qs, http, error, readSettings } from './utils'
+import {
+    DATA,
+    DEVICE,
+    SPACES,
+    BASE_URL
+} from './strings'
+
+import {
+    qs,
+    info,
+    http,
+    error,
+    readSettings
+} from './utils'
+
+import { _SETTINGS } from './settings'
 
 import { ISessionCheck } from './interfaces/SessionCheck'
 
-import { SPACES, BASE_URL, DEVICE, DATA } from './strings'
-import { _SETTINGS } from './settings'
-
-/**
- * ! Для работы Spaces+ необходима авторизация
- * * 00000 - Успешно авторизирован
- * * 01001 - Требуется авторизация
- */
 (() => {
     if (qs('#main_wrap')) {
         try {
+
+            /**
+             * ! Для работы Spaces+ необходима авторизация
+             * * 00000 - Авторизированы
+             * * 01001 - Требуется авторизация
+             */
             http<ISessionCheck>('POST', `${SPACES}/api/session/check`, false).then(e => {
                 if (e.status === 200 && e.parsedBody) {
                     if (userStatus(e.parsedBody.code)) {
@@ -59,18 +72,22 @@ import { _SETTINGS } from './settings'
 
                         // Инициализируем работу
                         init()
-                    } else {
-                        console.log(e)
                     }
+
+                    info('api/session/check', e)
                 }
             })
         } catch (e) {
-            error('Ошибка (main.ts): ' + e)
+            error('main.ts', e)
         }
     }
 })()
 
 const init = () => {
+
+    // Script error.
+    window.onerror = () => false
+
     /**
      * ! Технические функции
      * ? Срабатывают один раз после загрузки страницы

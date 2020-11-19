@@ -15,7 +15,7 @@ export const readSettings = () => {
             _SETTINGS = extend(_SETTINGS, cookieSet)
         }
     } catch (e) {
-        error('Ошибка (readSettings.ts): ' + e)
+        error('readSettings', e)
     }
 }
 
@@ -36,6 +36,6 @@ export const setSettings = (key: string, value: string | number | boolean) => {
 
         setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
     } catch (e) {
-        error('Ошибка (setSettings.ts): ' + e)
+        error('setSettings', e)
     }
 }

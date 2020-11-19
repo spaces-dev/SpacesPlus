@@ -5,7 +5,7 @@ import { ICheckUpdates } from '../interfaces/CheckUpdates'
 
 import { HTTP } from '../strings'
 
-export const settingsChangelogMenu = (id: string) => {
+export const settingsLogMenu = (id: string) => {
     window.scrollTo(0, 0)
     const target = qs(id)
 
@@ -43,7 +43,7 @@ export const settingsChangelogMenu = (id: string) => {
                 qs('#SP_JSON_PRELOADER').remove()
             })
         } catch (e) {
-            error('Ошибка (changelogMenu.ts): ' + e)
+            error('settingsLogMenu.ts', e)
         }
     }
 }

@@ -1,6 +1,7 @@
 import {
     ce,
     qs,
+    info,
     http,
     error,
     getPath
@@ -17,6 +18,7 @@ export const blockedFiles = () => {
 
         if (getPath(1) === 'files' &&
             getPath(2) === 'view' &&
+            downloadWrap &&
             !downloadBtn &&
             !linkSSL) {
 
@@ -43,10 +45,12 @@ export const blockedFiles = () => {
                         <span class="js-ico ico ico_download2_blue"></span>
                         <span class="t js-text">Скачать (${response.downloadBox.weight})</span>
                     `
+
+                    info('Загрузка заблокированного файла', e)
                 }
             })
         }
     } catch (e) {
-        error('Ошибка (blockedFiles.ts): ' + e)
+        error('blockedFiles.ts', e)
     }
 }

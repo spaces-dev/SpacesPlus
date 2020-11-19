@@ -23,7 +23,7 @@ export async function http<T>(method: 'GET' | 'POST', url: string, proxy: boolea
     try {
         response.parsedBody = await response.json()
     } catch (e) {
-        error('Ошибка http.ts: ' + e)
+        error('http.ts', e)
     }
 
     return response

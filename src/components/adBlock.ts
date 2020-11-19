@@ -22,6 +22,6 @@ export const adBlock = () => {
             document.getElementsByTagName('head')[0].appendChild(protoAd)
         }
     } catch (e) {
-        error('Ошибка (adBlock.ts): ' + e)
+        error('adBlock.ts', e)
     }
 }

@@ -115,7 +115,7 @@ export const recentSmiles = () => {
         }
 
     } catch (e) {
-        error('Ошибка (recentSmiles.ts): ' + e)
+        error('recentSmiles.ts', e)
     }
 }
 

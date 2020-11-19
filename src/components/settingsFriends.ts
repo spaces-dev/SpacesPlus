@@ -36,6 +36,6 @@ export const settingsFriends = (e: Element) => {
         frMaxWrap.appendChild(div)
         insertAfter(frMaxWrap, e.parentNode)
     } catch (e) {
-        error('Ошибка (settingsFriends.ts): ' + e)
+        error('settingsFriends.ts', e)
     }
 }

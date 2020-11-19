@@ -1,4 +1,4 @@
-import { qs, http, error } from '../utils'
+import { qs, http, info, error } from '../utils'
 
 import { INewbeeQuest } from '../interfaces/NewbeeQuest'
 
@@ -10,12 +10,15 @@ export const newbeeQuest = async () => {
     if (newbequest) {
         try {
             await http<INewbeeQuest>('GET', `${SPACES}/mysite/`, true).then(e => {
+
                 if (e.parsedBody?.owner_widget.newbee_quest_widget) {
                     newbequest.style.display = 'block'
                 }
+
+                info('Квест новичка', e)
             })
         } catch (e) {
-            error('Ошибка newbeeQuest.ts: ' + e)
+            error('newbeeQuest.ts', e)
         }
     }
 }

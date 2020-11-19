@@ -16,6 +16,6 @@ export const scrollMove = (b: boolean) => {
             scroll.removeAttribute('sp-replace')
         }
     } catch (e) {
-        error('Ошибка (scrollMove.ts): ' + e)
+        error('scrollMove.ts', e)
     }
 }

@@ -3,6 +3,7 @@ import {
     qs,
     qsa,
     http,
+    info,
     error,
     getPath,
     declOfNum,
@@ -104,7 +105,10 @@ export const deleteBlogs = () => {
 
                                 for (let blog of blogs) {
                                     messageBox(`Осталось удалить ${count--} из ${allCount} ${declStr(count)}`, 'Подождите немного... <span style="padding-right: 10px" class="ico ico_spinner"></span>', false)
-                                    await http('GET', `${SPACES}/diary/delete/?CK=${DATA.CK}&id=${blog}&Sure=1`, true)
+
+                                    await http('GET', `${SPACES}/diary/delete/?CK=${DATA.CK}&id=${blog}&Sure=1`, true).then(e => {
+                                        info('Удалили блог', e)
+                                    })
                                 }
 
                                 document.location.reload()
@@ -124,7 +128,7 @@ export const deleteBlogs = () => {
                 qs('#siteContent').append(buttonsDiv)
             }
         } catch (e) {
-            error('Ошибка (deleteBlogs.ts): ' + e)
+            error('deleteBlogs.ts', e)
         }
     }
 }

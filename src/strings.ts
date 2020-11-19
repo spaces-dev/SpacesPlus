@@ -7,6 +7,7 @@ import { IFirebase } from './interfaces/Firebase'
 /**
  * Константы
  */
+const DEV: boolean = process.env.NODE_ENV === 'development' ? true : false
 const HTTP: string = document.location.protocol
 const BASE_URL: string = document.location.hostname
 const SPACES: string = `${HTTP}//${BASE_URL}`
@@ -14,7 +15,7 @@ const PKG_VERSION: string = pkg.version
 const GITHUB: string = pkg.homepage
 const REVISION: number = Number(new Date())
 const DEVICE: IDevice = window.Device || unsafeWindow.Device
-const ENV_PATH = process.env.NODE_ENV === 'development' ? 'https://localhost:8080' : GITHUB
+const ENV_PATH = DEV ? 'https://localhost:8080' : GITHUB
 
 /**
  * Домены сайта
@@ -90,7 +91,6 @@ const DATA: IData = {
 
     BANNED: null,
     ONLINE: null,
-    FAVORITE: null,
     NICKNAME: null,
     CONTENT: null,
     EVENTS: 0,
@@ -101,6 +101,7 @@ const DATA: IData = {
 }
 
 export {
+    DEV,
     DATA,
     HTTP,
     DEVICE,

@@ -64,6 +64,6 @@ export const stickyHeader = (b: boolean) => {
             header.removeAttribute('sp-sticky-header')
         }
     } catch (e) {
-        error('Ошибка (stickyHeader.ts): ' + e)
+        error('stickyHeader.ts', e)
     }
 }

@@ -20,6 +20,6 @@ export const getQuery = (name: string) => {
 
         return r
     } catch (e) {
-        error('Ошибка (getQuery.ts): ' + e)
+        error('getQuery.ts', e)
     }
 }

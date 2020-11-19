@@ -36,7 +36,7 @@ export const friendsOnline = (t?: boolean) => {
                 if (frOnDiv) {
                     frOnDiv.remove()
                     countFriends = 0
-                    info('Убрали панель друзей!')
+                    info('Убрали панель друзей!', frCount)
                 }
 
                 friendsForce = 0
@@ -46,7 +46,7 @@ export const friendsOnline = (t?: boolean) => {
                 if (count !== countFriends || (count > 0 && !frOnDiv) || friendsForce >= 700) {
                     if (friendsForce >= 700) {
                         friendsForce = 0
-                        info('Принудительно обновляем друзей!')
+                        info('Принудительно обновляем друзей!', friendsForce)
                     }
 
                     countFriends = count
@@ -85,7 +85,7 @@ export const friendsOnline = (t?: boolean) => {
                                             reCount++
                                             setTimeout(() => {
                                                 countFriends = friendsList.length
-                                                info(`Количество друзей не точное, пробуем еще раз (${reCount} из 3)`)
+                                                info(`Количество друзей не точное, пробуем еще раз (${reCount} из 3)`, e)
                                             }, 1000)
                                         } else if (countFriends === friendsList.length) { reCount = 0 }
 
@@ -99,7 +99,7 @@ export const friendsOnline = (t?: boolean) => {
                                             }))
                                         }
 
-                                        info('Обновили список друзей!')
+                                        info('Обновили список друзей!', e)
                                     }
                                 })
                             }
@@ -112,7 +112,7 @@ export const friendsOnline = (t?: boolean) => {
                 frOnDiv?.remove()
             }
         } catch (e) {
-            error('Ошибка (friendsOnline.ts): ' + e)
+            error('friendsOnline.ts', e)
         }
     }
 }

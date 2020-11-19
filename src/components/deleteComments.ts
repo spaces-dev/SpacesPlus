@@ -3,6 +3,7 @@ import {
     qs,
     qsa,
     http,
+    info,
     error,
     declOfNum,
     confirmBox,
@@ -51,6 +52,7 @@ export const deleteComments = () => {
 
             // группа кнопок
             if (!qs('#SP_PLUS_BUTTONS')) {
+
                 let buttonsDiv = ce('div', {
                     class: 'widgets-group user__tools_last',
                     id: 'SP_PLUS_BUTTONS'
@@ -95,7 +97,6 @@ export const deleteComments = () => {
                                             urls.push(e.href)
                                         }
                                     })
-
                             }
                         }
 
@@ -107,7 +108,10 @@ export const deleteComments = () => {
 
                                 for (let url of urls) {
                                     messageBox(`Осталось удалить ${count--} из ${allCount} ${declStr(count)}`, 'Подождите немного... <span style="padding-right: 10px" class="ico ico_spinner"></span>', false)
-                                    await http('GET', url, true)
+
+                                    await http('GET', url, true).then(e => {
+                                        info('Удалил комментарий', e)
+                                    })
                                 }
 
                                 document.location.reload()
@@ -125,7 +129,7 @@ export const deleteComments = () => {
             }
         }
     } catch (e) {
-        error('Ошибка (deleteComments.ts): ' + e)
+        error('deleteComments.ts', e)
     }
 }
 

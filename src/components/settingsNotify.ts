@@ -149,6 +149,6 @@ export const settingsNotify = (e: Element) => {
         eventsWrap.appendChild(label3)
         insertAfter(eventsWrap, e.parentNode)
     } catch (e) {
-        error('Ошибка (settingsEvents.ts): ' + e)
+        error('settingsNotify.ts', e)
     }
 }

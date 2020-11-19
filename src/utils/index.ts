@@ -5,6 +5,7 @@ import { trim } from './trim'
 import { qs, qsa } from './qs'
 import { rever } from './rever'
 import { extend } from './extend'
+import { getPath } from './getPath'
 import { toUpper } from './toUpper'
 import { getQuery } from './getQuery'
 import { inBefore } from './inBefore'
@@ -19,10 +20,9 @@ import { isValidUrl } from './isValidUrl'
 import { messageBox } from './messageBox'
 import { historyPush } from './historyPush'
 import { insertAfter } from './insertAfter'
+import { log, info, error } from './console'
 import { modifyObject } from './modifyObject' 
 import { notification } from './notification'
-import { getPath, getHref } from './getLocation'
-import { log, info, error, debug } from './console'
 import { readSettings, setSettings } from './settings'
 
 export {
@@ -34,11 +34,9 @@ export {
     info,
     http,
     trim,
-    debug,
     error,
     rever,
     extend,
-    getHref,
     getPath,
     toUpper,
     getQuery,

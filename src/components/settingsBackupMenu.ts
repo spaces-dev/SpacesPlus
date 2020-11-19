@@ -2,6 +2,7 @@ import {
     ce,
     qs,
     http,
+    info,
     error,
     inBefore,
     delCookie,
@@ -146,7 +147,7 @@ export const settingsBackupMenu = (id: string) => {
                 inBefore(buttonsDiv, qs('#SP_PLUS_ABOUT'))
             })
         } catch (e) {
-            error('Ошибка (settingsBackupMenu.ts): ' + e)
+            error('settingsBackupMenu.ts', e)
         }
     }
 }
@@ -161,10 +162,12 @@ export const settingsBackupMenu = (id: string) => {
 const getJSON = (data: string, callback: Function) => {
     try {
         http<IGetJSON>('POST', 'https://crashmax.ru/api/getJSON', false, data).then(e => {
+            info('api/getJSON', e)
+
             return callback(e.parsedBody)
         })
     } catch (e) {
-        error('Ошибка (getJSON): ' + e)
+        error('getJSON', e)
     }
 }
 

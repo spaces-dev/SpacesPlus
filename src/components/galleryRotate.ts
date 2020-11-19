@@ -36,6 +36,6 @@ export const galleryRotate = () => {
             qs('#g_dloadlink').after(buttonRotate)
         }
     } catch (e) {
-        error('Ошибка (galleryRotate.ts): ' + e)
+        error('galleryRotate.ts', e)
     }
 }

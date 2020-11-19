@@ -3,7 +3,6 @@ export interface IData {
     USERNAME: string
     BANNED: string | null
     ONLINE: string | null
-    FAVORITE: string | null
     NICKNAME: string | null
     CONTENT: string | null
     EVENTS: number

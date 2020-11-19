@@ -143,7 +143,7 @@ export const settingsBackground = (e: Element) => {
         if (_SETTINGS.bodystyleSet.urlchecked) { setImage() }
         if (_SETTINGS.bodystyleSet.colorchecked) { setColor() }
     } catch (e) {
-        error('Ошибка (settingsBackground.ts): ' + e)
+        error('settingsBackground.ts', e)
     }
 }
 
@@ -203,7 +203,7 @@ const setImage = async () => {
             })
         }
     } catch (e) {
-        error('Ошибка (setImage): ' + e)
+        error('setImage', e)
     }
 }
 
@@ -347,7 +347,7 @@ const setColor = () => {
             }, 100)
         }
     } catch (e) {
-        error('Ошибка (setColor): ' + e)
+        error('setColor', e)
     }
 }
 

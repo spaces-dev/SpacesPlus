@@ -16,6 +16,6 @@ export const historyPush = (state: object, url: string, title: string) => {
         document.title = title
         history.pushState(state, title, url)
     } catch (e) {
-        error('Ошибка (historyPush.ts): ' + e)
+        error('historyPush.ts', e)
     }
 }

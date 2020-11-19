@@ -11,9 +11,9 @@ export const coinsAccept = () => {
             // Удаляем элемент
             e.parentElement?.remove()
 
-            info('Собрали монетку!')
+            info('Собрали монетку', e)
         })
     } catch (e) {
-        error('Ошибка (coinsAccept.ts): ' + e)
+        error('coinsAccept.ts', e)
     }
 }

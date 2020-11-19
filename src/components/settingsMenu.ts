@@ -3,7 +3,6 @@ import {
     qs,
     error,
     getPath,
-    getHref,
     inBefore,
     getQuery,
     delCookie,
@@ -21,12 +20,12 @@ import {
     friendsOnline,
     hiddenRightbar,
     settingsNotify,
+    settingsLogMenu,
     settingsFriends,
     settingsWeather,
     settingsFeatures,
     settingsBackground,
-    settingsBackupMenu,
-    settingsChangelogMenu
+    settingsBackupMenu
 } from './index'
 
 import { DEVICE, SPACES, PKG_VERSION } from '../strings'
@@ -50,7 +49,7 @@ export const settingsMenu = () => {
                     class: targetLink.className,
                     html: '<span>Настройки Spaces+</span><span class="ico ico_arr ico_m"></span>',
                     onclick: () => {
-                        if (!/(\&)sp_plus_settings=1/i.test(getHref())) {
+                        if (!/(\&)sp_plus_settings=1/i.test(document.location.href)) {
                             historyPush({
                                 'sp_plus_settings': urlSett,
                             }, `${SPACES}/settings/?sp_plus_settings=1`, 'Настройки Spaces+')
@@ -209,7 +208,7 @@ export const settingsMenu = () => {
                                     qs('#SP_PLUS_SETHEAD2').innerHTML = `<a href="${SPACES}/settings/?sp_plus_settings=1" style="margin-bottom: 1px">Spaces+</a><span class="location-bar__sep ico"></span> Импорт и экспорт настроек`
                                     // @ts-ignore
                                     qs('#SP_PLUS_SETBACK').href = `${SPACES}/settings/?sp_plus_settings=1`
-                                    if (!/(\&)sp_backup=1/i.test(getHref())) {
+                                    if (!/(\&)sp_backup=1/i.test(document.location.href)) {
                                         historyPush({
                                             'sp_plus_settings': urlSett,
                                             'sp_backup': urlSettBackup
@@ -231,13 +230,13 @@ export const settingsMenu = () => {
                                     qs('#SP_PLUS_SETHEAD2').innerHTML = `<a href="${SPACES}/settings/?sp_plus_settings=1" style="margin-bottom: 1px">Spaces+</a><span class="location-bar__sep ico"></span> История обновлений`
                                     // @ts-ignore
                                     qs('#SP_PLUS_SETBACK').href = `${SPACES}/settings/?sp_plus_settings=1`
-                                    if (!/(\&)sp_changelog=1/i.test(getHref())) {
+                                    if (!/(\&)sp_changelog=1/i.test(document.location.href)) {
                                         historyPush({
                                             'sp_plus_settings': urlSett,
                                             'sp_changelog': urlSettChangeLog
                                         }, `${SPACES}/settings/?sp_plus_settings=1&sp_changelog=1`, 'Spaces+: История обновлений')
                                     }
-                                    settingsChangelogMenu('#SP_PLUS_SETAREA')
+                                    settingsLogMenu('#SP_PLUS_SETAREA')
                                     return false
                                 }
                             })
@@ -316,7 +315,7 @@ export const settingsMenu = () => {
                 }
             }
         } catch (e) {
-            error('Ошибка (SETTINGS): ' + e)
+            error('settingsMenu', e)
         }
     }
 }

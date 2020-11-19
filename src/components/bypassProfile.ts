@@ -4,6 +4,7 @@ import {
     qsa,
     http,
     trim,
+    info,
     error,
     getPath,
     inBefore,
@@ -80,7 +81,7 @@ export const bypassProfile = () => {
         }
 
     } catch (e) {
-        error('Ошибка (bypassProfile.ts): ' + e)
+        error('bypassProfile.ts', e)
     }
 }
 
@@ -102,6 +103,8 @@ const getProfile = async (nickname: string) => {
             } else {
                 messageBox('Просмотр профилей', 'Ошибка загрузки профиля! Обратитесь к разработчику', true)
             }
+
+            info('Просмотр профилей', e)
         })
     }
 
@@ -188,7 +191,8 @@ const setUrls = (e: string, lnk1: HTMLElement, lnk2: HTMLElement) => {
     ]
 
     // конкатим второй массив, если аккаунт покинут
-    if (lnk1 === null && lnk2 === null) urls = urls2.concat(urls)
+    if (lnk1 === null && lnk2 === null)
+        urls = urls2.concat(urls)
 
     qs('div.js-pending-item').append(ce('div', {
         id: 'SP_LIST_LINK',
@@ -198,7 +202,7 @@ const setUrls = (e: string, lnk1: HTMLElement, lnk2: HTMLElement) => {
     // создаем ссылки
     for (let url of urls) {
 
-        let { ico, text, path } = url
+        const { ico, text, path } = url
 
         let link = ce('a', {
             href: SPACES + path,

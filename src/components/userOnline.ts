@@ -26,12 +26,13 @@ export const userOnline = () => {
                         let online = str[0] > 0 ? `${str[0]} ч, ${Math.trunc(str[1] / (100 / 60))} мин` : `${Math.trunc(str[1] / (100 / 60))} мин`
                         // @ts-ignore Костыль!
                         onBlock[0].nextElementSibling.textContent = online
-                        info('Время онлайн: ' + online)
+
+                        info(`Время онлайн: ${online}`, e)
                     }
                 })
             }
         } catch (e) {
-            error('Ошибка (userOnline.ts): ' + e)
+            error('userOnline.ts', e)
         }
     }
 }

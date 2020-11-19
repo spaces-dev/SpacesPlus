@@ -144,7 +144,7 @@ export const getWeather = async () => {
             }
         })
     } catch (e) {
-        error('Ошибка (openweathermap): ' + e)
+        error('openweathermap', e)
     }
 }
 
@@ -165,6 +165,6 @@ export const ipWhois = async () => {
             }
         })
     } catch (e) {
-        error('Ошибка (ipWhois): ' + e)
+        error('ipWhois', e)
     }
 }

@@ -28,6 +28,6 @@ export const videoSpeedPlayback = () => {
             target.after(buttonPlayback)
         }
     } catch (e) {
-        error('Ошибка (videoSpeedPlayback.ts): ' + e)
+        error('videoSpeedPlayback.ts', e)
     }
 }

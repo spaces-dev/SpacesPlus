@@ -11,9 +11,9 @@ export const karmaAccept = () => {
             // Удаляем элемент
             e.parentElement?.remove()
 
-            info('Собрали карму!')
+            info('Собрали карму!', e)
         })
     } catch (e) {
-        error('Ошибка (karmaAccept.ts): ' + e)
+        error('karmaAccept.ts', e)
     }
 }

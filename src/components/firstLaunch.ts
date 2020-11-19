@@ -13,7 +13,9 @@ export const firstLaunch = () => {
     try {
 
         // показываем приветствие, если отсутсвует кука и если BASE_URL не в залупе!
-        if (getCookie('SP_LAUNCH') === undefined && BASE_URL !== 'spaces-blogs.com') {
+        if (getCookie('SP_LAUNCH') === undefined &&
+            BASE_URL !== 'spaces-blogs.com' &&
+            BASE_URL !== 'spac1.net') {
 
             messageBox('Спасибо за установку Spaces+', `
                 <b style="color: #f86934">ВНИМАНИЕ!</b></br></br>
@@ -35,6 +37,6 @@ export const firstLaunch = () => {
             setCookie('SP_LAUNCH', '1')
         }
     } catch (e) {
-        error('Ошибка (firstLaunch.ts): ' + e)
+        error('firstLaunch.ts', e)
     }
 }

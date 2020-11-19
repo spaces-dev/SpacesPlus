@@ -38,11 +38,12 @@ export const playerDownload = () => {
                 insertAfter(dwnTd, tdIc.parentElement)
             } else if (downPlace && DATA.PLAYER !== trId) {
                 DATA.PLAYER = trId
-                info('Обновили ссылку на трек!')
                 downPlace.onclick = () => location.href = trScr
+
+                info('Обновили ссылку на трек', jstr)
             }
         }
     } catch (e) {
-        error('Ошибка (playerDownload.ts): ' + e)
+        error('playerDownload.ts', e)
     }
 }

@@ -19,6 +19,6 @@ export const hiddenRightbar = (b: boolean) => {
             rightbar.removeAttribute('sp-hidden-rightbar')
         }
     } catch (e) {
-        error('Ошибка (hidderRightbar.ts): ' + e)
+        error('hidderRightbar.ts', e)
     }
 }
