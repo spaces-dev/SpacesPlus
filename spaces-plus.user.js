@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        Spaces+
-// @version     3.1.1
+// @version     3.1.2
 // @author      Vitalij Ryndin
 // @description 🚀 Powerful userscript for Spaces.ru
 // @homepage    https://spaces-dev.github.io/SpacesPlus
@@ -106,7 +106,7 @@
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.readSettings = exports.notification = exports.modifyObject = exports.setSettings = exports.insertAfter = exports.historyPush = exports.messageBox = exports.isValidUrl = exports.confirmBox = exports.setCookie = exports.playSound = exports.getParams = exports.getCookie = exports.delCookie = exports.declOfNum = exports.inBefore = exports.getQuery = exports.toUpper = exports.getPath = exports.getHref = exports.extend = exports.rever = exports.error = exports.debug = exports.trim = exports.http = exports.info = exports.log = exports.css = exports.qsa = exports.qs = exports.ce = void 0;
+exports.readSettings = exports.notification = exports.modifyObject = exports.setSettings = exports.insertAfter = exports.historyPush = exports.messageBox = exports.isValidUrl = exports.confirmBox = exports.setCookie = exports.playSound = exports.getParams = exports.getCookie = exports.delCookie = exports.declOfNum = exports.inBefore = exports.getQuery = exports.toUpper = exports.getPath = exports.extend = exports.rever = exports.error = exports.trim = exports.http = exports.info = exports.log = exports.css = exports.qsa = exports.qs = exports.ce = void 0;
 const ce_1 = __webpack_require__(15);
 Object.defineProperty(exports, "ce", { enumerable: true, get: function () { return ce_1.ce; } });
 const css_1 = __webpack_require__(5);
@@ -115,54 +115,52 @@ const http_1 = __webpack_require__(16);
 Object.defineProperty(exports, "http", { enumerable: true, get: function () { return http_1.http; } });
 const trim_1 = __webpack_require__(6);
 Object.defineProperty(exports, "trim", { enumerable: true, get: function () { return trim_1.trim; } });
-const qs_1 = __webpack_require__(17);
+const qs_1 = __webpack_require__(18);
 Object.defineProperty(exports, "qs", { enumerable: true, get: function () { return qs_1.qs; } });
 Object.defineProperty(exports, "qsa", { enumerable: true, get: function () { return qs_1.qsa; } });
-const rever_1 = __webpack_require__(18);
+const rever_1 = __webpack_require__(19);
 Object.defineProperty(exports, "rever", { enumerable: true, get: function () { return rever_1.rever; } });
 const extend_1 = __webpack_require__(7);
 Object.defineProperty(exports, "extend", { enumerable: true, get: function () { return extend_1.extend; } });
-const toUpper_1 = __webpack_require__(19);
+const getPath_1 = __webpack_require__(20);
+Object.defineProperty(exports, "getPath", { enumerable: true, get: function () { return getPath_1.getPath; } });
+const toUpper_1 = __webpack_require__(21);
 Object.defineProperty(exports, "toUpper", { enumerable: true, get: function () { return toUpper_1.toUpper; } });
-const getQuery_1 = __webpack_require__(20);
+const getQuery_1 = __webpack_require__(22);
 Object.defineProperty(exports, "getQuery", { enumerable: true, get: function () { return getQuery_1.getQuery; } });
-const inBefore_1 = __webpack_require__(21);
+const inBefore_1 = __webpack_require__(23);
 Object.defineProperty(exports, "inBefore", { enumerable: true, get: function () { return inBefore_1.inBefore; } });
-const declOfNum_1 = __webpack_require__(22);
+const declOfNum_1 = __webpack_require__(24);
 Object.defineProperty(exports, "declOfNum", { enumerable: true, get: function () { return declOfNum_1.declOfNum; } });
-const delCookie_1 = __webpack_require__(23);
+const delCookie_1 = __webpack_require__(25);
 Object.defineProperty(exports, "delCookie", { enumerable: true, get: function () { return delCookie_1.delCookie; } });
-const getCookie_1 = __webpack_require__(25);
+const getCookie_1 = __webpack_require__(27);
 Object.defineProperty(exports, "getCookie", { enumerable: true, get: function () { return getCookie_1.getCookie; } });
-const getParams_1 = __webpack_require__(26);
+const getParams_1 = __webpack_require__(28);
 Object.defineProperty(exports, "getParams", { enumerable: true, get: function () { return getParams_1.getParams; } });
-const playSound_1 = __webpack_require__(27);
+const playSound_1 = __webpack_require__(29);
 Object.defineProperty(exports, "playSound", { enumerable: true, get: function () { return playSound_1.playSound; } });
 const setCookie_1 = __webpack_require__(8);
 Object.defineProperty(exports, "setCookie", { enumerable: true, get: function () { return setCookie_1.setCookie; } });
-const confirmBox_1 = __webpack_require__(28);
+const confirmBox_1 = __webpack_require__(30);
 Object.defineProperty(exports, "confirmBox", { enumerable: true, get: function () { return confirmBox_1.confirmBox; } });
-const isValidUrl_1 = __webpack_require__(29);
+const isValidUrl_1 = __webpack_require__(31);
 Object.defineProperty(exports, "isValidUrl", { enumerable: true, get: function () { return isValidUrl_1.isValidUrl; } });
-const messageBox_1 = __webpack_require__(30);
+const messageBox_1 = __webpack_require__(32);
 Object.defineProperty(exports, "messageBox", { enumerable: true, get: function () { return messageBox_1.messageBox; } });
-const historyPush_1 = __webpack_require__(31);
+const historyPush_1 = __webpack_require__(33);
 Object.defineProperty(exports, "historyPush", { enumerable: true, get: function () { return historyPush_1.historyPush; } });
-const insertAfter_1 = __webpack_require__(32);
+const insertAfter_1 = __webpack_require__(34);
 Object.defineProperty(exports, "insertAfter", { enumerable: true, get: function () { return insertAfter_1.insertAfter; } });
-const modifyObject_1 = __webpack_require__(33);
-Object.defineProperty(exports, "modifyObject", { enumerable: true, get: function () { return modifyObject_1.modifyObject; } });
-const notification_1 = __webpack_require__(34);
-Object.defineProperty(exports, "notification", { enumerable: true, get: function () { return notification_1.notification; } });
-const getLocation_1 = __webpack_require__(35);
-Object.defineProperty(exports, "getPath", { enumerable: true, get: function () { return getLocation_1.getPath; } });
-Object.defineProperty(exports, "getHref", { enumerable: true, get: function () { return getLocation_1.getHref; } });
 const console_1 = __webpack_require__(3);
 Object.defineProperty(exports, "log", { enumerable: true, get: function () { return console_1.log; } });
 Object.defineProperty(exports, "info", { enumerable: true, get: function () { return console_1.info; } });
 Object.defineProperty(exports, "error", { enumerable: true, get: function () { return console_1.error; } });
-Object.defineProperty(exports, "debug", { enumerable: true, get: function () { return console_1.debug; } });
-const settings_1 = __webpack_require__(36);
+const modifyObject_1 = __webpack_require__(35);
+Object.defineProperty(exports, "modifyObject", { enumerable: true, get: function () { return modifyObject_1.modifyObject; } });
+const notification_1 = __webpack_require__(36);
+Object.defineProperty(exports, "notification", { enumerable: true, get: function () { return notification_1.notification; } });
+const settings_1 = __webpack_require__(37);
 Object.defineProperty(exports, "readSettings", { enumerable: true, get: function () { return settings_1.readSettings; } });
 Object.defineProperty(exports, "setSettings", { enumerable: true, get: function () { return settings_1.setSettings; } });
 
@@ -177,11 +175,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FirebaseConfig = exports.PKG_VERSION = exports.BASE_PATH = exports.REVISION = exports.ENV_PATH = exports.BASE_URL = exports.DOMAINS = exports.SPACES = exports.GITHUB = exports.DEVICE = exports.HTTP = exports.DATA = void 0;
-const package_json_1 = __importDefault(__webpack_require__(24));
+exports.FirebaseConfig = exports.PKG_VERSION = exports.BASE_PATH = exports.REVISION = exports.ENV_PATH = exports.BASE_URL = exports.DOMAINS = exports.SPACES = exports.GITHUB = exports.DEVICE = exports.HTTP = exports.DATA = exports.DEV = void 0;
+const package_json_1 = __importDefault(__webpack_require__(26));
 /**
  * Константы
  */
+const DEV =  false ? undefined : false;
+exports.DEV = DEV;
 const HTTP = document.location.protocol;
 exports.HTTP = HTTP;
 const BASE_URL = document.location.hostname;
@@ -196,7 +196,7 @@ const REVISION = Number(new Date());
 exports.REVISION = REVISION;
 const DEVICE = window.Device || unsafeWindow.Device;
 exports.DEVICE = DEVICE;
-const ENV_PATH =  false ? undefined : GITHUB;
+const ENV_PATH = DEV ? 'https://localhost:8080' : GITHUB;
 exports.ENV_PATH = ENV_PATH;
 /**
  * Домены сайта
@@ -271,7 +271,6 @@ const DATA = {
     USERNAME: '',
     BANNED: null,
     ONLINE: null,
-    FAVORITE: null,
     NICKNAME: null,
     CONTENT: null,
     EVENTS: 0,
@@ -431,12 +430,19 @@ exports._SETTINGS = {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.debug = exports.error = exports.info = exports.log = void 0;
-const date = () => `(${new Date().toString().split(' ')[4]}) [S+] `;
-exports.log = (str) => console.log(date() + str);
-exports.info = (str) => console.info(date() + str);
-exports.error = (str) => console.error(date() + str);
-exports.debug = (str) => console.debug(date() + str);
+exports.error = exports.warn = exports.info = exports.log = void 0;
+const ts_debug_1 = __webpack_require__(17);
+const logger = new ts_debug_1.Debugger(console, true, '[S+]: ');
+const styles = [
+    'background: steelblue',
+    'background: green',
+    'background: darkorange',
+    'background: darkred'
+];
+exports.log = (str, obj) => logger.log('%c' + str, styles[0], obj);
+exports.info = (str, obj) => logger.info('%c' + str, styles[1], obj);
+exports.warn = (str, obj) => logger.warn('%c' + str, styles[2], obj);
+exports.error = (str, obj) => logger.error('%c' + str, styles[3], obj);
 
 
 /***/ }),
@@ -446,76 +452,78 @@ exports.debug = (str) => console.debug(date() + str);
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.settingsChangelogMenu = exports.settingsRecentSmiles = exports.settingsBackupMenu = exports.settingsBackground = exports.videoSpeedPlayback = exports.settingsFeatures = exports.settingsWeather = exports.settingsFriends = exports.disableRedirect = exports.settingsNotify = exports.playerDownload = exports.hiddenRightbar = exports.deleteComments = exports.weatherWidget = exports.sidebarButton = exports.galleryRotate = exports.friendsOnline = exports.deleteReaders = exports.bypassProfile = exports.stickyHeader = exports.settingsMenu = exports.recentSmiles = exports.freeStickers = exports.favoriteUser = exports.checkUpdates = exports.blockedFiles = exports.betaFeatures = exports.soundNotify = exports.karmaAccept = exports.firstLaunch = exports.deleteBlogs = exports.coinsAccept = exports.apiDebugger = exports.userOnline = exports.userStatus = exports.scrollMove = exports.getUpdater = exports.setStyles = exports.oldHeader = exports.ipWhois = exports.adBlock = void 0;
+exports.settingsRecentSmiles = exports.settingsBackupMenu = exports.settingsBackground = exports.videoSpeedPlayback = exports.settingsFeatures = exports.settingsWeather = exports.settingsFriends = exports.settingsLogMenu = exports.disableRedirect = exports.settingsNotify = exports.playerDownload = exports.hiddenRightbar = exports.deleteComments = exports.weatherWidget = exports.sidebarButton = exports.galleryRotate = exports.friendsOnline = exports.deleteReaders = exports.bypassProfile = exports.stickyHeader = exports.settingsMenu = exports.recentSmiles = exports.freeStickers = exports.favoriteUser = exports.checkUpdates = exports.blockedFiles = exports.betaFeatures = exports.soundNotify = exports.karmaAccept = exports.firstLaunch = exports.deleteBlogs = exports.coinsAccept = exports.apiDebugger = exports.userOnline = exports.userStatus = exports.scrollMove = exports.getUpdater = exports.setStyles = exports.oldHeader = exports.ipWhois = exports.adBlock = void 0;
 const adBlock_1 = __webpack_require__(14);
 Object.defineProperty(exports, "adBlock", { enumerable: true, get: function () { return adBlock_1.adBlock; } });
-const oldHeader_1 = __webpack_require__(37);
+const oldHeader_1 = __webpack_require__(38);
 Object.defineProperty(exports, "oldHeader", { enumerable: true, get: function () { return oldHeader_1.oldHeader; } });
 const setStyles_1 = __webpack_require__(9);
 Object.defineProperty(exports, "setStyles", { enumerable: true, get: function () { return setStyles_1.setStyles; } });
-const scrollMove_1 = __webpack_require__(38);
+const scrollMove_1 = __webpack_require__(39);
 Object.defineProperty(exports, "scrollMove", { enumerable: true, get: function () { return scrollMove_1.scrollMove; } });
-const userStatus_1 = __webpack_require__(39);
+const userStatus_1 = __webpack_require__(40);
 Object.defineProperty(exports, "userStatus", { enumerable: true, get: function () { return userStatus_1.userStatus; } });
-const userOnline_1 = __webpack_require__(40);
+const userOnline_1 = __webpack_require__(41);
 Object.defineProperty(exports, "userOnline", { enumerable: true, get: function () { return userOnline_1.userOnline; } });
-const apiDebugger_1 = __webpack_require__(41);
+const apiDebugger_1 = __webpack_require__(42);
 Object.defineProperty(exports, "apiDebugger", { enumerable: true, get: function () { return apiDebugger_1.apiDebugger; } });
-const coinsAccept_1 = __webpack_require__(42);
+const coinsAccept_1 = __webpack_require__(43);
 Object.defineProperty(exports, "coinsAccept", { enumerable: true, get: function () { return coinsAccept_1.coinsAccept; } });
-const deleteBlogs_1 = __webpack_require__(43);
+const deleteBlogs_1 = __webpack_require__(44);
 Object.defineProperty(exports, "deleteBlogs", { enumerable: true, get: function () { return deleteBlogs_1.deleteBlogs; } });
-const firstLaunch_1 = __webpack_require__(44);
+const firstLaunch_1 = __webpack_require__(45);
 Object.defineProperty(exports, "firstLaunch", { enumerable: true, get: function () { return firstLaunch_1.firstLaunch; } });
-const karmaAccept_1 = __webpack_require__(45);
+const karmaAccept_1 = __webpack_require__(46);
 Object.defineProperty(exports, "karmaAccept", { enumerable: true, get: function () { return karmaAccept_1.karmaAccept; } });
-const soundNotify_1 = __webpack_require__(46);
+const soundNotify_1 = __webpack_require__(47);
 Object.defineProperty(exports, "soundNotify", { enumerable: true, get: function () { return soundNotify_1.soundNotify; } });
-const betaFeatures_1 = __webpack_require__(47);
+const betaFeatures_1 = __webpack_require__(48);
 Object.defineProperty(exports, "betaFeatures", { enumerable: true, get: function () { return betaFeatures_1.betaFeatures; } });
-const blockedFiles_1 = __webpack_require__(48);
+const blockedFiles_1 = __webpack_require__(49);
 Object.defineProperty(exports, "blockedFiles", { enumerable: true, get: function () { return blockedFiles_1.blockedFiles; } });
-const favoriteUser_1 = __webpack_require__(49);
+const favoriteUser_1 = __webpack_require__(50);
 Object.defineProperty(exports, "favoriteUser", { enumerable: true, get: function () { return favoriteUser_1.favoriteUser; } });
-const freeStickers_1 = __webpack_require__(50);
+const freeStickers_1 = __webpack_require__(51);
 Object.defineProperty(exports, "freeStickers", { enumerable: true, get: function () { return freeStickers_1.freeStickers; } });
-const recentSmiles_1 = __webpack_require__(51);
+const recentSmiles_1 = __webpack_require__(52);
 Object.defineProperty(exports, "recentSmiles", { enumerable: true, get: function () { return recentSmiles_1.recentSmiles; } });
-const settingsMenu_1 = __webpack_require__(52);
+const settingsMenu_1 = __webpack_require__(53);
 Object.defineProperty(exports, "settingsMenu", { enumerable: true, get: function () { return settingsMenu_1.settingsMenu; } });
-const stickyHeader_1 = __webpack_require__(53);
+const stickyHeader_1 = __webpack_require__(54);
 Object.defineProperty(exports, "stickyHeader", { enumerable: true, get: function () { return stickyHeader_1.stickyHeader; } });
-const bypassProfile_1 = __webpack_require__(54);
+const bypassProfile_1 = __webpack_require__(55);
 Object.defineProperty(exports, "bypassProfile", { enumerable: true, get: function () { return bypassProfile_1.bypassProfile; } });
-const deleteReaders_1 = __webpack_require__(55);
+const deleteReaders_1 = __webpack_require__(56);
 Object.defineProperty(exports, "deleteReaders", { enumerable: true, get: function () { return deleteReaders_1.deleteReaders; } });
 const friendsOnline_1 = __webpack_require__(10);
 Object.defineProperty(exports, "friendsOnline", { enumerable: true, get: function () { return friendsOnline_1.friendsOnline; } });
-const galleryRotate_1 = __webpack_require__(56);
+const galleryRotate_1 = __webpack_require__(57);
 Object.defineProperty(exports, "galleryRotate", { enumerable: true, get: function () { return galleryRotate_1.galleryRotate; } });
-const sidebarButton_1 = __webpack_require__(57);
+const sidebarButton_1 = __webpack_require__(58);
 Object.defineProperty(exports, "sidebarButton", { enumerable: true, get: function () { return sidebarButton_1.sidebarButton; } });
-const weatherWidget_1 = __webpack_require__(58);
+const weatherWidget_1 = __webpack_require__(59);
 Object.defineProperty(exports, "weatherWidget", { enumerable: true, get: function () { return weatherWidget_1.weatherWidget; } });
-const deleteComments_1 = __webpack_require__(59);
+const deleteComments_1 = __webpack_require__(60);
 Object.defineProperty(exports, "deleteComments", { enumerable: true, get: function () { return deleteComments_1.deleteComments; } });
-const hiddenRightbar_1 = __webpack_require__(60);
+const hiddenRightbar_1 = __webpack_require__(61);
 Object.defineProperty(exports, "hiddenRightbar", { enumerable: true, get: function () { return hiddenRightbar_1.hiddenRightbar; } });
-const playerDownload_1 = __webpack_require__(61);
+const playerDownload_1 = __webpack_require__(62);
 Object.defineProperty(exports, "playerDownload", { enumerable: true, get: function () { return playerDownload_1.playerDownload; } });
-const settingsNotify_1 = __webpack_require__(62);
+const settingsNotify_1 = __webpack_require__(63);
 Object.defineProperty(exports, "settingsNotify", { enumerable: true, get: function () { return settingsNotify_1.settingsNotify; } });
-const disableRedirect_1 = __webpack_require__(63);
+const disableRedirect_1 = __webpack_require__(64);
 Object.defineProperty(exports, "disableRedirect", { enumerable: true, get: function () { return disableRedirect_1.disableRedirect; } });
-const settingsFriends_1 = __webpack_require__(64);
+const settingsLogMenu_1 = __webpack_require__(65);
+Object.defineProperty(exports, "settingsLogMenu", { enumerable: true, get: function () { return settingsLogMenu_1.settingsLogMenu; } });
+const settingsFriends_1 = __webpack_require__(66);
 Object.defineProperty(exports, "settingsFriends", { enumerable: true, get: function () { return settingsFriends_1.settingsFriends; } });
-const settingsFeatures_1 = __webpack_require__(65);
+const settingsFeatures_1 = __webpack_require__(67);
 Object.defineProperty(exports, "settingsFeatures", { enumerable: true, get: function () { return settingsFeatures_1.settingsFeatures; } });
-const videoSpeedPlayback_1 = __webpack_require__(67);
+const videoSpeedPlayback_1 = __webpack_require__(69);
 Object.defineProperty(exports, "videoSpeedPlayback", { enumerable: true, get: function () { return videoSpeedPlayback_1.videoSpeedPlayback; } });
-const settingsBackground_1 = __webpack_require__(68);
+const settingsBackground_1 = __webpack_require__(70);
 Object.defineProperty(exports, "settingsBackground", { enumerable: true, get: function () { return settingsBackground_1.settingsBackground; } });
-const settingsBackupMenu_1 = __webpack_require__(69);
+const settingsBackupMenu_1 = __webpack_require__(71);
 Object.defineProperty(exports, "settingsBackupMenu", { enumerable: true, get: function () { return settingsBackupMenu_1.settingsBackupMenu; } });
 const checkUpdates_1 = __webpack_require__(12);
 Object.defineProperty(exports, "checkUpdates", { enumerable: true, get: function () { return checkUpdates_1.checkUpdates; } });
@@ -523,10 +531,8 @@ Object.defineProperty(exports, "getUpdater", { enumerable: true, get: function (
 const settingsWeather_1 = __webpack_require__(11);
 Object.defineProperty(exports, "settingsWeather", { enumerable: true, get: function () { return settingsWeather_1.settingsWeather; } });
 Object.defineProperty(exports, "ipWhois", { enumerable: true, get: function () { return settingsWeather_1.ipWhois; } });
-const settingsRecentSmiles_1 = __webpack_require__(70);
+const settingsRecentSmiles_1 = __webpack_require__(72);
 Object.defineProperty(exports, "settingsRecentSmiles", { enumerable: true, get: function () { return settingsRecentSmiles_1.settingsRecentSmiles; } });
-const settingsChangelogMenu_1 = __webpack_require__(71);
-Object.defineProperty(exports, "settingsChangelogMenu", { enumerable: true, get: function () { return settingsChangelogMenu_1.settingsChangelogMenu; } });
 
 
 /***/ }),
@@ -714,7 +720,7 @@ exports.friendsOnline = (t) => {
                 if (frOnDiv) {
                     frOnDiv.remove();
                     countFriends = 0;
-                    utils_1.info('Убрали панель друзей!');
+                    utils_1.info('Убрали панель друзей!', frCount);
                 }
                 friendsForce = 0;
             }
@@ -723,7 +729,7 @@ exports.friendsOnline = (t) => {
                 if (count !== countFriends || (count > 0 && !frOnDiv) || friendsForce >= 700) {
                     if (friendsForce >= 700) {
                         friendsForce = 0;
-                        utils_1.info('Принудительно обновляем друзей!');
+                        utils_1.info('Принудительно обновляем друзей!', friendsForce);
                     }
                     countFriends = count;
                     let parent = (_b = (_a = frCount === null || frCount === void 0 ? void 0 : frCount.parentNode) === null || _a === void 0 ? void 0 : _a.parentNode) === null || _b === void 0 ? void 0 : _b.parentNode;
@@ -751,7 +757,7 @@ exports.friendsOnline = (t) => {
                                             reCount++;
                                             setTimeout(() => {
                                                 countFriends = friendsList.length;
-                                                utils_1.info(`Количество друзей не точное, пробуем еще раз (${reCount} из 3)`);
+                                                utils_1.info(`Количество друзей не точное, пробуем еще раз (${reCount} из 3)`, e);
                                             }, 1000);
                                         }
                                         else if (countFriends === friendsList.length) {
@@ -766,7 +772,7 @@ exports.friendsOnline = (t) => {
                                                     `<span class="online-status m"><img class="p14 online_status_ico" src="${strings_1.HTTP}//spac.me/i/${friendsList[i].online_status.on_img}" alt="(ON)"></span><span class="block-item__title m break-word">${friendsList[i].name}</span>`
                                             }));
                                         }
-                                        utils_1.info('Обновили список друзей!');
+                                        utils_1.info('Обновили список друзей!', e);
                                     }
                                 });
                             }
@@ -780,7 +786,7 @@ exports.friendsOnline = (t) => {
             }
         }
         catch (e) {
-            utils_1.error('Ошибка (friendsOnline.ts): ' + e);
+            utils_1.error('friendsOnline.ts', e);
         }
     }
 };
@@ -915,7 +921,7 @@ exports.getWeather = async () => {
         });
     }
     catch (e) {
-        utils_1.error('Ошибка (openweathermap): ' + e);
+        utils_1.error('openweathermap', e);
     }
 };
 /**
@@ -936,7 +942,7 @@ exports.ipWhois = async () => {
         });
     }
     catch (e) {
-        utils_1.error('Ошибка (ipWhois): ' + e);
+        utils_1.error('ipWhois', e);
     }
 };
 
@@ -960,13 +966,14 @@ exports.getUpdater = (callback) => {
     try {
         utils_1.http('GET', `${strings_1.ENV_PATH}/updater.json?r=${strings_1.REVISION}`, false).then(e => {
             const json = e.parsedBody;
+            utils_1.info('Проверка обновлений', e);
             if (e.status === 200 && (json === null || json === void 0 ? void 0 : json.history)) {
                 return callback(json);
             }
         });
     }
     catch (e) {
-        utils_1.error('Ошибка (getUpdater.ts): ' + e);
+        utils_1.error('getUpdater.ts', e);
     }
 };
 exports.checkUpdates = () => {
@@ -995,7 +1002,7 @@ exports.checkUpdates = () => {
         });
     }
     catch (e) {
-        utils_1.error('Ошибка (checkUpdates.ts): ' + e);
+        utils_1.error('checkUpdates.ts', e);
     }
 };
 
@@ -1008,17 +1015,17 @@ exports.checkUpdates = () => {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const components_1 = __webpack_require__(4);
-const utils_1 = __webpack_require__(0);
 const strings_1 = __webpack_require__(1);
+const utils_1 = __webpack_require__(0);
 const settings_1 = __webpack_require__(2);
-/**
- * ! Для работы Spaces+ необходима авторизация
- * * 00000 - Успешно авторизирован
- * * 01001 - Требуется авторизация
- */
 (() => {
     if (utils_1.qs('#main_wrap')) {
         try {
+            /**
+             * ! Для работы Spaces+ необходима авторизация
+             * * 00000 - Авторизированы
+             * * 01001 - Требуется авторизация
+             */
             utils_1.http('POST', `${strings_1.SPACES}/api/session/check`, false).then(e => {
                 var _a, _b;
                 if (e.status === 200 && e.parsedBody) {
@@ -1030,18 +1037,18 @@ const settings_1 = __webpack_require__(2);
                         // Инициализируем работу
                         init();
                     }
-                    else {
-                        console.log(e);
-                    }
+                    utils_1.info('api/session/check', e);
                 }
             });
         }
         catch (e) {
-            utils_1.error('Ошибка (main.ts): ' + e);
+            utils_1.error('main.ts', e);
         }
     }
 })();
 const init = () => {
+    // Script error.
+    window.onerror = () => false;
     /**
      * ! Технические функции
      * ? Срабатывают один раз после загрузки страницы
@@ -1143,7 +1150,7 @@ exports.adBlock = () => {
         }
     }
     catch (e) {
-        utils_1.error('Ошибка (adBlock.ts): ' + e);
+        utils_1.error('adBlock.ts', e);
     }
 };
 
@@ -1230,7 +1237,7 @@ async function http(method, url, proxy, body) {
         response.parsedBody = await response.json();
     }
     catch (e) {
-        console_1.error('Ошибка http.ts: ' + e);
+        console_1.error('http.ts', e);
     }
     return response;
 }
@@ -1239,6 +1246,236 @@ exports.http = http;
 
 /***/ }),
 /* 17 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Debugger", function() { return Debugger; });
+var Debugger = /** @class */ (function () {
+    function Debugger(console, isEnabled, prefix) {
+        if (isEnabled === void 0) { isEnabled = true; }
+        if (prefix === void 0) { prefix = ''; }
+        this.prefix = '';
+        this.console = console;
+        this.isEnabled = isEnabled;
+        this.prefix = prefix;
+    }
+    Object.defineProperty(Debugger.prototype, "memory", {
+        get: function () {
+            return this.doIfEnabled(function () { return console.hasOwnProperty('memory') && console.memory; });
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Debugger.prototype.assert = function (value, message) {
+        var _this = this;
+        var optionalParams = [];
+        for (var _i = 2; _i < arguments.length; _i++) {
+            optionalParams[_i - 2] = arguments[_i];
+        }
+        return this.doIfEnabled(function () {
+            var _a;
+            return (_a = _this.console).assert.apply(_a, [value, message].concat(optionalParams));
+        });
+    };
+    Debugger.prototype.countReset = function (label) {
+        var _this = this;
+        return this.doIfEnabled(function () { return _this.console.countReset(label); });
+    };
+    Debugger.prototype.dir = function (obj) {
+        var _this = this;
+        var options = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            options[_i - 1] = arguments[_i];
+        }
+        return this.doIfEnabled(function () {
+            var _a;
+            return (_a = _this.console).dir.apply(_a, [obj].concat(options));
+        });
+    };
+    Debugger.prototype.error = function (message) {
+        var _this = this;
+        var optionalParams = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            optionalParams[_i - 1] = arguments[_i];
+        }
+        return this.doIfEnabled(function () {
+            var _a;
+            return (_a = _this.console).error.apply(_a, [_this.addPrefix(message)].concat(optionalParams));
+        });
+    };
+    Debugger.prototype.info = function (message) {
+        var _this = this;
+        var optionalParams = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            optionalParams[_i - 1] = arguments[_i];
+        }
+        return this.doIfEnabled(function () {
+            var _a;
+            return (_a = _this.console).info.apply(_a, [_this.addPrefix(message)].concat(optionalParams));
+        });
+    };
+    Debugger.prototype.log = function (message) {
+        var _this = this;
+        var optionalParams = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            optionalParams[_i - 1] = arguments[_i];
+        }
+        return this.doIfEnabled(function () {
+            var _a;
+            return (_a = _this.console).log.apply(_a, [_this.addPrefix(message)].concat(optionalParams));
+        });
+    };
+    Debugger.prototype.time = function (label) {
+        var _this = this;
+        return this.doIfEnabled(function () { return _this.console.time(label); });
+    };
+    Debugger.prototype.timeEnd = function (label) {
+        var _this = this;
+        return this.doIfEnabled(function () { return _this.console.timeEnd(label); });
+    };
+    Debugger.prototype.timeLog = function (label) {
+        var _this = this;
+        var data = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            data[_i - 1] = arguments[_i];
+        }
+        return this.doIfEnabled(function () { return _this.console.timeLog(label, data); });
+    };
+    Debugger.prototype.timeStamp = function (label) {
+        var _this = this;
+        return this.doIfEnabled(function () { return _this.console.timeStamp(label); });
+    };
+    Debugger.prototype.timeline = function (label) {
+        var _this = this;
+        return this.doIfEnabled(function () { return _this.console.timeline(label); });
+    };
+    Debugger.prototype.timelineEnd = function (label) {
+        var _this = this;
+        return this.doIfEnabled(function () { return _this.console.timelineEnd(label); });
+    };
+    Debugger.prototype.trace = function (message) {
+        var _this = this;
+        var optionalParams = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            optionalParams[_i - 1] = arguments[_i];
+        }
+        return this.doIfEnabled(function () {
+            var _a;
+            return (_a = _this.console).trace.apply(_a, [_this.addPrefix(message)].concat(optionalParams));
+        });
+    };
+    Debugger.prototype.warn = function (message) {
+        var _this = this;
+        var optionalParams = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            optionalParams[_i - 1] = arguments[_i];
+        }
+        return this.doIfEnabled(function () {
+            var _a;
+            return (_a = _this.console).warn.apply(_a, [_this.addPrefix(message)].concat(optionalParams));
+        });
+    };
+    Debugger.prototype.clear = function () {
+        var _this = this;
+        return this.doIfEnabled(function () { return _this.console.clear(); });
+    };
+    Debugger.prototype.count = function (countTitle) {
+        var _this = this;
+        return this.doIfEnabled(function () { return _this.console.count(); });
+    };
+    Debugger.prototype.debug = function (message) {
+        var _this = this;
+        var optionalParams = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            optionalParams[_i - 1] = arguments[_i];
+        }
+        return this.doIfEnabled(function () {
+            var _a;
+            return (_a = _this.console).debug.apply(_a, [_this.addPrefix(message)].concat(optionalParams));
+        });
+    };
+    Debugger.prototype.dirxml = function (value) {
+        var _this = this;
+        return this.doIfEnabled(function () { return _this.console.dirxml(value); });
+    };
+    Debugger.prototype.exception = function (message) {
+        var _this = this;
+        var optionalParams = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            optionalParams[_i - 1] = arguments[_i];
+        }
+        return this.doIfEnabled(function () {
+            var _a;
+            return (_a = _this.console).exception.apply(_a, [_this.addPrefix(message)].concat(optionalParams));
+        });
+    };
+    Debugger.prototype.group = function (groupTitle) {
+        var _this = this;
+        return this.doIfEnabled(function () { return _this.console.group(groupTitle); });
+    };
+    Debugger.prototype.groupCollapsed = function (groupTitle) {
+        var _this = this;
+        return this.doIfEnabled(function () { return _this.console.groupCollapsed(groupTitle); });
+    };
+    Debugger.prototype.groupEnd = function () {
+        var _this = this;
+        return this.doIfEnabled(function () { return _this.console.groupEnd(); });
+    };
+    Debugger.prototype.markTimeline = function (label) {
+        var _this = this;
+        return this.doIfEnabled(function () { return _this.console.markTimeline(label); });
+    };
+    Debugger.prototype.profile = function (reportName) {
+        var _this = this;
+        return this.doIfEnabled(function () { return _this.console.profile(reportName); });
+    };
+    Debugger.prototype.profileEnd = function () {
+        var _this = this;
+        return this.doIfEnabled(function () { return _this.console.profileEnd(); });
+    };
+    Debugger.prototype.table = function () {
+        var _this = this;
+        var data = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            data[_i] = arguments[_i];
+        }
+        return this.doIfEnabled(function () {
+            var _a;
+            return (_a = _this.console).table.apply(_a, data);
+        });
+    };
+    /**
+     * Throws usual error in debug mode and non-blocking otherwise
+     * @param {Error} error
+     */
+    Debugger.prototype.throw = function (error) {
+        error.message = this.addPrefix(error.message);
+        if (this.isEnabled) {
+            throw error;
+        }
+        setTimeout(function () {
+            throw error;
+        });
+    };
+    Debugger.prototype.doIfEnabled = function (action) {
+        if (this.isEnabled) {
+            return action();
+        }
+    };
+    Debugger.prototype.addPrefix = function (message) {
+        if (this.prefix && (typeof message === 'string' || !message)) {
+            return this.prefix + message;
+        }
+        return message;
+    };
+    return Debugger;
+}());
+
+
+
+/***/ }),
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1258,7 +1495,7 @@ exports.qsa = (e) => document.querySelectorAll(e);
 
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1273,7 +1510,26 @@ exports.rever = (s) => s ? s.toString().split('').join('.') : s;
 
 
 /***/ }),
-/* 19 */
+/* 20 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getPath = void 0;
+/**
+ * * Используется для получения pathname
+ * @param number
+ */
+exports.getPath = (index) => {
+    let path = document.location.pathname;
+    let str = path.replace(/\/\s*$/, '').split('/');
+    return index ? str[index] : path;
+};
+
+
+/***/ }),
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1288,7 +1544,7 @@ exports.toUpper = (str) => str[0].toUpperCase() + str.substring(1);
 
 
 /***/ }),
-/* 20 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1315,13 +1571,13 @@ exports.getQuery = (name) => {
         return r;
     }
     catch (e) {
-        console_1.error('Ошибка (getQuery.ts): ' + e);
+        console_1.error('getQuery.ts', e);
     }
 };
 
 
 /***/ }),
-/* 21 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1346,7 +1602,7 @@ exports.inBefore = (elem, refElem) => {
 
 
 /***/ }),
-/* 22 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1370,7 +1626,7 @@ exports.declOfNum = (number, titles) => {
 
 
 /***/ }),
-/* 23 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1386,13 +1642,13 @@ exports.delCookie = (name) => setCookie_1.setCookie(name, null, { expires: -1 })
 
 
 /***/ }),
-/* 24 */
+/* 26 */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"name\":\"spaces-plus\",\"description\":\"🚀 Powerful userscript for Spaces.ru\",\"homepage\":\"https://spaces-dev.github.io/SpacesPlus\",\"version\":\"3.1.1\",\"author\":{\"name\":\"Vitalij Ryndin\",\"email\":\"sys@crashmax.ru\",\"url\":\"https://crashmax.ru\"},\"scripts\":{\"dev\":\"cross-env NODE_ENV=development webpack-dev-server --config-name main --host localhost --watch-poll\",\"build\":\"cross-env NODE_ENV=production webpack --progress\"},\"devDependencies\":{\"@types/node\":\"^14.11.8\",\"@types/resize-observer-browser\":\"^0.1.4\",\"@types/webpack\":\"^4.41.22\",\"@types/webpack-dev-server\":\"^3.11.0\",\"clean-webpack-plugin\":\"^3.0.0\",\"copy-webpack-plugin\":\"^6.2.1\",\"cross-env\":\"^7.0.2\",\"optimize-css-assets-webpack-plugin\":\"^5.0.4\",\"ts-loader\":\"^8.0.4\",\"ts-node\":\"^9.0.0\",\"typescript\":\"^4.0.2\",\"webpack\":\"^4.44.2\",\"webpack-cli\":\"^3.3.12\",\"webpack-dev-server\":\"^3.11.0\",\"webpack-userscript\":\"^2.5.6\",\"webpack-zip-files-plugin\":\"^1.0.0\"}}");
+module.exports = JSON.parse("{\"name\":\"spaces-plus\",\"description\":\"🚀 Powerful userscript for Spaces.ru\",\"homepage\":\"https://spaces-dev.github.io/SpacesPlus\",\"version\":\"3.1.2\",\"author\":{\"name\":\"Vitalij Ryndin\",\"email\":\"sys@crashmax.ru\",\"url\":\"https://crashmax.ru\"},\"scripts\":{\"dev\":\"cross-env NODE_ENV=development webpack-dev-server --config-name main --host localhost --watch-poll\",\"build\":\"cross-env NODE_ENV=production webpack --progress\"},\"devDependencies\":{\"@types/node\":\"^14.11.8\",\"@types/resize-observer-browser\":\"^0.1.4\",\"@types/webpack\":\"^4.41.22\",\"@types/webpack-dev-server\":\"^3.11.0\",\"clean-webpack-plugin\":\"^3.0.0\",\"copy-webpack-plugin\":\"^6.2.1\",\"cross-env\":\"^7.0.2\",\"optimize-css-assets-webpack-plugin\":\"^5.0.4\",\"ts-loader\":\"^8.0.4\",\"ts-debug\":\"^1.3.0\",\"ts-node\":\"^9.0.0\",\"typescript\":\"^4.0.2\",\"webpack\":\"^4.44.2\",\"webpack-cli\":\"^3.3.12\",\"webpack-dev-server\":\"^3.11.0\",\"webpack-userscript\":\"^2.5.6\",\"webpack-zip-files-plugin\":\"^1.0.0\"}}");
 
 /***/ }),
-/* 25 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1410,7 +1666,7 @@ exports.getCookie = (name) => {
 
 
 /***/ }),
-/* 26 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1436,7 +1692,7 @@ exports.getParams = (url) => {
 
 
 /***/ }),
-/* 27 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1456,7 +1712,7 @@ exports.playSound = (file, volume) => {
 
 
 /***/ }),
-/* 28 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1505,7 +1761,7 @@ const rm = () => index_1.qs('#SP_PLUS_CONFIRM').remove();
 
 
 /***/ }),
-/* 29 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1523,7 +1779,7 @@ exports.isValidUrl = (url) => {
 
 
 /***/ }),
-/* 30 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1566,7 +1822,7 @@ exports.messageBox = (title, content, close, timer) => {
 
 
 /***/ }),
-/* 31 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1591,13 +1847,13 @@ exports.historyPush = (state, url, title) => {
         history.pushState(state, title, url);
     }
     catch (e) {
-        console_1.error('Ошибка (historyPush.ts): ' + e);
+        console_1.error('historyPush.ts', e);
     }
 };
 
 
 /***/ }),
-/* 32 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1622,7 +1878,7 @@ exports.insertAfter = (elem, refElem) => {
 
 
 /***/ }),
-/* 33 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1664,7 +1920,7 @@ exports.modifyObject = (obj, key, value, index) => {
 
 
 /***/ }),
-/* 34 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1691,43 +1947,7 @@ exports.notification = (title, body, time) => {
 
 
 /***/ }),
-/* 35 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.getPath = exports.getHref = void 0;
-/**
- * Получаем полную ссылку
- */
-exports.getHref = () => document.location.href;
-/**
- * * Используется для определения в каком сейчас разделе находится пользователь
- * 1 - method
- * 2 - index
- * 3 - target
- * default - pathname
- * @param name
- */
-exports.getPath = (name) => {
-    let path = document.location.pathname;
-    let str = path.replace(/\/\s*$/, '').split('/');
-    switch (name) {
-        case 1:
-            return str[1];
-        case 2:
-            return str[2];
-        case 3:
-            return str[3];
-        default:
-            return path;
-    }
-};
-
-
-/***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1749,7 +1969,7 @@ exports.readSettings = () => {
         }
     }
     catch (e) {
-        index_1.error('Ошибка (readSettings.ts): ' + e);
+        index_1.error('readSettings', e);
     }
 };
 /**
@@ -1767,13 +1987,13 @@ exports.setSettings = (key, value) => {
         index_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
     }
     catch (e) {
-        index_1.error('Ошибка (setSettings.ts): ' + e);
+        index_1.error('setSettings', e);
     }
 };
 
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1801,7 +2021,7 @@ exports.oldHeader = (b) => {
 
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1825,13 +2045,13 @@ exports.scrollMove = (b) => {
         }
     }
     catch (e) {
-        utils_1.error('Ошибка (scrollMove.ts): ' + e);
+        utils_1.error('scrollMove.ts', e);
     }
 };
 
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1867,7 +2087,7 @@ exports.userStatus = (code) => {
 
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1895,20 +2115,20 @@ exports.userOnline = () => {
                         let online = str[0] > 0 ? `${str[0]} ч, ${Math.trunc(str[1] / (100 / 60))} мин` : `${Math.trunc(str[1] / (100 / 60))} мин`;
                         // @ts-ignore Костыль!
                         onBlock[0].nextElementSibling.textContent = online;
-                        utils_1.info('Время онлайн: ' + online);
+                        utils_1.info(`Время онлайн: ${online}`, e);
                     }
                 });
             }
         }
         catch (e) {
-            utils_1.error('Ошибка (userOnline.ts): ' + e);
+            utils_1.error('userOnline.ts', e);
         }
     }
 };
 
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1928,7 +2148,7 @@ exports.apiDebugger = (b) => {
 
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1945,17 +2165,17 @@ exports.coinsAccept = () => {
             e.click();
             // Удаляем элемент
             (_a = e.parentElement) === null || _a === void 0 ? void 0 : _a.remove();
-            utils_1.info('Собрали монетку!');
+            utils_1.info('Собрали монетку', e);
         });
     }
     catch (e) {
-        utils_1.error('Ошибка (coinsAccept.ts): ' + e);
+        utils_1.error('coinsAccept.ts', e);
     }
 };
 
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2033,7 +2253,9 @@ exports.deleteBlogs = () => {
                                 let allCount = count;
                                 for (let blog of blogs) {
                                     utils_1.messageBox(`Осталось удалить ${count--} из ${allCount} ${declStr(count)}`, 'Подождите немного... <span style="padding-right: 10px" class="ico ico_spinner"></span>', false);
-                                    await utils_1.http('GET', `${strings_1.SPACES}/diary/delete/?CK=${strings_1.DATA.CK}&id=${blog}&Sure=1`, true);
+                                    await utils_1.http('GET', `${strings_1.SPACES}/diary/delete/?CK=${strings_1.DATA.CK}&id=${blog}&Sure=1`, true).then(e => {
+                                        utils_1.info('Удалили блог', e);
+                                    });
                                 }
                                 document.location.reload();
                             });
@@ -2052,7 +2274,7 @@ exports.deleteBlogs = () => {
             }
         }
         catch (e) {
-            utils_1.error('Ошибка (deleteBlogs.ts): ' + e);
+            utils_1.error('deleteBlogs.ts', e);
         }
     }
 };
@@ -2060,7 +2282,7 @@ const declStr = (count) => 'блог' + utils_1.declOfNum(count, ['', 'а', 'о�
 
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2072,7 +2294,9 @@ const strings_1 = __webpack_require__(1);
 exports.firstLaunch = () => {
     try {
         // показываем приветствие, если отсутсвует кука и если BASE_URL не в залупе!
-        if (utils_1.getCookie('SP_LAUNCH') === undefined && strings_1.BASE_URL !== 'spaces-blogs.com') {
+        if (utils_1.getCookie('SP_LAUNCH') === undefined &&
+            strings_1.BASE_URL !== 'spaces-blogs.com' &&
+            strings_1.BASE_URL !== 'spac1.net') {
             utils_1.messageBox('Спасибо за установку Spaces+', `
                 <b style="color: #f86934">ВНИМАНИЕ!</b></br></br>
                 Во избежания подделок, которые могут воровать пароли пользователей, скрипт скачивать только с официального <a href="https://spaces-dev.github.io" target="_blank">сайта</a></br></br>
@@ -2092,13 +2316,13 @@ exports.firstLaunch = () => {
         }
     }
     catch (e) {
-        utils_1.error('Ошибка (firstLaunch.ts): ' + e);
+        utils_1.error('firstLaunch.ts', e);
     }
 };
 
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2115,17 +2339,17 @@ exports.karmaAccept = () => {
             e.click();
             // Удаляем элемент
             (_a = e.parentElement) === null || _a === void 0 ? void 0 : _a.remove();
-            utils_1.info('Собрали карму!');
+            utils_1.info('Собрали карму!', e);
         });
     }
     catch (e) {
-        utils_1.error('Ошибка (karmaAccept.ts): ' + e);
+        utils_1.error('karmaAccept.ts', e);
     }
 };
 
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2163,13 +2387,13 @@ exports.soundNotify = () => {
         }
     }
     catch (e) {
-        utils_1.error('Ошибка (soundEvents.ts): ' + e);
+        utils_1.error('soundEvents.ts', e);
     }
 };
 
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2195,7 +2419,7 @@ exports.betaFeatures = () => {
 
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2208,6 +2432,7 @@ exports.blockedFiles = () => {
         let downloadBtn = utils_1.qs('a[class*="__adv_download"'), downloadWrap = utils_1.qs('div[id^="download_wrap_"'), linkSSL = utils_1.qs('#SP_LINK_SSL');
         if (utils_1.getPath(1) === 'files' &&
             utils_1.getPath(2) === 'view' &&
+            downloadWrap &&
             !downloadBtn &&
             !linkSSL) {
             let createBtn = utils_1.ce('a', {
@@ -2230,18 +2455,19 @@ exports.blockedFiles = () => {
                         <span class="js-ico ico ico_download2_blue"></span>
                         <span class="t js-text">Скачать (${response.downloadBox.weight})</span>
                     `;
+                    utils_1.info('Загрузка заблокированного файла', e);
                 }
             });
         }
     }
     catch (e) {
-        utils_1.error('Ошибка (blockedFiles.ts): ' + e);
+        utils_1.error('blockedFiles.ts', e);
     }
 };
 
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2251,56 +2477,65 @@ exports.favoriteUser = void 0;
 const utils_1 = __webpack_require__(0);
 const strings_1 = __webpack_require__(1);
 exports.favoriteUser = async () => {
-    let href = utils_1.getHref(), method = utils_1.getPath(1), index = utils_1.getPath(2), nickname = utils_1.getPath(3);
-    if ((method === 'mysite' ||
-        (method === 'anketa' && index !== 'edit') ||
-        method === 'activity') &&
-        strings_1.DATA.FAVORITE !== href &&
-        strings_1.DATA.USERNAME !== utils_1.trim(utils_1.qs('#location_bar_1_0').textContent)) {
-        strings_1.DATA.FAVORITE = href;
-        try {
-            let inFavorite = utils_1.qs('#SP_PLUS_INFAVORITE'), tdBlock = utils_1.qsa('td.table__cell_last');
+    try {
+        let method = utils_1.getPath(1), index = utils_1.getPath(2), nickname = utils_1.getPath(3), inFavorite = utils_1.qs('#SP_PLUS_INFAVORITE'), tdBlock = utils_1.qsa('td.table__cell_last');
+        if ((method === 'mysite' ||
+            (method === 'anketa' && index !== 'edit') ||
+            method === 'activity') &&
+            strings_1.DATA.USERNAME !== utils_1.trim(utils_1.qs('#location_bar_1_0').textContent)) {
             if (nickname && tdBlock && !inFavorite) {
+                let favoriteButton = utils_1.ce('td', {
+                    class: 'table__cell stnd-link_disabled',
+                    id: 'SP_PLUS_INFAVORITE'
+                });
+                let loader = utils_1.ce('a', {
+                    href: '#',
+                    id: 'SP_FV_LOADER',
+                    class: 'stnd-link',
+                    html: `
+                        <span class="ico bp ico_spinner"></span>
+                        <span class="t js-text">Загрузка</span>
+                    `
+                });
+                favoriteButton.appendChild(loader);
+                utils_1.inBefore(favoriteButton, tdBlock[1]);
+                let clds = tdBlock[1].parentElement.childNodes;
+                for (let x in clds) {
+                    if (clds[x].nodeName === 'TD')
+                        clds[x].width = '25%';
+                }
                 await utils_1.http('GET', `${strings_1.SPACES}/anketa/index/${nickname}`, true).then(e => {
                     var _a;
                     const json = (_a = e.parsedBody) === null || _a === void 0 ? void 0 : _a.user_widget;
                     if (json) {
-                        let favoriteButton = inFavorite || utils_1.ce('td', {
-                            class: 'table__cell',
-                            id: 'SP_PLUS_INFAVORITE',
-                            html: `<a href="${strings_1.SPACES}/bookmarks/add/?object_id=${json.id}&object_type=11" class="stnd-link" title="Добавить в закладки"><span class="sp sp-fav"></span> B закладки</a>`,
+                        let favoriteLink = utils_1.ce('a', {
+                            href: `${strings_1.SPACES}/bookmarks/add/?object_id=${json.id}&object_type=11`,
+                            class: 'stnd-link',
+                            attr: { title: 'Добавить в закладки' },
+                            html: `<span class="sp sp-fav"></span> B закладки`,
                             onclick: () => {
                                 utils_1.confirmBox(`Добавить пользователя <b>${json.name}</b> в закладки?`, false, async () => {
                                     await utils_1.http('POST', `${strings_1.SPACES}/ajax/bookmarks/add/`, false, `object_id=${json.id}&object_type=11&show_all_tags_state=0&new_tags=Люди&cfms=Добавить&CK=${strings_1.DATA.CK}`).then(e => {
                                         e.status === 200 ?
                                             isFav(json.id, json.name, favoriteButton) :
-                                            console.log(e);
+                                            utils_1.error('bookmarks/add', e);
                                     });
                                 });
                                 return false;
                             }
                         });
                         isFav(json.id, json.name, favoriteButton);
-                        if (!inFavorite) {
-                            utils_1.inBefore(favoriteButton, tdBlock[1]);
-                        }
-                        let clds = tdBlock[1].parentElement.childNodes;
-                        for (let x in clds) {
-                            if (clds[x].nodeName === 'TD')
-                                clds[x].width = '25%';
-                        }
+                        utils_1.qs('#SP_FV_LOADER').remove();
+                        utils_1.qs('#SP_PLUS_INFAVORITE').classList.remove('stnd-link_disabled');
+                        favoriteButton.appendChild(favoriteLink);
                     }
+                    utils_1.info('anketa/index', e);
                 });
             }
         }
-        catch (e) {
-            utils_1.error('Ошибка (favoriteUser.ts): ' + e);
-        }
     }
-    else if (method !== 'mysite' &&
-        method !== 'anketa' &&
-        method !== 'activity') {
-        strings_1.DATA.FAVORITE = null;
+    catch (e) {
+        utils_1.error('favoriteUser.ts', e);
     }
 };
 const isFav = async (id, name, elem) => {
@@ -2317,22 +2552,23 @@ const isFav = async (id, name, elem) => {
                         await utils_1.http('GET', json.delete_URL, false).then(e => {
                             e.status === 200 ?
                                 document.location.reload() :
-                                console.log(e);
+                                utils_1.error('bookmarks/remove', e);
                         });
                     });
                     return false;
                 };
             }
+            utils_1.info('В закладках?', e);
         });
     }
     catch (e) {
-        utils_1.error('Ошибка (isFav): ' + e);
+        utils_1.error('isFav', e);
     }
 };
 
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2354,7 +2590,7 @@ exports.freeStickers = (b) => {
 
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2456,7 +2692,7 @@ exports.recentSmiles = () => {
         }
     }
     catch (e) {
-        utils_1.error('Ошибка (recentSmiles.ts): ' + e);
+        utils_1.error('recentSmiles.ts', e);
     }
 };
 const eventSmiles = (smiles, storage) => {
@@ -2470,7 +2706,7 @@ const eventSmiles = (smiles, storage) => {
 
 
 /***/ }),
-/* 52 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2499,7 +2735,7 @@ exports.settingsMenu = () => {
                     html: '<span>Настройки Spaces+</span><span class="ico ico_arr ico_m"></span>',
                     onclick: () => {
                         var _a, _b, _c;
-                        if (!/(\&)sp_plus_settings=1/i.test(utils_1.getHref())) {
+                        if (!/(\&)sp_plus_settings=1/i.test(document.location.href)) {
                             utils_1.historyPush({
                                 'sp_plus_settings': urlSett,
                             }, `${strings_1.SPACES}/settings/?sp_plus_settings=1`, 'Настройки Spaces+');
@@ -2643,7 +2879,7 @@ exports.settingsMenu = () => {
                                     utils_1.qs('#SP_PLUS_SETHEAD2').innerHTML = `<a href="${strings_1.SPACES}/settings/?sp_plus_settings=1" style="margin-bottom: 1px">Spaces+</a><span class="location-bar__sep ico"></span> Импорт и экспорт настроек`;
                                     // @ts-ignore
                                     utils_1.qs('#SP_PLUS_SETBACK').href = `${strings_1.SPACES}/settings/?sp_plus_settings=1`;
-                                    if (!/(\&)sp_backup=1/i.test(utils_1.getHref())) {
+                                    if (!/(\&)sp_backup=1/i.test(document.location.href)) {
                                         utils_1.historyPush({
                                             'sp_plus_settings': urlSett,
                                             'sp_backup': urlSettBackup
@@ -2664,13 +2900,13 @@ exports.settingsMenu = () => {
                                     utils_1.qs('#SP_PLUS_SETHEAD2').innerHTML = `<a href="${strings_1.SPACES}/settings/?sp_plus_settings=1" style="margin-bottom: 1px">Spaces+</a><span class="location-bar__sep ico"></span> История обновлений`;
                                     // @ts-ignore
                                     utils_1.qs('#SP_PLUS_SETBACK').href = `${strings_1.SPACES}/settings/?sp_plus_settings=1`;
-                                    if (!/(\&)sp_changelog=1/i.test(utils_1.getHref())) {
+                                    if (!/(\&)sp_changelog=1/i.test(document.location.href)) {
                                         utils_1.historyPush({
                                             'sp_plus_settings': urlSett,
                                             'sp_changelog': urlSettChangeLog
                                         }, `${strings_1.SPACES}/settings/?sp_plus_settings=1&sp_changelog=1`, 'Spaces+: История обновлений');
                                     }
-                                    index_1.settingsChangelogMenu('#SP_PLUS_SETAREA');
+                                    index_1.settingsLogMenu('#SP_PLUS_SETAREA');
                                     return false;
                                 }
                             });
@@ -2737,14 +2973,14 @@ exports.settingsMenu = () => {
             }
         }
         catch (e) {
-            utils_1.error('Ошибка (SETTINGS): ' + e);
+            utils_1.error('settingsMenu', e);
         }
     }
 };
 
 
 /***/ }),
-/* 53 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2803,13 +3039,13 @@ exports.stickyHeader = (b) => {
         }
     }
     catch (e) {
-        utils_1.error('Ошибка (stickyHeader.ts): ' + e);
+        utils_1.error('stickyHeader.ts', e);
     }
 };
 
 
 /***/ }),
-/* 54 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2869,7 +3105,7 @@ exports.bypassProfile = () => {
         }
     }
     catch (e) {
-        utils_1.error('Ошибка (bypassProfile.ts): ' + e);
+        utils_1.error('bypassProfile.ts', e);
     }
 };
 // выполняем CORS запрос и получаем HTML профиля
@@ -2889,6 +3125,7 @@ const getProfile = async (nickname) => {
             else {
                 utils_1.messageBox('Просмотр профилей', 'Ошибка загрузки профиля! Обратитесь к разработчику', true);
             }
+            utils_1.info('Просмотр профилей', e);
         });
     }
     if (strings_1.DATA.CONTENT !== null) {
@@ -2973,7 +3210,7 @@ const setUrls = (e, lnk1, lnk2) => {
     }));
     // создаем ссылки
     for (let url of urls) {
-        let { ico, text, path } = url;
+        const { ico, text, path } = url;
         let link = utils_1.ce('a', {
             href: strings_1.SPACES + path,
             class: 'list-link stnd-link_arr list-link-darkblue c-darkblue',
@@ -2989,7 +3226,7 @@ const setUrls = (e, lnk1, lnk2) => {
 
 
 /***/ }),
-/* 55 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3061,7 +3298,9 @@ exports.deleteReaders = () => {
                                     let allCount = count;
                                     for (let reader of readers) {
                                         utils_1.messageBox(`Осталось удалить ${count--} из ${allCount} ${declStr(count)}`, 'Подождите немного... <span style="padding-right: 10px" class="ico ico_spinner"></span>', false);
-                                        await utils_1.http('POST', `${strings_1.SPACES}/lenta/reader_delete/?user=${reader}`, false, `&CK=${strings_1.DATA.CK}&cfms=Удалить`);
+                                        await utils_1.http('POST', `${strings_1.SPACES}/lenta/reader_delete/?user=${reader}`, false, `&CK=${strings_1.DATA.CK}&cfms=Удалить`).then(e => {
+                                            utils_1.info('Удалили читателя', e);
+                                        });
                                     }
                                     document.location.reload();
                                 });
@@ -3079,7 +3318,7 @@ exports.deleteReaders = () => {
             }
         }
         catch (e) {
-            utils_1.error('Ошибка (deleteReaders.ts): ' + e);
+            utils_1.error('deleteReaders.ts', e);
         }
     }
 };
@@ -3087,7 +3326,7 @@ const declStr = (count) => 'читател' + utils_1.declOfNum(count, ['я', '�
 
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3124,13 +3363,13 @@ exports.galleryRotate = () => {
         }
     }
     catch (e) {
-        utils_1.error('Ошибка (galleryRotate.ts): ' + e);
+        utils_1.error('galleryRotate.ts', e);
     }
 };
 
 
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3155,7 +3394,7 @@ exports.sidebarButton = () => {
 
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3255,7 +3494,7 @@ const cookieWeather = () => {
 
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3351,7 +3590,9 @@ exports.deleteComments = () => {
                                 let allCount = count;
                                 for (let url of urls) {
                                     utils_1.messageBox(`Осталось удалить ${count--} из ${allCount} ${declStr(count)}`, 'Подождите немного... <span style="padding-right: 10px" class="ico ico_spinner"></span>', false);
-                                    await utils_1.http('GET', url, true);
+                                    await utils_1.http('GET', url, true).then(e => {
+                                        utils_1.info('Удалил комментарий', e);
+                                    });
                                 }
                                 document.location.reload();
                             });
@@ -3369,14 +3610,14 @@ exports.deleteComments = () => {
         }
     }
     catch (e) {
-        utils_1.error('Ошибка (deleteComments.ts): ' + e);
+        utils_1.error('deleteComments.ts', e);
     }
 };
 const declStr = (count) => 'комментари' + utils_1.declOfNum(count, ['й', 'я', 'ев']);
 
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3403,13 +3644,13 @@ exports.hiddenRightbar = (b) => {
         }
     }
     catch (e) {
-        utils_1.error('Ошибка (hidderRightbar.ts): ' + e);
+        utils_1.error('hidderRightbar.ts', e);
     }
 };
 
 
 /***/ }),
-/* 61 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3439,19 +3680,19 @@ exports.playerDownload = () => {
             }
             else if (downPlace && strings_1.DATA.PLAYER !== trId) {
                 strings_1.DATA.PLAYER = trId;
-                utils_1.info('Обновили ссылку на трек!');
                 downPlace.onclick = () => location.href = trScr;
+                utils_1.info('Обновили ссылку на трек', jstr);
             }
         }
     }
     catch (e) {
-        utils_1.error('Ошибка (playerDownload.ts): ' + e);
+        utils_1.error('playerDownload.ts', e);
     }
 };
 
 
 /***/ }),
-/* 62 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3582,13 +3823,13 @@ exports.settingsNotify = (e) => {
         utils_1.insertAfter(eventsWrap, e.parentNode);
     }
     catch (e) {
-        utils_1.error('Ошибка (settingsEvents.ts): ' + e);
+        utils_1.error('settingsNotify.ts', e);
     }
 };
 
 
 /***/ }),
-/* 63 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3604,7 +3845,55 @@ exports.disableRedirect = () => {
 
 
 /***/ }),
-/* 64 */
+/* 65 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.settingsLogMenu = void 0;
+const utils_1 = __webpack_require__(0);
+const checkUpdates_1 = __webpack_require__(12);
+const strings_1 = __webpack_require__(1);
+exports.settingsLogMenu = (id) => {
+    window.scrollTo(0, 0);
+    const target = utils_1.qs(id);
+    if (target) {
+        try {
+            target.innerHTML = '';
+            let wrap = utils_1.ce('div', { class: 'wbg error__item_wrapper sp_plus_c_wrap' });
+            let div = utils_1.ce('div', { class: 'pad_t_a' });
+            let container = utils_1.ce('div', { class: 'js-input_error_wrap' });
+            let preloader = utils_1.ce('div', { class: 't_center', id: 'SP_JSON_PRELOADER', html: `<img src="${strings_1.HTTP}//spac.me/i/preloader.gif">` });
+            container.appendChild(div);
+            wrap.appendChild(container);
+            target.appendChild(wrap);
+            wrap.appendChild(preloader);
+            checkUpdates_1.getUpdater((json) => {
+                for (let history of json.history) {
+                    let label = utils_1.ce('label', {
+                        class: 'label sp_plus_line_c',
+                        html: `v${utils_1.rever(history.build)}<div class="label__desc">${history.date}</div>`
+                    });
+                    let changes = utils_1.ce('div', {
+                        class: 'grey sp_plus_c_desc',
+                        html: history.changes
+                    });
+                    div.appendChild(label);
+                    div.appendChild(changes);
+                }
+                utils_1.qs('#SP_JSON_PRELOADER').remove();
+            });
+        }
+        catch (e) {
+            utils_1.error('settingsLogMenu.ts', e);
+        }
+    }
+};
+
+
+/***/ }),
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3645,13 +3934,13 @@ exports.settingsFriends = (e) => {
         utils_1.insertAfter(frMaxWrap, e.parentNode);
     }
     catch (e) {
-        utils_1.error('Ошибка (settingsFriends.ts): ' + e);
+        utils_1.error('settingsFriends.ts', e);
     }
 };
 
 
 /***/ }),
-/* 65 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3659,7 +3948,7 @@ exports.settingsFriends = (e) => {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.settingsFeatures = void 0;
 const utils_1 = __webpack_require__(0);
-const newbeeQuest_1 = __webpack_require__(66);
+const newbeeQuest_1 = __webpack_require__(68);
 const settings_1 = __webpack_require__(2);
 const strings_1 = __webpack_require__(1);
 // Встроенные возможности сайта
@@ -3757,7 +4046,7 @@ const btnWrap = (str) => `<span class="b">${str}<span class="ico ico_arr ico_m">
 
 
 /***/ }),
-/* 66 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3775,17 +4064,18 @@ exports.newbeeQuest = async () => {
                 if ((_a = e.parsedBody) === null || _a === void 0 ? void 0 : _a.owner_widget.newbee_quest_widget) {
                     newbequest.style.display = 'block';
                 }
+                utils_1.info('Квест новичка', e);
             });
         }
         catch (e) {
-            utils_1.error('Ошибка newbeeQuest.ts: ' + e);
+            utils_1.error('newbeeQuest.ts', e);
         }
     }
 };
 
 
 /***/ }),
-/* 67 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3819,13 +4109,13 @@ exports.videoSpeedPlayback = () => {
         }
     }
     catch (e) {
-        utils_1.error('Ошибка (videoSpeedPlayback.ts): ' + e);
+        utils_1.error('videoSpeedPlayback.ts', e);
     }
 };
 
 
 /***/ }),
-/* 68 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3951,7 +4241,7 @@ exports.settingsBackground = (e) => {
         }
     }
     catch (e) {
-        utils_1.error('Ошибка (settingsBackground.ts): ' + e);
+        utils_1.error('settingsBackground.ts', e);
     }
 };
 const setImage = async () => {
@@ -3997,7 +4287,7 @@ const setImage = async () => {
         }
     }
     catch (e) {
-        utils_1.error('Ошибка (setImage): ' + e);
+        utils_1.error('setImage', e);
     }
 };
 const setColor = () => {
@@ -4117,7 +4407,7 @@ const setColor = () => {
         }
     }
     catch (e) {
-        utils_1.error('Ошибка (setColor): ' + e);
+        utils_1.error('setColor', e);
     }
 };
 const setValues = (color) => {
@@ -4128,7 +4418,7 @@ const setValues = (color) => {
 
 
 /***/ }),
-/* 69 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4248,7 +4538,7 @@ exports.settingsBackupMenu = (id) => {
             });
         }
         catch (e) {
-            utils_1.error('Ошибка (settingsBackupMenu.ts): ' + e);
+            utils_1.error('settingsBackupMenu.ts', e);
         }
     }
 };
@@ -4262,11 +4552,12 @@ exports.settingsBackupMenu = (id) => {
 const getJSON = (data, callback) => {
     try {
         utils_1.http('POST', 'https://crashmax.ru/api/getJSON', false, data).then(e => {
+            utils_1.info('api/getJSON', e);
             return callback(e.parsedBody);
         });
     }
     catch (e) {
-        utils_1.error('Ошибка (getJSON): ' + e);
+        utils_1.error('getJSON', e);
     }
 };
 /**
@@ -4288,7 +4579,7 @@ const handleErrors = (target, errorsBlock, json) => {
 
 
 /***/ }),
-/* 70 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4322,54 +4613,6 @@ exports.settingsRecentSmiles = (e) => {
     masWarp.appendChild(maxSabeLbl);
     masWarp.appendChild(maxSave);
     utils_1.insertAfter(masWarp, e.parentNode);
-};
-
-
-/***/ }),
-/* 71 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.settingsChangelogMenu = void 0;
-const utils_1 = __webpack_require__(0);
-const checkUpdates_1 = __webpack_require__(12);
-const strings_1 = __webpack_require__(1);
-exports.settingsChangelogMenu = (id) => {
-    window.scrollTo(0, 0);
-    const target = utils_1.qs(id);
-    if (target) {
-        try {
-            target.innerHTML = '';
-            let wrap = utils_1.ce('div', { class: 'wbg error__item_wrapper sp_plus_c_wrap' });
-            let div = utils_1.ce('div', { class: 'pad_t_a' });
-            let container = utils_1.ce('div', { class: 'js-input_error_wrap' });
-            let preloader = utils_1.ce('div', { class: 't_center', id: 'SP_JSON_PRELOADER', html: `<img src="${strings_1.HTTP}//spac.me/i/preloader.gif">` });
-            container.appendChild(div);
-            wrap.appendChild(container);
-            target.appendChild(wrap);
-            wrap.appendChild(preloader);
-            checkUpdates_1.getUpdater((json) => {
-                for (let history of json.history) {
-                    let label = utils_1.ce('label', {
-                        class: 'label sp_plus_line_c',
-                        html: `v${utils_1.rever(history.build)}<div class="label__desc">${history.date}</div>`
-                    });
-                    let changes = utils_1.ce('div', {
-                        class: 'grey sp_plus_c_desc',
-                        html: history.changes
-                    });
-                    div.appendChild(label);
-                    div.appendChild(changes);
-                }
-                utils_1.qs('#SP_JSON_PRELOADER').remove();
-            });
-        }
-        catch (e) {
-            utils_1.error('Ошибка (changelogMenu.ts): ' + e);
-        }
-    }
 };
 
 
