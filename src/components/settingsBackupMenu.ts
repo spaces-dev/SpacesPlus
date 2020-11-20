@@ -1,29 +1,27 @@
 import {
     ce,
     qs,
-    http,
-    info,
     error,
     inBefore,
-    delCookie,
     setCookie,
     confirmBox,
+    messageBox,
     setSettings
 } from '../utils'
 
-import { IGetJSON } from '../interfaces/GetJSON'
-
-import { HTTP } from '../strings'
 import { _SETTINGS } from '../settings'
 
 /**
- * Меню сохранения/восстановления файла настроек
+ * Меню импорта/экспорта файла настроек
  * @param id #SP_PLUS_SETAREA
  */
 export const settingsBackupMenu = (id: string) => {
     // Прокручиваем страницу вверх
     window.scrollTo(0, 0)
     const target = qs(id)
+
+    // https://www.npmjs.com/package/json-beautify
+    const beautify = require('json-beautify')
 
     if (target) {
         try {
@@ -44,146 +42,133 @@ export const settingsBackupMenu = (id: string) => {
 
                 let smallInfo = ce('div', {
                     class: 'stnd-block-yellow',
-                    style: 'padding: 15px',
-                    html: '<span class="sp sp-alert"></span>Внимание!</br></br><div style="font-size: small">Редактирование только для опытных пользователей, если что-то пошло не так, следует сделать полный сброс настроек.</div>'
+                    style: 'padding: 16px',
+                    html: '<span class="sp sp-alert"></span>Внимание!</br></br><div style="font-size: small">Редактирование только для опытных пользователей! Перед редактированием файла настроек, следует сделать Экспорт, если что-то пошло не так, следует сделать Импорт настроек.</div>'
                 })
 
                 let infoDiv = ce('div', { id: 'SP_CONFIG_JSON' })
+
                 infoDiv.appendChild(hideNotify)
                 target.appendChild(infoDiv)
                 infoDiv.appendChild(smallInfo)
             }
 
-            let wrap = ce('div', { class: 'content-bl' }),
-                preloader = ce('div', {
-                    class: 't_center',
-                    id: 'SP_JSON_PRELOADER',
-                    html: `<img src="${HTTP}//spac.me/i/preloader.gif">`
-                })
-
-            target.appendChild(wrap)
-            wrap.appendChild(preloader)
-
-            let buttonsDiv = ce('div', { class: 'widgets-group user__tools_last', id: 'SP_PLUS_BOTTOM_DIVB' }),
+            let wrap = ce('div', { style: 'padding: 16px 16px 14px 16px' }),
+                buttonsDiv = ce('div', { class: 'widgets-group user__tools_last', id: 'SP_PLUS_BOTTOM_DIVB' }),
+                textareaBtn = ce('div', { class: 'widgets-group user__tools_last', style: 'margin: unset' }),
                 tiw = ce('div', { class: 'text-input__wrap' }),
-                cl = ce('div', { class: 'cl' }),
-                errorsBlock = ce('div', {
-                    id: 'JSON_ERROR_BLOCK',
-                    class: 'stnd-block-yellow',
-                    style: 'padding: 15px',
-                    html: '<span class="sp sp-alert"></span> Невалидный JSON<br /><br />'
-                })
+                cl = ce('div', { class: 'cl' })
+
+            let updateButton = ce('button', {
+                class: 'user__tools-link table__cell sp_btn',
+                style: 'border-right: none; border-top: 1px solid #cdd4e1',
+                html: '<span class="sp sp-ok-darkblue"></span><span style="color: #0e3c87; padding-left: 10px">Применить изменения</span>',
+                onclick: () => {
+                    let json,
+                        val = (<HTMLInputElement>qs('#SP_BACKUP_JSON')).value
+
+                    try {
+                        // валидация лоооол
+                        json = JSON.parse(val)
+
+                        // удаляем алерты с ошибками, если они есть
+                        qs('#SP_PLUS_ALERT')?.remove()
+
+                        // сохраняем настройки
+                        setCookie('SP_PLUS_SET', val)
+
+                        // сообщение
+                        messageBox('Импорт и экспорт настроек', 'Настройки были успешно сохранены', true, 3)
+                    } catch (e) {
+                        messageBox('Ошибка разбора файла настроек', e, true)
+                    }
+                }
+            })
+
+            let restoreInput = ce('input', {
+                id: 'SP_IMPORT',
+                attr: {
+                    type: 'file',
+                    name: 'config',
+                    accept: 'application/JSON'
+                },
+                style: 'display: none'
+            })
+
+            restoreInput.addEventListener('change', () => {
+
+                let json,
+                    textarea = (<HTMLInputElement>qs('#SP_BACKUP_JSON')),
+                    f = (<HTMLInputElement>qs('#SP_IMPORT')).files![0]
+
+                const reader = new FileReader()
+
+                reader.onload = ((f) => {
+                    return (e: any) => {
+                        try {
+                            json = JSON.parse(e.target.result)
+
+                            // сохраняем настройки
+                            setCookie('SP_PLUS_SET', e.target.result);
+
+                            // вставляем в textarea
+                            textarea.value = beautify(json, null, 4)
+
+                            messageBox('Импорт и экспорт настроек', 'Настройки были успешно сохранены', true, 3)
+                        } catch (e) {
+                            messageBox('Ошибка разбора файла настроек', e, true)
+                        }
+                    }
+                })(f)
+
+                reader.readAsText(f)
+            }, false)
 
             let restoreButton = ce('button', {
-                class: 'user__tools-link table__cell sp_btn_line sp_plus_btn_list',
-                html: '<span class="sp sp-restore-g"></span><span style="color: #3ca93c; padding-left: 10px">Сбросить настройки</span>',
-                onclick: () => {
-                    confirmBox('Вы действительно хотите сбросить файл конфигурации?', true, () => {
-                        delCookie('SP_PLUS_SET')
-                        document.location.reload()
-                    })
-                    return false
-                }
+                class: 'user__tools-link table__cell sp_btn_line sp_btn-list',
+                html: '<span class="sp sp-restore-g"></span><span style="color: #3ca93c; padding-left: 10px">Импорт</span>',
+                onclick: () => qs('#SP_IMPORT').click()
             })
 
             let saveButton = ce('button', {
-                class: 'user__tools-link sp_plus_btn_list',
-                html: '<span class="sp sp-ok-blue"></span><span style="color: #57A3EA; padding-left: 10px;">Сохранить</span>',
+                class: 'user__tools-link sp_btn-list',
+                html: '<span class="sp sp-download-blue"></span><span style="color: #57A3EA; padding-left: 10px;">Экспорт</span>',
                 onclick: () => {
-                    let area = (qs('#SP_BACKUP_JSON') as HTMLInputElement).value,
-                        confirm = qs('#SP_PLUS_CONFIRM')
+                    confirmBox('Вы уверены, что хотите сохранить файл настроек?', false, () => {
+                        let blob = ce('a', {
+                            attr: {
+                                href: URL.createObjectURL(new Blob([beautify(_SETTINGS, null, 4)], { type: 'text/plain' })),
+                                download: `spaces-plus-${+new Date}.json`
+                            }
+                        })
 
-                    confirm?.remove()
-
-                    getJSON(`value=${area}`, (json: IGetJSON) => {
-                        // Костыль ¯\_(ツ)_/¯
-                        if (qs('#JSON_ERROR_BLOCK')) {
-                            errorsBlock.innerHTML = '<span class="sp sp-alert"></span> Невалидный JSON<br /><br />'
-                            qs('#JSON_ERROR_BLOCK').remove()
-                        }
-
-                        if (json.result.valid) {
-                            setCookie('SP_PLUS_SET', area)
-                            confirmBox('Настройки были успешно обновлены</br>Хотите сохранить файл настроек на рабочий стол?', false, () => {
-                                let blob = ce('a', {
-                                    attr: {
-                                        href: URL.createObjectURL(new Blob([area], { type: 'text/plain' })),
-                                        download: 'spaces-plus.json'
-                                    }
-                                })
-
-                                blob.click()
-                                blob.remove()
-                            })
-                        } else {
-                            handleErrors(target, errorsBlock, json)
-                        }
-                        return false
+                        blob.click()
+                        blob.remove()
                     })
                 }
             })
 
-            getJSON(`value=${JSON.stringify(_SETTINGS)}`, (json: IGetJSON) => {
-
-                let textarea = ce('textarea', {
-                    class: 'text-input',
-                    id: 'SP_BACKUP_JSON',
-                    cols: '17',
-                    rows: '25',
-                    html: json.result.data
-                })
-
-                target.appendChild(wrap)
-                wrap.appendChild(tiw)
-                tiw.appendChild(cl)
-                cl.appendChild(textarea)
-
-                json.result.valid ?
-                    qs('#SP_JSON_PRELOADER').remove() :
-                    handleErrors(target, errorsBlock, json)
-
-                buttonsDiv.appendChild(restoreButton)
-                buttonsDiv.appendChild(saveButton)
-                inBefore(buttonsDiv, qs('#SP_PLUS_ABOUT'))
+            let textarea = ce('textarea', {
+                class: 'text-input',
+                id: 'SP_BACKUP_JSON',
+                rows: 20,
+                html: beautify(_SETTINGS, null, 4)
             })
+
+            target.appendChild(wrap)
+            wrap.appendChild(tiw)
+            tiw.appendChild(cl)
+            cl.appendChild(textarea)
+            textareaBtn.appendChild(updateButton)
+            target.appendChild(textareaBtn)
+
+            // группа кнопок
+            buttonsDiv.appendChild(restoreInput)
+            buttonsDiv.appendChild(restoreButton)
+            buttonsDiv.appendChild(saveButton)
+            inBefore(buttonsDiv, qs('#SP_PLUS_ABOUT'))
         } catch (e) {
             error('settingsBackupMenu.ts', e)
         }
-    }
-}
-
-/**
- * JSON Validator API (https://gist.github.com/crashmax-off/f86350b8a4b85311ac8676a906b973eb) 
- * https://crashmax.ru/api/getJSON
- * TODO: Возможно вынести в utils???
- * @param data используем JSON.stringfy() для отправки POST
- * @param callback response function
- */
-const getJSON = (data: string, callback: Function) => {
-    try {
-        http<IGetJSON>('POST', 'https://crashmax.ru/api/getJSON', false, data).then(e => {
-            info('api/getJSON', e)
-
-            return callback(e.parsedBody)
-        })
-    } catch (e) {
-        error('getJSON', e)
-    }
-}
-
-/**
- * Выводим получаемые ошибки в JSON схеме
- * @param target #SP_PLUS_SETAREA
- * @param errorsBlock #JSON_ERROR_BLOCK
- * @param json http response
- */
-const handleErrors = (target: Element, errorsBlock: Element, json: IGetJSON) => {
-    target.appendChild(errorsBlock)
-    for (let err of json.result.errors) {
-        let error = ce('div', {
-            class: 'sp_error-block',
-            html: `<b>Error:</b> ${err.message} [Code: ${err.code}, Sctructure: ${err.element}]<br />`
-        })
-        errorsBlock.appendChild(error)
     }
 }

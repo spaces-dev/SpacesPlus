@@ -171,8 +171,14 @@
     border-bottom: unset !important
 }
 
-.sp_plus_btn_list {
+.sp_btn-list {
     width: 50%;
+    display: inline-block;
+    box-sizing: border-box !important
+}
+
+.sp_btn {
+    width: 100%;
     display: inline-block;
     box-sizing: border-box !important
 }
@@ -623,4 +629,12 @@ input[type=color] {
 
 .sp-eye-grey {
     background-position: -64px -64px
+}
+
+.sp-ok-darkblue {
+    background-position: -16px -80px
+}
+
+.sp-download-blue {
+    background-position: 0px -80px
 }
