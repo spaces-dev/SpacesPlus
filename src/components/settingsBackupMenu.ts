@@ -89,7 +89,6 @@ export const settingsBackupMenu = (id: string) => {
                 id: 'SP_IMPORT',
                 attr: {
                     type: 'file',
-                    name: 'config',
                     accept: 'application/JSON'
                 },
                 style: 'display: none'
