@@ -182,7 +182,7 @@ const setImage = async () => {
                                 style: 'cursor: pointer',
                                 src: `${ENV_PATH}/backgrounds/${i}`,
                                 onclick: (e: any) => {
-                                    (qs('#image-input') as HTMLInputElement).value = e.target.src
+                                    (<HTMLInputElement>qs('#image-input')).value = e.target.src
                                     setSettings('bodystyleSet.url', e.target.src)
                                     setStyles()
                                 }
@@ -352,7 +352,7 @@ const setColor = () => {
 }
 
 const setValues = (color: string) => {
-    (qs('input[name=color]') as HTMLInputElement).value = color;
-    (qs('#color-input') as HTMLInputElement).value = color
+    (<HTMLInputElement>qs('input[name=color]')).value = color;
+    (<HTMLInputElement>qs('#color-input')).value = color
     qs('.colorpicker-color').style.backgroundColor = color
 }

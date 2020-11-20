@@ -22,8 +22,8 @@ export const favoriteUser = async () => {
         let method = getPath(1),
             index = getPath(2),
             nickname = getPath(3),
-            inFavorite = qs('#SP_PLUS_INFAVORITE'),
-            tdBlock: any = qsa('td.table__cell_last')
+            tdBlock = qsa('td.table__cell_last'),
+            inFavorite = qs('#SP_PLUS_INFAVORITE')
 
         if ((method === 'mysite' ||
             (method === 'anketa' && index !== 'edit') ||
@@ -50,8 +50,8 @@ export const favoriteUser = async () => {
                 favoriteButton.appendChild(loader)
                 inBefore(favoriteButton, tdBlock[1])
 
-                let clds = (tdBlock[1].parentElement.childNodes as NodeList)
-                for (let x in clds) { if (clds[x].nodeName === 'TD') (clds[x] as HTMLTableCellElement).width = '25%' }
+                let clds = (<NodeList>tdBlock[1]?.parentElement?.childNodes)
+                for (let x in clds) { if (clds[x].nodeName === 'TD') (<HTMLTableCellElement>clds[x]).width = '25%' }
 
                 await http<IUserAnketa>('GET', `${SPACES}/anketa/index/${nickname}`, true).then(e => {
                     const json = e.parsedBody?.user_widget

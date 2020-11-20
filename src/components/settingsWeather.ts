@@ -135,7 +135,7 @@ export const getWeather = async () => {
                 return false
             }
 
-            if (qs('#SP-CITY-INPUT')) { (qs('#SP-CITY-INPUT') as HTMLInputElement).value = json!.name }
+            if (qs('#SP-CITY-INPUT')) { (<HTMLInputElement>qs('#SP-CITY-INPUT')).value = json!.name }
             qs('#SP_WIDGET_WEATHER')?.remove()
 
             if (json?.cod === 200) {

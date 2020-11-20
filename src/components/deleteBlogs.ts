@@ -40,7 +40,7 @@ export const deleteBlogs = () => {
                 for (let link of links) {
                     if (link.className) {
 
-                        let blogId = `SP_DB_${getParams((link as HTMLLinkElement).href)['id']}`
+                        let blogId = `SP_DB_${getParams((<HTMLLinkElement>link).href)['id']}`
 
                         let checkbox = ce('input', {
                             class: 'sp-cbfb sp-checkbox-square',
@@ -68,13 +68,13 @@ export const deleteBlogs = () => {
 
                 // кнопка "Выбрать Все"
                 const chooseAllButton = ce('button', {
-                    class: 'user__tools-link table__cell sp_plus_btn_list',
+                    class: 'user__tools-link table__cell sp_btn-list',
                     html: '<span class="sp sp-ok-blue"></span><span class="sp-ch-text">Выбрать все</span>',
                     onclick: (e: any) => {
                         let parent = e.target.nodeName === 'SPAN' ? e.target.parentNode : e.target
 
                         for (let ch of checkboxArr) {
-                            (ch as HTMLInputElement).checked = parent.innerHTML.indexOf('Выбрать все') !== -1 ? true : false
+                            (<HTMLInputElement>ch).checked = parent.innerHTML.indexOf('Выбрать все') !== -1 ? true : false
                         }
 
                         parent.innerHTML = `<span class="sp sp-ok-blue"></span><span class="sp-ch-text">${parent.innerHTML.indexOf('Выбрать все') !== -1 ? 'Снять отметки' : 'Выбрать все'}</span>`
@@ -84,14 +84,14 @@ export const deleteBlogs = () => {
 
                 // кнопка "Удалить выбранные"
                 const deleteBlogsButton = ce('button', {
-                    class: 'user__tools-link table__cell sp_btn_line sp_plus_btn_list',
+                    class: 'user__tools-link table__cell sp_btn_line sp_btn-list',
                     html: '<span class="sp sp-remove-red"></span><span class="sp-del-text">Удалить выбранные</span>',
                     onclick: () => {
                         let count: number = 0,
                             blogs: string[] = []
 
                         for (let ch of checkboxArr) {
-                            if ((ch as HTMLInputElement).checked) {
+                            if ((<HTMLInputElement>ch).checked) {
                                 blogs.push(/^SP_DB_([0-9]+)$/i.exec(ch.id)![1])
                                 count++
                             }

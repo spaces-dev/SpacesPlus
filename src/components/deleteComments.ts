@@ -59,14 +59,14 @@ export const deleteComments = () => {
                 })
 
                 const chooseAllButton = ce('button', {
-                    class: 'user__tools-link table__cell sp_plus_btn_list',
+                    class: 'user__tools-link table__cell sp_btn-list',
                     html: '<span class="sp sp-ok-blue"></span><span class="sp-ch-text">Выбрать все</span>',
                     onclick: (e: any) => {
                         let inputs = qsa('input[id^="DC_"]')
                         let parent = e.target.nodeName === 'SPAN' ? e.target.parentNode : e.target
 
                         for (let input of inputs) {
-                            (input as HTMLInputElement).checked = parent.innerHTML.indexOf('Выбрать все') !== -1 ? true : false
+                            (<HTMLInputElement>input).checked = parent.innerHTML.indexOf('Выбрать все') !== -1 ? true : false
                         }
 
                         parent.innerHTML = `<span class="sp sp-ok-blue"></span><span class="sp-ch-text">${parent.innerHTML.indexOf('Выбрать все') !== -1 ? 'Снять отметки' : 'Выбрать все'}</span>`
@@ -75,7 +75,7 @@ export const deleteComments = () => {
                 })
 
                 const deleteCommentsButton = ce('button', {
-                    class: 'user__tools-link table__cell sp_btn_line sp_plus_btn_list',
+                    class: 'user__tools-link table__cell sp_btn_line sp_btn-list',
                     html: '<span class="sp sp-remove-red"></span><span class="sp-del-text">Удалить выбранные</span>',
                     onclick: () => {
                         let inputs = qsa('input[id^="DC_"]'),
@@ -83,7 +83,7 @@ export const deleteComments = () => {
                             urls: string[] = []
 
                         for (let input of inputs) {
-                            if ((input as HTMLInputElement).checked) {
+                            if ((<HTMLInputElement>input).checked) {
 
                                 Array.prototype.slice.call((DEVICE.id === 4 ?
                                     // костыль для PC

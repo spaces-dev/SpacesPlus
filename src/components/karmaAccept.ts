@@ -6,7 +6,7 @@ export const karmaAccept = () => {
     try {
         qsa(`a[href^="${SPACES}/mysite/rate_n_karma/karma/?Accept="`).forEach(e => {
             // Подтверждаем карму
-            (e as HTMLElement).click()
+            (<HTMLElement>e).click()
 
             // Удаляем элемент
             e.parentElement?.remove()

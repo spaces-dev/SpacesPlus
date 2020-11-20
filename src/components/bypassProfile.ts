@@ -54,9 +54,9 @@ export const bypassProfile = () => {
 
                 inBefore(button, tdBlock[1])
 
-                let clds = (tdBlock[1]?.parentElement?.childNodes as NodeList)
+                let clds = (<NodeList>tdBlock[1]?.parentElement?.childNodes)
                 // 'width' is deprecated ???
-                for (let x in clds) { if (clds[x].nodeName === 'TD') (clds[x] as HTMLTableCellElement).width = '25%' }
+                for (let x in clds) { if (clds[x].nodeName === 'TD') (<HTMLTableCellElement>clds[x]).width = '25%' }
 
                 if (DATA.NICKNAME === nickname) qs('#SP_PLUS_INBL').click()
             }

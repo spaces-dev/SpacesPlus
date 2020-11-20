@@ -7,7 +7,7 @@ export const videoSpeedPlayback = () => {
     let playback = qs('#SP_PLAYBACK_VIDEO')
 
     try {
-        if (playback) (qs('video') as HTMLVideoElement).playbackRate = _SETTINGS.videoSpeed
+        if (playback) (<HTMLVideoElement>qs('video')).playbackRate = _SETTINGS.videoSpeed
 
         if (jwcontrols && !playback) {
             let target = qs('span[class*="jwtext jwduration jwhidden"]')
