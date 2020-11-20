@@ -311,7 +311,7 @@ exports._DESCSTRINGS = {
     'grotate': `<img src="${strings_1.ENV_PATH}/screens/rotate-image.png"></br>Добавляется кнопка в просмотрщик фотографий, с помощью ее можно поворачивать изображение.`,
     'adblock': 'Функция полностью скрывает назойливую рекламу и не только.',
     'stickyheader': 'Функция закрепляет шапку сайта.',
-    'notify': `<img src="${strings_1.ENV_PATH}/screens/browser-permissions.png"></br>Для работы, в настройках браузера необходимо разрешить сайту использовать "Уведомления" и "Звук".</br></br>Функция позволяет изменять звук уведомлений (указывайте прямую ссылку на файл!), настраивать громкость звука и отмечать из каких разделов получать уведомления.`,
+    // 'notify': `<img src="${ENV_PATH}/screens/browser-permissions.png"></br>Для работы, в настройках браузера необходимо разрешить сайту использовать "Уведомления" и "Звук".</br></br>Функция позволяет изменять звук уведомлений (указывайте прямую ссылку на файл!), настраивать громкость звука и отмечать из каких разделов получать уведомления.`,
     'playback': `<img src="${strings_1.ENV_PATH}/screens/video-speed.png"></br>В видеоплеере добавляется кнопка ускорения видео, примерно как на YouTube.`,
     'recents': `<img src="${strings_1.ENV_PATH}/screens/recent-smiles.png"></br>В меню смайликов добавляется раздел с ранее использованными смайликами, для добавления в раздел, используйте смайлики/стикеры из меню смайликов.`,
     'karma': 'Функция в автоматическом режиме подтверждает назойливую карму.',
@@ -341,7 +341,7 @@ exports._SETSTRINGS = {
     'grotate': 'Поворот фотографий',
     'adblock': 'Скрывать рекламу',
     'stickyheader': 'Закрепить шапку',
-    'notify': 'Уведомления',
+    // 'notify': 'Уведомления',
     'playback': 'Кнопка ускорения видео',
     'recents': 'Ранее использованные смайлики',
     'karma': 'Собирать карму',
@@ -396,14 +396,16 @@ exports._SETTINGS = {
     'friendsSet': {
         'max': 10
     },
-    'notify': false,
-    'notifySet': {
-        'url': `${strings_1.ENV_PATH}/sounds/default.ogg`,
-        'volume': 50,
-        'mail': true,
-        'journal': true,
-        'feed': false
-    },
+    /**
+     * 'notify': false,
+     * 'notifySet': {
+     *      'url': `${ENV_PATH}/sounds/default.ogg`,
+     *      'volume': 50,
+     *      'mail': true,
+     *      'journal': true,
+     *      'feed': false
+     *  },
+     */
     'bodystyle': true,
     'bodystyleSet': {
         'url': `${strings_1.ENV_PATH}/backgrounds/default.png`,
@@ -1091,8 +1093,7 @@ const init = () => {
             components_1.karmaAccept();
         if (settings_1._SETTINGS.online)
             components_1.userOnline();
-        if (settings_1._SETTINGS.notify)
-            components_1.soundNotify();
+        // if (_SETTINGS.notify) soundNotify()
         if (settings_1._SETTINGS.recents)
             components_1.recentSmiles();
         if (settings_1._SETTINGS.grotate)
@@ -2002,13 +2003,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.oldHeader = void 0;
 const utils_1 = __webpack_require__(0);
 /**
- * ? Меняет местами кнопки почты и ленты местами (старое расположение)
- * ! molimawka, Я был дураком, Извини! ¯\_(ツ)_/¯
- * @param b On/Off
+ * Меняет местами кнопки почты и ленты местами (старое расположение)
+ * И по дефолту удаляет надписи
+ * @param b {boolean}
  */
 exports.oldHeader = (b) => {
+    // всегда скрываем надписи разделов
+    utils_1.qsa('span.horiz-menu__link-text').forEach(e => e.remove());
     // кнопки шапки
-    let p = utils_1.qsa('a[class="horiz-menu__link"');
+    let p = utils_1.qsa('a.horiz-menu__link');
     // Клонируем ленту
     let tab1 = p[2].cloneNode(true);
     // Клонируем почту
@@ -2775,11 +2778,12 @@ exports.settingsMenu = () => {
                                                 case 'hrightbar':
                                                     index_1.hiddenRightbar(checked);
                                                     break;
-                                                case 'notify':
+                                                // TODO: На переработку (скорее всего можно будет менять только звук уведомлений)
+                                                /*case 'notify':
                                                     checked ?
-                                                        index_1.settingsNotify(e.target) :
-                                                        utils_1.qs("#SP_PLUS_EVENTS").remove();
-                                                    break;
+                                                        settingsNotify(e.target) :
+                                                        qs("#SP_PLUS_EVENTS").remove()
+                                                    break*/
                                                 // TODO: Меню настроек на доработку!    
                                                 /*case 'recents':
                                                     checked ?
@@ -4488,7 +4492,6 @@ exports.settingsBackupMenu = (id) => {
                 id: 'SP_IMPORT',
                 attr: {
                     type: 'file',
-                    name: 'config',
                     accept: 'application/JSON'
                 },
                 style: 'display: none'
