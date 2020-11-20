@@ -531,7 +531,7 @@ Object.defineProperty(exports, "getUpdater", { enumerable: true, get: function (
 const settingsWeather_1 = __webpack_require__(11);
 Object.defineProperty(exports, "settingsWeather", { enumerable: true, get: function () { return settingsWeather_1.settingsWeather; } });
 Object.defineProperty(exports, "ipWhois", { enumerable: true, get: function () { return settingsWeather_1.ipWhois; } });
-const settingsRecentSmiles_1 = __webpack_require__(72);
+const settingsRecentSmiles_1 = __webpack_require__(73);
 Object.defineProperty(exports, "settingsRecentSmiles", { enumerable: true, get: function () { return settingsRecentSmiles_1.settingsRecentSmiles; } });
 
 
@@ -1645,7 +1645,7 @@ exports.delCookie = (name) => setCookie_1.setCookie(name, null, { expires: -1 })
 /* 26 */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"name\":\"spaces-plus\",\"description\":\"🚀 Powerful userscript for Spaces.ru\",\"homepage\":\"https://spaces-dev.github.io/SpacesPlus\",\"version\":\"3.1.2\",\"author\":{\"name\":\"Vitalij Ryndin\",\"email\":\"sys@crashmax.ru\",\"url\":\"https://crashmax.ru\"},\"scripts\":{\"dev\":\"cross-env NODE_ENV=development webpack-dev-server --config-name main --host localhost --watch-poll\",\"build\":\"cross-env NODE_ENV=production webpack --progress\"},\"devDependencies\":{\"@types/node\":\"^14.11.8\",\"@types/resize-observer-browser\":\"^0.1.4\",\"@types/webpack\":\"^4.41.22\",\"@types/webpack-dev-server\":\"^3.11.0\",\"clean-webpack-plugin\":\"^3.0.0\",\"copy-webpack-plugin\":\"^6.2.1\",\"cross-env\":\"^7.0.2\",\"optimize-css-assets-webpack-plugin\":\"^5.0.4\",\"ts-loader\":\"^8.0.4\",\"ts-debug\":\"^1.3.0\",\"ts-node\":\"^9.0.0\",\"typescript\":\"^4.0.2\",\"webpack\":\"^4.44.2\",\"webpack-cli\":\"^3.3.12\",\"webpack-dev-server\":\"^3.11.0\",\"webpack-userscript\":\"^2.5.6\",\"webpack-zip-files-plugin\":\"^1.0.0\"}}");
+module.exports = JSON.parse("{\"name\":\"spaces-plus\",\"description\":\"🚀 Powerful userscript for Spaces.ru\",\"homepage\":\"https://spaces-dev.github.io/SpacesPlus\",\"version\":\"3.1.2\",\"author\":{\"name\":\"Vitalij Ryndin\",\"email\":\"sys@crashmax.ru\",\"url\":\"https://crashmax.ru\"},\"scripts\":{\"dev\":\"cross-env NODE_ENV=development webpack-dev-server --config-name main --host localhost --watch-poll\",\"build\":\"cross-env NODE_ENV=production webpack --progress\"},\"devDependencies\":{\"@types/node\":\"^14.11.8\",\"@types/resize-observer-browser\":\"^0.1.4\",\"@types/webpack\":\"^4.41.22\",\"@types/webpack-dev-server\":\"^3.11.0\",\"clean-webpack-plugin\":\"^3.0.0\",\"copy-webpack-plugin\":\"^6.2.1\",\"cross-env\":\"^7.0.2\",\"json-beautify\":\"^1.1.1\",\"optimize-css-assets-webpack-plugin\":\"^5.0.4\",\"ts-debug\":\"^1.3.0\",\"ts-loader\":\"^8.0.4\",\"ts-node\":\"^9.0.0\",\"typescript\":\"^4.0.2\",\"webpack\":\"^4.44.2\",\"webpack-cli\":\"^3.3.12\",\"webpack-dev-server\":\"^3.11.0\",\"webpack-userscript\":\"^2.5.6\",\"webpack-zip-files-plugin\":\"^1.0.0\"}}");
 
 /***/ }),
 /* 27 */
@@ -2225,7 +2225,7 @@ exports.deleteBlogs = () => {
                 });
                 // кнопка "Выбрать Все"
                 const chooseAllButton = utils_1.ce('button', {
-                    class: 'user__tools-link table__cell sp_plus_btn_list',
+                    class: 'user__tools-link table__cell sp_btn-list',
                     html: '<span class="sp sp-ok-blue"></span><span class="sp-ch-text">Выбрать все</span>',
                     onclick: (e) => {
                         let parent = e.target.nodeName === 'SPAN' ? e.target.parentNode : e.target;
@@ -2238,7 +2238,7 @@ exports.deleteBlogs = () => {
                 });
                 // кнопка "Удалить выбранные"
                 const deleteBlogsButton = utils_1.ce('button', {
-                    class: 'user__tools-link table__cell sp_btn_line sp_plus_btn_list',
+                    class: 'user__tools-link table__cell sp_btn_line sp_btn-list',
                     html: '<span class="sp sp-remove-red"></span><span class="sp-del-text">Удалить выбранные</span>',
                     onclick: () => {
                         let count = 0, blogs = [];
@@ -2477,8 +2477,9 @@ exports.favoriteUser = void 0;
 const utils_1 = __webpack_require__(0);
 const strings_1 = __webpack_require__(1);
 exports.favoriteUser = async () => {
+    var _a, _b;
     try {
-        let method = utils_1.getPath(1), index = utils_1.getPath(2), nickname = utils_1.getPath(3), inFavorite = utils_1.qs('#SP_PLUS_INFAVORITE'), tdBlock = utils_1.qsa('td.table__cell_last');
+        let method = utils_1.getPath(1), index = utils_1.getPath(2), nickname = utils_1.getPath(3), tdBlock = utils_1.qsa('td.table__cell_last'), inFavorite = utils_1.qs('#SP_PLUS_INFAVORITE');
         if ((method === 'mysite' ||
             (method === 'anketa' && index !== 'edit') ||
             method === 'activity') &&
@@ -2499,7 +2500,7 @@ exports.favoriteUser = async () => {
                 });
                 favoriteButton.appendChild(loader);
                 utils_1.inBefore(favoriteButton, tdBlock[1]);
-                let clds = tdBlock[1].parentElement.childNodes;
+                let clds = (_b = (_a = tdBlock[1]) === null || _a === void 0 ? void 0 : _a.parentElement) === null || _b === void 0 ? void 0 : _b.childNodes;
                 for (let x in clds) {
                     if (clds[x].nodeName === 'TD')
                         clds[x].width = '25%';
@@ -2877,7 +2878,6 @@ exports.settingsMenu = () => {
                                 onclick: () => {
                                     utils_1.qs('#SP_PLUS_SETHEAD').innerHTML = 'Импорт и экспорт настроек';
                                     utils_1.qs('#SP_PLUS_SETHEAD2').innerHTML = `<a href="${strings_1.SPACES}/settings/?sp_plus_settings=1" style="margin-bottom: 1px">Spaces+</a><span class="location-bar__sep ico"></span> Импорт и экспорт настроек`;
-                                    // @ts-ignore
                                     utils_1.qs('#SP_PLUS_SETBACK').href = `${strings_1.SPACES}/settings/?sp_plus_settings=1`;
                                     if (!/(\&)sp_backup=1/i.test(document.location.href)) {
                                         utils_1.historyPush({
@@ -2898,7 +2898,6 @@ exports.settingsMenu = () => {
                                 onclick: () => {
                                     utils_1.qs('#SP_PLUS_SETHEAD').innerHTML = 'История обновлений';
                                     utils_1.qs('#SP_PLUS_SETHEAD2').innerHTML = `<a href="${strings_1.SPACES}/settings/?sp_plus_settings=1" style="margin-bottom: 1px">Spaces+</a><span class="location-bar__sep ico"></span> История обновлений`;
-                                    // @ts-ignore
                                     utils_1.qs('#SP_PLUS_SETBACK').href = `${strings_1.SPACES}/settings/?sp_plus_settings=1`;
                                     if (!/(\&)sp_changelog=1/i.test(document.location.href)) {
                                         utils_1.historyPush({
@@ -3271,7 +3270,7 @@ exports.deleteReaders = () => {
                         id: 'SP_PLUS_BUTTONS_R'
                     });
                     const chooseAllButton = utils_1.ce('button', {
-                        class: 'user__tools-link table__cell sp_plus_btn_list',
+                        class: 'user__tools-link table__cell sp_btn-list',
                         html: '<span class="sp sp-ok-blue"></span><span class="sp-ch-text">Выбрать все</span>',
                         onclick: (e) => {
                             let parent = e.target.nodeName === 'SPAN' ? e.target.parentNode : e.target;
@@ -3283,7 +3282,7 @@ exports.deleteReaders = () => {
                         }
                     });
                     const deleteReadersButton = utils_1.ce('button', {
-                        class: 'user__tools-link table__cell sp_btn_line sp_plus_btn_list',
+                        class: 'user__tools-link table__cell sp_btn_line sp_btn-list',
                         html: '<span class="sp sp-remove-red"></span><span class="sp-del-text">Удалить выбранных</span>',
                         onclick: () => {
                             let count = 0, readers = [];
@@ -3544,7 +3543,7 @@ exports.deleteComments = () => {
                     id: 'SP_PLUS_BUTTONS'
                 });
                 const chooseAllButton = utils_1.ce('button', {
-                    class: 'user__tools-link table__cell sp_plus_btn_list',
+                    class: 'user__tools-link table__cell sp_btn-list',
                     html: '<span class="sp sp-ok-blue"></span><span class="sp-ch-text">Выбрать все</span>',
                     onclick: (e) => {
                         let inputs = utils_1.qsa('input[id^="DC_"]');
@@ -3557,7 +3556,7 @@ exports.deleteComments = () => {
                     }
                 });
                 const deleteCommentsButton = utils_1.ce('button', {
-                    class: 'user__tools-link table__cell sp_btn_line sp_plus_btn_list',
+                    class: 'user__tools-link table__cell sp_btn_line sp_btn-list',
                     html: '<span class="sp sp-remove-red"></span><span class="sp-del-text">Удалить выбранные</span>',
                     onclick: () => {
                         var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
@@ -4426,16 +4425,17 @@ const setValues = (color) => {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.settingsBackupMenu = void 0;
 const utils_1 = __webpack_require__(0);
-const strings_1 = __webpack_require__(1);
 const settings_1 = __webpack_require__(2);
 /**
- * Меню сохранения/восстановления файла настроек
+ * Меню импорта/экспорта файла настроек
  * @param id #SP_PLUS_SETAREA
  */
 exports.settingsBackupMenu = (id) => {
     // Прокручиваем страницу вверх
     window.scrollTo(0, 0);
     const target = utils_1.qs(id);
+    // https://www.npmjs.com/package/json-beautify
+    const beautify = __webpack_require__(72);
     if (target) {
         try {
             // Очищаем #SP_PLUS_SETAREA
@@ -4453,133 +4453,350 @@ exports.settingsBackupMenu = (id) => {
                 });
                 let smallInfo = utils_1.ce('div', {
                     class: 'stnd-block-yellow',
-                    style: 'padding: 15px',
-                    html: '<span class="sp sp-alert"></span>Внимание!</br></br><div style="font-size: small">Редактирование только для опытных пользователей, если что-то пошло не так, следует сделать полный сброс настроек.</div>'
+                    style: 'padding: 16px',
+                    html: '<span class="sp sp-alert"></span>Внимание!</br></br><div style="font-size: small">Редактирование только для опытных пользователей! Перед редактированием файла настроек, следует сделать Экспорт, если что-то пошло не так, следует сделать Импорт настроек.</div>'
                 });
                 let infoDiv = utils_1.ce('div', { id: 'SP_CONFIG_JSON' });
                 infoDiv.appendChild(hideNotify);
                 target.appendChild(infoDiv);
                 infoDiv.appendChild(smallInfo);
             }
-            let wrap = utils_1.ce('div', { class: 'content-bl' }), preloader = utils_1.ce('div', {
-                class: 't_center',
-                id: 'SP_JSON_PRELOADER',
-                html: `<img src="${strings_1.HTTP}//spac.me/i/preloader.gif">`
-            });
-            target.appendChild(wrap);
-            wrap.appendChild(preloader);
-            let buttonsDiv = utils_1.ce('div', { class: 'widgets-group user__tools_last', id: 'SP_PLUS_BOTTOM_DIVB' }), tiw = utils_1.ce('div', { class: 'text-input__wrap' }), cl = utils_1.ce('div', { class: 'cl' }), errorsBlock = utils_1.ce('div', {
-                id: 'JSON_ERROR_BLOCK',
-                class: 'stnd-block-yellow',
-                style: 'padding: 15px',
-                html: '<span class="sp sp-alert"></span> Невалидный JSON<br /><br />'
-            });
-            let restoreButton = utils_1.ce('button', {
-                class: 'user__tools-link table__cell sp_btn_line sp_plus_btn_list',
-                html: '<span class="sp sp-restore-g"></span><span style="color: #3ca93c; padding-left: 10px">Сбросить настройки</span>',
+            let wrap = utils_1.ce('div', { style: 'padding: 16px 16px 14px 16px' }), buttonsDiv = utils_1.ce('div', { class: 'widgets-group user__tools_last', id: 'SP_PLUS_BOTTOM_DIVB' }), textareaBtn = utils_1.ce('div', { class: 'widgets-group user__tools_last', style: 'margin: unset' }), tiw = utils_1.ce('div', { class: 'text-input__wrap' }), cl = utils_1.ce('div', { class: 'cl' });
+            let updateButton = utils_1.ce('button', {
+                class: 'user__tools-link table__cell sp_btn',
+                style: 'border-right: none; border-top: 1px solid #cdd4e1',
+                html: '<span class="sp sp-ok-darkblue"></span><span style="color: #0e3c87; padding-left: 10px">Применить изменения</span>',
                 onclick: () => {
-                    utils_1.confirmBox('Вы действительно хотите сбросить файл конфигурации?', true, () => {
-                        utils_1.delCookie('SP_PLUS_SET');
-                        document.location.reload();
-                    });
-                    return false;
+                    var _a;
+                    let json, val = utils_1.qs('#SP_BACKUP_JSON').value;
+                    try {
+                        // валидация лоооол
+                        json = JSON.parse(val);
+                        // удаляем алерты с ошибками, если они есть
+                        (_a = utils_1.qs('#SP_PLUS_ALERT')) === null || _a === void 0 ? void 0 : _a.remove();
+                        // сохраняем настройки
+                        utils_1.setCookie('SP_PLUS_SET', val);
+                        // сообщение
+                        utils_1.messageBox('Импорт и экспорт настроек', 'Настройки были успешно сохранены', true, 3);
+                    }
+                    catch (e) {
+                        utils_1.messageBox('Ошибка разбора файла настроек', e, true);
+                    }
                 }
+            });
+            let restoreInput = utils_1.ce('input', {
+                id: 'SP_IMPORT',
+                attr: {
+                    type: 'file',
+                    name: 'config',
+                    accept: 'application/JSON'
+                },
+                style: 'display: none'
+            });
+            restoreInput.addEventListener('change', () => {
+                let json, textarea = utils_1.qs('#SP_BACKUP_JSON'), f = utils_1.qs('#SP_IMPORT').files[0];
+                const reader = new FileReader();
+                reader.onload = ((f) => {
+                    return (e) => {
+                        try {
+                            json = JSON.parse(e.target.result);
+                            // сохраняем настройки
+                            utils_1.setCookie('SP_PLUS_SET', e.target.result);
+                            // вставляем в textarea
+                            textarea.value = beautify(json, null, 4);
+                            utils_1.messageBox('Импорт и экспорт настроек', 'Настройки были успешно сохранены', true, 3);
+                        }
+                        catch (e) {
+                            utils_1.messageBox('Ошибка разбора файла настроек', e, true);
+                        }
+                    };
+                })(f);
+                reader.readAsText(f);
+            }, false);
+            let restoreButton = utils_1.ce('button', {
+                class: 'user__tools-link table__cell sp_btn_line sp_btn-list',
+                html: '<span class="sp sp-restore-g"></span><span style="color: #3ca93c; padding-left: 10px">Импорт</span>',
+                onclick: () => utils_1.qs('#SP_IMPORT').click()
             });
             let saveButton = utils_1.ce('button', {
-                class: 'user__tools-link sp_plus_btn_list',
-                html: '<span class="sp sp-ok-blue"></span><span style="color: #57A3EA; padding-left: 10px;">Сохранить</span>',
+                class: 'user__tools-link sp_btn-list',
+                html: '<span class="sp sp-download-blue"></span><span style="color: #57A3EA; padding-left: 10px;">Экспорт</span>',
                 onclick: () => {
-                    let area = utils_1.qs('#SP_BACKUP_JSON').value, confirm = utils_1.qs('#SP_PLUS_CONFIRM');
-                    confirm === null || confirm === void 0 ? void 0 : confirm.remove();
-                    getJSON(`value=${area}`, (json) => {
-                        // Костыль ¯\_(ツ)_/¯
-                        if (utils_1.qs('#JSON_ERROR_BLOCK')) {
-                            errorsBlock.innerHTML = '<span class="sp sp-alert"></span> Невалидный JSON<br /><br />';
-                            utils_1.qs('#JSON_ERROR_BLOCK').remove();
-                        }
-                        if (json.result.valid) {
-                            utils_1.setCookie('SP_PLUS_SET', area);
-                            utils_1.confirmBox('Настройки были успешно обновлены</br>Хотите сохранить файл настроек на рабочий стол?', false, () => {
-                                let blob = utils_1.ce('a', {
-                                    attr: {
-                                        href: URL.createObjectURL(new Blob([area], { type: 'text/plain' })),
-                                        download: 'spaces-plus.json'
-                                    }
-                                });
-                                blob.click();
-                                blob.remove();
-                            });
-                        }
-                        else {
-                            handleErrors(target, errorsBlock, json);
-                        }
-                        return false;
+                    utils_1.confirmBox('Вы уверены, что хотите сохранить файл настроек?', false, () => {
+                        let blob = utils_1.ce('a', {
+                            attr: {
+                                href: URL.createObjectURL(new Blob([beautify(settings_1._SETTINGS, null, 4)], { type: 'text/plain' })),
+                                download: `spaces-plus-${+new Date}.json`
+                            }
+                        });
+                        blob.click();
+                        blob.remove();
                     });
                 }
             });
-            getJSON(`value=${JSON.stringify(settings_1._SETTINGS)}`, (json) => {
-                let textarea = utils_1.ce('textarea', {
-                    class: 'text-input',
-                    id: 'SP_BACKUP_JSON',
-                    cols: '17',
-                    rows: '25',
-                    html: json.result.data
-                });
-                target.appendChild(wrap);
-                wrap.appendChild(tiw);
-                tiw.appendChild(cl);
-                cl.appendChild(textarea);
-                json.result.valid ?
-                    utils_1.qs('#SP_JSON_PRELOADER').remove() :
-                    handleErrors(target, errorsBlock, json);
-                buttonsDiv.appendChild(restoreButton);
-                buttonsDiv.appendChild(saveButton);
-                utils_1.inBefore(buttonsDiv, utils_1.qs('#SP_PLUS_ABOUT'));
+            let textarea = utils_1.ce('textarea', {
+                class: 'text-input',
+                id: 'SP_BACKUP_JSON',
+                rows: 20,
+                html: beautify(settings_1._SETTINGS, null, 4)
             });
+            target.appendChild(wrap);
+            wrap.appendChild(tiw);
+            tiw.appendChild(cl);
+            cl.appendChild(textarea);
+            textareaBtn.appendChild(updateButton);
+            target.appendChild(textareaBtn);
+            // группа кнопок
+            buttonsDiv.appendChild(restoreInput);
+            buttonsDiv.appendChild(restoreButton);
+            buttonsDiv.appendChild(saveButton);
+            utils_1.inBefore(buttonsDiv, utils_1.qs('#SP_PLUS_ABOUT'));
         }
         catch (e) {
             utils_1.error('settingsBackupMenu.ts', e);
         }
     }
 };
-/**
- * JSON Validator API (https://gist.github.com/crashmax-off/f86350b8a4b85311ac8676a906b973eb)
- * https://crashmax.ru/api/getJSON
- * TODO: Возможно вынести в utils???
- * @param data используем JSON.stringfy() для отправки POST
- * @param callback response function
- */
-const getJSON = (data, callback) => {
-    try {
-        utils_1.http('POST', 'https://crashmax.ru/api/getJSON', false, data).then(e => {
-            utils_1.info('api/getJSON', e);
-            return callback(e.parsedBody);
-        });
-    }
-    catch (e) {
-        utils_1.error('getJSON', e);
-    }
-};
-/**
- * Выводим получаемые ошибки в JSON схеме
- * @param target #SP_PLUS_SETAREA
- * @param errorsBlock #JSON_ERROR_BLOCK
- * @param json http response
- */
-const handleErrors = (target, errorsBlock, json) => {
-    target.appendChild(errorsBlock);
-    for (let err of json.result.errors) {
-        let error = utils_1.ce('div', {
-            class: 'sp_error-block',
-            html: `<b>Error:</b> ${err.message} [Code: ${err.code}, Sctructure: ${err.element}]<br />`
-        });
-        errorsBlock.appendChild(error);
-    }
-};
 
 
 /***/ }),
 /* 72 */
+/***/ (function(module, exports) {
+
+
+var rx_escapable = /[\\\"\u0000-\u001f\u007f-\u009f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g;
+
+var gap,
+    indent,
+    meta = { // table of character substitutions
+      '\b': '\\b',
+      '\t': '\\t',
+      '\n': '\\n',
+      '\f': '\\f',
+      '\r': '\\r',
+      '"': '\\"',
+      '\\': '\\\\'
+    },
+    rep;
+
+function quote(string) {
+
+// If the string contains no control characters, no quote characters, and no
+// backslash characters, then we can safely slap some quotes around it.
+// Otherwise we must also replace the offending characters with safe escape
+// sequences.
+
+    rx_escapable.lastIndex = 0;
+    return rx_escapable.test(string)
+        ? '"' + string.replace(rx_escapable, function (a) {
+            var c = meta[a];
+            return typeof c === 'string'
+                ? c
+                : '\\u' + ('0000' + a.charCodeAt(0).toString(16)).slice(-4);
+        }) + '"'
+        : '"' + string + '"';
+}
+
+
+function str(key, holder, limit) {
+
+// Produce a string from holder[key].
+
+    var i,          // The loop counter.
+        k,          // The member key.
+        v,          // The member value.
+        length,
+        mind = gap,
+        partial,
+        value = holder[key];
+
+// If the value has a toJSON method, call it to obtain a replacement value.
+
+    if (value && typeof value === 'object' &&
+            typeof value.toJSON === 'function') {
+        value = value.toJSON(key);
+    }
+
+// If we were called with a replacer function, then call the replacer to
+// obtain a replacement value.
+
+    if (typeof rep === 'function') {
+        value = rep.call(holder, key, value);
+    }
+
+// What happens next depends on the value's type.
+
+    switch (typeof value) {
+    case 'string':
+        return quote(value);
+
+    case 'number':
+
+// JSON numbers must be finite. Encode non-finite numbers as null.
+
+        return isFinite(value)
+            ? String(value)
+            : 'null';
+
+    case 'boolean':
+    case 'null':
+
+// If the value is a boolean or null, convert it to a string. Note:
+// typeof null does not produce 'null'. The case is included here in
+// the remote chance that this gets fixed someday.
+
+        return String(value);
+
+// If the type is 'object', we might be dealing with an object or an array or
+// null.
+
+    case 'object':
+
+// Due to a specification blunder in ECMAScript, typeof null is 'object',
+// so watch out for that case.
+
+        if (!value) {
+            return 'null';
+        }
+
+// Make an array to hold the partial results of stringifying this object value.
+
+        gap += indent;
+        partial = [];
+
+// Is the value an array?
+
+        if (Object.prototype.toString.apply(value) === '[object Array]') {
+
+// The value is an array. Stringify every element. Use null as a placeholder
+// for non-JSON values.
+
+            length = value.length;
+            for (i = 0; i < length; i += 1) {
+                partial[i] = str(i, value, limit) || 'null';
+            }
+
+// Join all of the elements together, separated with commas, and wrap them in
+// brackets.
+
+            v = partial.length === 0
+                ? '[]'
+                : gap
+                    ? (
+                      gap.length + partial.join(', ').length + 4 > limit ?
+                      '[\n' + gap + partial.join(',\n' + gap) + '\n' + mind + ']' :
+                      '[ ' + partial.join(', ') + ' ]'
+                    )
+                    : '[' + partial.join(',') + ']';
+            gap = mind;
+            return v;
+        }
+
+// If the replacer is an array, use it to select the members to be stringified.
+
+        if (rep && typeof rep === 'object') {
+            length = rep.length;
+            for (i = 0; i < length; i += 1) {
+                if (typeof rep[i] === 'string') {
+                    k = rep[i];
+                    v = str(k, value, limit);
+                    if (v) {
+                        partial.push(quote(k) + (
+                            gap
+                                ? ': '
+                                : ':'
+                        ) + v);
+                    }
+                }
+            }
+        } else {
+
+// Otherwise, iterate through all of the keys in the object.
+
+            for (k in value) {
+                if (Object.prototype.hasOwnProperty.call(value, k)) {
+                    v = str(k, value, limit);
+                    if (v) {
+                        partial.push(quote(k) + (
+                            gap
+                                ? ': '
+                                : ':'
+                        ) + v);
+                    }
+                }
+            }
+        }
+
+// Join all of the member texts together, separated with commas,
+// and wrap them in braces.
+
+        v = partial.length === 0
+            ? '{}'
+            : gap
+                ? (
+                  gap.length + partial.join(', ').length + 4 > limit ?
+                  '{\n' + gap + partial.join(',\n' + gap) + '\n' + mind + '}' :
+                  '{ ' + partial.join(', ') + ' }'
+                )
+                : '{' + partial.join(',') + '}';
+        gap = mind;
+        return v;
+    }
+}
+
+
+function beautify (value, replacer, space, limit) {
+
+// The stringify method takes a value and an optional replacer, and an optional
+// space parameter, and returns a JSON text. The replacer can be a function
+// that can replace values, or an array of strings that will select the keys.
+// A default replacer method can be provided. Use of the space parameter can
+// produce text that is more easily readable.
+
+  var i;
+  gap = '';
+  indent = '';
+
+  if (!limit) limit = 0;
+
+  if (typeof limit !== "number")
+    throw new Error("beaufifier: limit must be a number");
+
+// If the space parameter is a number, make an indent string containing that
+// many spaces.
+
+  if (typeof space === 'number') {
+      for (i = 0; i < space; i += 1) {
+          indent += ' ';
+      }
+
+// If the space parameter is a string, it will be used as the indent string.
+
+  } else if (typeof space === 'string') {
+      indent = space;
+  }
+
+// If there is a replacer, it must be a function or an array.
+// Otherwise, throw an error.
+
+  rep = replacer;
+  if (replacer && typeof replacer !== 'function' &&
+          (typeof replacer !== 'object' ||
+          typeof replacer.length !== 'number')) {
+      throw new Error('beautifier: wrong replacer parameter');
+  }
+
+// Make a fake root object containing our value under the key of ''.
+// Return the result of stringifying the value.
+
+  return str('', {'': value}, limit);
+}
+
+module.exports = beautify;
+
+
+/***/ }),
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
