@@ -70,8 +70,10 @@ export interface ISettings {
     recentSmiles: RecentSmiles
     friendsOn: boolean
     friendsSet: FriendsSet
-    notify: boolean
-    notifySet: NotifySet
+    /**
+     * notify: boolean
+     * notifySet: NotifySet
+     */
     bodystyle: boolean
     bodystyleSet: BodystyleSet
     weather: boolean

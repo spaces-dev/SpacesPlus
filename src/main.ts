@@ -10,7 +10,7 @@ import {
     deleteBlogs,
     firstLaunch,
     karmaAccept,
-    soundNotify,
+    // soundNotify,
     betaFeatures,
     blockedFiles,
     checkUpdates,
@@ -128,7 +128,7 @@ const init = () => {
         if (_SETTINGS.coins) coinsAccept()
         if (_SETTINGS.karma) karmaAccept()
         if (_SETTINGS.online) userOnline()
-        if (_SETTINGS.notify) soundNotify()
+        // if (_SETTINGS.notify) soundNotify()
         if (_SETTINGS.recents) recentSmiles()
         if (_SETTINGS.grotate) galleryRotate()
         if (_SETTINGS.favorite) favoriteUser()

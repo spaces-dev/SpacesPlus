@@ -96,11 +96,12 @@ export const settingsMenu = () => {
                                                 case 'hrightbar':
                                                     hiddenRightbar(checked)
                                                     break
-                                                case 'notify':
+                                                // TODO: На переработку (скорее всего можно будет менять только звук уведомлений)
+                                                /*case 'notify':
                                                     checked ?
                                                         settingsNotify(e.target) :
                                                         qs("#SP_PLUS_EVENTS").remove()
-                                                    break
+                                                    break*/
                                                 // TODO: Меню настроек на доработку!    
                                                 /*case 'recents':
                                                     checked ?

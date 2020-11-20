@@ -23,7 +23,7 @@ export const _DESCSTRINGS: ISetStrings = {
     'grotate': `<img src="${ENV_PATH}/screens/rotate-image.png"></br>Добавляется кнопка в просмотрщик фотографий, с помощью ее можно поворачивать изображение.`,
     'adblock': 'Функция полностью скрывает назойливую рекламу и не только.',
     'stickyheader': 'Функция закрепляет шапку сайта.',
-    'notify': `<img src="${ENV_PATH}/screens/browser-permissions.png"></br>Для работы, в настройках браузера необходимо разрешить сайту использовать "Уведомления" и "Звук".</br></br>Функция позволяет изменять звук уведомлений (указывайте прямую ссылку на файл!), настраивать громкость звука и отмечать из каких разделов получать уведомления.`,
+    // 'notify': `<img src="${ENV_PATH}/screens/browser-permissions.png"></br>Для работы, в настройках браузера необходимо разрешить сайту использовать "Уведомления" и "Звук".</br></br>Функция позволяет изменять звук уведомлений (указывайте прямую ссылку на файл!), настраивать громкость звука и отмечать из каких разделов получать уведомления.`,
     'playback': `<img src="${ENV_PATH}/screens/video-speed.png"></br>В видеоплеере добавляется кнопка ускорения видео, примерно как на YouTube.`,
     'recents': `<img src="${ENV_PATH}/screens/recent-smiles.png"></br>В меню смайликов добавляется раздел с ранее использованными смайликами, для добавления в раздел, используйте смайлики/стикеры из меню смайликов.`,
     'karma': 'Функция в автоматическом режиме подтверждает назойливую карму.',
@@ -54,7 +54,7 @@ export const _SETSTRINGS: ISetStrings = {
     'grotate': 'Поворот фотографий',
     'adblock': 'Скрывать рекламу',
     'stickyheader': 'Закрепить шапку',
-    'notify': 'Уведомления',
+    // 'notify': 'Уведомления',
     'playback': 'Кнопка ускорения видео',
     'recents': 'Ранее использованные смайлики',
     'karma': 'Собирать карму',
@@ -110,14 +110,16 @@ export let _SETTINGS: ISettings = {
     'friendsSet': {
         'max': 10
     },
-    'notify': false,
-    'notifySet': {
-        'url': `${ENV_PATH}/sounds/default.ogg`,
-        'volume': 50,
-        'mail': true,
-        'journal': true,
-        'feed': false
-    },
+    /**
+     * 'notify': false,
+     * 'notifySet': {
+     *      'url': `${ENV_PATH}/sounds/default.ogg`,
+     *      'volume': 50,
+     *      'mail': true,
+     *      'journal': true,
+     *      'feed': false
+     *  },
+     */
     'bodystyle': true,
     'bodystyleSet': {
         'url': `${ENV_PATH}/backgrounds/default.png`,
