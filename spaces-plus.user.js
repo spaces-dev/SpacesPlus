@@ -106,7 +106,7 @@
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.readSettings = exports.notification = exports.modifyObject = exports.setSettings = exports.insertAfter = exports.historyPush = exports.messageBox = exports.isValidUrl = exports.confirmBox = exports.setCookie = exports.playSound = exports.getParams = exports.getCookie = exports.delCookie = exports.declOfNum = exports.inBefore = exports.getQuery = exports.toUpper = exports.getPath = exports.extend = exports.rever = exports.error = exports.trim = exports.http = exports.info = exports.log = exports.css = exports.qsa = exports.qs = exports.ce = void 0;
+exports.readSettings = exports.notification = exports.modifyObject = exports.setSettings = exports.historyPush = exports.messageBox = exports.isValidUrl = exports.confirmBox = exports.setCookie = exports.playSound = exports.getParams = exports.getCookie = exports.delCookie = exports.declOfNum = exports.getQuery = exports.toUpper = exports.getPath = exports.extend = exports.rever = exports.error = exports.trim = exports.http = exports.info = exports.log = exports.css = exports.qsa = exports.qs = exports.ce = void 0;
 const ce_1 = __webpack_require__(15);
 Object.defineProperty(exports, "ce", { enumerable: true, get: function () { return ce_1.ce; } });
 const css_1 = __webpack_require__(5);
@@ -128,39 +128,35 @@ const toUpper_1 = __webpack_require__(21);
 Object.defineProperty(exports, "toUpper", { enumerable: true, get: function () { return toUpper_1.toUpper; } });
 const getQuery_1 = __webpack_require__(22);
 Object.defineProperty(exports, "getQuery", { enumerable: true, get: function () { return getQuery_1.getQuery; } });
-const inBefore_1 = __webpack_require__(23);
-Object.defineProperty(exports, "inBefore", { enumerable: true, get: function () { return inBefore_1.inBefore; } });
-const declOfNum_1 = __webpack_require__(24);
+const declOfNum_1 = __webpack_require__(23);
 Object.defineProperty(exports, "declOfNum", { enumerable: true, get: function () { return declOfNum_1.declOfNum; } });
-const delCookie_1 = __webpack_require__(25);
+const delCookie_1 = __webpack_require__(24);
 Object.defineProperty(exports, "delCookie", { enumerable: true, get: function () { return delCookie_1.delCookie; } });
-const getCookie_1 = __webpack_require__(27);
+const getCookie_1 = __webpack_require__(26);
 Object.defineProperty(exports, "getCookie", { enumerable: true, get: function () { return getCookie_1.getCookie; } });
-const getParams_1 = __webpack_require__(28);
+const getParams_1 = __webpack_require__(27);
 Object.defineProperty(exports, "getParams", { enumerable: true, get: function () { return getParams_1.getParams; } });
-const playSound_1 = __webpack_require__(29);
+const playSound_1 = __webpack_require__(28);
 Object.defineProperty(exports, "playSound", { enumerable: true, get: function () { return playSound_1.playSound; } });
 const setCookie_1 = __webpack_require__(8);
 Object.defineProperty(exports, "setCookie", { enumerable: true, get: function () { return setCookie_1.setCookie; } });
-const confirmBox_1 = __webpack_require__(30);
+const confirmBox_1 = __webpack_require__(29);
 Object.defineProperty(exports, "confirmBox", { enumerable: true, get: function () { return confirmBox_1.confirmBox; } });
-const isValidUrl_1 = __webpack_require__(31);
+const isValidUrl_1 = __webpack_require__(30);
 Object.defineProperty(exports, "isValidUrl", { enumerable: true, get: function () { return isValidUrl_1.isValidUrl; } });
-const messageBox_1 = __webpack_require__(32);
+const messageBox_1 = __webpack_require__(31);
 Object.defineProperty(exports, "messageBox", { enumerable: true, get: function () { return messageBox_1.messageBox; } });
-const historyPush_1 = __webpack_require__(33);
+const historyPush_1 = __webpack_require__(32);
 Object.defineProperty(exports, "historyPush", { enumerable: true, get: function () { return historyPush_1.historyPush; } });
-const insertAfter_1 = __webpack_require__(34);
-Object.defineProperty(exports, "insertAfter", { enumerable: true, get: function () { return insertAfter_1.insertAfter; } });
 const console_1 = __webpack_require__(3);
 Object.defineProperty(exports, "log", { enumerable: true, get: function () { return console_1.log; } });
 Object.defineProperty(exports, "info", { enumerable: true, get: function () { return console_1.info; } });
 Object.defineProperty(exports, "error", { enumerable: true, get: function () { return console_1.error; } });
-const modifyObject_1 = __webpack_require__(35);
+const modifyObject_1 = __webpack_require__(33);
 Object.defineProperty(exports, "modifyObject", { enumerable: true, get: function () { return modifyObject_1.modifyObject; } });
-const notification_1 = __webpack_require__(36);
+const notification_1 = __webpack_require__(34);
 Object.defineProperty(exports, "notification", { enumerable: true, get: function () { return notification_1.notification; } });
-const settings_1 = __webpack_require__(37);
+const settings_1 = __webpack_require__(35);
 Object.defineProperty(exports, "readSettings", { enumerable: true, get: function () { return settings_1.readSettings; } });
 Object.defineProperty(exports, "setSettings", { enumerable: true, get: function () { return settings_1.setSettings; } });
 
@@ -176,7 +172,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FirebaseConfig = exports.PKG_VERSION = exports.BASE_PATH = exports.REVISION = exports.ENV_PATH = exports.BASE_URL = exports.DOMAINS = exports.SPACES = exports.GITHUB = exports.DEVICE = exports.HTTP = exports.DATA = exports.DEV = void 0;
-const package_json_1 = __importDefault(__webpack_require__(26));
+const package_json_1 = __importDefault(__webpack_require__(25));
 /**
  * Константы
  */
@@ -415,7 +411,7 @@ exports._SETTINGS = {
     },
     'weather': false,
     'weatherSet': {
-        'interval': 600,
+        'interval': 3600,
         'time': 0,
         'city': null,
         'language': 'ru',
@@ -457,75 +453,75 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.settingsRecentSmiles = exports.settingsBackupMenu = exports.settingsBackground = exports.videoSpeedPlayback = exports.settingsFeatures = exports.settingsWeather = exports.settingsFriends = exports.settingsLogMenu = exports.disableRedirect = exports.settingsNotify = exports.playerDownload = exports.hiddenRightbar = exports.deleteComments = exports.weatherWidget = exports.sidebarButton = exports.galleryRotate = exports.friendsOnline = exports.deleteReaders = exports.bypassProfile = exports.stickyHeader = exports.settingsMenu = exports.recentSmiles = exports.freeStickers = exports.favoriteUser = exports.checkUpdates = exports.blockedFiles = exports.betaFeatures = exports.soundNotify = exports.karmaAccept = exports.firstLaunch = exports.deleteBlogs = exports.coinsAccept = exports.apiDebugger = exports.userOnline = exports.userStatus = exports.scrollMove = exports.getUpdater = exports.setStyles = exports.oldHeader = exports.ipWhois = exports.adBlock = void 0;
 const adBlock_1 = __webpack_require__(14);
 Object.defineProperty(exports, "adBlock", { enumerable: true, get: function () { return adBlock_1.adBlock; } });
-const oldHeader_1 = __webpack_require__(38);
+const oldHeader_1 = __webpack_require__(36);
 Object.defineProperty(exports, "oldHeader", { enumerable: true, get: function () { return oldHeader_1.oldHeader; } });
 const setStyles_1 = __webpack_require__(9);
 Object.defineProperty(exports, "setStyles", { enumerable: true, get: function () { return setStyles_1.setStyles; } });
-const scrollMove_1 = __webpack_require__(39);
+const scrollMove_1 = __webpack_require__(37);
 Object.defineProperty(exports, "scrollMove", { enumerable: true, get: function () { return scrollMove_1.scrollMove; } });
-const userStatus_1 = __webpack_require__(40);
+const userStatus_1 = __webpack_require__(38);
 Object.defineProperty(exports, "userStatus", { enumerable: true, get: function () { return userStatus_1.userStatus; } });
-const userOnline_1 = __webpack_require__(41);
+const userOnline_1 = __webpack_require__(39);
 Object.defineProperty(exports, "userOnline", { enumerable: true, get: function () { return userOnline_1.userOnline; } });
-const apiDebugger_1 = __webpack_require__(42);
+const apiDebugger_1 = __webpack_require__(40);
 Object.defineProperty(exports, "apiDebugger", { enumerable: true, get: function () { return apiDebugger_1.apiDebugger; } });
-const coinsAccept_1 = __webpack_require__(43);
+const coinsAccept_1 = __webpack_require__(41);
 Object.defineProperty(exports, "coinsAccept", { enumerable: true, get: function () { return coinsAccept_1.coinsAccept; } });
-const deleteBlogs_1 = __webpack_require__(44);
+const deleteBlogs_1 = __webpack_require__(42);
 Object.defineProperty(exports, "deleteBlogs", { enumerable: true, get: function () { return deleteBlogs_1.deleteBlogs; } });
-const firstLaunch_1 = __webpack_require__(45);
+const firstLaunch_1 = __webpack_require__(43);
 Object.defineProperty(exports, "firstLaunch", { enumerable: true, get: function () { return firstLaunch_1.firstLaunch; } });
-const karmaAccept_1 = __webpack_require__(46);
+const karmaAccept_1 = __webpack_require__(44);
 Object.defineProperty(exports, "karmaAccept", { enumerable: true, get: function () { return karmaAccept_1.karmaAccept; } });
-const soundNotify_1 = __webpack_require__(47);
+const soundNotify_1 = __webpack_require__(45);
 Object.defineProperty(exports, "soundNotify", { enumerable: true, get: function () { return soundNotify_1.soundNotify; } });
-const betaFeatures_1 = __webpack_require__(48);
+const betaFeatures_1 = __webpack_require__(46);
 Object.defineProperty(exports, "betaFeatures", { enumerable: true, get: function () { return betaFeatures_1.betaFeatures; } });
-const blockedFiles_1 = __webpack_require__(49);
+const blockedFiles_1 = __webpack_require__(47);
 Object.defineProperty(exports, "blockedFiles", { enumerable: true, get: function () { return blockedFiles_1.blockedFiles; } });
-const favoriteUser_1 = __webpack_require__(50);
+const favoriteUser_1 = __webpack_require__(48);
 Object.defineProperty(exports, "favoriteUser", { enumerable: true, get: function () { return favoriteUser_1.favoriteUser; } });
-const freeStickers_1 = __webpack_require__(51);
+const freeStickers_1 = __webpack_require__(49);
 Object.defineProperty(exports, "freeStickers", { enumerable: true, get: function () { return freeStickers_1.freeStickers; } });
-const recentSmiles_1 = __webpack_require__(52);
+const recentSmiles_1 = __webpack_require__(50);
 Object.defineProperty(exports, "recentSmiles", { enumerable: true, get: function () { return recentSmiles_1.recentSmiles; } });
-const settingsMenu_1 = __webpack_require__(53);
+const settingsMenu_1 = __webpack_require__(51);
 Object.defineProperty(exports, "settingsMenu", { enumerable: true, get: function () { return settingsMenu_1.settingsMenu; } });
-const stickyHeader_1 = __webpack_require__(54);
+const stickyHeader_1 = __webpack_require__(52);
 Object.defineProperty(exports, "stickyHeader", { enumerable: true, get: function () { return stickyHeader_1.stickyHeader; } });
-const bypassProfile_1 = __webpack_require__(55);
+const bypassProfile_1 = __webpack_require__(53);
 Object.defineProperty(exports, "bypassProfile", { enumerable: true, get: function () { return bypassProfile_1.bypassProfile; } });
-const deleteReaders_1 = __webpack_require__(56);
+const deleteReaders_1 = __webpack_require__(54);
 Object.defineProperty(exports, "deleteReaders", { enumerable: true, get: function () { return deleteReaders_1.deleteReaders; } });
 const friendsOnline_1 = __webpack_require__(10);
 Object.defineProperty(exports, "friendsOnline", { enumerable: true, get: function () { return friendsOnline_1.friendsOnline; } });
-const galleryRotate_1 = __webpack_require__(57);
+const galleryRotate_1 = __webpack_require__(55);
 Object.defineProperty(exports, "galleryRotate", { enumerable: true, get: function () { return galleryRotate_1.galleryRotate; } });
-const sidebarButton_1 = __webpack_require__(58);
+const sidebarButton_1 = __webpack_require__(56);
 Object.defineProperty(exports, "sidebarButton", { enumerable: true, get: function () { return sidebarButton_1.sidebarButton; } });
-const weatherWidget_1 = __webpack_require__(59);
+const weatherWidget_1 = __webpack_require__(57);
 Object.defineProperty(exports, "weatherWidget", { enumerable: true, get: function () { return weatherWidget_1.weatherWidget; } });
-const deleteComments_1 = __webpack_require__(60);
+const deleteComments_1 = __webpack_require__(58);
 Object.defineProperty(exports, "deleteComments", { enumerable: true, get: function () { return deleteComments_1.deleteComments; } });
-const hiddenRightbar_1 = __webpack_require__(61);
+const hiddenRightbar_1 = __webpack_require__(59);
 Object.defineProperty(exports, "hiddenRightbar", { enumerable: true, get: function () { return hiddenRightbar_1.hiddenRightbar; } });
-const playerDownload_1 = __webpack_require__(62);
+const playerDownload_1 = __webpack_require__(60);
 Object.defineProperty(exports, "playerDownload", { enumerable: true, get: function () { return playerDownload_1.playerDownload; } });
-const settingsNotify_1 = __webpack_require__(63);
+const settingsNotify_1 = __webpack_require__(61);
 Object.defineProperty(exports, "settingsNotify", { enumerable: true, get: function () { return settingsNotify_1.settingsNotify; } });
-const disableRedirect_1 = __webpack_require__(64);
+const disableRedirect_1 = __webpack_require__(62);
 Object.defineProperty(exports, "disableRedirect", { enumerable: true, get: function () { return disableRedirect_1.disableRedirect; } });
-const settingsLogMenu_1 = __webpack_require__(65);
+const settingsLogMenu_1 = __webpack_require__(63);
 Object.defineProperty(exports, "settingsLogMenu", { enumerable: true, get: function () { return settingsLogMenu_1.settingsLogMenu; } });
-const settingsFriends_1 = __webpack_require__(66);
+const settingsFriends_1 = __webpack_require__(64);
 Object.defineProperty(exports, "settingsFriends", { enumerable: true, get: function () { return settingsFriends_1.settingsFriends; } });
-const settingsFeatures_1 = __webpack_require__(67);
+const settingsFeatures_1 = __webpack_require__(65);
 Object.defineProperty(exports, "settingsFeatures", { enumerable: true, get: function () { return settingsFeatures_1.settingsFeatures; } });
-const videoSpeedPlayback_1 = __webpack_require__(69);
+const videoSpeedPlayback_1 = __webpack_require__(67);
 Object.defineProperty(exports, "videoSpeedPlayback", { enumerable: true, get: function () { return videoSpeedPlayback_1.videoSpeedPlayback; } });
-const settingsBackground_1 = __webpack_require__(70);
+const settingsBackground_1 = __webpack_require__(68);
 Object.defineProperty(exports, "settingsBackground", { enumerable: true, get: function () { return settingsBackground_1.settingsBackground; } });
-const settingsBackupMenu_1 = __webpack_require__(71);
+const settingsBackupMenu_1 = __webpack_require__(69);
 Object.defineProperty(exports, "settingsBackupMenu", { enumerable: true, get: function () { return settingsBackupMenu_1.settingsBackupMenu; } });
 const checkUpdates_1 = __webpack_require__(12);
 Object.defineProperty(exports, "checkUpdates", { enumerable: true, get: function () { return checkUpdates_1.checkUpdates; } });
@@ -533,7 +529,7 @@ Object.defineProperty(exports, "getUpdater", { enumerable: true, get: function (
 const settingsWeather_1 = __webpack_require__(11);
 Object.defineProperty(exports, "settingsWeather", { enumerable: true, get: function () { return settingsWeather_1.settingsWeather; } });
 Object.defineProperty(exports, "ipWhois", { enumerable: true, get: function () { return settingsWeather_1.ipWhois; } });
-const settingsRecentSmiles_1 = __webpack_require__(73);
+const settingsRecentSmiles_1 = __webpack_require__(71);
 Object.defineProperty(exports, "settingsRecentSmiles", { enumerable: true, get: function () { return settingsRecentSmiles_1.settingsRecentSmiles; } });
 
 
@@ -547,7 +543,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.css = void 0;
 const trim_1 = __webpack_require__(6);
 /**
- * Используется в ce.ts для создание стилей
+ * Используется для создание стилей
  * @param elem
  * @param css
  */
@@ -809,7 +805,7 @@ const settings_1 = __webpack_require__(2);
  * @param e #weather
  */
 exports.settingsWeather = async (e) => {
-    var _a;
+    var _a, _b;
     /**
      * Отключаем скрытие правого меню, если оно включено
      */
@@ -890,7 +886,7 @@ exports.settingsWeather = async (e) => {
     masWarp.appendChild(apiKey);
     masWarp.appendChild(intervalLbl);
     masWarp.appendChild(interval);
-    utils_1.insertAfter(masWarp, e.parentNode);
+    (_b = e.parentElement) === null || _b === void 0 ? void 0 : _b.after(masWarp);
 };
 /**
  * Получаем погоду через openweathermap.org
@@ -1584,31 +1580,6 @@ exports.getQuery = (name) => {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.inBefore = void 0;
-/**
- * Используется для добавления HTMLElement перед определенным элементом в DOM
- * Пример использования c помощью ce.ts и qs.ts:
- * * let elem = ce('div', {
- * *     html: 'Hello, World!'
- * * })
- * *
- * * inBefore(elem, qs('#main_wrap'))
- * @param elem
- * @param refElem
- */
-exports.inBefore = (elem, refElem) => {
-    let parent = refElem.parentNode;
-    return parent.insertBefore(elem, refElem);
-};
-
-
-/***/ }),
-/* 24 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
 exports.declOfNum = void 0;
 /**
  * ? Определеят склонение для слов в зависимости от входящего числа
@@ -1627,7 +1598,7 @@ exports.declOfNum = (number, titles) => {
 
 
 /***/ }),
-/* 25 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1643,13 +1614,13 @@ exports.delCookie = (name) => setCookie_1.setCookie(name, null, { expires: -1 })
 
 
 /***/ }),
-/* 26 */
+/* 25 */
 /***/ (function(module) {
 
 module.exports = JSON.parse("{\"name\":\"spaces-plus\",\"description\":\"🚀 Powerful userscript for Spaces.ru\",\"homepage\":\"https://spaces-dev.github.io/SpacesPlus\",\"version\":\"3.1.2\",\"author\":{\"name\":\"Vitalij Ryndin\",\"email\":\"sys@crashmax.ru\",\"url\":\"https://crashmax.ru\"},\"scripts\":{\"dev\":\"cross-env NODE_ENV=development webpack-dev-server --config-name main --host localhost --watch-poll\",\"build\":\"cross-env NODE_ENV=production webpack --progress\"},\"devDependencies\":{\"@types/node\":\"^14.11.8\",\"@types/resize-observer-browser\":\"^0.1.4\",\"@types/webpack\":\"^4.41.22\",\"@types/webpack-dev-server\":\"^3.11.0\",\"clean-webpack-plugin\":\"^3.0.0\",\"copy-webpack-plugin\":\"^6.2.1\",\"cross-env\":\"^7.0.2\",\"json-beautify\":\"^1.1.1\",\"optimize-css-assets-webpack-plugin\":\"^5.0.4\",\"ts-debug\":\"^1.3.0\",\"ts-loader\":\"^8.0.4\",\"ts-node\":\"^9.0.0\",\"typescript\":\"^4.0.2\",\"webpack\":\"^4.44.2\",\"webpack-cli\":\"^3.3.12\",\"webpack-dev-server\":\"^3.11.0\",\"webpack-userscript\":\"^2.5.6\",\"webpack-zip-files-plugin\":\"^1.0.0\"}}");
 
 /***/ }),
-/* 27 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1667,7 +1638,7 @@ exports.getCookie = (name) => {
 
 
 /***/ }),
-/* 28 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1693,7 +1664,7 @@ exports.getParams = (url) => {
 
 
 /***/ }),
-/* 29 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1713,7 +1684,7 @@ exports.playSound = (file, volume) => {
 
 
 /***/ }),
-/* 30 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1762,7 +1733,7 @@ const rm = () => index_1.qs('#SP_PLUS_CONFIRM').remove();
 
 
 /***/ }),
-/* 31 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1780,7 +1751,7 @@ exports.isValidUrl = (url) => {
 
 
 /***/ }),
-/* 32 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1823,7 +1794,7 @@ exports.messageBox = (title, content, close, timer) => {
 
 
 /***/ }),
-/* 33 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1854,32 +1825,7 @@ exports.historyPush = (state, url, title) => {
 
 
 /***/ }),
-/* 34 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.insertAfter = void 0;
-/**
- * Используется для добавления HTMLElement после определенного элементом в DOM
- * Пример использования c помощью ce.ts и qs.ts:
- * * let elem = ce('div', {
- * *     html: 'Hello, World!'
- * * })
- * *
- * * insertAfter(elem, qs('#main_wrap'))
- * @param elem
- * @param refElem
- */
-exports.insertAfter = (elem, refElem) => {
-    let parent = refElem.parentNode, next = refElem.nextSibling;
-    return parent && next ? parent.insertBefore(elem, next) : parent.appendChild(elem);
-};
-
-
-/***/ }),
-/* 35 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1921,7 +1867,7 @@ exports.modifyObject = (obj, key, value, index) => {
 
 
 /***/ }),
-/* 36 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1948,7 +1894,7 @@ exports.notification = (title, body, time) => {
 
 
 /***/ }),
-/* 37 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1994,7 +1940,7 @@ exports.setSettings = (key, value) => {
 
 
 /***/ }),
-/* 38 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2024,7 +1970,7 @@ exports.oldHeader = (b) => {
 
 
 /***/ }),
-/* 39 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2054,7 +2000,7 @@ exports.scrollMove = (b) => {
 
 
 /***/ }),
-/* 40 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2090,7 +2036,7 @@ exports.userStatus = (code) => {
 
 
 /***/ }),
-/* 41 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2131,7 +2077,7 @@ exports.userOnline = () => {
 
 
 /***/ }),
-/* 42 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2151,7 +2097,7 @@ exports.apiDebugger = (b) => {
 
 
 /***/ }),
-/* 43 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2178,7 +2124,7 @@ exports.coinsAccept = () => {
 
 
 /***/ }),
-/* 44 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2191,101 +2137,98 @@ const strings_1 = __webpack_require__(1);
  * TODO: Типизировать поля!
  */
 exports.deleteBlogs = () => {
-    let p = utils_1.getPath().split('/');
-    let buttons = utils_1.qs('#SP_PLUS_BUTTONS_B');
-    // сброс кнопок
-    if (p[2] !== 'view' && buttons)
-        buttons.remove();
-    if (p[1] === 'diary' && p[2] === 'view' && !utils_1.qs('input[id^="SP_DB_"')) {
-        try {
-            // кнопки "Настройки доступа"
-            let links = utils_1.qsa(`a[href^="${strings_1.SPACES}/diary/editaccess/"`);
-            if (links.length > 0) {
-                let checkboxArr = [];
-                // создаем чекбоксы
-                for (let link of links) {
-                    if (link.className) {
-                        let blogId = `SP_DB_${utils_1.getParams(link.href)['id']}`;
-                        let checkbox = utils_1.ce('input', {
-                            class: 'sp-cbfb sp-checkbox-square',
-                            type: 'checkbox',
-                            id: blogId
-                        });
-                        let label = utils_1.ce('label', {
-                            class: 'sp-ch-blogs',
-                            style: 'margin: 1px',
-                            attr: { 'for': blogId }
-                        });
-                        utils_1.insertAfter(checkbox, link);
-                        utils_1.insertAfter(label, checkbox);
-                        checkboxArr.push(checkbox);
-                    }
+    var _a, _b, _c;
+    let path = utils_1.getPath().split('/'), buttons = utils_1.qs('#SP_PLUS_BUTTONS_B'), 
+    // кнопки "Настройки доступа"
+    links = utils_1.qsa(`a[href^="${strings_1.SPACES}/diary/editaccess/"`);
+    try {
+        // сброс кнопок
+        if (path[2] !== 'view' && buttons)
+            buttons.remove();
+        if (path[1] === 'diary' && path[2] === 'view' && links && !utils_1.qs('input[id^="SP_DB_"')) {
+            let checkboxArr = [];
+            // создаем чекбоксы
+            for (let link of links) {
+                if (!link.getElementsByTagName('input').length) {
+                    let blogId = `SP_DB_${utils_1.getParams(link.href)['id']}`;
+                    let checkbox = utils_1.ce('input', {
+                        class: 'sp-cbfb sp-checkbox-square',
+                        type: 'checkbox',
+                        id: blogId
+                    });
+                    (_a = link.parentElement) === null || _a === void 0 ? void 0 : _a.appendChild(checkbox);
+                    (_b = link.parentElement) === null || _b === void 0 ? void 0 : _b.appendChild(utils_1.ce('label', {
+                        class: 'sp-ch-blogs',
+                        style: 'margin: 2px',
+                        attr: {
+                            'for': blogId
+                        }
+                    }));
+                    checkboxArr.push(checkbox);
                 }
-                // блок кнопок управления
-                let buttonsDiv = utils_1.ce('div', {
-                    class: 'widgets-group user__tools_last',
-                    id: 'SP_PLUS_BUTTONS_B'
-                });
-                // кнопка "Выбрать Все"
-                const chooseAllButton = utils_1.ce('button', {
-                    class: 'user__tools-link table__cell sp_btn-list',
-                    html: '<span class="sp sp-ok-blue"></span><span class="sp-ch-text">Выбрать все</span>',
-                    onclick: (e) => {
-                        let parent = e.target.nodeName === 'SPAN' ? e.target.parentNode : e.target;
-                        for (let ch of checkboxArr) {
-                            ch.checked = parent.innerHTML.indexOf('Выбрать все') !== -1 ? true : false;
-                        }
-                        parent.innerHTML = `<span class="sp sp-ok-blue"></span><span class="sp-ch-text">${parent.innerHTML.indexOf('Выбрать все') !== -1 ? 'Снять отметки' : 'Выбрать все'}</span>`;
-                        return false;
-                    }
-                });
-                // кнопка "Удалить выбранные"
-                const deleteBlogsButton = utils_1.ce('button', {
-                    class: 'user__tools-link table__cell sp_btn_line sp_btn-list',
-                    html: '<span class="sp sp-remove-red"></span><span class="sp-del-text">Удалить выбранные</span>',
-                    onclick: () => {
-                        let count = 0, blogs = [];
-                        for (let ch of checkboxArr) {
-                            if (ch.checked) {
-                                blogs.push(/^SP_DB_([0-9]+)$/i.exec(ch.id)[1]);
-                                count++;
-                            }
-                        }
-                        if (count > 0) {
-                            utils_1.confirmBox(`Вы действительно хотите удалить ${count} ${declStr(count)}?`, true, async () => {
-                                let allCount = count;
-                                for (let blog of blogs) {
-                                    utils_1.messageBox(`Осталось удалить ${count--} из ${allCount} ${declStr(count)}`, 'Подождите немного... <span style="padding-right: 10px" class="ico ico_spinner"></span>', false);
-                                    await utils_1.http('GET', `${strings_1.SPACES}/diary/delete/?CK=${strings_1.DATA.CK}&id=${blog}&Sure=1`, true).then(e => {
-                                        utils_1.info('Удалили блог', e);
-                                    });
-                                }
-                                document.location.reload();
-                            });
-                        }
-                        else {
-                            utils_1.messageBox('Внимание!', 'Отметьте галочкой, те блоги, которые вы хотите удалить и попробуйте еще раз', true, 5);
-                        }
-                        return false;
-                    }
-                });
-                // костыль
-                buttons === null || buttons === void 0 ? void 0 : buttons.remove();
-                buttonsDiv.appendChild(deleteBlogsButton);
-                buttonsDiv.appendChild(chooseAllButton);
-                utils_1.qs('#siteContent').append(buttonsDiv);
             }
+            // блок кнопок управления
+            let buttonsDiv = utils_1.ce('div', {
+                class: 'widgets-group user__tools_last',
+                id: 'SP_PLUS_BUTTONS_B'
+            });
+            // кнопка "Выбрать Все"
+            const chooseAllButton = utils_1.ce('button', {
+                class: 'user__tools-link table__cell sp_btn-list',
+                html: '<span class="sp sp-ok-blue"></span><span class="sp-ch-text">Выбрать все</span>',
+                onclick: (e) => {
+                    let parent = e.target.nodeName === 'SPAN' ? e.target.parentNode : e.target;
+                    for (let ch of checkboxArr) {
+                        ch.checked = parent.innerHTML.indexOf('Выбрать все') !== -1 ? true : false;
+                    }
+                    parent.innerHTML = `<span class="sp sp-ok-blue"></span><span class="sp-ch-text">${parent.innerHTML.indexOf('Выбрать все') !== -1 ? 'Снять отметки' : 'Выбрать все'}</span>`;
+                    return false;
+                }
+            });
+            // кнопка "Удалить выбранные"
+            const deleteBlogsButton = utils_1.ce('button', {
+                class: 'user__tools-link table__cell sp_btn_line sp_btn-list',
+                html: '<span class="sp sp-remove-red"></span><span class="sp-del-text">Удалить выбранные</span>',
+                onclick: () => {
+                    let count = 0, blogs = [];
+                    for (let ch of checkboxArr) {
+                        if (ch.checked) {
+                            blogs.push(/^SP_DB_([0-9]+)$/i.exec(ch.id)[1]);
+                            count++;
+                        }
+                    }
+                    if (count > 0) {
+                        utils_1.confirmBox(`Вы действительно хотите удалить ${count} ${declStr(count)}?`, true, async () => {
+                            let allCount = count;
+                            for (let blog of blogs) {
+                                utils_1.messageBox(`Осталось удалить ${count--} из ${allCount} ${declStr(count)}`, 'Подождите немного... <span style="padding-right: 10px" class="ico ico_spinner"></span>', false);
+                                await utils_1.http('GET', `${strings_1.SPACES}/diary/delete/?CK=${strings_1.DATA.CK}&id=${blog}&Sure=1`, true).then(e => {
+                                    utils_1.info('Удалили блог', e);
+                                });
+                            }
+                            document.location.reload();
+                        });
+                    }
+                    else {
+                        utils_1.messageBox('Внимание!', 'Отметьте галочкой, те блоги, которые вы хотите удалить и попробуйте еще раз', true, 5);
+                    }
+                    return false;
+                }
+            });
+            buttonsDiv.appendChild(deleteBlogsButton);
+            buttonsDiv.appendChild(chooseAllButton);
+            (_c = utils_1.qs('div.pgn').previousElementSibling) === null || _c === void 0 ? void 0 : _c.after(buttonsDiv);
         }
-        catch (e) {
-            utils_1.error('deleteBlogs.ts', e);
-        }
+    }
+    catch (e) {
+        utils_1.error('deleteBlogs.ts', e);
     }
 };
 const declStr = (count) => 'блог' + utils_1.declOfNum(count, ['', 'а', 'ов']);
 
 
 /***/ }),
-/* 45 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2325,7 +2268,7 @@ exports.firstLaunch = () => {
 
 
 /***/ }),
-/* 46 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2352,7 +2295,7 @@ exports.karmaAccept = () => {
 
 
 /***/ }),
-/* 47 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2396,7 +2339,7 @@ exports.soundNotify = () => {
 
 
 /***/ }),
-/* 48 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2422,7 +2365,7 @@ exports.betaFeatures = () => {
 
 
 /***/ }),
-/* 49 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2470,7 +2413,7 @@ exports.blockedFiles = () => {
 
 
 /***/ }),
-/* 50 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2480,7 +2423,7 @@ exports.favoriteUser = void 0;
 const utils_1 = __webpack_require__(0);
 const strings_1 = __webpack_require__(1);
 exports.favoriteUser = async () => {
-    var _a, _b;
+    var _a, _b, _c;
     try {
         let method = utils_1.getPath(1), index = utils_1.getPath(2), nickname = utils_1.getPath(3), tdBlock = utils_1.qsa('td.table__cell_last'), inFavorite = utils_1.qs('#SP_PLUS_INFAVORITE');
         if ((method === 'mysite' ||
@@ -2502,8 +2445,8 @@ exports.favoriteUser = async () => {
                     `
                 });
                 favoriteButton.appendChild(loader);
-                utils_1.inBefore(favoriteButton, tdBlock[1]);
-                let clds = (_b = (_a = tdBlock[1]) === null || _a === void 0 ? void 0 : _a.parentElement) === null || _b === void 0 ? void 0 : _b.childNodes;
+                (_a = tdBlock[1].parentElement) === null || _a === void 0 ? void 0 : _a.insertBefore(favoriteButton, tdBlock[1]);
+                let clds = (_c = (_b = tdBlock[1]) === null || _b === void 0 ? void 0 : _b.parentElement) === null || _c === void 0 ? void 0 : _c.childNodes;
                 for (let x in clds) {
                     if (clds[x].nodeName === 'TD')
                         clds[x].width = '25%';
@@ -2572,7 +2515,7 @@ const isFav = async (id, name, elem) => {
 
 
 /***/ }),
-/* 51 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2594,7 +2537,7 @@ exports.freeStickers = (b) => {
 
 
 /***/ }),
-/* 52 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2710,7 +2653,7 @@ const eventSmiles = (smiles, storage) => {
 
 
 /***/ }),
-/* 53 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2951,7 +2894,7 @@ exports.settingsMenu = () => {
                     }
                 });
                 // Вставляем "Настройки Spaces+" перед "Уведомления"
-                utils_1.inBefore(baseLink, targetLink);
+                targetLink.before(baseLink);
                 let clickEvent = document.createEvent('MouseEvent');
                 if (urlSett) {
                     document.title = 'Настройки Spaces+';
@@ -2983,7 +2926,7 @@ exports.settingsMenu = () => {
 
 
 /***/ }),
-/* 54 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3048,7 +2991,7 @@ exports.stickyHeader = (b) => {
 
 
 /***/ }),
-/* 55 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3058,7 +3001,7 @@ exports.bypassProfile = void 0;
 const utils_1 = __webpack_require__(0);
 const strings_1 = __webpack_require__(1);
 exports.bypassProfile = () => {
-    var _a, _b, _c;
+    var _a, _b, _c, _d;
     try {
         let tdBlock = utils_1.qsa('td.table__cell_last'), blackListLink = utils_1.qs(`a[href^="${strings_1.SPACES}/blacklist/"`), rulesLink = utils_1.qs(`a[href^="${strings_1.SPACES}/info/rules/"`), noAccessIco = utils_1.qs('div.ico_noaccess_xlarge'), inButton = utils_1.qs('#SP_PLUS_INBL');
         if (utils_1.getPath(1) === 'mysite' && tdBlock) {
@@ -3082,8 +3025,8 @@ exports.bypassProfile = () => {
                         return false;
                     }
                 });
-                utils_1.inBefore(button, tdBlock[1]);
-                let clds = (_b = (_a = tdBlock[1]) === null || _a === void 0 ? void 0 : _a.parentElement) === null || _b === void 0 ? void 0 : _b.childNodes;
+                (_a = tdBlock[1].parentElement) === null || _a === void 0 ? void 0 : _a.insertBefore(button, tdBlock[1]);
+                let clds = (_c = (_b = tdBlock[1]) === null || _b === void 0 ? void 0 : _b.parentElement) === null || _c === void 0 ? void 0 : _c.childNodes;
                 // 'width' is deprecated ???
                 for (let x in clds) {
                     if (clds[x].nodeName === 'TD')
@@ -3104,7 +3047,7 @@ exports.bypassProfile = () => {
         }
         else {
             // удаляем список ссылок
-            (_c = utils_1.qs('#SP_LIST_LINK')) === null || _c === void 0 ? void 0 : _c.remove();
+            (_d = utils_1.qs('#SP_LIST_LINK')) === null || _d === void 0 ? void 0 : _d.remove();
         }
     }
     catch (e) {
@@ -3229,7 +3172,7 @@ const setUrls = (e, lnk1, lnk2) => {
 
 
 /***/ }),
-/* 56 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3264,7 +3207,7 @@ exports.deleteReaders = () => {
                     });
                     chWrap.appendChild(bChbx);
                     chWrap.appendChild(ckbxlb);
-                    utils_1.insertAfter(chWrap, link);
+                    link.after(chWrap);
                     checkboxArr.push(bChbx);
                 }
                 let lastParent = (_b = (_a = links[links.length - 1]) === null || _a === void 0 ? void 0 : _a.parentNode) === null || _b === void 0 ? void 0 : _b.parentNode;
@@ -3274,6 +3217,7 @@ exports.deleteReaders = () => {
                         id: 'SP_PLUS_BUTTONS_R'
                     });
                     const chooseAllButton = utils_1.ce('button', {
+                        style: 'border-right: unset',
                         class: 'user__tools-link table__cell sp_btn-list',
                         html: '<span class="sp sp-ok-blue"></span><span class="sp-ch-text">Выбрать все</span>',
                         onclick: (e) => {
@@ -3316,7 +3260,7 @@ exports.deleteReaders = () => {
                     });
                     buttonsDiv.appendChild(deleteReadersButton);
                     buttonsDiv.appendChild(chooseAllButton);
-                    utils_1.insertAfter(buttonsDiv, lastParent);
+                    utils_1.qs('div.pgn-wrapper').prepend(buttonsDiv);
                 }
             }
         }
@@ -3329,7 +3273,7 @@ const declStr = (count) => 'читател' + utils_1.declOfNum(count, ['я', '�
 
 
 /***/ }),
-/* 57 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3372,7 +3316,7 @@ exports.galleryRotate = () => {
 
 
 /***/ }),
-/* 58 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3384,20 +3328,21 @@ const strings_1 = __webpack_require__(1);
 exports.sidebarButton = () => {
     // Место для вставки кнопки
     utils_1.qsa(`li.li>a[href^="${strings_1.SPACES}/services/"]`).forEach(e => {
+        var _a;
         // Включены ли иконки на левой панели
-        let disableIcons = !!utils_1.qs('span.s_i_exit') ? '<span class="sp sp-ico"></span>' : '';
+        let icon = utils_1.qs('span.s_i_exit') ? '<span class="sp sp-ico"></span>' : '';
         // Создаем кнопку быстрого доступа в настройки Spaces+
         let link = utils_1.ce('li', {
             class: 'li',
-            html: `<a href="${strings_1.SPACES}/settings/?sp_plus_settings=1" title="Настройки Spaces+">${disableIcons}<span class="m s_i_text"> Spaces+</span></a>`
+            html: `<a href="${strings_1.SPACES}/settings/?sp_plus_settings=1" title="Настройки Spaces+">${icon}<span class="m s_i_text"> Spaces+</span></a>`
         });
-        utils_1.insertAfter(link, e.parentElement);
+        (_a = e.parentElement) === null || _a === void 0 ? void 0 : _a.after(link);
     });
 };
 
 
 /***/ }),
-/* 59 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3497,7 +3442,7 @@ const cookieWeather = () => {
 
 
 /***/ }),
-/* 60 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3518,7 +3463,7 @@ exports.deleteComments = () => {
                 // к новым комментариям добавляем чекбоксы
                 if (!child.getElementsByTagName('input').length) {
                     // Нихуевый костыль!
-                    let DC = `DC_${(strings_1.DEVICE.id === 4 ? (_e = (_d = (_c = (_b = (_a = 
+                    let DC = strings_1.DEVICE.id === 4 ? (_e = (_d = (_c = (_b = (_a = 
                     // pc
                     child === null || 
                     // pc
@@ -3526,18 +3471,21 @@ exports.deleteComments = () => {
                     // pc
                     child.parentElement) === null || _a === void 0 ? void 0 : _a.parentElement) === null || _b === void 0 ? void 0 : _b.parentElement) === null || _c === void 0 ? void 0 : _c.parentElement) === null || _d === void 0 ? void 0 : _d.parentElement) === null || _e === void 0 ? void 0 : _e.id : (_m = (_l = (_k = (_j = (_h = (_g = (_f = 
                     // touch
-                    child.parentElement) === null || _f === void 0 ? void 0 : _f.parentElement) === null || _g === void 0 ? void 0 : _g.parentElement) === null || _h === void 0 ? void 0 : _h.parentElement) === null || _j === void 0 ? void 0 : _j.parentElement) === null || _k === void 0 ? void 0 : _k.parentElement) === null || _l === void 0 ? void 0 : _l.parentElement) === null || _m === void 0 ? void 0 : _m.id)}`;
-                    let checkbox = utils_1.ce('input', {
-                        type: 'checkbox',
-                        class: 'sp-cbfc sp-checkbox-square',
-                        id: DC
-                    });
-                    child.appendChild(checkbox);
-                    child.appendChild(utils_1.ce('label', {
-                        attr: {
-                            'for': DC
-                        }
-                    }));
+                    child.parentElement) === null || _f === void 0 ? void 0 : _f.parentElement) === null || _g === void 0 ? void 0 : _g.parentElement) === null || _h === void 0 ? void 0 : _h.parentElement) === null || _j === void 0 ? void 0 : _j.parentElement) === null || _k === void 0 ? void 0 : _k.parentElement) === null || _l === void 0 ? void 0 : _l.parentElement) === null || _m === void 0 ? void 0 : _m.id;
+                    // еще костыль хуле
+                    if (parseInt(DC)) {
+                        let checkbox = utils_1.ce('input', {
+                            type: 'checkbox',
+                            class: 'sp-cbfc sp-checkbox-square',
+                            id: `DC_${DC}`
+                        });
+                        child.appendChild(checkbox);
+                        child.appendChild(utils_1.ce('label', {
+                            attr: {
+                                'for': `DC_${DC}`
+                            }
+                        }));
+                    }
                 }
             }
             // группа кнопок
@@ -3608,7 +3556,7 @@ exports.deleteComments = () => {
                 });
                 buttonsDiv.appendChild(deleteCommentsButton);
                 buttonsDiv.appendChild(chooseAllButton);
-                utils_1.insertAfter(buttonsDiv, utils_1.qs('div.js-comments-pgn'));
+                utils_1.qs('div.js-comments-pgn').after(buttonsDiv);
             }
         }
     }
@@ -3620,7 +3568,7 @@ const declStr = (count) => 'комментари' + utils_1.declOfNum(count, ['�
 
 
 /***/ }),
-/* 61 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3653,7 +3601,7 @@ exports.hiddenRightbar = (b) => {
 
 
 /***/ }),
-/* 62 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3663,6 +3611,7 @@ exports.playerDownload = void 0;
 const utils_1 = __webpack_require__(0);
 const strings_1 = __webpack_require__(1);
 exports.playerDownload = () => {
+    var _a;
     try {
         let trId = 0, track = sessionStorage.getItem('music:track'), data = sessionStorage.getItem('music:playlist'), downPlace = utils_1.qs('#SP_MUSIC_DOWN'), player = utils_1.qs('#gp_main_player');
         if (player && track && data) {
@@ -3679,7 +3628,7 @@ exports.playerDownload = () => {
                     innerHTML: '<span style="margin: 0px 6px 0px 0px !important" class="sp sp-download-darkblue" title="Скачать"></span>',
                     onclick: () => location.href = trScr
                 });
-                utils_1.insertAfter(dwnTd, tdIc.parentElement);
+                (_a = tdIc.parentElement) === null || _a === void 0 ? void 0 : _a.after(dwnTd);
             }
             else if (downPlace && strings_1.DATA.PLAYER !== trId) {
                 strings_1.DATA.PLAYER = trId;
@@ -3695,7 +3644,7 @@ exports.playerDownload = () => {
 
 
 /***/ }),
-/* 63 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3706,6 +3655,7 @@ const utils_1 = __webpack_require__(0);
 const strings_1 = __webpack_require__(1);
 const settings_1 = __webpack_require__(2);
 exports.settingsNotify = (e) => {
+    var _a;
     try {
         if (!('Notification' in window)) {
             utils_1.messageBox('Внимание!', 'Ваш браузер не поддерживает уведомления', true, 5);
@@ -3823,7 +3773,7 @@ exports.settingsNotify = (e) => {
         eventsWrap.appendChild(label1);
         eventsWrap.appendChild(label2);
         eventsWrap.appendChild(label3);
-        utils_1.insertAfter(eventsWrap, e.parentNode);
+        (_a = e.parentElement) === null || _a === void 0 ? void 0 : _a.after(eventsWrap);
     }
     catch (e) {
         utils_1.error('settingsNotify.ts', e);
@@ -3832,7 +3782,7 @@ exports.settingsNotify = (e) => {
 
 
 /***/ }),
-/* 64 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3848,7 +3798,7 @@ exports.disableRedirect = () => {
 
 
 /***/ }),
-/* 65 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3896,7 +3846,7 @@ exports.settingsLogMenu = (id) => {
 
 
 /***/ }),
-/* 66 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3907,6 +3857,7 @@ const utils_1 = __webpack_require__(0);
 const friendsOnline_1 = __webpack_require__(10);
 const settings_1 = __webpack_require__(2);
 exports.settingsFriends = (e) => {
+    var _a;
     try {
         let frMaxWrap = utils_1.ce('div', { id: 'SP_PLUS_MAXFRIENDS' });
         let div = utils_1.ce('div', { class: 'sp_settings-wrap' });
@@ -3934,7 +3885,7 @@ exports.settingsFriends = (e) => {
         div.appendChild(frMaxLbl);
         div.appendChild(frMax);
         frMaxWrap.appendChild(div);
-        utils_1.insertAfter(frMaxWrap, e.parentNode);
+        (_a = e.parentElement) === null || _a === void 0 ? void 0 : _a.after(frMaxWrap);
     }
     catch (e) {
         utils_1.error('settingsFriends.ts', e);
@@ -3943,7 +3894,7 @@ exports.settingsFriends = (e) => {
 
 
 /***/ }),
-/* 67 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3951,7 +3902,7 @@ exports.settingsFriends = (e) => {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.settingsFeatures = void 0;
 const utils_1 = __webpack_require__(0);
-const newbeeQuest_1 = __webpack_require__(68);
+const newbeeQuest_1 = __webpack_require__(66);
 const settings_1 = __webpack_require__(2);
 const strings_1 = __webpack_require__(1);
 // Встроенные возможности сайта
@@ -4049,7 +4000,7 @@ const btnWrap = (str) => `<span class="b">${str}<span class="ico ico_arr ico_m">
 
 
 /***/ }),
-/* 68 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4078,7 +4029,7 @@ exports.newbeeQuest = async () => {
 
 
 /***/ }),
-/* 69 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4118,7 +4069,7 @@ exports.videoSpeedPlayback = () => {
 
 
 /***/ }),
-/* 70 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4130,6 +4081,7 @@ const setStyles_1 = __webpack_require__(9);
 const settings_1 = __webpack_require__(2);
 const strings_1 = __webpack_require__(1);
 exports.settingsBackground = (e) => {
+    var _a;
     try {
         let div = utils_1.ce('div', { class: 'text-input__wrap' }), bgWrap = utils_1.ce('div', { id: 'SP_PLUS_BODYSTYLE' }), label = utils_1.ce('label', { class: 'stnd-link', style: 'border-bottom: none' }), label1 = utils_1.ce('label', { class: 'stnd-link', style: 'border-bottom: none' }), bstlWrap = utils_1.ce('div', { class: 'bstrwrap', style: 'border-bottom: none; padding: 15px' });
         let descriptionUrl = utils_1.ce('label', {
@@ -4235,7 +4187,7 @@ exports.settingsBackground = (e) => {
         bgWrap.appendChild(bstlWrap);
         bgWrap.appendChild(label);
         bgWrap.appendChild(label1);
-        utils_1.insertAfter(bgWrap, e.parentNode);
+        (_a = e.parentElement) === null || _a === void 0 ? void 0 : _a.after(bgWrap);
         if (settings_1._SETTINGS.bodystyleSet.urlchecked) {
             setImage();
         }
@@ -4421,7 +4373,7 @@ const setValues = (color) => {
 
 
 /***/ }),
-/* 71 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4435,11 +4387,12 @@ const settings_1 = __webpack_require__(2);
  * @param id #SP_PLUS_SETAREA
  */
 exports.settingsBackupMenu = (id) => {
+    var _a;
     // Прокручиваем страницу вверх
     window.scrollTo(0, 0);
     const target = utils_1.qs(id);
     // https://www.npmjs.com/package/json-beautify
-    const beautify = __webpack_require__(72);
+    const beautify = __webpack_require__(70);
     if (target) {
         try {
             // Очищаем #SP_PLUS_SETAREA
@@ -4553,7 +4506,7 @@ exports.settingsBackupMenu = (id) => {
             buttonsDiv.appendChild(restoreInput);
             buttonsDiv.appendChild(restoreButton);
             buttonsDiv.appendChild(saveButton);
-            utils_1.inBefore(buttonsDiv, utils_1.qs('#SP_PLUS_ABOUT'));
+            (_a = utils_1.qs('#SP_PLUS_ABOUT').previousElementSibling) === null || _a === void 0 ? void 0 : _a.after(buttonsDiv);
         }
         catch (e) {
             utils_1.error('settingsBackupMenu.ts', e);
@@ -4563,7 +4516,7 @@ exports.settingsBackupMenu = (id) => {
 
 
 /***/ }),
-/* 72 */
+/* 70 */
 /***/ (function(module, exports) {
 
 
@@ -4799,7 +4752,7 @@ module.exports = beautify;
 
 
 /***/ }),
-/* 73 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4809,6 +4762,7 @@ exports.settingsRecentSmiles = void 0;
 const utils_1 = __webpack_require__(0);
 const settings_1 = __webpack_require__(2);
 exports.settingsRecentSmiles = (e) => {
+    var _a;
     let masWarp = utils_1.ce('div', { id: 'SP_RECENTS_SETTINGS', class: 'sp_settings-wrap' });
     let maxSabeLbl = utils_1.ce('label', {
         html: 'Сохранять смайликов:<div class="label__desc">от 10 до 60</div>',
@@ -4832,7 +4786,7 @@ exports.settingsRecentSmiles = (e) => {
     });
     masWarp.appendChild(maxSabeLbl);
     masWarp.appendChild(maxSave);
-    utils_1.insertAfter(masWarp, e.parentNode);
+    (_a = e.parentElement) === null || _a === void 0 ? void 0 : _a.after(masWarp);
 };
 
 
