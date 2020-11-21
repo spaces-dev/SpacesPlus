@@ -129,7 +129,7 @@ export let _SETTINGS: ISettings = {
     },
     'weather': false,
     'weatherSet': {
-        'interval': 600,
+        'interval': 3600,
         'time': 0,
         'city': null,
         'language': 'ru',
