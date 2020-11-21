@@ -7,7 +7,6 @@ import {
     info,
     error,
     getPath,
-    inBefore,
     confirmBox
 } from '../utils'
 
@@ -48,7 +47,7 @@ export const favoriteUser = async () => {
                 })
 
                 favoriteButton.appendChild(loader)
-                inBefore(favoriteButton, tdBlock[1])
+                tdBlock[1].parentElement?.insertBefore(favoriteButton, tdBlock[1])
 
                 let clds = (<NodeList>tdBlock[1]?.parentElement?.childNodes)
                 for (let x in clds) { if (clds[x].nodeName === 'TD') (<HTMLTableCellElement>clds[x]).width = '25%' }

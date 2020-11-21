@@ -2,7 +2,6 @@ import {
     ce,
     qs,
     error,
-    inBefore,
     setCookie,
     confirmBox,
     messageBox,
@@ -165,7 +164,7 @@ export const settingsBackupMenu = (id: string) => {
             buttonsDiv.appendChild(restoreInput)
             buttonsDiv.appendChild(restoreButton)
             buttonsDiv.appendChild(saveButton)
-            inBefore(buttonsDiv, qs('#SP_PLUS_ABOUT'))
+            qs('#SP_PLUS_ABOUT').previousElementSibling?.after(buttonsDiv)
         } catch (e) {
             error('settingsBackupMenu.ts', e)
         }

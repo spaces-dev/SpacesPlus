@@ -8,7 +8,6 @@ import { extend } from './extend'
 import { getPath } from './getPath'
 import { toUpper } from './toUpper'
 import { getQuery } from './getQuery'
-import { inBefore } from './inBefore'
 import { declOfNum } from './declOfNum'
 import { delCookie } from './delCookie'
 import { getCookie } from './getCookie'
@@ -39,7 +38,6 @@ export {
     getPath,
     toUpper,
     getQuery,
-    inBefore,
     declOfNum,
     delCookie,
     getCookie,

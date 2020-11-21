@@ -3,7 +3,6 @@ import {
     qs,
     error,
     getPath,
-    inBefore,
     getQuery,
     delCookie,
     confirmBox,
@@ -285,7 +284,7 @@ export const settingsMenu = () => {
                 })
 
                 // Вставляем "Настройки Spaces+" перед "Уведомления"
-                inBefore(baseLink, targetLink)
+                targetLink.before(baseLink)
 
                 let clickEvent = document.createEvent('MouseEvent')
 

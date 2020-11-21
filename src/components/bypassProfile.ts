@@ -7,7 +7,6 @@ import {
     info,
     error,
     getPath,
-    inBefore,
     messageBox
 } from '../utils'
 
@@ -52,7 +51,7 @@ export const bypassProfile = () => {
                     }
                 })
 
-                inBefore(button, tdBlock[1])
+                tdBlock[1].parentElement?.insertBefore(button, tdBlock[1])
 
                 let clds = (<NodeList>tdBlock[1]?.parentElement?.childNodes)
                 // 'width' is deprecated ???
