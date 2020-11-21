@@ -114,7 +114,16 @@ export const deleteReaders = () => {
 
                     buttonsDiv.appendChild(deleteReadersButton)
                     buttonsDiv.appendChild(chooseAllButton)
-                    qs('div.pgn-wrapper').prepend(buttonsDiv)
+
+                    let main = qs('#main'),
+                        pgn = qs('div.pgn-wrapper')
+
+                    if (pgn) {
+                        pgn.prepend(buttonsDiv)
+                    } else if (main) {
+                        buttonsDiv.classList.add('widgets-group')
+                        main.prepend(buttonsDiv)
+                    }
                 }
             }
         } catch (e) {

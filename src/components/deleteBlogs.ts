@@ -121,7 +121,7 @@ export const deleteBlogs = () => {
 
             buttonsDiv.appendChild(deleteBlogsButton)
             buttonsDiv.appendChild(chooseAllButton)
-            qs('div.pgn').previousElementSibling?.after(buttonsDiv)
+            qs('#main').after(buttonsDiv)
         }
     } catch (e) {
         error('deleteBlogs.ts', e)
