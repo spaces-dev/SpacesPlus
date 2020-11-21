@@ -28,25 +28,29 @@ export const deleteComments = () => {
                 if (!child.getElementsByTagName('input').length) {
 
                     // Нихуевый костыль!
-                    let DC = `DC_${(DEVICE.id === 4 ?
+                    let DC = DEVICE.id === 4 ?
                         // pc
                         child?.parentElement?.parentElement?.parentElement?.parentElement?.parentElement?.id :
                         // touch
-                        child.parentElement?.parentElement?.parentElement?.parentElement?.parentElement?.parentElement?.parentElement?.id)}`
-                    let checkbox = ce('input', {
-                        type: 'checkbox',
-                        class: 'sp-cbfc sp-checkbox-square',
-                        id: DC
-                    })
+                        child.parentElement?.parentElement?.parentElement?.parentElement?.parentElement?.parentElement?.parentElement?.id
 
-                    child.appendChild(checkbox)
-                    child.appendChild(ce('label',
-                        {
-                            attr: {
-                                'for': DC
+                    // еще костыль хуле
+                    if (parseInt(DC!)) {
+                        let checkbox = ce('input', {
+                            type: 'checkbox',
+                            class: 'sp-cbfc sp-checkbox-square',
+                            id: `DC_${DC}`
+                        })
+
+                        child.appendChild(checkbox)
+                        child.appendChild(ce('label',
+                            {
+                                attr: {
+                                    'for': `DC_${DC}`
+                                }
                             }
-                        }
-                    ))
+                        ))
+                    }
                 }
             }
 
