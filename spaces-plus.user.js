@@ -2137,7 +2137,7 @@ const strings_1 = __webpack_require__(1);
  * TODO: Типизировать поля!
  */
 exports.deleteBlogs = () => {
-    var _a, _b, _c;
+    var _a, _b;
     let path = utils_1.getPath().split('/'), buttons = utils_1.qs('#SP_PLUS_BUTTONS_B'), 
     // кнопки "Настройки доступа"
     links = utils_1.qsa(`a[href^="${strings_1.SPACES}/diary/editaccess/"`);
@@ -2217,7 +2217,7 @@ exports.deleteBlogs = () => {
             });
             buttonsDiv.appendChild(deleteBlogsButton);
             buttonsDiv.appendChild(chooseAllButton);
-            (_c = utils_1.qs('div.pgn').previousElementSibling) === null || _c === void 0 ? void 0 : _c.after(buttonsDiv);
+            utils_1.qs('#main').after(buttonsDiv);
         }
     }
     catch (e) {
@@ -3260,7 +3260,14 @@ exports.deleteReaders = () => {
                     });
                     buttonsDiv.appendChild(deleteReadersButton);
                     buttonsDiv.appendChild(chooseAllButton);
-                    utils_1.qs('div.pgn-wrapper').prepend(buttonsDiv);
+                    let main = utils_1.qs('#main'), pgn = utils_1.qs('div.pgn-wrapper');
+                    if (pgn) {
+                        pgn.prepend(buttonsDiv);
+                    }
+                    else if (main) {
+                        buttonsDiv.classList.add('widgets-group');
+                        main.prepend(buttonsDiv);
+                    }
                 }
             }
         }
