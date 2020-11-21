@@ -1,10 +1,8 @@
 import {
     ce,
     qs,
-    qsa,
     info,
-    error,
-    insertAfter
+    error
 } from '../utils'
 
 import { DATA } from '../strings'
@@ -35,7 +33,7 @@ export const playerDownload = () => {
                     onclick: () => location.href = trScr
                 })
 
-                insertAfter(dwnTd, tdIc.parentElement)
+                tdIc.parentElement?.after(dwnTd)
             } else if (downPlace && DATA.PLAYER !== trId) {
                 DATA.PLAYER = trId
                 downPlace.onclick = () => location.href = trScr

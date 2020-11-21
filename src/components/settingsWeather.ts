@@ -5,7 +5,6 @@ import {
     error,
     setCookie,
     messageBox,
-    insertAfter,
     setSettings
 } from '../utils'
 
@@ -108,7 +107,7 @@ export const settingsWeather = async (e: Element) => {
     masWarp.appendChild(apiKey)
     masWarp.appendChild(intervalLbl)
     masWarp.appendChild(interval)
-    insertAfter(masWarp, e.parentNode)
+    e.parentElement?.after(masWarp)
 }
 
 /**

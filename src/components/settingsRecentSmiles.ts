@@ -1,4 +1,4 @@
-import { ce, insertAfter, setSettings } from '../utils'
+import { ce, setSettings } from '../utils'
 
 import { _SETTINGS } from '../settings'
 
@@ -30,5 +30,5 @@ export const settingsRecentSmiles = (e: Element) => {
 
     masWarp.appendChild(maxSabeLbl)
     masWarp.appendChild(maxSave)
-    insertAfter(masWarp, e.parentNode)
+    e.parentElement?.after(masWarp)
 }

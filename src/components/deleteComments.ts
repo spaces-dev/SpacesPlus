@@ -7,8 +7,7 @@ import {
     error,
     declOfNum,
     confirmBox,
-    messageBox,
-    insertAfter
+    messageBox
 } from '../utils'
 
 import { SPACES, DEVICE } from '../strings'
@@ -129,7 +128,7 @@ export const deleteComments = () => {
 
                 buttonsDiv.appendChild(deleteCommentsButton)
                 buttonsDiv.appendChild(chooseAllButton)
-                insertAfter(buttonsDiv, qs('div.js-comments-pgn'))
+                qs('div.js-comments-pgn').after(buttonsDiv)
             }
         }
     } catch (e) {

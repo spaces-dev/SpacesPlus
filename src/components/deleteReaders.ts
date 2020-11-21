@@ -9,8 +9,7 @@ import {
     getParams,
     declOfNum,
     confirmBox,
-    messageBox,
-    insertAfter
+    messageBox
 } from '../utils'
 
 import { SPACES, DATA } from '../strings'
@@ -48,7 +47,7 @@ export const deleteReaders = () => {
 
                     chWrap.appendChild(bChbx)
                     chWrap.appendChild(ckbxlb)
-                    insertAfter(chWrap, link)
+                    link.after(chWrap)
                     checkboxArr.push(bChbx)
                 }
 
@@ -61,6 +60,7 @@ export const deleteReaders = () => {
                     })
 
                     const chooseAllButton = ce('button', {
+                        style: 'border-right: unset',
                         class: 'user__tools-link table__cell sp_btn-list',
                         html: '<span class="sp sp-ok-blue"></span><span class="sp-ch-text">Выбрать все</span>',
                         onclick: (e: any) => {
@@ -114,7 +114,7 @@ export const deleteReaders = () => {
 
                     buttonsDiv.appendChild(deleteReadersButton)
                     buttonsDiv.appendChild(chooseAllButton)
-                    insertAfter(buttonsDiv, lastParent)
+                    qs('div.pgn-wrapper').prepend(buttonsDiv)
                 }
             }
         } catch (e) {

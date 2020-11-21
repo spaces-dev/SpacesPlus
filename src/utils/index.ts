@@ -19,7 +19,6 @@ import { confirmBox } from './confirmBox'
 import { isValidUrl } from './isValidUrl'
 import { messageBox } from './messageBox'
 import { historyPush } from './historyPush'
-import { insertAfter } from './insertAfter'
 import { log, info, error } from './console'
 import { modifyObject } from './modifyObject' 
 import { notification } from './notification'
@@ -51,7 +50,6 @@ export {
     isValidUrl,
     messageBox,
     historyPush,
-    insertAfter,
     setSettings,
     modifyObject,
     notification,

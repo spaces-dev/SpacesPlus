@@ -1,4 +1,4 @@
-import { ce, insertAfter, error, setSettings } from '../utils'
+import { ce, error, setSettings } from '../utils'
 
 import { friendsOnline } from './friendsOnline'
 import { _SETTINGS } from '../settings'
@@ -34,7 +34,7 @@ export const settingsFriends = (e: Element) => {
         div.appendChild(frMaxLbl)
         div.appendChild(frMax)
         frMaxWrap.appendChild(div)
-        insertAfter(frMaxWrap, e.parentNode)
+        e.parentElement?.after(frMaxWrap)
     } catch (e) {
         error('settingsFriends.ts', e)
     }

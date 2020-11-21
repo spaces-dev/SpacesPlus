@@ -4,7 +4,6 @@ import {
     playSound,
     messageBox,
     isValidUrl,
-    insertAfter,
     setSettings
 } from '../utils'
 
@@ -147,7 +146,7 @@ export const settingsNotify = (e: Element) => {
         eventsWrap.appendChild(label1)
         eventsWrap.appendChild(label2)
         eventsWrap.appendChild(label3)
-        insertAfter(eventsWrap, e.parentNode)
+        e.parentElement?.after(eventsWrap)
     } catch (e) {
         error('settingsNotify.ts', e)
     }

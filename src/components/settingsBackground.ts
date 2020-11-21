@@ -4,7 +4,6 @@ import {
     http,
     error,
     isValidUrl,
-    insertAfter,
     setSettings
 } from '../utils'
 
@@ -138,7 +137,7 @@ export const settingsBackground = (e: Element) => {
         bgWrap.appendChild(bstlWrap)
         bgWrap.appendChild(label)
         bgWrap.appendChild(label1)
-        insertAfter(bgWrap, e.parentNode)
+        e.parentElement?.after(bgWrap)
 
         if (_SETTINGS.bodystyleSet.urlchecked) { setImage() }
         if (_SETTINGS.bodystyleSet.colorchecked) { setColor() }
