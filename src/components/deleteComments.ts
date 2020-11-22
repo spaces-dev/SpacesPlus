@@ -64,16 +64,30 @@ export const deleteComments = () => {
                 const chooseAllButton = ce('button', {
                     class: 'user__tools-link table__cell sp_btn-list',
                     html: '<span class="sp sp-ok-blue"></span><span class="sp-ch-text">Выбрать все</span>',
-                    onclick: (e: any) => {
-                        let inputs = qsa('input[id^="DC_"]')
-                        let parent = e.target.nodeName === 'SPAN' ? e.target.parentNode : e.target
+                    onclick: (e: MouseEvent) => {
+                        if (e.target instanceof Element) {
+                            let inputs = qsa('input[id^="DC_"]')
 
-                        for (let input of inputs) {
-                            (<HTMLInputElement>input).checked = parent.innerHTML.indexOf('Выбрать все') !== -1 ? true : false
+                            let parent = e.target.nodeName === 'SPAN' ?
+                                <Element>e.target.parentNode :
+                                <Element>e.target
+
+                            for (let input of inputs) {
+                                (<HTMLInputElement>input).checked =
+                                    parent.innerHTML.indexOf('Выбрать все') !== -1 ?
+                                        true :
+                                        false
+                            }
+
+                            parent.innerHTML = `
+                                <span class="sp sp-ok-blue"></span>
+                                    <span class="sp-ch-text">
+                                    ${parent.innerHTML.indexOf('Выбрать все') !== -1 ?
+                                    'Снять отметки' :
+                                    'Выбрать все'}
+                                </span>
+                            `
                         }
-
-                        parent.innerHTML = `<span class="sp sp-ok-blue"></span><span class="sp-ch-text">${parent.innerHTML.indexOf('Выбрать все') !== -1 ? 'Снять отметки' : 'Выбрать все'}</span>`
-                        return false
                     }
                 })
 
@@ -82,7 +96,6 @@ export const deleteComments = () => {
                     html: '<span class="sp sp-remove-red"></span><span class="sp-del-text">Удалить выбранные</span>',
                     onclick: () => {
                         let inputs = qsa('input[id^="DC_"]'),
-                            count: number = 0,
                             urls: string[] = []
 
                         for (let input of inputs) {
@@ -95,22 +108,21 @@ export const deleteComments = () => {
                                     input?.parentNode?.parentNode?.parentNode?.parentNode?.parentNode?.parentNode?.parentNode)
                                     ?.querySelectorAll(`a[href^="${SPACES}/comment/delete/"]`))
                                     .filter(e => {
-                                        if (e.textContent === 'Удалить') {
-                                            count++
-                                            urls.push(e.href)
-                                        }
+                                        if (e.textContent === 'Удалить') urls.push(e.href)
                                     })
                             }
                         }
+
+                        let count: number = urls.length
 
                         if (count > 0) {
 
                             confirmBox(`Вы действительно хотите удалить ${count} ${declStr(count)}?`, true, async () => {
 
-                                let allCount = count
+                                let allComments = count
 
                                 for (let url of urls) {
-                                    messageBox(`Осталось удалить ${count--} из ${allCount} ${declStr(count)}`, 'Подождите немного... <span style="padding-right: 10px" class="ico ico_spinner"></span>', false)
+                                    messageBox(`Осталось удалить ${count--} из ${allComments} ${declStr(count)}`, 'Подождите немного... <span style="padding-right: 10px" class="ico ico_spinner"></span>', false)
 
                                     await http('GET', url, true).then(e => {
                                         info('Удалил комментарий', e)
