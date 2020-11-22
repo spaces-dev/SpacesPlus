@@ -96,7 +96,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 13);
+/******/ 	return __webpack_require__(__webpack_require__.s = 12);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -107,56 +107,56 @@
 
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.readSettings = exports.notification = exports.modifyObject = exports.setSettings = exports.historyPush = exports.messageBox = exports.isValidUrl = exports.confirmBox = exports.setCookie = exports.playSound = exports.getParams = exports.getCookie = exports.delCookie = exports.declOfNum = exports.getQuery = exports.toUpper = exports.getPath = exports.extend = exports.rever = exports.error = exports.trim = exports.http = exports.info = exports.log = exports.css = exports.qsa = exports.qs = exports.ce = void 0;
-const ce_1 = __webpack_require__(15);
+const ce_1 = __webpack_require__(14);
 Object.defineProperty(exports, "ce", { enumerable: true, get: function () { return ce_1.ce; } });
 const css_1 = __webpack_require__(5);
 Object.defineProperty(exports, "css", { enumerable: true, get: function () { return css_1.css; } });
-const http_1 = __webpack_require__(16);
+const http_1 = __webpack_require__(15);
 Object.defineProperty(exports, "http", { enumerable: true, get: function () { return http_1.http; } });
 const trim_1 = __webpack_require__(6);
 Object.defineProperty(exports, "trim", { enumerable: true, get: function () { return trim_1.trim; } });
-const qs_1 = __webpack_require__(18);
+const qs_1 = __webpack_require__(17);
 Object.defineProperty(exports, "qs", { enumerable: true, get: function () { return qs_1.qs; } });
 Object.defineProperty(exports, "qsa", { enumerable: true, get: function () { return qs_1.qsa; } });
-const rever_1 = __webpack_require__(19);
+const rever_1 = __webpack_require__(18);
 Object.defineProperty(exports, "rever", { enumerable: true, get: function () { return rever_1.rever; } });
 const extend_1 = __webpack_require__(7);
 Object.defineProperty(exports, "extend", { enumerable: true, get: function () { return extend_1.extend; } });
-const getPath_1 = __webpack_require__(20);
+const getPath_1 = __webpack_require__(19);
 Object.defineProperty(exports, "getPath", { enumerable: true, get: function () { return getPath_1.getPath; } });
-const toUpper_1 = __webpack_require__(21);
+const toUpper_1 = __webpack_require__(20);
 Object.defineProperty(exports, "toUpper", { enumerable: true, get: function () { return toUpper_1.toUpper; } });
-const getQuery_1 = __webpack_require__(22);
+const getQuery_1 = __webpack_require__(21);
 Object.defineProperty(exports, "getQuery", { enumerable: true, get: function () { return getQuery_1.getQuery; } });
-const declOfNum_1 = __webpack_require__(23);
+const declOfNum_1 = __webpack_require__(22);
 Object.defineProperty(exports, "declOfNum", { enumerable: true, get: function () { return declOfNum_1.declOfNum; } });
-const delCookie_1 = __webpack_require__(24);
+const delCookie_1 = __webpack_require__(23);
 Object.defineProperty(exports, "delCookie", { enumerable: true, get: function () { return delCookie_1.delCookie; } });
-const getCookie_1 = __webpack_require__(26);
+const getCookie_1 = __webpack_require__(25);
 Object.defineProperty(exports, "getCookie", { enumerable: true, get: function () { return getCookie_1.getCookie; } });
-const getParams_1 = __webpack_require__(27);
+const getParams_1 = __webpack_require__(26);
 Object.defineProperty(exports, "getParams", { enumerable: true, get: function () { return getParams_1.getParams; } });
-const playSound_1 = __webpack_require__(28);
+const playSound_1 = __webpack_require__(27);
 Object.defineProperty(exports, "playSound", { enumerable: true, get: function () { return playSound_1.playSound; } });
 const setCookie_1 = __webpack_require__(8);
 Object.defineProperty(exports, "setCookie", { enumerable: true, get: function () { return setCookie_1.setCookie; } });
-const confirmBox_1 = __webpack_require__(29);
+const confirmBox_1 = __webpack_require__(28);
 Object.defineProperty(exports, "confirmBox", { enumerable: true, get: function () { return confirmBox_1.confirmBox; } });
-const isValidUrl_1 = __webpack_require__(30);
+const isValidUrl_1 = __webpack_require__(29);
 Object.defineProperty(exports, "isValidUrl", { enumerable: true, get: function () { return isValidUrl_1.isValidUrl; } });
-const messageBox_1 = __webpack_require__(31);
+const messageBox_1 = __webpack_require__(30);
 Object.defineProperty(exports, "messageBox", { enumerable: true, get: function () { return messageBox_1.messageBox; } });
-const historyPush_1 = __webpack_require__(32);
+const historyPush_1 = __webpack_require__(31);
 Object.defineProperty(exports, "historyPush", { enumerable: true, get: function () { return historyPush_1.historyPush; } });
 const console_1 = __webpack_require__(3);
 Object.defineProperty(exports, "log", { enumerable: true, get: function () { return console_1.log; } });
 Object.defineProperty(exports, "info", { enumerable: true, get: function () { return console_1.info; } });
 Object.defineProperty(exports, "error", { enumerable: true, get: function () { return console_1.error; } });
-const modifyObject_1 = __webpack_require__(33);
+const modifyObject_1 = __webpack_require__(32);
 Object.defineProperty(exports, "modifyObject", { enumerable: true, get: function () { return modifyObject_1.modifyObject; } });
-const notification_1 = __webpack_require__(34);
+const notification_1 = __webpack_require__(33);
 Object.defineProperty(exports, "notification", { enumerable: true, get: function () { return notification_1.notification; } });
-const settings_1 = __webpack_require__(35);
+const settings_1 = __webpack_require__(34);
 Object.defineProperty(exports, "readSettings", { enumerable: true, get: function () { return settings_1.readSettings; } });
 Object.defineProperty(exports, "setSettings", { enumerable: true, get: function () { return settings_1.setSettings; } });
 
@@ -172,7 +172,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FirebaseConfig = exports.PKG_VERSION = exports.BASE_PATH = exports.REVISION = exports.ENV_PATH = exports.BASE_URL = exports.DOMAINS = exports.SPACES = exports.GITHUB = exports.DEVICE = exports.HTTP = exports.DATA = exports.DEV = void 0;
-const package_json_1 = __importDefault(__webpack_require__(25));
+const package_json_1 = __importDefault(__webpack_require__(24));
 /**
  * Константы
  */
@@ -429,7 +429,7 @@ exports._SETTINGS = {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.error = exports.warn = exports.info = exports.log = void 0;
-const ts_debug_1 = __webpack_require__(17);
+const ts_debug_1 = __webpack_require__(16);
 const logger = new ts_debug_1.Debugger(console, true, '[S+]: ');
 const styles = [
     'background: steelblue',
@@ -451,49 +451,49 @@ exports.error = (str, obj) => logger.error('%c' + str, styles[3], obj);
 
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.settingsRecentSmiles = exports.settingsBackupMenu = exports.settingsBackground = exports.videoSpeedPlayback = exports.settingsFeatures = exports.settingsWeather = exports.settingsFriends = exports.settingsLogMenu = exports.disableRedirect = exports.settingsNotify = exports.playerDownload = exports.hiddenRightbar = exports.deleteComments = exports.weatherWidget = exports.sidebarButton = exports.galleryRotate = exports.friendsOnline = exports.deleteReaders = exports.bypassProfile = exports.stickyHeader = exports.settingsMenu = exports.recentSmiles = exports.freeStickers = exports.favoriteUser = exports.checkUpdates = exports.blockedFiles = exports.betaFeatures = exports.soundNotify = exports.karmaAccept = exports.firstLaunch = exports.deleteBlogs = exports.coinsAccept = exports.apiDebugger = exports.userOnline = exports.userStatus = exports.scrollMove = exports.getUpdater = exports.setStyles = exports.oldHeader = exports.ipWhois = exports.adBlock = void 0;
-const adBlock_1 = __webpack_require__(14);
+const adBlock_1 = __webpack_require__(13);
 Object.defineProperty(exports, "adBlock", { enumerable: true, get: function () { return adBlock_1.adBlock; } });
-const oldHeader_1 = __webpack_require__(36);
+const oldHeader_1 = __webpack_require__(35);
 Object.defineProperty(exports, "oldHeader", { enumerable: true, get: function () { return oldHeader_1.oldHeader; } });
 const setStyles_1 = __webpack_require__(9);
 Object.defineProperty(exports, "setStyles", { enumerable: true, get: function () { return setStyles_1.setStyles; } });
-const scrollMove_1 = __webpack_require__(37);
+const scrollMove_1 = __webpack_require__(36);
 Object.defineProperty(exports, "scrollMove", { enumerable: true, get: function () { return scrollMove_1.scrollMove; } });
-const userStatus_1 = __webpack_require__(38);
+const userStatus_1 = __webpack_require__(37);
 Object.defineProperty(exports, "userStatus", { enumerable: true, get: function () { return userStatus_1.userStatus; } });
-const userOnline_1 = __webpack_require__(39);
+const userOnline_1 = __webpack_require__(38);
 Object.defineProperty(exports, "userOnline", { enumerable: true, get: function () { return userOnline_1.userOnline; } });
-const apiDebugger_1 = __webpack_require__(40);
+const apiDebugger_1 = __webpack_require__(39);
 Object.defineProperty(exports, "apiDebugger", { enumerable: true, get: function () { return apiDebugger_1.apiDebugger; } });
-const coinsAccept_1 = __webpack_require__(41);
+const coinsAccept_1 = __webpack_require__(40);
 Object.defineProperty(exports, "coinsAccept", { enumerable: true, get: function () { return coinsAccept_1.coinsAccept; } });
-const deleteBlogs_1 = __webpack_require__(42);
+const deleteBlogs_1 = __webpack_require__(41);
 Object.defineProperty(exports, "deleteBlogs", { enumerable: true, get: function () { return deleteBlogs_1.deleteBlogs; } });
-const firstLaunch_1 = __webpack_require__(43);
+const firstLaunch_1 = __webpack_require__(42);
 Object.defineProperty(exports, "firstLaunch", { enumerable: true, get: function () { return firstLaunch_1.firstLaunch; } });
-const karmaAccept_1 = __webpack_require__(44);
+const karmaAccept_1 = __webpack_require__(43);
 Object.defineProperty(exports, "karmaAccept", { enumerable: true, get: function () { return karmaAccept_1.karmaAccept; } });
-const soundNotify_1 = __webpack_require__(45);
+const soundNotify_1 = __webpack_require__(44);
 Object.defineProperty(exports, "soundNotify", { enumerable: true, get: function () { return soundNotify_1.soundNotify; } });
-const betaFeatures_1 = __webpack_require__(46);
+const betaFeatures_1 = __webpack_require__(45);
 Object.defineProperty(exports, "betaFeatures", { enumerable: true, get: function () { return betaFeatures_1.betaFeatures; } });
-const blockedFiles_1 = __webpack_require__(47);
+const blockedFiles_1 = __webpack_require__(46);
 Object.defineProperty(exports, "blockedFiles", { enumerable: true, get: function () { return blockedFiles_1.blockedFiles; } });
-const favoriteUser_1 = __webpack_require__(48);
+const favoriteUser_1 = __webpack_require__(47);
 Object.defineProperty(exports, "favoriteUser", { enumerable: true, get: function () { return favoriteUser_1.favoriteUser; } });
-const freeStickers_1 = __webpack_require__(49);
+const freeStickers_1 = __webpack_require__(48);
 Object.defineProperty(exports, "freeStickers", { enumerable: true, get: function () { return freeStickers_1.freeStickers; } });
-const recentSmiles_1 = __webpack_require__(50);
+const recentSmiles_1 = __webpack_require__(49);
 Object.defineProperty(exports, "recentSmiles", { enumerable: true, get: function () { return recentSmiles_1.recentSmiles; } });
-const settingsMenu_1 = __webpack_require__(51);
+const settingsMenu_1 = __webpack_require__(50);
 Object.defineProperty(exports, "settingsMenu", { enumerable: true, get: function () { return settingsMenu_1.settingsMenu; } });
-const stickyHeader_1 = __webpack_require__(52);
+const stickyHeader_1 = __webpack_require__(51);
 Object.defineProperty(exports, "stickyHeader", { enumerable: true, get: function () { return stickyHeader_1.stickyHeader; } });
-const bypassProfile_1 = __webpack_require__(53);
+const bypassProfile_1 = __webpack_require__(52);
 Object.defineProperty(exports, "bypassProfile", { enumerable: true, get: function () { return bypassProfile_1.bypassProfile; } });
-const deleteReaders_1 = __webpack_require__(54);
+const deleteReaders_1 = __webpack_require__(53);
 Object.defineProperty(exports, "deleteReaders", { enumerable: true, get: function () { return deleteReaders_1.deleteReaders; } });
-const friendsOnline_1 = __webpack_require__(10);
+const friendsOnline_1 = __webpack_require__(54);
 Object.defineProperty(exports, "friendsOnline", { enumerable: true, get: function () { return friendsOnline_1.friendsOnline; } });
 const galleryRotate_1 = __webpack_require__(55);
 Object.defineProperty(exports, "galleryRotate", { enumerable: true, get: function () { return galleryRotate_1.galleryRotate; } });
@@ -523,10 +523,10 @@ const settingsBackground_1 = __webpack_require__(68);
 Object.defineProperty(exports, "settingsBackground", { enumerable: true, get: function () { return settingsBackground_1.settingsBackground; } });
 const settingsBackupMenu_1 = __webpack_require__(69);
 Object.defineProperty(exports, "settingsBackupMenu", { enumerable: true, get: function () { return settingsBackupMenu_1.settingsBackupMenu; } });
-const checkUpdates_1 = __webpack_require__(12);
+const checkUpdates_1 = __webpack_require__(11);
 Object.defineProperty(exports, "checkUpdates", { enumerable: true, get: function () { return checkUpdates_1.checkUpdates; } });
 Object.defineProperty(exports, "getUpdater", { enumerable: true, get: function () { return checkUpdates_1.getUpdater; } });
-const settingsWeather_1 = __webpack_require__(11);
+const settingsWeather_1 = __webpack_require__(10);
 Object.defineProperty(exports, "settingsWeather", { enumerable: true, get: function () { return settingsWeather_1.settingsWeather; } });
 Object.defineProperty(exports, "ipWhois", { enumerable: true, get: function () { return settingsWeather_1.ipWhois; } });
 const settingsRecentSmiles_1 = __webpack_require__(71);
@@ -694,109 +694,6 @@ exports.setStyles = () => {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.friendsOnline = void 0;
-const utils_1 = __webpack_require__(0);
-const strings_1 = __webpack_require__(1);
-const settings_1 = __webpack_require__(2);
-/**
- * TODO: Переписать логику обновления списка
- * ! Сейчас обновление проиcходит путем F5
- * @param t
- */
-exports.friendsOnline = (t) => {
-    var _a, _b;
-    let frCount = utils_1.qs('#friends_cnt');
-    let frOnDiv = utils_1.qs('#SP_PLUS_FRIENDSSB');
-    let friendsForce = 0, reCount, count = 0, countFriends = 0;
-    // @ts-ignore
-    if (frCount && !isNaN(frCount.innerHTML)) {
-        count = Number(frCount.innerHTML);
-    }
-    if (frCount) {
-        try {
-            if (!t) {
-                if (frOnDiv) {
-                    frOnDiv.remove();
-                    countFriends = 0;
-                    utils_1.info('Убрали панель друзей!', frCount);
-                }
-                friendsForce = 0;
-            }
-            else if (count > 0) {
-                friendsForce++;
-                if (count !== countFriends || (count > 0 && !frOnDiv) || friendsForce >= 700) {
-                    if (friendsForce >= 700) {
-                        friendsForce = 0;
-                        utils_1.info('Принудительно обновляем друзей!', friendsForce);
-                    }
-                    countFriends = count;
-                    let parent = (_b = (_a = frCount === null || frCount === void 0 ? void 0 : frCount.parentNode) === null || _a === void 0 ? void 0 : _a.parentNode) === null || _b === void 0 ? void 0 : _b.parentNode;
-                    frOnDiv = frOnDiv || utils_1.ce('div', { id: 'SP_PLUS_FRIENDSSB', class: 'list-link__wrap' });
-                    utils_1.http('GET', `${strings_1.SPACES}/friends/?S=3`, true).then(e => {
-                        const json = e.parsedBody;
-                        if (json === null || json === void 0 ? void 0 : json.tabbed_panel) {
-                            let tempfriendsList = json.tabbed_panel.tabs[1].content.list;
-                            if (tempfriendsList) {
-                                utils_1.http('GET', `${strings_1.SPACES}/friends/?P=2&S=3`, true).then(e => {
-                                    const json2 = e.parsedBody;
-                                    if (json2 === null || json2 === void 0 ? void 0 : json2.tabbed_panel) {
-                                        // Включены ли иконки на левой панели
-                                        let disableAvatar = utils_1.qs('span.s_i_exit') ? true : false;
-                                        let friendsList = json2.tabbed_panel.tabs[1].content.list;
-                                        friendsList ?
-                                            friendsList = utils_1.extend(tempfriendsList, friendsList) :
-                                            friendsList = tempfriendsList;
-                                        frOnDiv.innerHTML = '';
-                                        let lengthList = (settings_1._SETTINGS.friendsSet.max >
-                                            friendsList.length ?
-                                            friendsList.length :
-                                            settings_1._SETTINGS.friendsSet.max);
-                                        if (countFriends !== friendsList.length && reCount < 3) {
-                                            reCount++;
-                                            setTimeout(() => {
-                                                countFriends = friendsList.length;
-                                                utils_1.info(`Количество друзей не точное, пробуем еще раз (${reCount} из 3)`, e);
-                                            }, 1000);
-                                        }
-                                        else if (countFriends === friendsList.length) {
-                                            reCount = 0;
-                                        }
-                                        for (let i = 0; i < lengthList; i++) {
-                                            frOnDiv.appendChild(utils_1.ce('a', {
-                                                href: `${strings_1.SPACES}/mysite/index/${friendsList[i].name}`,
-                                                class: 'li',
-                                                html: (disableAvatar ?
-                                                    `<span class="comm_ava m for_avatar"><img src="${friendsList[i].avatar.previewURL}" class="preview s21_20"></span>` : '') +
-                                                    `<span class="online-status m"><img class="p14 online_status_ico" src="${strings_1.HTTP}//spac.me/i/${friendsList[i].online_status.on_img}" alt="(ON)"></span><span class="block-item__title m break-word">${friendsList[i].name}</span>`
-                                            }));
-                                        }
-                                        utils_1.info('Обновили список друзей!', e);
-                                    }
-                                });
-                            }
-                        }
-                    });
-                    parent === null || parent === void 0 ? void 0 : parent.appendChild(frOnDiv);
-                }
-            }
-            else if (count === 0) {
-                frOnDiv === null || frOnDiv === void 0 ? void 0 : frOnDiv.remove();
-            }
-        }
-        catch (e) {
-            utils_1.error('friendsOnline.ts', e);
-        }
-    }
-};
-
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
 exports.ipWhois = exports.getWeather = exports.settingsWeather = void 0;
 const utils_1 = __webpack_require__(0);
 const settings_1 = __webpack_require__(2);
@@ -946,7 +843,7 @@ exports.ipWhois = async () => {
 
 
 /***/ }),
-/* 12 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1006,7 +903,7 @@ exports.checkUpdates = () => {
 
 
 /***/ }),
-/* 13 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1120,7 +1017,7 @@ const init = () => {
 
 
 /***/ }),
-/* 14 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1153,7 +1050,7 @@ exports.adBlock = () => {
 
 
 /***/ }),
-/* 15 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1204,7 +1101,7 @@ exports.ce = (name, params) => {
 
 
 /***/ }),
-/* 16 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1242,7 +1139,7 @@ exports.http = http;
 
 
 /***/ }),
-/* 17 */
+/* 16 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1472,7 +1369,7 @@ var Debugger = /** @class */ (function () {
 
 
 /***/ }),
-/* 18 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1492,7 +1389,7 @@ exports.qsa = (e) => document.querySelectorAll(e);
 
 
 /***/ }),
-/* 19 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1507,7 +1404,7 @@ exports.rever = (s) => s ? s.toString().split('').join('.') : s;
 
 
 /***/ }),
-/* 20 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1526,7 +1423,7 @@ exports.getPath = (index) => {
 
 
 /***/ }),
-/* 21 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1541,7 +1438,7 @@ exports.toUpper = (str) => str[0].toUpperCase() + str.substring(1);
 
 
 /***/ }),
-/* 22 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1574,7 +1471,7 @@ exports.getQuery = (name) => {
 
 
 /***/ }),
-/* 23 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1598,7 +1495,7 @@ exports.declOfNum = (number, titles) => {
 
 
 /***/ }),
-/* 24 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1614,13 +1511,13 @@ exports.delCookie = (name) => setCookie_1.setCookie(name, null, { expires: -1 })
 
 
 /***/ }),
-/* 25 */
+/* 24 */
 /***/ (function(module) {
 
 module.exports = JSON.parse("{\"name\":\"spaces-plus\",\"description\":\"🚀 Powerful userscript for Spaces.ru\",\"homepage\":\"https://spaces-dev.github.io/SpacesPlus\",\"version\":\"3.1.2\",\"author\":{\"name\":\"Vitalij Ryndin\",\"email\":\"sys@crashmax.ru\",\"url\":\"https://crashmax.ru\"},\"scripts\":{\"dev\":\"cross-env NODE_ENV=development webpack-dev-server --config-name main --host localhost --watch-poll\",\"build\":\"cross-env NODE_ENV=production webpack --progress\"},\"devDependencies\":{\"@types/node\":\"^14.11.8\",\"@types/resize-observer-browser\":\"^0.1.4\",\"@types/webpack\":\"^4.41.22\",\"@types/webpack-dev-server\":\"^3.11.0\",\"clean-webpack-plugin\":\"^3.0.0\",\"copy-webpack-plugin\":\"^6.2.1\",\"cross-env\":\"^7.0.2\",\"json-beautify\":\"^1.1.1\",\"optimize-css-assets-webpack-plugin\":\"^5.0.4\",\"ts-debug\":\"^1.3.0\",\"ts-loader\":\"^8.0.4\",\"ts-node\":\"^9.0.0\",\"typescript\":\"^4.0.2\",\"webpack\":\"^4.44.2\",\"webpack-cli\":\"^3.3.12\",\"webpack-dev-server\":\"^3.11.0\",\"webpack-userscript\":\"^2.5.6\",\"webpack-zip-files-plugin\":\"^1.0.0\"}}");
 
 /***/ }),
-/* 26 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1638,7 +1535,7 @@ exports.getCookie = (name) => {
 
 
 /***/ }),
-/* 27 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1664,7 +1561,7 @@ exports.getParams = (url) => {
 
 
 /***/ }),
-/* 28 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1684,7 +1581,7 @@ exports.playSound = (file, volume) => {
 
 
 /***/ }),
-/* 29 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1733,7 +1630,7 @@ const rm = () => index_1.qs('#SP_PLUS_CONFIRM').remove();
 
 
 /***/ }),
-/* 30 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1751,7 +1648,7 @@ exports.isValidUrl = (url) => {
 
 
 /***/ }),
-/* 31 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1794,7 +1691,7 @@ exports.messageBox = (title, content, close, timer) => {
 
 
 /***/ }),
-/* 32 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1825,7 +1722,7 @@ exports.historyPush = (state, url, title) => {
 
 
 /***/ }),
-/* 33 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1867,7 +1764,7 @@ exports.modifyObject = (obj, key, value, index) => {
 
 
 /***/ }),
-/* 34 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1894,7 +1791,7 @@ exports.notification = (title, body, time) => {
 
 
 /***/ }),
-/* 35 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1940,7 +1837,7 @@ exports.setSettings = (key, value) => {
 
 
 /***/ }),
-/* 36 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1970,7 +1867,7 @@ exports.oldHeader = (b) => {
 
 
 /***/ }),
-/* 37 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2000,7 +1897,7 @@ exports.scrollMove = (b) => {
 
 
 /***/ }),
-/* 38 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2036,7 +1933,7 @@ exports.userStatus = (code) => {
 
 
 /***/ }),
-/* 39 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2077,7 +1974,7 @@ exports.userOnline = () => {
 
 
 /***/ }),
-/* 40 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2097,7 +1994,7 @@ exports.apiDebugger = (b) => {
 
 
 /***/ }),
-/* 41 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2124,7 +2021,7 @@ exports.coinsAccept = () => {
 
 
 /***/ }),
-/* 42 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2236,7 +2133,7 @@ const declStr = (count) => 'блог' + utils_1.declOfNum(count, ['', 'а', 'о�
 
 
 /***/ }),
-/* 43 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2276,7 +2173,7 @@ exports.firstLaunch = () => {
 
 
 /***/ }),
-/* 44 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2303,7 +2200,7 @@ exports.karmaAccept = () => {
 
 
 /***/ }),
-/* 45 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2347,7 +2244,7 @@ exports.soundNotify = () => {
 
 
 /***/ }),
-/* 46 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2373,7 +2270,7 @@ exports.betaFeatures = () => {
 
 
 /***/ }),
-/* 47 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2421,7 +2318,7 @@ exports.blockedFiles = () => {
 
 
 /***/ }),
-/* 48 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2528,7 +2425,7 @@ const isFav = async (id, name, elem) => {
 
 
 /***/ }),
-/* 49 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2550,7 +2447,7 @@ exports.freeStickers = (b) => {
 
 
 /***/ }),
-/* 50 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2666,7 +2563,7 @@ const eventSmiles = (smiles, storage) => {
 
 
 /***/ }),
-/* 51 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2939,7 +2836,7 @@ exports.settingsMenu = () => {
 
 
 /***/ }),
-/* 52 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3004,7 +2901,7 @@ exports.stickyHeader = (b) => {
 
 
 /***/ }),
-/* 53 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3186,7 +3083,7 @@ const setUrls = (e, lnk1, lnk2) => {
 
 
 /***/ }),
-/* 54 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3294,6 +3191,69 @@ const declStr = (count) => 'читател' + utils_1.declOfNum(count, ['я', '�
 
 
 /***/ }),
+/* 54 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.friendsOnline = void 0;
+const utils_1 = __webpack_require__(0);
+const strings_1 = __webpack_require__(1);
+const settings_1 = __webpack_require__(2);
+/**
+ * Панель друзей онлайн
+ * @param t
+ */
+exports.friendsOnline = (b) => {
+    var _a, _b;
+    try {
+        let friendsCount = utils_1.qs('#friends_cnt'), frOnDiv = utils_1.qs('#SP_PLUS_FRIENDS_B'), count = 0;
+        // получаем значение каунтера
+        if (friendsCount)
+            count = Number(friendsCount.textContent);
+        if (b && count > 0) {
+            let parent = (_b = (_a = friendsCount === null || friendsCount === void 0 ? void 0 : friendsCount.parentNode) === null || _a === void 0 ? void 0 : _a.parentNode) === null || _b === void 0 ? void 0 : _b.parentNode;
+            frOnDiv = frOnDiv || utils_1.ce('div', {
+                id: 'SP_PLUS_FRIENDS_B',
+                class: 'list-link__wrap'
+            });
+            utils_1.http('GET', `${strings_1.SPACES}/friends/?S=3`, true).then(e => {
+                var _a;
+                const response = (_a = e.parsedBody) === null || _a === void 0 ? void 0 : _a.tabbed_panel.tabs[1].content.list;
+                if (response) {
+                    // Включены ли иконки на левой панели
+                    let disableAvatar = utils_1.qs('span.s_i_exit') ? true : false;
+                    let friendsList = response;
+                    let lengthList = (settings_1._SETTINGS.friendsSet.max >
+                        friendsList.length ?
+                        friendsList.length :
+                        settings_1._SETTINGS.friendsSet.max);
+                    for (let i = 0; i < lengthList; i++) {
+                        frOnDiv.appendChild(utils_1.ce('a', {
+                            href: `${strings_1.SPACES}/mysite/index/${friendsList[i].name}`,
+                            class: 'li',
+                            html: (disableAvatar ?
+                                `<span class="comm_ava m for_avatar"><img src="${friendsList[i].avatar.previewURL}" class="preview s21_20"></span>` : '') +
+                                `<span class="online-status m"><img class="p14 online_status_ico" src="${strings_1.HTTP}//spac.me/i/${friendsList[i].online_status.on_img}" alt="(ON)"></span><span class="block-item__title m break-word">${friendsList[i].name}</span>`
+                        }));
+                    }
+                    utils_1.info('Панель друзей онлайн', e);
+                }
+            });
+            parent === null || parent === void 0 ? void 0 : parent.appendChild(frOnDiv);
+        }
+        else {
+            frOnDiv === null || frOnDiv === void 0 ? void 0 : frOnDiv.remove();
+        }
+    }
+    catch (e) {
+        utils_1.error('friendsOnline.ts', e);
+    }
+};
+
+
+/***/ }),
 /* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3371,7 +3331,7 @@ exports.sidebarButton = () => {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.weatherWidget = void 0;
 const utils_1 = __webpack_require__(0);
-const settingsWeather_1 = __webpack_require__(11);
+const settingsWeather_1 = __webpack_require__(10);
 const settings_1 = __webpack_require__(2);
 /**
  * Виджет погоды в правом меню
@@ -3474,21 +3434,18 @@ const utils_1 = __webpack_require__(0);
 const strings_1 = __webpack_require__(1);
 exports.deleteComments = () => {
     var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
-    let targetComm = utils_1.qs('h2.span');
-    let childs = utils_1.qsa('span.comment_date');
-    let delLinks = utils_1.qsa('a[class="ajax_delete"');
-    let delBtns = utils_1.qsa(`a[href^="${strings_1.SPACES}/comment/delete/"`);
+    let targetComm = utils_1.qs('h2.span'), childs = utils_1.qsa('span.comment_date'), delLinks = utils_1.qsa('a[class="ajax_delete"'), delBtns = utils_1.qsa(`a[href^="${strings_1.SPACES}/comment/delete/"`), banTarget = utils_1.qs(`a[href="${strings_1.SPACES}/forums/moder/ban/"`);
     try {
-        if (childs && delLinks && delBtns.length > 0 && (targetComm === null || targetComm === void 0 ? void 0 : targetComm.textContent) === 'Комментарии') {
+        if (childs &&
+            delLinks &&
+            banTarget &&
+            delBtns.length > 0 &&
+            (targetComm === null || targetComm === void 0 ? void 0 : targetComm.textContent) === 'Комментарии') {
             for (let child of childs) {
                 // к новым комментариям добавляем чекбоксы
                 if (!child.getElementsByTagName('input').length) {
                     // Нихуевый костыль!
                     let DC = strings_1.DEVICE.id === 4 ? (_e = (_d = (_c = (_b = (_a = 
-                    // pc
-                    child === null || 
-                    // pc
-                    child === void 0 ? void 0 : 
                     // pc
                     child.parentElement) === null || _a === void 0 ? void 0 : _a.parentElement) === null || _b === void 0 ? void 0 : _b.parentElement) === null || _c === void 0 ? void 0 : _c.parentElement) === null || _d === void 0 ? void 0 : _d.parentElement) === null || _e === void 0 ? void 0 : _e.id : (_m = (_l = (_k = (_j = (_h = (_g = (_f = 
                     // touch
@@ -3839,7 +3796,7 @@ exports.disableRedirect = () => {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.settingsLogMenu = void 0;
 const utils_1 = __webpack_require__(0);
-const checkUpdates_1 = __webpack_require__(12);
+const checkUpdates_1 = __webpack_require__(11);
 const strings_1 = __webpack_require__(1);
 exports.settingsLogMenu = (id) => {
     window.scrollTo(0, 0);
@@ -3887,7 +3844,6 @@ exports.settingsLogMenu = (id) => {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.settingsFriends = void 0;
 const utils_1 = __webpack_require__(0);
-const friendsOnline_1 = __webpack_require__(10);
 const settings_1 = __webpack_require__(2);
 exports.settingsFriends = (e) => {
     var _a;
@@ -3904,7 +3860,6 @@ exports.settingsFriends = (e) => {
         frMax.addEventListener('change', (e) => {
             if (/^([1-9]|1[0-5])$/i.test(e.target.value)) {
                 utils_1.setSettings('friendsSet.max', e.target.value);
-                friendsOnline_1.friendsOnline(true);
                 frMax.classList.remove('sp-input-error');
             }
             else {
