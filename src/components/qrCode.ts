@@ -6,8 +6,6 @@ import {
     messageBox
 } from '../utils'
 
-import Qr from 'qrcode'
-
 import { DATA } from '../strings'
 
 export const qrCode = () => {
@@ -27,12 +25,9 @@ export const qrCode = () => {
                 onclick: () => {
                     messageBox(
                         'Сканируйте QR-код c телефона',
-                        '<canvas id="SP_QR_CODE" class="sp_img-center"></canvas>',
+                        `<img src="https://chart.googleapis.com/chart?cht=qr&chs=256x256&chl=${DATA.SID}" class="sp_img-center"></img>`,
                         true
                     )
-
-                    // генерируем qr-код
-                    Qr.toCanvas(qs('#SP_QR_CODE'), DATA.SID)
 
                     return false
                 }
