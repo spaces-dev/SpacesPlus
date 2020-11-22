@@ -15,7 +15,7 @@ export const qrCode = () => {
 
         if (getPath(1) === 'mysite' && moreMenu && !qs('#SP_QR_BUTTON')) {
 
-            let link = ce('a', {
+            let qrCodeBtn = ce('a', {
                 class: 'stnd-link',
                 id: 'SP_QR_BUTTON',
                 html: `
@@ -24,8 +24,11 @@ export const qrCode = () => {
                 `,
                 onclick: () => {
                     messageBox(
-                        'Сканируйте QR-код c телефона',
-                        `<div id="SP_QR_CODE"><img src="${HTTP}//spac.me/i/preloader.gif" class="sp_img-center" id="SP_QR_LOADER"></div>`,
+                        'Сканируйте QR-код c телефона', `
+                            <div id="SP_QR_CODE">
+                                <img src="${HTTP}//spac.me/i/preloader.gif" class="sp_img-center" id="SP_QR_LOADER">
+                            </div>
+                        `,
                         true
                     )
 
@@ -51,14 +54,14 @@ export const qrCode = () => {
                 }
             })
 
-            moreMenu.appendChild(link)
+            moreMenu.appendChild(qrCodeBtn)
         }
     } catch (e) {
         error('qrCode.ts', e)
     }
 }
 
-const qrCodeLoader = (url: string): Promise<Element> => {
+const qrCodeLoader = (url: string): Promise<HTMLImageElement> => {
     return new Promise((resolve, reject) => {
         const image = new Image()
         image.src = url
