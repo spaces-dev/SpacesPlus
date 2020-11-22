@@ -112,12 +112,14 @@ const getProfile = async (nickname: string) => {
         qs('#main_content').innerHTML = DATA.CONTENT
 
         // Костыль по восстановлению аватарки
-        let avatar = qs('img[data-s*="101.100.0"')
-        // @ts-ignore
-        avatar.src = avatar.dataset.s
+        let avatar = (<HTMLImageElement>qs('img[data-s*="101.100.0"'))
+        avatar.src = (avatar.dataset.s as string)
+
+        // Удаляем ебучие виджеты
+        qs('div.widgets-group').remove()
 
         // Удаляем ненужную панель c кнопками
-        qs('.user__tools').remove()
+        qs('div.user__tools').remove()
 
         // Удаляем кнопку "Сделать подарок"
         qs('span[class$="ico_gifts"').parentElement?.parentElement?.remove()
@@ -126,7 +128,7 @@ const getProfile = async (nickname: string) => {
         qs(`a[href^="${SPACES}/activity"`).parentElement?.remove()
 
         // Удаляем кнопку "Написать"
-        qs('.btn-single__wrap').remove()
+        qs('div.btn-single__wrap').remove()
     }
 }
 
@@ -207,7 +209,7 @@ const setUrls = (e: string, lnk1: HTMLElement, lnk2: HTMLElement) => {
             href: SPACES + path,
             class: 'list-link stnd-link_arr list-link-darkblue c-darkblue',
             html: `
-                <span class="js-ico  ico ico_${ico}"></span>
+                <span class="js-ico ico ico_${ico}"></span>
                 <span class="t js-text">${text}</span>
                 <span class="ico ico_arr"></span>
             `
