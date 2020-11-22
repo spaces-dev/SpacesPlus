@@ -1,6 +1,5 @@
 import { ce, error, setSettings } from '../utils'
 
-import { friendsOnline } from './friendsOnline'
 import { _SETTINGS } from '../settings'
 
 export const settingsFriends = (e: Element) => {
@@ -19,7 +18,6 @@ export const settingsFriends = (e: Element) => {
         frMax.addEventListener('change', (e: any) => {
             if (/^([1-9]|1[0-5])$/i.test(e.target.value)) {
                 setSettings('friendsSet.max', e.target.value)
-                friendsOnline(true)
                 frMax.classList.remove('sp-input-error')
             } else {
                 frMax.classList.add('sp-input-error')
