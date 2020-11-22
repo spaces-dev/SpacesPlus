@@ -13,13 +13,18 @@ import {
 import { SPACES, DEVICE } from '../strings'
 
 export const deleteComments = () => {
-    let targetComm = qs('h2.span')
-    let childs = qsa('span.comment_date')
-    let delLinks = qsa('a[class="ajax_delete"')
-    let delBtns = qsa(`a[href^="${SPACES}/comment/delete/"`)
+    let targetComm = qs('h2.span'),
+        childs = qsa('span.comment_date'),
+        delLinks = qsa('a[class="ajax_delete"'),
+        delBtns = qsa(`a[href^="${SPACES}/comment/delete/"`),
+        banTarget = qs(`a[href="${SPACES}/forums/moder/ban/"`)
 
     try {
-        if (childs && delLinks && delBtns.length > 0 && targetComm?.textContent === 'Комментарии') {
+        if (childs &&
+            delLinks &&
+            banTarget &&
+            delBtns.length > 0 &&
+            targetComm?.textContent === 'Комментарии') {
 
             for (let child of childs) {
 
@@ -29,7 +34,7 @@ export const deleteComments = () => {
                     // Нихуевый костыль!
                     let DC = DEVICE.id === 4 ?
                         // pc
-                        child?.parentElement?.parentElement?.parentElement?.parentElement?.parentElement?.id :
+                        child.parentElement?.parentElement?.parentElement?.parentElement?.parentElement?.id :
                         // touch
                         child.parentElement?.parentElement?.parentElement?.parentElement?.parentElement?.parentElement?.parentElement?.id
 
