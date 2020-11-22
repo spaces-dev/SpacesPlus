@@ -1,4 +1,5 @@
 import {
+    qrCode,
     adBlock,
     setStyles,
     oldHeader,
@@ -50,8 +51,6 @@ import {
 import { _SETTINGS } from './settings'
 
 import { ISessionCheck } from './interfaces/SessionCheck'
-
-import { qrCode } from './components/qrCode'
 
 (() => {
     if (qs('#main_wrap')) {

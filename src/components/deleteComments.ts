@@ -19,10 +19,13 @@ export const deleteComments = () => {
             childs = qsa('span.comment_date'),
             delLink = qs(`a[href^="${SPACES}/comment/delete/"`),
             banLink = qs(`a[href^="${SPACES}/forums/moder/ban/"`),
+            onComments = targetComm?.textContent === 'Комментарии' ? true : false,
             onDelete = delLink?.textContent === 'Удалить' ? true : false,
             onAdmin = banLink?.textContent === 'Бан' ? true : false
 
-        if (childs && (onDelete || onAdmin) && targetComm?.textContent === 'Комментарии') {
+        if (childs &&
+            onComments &&
+            (onDelete || onAdmin)) {
 
             for (let child of childs) {
 

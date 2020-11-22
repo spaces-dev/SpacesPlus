@@ -1,3 +1,4 @@
+import { qrCode } from './qrCode'
 import { adBlock } from './adBlock'
 import { oldHeader } from './oldHeader'
 import { setStyles } from './setStyles'
@@ -39,6 +40,7 @@ import { settingsWeather, ipWhois } from './settingsWeather'
 import { settingsRecentSmiles } from './settingsRecentSmiles'
 
 export {
+    qrCode,
     adBlock,
     ipWhois,
     oldHeader,
