@@ -1035,7 +1035,7 @@ exports.qrCode = () => {
     try {
         let moreMenu = utils_1.qs('#more_menu > div > div');
         if (utils_1.getPath(1) === 'mysite' && moreMenu && !utils_1.qs('#SP_QR_BUTTON')) {
-            let link = utils_1.ce('a', {
+            let qrCodeBtn = utils_1.ce('a', {
                 class: 'stnd-link',
                 id: 'SP_QR_BUTTON',
                 html: `
@@ -1043,7 +1043,11 @@ exports.qrCode = () => {
                     <span class="t js-text">Получить QR-код</span>
                 `,
                 onclick: () => {
-                    utils_1.messageBox('Сканируйте QR-код c телефона', `<div id="SP_QR_CODE"><img src="${strings_1.HTTP}//spac.me/i/preloader.gif" class="sp_img-center" id="SP_QR_LOADER"></div>`, true);
+                    utils_1.messageBox('Сканируйте QR-код c телефона', `
+                            <div id="SP_QR_CODE">
+                                <img src="${strings_1.HTTP}//spac.me/i/preloader.gif" class="sp_img-center" id="SP_QR_LOADER">
+                            </div>
+                        `, true);
                     // https://developers.google.com/chart/infographics/docs/qr_codes
                     let qr = qrCodeLoader(`https://chart.googleapis.com/chart?cht=qr&chs=256x256&chl=${strings_1.DATA.SID}`), loader = utils_1.qs('#SP_QR_LOADER'), target = utils_1.qs('#SP_QR_CODE');
                     qr.then(e => {
@@ -1060,7 +1064,7 @@ exports.qrCode = () => {
                     return false;
                 }
             });
-            moreMenu.appendChild(link);
+            moreMenu.appendChild(qrCodeBtn);
         }
     }
     catch (e) {
