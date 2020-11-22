@@ -1043,7 +1043,20 @@ exports.qrCode = () => {
                     <span class="t js-text">Получить QR-код</span>
                 `,
                 onclick: () => {
-                    utils_1.messageBox('Сканируйте QR-код c телефона', `<img src="https://chart.googleapis.com/chart?cht=qr&chs=256x256&chl=${strings_1.DATA.SID}" class="sp_img-center"></img>`, true);
+                    utils_1.messageBox('Сканируйте QR-код c телефона', `<div id="SP_QR_CODE"><img src="${strings_1.HTTP}//spac.me/i/preloader.gif" class="sp_img-center" id="SP_QR_LOADER"></div>`, true);
+                    // https://developers.google.com/chart/infographics/docs/qr_codes
+                    let qr = qrCodeLoader(`https://chart.googleapis.com/chart?cht=qr&chs=256x256&chl=${strings_1.DATA.SID}`), loader = utils_1.qs('#SP_QR_LOADER'), target = utils_1.qs('#SP_QR_CODE');
+                    qr.then(e => {
+                        loader.remove();
+                        target.appendChild(e);
+                        target.appendChild(utils_1.ce('ol', {
+                            html: `
+                                <li>Запустите <b>OpenSpaces</b> на телефоне</li>
+                                <li>На странице авторизации нажмите «<b>Login by QR code</b>»</li>
+                                <li>Сканируйте этот код для авторизации</li>
+                            `
+                        }));
+                    });
                     return false;
                 }
             });
@@ -1053,6 +1066,15 @@ exports.qrCode = () => {
     catch (e) {
         utils_1.error('qrCode.ts', e);
     }
+};
+const qrCodeLoader = (url) => {
+    return new Promise((resolve, reject) => {
+        const image = new Image();
+        image.src = url;
+        image.className = 'sp_img-center';
+        image.onload = () => resolve(image);
+        image.onerror = () => reject(new Error('loading error'));
+    });
 };
 
 
