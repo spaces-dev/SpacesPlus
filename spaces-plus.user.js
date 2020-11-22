@@ -3434,13 +3434,9 @@ const utils_1 = __webpack_require__(0);
 const strings_1 = __webpack_require__(1);
 exports.deleteComments = () => {
     var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
-    let targetComm = utils_1.qs('h2.span'), childs = utils_1.qsa('span.comment_date'), delLinks = utils_1.qsa('a[class="ajax_delete"'), delBtns = utils_1.qsa(`a[href^="${strings_1.SPACES}/comment/delete/"`), banTarget = utils_1.qs(`a[href="${strings_1.SPACES}/forums/moder/ban/"`);
     try {
-        if (childs &&
-            delLinks &&
-            banTarget &&
-            delBtns.length > 0 &&
-            (targetComm === null || targetComm === void 0 ? void 0 : targetComm.textContent) === 'Комментарии') {
+        let targetComm = utils_1.qs('h2.span'), childs = utils_1.qsa('span.comment_date'), delLink = utils_1.qs(`a[href^="${strings_1.SPACES}/comment/delete/"`), banLink = utils_1.qs(`a[href^="${strings_1.SPACES}/forums/moder/ban/"`), onDelete = (delLink === null || delLink === void 0 ? void 0 : delLink.textContent) === 'Удалить' ? true : false, onAdmin = (banLink === null || banLink === void 0 ? void 0 : banLink.textContent) === 'Бан' ? true : false;
+        if (childs && (onDelete || onAdmin) && (targetComm === null || targetComm === void 0 ? void 0 : targetComm.textContent) === 'Комментарии') {
             for (let child of childs) {
                 // к новым комментариям добавляем чекбоксы
                 if (!child.getElementsByTagName('input').length) {
