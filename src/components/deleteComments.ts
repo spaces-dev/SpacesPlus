@@ -13,18 +13,16 @@ import {
 import { SPACES, DEVICE } from '../strings'
 
 export const deleteComments = () => {
-    let targetComm = qs('h2.span'),
-        childs = qsa('span.comment_date'),
-        delLinks = qsa('a[class="ajax_delete"'),
-        delBtns = qsa(`a[href^="${SPACES}/comment/delete/"`),
-        banTarget = qs(`a[href="${SPACES}/forums/moder/ban/"`)
-
     try {
-        if (childs &&
-            delLinks &&
-            banTarget &&
-            delBtns.length > 0 &&
-            targetComm?.textContent === 'Комментарии') {
+
+        let targetComm = qs('h2.span'),
+            childs = qsa('span.comment_date'),
+            delLink = qs(`a[href^="${SPACES}/comment/delete/"`),
+            banLink = qs(`a[href^="${SPACES}/forums/moder/ban/"`),
+            onDelete = delLink?.textContent === 'Удалить' ? true : false,
+            onAdmin = banLink?.textContent === 'Бан' ? true : false
+
+        if (childs && (onDelete || onAdmin) && targetComm?.textContent === 'Комментарии') {
 
             for (let child of childs) {
 
