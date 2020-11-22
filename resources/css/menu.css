@@ -638,3 +638,7 @@ input[type=color] {
 .sp-download-blue {
     background-position: 0px -80px
 }
+
+.sp-qrcode {
+    background-position: -32px -80px
+}

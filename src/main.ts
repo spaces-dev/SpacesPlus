@@ -51,6 +51,8 @@ import { _SETTINGS } from './settings'
 
 import { ISessionCheck } from './interfaces/SessionCheck'
 
+import { qrCode } from './components/qrCode'
+
 (() => {
     if (qs('#main_wrap')) {
         try {
@@ -61,21 +63,25 @@ import { ISessionCheck } from './interfaces/SessionCheck'
              * * 01001 - Требуется авторизация
              */
             http<ISessionCheck>('POST', `${SPACES}/api/session/check`, false).then(e => {
-                if (e.status === 200 && e.parsedBody) {
-                    if (userStatus(e.parsedBody.code)) {
 
-                        // Временно храним ник
-                        DATA.USERNAME = e.parsedBody?.attributes.name
+                const response = e.parsedBody
 
-                        // Временно храним CK
-                        DATA.CK = e.parsedBody?.attributes.CK
+                if (response && userStatus(response.code)) {
 
-                        // Инициализируем работу
-                        init()
-                    }
+                    // Временно храним ник
+                    DATA.USERNAME = response.attributes.name
 
-                    info('api/session/check', e)
+                    // Временно храним CK
+                    DATA.CK = response.attributes.CK
+
+                    // Временно храним SID
+                    DATA.SID = response?.attributes.sid
+
+                    // Инициализируем работу
+                    init()
                 }
+
+                info('api/session/check', e)
             })
         } catch (e) {
             error('main.ts', e)
@@ -142,5 +148,6 @@ const init = () => {
         if (_SETTINGS.blogsd || BASE_URL === 'spaces-blogs.com') deleteBlogs()
         if (_SETTINGS.blockedfiles || BASE_URL === 'spac1.net') blockedFiles()
         settingsMenu()
+        qrCode()
     }, 200)
 }

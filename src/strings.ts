@@ -86,6 +86,8 @@ const FirebaseConfig: IFirebase = {
 const DATA: IData = {
     // наш CK
     CK: '',
+    // наш SID
+    SID: '',
     // наш Никнейм
     USERNAME: '',
 
