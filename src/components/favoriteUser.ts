@@ -29,7 +29,7 @@ export const favoriteUser = async () => {
             method === 'activity') &&
             DATA.USERNAME !== trim(qs('#location_bar_1_0').textContent)) {
 
-            if (nickname && tdBlock && !inFavorite) {
+            if (nickname && tdBlock.length > 0 && !inFavorite) {
 
                 let favoriteButton = ce('td', {
                     class: 'table__cell stnd-link_disabled',
@@ -50,12 +50,17 @@ export const favoriteUser = async () => {
                 tdBlock[1].parentElement?.insertBefore(favoriteButton, tdBlock[1])
 
                 let clds = (<NodeList>tdBlock[1]?.parentElement?.childNodes)
-                for (let x in clds) { if (clds[x].nodeName === 'TD') (<HTMLTableCellElement>clds[x]).width = '25%' }
+                for (let x in clds) {
+                    if (clds[x].nodeName === 'TD') {
+                        // 'width' is deprecated???
+                        (<HTMLTableCellElement>clds[x]).width = '25%'
+                    }
+                }
 
                 await http<IUserAnketa>('GET', `${SPACES}/anketa/index/${nickname}`, true).then(e => {
                     const json = e.parsedBody?.user_widget
 
-                    if (json) {
+                    if (json !== undefined) {
                         let favoriteLink = ce('a', {
                             href: `${SPACES}/bookmarks/add/?object_id=${json.id}&object_type=11`,
                             class: 'stnd-link',
@@ -76,9 +81,11 @@ export const favoriteUser = async () => {
 
                         isFav(json.id, json.name, favoriteButton)
 
-                        qs('#SP_FV_LOADER').remove()
-                        qs('#SP_PLUS_INFAVORITE').classList.remove('stnd-link_disabled')
+                        loader.remove()
+                        favoriteButton.classList.remove('stnd-link_disabled')
                         favoriteButton.appendChild(favoriteLink)
+                    } else {
+                        loader.parentElement!.style.display = 'none'
                     }
 
                     info('anketa/index', e)
