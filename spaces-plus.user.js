@@ -106,7 +106,7 @@
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.readSettings = exports.notification = exports.modifyObject = exports.setSettings = exports.historyPush = exports.messageBox = exports.isValidUrl = exports.confirmBox = exports.setCookie = exports.playSound = exports.getParams = exports.getCookie = exports.delCookie = exports.declOfNum = exports.getQuery = exports.toUpper = exports.getPath = exports.extend = exports.rever = exports.error = exports.trim = exports.http = exports.info = exports.log = exports.css = exports.qsa = exports.qs = exports.ce = void 0;
+exports.readSettings = exports.notification = exports.modifyObject = exports.setSettings = exports.historyPush = exports.messageBox = exports.isValidUrl = exports.confirmBox = exports.setCookie = exports.playSound = exports.getParams = exports.getCookie = exports.delCookie = exports.declOfNum = exports.getQuery = exports.toUpper = exports.getPath = exports.extend = exports.logger = exports.rever = exports.trim = exports.http = exports.css = exports.qsa = exports.qs = exports.ce = void 0;
 const ce_1 = __webpack_require__(14);
 Object.defineProperty(exports, "ce", { enumerable: true, get: function () { return ce_1.ce; } });
 const css_1 = __webpack_require__(5);
@@ -120,6 +120,8 @@ Object.defineProperty(exports, "qs", { enumerable: true, get: function () { retu
 Object.defineProperty(exports, "qsa", { enumerable: true, get: function () { return qs_1.qsa; } });
 const rever_1 = __webpack_require__(18);
 Object.defineProperty(exports, "rever", { enumerable: true, get: function () { return rever_1.rever; } });
+const logger_1 = __webpack_require__(3);
+Object.defineProperty(exports, "logger", { enumerable: true, get: function () { return logger_1.logger; } });
 const extend_1 = __webpack_require__(7);
 Object.defineProperty(exports, "extend", { enumerable: true, get: function () { return extend_1.extend; } });
 const getPath_1 = __webpack_require__(19);
@@ -148,10 +150,6 @@ const messageBox_1 = __webpack_require__(30);
 Object.defineProperty(exports, "messageBox", { enumerable: true, get: function () { return messageBox_1.messageBox; } });
 const historyPush_1 = __webpack_require__(31);
 Object.defineProperty(exports, "historyPush", { enumerable: true, get: function () { return historyPush_1.historyPush; } });
-const console_1 = __webpack_require__(3);
-Object.defineProperty(exports, "log", { enumerable: true, get: function () { return console_1.log; } });
-Object.defineProperty(exports, "info", { enumerable: true, get: function () { return console_1.info; } });
-Object.defineProperty(exports, "error", { enumerable: true, get: function () { return console_1.error; } });
 const modifyObject_1 = __webpack_require__(32);
 Object.defineProperty(exports, "modifyObject", { enumerable: true, get: function () { return modifyObject_1.modifyObject; } });
 const notification_1 = __webpack_require__(33);
@@ -171,7 +169,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FirebaseConfig = exports.PKG_VERSION = exports.BASE_PATH = exports.REVISION = exports.ENV_PATH = exports.BASE_URL = exports.DOMAINS = exports.SPACES = exports.GITHUB = exports.DEVICE = exports.HTTP = exports.DATA = exports.DEV = void 0;
+exports.PKG_VERSION = exports.REVISION = exports.ENV_PATH = exports.BASE_URL = exports.SPACES = exports.GITHUB = exports.DEVICE = exports.HTTP = exports.DATA = exports.DEV = void 0;
 const package_json_1 = __importDefault(__webpack_require__(24));
 /**
  * Константы
@@ -194,69 +192,6 @@ const DEVICE = window.Device || unsafeWindow.Device;
 exports.DEVICE = DEVICE;
 const ENV_PATH = DEV ? 'https://localhost:8080' : GITHUB;
 exports.ENV_PATH = ENV_PATH;
-/**
- * Домены сайта
- */
-const DOMAINS = [
-    'spaces-blogs.com',
-    'gdespaces.com',
-    'spaces.ru',
-    'spaces.im',
-    'spac1.net',
-    'spcs.me'
-];
-exports.DOMAINS = DOMAINS;
-/**
- * Базовые пути разделов сайта
- */
-const BASE_PATH = [
-    'sz',
-    'app',
-    'rklm',
-    'tags',
-    'mail',
-    'info',
-    'comm',
-    'chat',
-    'files',
-    'video',
-    'users',
-    'diary',
-    'lenta',
-    'mysite',
-    'dating',
-    'forums',
-    'anketa',
-    'journal',
-    'musicat',
-    'pictures',
-    'activity',
-    'settings',
-    'friends',
-    'services',
-    'devices',
-    'bookmarks',
-    'music.user',
-    'online_help',
-    'sections.city',
-    'sidebar.types',
-    'gifts.user_list',
-    'guestbook.index'
-];
-exports.BASE_PATH = BASE_PATH;
-/**
- * Firebase конфигурация
- */
-const FirebaseConfig = {
-    apiKey: 'AIzaSyB8iDAyd-mMrSnBDKj_qasTjw268mk1d14',
-    authDomain: 'spacesplus.firebaseapp.com',
-    databaseURL: 'https://spacesplus.firebaseio.com',
-    projectId: 'spacesplus',
-    storageBucket: 'spacesplus.appspot.com',
-    messagingSenderId: '855455546501',
-    appId: '1:855455546501:web:89bbef7d9a9a03b3c2fdec'
-};
-exports.FirebaseConfig = FirebaseConfig;
 /**
  * Временное хранилище данных
  */
@@ -430,19 +365,32 @@ exports._SETTINGS = {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.error = exports.warn = exports.info = exports.log = void 0;
+exports.logger = void 0;
 const ts_debug_1 = __webpack_require__(16);
-const logger = new ts_debug_1.Debugger(console, true, '[S+]: ');
-const styles = [
-    'background: steelblue',
-    'background: green',
-    'background: darkorange',
-    'background: darkred'
-];
-exports.log = (str, obj) => logger.log('%c' + str, styles[0], obj);
-exports.info = (str, obj) => logger.info('%c' + str, styles[1], obj);
-exports.warn = (str, obj) => logger.warn('%c' + str, styles[2], obj);
-exports.error = (str, obj) => logger.error('%c' + str, styles[3], obj);
+class Logger {
+    constructor() {
+        this.logger = new ts_debug_1.Debugger(console, true, '[S+]: ');
+        this.styles = [
+            'background: steelblue',
+            'background: green',
+            'background: darkorange',
+            'background: darkred'
+        ];
+    }
+    log(str, obj) {
+        this.logger.log('%c' + str, this.styles[0], obj);
+    }
+    info(str, obj) {
+        this.logger.info('%c' + str, this.styles[1], obj);
+    }
+    warn(str, obj) {
+        this.logger.warn('%c' + str, this.styles[2], obj);
+    }
+    error(str, obj) {
+        this.logger.error('%c' + str, this.styles[3], obj);
+    }
+}
+exports.logger = new Logger();
 
 
 /***/ }),
@@ -714,7 +662,10 @@ exports.settingsWeather = async (e) => {
         utils_1.qs('#hrightbar').click();
     // Инициализация
     (_a = settings_1._SETTINGS.weatherSet.city) !== null && _a !== void 0 ? _a : exports.ipWhois();
-    let masWarp = utils_1.ce('div', { id: 'SP_WEATHER_SETTINGS', class: 'sp_settings-wrap' });
+    let masWarp = utils_1.ce('div', {
+        id: 'SP_WEATHER_SETTINGS',
+        class: 'sp_settings-wrap'
+    });
     let locationLbl = utils_1.ce('label', {
         html: 'API-Ключ:<div class="label__desc"><a href="https://openweathermap.org/appid" target="_blank">Получить ключ</a></div>',
         class: 'label'
@@ -738,7 +689,10 @@ exports.settingsWeather = async (e) => {
             }
         }
     });
-    let cityLbl = utils_1.ce('label', { html: 'Город:', class: 'label' });
+    let cityLbl = utils_1.ce('label', {
+        html: 'Город:',
+        class: 'label'
+    });
     let cityInp = utils_1.ce('input', {
         type: 'text',
         class: 'text-input',
@@ -820,7 +774,7 @@ exports.getWeather = async () => {
         });
     }
     catch (e) {
-        utils_1.error('openweathermap', e);
+        utils_1.logger.error('openweathermap', e);
     }
 };
 /**
@@ -841,7 +795,7 @@ exports.ipWhois = async () => {
         });
     }
     catch (e) {
-        utils_1.error('ipWhois', e);
+        utils_1.logger.error('ipWhois', e);
     }
 };
 
@@ -865,14 +819,14 @@ exports.getUpdater = (callback) => {
     try {
         utils_1.http('GET', `${strings_1.ENV_PATH}/updater.json?r=${strings_1.REVISION}`, false).then(e => {
             const json = e.parsedBody;
-            utils_1.info('Проверка обновлений', e);
+            utils_1.logger.info('Проверка обновлений', e);
             if (e.status === 200 && (json === null || json === void 0 ? void 0 : json.history)) {
                 return callback(json);
             }
         });
     }
     catch (e) {
-        utils_1.error('getUpdater.ts', e);
+        utils_1.logger.error('getUpdater', e);
     }
 };
 exports.checkUpdates = () => {
@@ -901,7 +855,7 @@ exports.checkUpdates = () => {
         });
     }
     catch (e) {
-        utils_1.error('checkUpdates.ts', e);
+        utils_1.logger.error('checkUpdates.ts', e);
     }
 };
 
@@ -937,11 +891,11 @@ const settings_1 = __webpack_require__(2);
                     // Инициализируем работу
                     init();
                 }
-                utils_1.info('api/session/check', e);
+                utils_1.logger.info('Проверка сессии', e);
             });
         }
         catch (e) {
-            utils_1.error('main.ts', e);
+            utils_1.logger.error('main.ts', e);
         }
     }
 })();
@@ -1068,7 +1022,7 @@ exports.qrCode = () => {
         }
     }
     catch (e) {
-        utils_1.error('qrCode.ts', e);
+        utils_1.logger.error('qrCode.ts', e);
     }
 };
 const qrCodeLoader = (url) => {
@@ -1077,7 +1031,7 @@ const qrCodeLoader = (url) => {
         image.src = url;
         image.className = 'sp_img-center';
         image.onload = () => resolve(image);
-        image.onerror = () => reject(new Error('loading error'));
+        image.onerror = () => reject(utils_1.logger.error('qrCodeLoader', image));
     });
 };
 
@@ -1141,19 +1095,26 @@ exports.ce = (name, params) => {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.http = void 0;
-const console_1 = __webpack_require__(3);
+const logger_1 = __webpack_require__(3);
 /**
  * Основополагающая функция для формирования HTTP запросов
  * Для использования получаемого JSON используйте Generic interface
  * ? Пример использования смотрите в components/checkUpdates.ts
  * @param method GET/POST
  * @param url Ссылка запроса
- * @param proxy Тип запроса: True - получаем JSON со Spaces, False - отправляем body
+ * @param proxy Тип запроса
  * @param body Строка запроса
  */
 async function http(method, url, proxy, body) {
-    // X-Proxy используется на Spaces.ru для получения JSON страницы, а x-www-form-urlencoded для отправки body
-    const header = proxy ? { 'X-Proxy': 'spaces' } : { 'Content-Type': 'application/x-www-form-urlencoded' };
+    const header = new Headers();
+    if (proxy) {
+        // Получаем JSON сракеса
+        header.append('X-Proxy', 'spaces');
+    }
+    else {
+        // Отправка body
+        header.append('Content-Type', 'application/x-www-form-urlencoded');
+    }
     // Запрос поддерживает Generic interface
     const response = await fetch(url, {
         method: method,
@@ -1164,7 +1125,7 @@ async function http(method, url, proxy, body) {
         response.parsedBody = await response.json();
     }
     catch (e) {
-        console_1.error('http.ts', e);
+        logger_1.logger.error('http.ts', e);
     }
     return response;
 }
@@ -1478,7 +1439,7 @@ exports.toUpper = (str) => str[0].toUpperCase() + str.substring(1);
 
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getQuery = void 0;
-const console_1 = __webpack_require__(3);
+const logger_1 = __webpack_require__(3);
 /**
  * Ищем определенный GET параметр в ссылке
  * @param name
@@ -1498,7 +1459,7 @@ exports.getQuery = (name) => {
         return r;
     }
     catch (e) {
-        console_1.error('getQuery.ts', e);
+        logger_1.logger.error('getQuery.ts', e);
     }
 };
 
@@ -1631,11 +1592,27 @@ const index_1 = __webpack_require__(0);
 exports.confirmBox = (text, warn, callback) => {
     let Alert = index_1.qs('#SP_PLUS_ALERT');
     let Confirm = index_1.qs('#SP_PLUS_CONFIRM');
-    let successBtn = index_1.ce('button', { html: 'Да', href: '#', class: 'btn btn_red btn_input' });
-    let cancelBtn = index_1.ce('a', { html: 'Отмена', href: '#', class: 'btn btn_white btn_input right sticker-close_btn' });
-    let warningText = index_1.ce('small', { class: 'pad_t_a grey', html: 'Это действие нельзя будет отменить.' });
-    let container = index_1.ce('div', { class: 'content-item3 wbg oh', html: text + '<div class="pad_t_a"></div>' });
-    let br = index_1.ce('div', { class: 'pad_t_a' });
+    let successBtn = index_1.ce('button', {
+        html: 'Да',
+        href: '#',
+        class: 'btn btn_red btn_input'
+    });
+    let cancelBtn = index_1.ce('a', {
+        html: 'Отмена',
+        href: '#',
+        class: 'btn btn_white btn_input right sticker-close_btn'
+    });
+    let warningText = index_1.ce('small', {
+        class: 'pad_t_a grey',
+        html: 'Это действие нельзя будет отменить.'
+    });
+    let container = index_1.ce('div', {
+        class: 'content-item3 wbg oh',
+        html: text + '<div class="pad_t_a"></div>'
+    });
+    let br = index_1.ce('div', {
+        class: 'pad_t_a'
+    });
     // Скрываем раннее созданные уводомления
     Alert === null || Alert === void 0 ? void 0 : Alert.remove();
     Confirm === null || Confirm === void 0 ? void 0 : Confirm.remove();
@@ -1650,7 +1627,10 @@ exports.confirmBox = (text, warn, callback) => {
         rm();
         return false;
     };
-    let Main = index_1.ce('div', { class: 'sticker sp-sticker-anim', id: 'SP_PLUS_CONFIRM' });
+    let Main = index_1.ce('div', {
+        id: 'SP_PLUS_CONFIRM',
+        class: 'sticker sp-sticker-anim'
+    });
     if (warn)
         container.appendChild(warningText);
     container.appendChild(br);
@@ -1731,7 +1711,7 @@ exports.messageBox = (title, content, close, timer) => {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.historyPush = void 0;
-const console_1 = __webpack_require__(3);
+const logger_1 = __webpack_require__(3);
 /**
  * ? Функция необходима для перехода по ссылке в собственно созданные разделы на сайте или в настройках скрипта
  * ! Не работает без getQuery.ts
@@ -1749,7 +1729,7 @@ exports.historyPush = (state, url, title) => {
         history.pushState(state, title, url);
     }
     catch (e) {
-        console_1.error('historyPush.ts', e);
+        logger_1.logger.error('historyPush.ts', e);
     }
 };
 
@@ -1846,7 +1826,7 @@ exports.readSettings = () => {
         }
     }
     catch (e) {
-        index_1.error('readSettings', e);
+        index_1.logger.error('readSettings', e);
     }
 };
 /**
@@ -1864,7 +1844,7 @@ exports.setSettings = (key, value) => {
         index_1.setCookie('SP_PLUS_SET', JSON.stringify(settings_1._SETTINGS));
     }
     catch (e) {
-        index_1.error('setSettings', e);
+        index_1.logger.error('setSettings', e);
     }
 };
 
@@ -1897,7 +1877,7 @@ exports.adBlock = () => {
         }
     }
     catch (e) {
-        utils_1.error('adBlock.ts', e);
+        utils_1.logger.error('adBlock.ts', e);
     }
 };
 
@@ -1957,7 +1937,7 @@ exports.scrollMove = (b) => {
         }
     }
     catch (e) {
-        utils_1.error('scrollMove.ts', e);
+        utils_1.logger.error('scrollMove.ts', e);
     }
 };
 
@@ -1973,7 +1953,9 @@ exports.userStatus = void 0;
 const utils_1 = __webpack_require__(0);
 const strings_1 = __webpack_require__(1);
 exports.userStatus = (code) => {
-    let noAuthorized = utils_1.ce('div', { html: 'Для работы <b>Spaces+</b> необходима авторизация!' });
+    let noAuthorized = utils_1.ce('div', {
+        html: 'Для работы <b>Spaces+</b> необходима авторизация!'
+    });
     if (strings_1.DEVICE.id === 1 || strings_1.DEVICE.id === 2) {
         let unSupported = utils_1.ce('div', {
             class: 'oh busi',
@@ -2009,16 +1991,12 @@ exports.userOnline = void 0;
 const utils_1 = __webpack_require__(0);
 const strings_1 = __webpack_require__(1);
 exports.userOnline = () => {
-    let path = utils_1.getPath();
-    let nick = utils_1.getPath(3);
-    let target = `/anketa/index/${nick}/`;
-    if (path !== target)
-        strings_1.DATA.ONLINE = null;
+    let path = utils_1.getPath(), nick = utils_1.getPath(3), target = `/anketa/index/${nick}/`;
     if (path === target && strings_1.DATA.ONLINE !== nick) {
-        try {
-            let onBlock = Array.from(utils_1.qsa('div.info-item__title')).filter(e => e.textContent === 'Время онлайн:');
-            if (nick && onBlock) {
-                strings_1.DATA.ONLINE = nick;
+        let onBlock = Array.from(utils_1.qsa('div.info-item__title')).filter(e => e.textContent === 'Время онлайн:');
+        if (nick && onBlock) {
+            strings_1.DATA.ONLINE = nick;
+            try {
                 utils_1.http('GET', `${strings_1.SPACES}/anketa/index/${nick}/`, true).then(e => {
                     var _a, _b;
                     const response = (_b = (_a = e.parsedBody) === null || _a === void 0 ? void 0 : _a.user_widget) === null || _b === void 0 ? void 0 : _b.online_time;
@@ -2027,14 +2005,17 @@ exports.userOnline = () => {
                         let online = str[0] > 0 ? `${str[0]} ч, ${Math.trunc(str[1] / (100 / 60))} мин` : `${Math.trunc(str[1] / (100 / 60))} мин`;
                         // @ts-ignore Костыль!
                         onBlock[0].nextElementSibling.textContent = online;
-                        utils_1.info(`Время онлайн: ${online}`, e);
+                        utils_1.logger.info(`Время онлайн: ${online}`, e);
                     }
                 });
             }
+            catch (e) {
+                utils_1.logger.error('userOnline.ts', e);
+            }
         }
-        catch (e) {
-            utils_1.error('userOnline.ts', e);
-        }
+    }
+    else if (path !== target) {
+        strings_1.DATA.ONLINE = null;
     }
 };
 
@@ -2077,11 +2058,11 @@ exports.coinsAccept = () => {
             e.click();
             // Удаляем элемент
             (_a = e.parentElement) === null || _a === void 0 ? void 0 : _a.remove();
-            utils_1.info('Собрали монетку', e);
+            utils_1.logger.info('Собрали монетку', e);
         });
     }
     catch (e) {
-        utils_1.error('coinsAccept.ts', e);
+        utils_1.logger.error('coinsAccept.ts', e);
     }
 };
 
@@ -2131,7 +2112,10 @@ exports.deleteBlogs = () => {
             // кнопка "Выбрать Все"
             const chooseAllButton = utils_1.ce('button', {
                 class: 'user__tools-link table__cell sp_btn-list',
-                html: '<span class="sp sp-ok-blue"></span><span class="sp-ch-text">Выбрать все</span>',
+                html: `
+                    <span class="sp sp-ok-blue"></span>
+                    <span class="sp-ch-text">Выбрать все</span>
+                `,
                 onclick: (e) => {
                     if (e.target instanceof Element) {
                         let parent = e.target.nodeName === 'SPAN' ?
@@ -2157,7 +2141,10 @@ exports.deleteBlogs = () => {
             // кнопка "Удалить выбранные"
             const deleteBlogsButton = utils_1.ce('button', {
                 class: 'user__tools-link table__cell sp_btn_line sp_btn-list',
-                html: '<span class="sp sp-remove-red"></span><span class="sp-del-text">Удалить выбранные</span>',
+                html: `
+                    <span class="sp sp-remove-red"></span>
+                    <span class="sp-del-text">Удалить выбранные</span>
+                `,
                 onclick: () => {
                     let blogs = [];
                     for (let ch of checkboxArr) {
@@ -2172,7 +2159,7 @@ exports.deleteBlogs = () => {
                             for (let blog of blogs) {
                                 utils_1.messageBox(`Осталось удалить ${count--} из ${allBlogs} ${declStr(count)}`, 'Подождите немного... <span style="padding-right: 10px" class="ico ico_spinner"></span>', false);
                                 await utils_1.http('GET', `${strings_1.SPACES}/diary/delete/?CK=${strings_1.DATA.CK}&id=${blog}&Sure=1`, true).then(e => {
-                                    utils_1.info('Удалили блог', e);
+                                    utils_1.logger.info('Удалили блог', e);
                                 });
                             }
                             document.location.reload();
@@ -2192,7 +2179,7 @@ exports.deleteBlogs = () => {
         }
     }
     catch (e) {
-        utils_1.error('deleteBlogs.ts', e);
+        utils_1.logger.error('deleteBlogs.ts', e);
     }
 };
 const declStr = (count) => 'блог' + utils_1.declOfNum(count, ['', 'а', 'ов']);
@@ -2233,7 +2220,7 @@ exports.firstLaunch = () => {
         }
     }
     catch (e) {
-        utils_1.error('firstLaunch.ts', e);
+        utils_1.logger.error('firstLaunch.ts', e);
     }
 };
 
@@ -2256,11 +2243,11 @@ exports.karmaAccept = () => {
             e.click();
             // Удаляем элемент
             (_a = e.parentElement) === null || _a === void 0 ? void 0 : _a.remove();
-            utils_1.info('Собрали карму!', e);
+            utils_1.logger.info('Собрали карму!', e);
         });
     }
     catch (e) {
-        utils_1.error('karmaAccept.ts', e);
+        utils_1.logger.error('karmaAccept.ts', e);
     }
 };
 
@@ -2304,7 +2291,7 @@ exports.soundNotify = () => {
         }
     }
     catch (e) {
-        utils_1.error('soundEvents.ts', e);
+        utils_1.logger.error('soundEvents.ts', e);
     }
 };
 
@@ -2372,13 +2359,13 @@ exports.blockedFiles = () => {
                         <span class="js-ico ico ico_download2_blue"></span>
                         <span class="t js-text">Скачать (${response.downloadBox.weight})</span>
                     `;
-                    utils_1.info('Загрузка заблокированного файла', e);
+                    utils_1.logger.info('Загрузка заблокированного файла', e);
                 }
             });
         }
     }
     catch (e) {
-        utils_1.error('blockedFiles.ts', e);
+        utils_1.logger.error('blockedFiles.ts', e);
     }
 };
 
@@ -2432,13 +2419,13 @@ exports.favoriteUser = async () => {
                             href: `${strings_1.SPACES}/bookmarks/add/?object_id=${json.id}&object_type=11`,
                             class: 'stnd-link',
                             attr: { title: 'Добавить в закладки' },
-                            html: `<span class="sp sp-fav"></span> B закладки`,
+                            html: '<span class="sp sp-fav"></span> B закладки',
                             onclick: () => {
                                 utils_1.confirmBox(`Добавить пользователя <b>${json.name}</b> в закладки?`, false, async () => {
                                     await utils_1.http('POST', `${strings_1.SPACES}/ajax/bookmarks/add/`, false, `object_id=${json.id}&object_type=11&show_all_tags_state=0&new_tags=Люди&cfms=Добавить&CK=${strings_1.DATA.CK}`).then(e => {
                                         e.status === 200 ?
                                             isFav(json.id, json.name, favoriteButton) :
-                                            utils_1.error('bookmarks/add', e);
+                                            utils_1.logger.error('bookmarks/add', e);
                                     });
                                 });
                                 return false;
@@ -2452,13 +2439,13 @@ exports.favoriteUser = async () => {
                     else {
                         loader.parentElement.style.display = 'none';
                     }
-                    utils_1.info('anketa/index', e);
+                    utils_1.logger.info('anketa/index', e);
                 });
             }
         }
     }
     catch (e) {
-        utils_1.error('favoriteUser.ts', e);
+        utils_1.logger.error('favoriteUser.ts', e);
     }
 };
 const isFav = async (id, name, elem) => {
@@ -2475,17 +2462,17 @@ const isFav = async (id, name, elem) => {
                         await utils_1.http('GET', json.delete_URL, false).then(e => {
                             e.status === 200 ?
                                 document.location.reload() :
-                                utils_1.error('bookmarks/remove', e);
+                                utils_1.logger.error('bookmarks/remove', e);
                         });
                     });
                     return false;
                 };
             }
-            utils_1.info('В закладках?', e);
+            utils_1.logger.info('В закладках?', e);
         });
     }
     catch (e) {
-        utils_1.error('isFav', e);
+        utils_1.logger.error('isFav', e);
     }
 };
 
@@ -2500,8 +2487,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.freeStickers = void 0;
 const utils_1 = __webpack_require__(0);
 exports.freeStickers = (b) => {
-    let script = utils_1.qs('#SP_PLUS_STICKERS');
-    if (b && !script) {
+    if (b && !utils_1.qs('#SP_PLUS_STICKERS')) {
         let s = utils_1.ce('script', {
             type: 'text/javascript',
             id: 'SP_PLUS_STICKERS',
@@ -2615,7 +2601,7 @@ exports.recentSmiles = () => {
         }
     }
     catch (e) {
-        utils_1.error('recentSmiles.ts', e);
+        utils_1.logger.error('recentSmiles.ts', e);
     }
 };
 const eventSmiles = (smiles, storage) => {
@@ -2641,21 +2627,23 @@ const index_1 = __webpack_require__(4);
 const strings_1 = __webpack_require__(1);
 const settings_1 = __webpack_require__(2);
 exports.settingsMenu = () => {
-    var _a, _b, _c;
+    var _a, _b;
     if (utils_1.getPath() === '/settings/' && !utils_1.qs('#SP_PLUS_SETLINK')) {
         try {
             // Ищем таргер для инициализации меню настроек
             const targetLink = utils_1.qs(`a[href^="${strings_1.SPACES}/settings/notification/"`);
             if (targetLink) {
                 const urlSett = utils_1.getQuery('sp_plus_settings');
-                const urlSettEditor = utils_1.getQuery('sp_cookie_editor');
                 const urlSettChangeLog = utils_1.getQuery('sp_changelog');
                 const urlSettBackup = utils_1.getQuery('sp_backup');
                 const baseLink = utils_1.ce('a', {
                     href: `${strings_1.SPACES}/settings/?sp_plus_settings=1`,
                     id: 'SP_PLUS_SETLINK',
                     class: targetLink.className,
-                    html: '<span>Настройки Spaces+</span><span class="ico ico_arr ico_m"></span>',
+                    html: `
+                        <span>Настройки Spaces+</span>
+                        <span class="ico ico_arr ico_m"></span>
+                    `,
                     onclick: () => {
                         var _a, _b, _c;
                         if (!/(\&)sp_plus_settings=1/i.test(document.location.href)) {
@@ -2665,8 +2653,28 @@ exports.settingsMenu = () => {
                         }
                         let prnt = (_c = (_b = (_a = utils_1.qs('#SP_PLUS_SETLINK').parentElement) === null || _a === void 0 ? void 0 : _a.parentNode) === null || _b === void 0 ? void 0 : _b.parentNode) === null || _c === void 0 ? void 0 : _c.parentNode;
                         if (prnt.id === 'main') {
-                            utils_1.qs('#header_path').innerHTML = utils_1.qs('#header_path').innerHTML.replace('Настройки', `<a href="${strings_1.SPACES}/settings/" style="margin-bottom: 1px">Настройки</a><span class="location-bar__sep ico"></span><span id="SP_PLUS_SETHEAD2">Spaces+</span>`);
-                            prnt.innerHTML = `<div class="widgets-group widgets-group_top js-container__block"><div class="b-title cl b-title_center b-title_first oh"><div class="b-title__item" id="SP_PLUS_SETHEAD">Настройки Spaces+</div></div><div class="content"><div class="list f-c_fll"> <div id="SP_PLUS_SETAREA" class="no-select"></div></div></div></div> <div id="SP_PLUS_ABOUT"></div> <a id="SP_PLUS_SETBACK" href="${strings_1.SPACES}/settings/?" class="link-return full_link"><span class="ico ico_arrow-back" style="margin: 0px 6px -1px 0px"></span><span class="m">Назад</span></a>`;
+                            utils_1.qs('#header_path').innerHTML = utils_1.qs('#header_path').innerHTML.replace('Настройки', `
+                                <a href="${strings_1.SPACES}/settings/">Настройки</a>
+                                <span class="location-bar__sep ico"></span>
+                                <span id="SP_PLUS_SETHEAD2">Spaces+</span>
+                            `);
+                            prnt.innerHTML = `
+                                <div class="widgets-group widgets-group_top js-container__block">
+                                    <div class="b-title cl b-title_center b-title_first oh">
+                                        <div class="b-title__item" id="SP_PLUS_SETHEAD">Настройки Spaces+</div>
+                                    </div>
+                                    <div class="content">
+                                        <div class="list f-c_fll">
+                                            <div id="SP_PLUS_SETAREA" class="no-select"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="SP_PLUS_ABOUT"></div>
+                                <a id="SP_PLUS_SETBACK" href="${strings_1.SPACES}/settings/?" class="link-return full_link">
+                                    <span class="ico ico_arrow-back"></span>
+                                    <span class="m">Назад</span>
+                                </a>
+                            `;
                         }
                         const setArea = utils_1.qs('#SP_PLUS_SETAREA');
                         if (setArea) {
@@ -2797,10 +2805,18 @@ exports.settingsMenu = () => {
                                 href: `${strings_1.SPACES}/settings/?sp_plus_settings=1&sp_backup=1`,
                                 class: 'stnd-link stnd-link_arr sp_font_sm',
                                 id: 'sp_backup',
-                                html: '<span class="b" style="color: #2e7d32"><span class="sp sp-backup-g mr-14"></span>Импорт и экспорт настроек<span class="ico ico_arr ico_m"></span></span>',
+                                html: `
+                                    <span class="b" style="color: #2e7d32">
+                                        <span class="sp sp-backup-g mr-14"></span>Импорт и экспорт настроек
+                                        <span class="ico ico_arr ico_m"></span>
+                                    </span>
+                                `,
                                 onclick: () => {
                                     utils_1.qs('#SP_PLUS_SETHEAD').innerHTML = 'Импорт и экспорт настроек';
-                                    utils_1.qs('#SP_PLUS_SETHEAD2').innerHTML = `<a href="${strings_1.SPACES}/settings/?sp_plus_settings=1" style="margin-bottom: 1px">Spaces+</a><span class="location-bar__sep ico"></span> Импорт и экспорт настроек`;
+                                    utils_1.qs('#SP_PLUS_SETHEAD2').innerHTML = `
+                                        <a href="${strings_1.SPACES}/settings/?sp_plus_settings=1">Spaces+</a>
+                                        <span class="location-bar__sep ico"></span> Импорт и экспорт настроек
+                                    `;
                                     utils_1.qs('#SP_PLUS_SETBACK').href = `${strings_1.SPACES}/settings/?sp_plus_settings=1`;
                                     if (!/(\&)sp_backup=1/i.test(document.location.href)) {
                                         utils_1.historyPush({
@@ -2817,10 +2833,18 @@ exports.settingsMenu = () => {
                                 href: `${strings_1.SPACES}/settings/?sp_plus_settings=1&sp_changelog=1`,
                                 class: 'stnd-link stnd-link_arr sp_font_sm',
                                 id: 'sp_changelog',
-                                html: '<span class="b" style="color: #2196f3"><span class="sp sp-restore-blue mr-14"></span>История обновлений<span class="ico ico_arr ico_m"></span></span>',
+                                html: `
+                                    <span class="b" style="color: #2196f3">
+                                        <span class="sp sp-restore-blue mr-14"></span>История обновлений
+                                        <span class="ico ico_arr ico_m"></span>
+                                    </span>
+                                `,
                                 onclick: () => {
                                     utils_1.qs('#SP_PLUS_SETHEAD').innerHTML = 'История обновлений';
-                                    utils_1.qs('#SP_PLUS_SETHEAD2').innerHTML = `<a href="${strings_1.SPACES}/settings/?sp_plus_settings=1" style="margin-bottom: 1px">Spaces+</a><span class="location-bar__sep ico"></span> История обновлений`;
+                                    utils_1.qs('#SP_PLUS_SETHEAD2').innerHTML = `
+                                        <a href="${strings_1.SPACES}/settings/?sp_plus_settings=1">Spaces+</a>
+                                        <span class="location-bar__sep ico"></span> История обновлений
+                                    `;
                                     utils_1.qs('#SP_PLUS_SETBACK').href = `${strings_1.SPACES}/settings/?sp_plus_settings=1`;
                                     if (!/(\&)sp_changelog=1/i.test(document.location.href)) {
                                         utils_1.historyPush({
@@ -2837,7 +2861,12 @@ exports.settingsMenu = () => {
                                 href: '#',
                                 class: 'stnd-link stnd-link_arr sp_font_sm',
                                 id: 'sp_plus_reset',
-                                html: '<span class="b" style="color: #f86934"><span class="sp sp-alert mr-14"></span>Сброс настроек<span class="ico ico_arr ico_m"></span></span>',
+                                html: `
+                                    <span class="b" style="color: #f86934">
+                                        <span class="sp sp-alert mr-14"></span>Сброс настроек
+                                        <span class="ico ico_arr ico_m"></span>
+                                    </span>
+                                `,
                                 onclick: () => {
                                     utils_1.confirmBox('Вы действительно хотите полностью сбросить настройки?', true, () => {
                                         utils_1.delCookie('SP_PLUS_SET');
@@ -2877,25 +2906,20 @@ exports.settingsMenu = () => {
                     clickEvent.initEvent('click', true, true);
                     baseLink.dispatchEvent(clickEvent);
                 }
-                if (urlSettEditor) {
-                    document.title = 'Spaces+: Редактор cookies';
+                if (urlSettBackup) {
+                    document.title = 'Spaces+: Импорт и экспорт настроек';
                     clickEvent.initEvent('click', true, true);
-                    (_a = utils_1.qs('#sp_cookie_editor')) === null || _a === void 0 ? void 0 : _a.dispatchEvent(clickEvent);
+                    (_a = utils_1.qs('#sp_backup')) === null || _a === void 0 ? void 0 : _a.dispatchEvent(clickEvent);
                 }
                 if (urlSettChangeLog) {
                     document.title = 'Spaces+: История обновлений';
                     clickEvent.initEvent('click', true, true);
                     (_b = utils_1.qs('#sp_changelog')) === null || _b === void 0 ? void 0 : _b.dispatchEvent(clickEvent);
                 }
-                if (urlSettBackup) {
-                    document.title = 'Spaces+: Импорт и экспорт настроек';
-                    clickEvent.initEvent('click', true, true);
-                    (_c = utils_1.qs('#sp_backup')) === null || _c === void 0 ? void 0 : _c.dispatchEvent(clickEvent);
-                }
             }
         }
         catch (e) {
-            utils_1.error('settingsMenu', e);
+            utils_1.logger.error('settingsMenu.ts', e);
         }
     }
 };
@@ -2961,7 +2985,7 @@ exports.stickyHeader = (b) => {
         }
     }
     catch (e) {
-        utils_1.error('stickyHeader.ts', e);
+        utils_1.logger.error('stickyHeader.ts', e);
     }
 };
 
@@ -2987,12 +3011,19 @@ exports.bypassProfile = () => {
                 let button = utils_1.ce('td', {
                     class: 'table__cell',
                     id: 'SP_PLUS_INBL',
-                    html: `<a href="#" class="stnd-link" title="Показать профиль"><span class="sp sp-eye-grey"></span> Показать</a>`,
+                    html: `
+                        <a href="#" class="stnd-link" title="Показать профиль">
+                        <span class="sp sp-eye-grey"></span> Показать</a>
+                    `,
                     onclick: () => {
                         button.after(utils_1.ce('td', {
                             class: 'table__cell',
                             id: 'SP_PLUS_INBL',
-                            html: `<a href="#" class="stnd-link stnd-link_disabled" title="Загрузка"><span class="ico bp ico_spinner"></span> Загрузка</a>`,
+                            attr: { width: '25%' },
+                            html: `
+                                <a href="#" class="stnd-link stnd-link_disabled" title="Загрузка">
+                                <span class="ico bp ico_spinner"></span> Загрузка</a>
+                            `,
                             onclick: () => false
                         }));
                         button.remove();
@@ -3027,7 +3058,7 @@ exports.bypassProfile = () => {
         }
     }
     catch (e) {
-        utils_1.error('bypassProfile.ts', e);
+        utils_1.logger.error('bypassProfile.ts', e);
     }
 };
 // выполняем CORS запрос и получаем HTML профиля
@@ -3047,7 +3078,7 @@ const getProfile = async (nickname) => {
             else {
                 utils_1.messageBox('Просмотр профилей', 'Ошибка загрузки профиля! Обратитесь к разработчику', true);
             }
-            utils_1.info('Просмотр профилей', e);
+            utils_1.logger.info('Просмотр профилей', e);
         });
     }
     if (strings_1.DATA.CONTENT !== null) {
@@ -3056,8 +3087,6 @@ const getProfile = async (nickname) => {
         // Костыль по восстановлению аватарки
         let avatar = utils_1.qs('img[data-s*="101.100.0"');
         avatar.src = avatar.dataset.s;
-        // Удаляем ебучие виджеты
-        utils_1.qs('div.widgets-group').remove();
         // Удаляем ненужную панель c кнопками
         utils_1.qs('div.user__tools').remove();
         // Удаляем кнопку "Сделать подарок"
@@ -3127,10 +3156,11 @@ const setUrls = (e, lnk1, lnk2) => {
     // конкатим второй массив, если аккаунт покинут
     if (lnk1 === null && lnk2 === null)
         urls = urls2.concat(urls);
-    utils_1.qs('div.js-pending-item').append(utils_1.ce('div', {
+    let widget = utils_1.ce('div', {
         id: 'SP_LIST_LINK',
         class: 'widgets-group links-group'
-    }));
+    });
+    utils_1.qs('div.js-pending-item').append(widget);
     // создаем ссылки
     for (let url of urls) {
         const { ico, text, path } = url;
@@ -3143,7 +3173,7 @@ const setUrls = (e, lnk1, lnk2) => {
                 <span class="ico ico_arr"></span>
             `
         });
-        utils_1.qs('#SP_LIST_LINK').append(link);
+        widget.append(link);
     }
 };
 
@@ -3164,7 +3194,9 @@ exports.deleteReaders = () => {
         if (utils_1.getPath() === '/lenta/readers/' && delLinks && !buttons) {
             let checkboxArr = [];
             for (let link of delLinks) {
-                let chWrap = utils_1.ce('label', { class: 'stnd-link icon-link sp-ch-readers' });
+                let chWrap = utils_1.ce('label', {
+                    class: 'stnd-link icon-link sp-ch-readers'
+                });
                 let userId = utils_1.getParams(link.href)['user'];
                 let bChbx = utils_1.ce('input', {
                     type: 'checkbox',
@@ -3172,7 +3204,6 @@ exports.deleteReaders = () => {
                     id: userId
                 });
                 let ckbxlb = utils_1.ce('label', {
-                    style: 'margin-left: 0px',
                     attr: { 'for': userId }
                 });
                 chWrap.appendChild(bChbx);
@@ -3180,77 +3211,85 @@ exports.deleteReaders = () => {
                 link.after(chWrap);
                 checkboxArr.push(bChbx);
             }
-            let buttonsDiv = utils_1.ce('div', {
-                class: 'user__tools_last',
-                id: 'SP_PLUS_BUTTONS_R'
-            });
-            const chooseAllButton = utils_1.ce('button', {
-                style: 'border-right: unset',
-                class: 'user__tools-link table__cell sp_btn-list',
-                html: '<span class="sp sp-ok-blue"></span><span class="sp-ch-text">Выбрать все</span>',
-                onclick: (e) => {
-                    if (e.target instanceof Element) {
-                        let parent = e.target.nodeName === 'SPAN' ?
-                            e.target.parentNode :
-                            e.target;
-                        for (let ch of checkboxArr) {
-                            ch.checked =
-                                parent.innerHTML.indexOf('Выбрать все') !== -1 ?
-                                    true :
-                                    false;
-                        }
-                        parent.innerHTML = `
-                            <span class="sp sp-ok-blue"></span>
-                            <span class="sp-ch-text">
-                                ${parent.innerHTML.indexOf('Выбрать все') !== -1 ?
-                            'Снять отметки' :
-                            'Выбрать все'}
-                            </span>
-                        `;
-                    }
-                }
-            });
-            const deleteReadersButton = utils_1.ce('button', {
-                class: 'user__tools-link table__cell sp_btn_line sp_btn-list',
-                html: '<span class="sp sp-remove-red"></span><span class="sp-del-text">Удалить выбранных</span>',
-                onclick: () => {
-                    let readers = [];
-                    for (let ch of checkboxArr) {
-                        if (ch.checked)
-                            readers.push(ch.id);
-                    }
-                    let count = readers.length;
-                    if (count > 0) {
-                        utils_1.confirmBox(`Вы действительно хотите удалить ${count} ${declStr(count)}?`, true, async () => {
-                            let allReaders = count;
-                            for (let reader of readers) {
-                                utils_1.messageBox(`Осталось удалить ${count--} из ${allReaders} ${declStr(count)}`, 'Подождите немного... <span style="padding-right: 10px" class="ico ico_spinner"></span>', false);
-                                await utils_1.http('POST', `${strings_1.SPACES}/lenta/reader_delete/?user=${reader}`, false, `&CK=${strings_1.DATA.CK}&cfms=Удалить`).then(e => {
-                                    utils_1.info('Удалили читателя', e);
-                                });
+            if (utils_1.qs('.sp-ch-readers')) {
+                let buttonsDiv = utils_1.ce('div', {
+                    class: 'user__tools_last',
+                    id: 'SP_PLUS_BUTTONS_R'
+                });
+                const chooseAllButton = utils_1.ce('button', {
+                    style: 'border-right: unset',
+                    class: 'user__tools-link table__cell sp_btn-list',
+                    html: `
+                        <span class="sp sp-ok-blue"></span>
+                        <span class="sp-ch-text">Выбрать все</span>
+                    `,
+                    onclick: (e) => {
+                        if (e.target instanceof Element) {
+                            let parent = e.target.nodeName === 'SPAN' ?
+                                e.target.parentNode :
+                                e.target;
+                            for (let ch of checkboxArr) {
+                                ch.checked =
+                                    parent.innerHTML.indexOf('Выбрать все') !== -1 ?
+                                        true :
+                                        false;
                             }
-                            document.location.reload();
-                        });
+                            parent.innerHTML = `
+                                <span class="sp sp-ok-blue"></span>
+                                <span class="sp-ch-text">
+                                    ${parent.innerHTML.indexOf('Выбрать все') !== -1 ?
+                                'Снять отметки' :
+                                'Выбрать все'}
+                                </span>
+                            `;
+                        }
                     }
-                    else {
-                        utils_1.messageBox('Внимание!', 'Отметьте галочкой, теx читателей, которых вы хотите удалить и попробуйте еще раз', true, 5);
+                });
+                const deleteReadersButton = utils_1.ce('button', {
+                    class: 'user__tools-link table__cell sp_btn_line sp_btn-list',
+                    html: `
+                        <span class="sp sp-remove-red"></span>
+                        <span class="sp-del-text">Удалить выбранных</span>
+                    `,
+                    onclick: () => {
+                        let readers = [];
+                        for (let ch of checkboxArr) {
+                            if (ch.checked)
+                                readers.push(ch.id);
+                        }
+                        let count = readers.length;
+                        if (count > 0) {
+                            utils_1.confirmBox(`Вы действительно хотите удалить ${count} ${declStr(count)}?`, true, async () => {
+                                let allReaders = count;
+                                for (let reader of readers) {
+                                    utils_1.messageBox(`Осталось удалить ${count--} из ${allReaders} ${declStr(count)}`, 'Подождите немного... <span style="padding-right: 10px" class="ico ico_spinner"></span>', false);
+                                    await utils_1.http('POST', `${strings_1.SPACES}/lenta/reader_delete/?user=${reader}`, false, `&CK=${strings_1.DATA.CK}&cfms=Удалить`).then(e => {
+                                        utils_1.logger.info('Удалили читателя', e);
+                                    });
+                                }
+                                document.location.reload();
+                            });
+                        }
+                        else {
+                            utils_1.messageBox('Внимание!', 'Отметьте галочкой, теx читателей, которых вы хотите удалить и попробуйте еще раз', true, 5);
+                        }
                     }
+                });
+                buttonsDiv.appendChild(deleteReadersButton);
+                buttonsDiv.appendChild(chooseAllButton);
+                let pgn = utils_1.qs('div.pgn-wrapper'), main = utils_1.qs('#main');
+                if (pgn) {
+                    pgn.prepend(buttonsDiv);
                 }
-            });
-            buttonsDiv.appendChild(deleteReadersButton);
-            buttonsDiv.appendChild(chooseAllButton);
-            let main = utils_1.qs('#main'), pgn = utils_1.qs('div.pgn-wrapper');
-            if (pgn) {
-                pgn.prepend(buttonsDiv);
-            }
-            else if (main) {
-                buttonsDiv.classList.add('widgets-group');
-                main.prepend(buttonsDiv);
+                else if (main) {
+                    buttonsDiv.classList.add('widgets-group');
+                    main.prepend(buttonsDiv);
+                }
             }
         }
     }
     catch (e) {
-        utils_1.error('deleteReaders.ts', e);
+        utils_1.logger.error('deleteReaders.ts', e);
     }
 };
 const declStr = (count) => 'читател' + utils_1.declOfNum(count, ['я', 'я', 'ей']);
@@ -3304,7 +3343,7 @@ exports.friendsOnline = (b) => {
                                 `<span class="online-status m"><img class="p14 online_status_ico" src="${strings_1.HTTP}//spac.me/i/${friendsList[i].online_status.on_img}" alt="(ON)"></span><span class="block-item__title m break-word">${friendsList[i].name}</span>`
                         }));
                     }
-                    utils_1.info('Панель друзей онлайн', e);
+                    utils_1.logger.info('Панель друзей онлайн', e);
                 }
             });
             parent === null || parent === void 0 ? void 0 : parent.appendChild(frOnDiv);
@@ -3314,7 +3353,7 @@ exports.friendsOnline = (b) => {
         }
     }
     catch (e) {
-        utils_1.error('friendsOnline.ts', e);
+        utils_1.logger.error('friendsOnline.ts', e);
     }
 };
 
@@ -3357,7 +3396,7 @@ exports.galleryRotate = () => {
         }
     }
     catch (e) {
-        utils_1.error('galleryRotate.ts', e);
+        utils_1.logger.error('galleryRotate.ts', e);
     }
 };
 
@@ -3381,7 +3420,11 @@ exports.sidebarButton = () => {
         // Создаем кнопку быстрого доступа в настройки Spaces+
         let link = utils_1.ce('li', {
             class: 'li',
-            html: `<a href="${strings_1.SPACES}/settings/?sp_plus_settings=1" title="Настройки Spaces+">${icon}<span class="m s_i_text"> Spaces+</span></a>`
+            html: `
+                <a href="${strings_1.SPACES}/settings/?sp_plus_settings=1" title="Настройки Spaces+">
+                ${icon}
+                <span class="m s_i_text"> Spaces+</span></a>
+            `
         });
         (_a = e.parentElement) === null || _a === void 0 ? void 0 : _a.after(link);
     });
@@ -3439,7 +3482,7 @@ exports.weatherWidget = () => {
             style: 'padding: 0px 16px 16px 16px',
             html: `
                 <img src="https://openweathermap.org/img/wn/${weather[0].icon}@2x.png" class="sp_img-center">
-                    <div class="grey sp_weather-container">
+                <div class="grey sp_weather-container">
                     <p>${Math.round(main.temp)}°C</p>
                     <p>${utils_1.toUpper(weather[0].description)}</p>
                 </div>
@@ -3538,7 +3581,10 @@ exports.deleteComments = () => {
                 });
                 const chooseAllButton = utils_1.ce('button', {
                     class: 'user__tools-link table__cell sp_btn-list',
-                    html: '<span class="sp sp-ok-blue"></span><span class="sp-ch-text">Выбрать все</span>',
+                    html: `
+                        <span class="sp sp-ok-blue"></span>
+                        <span class="sp-ch-text">Выбрать все</span>
+                    `,
                     onclick: (e) => {
                         if (e.target instanceof Element) {
                             let inputs = utils_1.qsa('input[id^="DC_"]');
@@ -3564,7 +3610,10 @@ exports.deleteComments = () => {
                 });
                 const deleteCommentsButton = utils_1.ce('button', {
                     class: 'user__tools-link table__cell sp_btn_line sp_btn-list',
-                    html: '<span class="sp sp-remove-red"></span><span class="sp-del-text">Удалить выбранные</span>',
+                    html: `
+                        <span class="sp sp-remove-red"></span>
+                        <span class="sp-del-text">Удалить выбранные</span>
+                    `,
                     onclick: () => {
                         var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
                         let inputs = utils_1.qsa('input[id^="DC_"]'), urls = [];
@@ -3596,7 +3645,7 @@ exports.deleteComments = () => {
                                 for (let url of urls) {
                                     utils_1.messageBox(`Осталось удалить ${count--} из ${allComments} ${declStr(count)}`, 'Подождите немного... <span style="padding-right: 10px" class="ico ico_spinner"></span>', false);
                                     await utils_1.http('GET', url, true).then(e => {
-                                        utils_1.info('Удалил комментарий', e);
+                                        utils_1.logger.info('Удалил комментарий', e);
                                     });
                                 }
                                 document.location.reload();
@@ -3615,7 +3664,7 @@ exports.deleteComments = () => {
         }
     }
     catch (e) {
-        utils_1.error('deleteComments.ts', e);
+        utils_1.logger.error('deleteComments.ts', e);
     }
 };
 const declStr = (count) => 'комментари' + utils_1.declOfNum(count, ['й', 'я', 'ев']);
@@ -3649,7 +3698,7 @@ exports.hiddenRightbar = (b) => {
         }
     }
     catch (e) {
-        utils_1.error('hidderRightbar.ts', e);
+        utils_1.logger.error('hidderRightbar.ts', e);
     }
 };
 
@@ -3687,12 +3736,12 @@ exports.playerDownload = () => {
             else if (downPlace && strings_1.DATA.PLAYER !== trId) {
                 strings_1.DATA.PLAYER = trId;
                 downPlace.onclick = () => location.href = trScr;
-                utils_1.info('Обновили ссылку на трек', jstr);
+                utils_1.logger.info('Обновили ссылку на трек', jstr);
             }
         }
     }
     catch (e) {
-        utils_1.error('playerDownload.ts', e);
+        utils_1.logger.error('playerDownload.ts', e);
     }
 };
 
@@ -3830,7 +3879,7 @@ exports.settingsNotify = (e) => {
         (_a = e.parentElement) === null || _a === void 0 ? void 0 : _a.after(eventsWrap);
     }
     catch (e) {
-        utils_1.error('settingsNotify.ts', e);
+        utils_1.logger.error('settingsNotify.ts', e);
     }
 };
 
@@ -3868,11 +3917,21 @@ exports.settingsLogMenu = (id) => {
     if (target) {
         try {
             target.innerHTML = '';
-            let wrap = utils_1.ce('div', { class: 'wbg error__item_wrapper sp_plus_c_wrap' });
-            let div = utils_1.ce('div', { class: 'pad_t_a' });
-            let container = utils_1.ce('div', { class: 'js-input_error_wrap' });
-            let preloader = utils_1.ce('div', { class: 't_center', id: 'SP_JSON_PRELOADER', html: `<img src="${strings_1.HTTP}//spac.me/i/preloader.gif">` });
-            container.appendChild(div);
+            let wrap = utils_1.ce('div', {
+                class: 'wbg error__item_wrapper sp_plus_c_wrap'
+            });
+            let pad = utils_1.ce('div', {
+                class: 'pad_t_a'
+            });
+            let container = utils_1.ce('div', {
+                class: 'js-input_error_wrap'
+            });
+            let preloader = utils_1.ce('div', {
+                class: 't_center',
+                id: 'SP_JSON_PRELOADER',
+                html: `<img src="${strings_1.HTTP}//spac.me/i/preloader.gif">`
+            });
+            container.appendChild(pad);
             wrap.appendChild(container);
             target.appendChild(wrap);
             wrap.appendChild(preloader);
@@ -3886,14 +3945,14 @@ exports.settingsLogMenu = (id) => {
                         class: 'grey sp_plus_c_desc',
                         html: history.changes
                     });
-                    div.appendChild(label);
-                    div.appendChild(changes);
+                    pad.appendChild(label);
+                    pad.appendChild(changes);
                 }
                 utils_1.qs('#SP_JSON_PRELOADER').remove();
             });
         }
         catch (e) {
-            utils_1.error('settingsLogMenu.ts', e);
+            utils_1.logger.error('settingsLogMenu.ts', e);
         }
     }
 };
@@ -3912,8 +3971,12 @@ const settings_1 = __webpack_require__(2);
 exports.settingsFriends = (e) => {
     var _a;
     try {
-        let frMaxWrap = utils_1.ce('div', { id: 'SP_PLUS_MAXFRIENDS' });
-        let div = utils_1.ce('div', { class: 'sp_settings-wrap' });
+        let frMaxWrap = utils_1.ce('div', {
+            id: 'SP_PLUS_MAXFRIENDS'
+        });
+        let div = utils_1.ce('div', {
+            class: 'sp_settings-wrap'
+        });
         let frMax = utils_1.ce('input', {
             type: 'text',
             class: 'text-input',
@@ -3940,7 +4003,7 @@ exports.settingsFriends = (e) => {
         (_a = e.parentElement) === null || _a === void 0 ? void 0 : _a.after(frMaxWrap);
     }
     catch (e) {
-        utils_1.error('settingsFriends.ts', e);
+        utils_1.logger.error('settingsFriends.ts', e);
     }
 };
 
@@ -3959,7 +4022,9 @@ const settings_1 = __webpack_require__(2);
 const strings_1 = __webpack_require__(1);
 // Встроенные возможности сайта
 exports.settingsFeatures = (root) => {
-    let wrap = utils_1.ce('div', { id: 'wrap_spaces_option' });
+    let wrap = utils_1.ce('div', {
+        id: 'wrap_spaces_option'
+    });
     // API Отладчик
     let apidebug = utils_1.ce('a', {
         href: '#',
@@ -4070,11 +4135,11 @@ exports.newbeeQuest = async () => {
                 if ((_a = e.parsedBody) === null || _a === void 0 ? void 0 : _a.owner_widget.newbee_quest_widget) {
                     newbequest.style.display = 'block';
                 }
-                utils_1.info('Квест новичка', e);
+                utils_1.logger.info('Квест новичка', e);
             });
         }
         catch (e) {
-            utils_1.error('newbeeQuest.ts', e);
+            utils_1.logger.error('newbeeQuest.ts', e);
         }
     }
 };
@@ -4115,7 +4180,7 @@ exports.videoSpeedPlayback = () => {
         }
     }
     catch (e) {
-        utils_1.error('videoSpeedPlayback.ts', e);
+        utils_1.logger.error('videoSpeedPlayback.ts', e);
     }
 };
 
@@ -4248,7 +4313,7 @@ exports.settingsBackground = (e) => {
         }
     }
     catch (e) {
-        utils_1.error('settingsBackground.ts', e);
+        utils_1.logger.error('settingsBackground.ts', e);
     }
 };
 const setImage = async () => {
@@ -4294,7 +4359,7 @@ const setImage = async () => {
         }
     }
     catch (e) {
-        utils_1.error('setImage', e);
+        utils_1.logger.error('setImage', e);
     }
 };
 const setColor = () => {
@@ -4414,7 +4479,7 @@ const setColor = () => {
         }
     }
     catch (e) {
-        utils_1.error('setColor', e);
+        utils_1.logger.error('setColor', e);
     }
 };
 const setValues = (color) => {
@@ -4470,11 +4535,30 @@ exports.settingsBackupMenu = (id) => {
                 target.appendChild(infoDiv);
                 infoDiv.appendChild(smallInfo);
             }
-            let wrap = utils_1.ce('div', { style: 'padding: 16px 16px 14px 16px' }), buttonsDiv = utils_1.ce('div', { class: 'widgets-group user__tools_last', id: 'SP_PLUS_BOTTOM_DIVB' }), textareaBtn = utils_1.ce('div', { class: 'widgets-group user__tools_last', style: 'margin: unset' }), tiw = utils_1.ce('div', { class: 'text-input__wrap' }), cl = utils_1.ce('div', { class: 'cl' });
+            let wrap = utils_1.ce('div', {
+                style: 'padding: 16px 16px 14px 16px'
+            });
+            let buttonsDiv = utils_1.ce('div', {
+                class: 'widgets-group user__tools_last',
+                id: 'SP_PLUS_BOTTOM_DIVB'
+            });
+            let textareaBtn = utils_1.ce('div', {
+                class: 'widgets-group user__tools_last',
+                style: 'margin: unset'
+            });
+            let tiw = utils_1.ce('div', {
+                class: 'text-input__wrap'
+            });
+            let cl = utils_1.ce('div', {
+                class: 'cl'
+            });
             let updateButton = utils_1.ce('button', {
                 class: 'user__tools-link table__cell sp_btn',
                 style: 'border-right: none; border-top: 1px solid #cdd4e1',
-                html: '<span class="sp sp-ok-darkblue"></span><span style="color: #0e3c87; padding-left: 10px">Применить изменения</span>',
+                html: `
+                    <span class="sp sp-ok-darkblue"></span>
+                    <span style="color: #0E3C87; padding-left: 10px">Применить изменения</span>
+                `,
                 onclick: () => {
                     var _a;
                     let json, val = utils_1.qs('#SP_BACKUP_JSON').value;
@@ -4523,12 +4607,18 @@ exports.settingsBackupMenu = (id) => {
             }, false);
             let restoreButton = utils_1.ce('button', {
                 class: 'user__tools-link table__cell sp_btn_line sp_btn-list',
-                html: '<span class="sp sp-restore-g"></span><span style="color: #3ca93c; padding-left: 10px">Импорт</span>',
+                html: `
+                    <span class="sp sp-restore-g"></span>
+                    <span style="color: #3CA93C; padding-left: 10px">Импорт</span>
+                `,
                 onclick: () => utils_1.qs('#SP_IMPORT').click()
             });
             let saveButton = utils_1.ce('button', {
                 class: 'user__tools-link sp_btn-list',
-                html: '<span class="sp sp-download-blue"></span><span style="color: #57A3EA; padding-left: 10px;">Экспорт</span>',
+                html: `
+                    <span class="sp sp-download-blue"></span>
+                    <span style="color: #57A3EA; padding-left: 10px">Экспорт</span>
+                `,
                 onclick: () => {
                     utils_1.confirmBox('Вы уверены, что хотите сохранить файл настроек?', false, () => {
                         let blob = utils_1.ce('a', {
@@ -4561,7 +4651,7 @@ exports.settingsBackupMenu = (id) => {
             (_a = utils_1.qs('#SP_PLUS_ABOUT').previousElementSibling) === null || _a === void 0 ? void 0 : _a.after(buttonsDiv);
         }
         catch (e) {
-            utils_1.error('settingsBackupMenu.ts', e);
+            utils_1.logger.error('settingsBackupMenu.ts', e);
         }
     }
 };
@@ -4815,7 +4905,10 @@ const utils_1 = __webpack_require__(0);
 const settings_1 = __webpack_require__(2);
 exports.settingsRecentSmiles = (e) => {
     var _a;
-    let masWarp = utils_1.ce('div', { id: 'SP_RECENTS_SETTINGS', class: 'sp_settings-wrap' });
+    let masWarp = utils_1.ce('div', {
+        id: 'SP_RECENTS_SETTINGS',
+        class: 'sp_settings-wrap'
+    });
     let maxSabeLbl = utils_1.ce('label', {
         html: 'Сохранять смайликов:<div class="label__desc">от 10 до 60</div>',
         class: 'label'
