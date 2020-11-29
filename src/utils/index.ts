@@ -4,6 +4,7 @@ import { http } from './http'
 import { trim } from './trim'
 import { qs, qsa } from './qs'
 import { rever } from './rever'
+import { logger } from './logger'
 import { extend } from './extend'
 import { getPath } from './getPath'
 import { toUpper } from './toUpper'
@@ -18,7 +19,6 @@ import { confirmBox } from './confirmBox'
 import { isValidUrl } from './isValidUrl'
 import { messageBox } from './messageBox'
 import { historyPush } from './historyPush'
-import { log, info, error } from './console'
 import { modifyObject } from './modifyObject' 
 import { notification } from './notification'
 import { readSettings, setSettings } from './settings'
@@ -28,12 +28,10 @@ export {
     qs,
     qsa,
     css,
-    log,
-    info,
     http,
     trim,
-    error,
     rever,
+    logger,
     extend,
     getPath,
     toUpper,

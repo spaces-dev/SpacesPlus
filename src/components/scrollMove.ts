@@ -1,4 +1,4 @@
-import { qs, error } from '../utils'
+import { qs, logger } from '../utils'
 
 import { _SETTINGS } from '../settings'
 
@@ -16,6 +16,6 @@ export const scrollMove = (b: boolean) => {
             scroll.removeAttribute('sp-replace')
         }
     } catch (e) {
-        error('scrollMove.ts', e)
+        logger.error('scrollMove.ts', e)
     }
 }

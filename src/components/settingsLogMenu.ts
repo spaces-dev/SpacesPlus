@@ -1,4 +1,4 @@
-import { ce, qs, error, rever } from '../utils'
+import { ce, qs, rever, logger } from '../utils'
 
 import { getUpdater } from './checkUpdates'
 import { ICheckUpdates } from '../interfaces/CheckUpdates'
@@ -13,12 +13,25 @@ export const settingsLogMenu = (id: string) => {
         try {
             target.innerHTML = ''
 
-            let wrap = ce('div', { class: 'wbg error__item_wrapper sp_plus_c_wrap' })
-            let div = ce('div', { class: 'pad_t_a' })
-            let container = ce('div', { class: 'js-input_error_wrap' })
-            let preloader = ce('div', { class: 't_center', id: 'SP_JSON_PRELOADER', html: `<img src="${HTTP}//spac.me/i/preloader.gif">` })
+            let wrap = ce('div', {
+                class: 'wbg error__item_wrapper sp_plus_c_wrap'
+            })
 
-            container.appendChild(div)
+            let pad = ce('div', {
+                class: 'pad_t_a'
+            })
+
+            let container = ce('div', {
+                class: 'js-input_error_wrap'
+            })
+
+            let preloader = ce('div', {
+                class: 't_center',
+                id: 'SP_JSON_PRELOADER',
+                html: `<img src="${HTTP}//spac.me/i/preloader.gif">`
+            })
+
+            container.appendChild(pad)
             wrap.appendChild(container)
             target.appendChild(wrap)
             wrap.appendChild(preloader)
@@ -36,14 +49,14 @@ export const settingsLogMenu = (id: string) => {
                         html: history.changes
                     })
 
-                    div.appendChild(label)
-                    div.appendChild(changes)
+                    pad.appendChild(label)
+                    pad.appendChild(changes)
                 }
 
                 qs('#SP_JSON_PRELOADER').remove()
             })
         } catch (e) {
-            error('settingsLogMenu.ts', e)
+            logger.error('settingsLogMenu.ts', e)
         }
     }
 }

@@ -1,10 +1,11 @@
-import { qs, http, info, error } from '../utils'
+import { qs, http, logger } from '../utils'
 
 import { INewbeeQuest } from '../interfaces/NewbeeQuest'
 
 import { SPACES } from '../strings'
 
 export const newbeeQuest = async () => {
+
     let newbequest = qs('#sp_newbequest_togl')
 
     if (newbequest) {
@@ -15,10 +16,10 @@ export const newbeeQuest = async () => {
                     newbequest.style.display = 'block'
                 }
 
-                info('Квест новичка', e)
+                logger.info('Квест новичка', e)
             })
         } catch (e) {
-            error('newbeeQuest.ts', e)
+            logger.error('newbeeQuest.ts', e)
         }
     }
 }

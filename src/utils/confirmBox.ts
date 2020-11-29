@@ -9,11 +9,32 @@ import { ce, qs } from './index'
 export const confirmBox = (text: string, warn: boolean, callback: Function) => {
     let Alert = qs('#SP_PLUS_ALERT')
     let Confirm = qs('#SP_PLUS_CONFIRM')
-    let successBtn = ce('button', { html: 'Да', href: '#', class: 'btn btn_red btn_input' })
-    let cancelBtn = ce('a', { html: 'Отмена', href: '#', class: 'btn btn_white btn_input right sticker-close_btn' })
-    let warningText = ce('small', { class: 'pad_t_a grey', html: 'Это действие нельзя будет отменить.' })
-    let container = ce('div', { class: 'content-item3 wbg oh', html: text + '<div class="pad_t_a"></div>' })
-    let br = ce('div', { class: 'pad_t_a' })
+
+    let successBtn = ce('button', {
+        html: 'Да',
+        href: '#',
+        class: 'btn btn_red btn_input'
+    })
+
+    let cancelBtn = ce('a', {
+        html: 'Отмена',
+        href: '#',
+        class: 'btn btn_white btn_input right sticker-close_btn'
+    })
+
+    let warningText = ce('small', {
+        class: 'pad_t_a grey',
+        html: 'Это действие нельзя будет отменить.'
+    })
+
+    let container = ce('div', {
+        class: 'content-item3 wbg oh',
+        html: text + '<div class="pad_t_a"></div>'
+    })
+
+    let br = ce('div', {
+        class: 'pad_t_a'
+    })
 
     // Скрываем раннее созданные уводомления
     Alert?.remove()
@@ -32,7 +53,10 @@ export const confirmBox = (text: string, warn: boolean, callback: Function) => {
         return false
     }
 
-    let Main = ce('div', { class: 'sticker sp-sticker-anim', id: 'SP_PLUS_CONFIRM' })
+    let Main = ce('div', {
+        id: 'SP_PLUS_CONFIRM',
+        class: 'sticker sp-sticker-anim'
+    })
 
     if (warn) container.appendChild(warningText)
 

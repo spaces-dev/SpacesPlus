@@ -1,23 +1,27 @@
-import { qsa, http, getPath, info, error } from '../utils'
+import {
+    qsa,
+    http,
+    logger,
+    getPath
+} from '../utils'
 
 import { IUserAnketa } from '../interfaces/Mysite'
 
 import { SPACES, DATA } from '../strings'
 
 export const userOnline = () => {
-    let path = getPath()
-    let nick = getPath(3)
-    let target = `/anketa/index/${nick}/`
-
-    if (path !== target) DATA.ONLINE = null
+    let path = getPath(),
+        nick = getPath(3),
+        target = `/anketa/index/${nick}/`
 
     if (path === target && DATA.ONLINE !== nick) {
-        try {
-            let onBlock = Array.from(qsa('div.info-item__title')).filter(e => e.textContent === 'Время онлайн:')
 
-            if (nick && onBlock) {
-                DATA.ONLINE = nick
+        let onBlock = Array.from(qsa('div.info-item__title')).filter(e => e.textContent === 'Время онлайн:')
 
+        if (nick && onBlock) {
+            DATA.ONLINE = nick
+
+            try {
                 http<IUserAnketa>('GET', `${SPACES}/anketa/index/${nick}/`, true).then(e => {
                     const response = e.parsedBody?.user_widget?.online_time
 
@@ -27,12 +31,14 @@ export const userOnline = () => {
                         // @ts-ignore Костыль!
                         onBlock[0].nextElementSibling.textContent = online
 
-                        info(`Время онлайн: ${online}`, e)
+                        logger.info(`Время онлайн: ${online}`, e)
                     }
                 })
+            } catch (e) {
+                logger.error('userOnline.ts', e)
             }
-        } catch (e) {
-            error('userOnline.ts', e)
         }
+    } else if (path !== target) {
+        DATA.ONLINE = null
     }
 }

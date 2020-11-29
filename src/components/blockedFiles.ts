@@ -1,9 +1,8 @@
 import {
     ce,
     qs,
-    info,
     http,
-    error,
+    logger,
     getPath
 } from '../utils'
 
@@ -46,11 +45,11 @@ export const blockedFiles = () => {
                         <span class="t js-text">Скачать (${response.downloadBox.weight})</span>
                     `
 
-                    info('Загрузка заблокированного файла', e)
+                    logger.info('Загрузка заблокированного файла', e)
                 }
             })
         }
     } catch (e) {
-        error('blockedFiles.ts', e)
+        logger.error('blockedFiles.ts', e)
     }
 }

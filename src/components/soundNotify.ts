@@ -1,6 +1,6 @@
 import {
     qs,
-    error,
+    logger,
     toUpper,
     declOfNum,
     playSound,
@@ -42,6 +42,6 @@ export const soundNotify = () => {
             DATA.EVENTS = counter
         }
     } catch (e) {
-        error('soundEvents.ts', e)
+        logger.error('soundEvents.ts', e)
     }
 }

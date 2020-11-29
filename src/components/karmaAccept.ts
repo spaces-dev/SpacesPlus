@@ -1,4 +1,4 @@
-import { qsa, error, info } from '../utils'
+import { qsa, logger } from '../utils'
 
 import { SPACES } from '../strings'
 
@@ -11,9 +11,9 @@ export const karmaAccept = () => {
             // Удаляем элемент
             e.parentElement?.remove()
 
-            info('Собрали карму!', e)
+            logger.info('Собрали карму!', e)
         })
     } catch (e) {
-        error('karmaAccept.ts', e)
+        logger.error('karmaAccept.ts', e)
     }
 }

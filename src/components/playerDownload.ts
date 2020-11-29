@@ -1,8 +1,7 @@
 import {
     ce,
     qs,
-    info,
-    error
+    logger
 } from '../utils'
 
 import { DATA } from '../strings'
@@ -38,10 +37,10 @@ export const playerDownload = () => {
                 DATA.PLAYER = trId
                 downPlace.onclick = () => location.href = trScr
 
-                info('Обновили ссылку на трек', jstr)
+                logger.info('Обновили ссылку на трек', jstr)
             }
         }
     } catch (e) {
-        error('playerDownload.ts', e)
+        logger.error('playerDownload.ts', e)
     }
 }

@@ -1,4 +1,4 @@
-import { ce, qs, error, setSettings } from '../utils'
+import { ce, qs, logger, setSettings } from '../utils'
 
 import { _SETTINGS } from '../settings'
 
@@ -36,6 +36,6 @@ export const galleryRotate = () => {
             qs('#g_dloadlink').after(buttonRotate)
         }
     } catch (e) {
-        error('galleryRotate.ts', e)
+        logger.error('galleryRotate.ts', e)
     }
 }

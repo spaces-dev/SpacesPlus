@@ -1,9 +1,7 @@
 import { qs, ce } from '../utils'
 
 export const freeStickers = (b: boolean) => {
-    let script = qs('#SP_PLUS_STICKERS')
-
-    if (b && !script) {
+    if (b && !qs('#SP_PLUS_STICKERS')) {
         let s = ce('script', {
             type: 'text/javascript',
             id: 'SP_PLUS_STICKERS',

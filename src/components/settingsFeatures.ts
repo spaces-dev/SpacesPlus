@@ -16,7 +16,9 @@ import { SPACES, DATA } from '../strings'
 
 // Встроенные возможности сайта
 export const settingsFeatures = (root: Element) => {
-    let wrap = ce('div', { id: 'wrap_spaces_option' })
+    let wrap = ce('div', {
+        id: 'wrap_spaces_option'
+    })
 
     // API Отладчик
     let apidebug = ce('a', {

@@ -2,7 +2,7 @@ import {
     ce,
     qs,
     http,
-    error,
+    logger,
     isValidUrl,
     setSettings
 } from '../utils'
@@ -142,7 +142,7 @@ export const settingsBackground = (e: Element) => {
         if (_SETTINGS.bodystyleSet.urlchecked) { setImage() }
         if (_SETTINGS.bodystyleSet.colorchecked) { setColor() }
     } catch (e) {
-        error('settingsBackground.ts', e)
+        logger.error('settingsBackground.ts', e)
     }
 }
 
@@ -202,7 +202,7 @@ const setImage = async () => {
             })
         }
     } catch (e) {
-        error('setImage', e)
+        logger.error('setImage', e)
     }
 }
 
@@ -346,7 +346,7 @@ const setColor = () => {
             }, 100)
         }
     } catch (e) {
-        error('setColor', e)
+        logger.error('setColor', e)
     }
 }
 

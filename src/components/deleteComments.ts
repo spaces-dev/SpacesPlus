@@ -3,8 +3,7 @@ import {
     qs,
     qsa,
     http,
-    info,
-    error,
+    logger,
     declOfNum,
     confirmBox,
     messageBox
@@ -69,7 +68,10 @@ export const deleteComments = () => {
 
                 const chooseAllButton = ce('button', {
                     class: 'user__tools-link table__cell sp_btn-list',
-                    html: '<span class="sp sp-ok-blue"></span><span class="sp-ch-text">Выбрать все</span>',
+                    html: `
+                        <span class="sp sp-ok-blue"></span>
+                        <span class="sp-ch-text">Выбрать все</span>
+                    `,
                     onclick: (e: MouseEvent) => {
                         if (e.target instanceof Element) {
                             let inputs = qsa('input[id^="DC_"]')
@@ -99,7 +101,10 @@ export const deleteComments = () => {
 
                 const deleteCommentsButton = ce('button', {
                     class: 'user__tools-link table__cell sp_btn_line sp_btn-list',
-                    html: '<span class="sp sp-remove-red"></span><span class="sp-del-text">Удалить выбранные</span>',
+                    html: `
+                        <span class="sp sp-remove-red"></span>
+                        <span class="sp-del-text">Удалить выбранные</span>
+                    `,
                     onclick: () => {
                         let inputs = qsa('input[id^="DC_"]'),
                             urls: string[] = []
@@ -131,7 +136,7 @@ export const deleteComments = () => {
                                     messageBox(`Осталось удалить ${count--} из ${allComments} ${declStr(count)}`, 'Подождите немного... <span style="padding-right: 10px" class="ico ico_spinner"></span>', false)
 
                                     await http('GET', url, true).then(e => {
-                                        info('Удалил комментарий', e)
+                                        logger.info('Удалил комментарий', e)
                                     })
                                 }
 
@@ -150,7 +155,7 @@ export const deleteComments = () => {
             }
         }
     } catch (e) {
-        error('deleteComments.ts', e)
+        logger.error('deleteComments.ts', e)
     }
 }
 

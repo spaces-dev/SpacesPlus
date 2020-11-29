@@ -1,7 +1,7 @@
 import {
     ce,
     qs,
-    error,
+    logger,
     confirmBox,
     modifyObject
 } from '../utils'
@@ -115,7 +115,7 @@ export const recentSmiles = () => {
         }
 
     } catch (e) {
-        error('recentSmiles.ts', e)
+        logger.error('recentSmiles.ts', e)
     }
 }
 

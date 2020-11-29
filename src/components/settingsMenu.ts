@@ -1,7 +1,7 @@
 import {
     ce,
     qs,
-    error,
+    logger,
     getPath,
     getQuery,
     delCookie,
@@ -39,14 +39,16 @@ export const settingsMenu = () => {
 
             if (targetLink) {
                 const urlSett = getQuery('sp_plus_settings')
-                const urlSettEditor = getQuery('sp_cookie_editor')
                 const urlSettChangeLog = getQuery('sp_changelog')
                 const urlSettBackup = getQuery('sp_backup')
                 const baseLink = ce('a', {
                     href: `${SPACES}/settings/?sp_plus_settings=1`,
                     id: 'SP_PLUS_SETLINK',
                     class: targetLink.className,
-                    html: '<span>Настройки Spaces+</span><span class="ico ico_arr ico_m"></span>',
+                    html: `
+                        <span>Настройки Spaces+</span>
+                        <span class="ico ico_arr ico_m"></span>
+                    `,
                     onclick: () => {
                         if (!/(\&)sp_plus_settings=1/i.test(document.location.href)) {
                             historyPush({
@@ -56,8 +58,30 @@ export const settingsMenu = () => {
 
                         let prnt = (<HTMLElement>qs('#SP_PLUS_SETLINK').parentElement?.parentNode?.parentNode?.parentNode)
                         if (prnt.id === 'main') {
-                            qs('#header_path').innerHTML = qs('#header_path').innerHTML.replace('Настройки', `<a href="${SPACES}/settings/" style="margin-bottom: 1px">Настройки</a><span class="location-bar__sep ico"></span><span id="SP_PLUS_SETHEAD2">Spaces+</span>`)
-                            prnt.innerHTML = `<div class="widgets-group widgets-group_top js-container__block"><div class="b-title cl b-title_center b-title_first oh"><div class="b-title__item" id="SP_PLUS_SETHEAD">Настройки Spaces+</div></div><div class="content"><div class="list f-c_fll"> <div id="SP_PLUS_SETAREA" class="no-select"></div></div></div></div> <div id="SP_PLUS_ABOUT"></div> <a id="SP_PLUS_SETBACK" href="${SPACES}/settings/?" class="link-return full_link"><span class="ico ico_arrow-back" style="margin: 0px 6px -1px 0px"></span><span class="m">Назад</span></a>`
+
+                            qs('#header_path').innerHTML = qs('#header_path').innerHTML.replace('Настройки', `
+                                <a href="${SPACES}/settings/">Настройки</a>
+                                <span class="location-bar__sep ico"></span>
+                                <span id="SP_PLUS_SETHEAD2">Spaces+</span>
+                            `)
+
+                            prnt.innerHTML = `
+                                <div class="widgets-group widgets-group_top js-container__block">
+                                    <div class="b-title cl b-title_center b-title_first oh">
+                                        <div class="b-title__item" id="SP_PLUS_SETHEAD">Настройки Spaces+</div>
+                                    </div>
+                                    <div class="content">
+                                        <div class="list f-c_fll">
+                                            <div id="SP_PLUS_SETAREA" class="no-select"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="SP_PLUS_ABOUT"></div>
+                                <a id="SP_PLUS_SETBACK" href="${SPACES}/settings/?" class="link-return full_link">
+                                    <span class="ico ico_arrow-back"></span>
+                                    <span class="m">Назад</span>
+                                </a>
+                            `
                         }
 
                         const setArea = qs('#SP_PLUS_SETAREA')
@@ -202,10 +226,18 @@ export const settingsMenu = () => {
                                 href: `${SPACES}/settings/?sp_plus_settings=1&sp_backup=1`,
                                 class: 'stnd-link stnd-link_arr sp_font_sm',
                                 id: 'sp_backup',
-                                html: '<span class="b" style="color: #2e7d32"><span class="sp sp-backup-g mr-14"></span>Импорт и экспорт настроек<span class="ico ico_arr ico_m"></span></span>',
+                                html: `
+                                    <span class="b" style="color: #2e7d32">
+                                        <span class="sp sp-backup-g mr-14"></span>Импорт и экспорт настроек
+                                        <span class="ico ico_arr ico_m"></span>
+                                    </span>
+                                `,
                                 onclick: () => {
                                     qs('#SP_PLUS_SETHEAD').innerHTML = 'Импорт и экспорт настроек'
-                                    qs('#SP_PLUS_SETHEAD2').innerHTML = `<a href="${SPACES}/settings/?sp_plus_settings=1" style="margin-bottom: 1px">Spaces+</a><span class="location-bar__sep ico"></span> Импорт и экспорт настроек`;
+                                    qs('#SP_PLUS_SETHEAD2').innerHTML = `
+                                        <a href="${SPACES}/settings/?sp_plus_settings=1">Spaces+</a>
+                                        <span class="location-bar__sep ico"></span> Импорт и экспорт настроек
+                                    `;
                                     (<HTMLLinkElement>qs('#SP_PLUS_SETBACK')).href = `${SPACES}/settings/?sp_plus_settings=1`
                                     if (!/(\&)sp_backup=1/i.test(document.location.href)) {
                                         historyPush({
@@ -223,10 +255,18 @@ export const settingsMenu = () => {
                                 href: `${SPACES}/settings/?sp_plus_settings=1&sp_changelog=1`,
                                 class: 'stnd-link stnd-link_arr sp_font_sm',
                                 id: 'sp_changelog',
-                                html: '<span class="b" style="color: #2196f3"><span class="sp sp-restore-blue mr-14"></span>История обновлений<span class="ico ico_arr ico_m"></span></span>',
+                                html: `
+                                    <span class="b" style="color: #2196f3">
+                                        <span class="sp sp-restore-blue mr-14"></span>История обновлений
+                                        <span class="ico ico_arr ico_m"></span>
+                                    </span>
+                                `,
                                 onclick: () => {
                                     qs('#SP_PLUS_SETHEAD').innerHTML = 'История обновлений'
-                                    qs('#SP_PLUS_SETHEAD2').innerHTML = `<a href="${SPACES}/settings/?sp_plus_settings=1" style="margin-bottom: 1px">Spaces+</a><span class="location-bar__sep ico"></span> История обновлений`;
+                                    qs('#SP_PLUS_SETHEAD2').innerHTML = `
+                                        <a href="${SPACES}/settings/?sp_plus_settings=1">Spaces+</a>
+                                        <span class="location-bar__sep ico"></span> История обновлений
+                                    `;
                                     (<HTMLLinkElement>qs('#SP_PLUS_SETBACK')).href = `${SPACES}/settings/?sp_plus_settings=1`
                                     if (!/(\&)sp_changelog=1/i.test(document.location.href)) {
                                         historyPush({
@@ -244,7 +284,12 @@ export const settingsMenu = () => {
                                 href: '#',
                                 class: 'stnd-link stnd-link_arr sp_font_sm',
                                 id: 'sp_plus_reset',
-                                html: '<span class="b" style="color: #f86934"><span class="sp sp-alert mr-14"></span>Сброс настроек<span class="ico ico_arr ico_m"></span></span>',
+                                html: `
+                                    <span class="b" style="color: #f86934">
+                                        <span class="sp sp-alert mr-14"></span>Сброс настроек
+                                        <span class="ico ico_arr ico_m"></span>
+                                    </span>
+                                `,
                                 onclick: () => {
                                     confirmBox('Вы действительно хотите полностью сбросить настройки?', true, () => {
                                         delCookie('SP_PLUS_SET')
@@ -294,10 +339,10 @@ export const settingsMenu = () => {
                     baseLink.dispatchEvent(clickEvent)
                 }
 
-                if (urlSettEditor) {
-                    document.title = 'Spaces+: Редактор cookies'
+                if (urlSettBackup) {
+                    document.title = 'Spaces+: Импорт и экспорт настроек'
                     clickEvent.initEvent('click', true, true)
-                    qs('#sp_cookie_editor')?.dispatchEvent(clickEvent)
+                    qs('#sp_backup')?.dispatchEvent(clickEvent)
                 }
 
                 if (urlSettChangeLog) {
@@ -305,15 +350,9 @@ export const settingsMenu = () => {
                     clickEvent.initEvent('click', true, true)
                     qs('#sp_changelog')?.dispatchEvent(clickEvent)
                 }
-
-                if (urlSettBackup) {
-                    document.title = 'Spaces+: Импорт и экспорт настроек'
-                    clickEvent.initEvent('click', true, true)
-                    qs('#sp_backup')?.dispatchEvent(clickEvent)
-                }
             }
         } catch (e) {
-            error('settingsMenu', e)
+            logger.error('settingsMenu.ts', e)
         }
     }
 }

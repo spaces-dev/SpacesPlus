@@ -56,7 +56,7 @@ export const weatherWidget = () => {
             style: 'padding: 0px 16px 16px 16px',
             html: `
                 <img src="https://openweathermap.org/img/wn/${weather[0].icon}@2x.png" class="sp_img-center">
-                    <div class="grey sp_weather-container">
+                <div class="grey sp_weather-container">
                     <p>${Math.round(main.temp)}°C</p>
                     <p>${toUpper(weather[0].description)}</p>
                 </div>

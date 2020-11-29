@@ -1,4 +1,4 @@
-import { error } from './console'
+import { logger } from './logger'
 
 /**
  * Ищем определенный GET параметр в ссылке
@@ -20,6 +20,6 @@ export const getQuery = (name: string) => {
 
         return r
     } catch (e) {
-        error('getQuery.ts', e)
+        logger.error('getQuery.ts', e)
     }
 }

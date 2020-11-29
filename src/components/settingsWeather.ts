@@ -2,7 +2,7 @@ import {
     ce,
     qs,
     http,
-    error,
+    logger,
     setCookie,
     messageBox,
     setSettings
@@ -27,7 +27,10 @@ export const settingsWeather = async (e: Element) => {
     // Инициализация
     _SETTINGS.weatherSet.city ?? ipWhois()
 
-    let masWarp = ce('div', { id: 'SP_WEATHER_SETTINGS', class: 'sp_settings-wrap' })
+    let masWarp = ce('div', {
+        id: 'SP_WEATHER_SETTINGS',
+        class: 'sp_settings-wrap'
+    })
 
     let locationLbl = ce('label', {
         html: 'API-Ключ:<div class="label__desc"><a href="https://openweathermap.org/appid" target="_blank">Получить ключ</a></div>',
@@ -54,7 +57,10 @@ export const settingsWeather = async (e: Element) => {
         }
     })
 
-    let cityLbl = ce('label', { html: 'Город:', class: 'label' })
+    let cityLbl = ce('label', {
+        html: 'Город:',
+        class: 'label'
+    })
 
     let cityInp = ce('input', {
         type: 'text',
@@ -143,7 +149,7 @@ export const getWeather = async () => {
             }
         })
     } catch (e) {
-        error('openweathermap', e)
+        logger.error('openweathermap', e)
     }
 }
 
@@ -164,6 +170,6 @@ export const ipWhois = async () => {
             }
         })
     } catch (e) {
-        error('ipWhois', e)
+        logger.error('ipWhois', e)
     }
 }

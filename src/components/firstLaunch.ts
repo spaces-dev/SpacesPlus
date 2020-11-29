@@ -1,7 +1,7 @@
 import {
     ce,
     qs,
-    error,
+    logger,
     getCookie,
     setCookie,
     messageBox
@@ -31,12 +31,13 @@ export const firstLaunch = () => {
                     html: 'Перейти к настройкам',
                     onclick: () => qs('#SP_PLUS_ALERT').remove()
                 })
+
                 qs('#SP_LAUNCH_BUTTON').appendChild(goTo)
             }
 
             setCookie('SP_LAUNCH', '1')
         }
     } catch (e) {
-        error('firstLaunch.ts', e)
+        logger.error('firstLaunch.ts', e)
     }
 }

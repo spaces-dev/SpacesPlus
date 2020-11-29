@@ -1,11 +1,16 @@
-import { ce, error, setSettings } from '../utils'
+import { ce, logger, setSettings } from '../utils'
 
 import { _SETTINGS } from '../settings'
 
 export const settingsFriends = (e: Element) => {
     try {
-        let frMaxWrap = ce('div', { id: 'SP_PLUS_MAXFRIENDS' })
-        let div = ce('div', { class: 'sp_settings-wrap' })
+        let frMaxWrap = ce('div', {
+            id: 'SP_PLUS_MAXFRIENDS'
+        })
+
+        let div = ce('div', {
+            class: 'sp_settings-wrap'
+        })
 
         let frMax = ce('input', {
             type: 'text',
@@ -34,6 +39,6 @@ export const settingsFriends = (e: Element) => {
         frMaxWrap.appendChild(div)
         e.parentElement?.after(frMaxWrap)
     } catch (e) {
-        error('settingsFriends.ts', e)
+        logger.error('settingsFriends.ts', e)
     }
 }

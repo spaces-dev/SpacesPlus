@@ -1,4 +1,4 @@
-import { qs, css, error } from '../utils'
+import { qs, css, logger } from '../utils'
 
 export const stickyHeader = (b: boolean) => {
     try {
@@ -64,6 +64,6 @@ export const stickyHeader = (b: boolean) => {
             header.removeAttribute('sp-sticky-header')
         }
     } catch (e) {
-        error('stickyHeader.ts', e)
+        logger.error('stickyHeader.ts', e)
     }
 }

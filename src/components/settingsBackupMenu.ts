@@ -1,7 +1,7 @@
 import {
     ce,
     qs,
-    error,
+    logger,
     setCookie,
     confirmBox,
     messageBox,
@@ -52,16 +52,35 @@ export const settingsBackupMenu = (id: string) => {
                 infoDiv.appendChild(smallInfo)
             }
 
-            let wrap = ce('div', { style: 'padding: 16px 16px 14px 16px' }),
-                buttonsDiv = ce('div', { class: 'widgets-group user__tools_last', id: 'SP_PLUS_BOTTOM_DIVB' }),
-                textareaBtn = ce('div', { class: 'widgets-group user__tools_last', style: 'margin: unset' }),
-                tiw = ce('div', { class: 'text-input__wrap' }),
-                cl = ce('div', { class: 'cl' })
+            let wrap = ce('div', {
+                style: 'padding: 16px 16px 14px 16px'
+            })
+
+            let buttonsDiv = ce('div', {
+                class: 'widgets-group user__tools_last',
+                id: 'SP_PLUS_BOTTOM_DIVB'
+            })
+
+            let textareaBtn = ce('div', {
+                class: 'widgets-group user__tools_last',
+                style: 'margin: unset'
+            })
+
+            let tiw = ce('div', {
+                class: 'text-input__wrap'
+            })
+
+            let cl = ce('div', {
+                class: 'cl'
+            })
 
             let updateButton = ce('button', {
                 class: 'user__tools-link table__cell sp_btn',
                 style: 'border-right: none; border-top: 1px solid #cdd4e1',
-                html: '<span class="sp sp-ok-darkblue"></span><span style="color: #0e3c87; padding-left: 10px">Применить изменения</span>',
+                html: `
+                    <span class="sp sp-ok-darkblue"></span>
+                    <span style="color: #0E3C87; padding-left: 10px">Применить изменения</span>
+                `,
                 onclick: () => {
                     let json,
                         val = (<HTMLInputElement>qs('#SP_BACKUP_JSON')).value
@@ -124,13 +143,19 @@ export const settingsBackupMenu = (id: string) => {
 
             let restoreButton = ce('button', {
                 class: 'user__tools-link table__cell sp_btn_line sp_btn-list',
-                html: '<span class="sp sp-restore-g"></span><span style="color: #3ca93c; padding-left: 10px">Импорт</span>',
+                html: `
+                    <span class="sp sp-restore-g"></span>
+                    <span style="color: #3CA93C; padding-left: 10px">Импорт</span>
+                `,
                 onclick: () => qs('#SP_IMPORT').click()
             })
 
             let saveButton = ce('button', {
                 class: 'user__tools-link sp_btn-list',
-                html: '<span class="sp sp-download-blue"></span><span style="color: #57A3EA; padding-left: 10px;">Экспорт</span>',
+                html: `
+                    <span class="sp sp-download-blue"></span>
+                    <span style="color: #57A3EA; padding-left: 10px">Экспорт</span>
+                `,
                 onclick: () => {
                     confirmBox('Вы уверены, что хотите сохранить файл настроек?', false, () => {
                         let blob = ce('a', {
@@ -166,7 +191,7 @@ export const settingsBackupMenu = (id: string) => {
             buttonsDiv.appendChild(saveButton)
             qs('#SP_PLUS_ABOUT').previousElementSibling?.after(buttonsDiv)
         } catch (e) {
-            error('settingsBackupMenu.ts', e)
+            logger.error('settingsBackupMenu.ts', e)
         }
     }
 }

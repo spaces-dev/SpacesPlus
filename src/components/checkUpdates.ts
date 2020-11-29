@@ -2,9 +2,8 @@ import {
     ce,
     qs,
     http,
-    info,
-    error,
     rever,
+    logger,
     messageBox,
     setSettings
 } from '../utils'
@@ -23,14 +22,14 @@ export const getUpdater = (callback: Function) => {
         http<ICheckUpdates>('GET', `${ENV_PATH}/updater.json?r=${REVISION}`, false).then(e => {
             const json = e.parsedBody
 
-            info('Проверка обновлений', e)
+            logger.info('Проверка обновлений', e)
 
             if (e.status === 200 && json?.history) {
                 return callback(json)
             }
         })
     } catch (e) {
-        error('getUpdater.ts', e)
+        logger.error('getUpdater', e)
     }
 }
 
@@ -62,6 +61,6 @@ export const checkUpdates = () => {
             }
         })
     } catch (e) {
-        error('checkUpdates.ts', e)
+        logger.error('checkUpdates.ts', e)
     }
 }

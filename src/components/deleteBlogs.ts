@@ -3,8 +3,7 @@ import {
     qs,
     qsa,
     http,
-    info,
-    error,
+    logger,
     getPath,
     declOfNum,
     getParams,
@@ -62,7 +61,10 @@ export const deleteBlogs = () => {
             // кнопка "Выбрать Все"
             const chooseAllButton = ce('button', {
                 class: 'user__tools-link table__cell sp_btn-list',
-                html: '<span class="sp sp-ok-blue"></span><span class="sp-ch-text">Выбрать все</span>',
+                html: `
+                    <span class="sp sp-ok-blue"></span>
+                    <span class="sp-ch-text">Выбрать все</span>
+                `,
                 onclick: (e: MouseEvent) => {
                     if (e.target instanceof Element) {
                         let parent = e.target.nodeName === 'SPAN' ?
@@ -91,7 +93,10 @@ export const deleteBlogs = () => {
             // кнопка "Удалить выбранные"
             const deleteBlogsButton = ce('button', {
                 class: 'user__tools-link table__cell sp_btn_line sp_btn-list',
-                html: '<span class="sp sp-remove-red"></span><span class="sp-del-text">Удалить выбранные</span>',
+                html: `
+                    <span class="sp sp-remove-red"></span>
+                    <span class="sp-del-text">Удалить выбранные</span>
+                `,
                 onclick: () => {
                     let blogs: string[] = []
 
@@ -113,7 +118,7 @@ export const deleteBlogs = () => {
                                 messageBox(`Осталось удалить ${count--} из ${allBlogs} ${declStr(count)}`, 'Подождите немного... <span style="padding-right: 10px" class="ico ico_spinner"></span>', false)
 
                                 await http('GET', `${SPACES}/diary/delete/?CK=${DATA.CK}&id=${blog}&Sure=1`, true).then(e => {
-                                    info('Удалили блог', e)
+                                    logger.info('Удалили блог', e)
                                 })
                             }
 
@@ -132,7 +137,7 @@ export const deleteBlogs = () => {
             if (qs('input[id^="SP_DB_"')) qs('#main').after(buttonsDiv)
         }
     } catch (e) {
-        error('deleteBlogs.ts', e)
+        logger.error('deleteBlogs.ts', e)
     }
 }
 

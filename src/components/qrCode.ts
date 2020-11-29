@@ -1,7 +1,7 @@
 import {
     ce,
     qs,
-    error,
+    logger,
     getPath,
     messageBox
 } from '../utils'
@@ -57,7 +57,7 @@ export const qrCode = () => {
             moreMenu.appendChild(qrCodeBtn)
         }
     } catch (e) {
-        error('qrCode.ts', e)
+        logger.error('qrCode.ts', e)
     }
 }
 
@@ -67,6 +67,6 @@ const qrCodeLoader = (url: string): Promise<HTMLImageElement> => {
         image.src = url
         image.className = 'sp_img-center'
         image.onload = () => resolve(image)
-        image.onerror = () => reject(new Error('loading error'))
+        image.onerror = () => reject(logger.error('qrCodeLoader', image))
     })
 }

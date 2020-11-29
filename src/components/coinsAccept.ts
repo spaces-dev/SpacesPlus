@@ -1,4 +1,4 @@
-import { qsa, error, info } from '../utils'
+import { qsa, logger } from '../utils'
 
 import { SPACES } from '../strings'
 
@@ -11,9 +11,9 @@ export const coinsAccept = () => {
             // Удаляем элемент
             e.parentElement?.remove()
 
-            info('Собрали монетку', e)
+            logger.info('Собрали монетку', e)
         })
     } catch (e) {
-        error('coinsAccept.ts', e)
+        logger.error('coinsAccept.ts', e)
     }
 }

@@ -2,8 +2,7 @@ import {
     ce,
     qs,
     http,
-    info,
-    error
+    logger
 } from '../utils'
 
 import { IFriendsOnline } from '../interfaces/FriendsOnline'
@@ -59,7 +58,7 @@ export const friendsOnline = (b: boolean) => {
                         }))
                     }
 
-                    info('Панель друзей онлайн', e)
+                    logger.info('Панель друзей онлайн', e)
                 }
             })
 
@@ -68,6 +67,6 @@ export const friendsOnline = (b: boolean) => {
             frOnDiv?.remove()
         }
     } catch (e) {
-        error('friendsOnline.ts', e)
+        logger.error('friendsOnline.ts', e)
     }
 }

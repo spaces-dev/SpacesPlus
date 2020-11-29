@@ -3,7 +3,9 @@ import { qs, ce } from '../utils'
 import { DEVICE } from '../strings'
 
 export const userStatus = (code: string | undefined) => {
-    let noAuthorized = ce('div', { html: 'Для работы <b>Spaces+</b> необходима авторизация!' })
+    let noAuthorized = ce('div', {
+        html: 'Для работы <b>Spaces+</b> необходима авторизация!'
+    })
 
     if (DEVICE.id === 1 || DEVICE.id === 2) {
         let unSupported = ce('div', {

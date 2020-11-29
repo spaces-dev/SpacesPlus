@@ -1,4 +1,4 @@
-import { error, extend, getCookie, setCookie } from './index'
+import { extend, logger, getCookie, setCookie } from './index'
 
 import { _SETTINGS } from '../settings'
 
@@ -15,7 +15,7 @@ export const readSettings = () => {
             _SETTINGS = extend(_SETTINGS, cookieSet)
         }
     } catch (e) {
-        error('readSettings', e)
+        logger.error('readSettings', e)
     }
 }
 
@@ -36,6 +36,6 @@ export const setSettings = (key: string, value: string | number | boolean) => {
 
         setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
     } catch (e) {
-        error('setSettings', e)
+        logger.error('setSettings', e)
     }
 }

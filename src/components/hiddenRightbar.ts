@@ -1,4 +1,4 @@
-import { qs, error } from '../utils'
+import { qs, logger } from '../utils'
 
 import { _SETTINGS } from '../settings'
 
@@ -19,6 +19,6 @@ export const hiddenRightbar = (b: boolean) => {
             rightbar.removeAttribute('sp-hidden-rightbar')
         }
     } catch (e) {
-        error('hidderRightbar.ts', e)
+        logger.error('hidderRightbar.ts', e)
     }
 }

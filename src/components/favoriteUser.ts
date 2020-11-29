@@ -4,8 +4,7 @@ import {
     qsa,
     http,
     trim,
-    info,
-    error,
+    logger,
     getPath,
     confirmBox
 } from '../utils'
@@ -65,13 +64,13 @@ export const favoriteUser = async () => {
                             href: `${SPACES}/bookmarks/add/?object_id=${json.id}&object_type=11`,
                             class: 'stnd-link',
                             attr: { title: 'Добавить в закладки' },
-                            html: `<span class="sp sp-fav"></span> B закладки`,
+                            html: '<span class="sp sp-fav"></span> B закладки',
                             onclick: () => {
                                 confirmBox(`Добавить пользователя <b>${json.name}</b> в закладки?`, false, async () => {
                                     await http('POST', `${SPACES}/ajax/bookmarks/add/`, false, `object_id=${json.id}&object_type=11&show_all_tags_state=0&new_tags=Люди&cfms=Добавить&CK=${DATA.CK}`).then(e => {
                                         e.status === 200 ?
                                             isFav(json.id, json.name, favoriteButton) :
-                                            error('bookmarks/add', e)
+                                            logger.error('bookmarks/add', e)
                                     })
                                 })
 
@@ -88,12 +87,12 @@ export const favoriteUser = async () => {
                         loader.parentElement!.style.display = 'none'
                     }
 
-                    info('anketa/index', e)
+                    logger.info('anketa/index', e)
                 })
             }
         }
     } catch (e) {
-        error('favoriteUser.ts', e)
+        logger.error('favoriteUser.ts', e)
     }
 }
 
@@ -111,7 +110,7 @@ const isFav = async (id: string, name: string, elem: any) => {
                         await http('GET', json.delete_URL, false).then(e => {
                             e.status === 200 ?
                                 document.location.reload() :
-                                error('bookmarks/remove', e)
+                                logger.error('bookmarks/remove', e)
                         })
                     })
 
@@ -119,9 +118,9 @@ const isFav = async (id: string, name: string, elem: any) => {
                 }
             }
 
-            info('В закладках?', e)
+            logger.info('В закладках?', e)
         })
     } catch (e) {
-        error('isFav', e)
+        logger.error('isFav', e)
     }
 }

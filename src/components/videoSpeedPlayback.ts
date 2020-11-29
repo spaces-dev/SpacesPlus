@@ -1,4 +1,4 @@
-import { ce, qs, error, setSettings } from '../utils'
+import { ce, qs, logger, setSettings } from '../utils'
 
 import { _SETTINGS } from '../settings'
 
@@ -28,6 +28,6 @@ export const videoSpeedPlayback = () => {
             target.after(buttonPlayback)
         }
     } catch (e) {
-        error('videoSpeedPlayback.ts', e)
+        logger.error('videoSpeedPlayback.ts', e)
     }
 }

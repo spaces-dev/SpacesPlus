@@ -4,8 +4,7 @@ import {
     qsa,
     http,
     trim,
-    info,
-    error,
+    logger,
     getPath,
     messageBox
 } from '../utils'
@@ -33,13 +32,20 @@ export const bypassProfile = () => {
                 let button = ce('td', {
                     class: 'table__cell',
                     id: 'SP_PLUS_INBL',
-                    html: `<a href="#" class="stnd-link" title="Показать профиль"><span class="sp sp-eye-grey"></span> Показать</a>`,
+                    html: `
+                        <a href="#" class="stnd-link" title="Показать профиль">
+                        <span class="sp sp-eye-grey"></span> Показать</a>
+                    `,
                     onclick: () => {
 
                         button.after(ce('td', {
                             class: 'table__cell',
                             id: 'SP_PLUS_INBL',
-                            html: `<a href="#" class="stnd-link stnd-link_disabled" title="Загрузка"><span class="ico bp ico_spinner"></span> Загрузка</a>`,
+                            attr: { width: '25%' },
+                            html: `
+                                <a href="#" class="stnd-link stnd-link_disabled" title="Загрузка">
+                                <span class="ico bp ico_spinner"></span> Загрузка</a>
+                            `,
                             onclick: () => false
                         }))
 
@@ -80,7 +86,7 @@ export const bypassProfile = () => {
         }
 
     } catch (e) {
-        error('bypassProfile.ts', e)
+        logger.error('bypassProfile.ts', e)
     }
 }
 
@@ -103,7 +109,7 @@ const getProfile = async (nickname: string) => {
                 messageBox('Просмотр профилей', 'Ошибка загрузки профиля! Обратитесь к разработчику', true)
             }
 
-            info('Просмотр профилей', e)
+            logger.info('Просмотр профилей', e)
         })
     }
 
@@ -114,9 +120,6 @@ const getProfile = async (nickname: string) => {
         // Костыль по восстановлению аватарки
         let avatar = (<HTMLImageElement>qs('img[data-s*="101.100.0"'))
         avatar.src = (avatar.dataset.s as string)
-
-        // Удаляем ебучие виджеты
-        qs('div.widgets-group').remove()
 
         // Удаляем ненужную панель c кнопками
         qs('div.user__tools').remove()
@@ -195,10 +198,12 @@ const setUrls = (e: string, lnk1: HTMLElement, lnk2: HTMLElement) => {
     if (lnk1 === null && lnk2 === null)
         urls = urls2.concat(urls)
 
-    qs('div.js-pending-item').append(ce('div', {
+    let widget = ce('div', {
         id: 'SP_LIST_LINK',
         class: 'widgets-group links-group'
-    }))
+    })
+
+    qs('div.js-pending-item').append(widget)
 
     // создаем ссылки
     for (let url of urls) {
@@ -215,6 +220,6 @@ const setUrls = (e: string, lnk1: HTMLElement, lnk2: HTMLElement) => {
             `
         })
 
-        qs('#SP_LIST_LINK').append(link)
+        widget.append(link)
     }
 }

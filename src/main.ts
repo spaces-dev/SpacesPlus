@@ -42,9 +42,8 @@ import {
 
 import {
     qs,
-    info,
     http,
-    error,
+    logger,
     readSettings
 } from './utils'
 
@@ -80,10 +79,10 @@ import { ISessionCheck } from './interfaces/SessionCheck'
                     init()
                 }
 
-                info('api/session/check', e)
+                logger.info('Проверка сессии', e)
             })
         } catch (e) {
-            error('main.ts', e)
+            logger.error('main.ts', e)
         }
     }
 })()

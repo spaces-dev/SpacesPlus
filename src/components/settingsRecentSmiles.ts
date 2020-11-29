@@ -4,7 +4,10 @@ import { _SETTINGS } from '../settings'
 
 export const settingsRecentSmiles = (e: Element) => {
 
-    let masWarp = ce('div', { id: 'SP_RECENTS_SETTINGS', class: 'sp_settings-wrap' })
+    let masWarp = ce('div', {
+        id: 'SP_RECENTS_SETTINGS',
+        class: 'sp_settings-wrap'
+    })
 
     let maxSabeLbl = ce('label', {
         html: 'Сохранять смайликов:<div class="label__desc">от 10 до 60</div>',

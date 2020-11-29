@@ -1,6 +1,6 @@
 import {
     ce,
-    error,
+    logger,
     playSound,
     messageBox,
     isValidUrl,
@@ -148,6 +148,6 @@ export const settingsNotify = (e: Element) => {
         eventsWrap.appendChild(label3)
         e.parentElement?.after(eventsWrap)
     } catch (e) {
-        error('settingsNotify.ts', e)
+        logger.error('settingsNotify.ts', e)
     }
 }

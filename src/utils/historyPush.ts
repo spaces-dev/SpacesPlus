@@ -1,4 +1,4 @@
-import { error } from './console'
+import { logger } from './logger'
 
 /**
  * ? Функция необходима для перехода по ссылке в собственно созданные разделы на сайте или в настройках скрипта
@@ -16,6 +16,6 @@ export const historyPush = (state: object, url: string, title: string) => {
         document.title = title
         history.pushState(state, title, url)
     } catch (e) {
-        error('historyPush.ts', e)
+        logger.error('historyPush.ts', e)
     }
 }
