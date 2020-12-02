@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 
 <head>
     <meta charset="utf-8">
@@ -10,95 +10,108 @@
 
 <body>
 
-    <header class="header">
-        <div class="container">
-            <div class="header__inner">
-                <div class="header__logo">
-                    <svg width="96" height="96" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd"
-                            d="M493.96 813.192L678.244 899.125C713.282 915.464 754.931 900.305 771.269 865.267L1002.04 370.377C1018.38 335.339 1003.22 293.69 968.182 277.352L647.023 127.593C611.985 111.255 570.336 126.413 553.998 161.451L530.656 211.509L667.53 275.334C702.568 291.673 717.727 333.321 701.389 368.359L493.96 813.192Z"
-                            fill="#A088FF" />
-                        <path fill-rule="evenodd" clip-rule="evenodd"
-                            d="M493.96 813.192L678.244 899.125C713.282 915.464 754.931 900.305 771.269 865.267L1002.04 370.377C1018.38 335.339 1003.22 293.69 968.182 277.352L647.023 127.593C611.985 111.255 570.336 126.413 553.998 161.451L530.656 211.509L667.53 275.334C702.568 291.673 717.727 333.321 701.389 368.359L493.96 813.192Z"
-                            fill="url(#paint0_linear)" />
-                        <path fill-rule="evenodd" clip-rule="evenodd"
-                            d="M530.656 211.509L667.53 275.334C702.568 291.673 717.727 333.321 701.389 368.359L493.96 813.192L357.085 749.366C322.047 733.028 306.889 691.379 323.227 656.341L530.656 211.509Z"
-                            fill="#FFE954" />
-                        <path fill-rule="evenodd" clip-rule="evenodd"
-                            d="M530.656 211.509L667.53 275.334C702.568 291.673 717.727 333.321 701.389 368.359L493.96 813.192L357.085 749.366C322.047 733.028 306.889 691.379 323.227 656.341L530.656 211.509Z"
-                            fill="url(#paint1_linear)" />
-                        <path fill-rule="evenodd" clip-rule="evenodd"
-                            d="M346.371 125.575C311.333 109.237 269.685 124.396 253.346 159.433L22.5752 654.323C6.23677 689.361 21.3956 731.01 56.4334 747.348L377.593 897.107C412.631 913.446 454.279 898.287 470.618 863.249L493.96 813.192L357.085 749.366C322.047 733.028 306.889 691.379 323.227 656.341L530.656 211.509L346.371 125.575Z"
-                            fill="#47C6FF" />
-                        <path fill-rule="evenodd" clip-rule="evenodd"
-                            d="M346.371 125.575C311.333 109.237 269.685 124.396 253.346 159.433L22.5752 654.323C6.23677 689.361 21.3956 731.01 56.4334 747.348L377.593 897.107C412.631 913.446 454.279 898.287 470.618 863.249L493.96 813.192L357.085 749.366C322.047 733.028 306.889 691.379 323.227 656.341L530.656 211.509L346.371 125.575Z"
-                            fill="url(#paint2_linear)" />
-                        <defs>
-                            <linearGradient id="paint0_linear" x1="751.288" y1="121.018" x2="751.288" y2="905.7"
-                                gradientUnits="userSpaceOnUse">
-                                <stop stop-color="white" stop-opacity="0" />
-                                <stop offset="1" stop-color="#9076FF" />
-                            </linearGradient>
-                            <linearGradient id="paint1_linear" x1="512.308" y1="211.509" x2="512.308" y2="813.192"
-                                gradientUnits="userSpaceOnUse">
-                                <stop stop-color="white" stop-opacity="0" />
-                                <stop offset="1" stop-color="#FFE00E" />
-                            </linearGradient>
-                            <linearGradient id="paint2_linear" x1="273.328" y1="119" x2="273.328" y2="903.682"
-                                gradientUnits="userSpaceOnUse">
-                                <stop stop-color="white" stop-opacity="0" />
-                                <stop offset="1" stop-color="#18B6FF" />
-                            </linearGradient>
-                        </defs>
-                    </svg>
+    <div class="main__container">
+        <header class="header">
+            <div class="container">
+                <div class="header__inner">
+                    <!--<div class="header__logo">
+                        <svg width="96" height="96" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M493.96 813.192L678.244 899.125C713.282 915.464 754.931 900.305 771.269 865.267L1002.04 370.377C1018.38 335.339 1003.22 293.69 968.182 277.352L647.023 127.593C611.985 111.255 570.336 126.413 553.998 161.451L530.656 211.509L667.53 275.334C702.568 291.673 717.727 333.321 701.389 368.359L493.96 813.192Z"
+                                fill="#A088FF" />
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M493.96 813.192L678.244 899.125C713.282 915.464 754.931 900.305 771.269 865.267L1002.04 370.377C1018.38 335.339 1003.22 293.69 968.182 277.352L647.023 127.593C611.985 111.255 570.336 126.413 553.998 161.451L530.656 211.509L667.53 275.334C702.568 291.673 717.727 333.321 701.389 368.359L493.96 813.192Z"
+                                fill="url(#paint0_linear)" />
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M530.656 211.509L667.53 275.334C702.568 291.673 717.727 333.321 701.389 368.359L493.96 813.192L357.085 749.366C322.047 733.028 306.889 691.379 323.227 656.341L530.656 211.509Z"
+                                fill="#FFE954" />
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M530.656 211.509L667.53 275.334C702.568 291.673 717.727 333.321 701.389 368.359L493.96 813.192L357.085 749.366C322.047 733.028 306.889 691.379 323.227 656.341L530.656 211.509Z"
+                                fill="url(#paint1_linear)" />
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M346.371 125.575C311.333 109.237 269.685 124.396 253.346 159.433L22.5752 654.323C6.23677 689.361 21.3956 731.01 56.4334 747.348L377.593 897.107C412.631 913.446 454.279 898.287 470.618 863.249L493.96 813.192L357.085 749.366C322.047 733.028 306.889 691.379 323.227 656.341L530.656 211.509L346.371 125.575Z"
+                                fill="#47C6FF" />
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M346.371 125.575C311.333 109.237 269.685 124.396 253.346 159.433L22.5752 654.323C6.23677 689.361 21.3956 731.01 56.4334 747.348L377.593 897.107C412.631 913.446 454.279 898.287 470.618 863.249L493.96 813.192L357.085 749.366C322.047 733.028 306.889 691.379 323.227 656.341L530.656 211.509L346.371 125.575Z"
+                                fill="url(#paint2_linear)" />
+                            <defs>
+                                <linearGradient id="paint0_linear" x1="751.288" y1="121.018" x2="751.288" y2="905.7"
+                                    gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="white" stop-opacity="0" />
+                                    <stop offset="1" stop-color="#9076FF" />
+                                </linearGradient>
+                                <linearGradient id="paint1_linear" x1="512.308" y1="211.509" x2="512.308" y2="813.192"
+                                    gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="white" stop-opacity="0" />
+                                    <stop offset="1" stop-color="#FFE00E" />
+                                </linearGradient>
+                                <linearGradient id="paint2_linear" x1="273.328" y1="119" x2="273.328" y2="903.682"
+                                    gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="white" stop-opacity="0" />
+                                    <stop offset="1" stop-color="#18B6FF" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>-->
+    
+                    <!--<nav class="nav">
+                        <a class="nav__link" href="overview.html">Обзор</a>
+                        <a class="nav__link" href="release.html">Изменения</a>
+                        <a class="nav__link" href="install.html">Установка</a>
+                    </nav>-->
+    
                 </div>
+            </div>
+    
+        </header>
 
-                <nav class="nav">
-                    <a class="nav__link" href="overview.html">Обзор</a>
-                    <a class="nav__link" href="release.html">Изменения</a>
-                    <a class="nav__link" href="install.html">Установка</a>
-                </nav>
-
+        <div class="hero d-flex container text-center">
+            <div class="hero__container align-self-center">
+                <div class="hero__inner">
+                    <h1 class="hero__title">Spaces Plus</h1>
+    
+                    <div class="hero__text">
+                        Powerfull userscript for Spaces.ru
+                    </div>
+    
+                    <button class="btn" id="sp-install">Установить</button>
+                </div>
             </div>
         </div>
 
-    </header>
-
-    <div class="hero">
-        <div class="container">
-            <div class="hero__inner">
-                <h1 class="hero__title">Spaces Plus</h1>
-
-                <div class="hero__text">
-                    Powerfull userscript for Spaces.ru
+        <!--<section class="main">
+            <div class="container">
+                <div class="main__container">
+                    <h1 class="main__title">Обзор</h1>
+    
+                    <div class="main__content">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </div>
                 </div>
-
-                <button class="btn">Установить</button>
             </div>
+        </section>-->
+
+        <div class="container d-flex pt-3 pb-3">
+            <footer>От сообщества <a href="https://spaces.im/soo/extension/" class="footer__link">Spaces+</a></footer>
+            <footer class="ml-auto">
+                <a href="#" class="footer__link">Release notes</a>
+                <a href="#" class="footer__link">Privacy Policy</a>
+            </footer>
         </div>
     </div>
 
-    <section class="main">
-        <div class="container">
-            <div class="main__container">
-                <h1 class="main__title">Обзор</h1>
+    <script>
+        let installBtn = document.getElementById('sp-install')
 
-                <div class="main__content">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="d-flex pt-3 pb-3 container">
-        <footer>От сообщества сайта <a href="https://spaces.im/soo/extension/" class="footer__link">Spaces+</a></footer>
-        <footer class="ml-auto"><a href="/terms" class="footer__link">Release notes</a> <a href="/privacy" class="footer__link">Privacy Policy</a></footer>
-    </div>
+        installBtn.addEventListener('click', () => {
+            location.href = 'spaces-plus.user.js'
+        })
+    </script>
 </body>
 
 </html>

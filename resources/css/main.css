@@ -61,7 +61,13 @@ a {
 }
 
 .hero {
-    margin-top: 25px;
+    flex: 1 1
+}
+
+.hero__container {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center
 }
 
 .hero__inner {
@@ -106,21 +112,9 @@ a {
 }
 
 .main__container {
-    margin: 64px auto;
-}
-
-@media screen and (min-width: 1000px) {
-    .main__container {
-        max-width: 66.6666666667%;
-        width: 100%;
-    }
-}
-
-@media screen and (max-width: 991px) {
-    .main__container {
-        margin-left: 25px;
-        margin-right: 25px;
-    }
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .main__title {
@@ -238,4 +232,12 @@ a {
 a:hover {
     color: #6f6f8c;
     text-decoration: underline
+}
+
+.align-self-center {
+    align-self: center
+}
+
+.text-center {
+    text-align: center
 }
