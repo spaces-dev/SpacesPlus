@@ -2,7 +2,7 @@ import {
     ce,
     qs,
     logger,
-    confirmBox,
+    modalConfirm,
     modifyObject
 } from '../utils'
 
@@ -55,7 +55,7 @@ export const recentSmiles = () => {
             let recentDelete = ce('span', {
                 class: 'sp sp-grey-del trash-btn',
                 onclick: () => {
-                    confirmBox('Вы действительно хотите очистить ранее использованные смайлики?', true, () => {
+                    modalConfirm('Вы действительно хотите очистить ранее использованные смайлики?', true, () => {
                         localStorage.removeItem('sp_recent_smiles')
                         // костыль
                         document.location.reload()

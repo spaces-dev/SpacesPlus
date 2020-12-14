@@ -4,7 +4,7 @@ import {
     logger,
     getCookie,
     setCookie,
-    messageBox
+    modalMessage
 } from '../utils'
 
 import { SPACES, BASE_URL } from '../strings'
@@ -17,7 +17,7 @@ export const firstLaunch = () => {
             BASE_URL !== 'spaces-blogs.com' &&
             BASE_URL !== 'spac1.net') {
 
-            messageBox('Спасибо за установку Spaces+', `
+            modalMessage('Спасибо за установку Spaces+', `
                 <b style="color: #f86934">ВНИМАНИЕ!</b></br></br>
                 Во избежания подделок, которые могут воровать пароли пользователей, скрипт скачивать только с официального <a href="https://spaces-dev.github.io" target="_blank">сайта</a></br></br>
                 С вопросами по использованию скрипта, писать в сообщество <a href="${SPACES}/soo/extension/" target="_blank">Spaces+</a></br></br>

@@ -3,8 +3,8 @@ import {
     qs,
     logger,
     setCookie,
-    confirmBox,
-    messageBox,
+    modalConfirm,
+    modalMessage,
     setSettings
 } from '../utils'
 
@@ -96,9 +96,9 @@ export const settingsBackupMenu = (id: string) => {
                         setCookie('SP_PLUS_SET', val)
 
                         // сообщение
-                        messageBox('Импорт и экспорт настроек', 'Настройки были успешно сохранены', true, 3)
+                        modalMessage('Импорт и экспорт настроек', 'Настройки были успешно сохранены', true, 3)
                     } catch (e) {
-                        messageBox('Ошибка разбора файла настроек', e, true)
+                        modalMessage('Ошибка разбора файла настроек', e, true)
                     }
                 }
             })
@@ -131,9 +131,9 @@ export const settingsBackupMenu = (id: string) => {
                             // вставляем в textarea
                             textarea.value = beautify(json, null, 4)
 
-                            messageBox('Импорт и экспорт настроек', 'Настройки были успешно сохранены', true, 3)
+                            modalMessage('Импорт и экспорт настроек', 'Настройки были успешно сохранены', true, 3)
                         } catch (e) {
-                            messageBox('Ошибка разбора файла настроек', e, true)
+                            modalMessage('Ошибка разбора файла настроек', e, true)
                         }
                     }
                 })(f)
@@ -157,7 +157,7 @@ export const settingsBackupMenu = (id: string) => {
                     <span style="color: #57A3EA; padding-left: 10px">Экспорт</span>
                 `,
                 onclick: () => {
-                    confirmBox('Вы уверены, что хотите сохранить файл настроек?', false, () => {
+                    modalConfirm('Вы уверены, что хотите сохранить файл настроек?', false, () => {
                         let blob = ce('a', {
                             attr: {
                                 href: URL.createObjectURL(new Blob([beautify(_SETTINGS, null, 4)], { type: 'text/plain' })),

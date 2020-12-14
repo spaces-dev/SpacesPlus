@@ -6,7 +6,7 @@ import {
     trim,
     logger,
     getPath,
-    messageBox
+    modalMessage
 } from '../utils'
 
 import { IProxy } from '../interfaces/Proxy'
@@ -106,7 +106,7 @@ const getProfile = async (nickname: string) => {
                 // Заменяем уебанские домены на пользовательский
                 DATA.CONTENT = e.parsedBody!.contents.content.replace(/spac1\.net|spaces-blogs\.com/gi, str => str = BASE_URL)
             } else {
-                messageBox('Просмотр профилей', 'Ошибка загрузки профиля! Обратитесь к разработчику', true)
+                modalMessage('Просмотр профилей', 'Ошибка загрузки профиля! Обратитесь к разработчику', true)
             }
 
             logger.info('Просмотр профилей', e)

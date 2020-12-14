@@ -7,8 +7,8 @@ import {
     getPath,
     declOfNum,
     getParams,
-    confirmBox,
-    messageBox
+    modalConfirm,
+    modalMessage
 } from '../utils'
 
 import { SPACES, DATA } from '../strings'
@@ -110,12 +110,12 @@ export const deleteBlogs = () => {
 
                     if (count > 0) {
 
-                        confirmBox(`Вы действительно хотите удалить ${count} ${declStr(count)}?`, true, async () => {
+                        modalConfirm(`Вы действительно хотите удалить ${count} ${declStr(count)}?`, true, async () => {
 
                             let allBlogs = count
 
                             for (let blog of blogs) {
-                                messageBox(`Осталось удалить ${count--} из ${allBlogs} ${declStr(count)}`, 'Подождите немного... <span style="padding-right: 10px" class="ico ico_spinner"></span>', false)
+                                modalMessage(`Осталось удалить ${count--} из ${allBlogs} ${declStr(count)}`, 'Подождите немного... <span style="padding-right: 10px" class="ico ico_spinner"></span>', false)
 
                                 await http('GET', `${SPACES}/diary/delete/?CK=${DATA.CK}&id=${blog}&Sure=1`, true).then(e => {
                                     logger.info('Удалили блог', e)
@@ -125,7 +125,7 @@ export const deleteBlogs = () => {
                             document.location.reload()
                         })
                     } else {
-                        messageBox('Внимание!', 'Отметьте галочкой, те блоги, которые вы хотите удалить и попробуйте еще раз', true, 5)
+                        modalMessage('Внимание!', 'Отметьте галочкой, те блоги, которые вы хотите удалить и попробуйте еще раз', true, 5)
                     }
                     return false
                 }

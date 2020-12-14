@@ -4,7 +4,7 @@ import {
     http,
     logger,
     setCookie,
-    messageBox,
+    modalMessage,
     setSettings
 } from '../utils'
 
@@ -130,13 +130,13 @@ export const getWeather = async () => {
 
             // Город не найден
             if (e.status === 404) {
-                messageBox('Виджет погоды', `Город <b>${city}</b> не найден`, true, 5)
+                modalMessage('Виджет погоды', `Город <b>${city}</b> не найден`, true, 5)
                 return false
             }
 
             // если есть другие ошибки
             if (json?.message) {
-                messageBox('Виджет погоды', json.message, true, 5)
+                modalMessage('Виджет погоды', json.message, true, 5)
                 return false
             }
 
@@ -166,7 +166,7 @@ export const ipWhois = async () => {
                 setSettings('weatherSet.city', json.city)
                 getWeather()
             } else {
-                messageBox('Ошибка ipWhois', 'Обратитесь к разработчику!', true)
+                modalMessage('Ошибка ipWhois', 'Обратитесь к разработчику!', true)
             }
         })
     } catch (e) {

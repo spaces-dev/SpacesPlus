@@ -4,9 +4,9 @@ import {
     delCookie,
     getCookie,
     setCookie,
-    confirmBox,
-    messageBox,
-    setSettings
+    setSettings,
+    modalConfirm,
+    modalMessage
 } from '../utils'
 
 import { newbeeQuest } from './newbeeQuest'
@@ -92,9 +92,9 @@ export const settingsFeatures = (root: Element) => {
         class: 'stnd-link stnd-link_arr sp_line sp_last_btn sp_newbq_l',
         html: btnWrap('<span class="sp sp-remove-grey mr-14"></span>Скрыть квест новичка'),
         onclick: () => {
-            confirmBox('Вы действительно хотите скрыть квест новичка?', true, () => {
+            modalConfirm('Вы действительно хотите скрыть квест новичка?', true, () => {
                 http('GET', `${SPACES}/newbequest/?CK=${DATA.CK}`, true).then(e => {
-                    if (e.status === 200) messageBox('Поздравляем!', 'Квест новичка был успешно скрыт', true, 5)
+                    if (e.status === 200) modalMessage('Поздравляем!', 'Квест новичка был успешно скрыт', true, 5)
                 })
             })
             return false

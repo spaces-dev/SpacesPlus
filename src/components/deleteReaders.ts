@@ -7,8 +7,8 @@ import {
     getPath,
     getParams,
     declOfNum,
-    confirmBox,
-    messageBox
+    modalConfirm,
+    modalMessage
 } from '../utils'
 
 import { SPACES, DATA } from '../strings'
@@ -101,12 +101,12 @@ export const deleteReaders = () => {
 
                         if (count > 0) {
 
-                            confirmBox(`Вы действительно хотите удалить ${count} ${declStr(count)}?`, true, async () => {
+                            modalConfirm(`Вы действительно хотите удалить ${count} ${declStr(count)}?`, true, async () => {
 
                                 let allReaders = count
 
                                 for (let reader of readers) {
-                                    messageBox(`Осталось удалить ${count--} из ${allReaders} ${declStr(count)}`, 'Подождите немного... <span style="padding-right: 10px" class="ico ico_spinner"></span>', false)
+                                    modalMessage(`Осталось удалить ${count--} из ${allReaders} ${declStr(count)}`, 'Подождите немного... <span style="padding-right: 10px" class="ico ico_spinner"></span>', false)
 
                                     await http('POST', `${SPACES}/lenta/reader_delete/?user=${reader}`, false, `&CK=${DATA.CK}&cfms=Удалить`).then(e => {
                                         logger.info('Удалили читателя', e)
@@ -116,7 +116,7 @@ export const deleteReaders = () => {
                                 document.location.reload()
                             })
                         } else {
-                            messageBox('Внимание!', 'Отметьте галочкой, теx читателей, которых вы хотите удалить и попробуйте еще раз', true, 5)
+                            modalMessage('Внимание!', 'Отметьте галочкой, теx читателей, которых вы хотите удалить и попробуйте еще раз', true, 5)
                         }
                     }
                 })

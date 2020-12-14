@@ -3,7 +3,7 @@ import {
     qs,
     logger,
     getPath,
-    messageBox
+    modalMessage
 } from '../utils'
 
 import { DATA, HTTP } from '../strings'
@@ -23,7 +23,7 @@ export const qrCode = () => {
                     <span class="t js-text">Получить QR-код</span>
                 `,
                 onclick: () => {
-                    messageBox(
+                    modalMessage(
                         'Сканируйте QR-код c телефона', `
                             <div id="SP_QR_CODE">
                                 <img src="${HTTP}//spac.me/i/preloader.gif" class="sp_img-center" id="SP_QR_LOADER">

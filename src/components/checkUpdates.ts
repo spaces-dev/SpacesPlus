@@ -4,7 +4,7 @@ import {
     http,
     rever,
     logger,
-    messageBox,
+    modalMessage,
     setSettings
 } from '../utils'
 
@@ -42,7 +42,7 @@ export const checkUpdates = () => {
             DATA.VERSION = Math.max(hideVer, DATA.VERSION)
 
             if (json.history[0].build > DATA.VERSION) {
-                messageBox(`Доступна новая версия Spaces+ ${rever(json.history[0].build)}`, `<div class="pad_t_a"></div>${json.history[0].changes}<div id="SP_UPDATER_BUTTONS" class="pad_t_a"><a class="btn btn_green btn_input" href="${ENV_PATH}/spaces-plus.user.js?r=${REVISION}" onclick="document.body.removeChild(this.parentNode.parentNode.parentNode.parentNode)">Обновить</a></div>`, true)
+                modalMessage(`Доступна новая версия Spaces+ ${rever(json.history[0].build)}`, `<div class="pad_t_a"></div>${json.history[0].changes}<div id="SP_UPDATER_BUTTONS" class="pad_t_a"><a class="btn btn_green btn_input" href="${ENV_PATH}/spaces-plus.user.js?r=${REVISION}" onclick="document.body.removeChild(this.parentNode.parentNode.parentNode.parentNode)">Обновить</a></div>`, true)
 
                 if (qs('#SP_PLUS_ALERT')) {
                     const hide = ce('a', {

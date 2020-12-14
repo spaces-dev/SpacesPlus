@@ -5,8 +5,8 @@ import {
     getPath,
     getQuery,
     delCookie,
-    confirmBox,
-    messageBox,
+    modalConfirm,
+    modalMessage,
     historyPush,
     setSettings
 } from '../utils'
@@ -106,7 +106,7 @@ export const settingsMenu = () => {
                                             const { id, checked } = e.target
 
                                             if (e.target.attributes.unsupported.value === 'true' && checked) {
-                                                messageBox('Внимание!', 'Для работы данной функции, необходимо переключиться на компьютерную версию сайта', true, 5)
+                                                modalMessage('Внимание!', 'Для работы данной функции, необходимо переключиться на компьютерную версию сайта', true, 5)
                                                 return false
                                             }
 
@@ -168,8 +168,16 @@ export const settingsMenu = () => {
                                         }
                                     })
 
-                                    let description = ce('label', { html: _SETSTRINGS[i], attr: { 'for': i } })
-                                    let label = ce('label', { class: `stnd-link bstrwrap${unsupported ? ' sp_unsupported' : ''}` })
+                                    let description = ce('label', {
+                                        html: _SETSTRINGS[i],
+                                        attr: {
+                                            for: i
+                                        }
+                                    })
+
+                                    let label = ce('label', {
+                                        class: `stnd-link bstrwrap ${unsupported ? 'sp_unsupported' : ''}`
+                                    })
 
                                     label.appendChild(checkbox)
                                     label.appendChild(description)
@@ -181,7 +189,7 @@ export const settingsMenu = () => {
                                             href: '#',
                                             class: 'sp sp-info sp_info-btn',
                                             onclick: () => {
-                                                messageBox(_SETSTRINGS[i], _DESCSTRINGS[i], true)
+                                                modalMessage(_SETSTRINGS[i], _DESCSTRINGS[i], true)
                                                 return false
                                             }
                                         })
@@ -189,7 +197,6 @@ export const settingsMenu = () => {
                                         label.appendChild(info)
                                     }
 
-                                    setArea.appendChild(label)
                                     setArea.appendChild(label)
 
                                     // отключаем неподдерживаемые функции
@@ -291,7 +298,7 @@ export const settingsMenu = () => {
                                     </span>
                                 `,
                                 onclick: () => {
-                                    confirmBox('Вы действительно хотите полностью сбросить настройки?', true, () => {
+                                    modalConfirm('Вы действительно хотите полностью сбросить настройки?', true, () => {
                                         delCookie('SP_PLUS_SET')
                                         delCookie('SP_WEATHER')
                                         delCookie('gp_left_btn')

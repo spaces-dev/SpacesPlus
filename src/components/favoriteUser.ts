@@ -6,7 +6,7 @@ import {
     trim,
     logger,
     getPath,
-    confirmBox
+    modalConfirm
 } from '../utils'
 
 import { IBookmarks } from '../interfaces/Bookmarks'
@@ -66,7 +66,7 @@ export const favoriteUser = async () => {
                             attr: { title: 'Добавить в закладки' },
                             html: '<span class="sp sp-fav"></span> B закладки',
                             onclick: () => {
-                                confirmBox(`Добавить пользователя <b>${json.name}</b> в закладки?`, false, async () => {
+                                modalConfirm(`Добавить пользователя <b>${json.name}</b> в закладки?`, false, async () => {
                                     await http('POST', `${SPACES}/ajax/bookmarks/add/`, false, `object_id=${json.id}&object_type=11&show_all_tags_state=0&new_tags=Люди&cfms=Добавить&CK=${DATA.CK}`).then(e => {
                                         e.status === 200 ?
                                             isFav(json.id, json.name, favoriteButton) :
@@ -106,7 +106,7 @@ const isFav = async (id: string, name: string, elem: any) => {
                 elem.firstElementChild.title = 'Удалить из закладок'
                 elem.firstElementChild.innerHTML = '<span class="sp sp-fav-on"></span><span style="color: #61a961"> В закладках</span>'
                 elem.onclick = () => {
-                    confirmBox(`Вы действительно хотите удалить пользователя <b>${name}</b> из закладок?`, false, async () => {
+                    modalConfirm(`Вы действительно хотите удалить пользователя <b>${name}</b> из закладок?`, false, async () => {
                         await http('GET', json.delete_URL, false).then(e => {
                             e.status === 200 ?
                                 document.location.reload() :

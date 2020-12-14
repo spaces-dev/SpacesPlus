@@ -2,7 +2,7 @@ import {
     ce,
     logger,
     playSound,
-    messageBox,
+    modalMessage,
     isValidUrl,
     setSettings
 } from '../utils'
@@ -14,15 +14,15 @@ export const settingsNotify = (e: Element) => {
     try {
 
         if (!('Notification' in window)) {
-            messageBox('Внимание!', 'Ваш браузер не поддерживает уведомления', true, 5)
+            modalMessage('Внимание!', 'Ваш браузер не поддерживает уведомления', true, 5)
         } else if (Notification.permission.toLowerCase() !== 'denied') {
             Notification.requestPermission((permission) => {
                 if (permission.toLowerCase() !== 'granted') {
-                    messageBox('Внимание!', `Разрешите браузеру показывать уведомления с сайта ${BASE_URL}, чтобы пользоваться функцией`, true, 5)
+                    modalMessage('Внимание!', `Разрешите браузеру показывать уведомления с сайта ${BASE_URL}, чтобы пользоваться функцией`, true, 5)
                 }
             })
         } else {
-            messageBox('Внимание!', `Вы запретили показывать уведомления для сайта ${BASE_URL}`, true, 5)
+            modalMessage('Внимание!', `Вы запретили показывать уведомления для сайта ${BASE_URL}`, true, 5)
         }
 
         let eventsWrap = ce('div', { id: 'SP_PLUS_EVENTS' })

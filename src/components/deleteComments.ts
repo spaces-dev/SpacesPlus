@@ -5,8 +5,8 @@ import {
     http,
     logger,
     declOfNum,
-    confirmBox,
-    messageBox
+    modalConfirm,
+    modalMessage
 } from '../utils'
 
 import { SPACES, DEVICE } from '../strings'
@@ -128,12 +128,12 @@ export const deleteComments = () => {
 
                         if (count > 0) {
 
-                            confirmBox(`Вы действительно хотите удалить ${count} ${declStr(count)}?`, true, async () => {
+                            modalConfirm(`Вы действительно хотите удалить ${count} ${declStr(count)}?`, true, async () => {
 
                                 let allComments = count
 
                                 for (let url of urls) {
-                                    messageBox(`Осталось удалить ${count--} из ${allComments} ${declStr(count)}`, 'Подождите немного... <span style="padding-right: 10px" class="ico ico_spinner"></span>', false)
+                                    modalMessage(`Осталось удалить ${count--} из ${allComments} ${declStr(count)}`, 'Подождите немного... <span style="padding-right: 10px" class="ico ico_spinner"></span>', false)
 
                                     await http('GET', url, true).then(e => {
                                         logger.info('Удалил комментарий', e)
@@ -143,7 +143,7 @@ export const deleteComments = () => {
                                 document.location.reload()
                             })
                         } else {
-                            messageBox('Внимание!', 'Отметьте галочкой, те комментарии, которые вы хотите удалить и попробуйте еще раз', true, 5)
+                            modalMessage('Внимание!', 'Отметьте галочкой, те комментарии, которые вы хотите удалить и попробуйте еще раз', true, 5)
                         }
                         return false
                     }

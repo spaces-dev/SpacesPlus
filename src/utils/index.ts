@@ -15,13 +15,12 @@ import { getCookie } from './getCookie'
 import { getParams } from './getParams'
 import { playSound } from './playSound'
 import { setCookie } from './setCookie'
-import { confirmBox } from './confirmBox'
 import { isValidUrl } from './isValidUrl'
-import { messageBox } from './messageBox'
 import { historyPush } from './historyPush'
-import { modifyObject } from './modifyObject' 
+import { modifyObject } from './modifyObject'
 import { notification } from './notification'
 import { readSettings, setSettings } from './settings'
+import { modalConfirm, modalMessage } from './modals'
 
 export {
     ce,
@@ -42,12 +41,12 @@ export {
     getParams,
     playSound,
     setCookie,
-    confirmBox,
     isValidUrl,
-    messageBox,
     historyPush,
     setSettings,
     modifyObject,
     notification,
-    readSettings
+    readSettings,
+    modalConfirm,
+    modalMessage
 }

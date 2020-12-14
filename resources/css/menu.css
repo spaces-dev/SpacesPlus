@@ -111,17 +111,29 @@
     }
 }
 
-.sp-sticker-anim {
-    animation-duration: 0.3s;
-    animation-name: fadeIn
+.fadeIn {
+    animation: fade-in .3s ease-in-out
 }
 
-@keyframes fadeIn {
-    from {
+@keyframes fade-in {
+    0% {
         opacity: 0
     }
-    to {
+    100% {
         opacity: 1
+    }
+}
+
+.fadeOut {
+    animation: fade-out .3s ease-in-out
+}
+
+@keyframes fade-out {
+    0% {
+        opacity: 1
+    }
+    100% {
+        opacity: 0
     }
 }
 
