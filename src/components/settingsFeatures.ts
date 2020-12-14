@@ -88,7 +88,6 @@ export const settingsFeatures = (root: Element) => {
     // кнопка скрытия квеста новичка
     let nbqLink = ce('a', {
         href: '#',
-        style: 'display: none',
         id: 'sp_newbequest_togl',
         class: 'stnd-link stnd-link_arr sp_line sp_last_btn sp_newbq_l',
         html: btnWrap('<span class="sp sp-remove-grey mr-14"></span>Скрыть квест новичка'),
@@ -106,11 +105,11 @@ export const settingsFeatures = (root: Element) => {
     wrap.appendChild(sndbeta)
     wrap.appendChild(fatWrap)
     wrap.appendChild(glbWrap)
-    wrap.appendChild(nbqLink)
-    root.appendChild(wrap)
 
-    // Проверяем скрыт ли квест новичка
-    newbeeQuest()
+    // Проверяем, скрыт ли квест новичка
+    newbeeQuest(wrap, nbqLink)
+
+    root.appendChild(wrap)
 }
 
 /**
