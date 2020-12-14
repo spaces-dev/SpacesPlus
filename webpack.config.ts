@@ -32,12 +32,6 @@ module.exports = {
     },
     optimization: {
         minimize: !isDev,
-        minimizer: [
-            new OptimizeCSSAssetsPlugin({
-                assetNameRegExp: /\.css$/g,
-                cssProcessor: require('cssnano')
-            })
-        ]
     },
     devServer: {
         https: true,
@@ -58,6 +52,10 @@ module.exports = {
                     to: outputPath
                 }
             ]
+        }),
+        new OptimizeCSSAssetsPlugin({
+            assetNameRegExp: /\.css$/g,
+            cssProcessor: require('cssnano')
         }),
         new WebpackUserscript({
             headers: scriptHeaders,
