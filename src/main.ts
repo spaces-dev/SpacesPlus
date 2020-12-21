@@ -1,6 +1,7 @@
 import {
     qrCode,
     adBlock,
+    newYear,
     setStyles,
     oldHeader,
     scrollMove,
@@ -106,11 +107,13 @@ const init = () => {
      * ? Тут перечислены функции, которые срабатывают единоразово
      * ? далее их изменения отслеживаются в components/settingsMenu.ts
      */
+    newYear()
     oldHeader(_SETTINGS.oldheader)
     apiDebugger(_SETTINGS.apidebug)
     freeStickers(_SETTINGS.sticker)
     friendsOnline(_SETTINGS.friendsOn)
     stickyHeader(_SETTINGS.stickyheader)
+
 
     /**
      * ? Единоразовая инициализация

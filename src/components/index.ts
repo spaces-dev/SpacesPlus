@@ -1,5 +1,6 @@
 import { qrCode } from './qrCode'
 import { adBlock } from './adBlock'
+import { newYear } from './newYear'
 import { oldHeader } from './oldHeader'
 import { setStyles } from './setStyles'
 import { scrollMove } from './scrollMove'
@@ -43,6 +44,7 @@ export {
     qrCode,
     adBlock,
     ipWhois,
+    newYear,
     oldHeader,
     setStyles,
     getUpdater,
