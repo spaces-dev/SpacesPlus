@@ -14,7 +14,7 @@ export const hiddenRightbar = (b: boolean) => {
         if (b && !rightbar.hasAttribute('sp-hidden-rightbar')) {
             rightbar.style.display = 'none'
             rightbar.setAttribute('sp-hidden-rightbar', '1')
-        } else if (rightbar.hasAttribute('sp-hidden-rightbar')) {
+        } else if (rightbar?.hasAttribute('sp-hidden-rightbar')) {
             rightbar.style.display = 'block'
             rightbar.removeAttribute('sp-hidden-rightbar')
         }

@@ -10,7 +10,7 @@ export const scrollMove = (b: boolean) => {
             scroll.style.left = 'auto'
             scroll.style.right = '0'
             scroll.setAttribute('sp-replace', '1')
-        } else if (!_SETTINGS.rscroll && scroll.hasAttribute('sp-replace')) {
+        } else if (!_SETTINGS.rscroll && scroll?.hasAttribute('sp-replace')) {
             scroll.style.left = '0'
             scroll.style.right = 'auto'
             scroll.removeAttribute('sp-replace')
