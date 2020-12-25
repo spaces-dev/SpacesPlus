@@ -33,7 +33,7 @@ export const deleteBlogs = () => {
                 let blogId = `SP_DB_${getParams((<HTMLLinkElement>link).href)['id']}`
 
                 let checkbox = ce('input', {
-                    class: 'sp-cbfb sp-checkbox-square',
+                    className: 'sp-cbfb sp-checkbox-square',
                     type: 'checkbox',
                     id: blogId
                 })
@@ -41,10 +41,10 @@ export const deleteBlogs = () => {
                 link.parentElement?.appendChild(checkbox)
                 link.parentElement?.appendChild(ce('label',
                     {
-                        class: 'sp-ch-blogs',
-                        style: 'margin: 2px',
-                        attr: {
-                            'for': blogId
+                        className: 'sp-ch-blogs',
+                        htmlFor: blogId,
+                        style: {
+                            margin: '2px'
                         }
                     }
                 ))
@@ -54,14 +54,14 @@ export const deleteBlogs = () => {
 
             // блок кнопок управления
             let buttonsDiv = ce('div', {
-                class: 'widgets-group user__tools_last',
+                className: 'widgets-group user__tools_last',
                 id: 'SP_PLUS_BUTTONS_B'
             })
 
             // кнопка "Выбрать Все"
             const chooseAllButton = ce('button', {
-                class: 'user__tools-link table__cell sp_btn-list',
-                html: `
+                className: 'user__tools-link table__cell sp_btn-list',
+                innerHTML: `
                     <span class="sp sp-ok-blue"></span>
                     <span class="sp-ch-text">Выбрать все</span>
                 `,
@@ -92,8 +92,8 @@ export const deleteBlogs = () => {
 
             // кнопка "Удалить выбранные"
             const deleteBlogsButton = ce('button', {
-                class: 'user__tools-link table__cell sp_btn_line sp_btn-list',
-                html: `
+                className: 'user__tools-link table__cell sp_btn_line sp_btn-list',
+                innerHTML: `
                     <span class="sp sp-remove-red"></span>
                     <span class="sp-del-text">Удалить выбранные</span>
                 `,

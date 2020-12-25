@@ -14,21 +14,21 @@ export const settingsLogMenu = (id: string) => {
             target.innerHTML = ''
 
             let wrap = ce('div', {
-                class: 'wbg error__item_wrapper sp_plus_c_wrap'
+                className: 'wbg error__item_wrapper sp_plus_c_wrap'
             })
 
             let pad = ce('div', {
-                class: 'pad_t_a'
+                className: 'pad_t_a'
             })
 
             let container = ce('div', {
-                class: 'js-input_error_wrap'
+                className: 'js-input_error_wrap'
             })
 
             let preloader = ce('div', {
-                class: 't_center',
+                className: 't_center',
                 id: 'SP_JSON_PRELOADER',
-                html: `<img src="${HTTP}//spac.me/i/preloader.gif">`
+                innerHTML: `<img src="${HTTP}//spac.me/i/preloader.gif">`
             })
 
             container.appendChild(pad)
@@ -40,13 +40,13 @@ export const settingsLogMenu = (id: string) => {
 
                 for (let history of json.history) {
                     let label = ce('label', {
-                        class: 'label sp_plus_line_c',
-                        html: `v${rever(history.build)}<div class="label__desc">${history.date}</div>`
+                        className: 'label sp_plus_line_c',
+                        innerHTML: `v${rever(history.build)}<div class="label__desc">${history.date}</div>`
                     })
 
                     let changes = ce('div', {
-                        class: 'grey sp_plus_c_desc',
-                        html: history.changes
+                        className: 'grey sp_plus_c_desc',
+                        innerHTML: history.changes
                     })
 
                     pad.appendChild(label)

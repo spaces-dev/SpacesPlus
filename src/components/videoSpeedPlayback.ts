@@ -13,9 +13,9 @@ export const videoSpeedPlayback = () => {
             let target = qs('span[class*="jwtext jwduration jwhidden"]')
 
             let buttonPlayback = ce('span', {
-                class: 'jwtext jwduration jwhidden',
+                className: 'jwtext jwduration jwhidden',
                 id: 'SP_PLAYBACK_VIDEO',
-                html: 'x' + _SETTINGS.videoSpeed,
+                innerHTML: 'x' + _SETTINGS.videoSpeed,
                 onclick: () => {
                     let videoSpeed = (_SETTINGS.videoSpeed + 0.25) % 2.25
                     if (videoSpeed === 0) videoSpeed = 0.5

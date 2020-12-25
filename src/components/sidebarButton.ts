@@ -12,8 +12,8 @@ export const sidebarButton = () => {
 
         // Создаем кнопку быстрого доступа в настройки Spaces+
         let link = ce('li', {
-            class: 'li',
-            html: `
+            className: 'li',
+            innerHTML: `
                 <a href="${SPACES}/settings/?sp_plus_settings=1" title="Настройки Spaces+">
                 ${icon}
                 <span class="m s_i_text"> Spaces+</span></a>

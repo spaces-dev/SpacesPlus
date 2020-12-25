@@ -42,16 +42,14 @@ export const deleteComments = () => {
                     if (parseInt(DC!)) {
                         let checkbox = ce('input', {
                             type: 'checkbox',
-                            class: 'sp-cbfc sp-checkbox-square',
+                            className: 'sp-cbfc sp-checkbox-square',
                             id: `DC_${DC}`
                         })
 
                         child.appendChild(checkbox)
                         child.appendChild(ce('label',
                             {
-                                attr: {
-                                    'for': `DC_${DC}`
-                                }
+                                htmlFor: `DC_${DC}`
                             }
                         ))
                     }
@@ -62,13 +60,13 @@ export const deleteComments = () => {
             if (!qs('#SP_PLUS_BUTTONS')) {
 
                 let buttonsDiv = ce('div', {
-                    class: 'widgets-group user__tools_last',
+                    className: 'widgets-group user__tools_last',
                     id: 'SP_PLUS_BUTTONS'
                 })
 
                 const chooseAllButton = ce('button', {
-                    class: 'user__tools-link table__cell sp_btn-list',
-                    html: `
+                    className: 'user__tools-link table__cell sp_btn-list',
+                    innerHTML: `
                         <span class="sp sp-ok-blue"></span>
                         <span class="sp-ch-text">Выбрать все</span>
                     `,
@@ -100,8 +98,8 @@ export const deleteComments = () => {
                 })
 
                 const deleteCommentsButton = ce('button', {
-                    class: 'user__tools-link table__cell sp_btn_line sp_btn-list',
-                    html: `
+                    className: 'user__tools-link table__cell sp_btn_line sp_btn-list',
+                    innerHTML: `
                         <span class="sp sp-remove-red"></span>
                         <span class="sp-del-text">Удалить выбранные</span>
                     `,

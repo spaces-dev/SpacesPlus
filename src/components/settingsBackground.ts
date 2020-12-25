@@ -17,30 +17,60 @@ import { ENV_PATH, REVISION } from '../strings'
 export const settingsBackground = (e: Element) => {
     try {
 
-        let div = ce('div', { class: 'text-input__wrap' }),
-            bgWrap = ce('div', { id: 'SP_PLUS_BODYSTYLE' }),
-            label = ce('label', { class: 'stnd-link', style: 'border-bottom: none' }),
-            label1 = ce('label', { class: 'stnd-link', style: 'border-bottom: none' }),
-            bstlWrap = ce('div', { class: 'bstrwrap', style: 'border-bottom: none; padding: 15px' })
+        let div = ce('div', {
+            className: 'text-input__wrap'
+        })
+
+        let bgWrap = ce('div', {
+            id: 'SP_PLUS_BODYSTYLE'
+        })
+
+        let label = ce('label', {
+            className: 'stnd-link',
+            style: {
+                borderBottom: 'none'
+            }
+        })
+
+        let label1 = ce('label', {
+            className: 'stnd-link',
+            style: {
+                borderBottom: 'none'
+            }
+        })
+
+        let bstlWrap = ce('div', {
+            className: 'bstrwrap',
+            style: {
+                borderBottom: 'none',
+                padding: '15px'
+            }
+        })
 
         let descriptionUrl = ce('label', {
-            html: 'Ссылка на изображение:<div class="label__desc">.jpg или .png</div>',
-            style: 'margin-right: -17px',
-            class: 'label'
+            innerHTML: 'Ссылка на изображение:<div class="label__desc">.jpg или .png</div>',
+            className: 'label',
+            style: {
+                marginRight: '-17px'
+            }
         })
 
         let descriptionColor = ce('label', {
-            html: 'Цвет фона:<div class="label__desc">#RRGGBB</div>',
-            style: 'margin-right: -17px',
-            class: 'label'
+            innerHTML: 'Цвет фона:<div class="label__desc">#RRGGBB</div>',
+            className: 'label',
+            style: {
+                marginRight: '-17px'
+            }
         })
 
         let inputImageUrl = ce('input', {
             type: 'text',
             id: 'image-input',
+            className: 'text-input',
             value: _SETTINGS.bodystyleSet.url,
-            style: 'margin-bottom: 7px',
-            class: 'text-input'
+            style: {
+                marginBottom: '7px'
+            }
         })
 
         inputImageUrl.addEventListener('change', (e: any) => {
@@ -55,7 +85,7 @@ export const settingsBackground = (e: Element) => {
 
         let inputColor = ce('input', {
             type: 'text',
-            class: 'text-input',
+            className: 'text-input',
             id: 'color-input',
             value: _SETTINGS.bodystyleSet.color
         })
@@ -75,7 +105,7 @@ export const settingsBackground = (e: Element) => {
             type: 'radio',
             id: 'sp_set_bodystyle_URL',
             checked: _SETTINGS.bodystyleSet.urlchecked,
-            class: 'sp-checkbox-circle',
+            className: 'sp-checkbox-circle',
             onclick: (e: any) => {
                 setSettings('bodystyleSet.urlchecked', e.target.checked)
 
@@ -97,7 +127,7 @@ export const settingsBackground = (e: Element) => {
             type: 'radio',
             id: 'sp_set_bodystyle_color',
             checked: _SETTINGS.bodystyleSet.colorchecked,
-            class: 'sp-checkbox-circle',
+            className: 'sp-checkbox-circle',
             onclick: (e: any) => {
                 setSettings('bodystyleSet.colorchecked', e.target.checked)
 
@@ -116,13 +146,13 @@ export const settingsBackground = (e: Element) => {
         })
 
         let lblstylelbl = ce('label', {
-            attr: { 'for': 'sp_set_bodystyle_URL' },
-            html: 'Выбрать изображение'
+            htmlFor: 'sp_set_bodystyle_URL',
+            innerHTML: 'Выбрать изображение'
         })
 
         let lblstyleclbl = ce('label', {
-            attr: { 'for': 'sp_set_bodystyle_color' },
-            html: 'Подобрать цвет'
+            htmlFor: 'sp_set_bodystyle_color',
+            innerHTML: 'Подобрать цвет'
         })
 
         div.appendChild(descriptionUrl)
@@ -164,22 +194,33 @@ const setImage = async () => {
 
             document.getElementsByTagName('head')[0].appendChild(style)
 
-            let SPB = qs('#SP_PLUS_BODYSTYLE'),
-                gd = ce('div', { class: 'js-gallery_skip wbg oh tiles_block tiles_wrapper' }),
-                stdnI = ce('div', { id: 'SP_WRAP_IMAGE', style: 'border-top: 1px solid #cdd4e1' })
+            let SPB = qs('#SP_PLUS_BODYSTYLE')
+
+            let gd = ce('div', {
+                className: 'js-gallery_skip wbg oh tiles_block tiles_wrapper'
+            })
+
+            let stdnI = ce('div', {
+                id: 'SP_WRAP_IMAGE',
+                style: {
+                    borderTop: '1px solid #cdd4e1'
+                }
+            })
 
             await http<IAssets>('GET', `${ENV_PATH}/data.json?r=${REVISION}`, false).then(e => {
 
                 if (e.status === 200 && e.parsedBody?.backgrounds) {
                     for (let i of e.parsedBody?.backgrounds) {
-                        let d1 = ce('div', { class: 'js-file_item tiled_item tiled_item-200' }),
-                            d2 = ce('div', { class: 'tiled_inner t_center relative' }),
-                            s3 = ce('span', { class: 'relative sp_bg-items' }),
-                            ds1 = ce('div', { class: 'tiled-preview border' }),
+                        let d1 = ce('div', { className: 'js-file_item tiled_item tiled_item-200' }),
+                            d2 = ce('div', { className: 'tiled_inner t_center relative' }),
+                            s3 = ce('span', { className: 'relative sp_bg-items' }),
+                            ds1 = ce('div', { className: 'tiled-preview border' }),
                             img = ce('img', {
-                                class: 'preview s201_200',
-                                style: 'cursor: pointer',
+                                className: 'preview s201_200',
                                 src: `${ENV_PATH}/backgrounds/${i}`,
+                                style: {
+                                    cursor: 'pointer'
+                                },
                                 onclick: (e: any) => {
                                     (<HTMLInputElement>qs('#image-input')).value = e.target.src
                                     setSettings('bodystyleSet.url', e.target.src)
@@ -225,15 +266,26 @@ const setColor = () => {
             document.getElementsByTagName('head')[0].appendChild(style)
 
             let colorsTd = ce('div', {
-                class: 'stnd-block'
+                className: 'stnd-block'
             })
 
-            let bodyStyle = qs('#SP_PLUS_BODYSTYLE'),
-                stdnC = ce('div', { id: 'SP_WRAP_COLOR', style: 'border-top: 1px solid #cdd4e1' }),
-                table = ce('table', { class: 'table__wrap bb-colorpicker' }),
-                tbody = ce('tbody'),
-                tr = ce('tr'),
-                td1 = ce('td', { class: 'table__cell' })
+            let bodyStyle = qs('#SP_PLUS_BODYSTYLE')
+            let stdnC = ce('div', {
+                id: 'SP_WRAP_COLOR',
+                style: {
+                    borderTop: '1px solid #cdd4e1'
+                }
+            })
+
+            let table = ce('table', {
+                className: 'table__wrap bb-colorpicker'
+            })
+
+            let tbody = ce('tbody')
+            let tr = ce('tr')
+            let td1 = ce('td', {
+                className: 'table__cell'
+            })
 
             // цвета для быстрого выбора
             const colors = [
@@ -279,11 +331,11 @@ const setColor = () => {
 
                 for (let i in color) {
                     let dd = ce('div', {
-                        style: `background-color: ${color[i]}`,
-                        class: 'js-bb_color toolbar-color pointer',
-                        attr: {
-                            'data-val': color[i],
-                            'data-tag': 'fon'
+                        className: 'js-bb_color toolbar-color pointer',
+                        'data-val': color[i],
+                        'data-tag': 'fon',
+                        style: {
+                            backgroundColor: color[i]
                         }
                     })
 
@@ -296,9 +348,9 @@ const setColor = () => {
             td1.appendChild(colorsTd)
             tr.appendChild(td1)
 
-            let td2 = ce('td', { class: 'table__cell table__cell_last' }),
-                stnd = ce('div', { class: 'stnd-block' }),
-                container = ce('div', { class: 'js-bb_colorpicker' })
+            let td2 = ce('td', { className: 'table__cell table__cell_last' }),
+                stnd = ce('div', { className: 'stnd-block' }),
+                container = ce('div', { className: 'js-bb_colorpicker' })
 
             stnd.appendChild(container)
             td2.appendChild(stnd)

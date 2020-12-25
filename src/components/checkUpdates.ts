@@ -47,8 +47,8 @@ export const checkUpdates = () => {
                 if (qs('#SP_PLUS_ALERT')) {
                     const hide = ce('a', {
                         href: '#',
-                        class: 'btn btn_white btn_input right sticker-close_btn',
-                        html: 'Больше не показывать',
+                        className: 'btn btn_white btn_input right sticker-close_btn',
+                        innerHTML: 'Больше не показывать',
                         onclick: () => {
                             setSettings('upVersion', json.history[0].build)
                             qs('#SP_PLUS_ALERT').remove()

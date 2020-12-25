@@ -29,81 +29,90 @@ export const settingsWeather = async (e: Element) => {
 
     let masWarp = ce('div', {
         id: 'SP_WEATHER_SETTINGS',
-        class: 'sp_settings-wrap'
+        className: 'sp_settings-wrap'
     })
 
     let locationLbl = ce('label', {
-        html: 'API-Ключ:<div class="label__desc"><a href="https://openweathermap.org/appid" target="_blank">Получить ключ</a></div>',
-        class: 'label'
+        innerHTML: 'API-Ключ:<div class="label__desc"><a href="https://openweathermap.org/appid" target="_blank">Получить ключ</a></div>',
+        className: 'label'
     })
 
     let apiKey = ce('input', {
         type: 'text',
-        class: 'text-input',
-        style: 'margin-bottom: 7px',
-        size: '32',
-        value: _SETTINGS.weatherSet.key
-    })
+        className: 'text-input',
+        size: 32,
+        value: _SETTINGS.weatherSet.key,
+        style: {
+            marginBottom: '7px'
+        },
+        onkeypress: (e: KeyboardEvent) => {
+            const value = (e.target as HTMLInputElement).value
 
-    apiKey.addEventListener('keypress', (e: any) => {
-        if (e.keyCode === 13) {
-            if (/^[a-f0-9]{32}$/i.test(e.target.value)) {
-                setSettings('weatherSet.key', e.target.value)
-                getWeather()
-                apiKey.classList.remove('sp-input-error')
-            } else {
-                apiKey.classList.add('sp-input-error')
+            if (e.keyCode === 13) {
+                if (/^[a-f0-9]{32}$/i.test(value)) {
+                    setSettings('weatherSet.key', value)
+                    getWeather()
+                    apiKey.classList.remove('sp-input-error')
+                } else {
+                    apiKey.classList.add('sp-input-error')
+                }
             }
         }
     })
 
     let cityLbl = ce('label', {
-        html: 'Город:',
-        class: 'label'
+        innerHTML: 'Город:',
+        className: 'label'
     })
 
     let cityInp = ce('input', {
         type: 'text',
-        class: 'text-input',
-        style: 'margin-bottom: 7px',
-        size: '32',
+        className: 'text-input',
+        size: 32,
         id: 'SP-CITY-INPUT',
-        value: _SETTINGS.weatherSet.city
-    })
+        value: _SETTINGS.weatherSet.city ?? 'Загрузка...',
+        style: {
+            marginBottom: '7px'
+        },
+        onkeypress: (e: KeyboardEvent) => {
+            const value = (e.target as HTMLInputElement).value
 
-    cityInp.addEventListener('keypress', (e: any) => {
-        if (e.keyCode === 13) {
-            if (/^([a-zA-Zа-яА-ЯёЁ]+[-]?[a-zA-Zа-яА-ЯёЁ]*[-]?[a-zA-Zа-яА-ЯёЁ]*[-]?[a-zA-Zа-яА-ЯёЁ]*)$/i.test(e.target.value)) {
-                setSettings('weatherSet.city', e.target.value)
-                getWeather()
-                cityInp.classList.remove('sp-input-error')
-            } else {
-                cityInp.classList.add('sp-input-error')
+            if (e.keyCode === 13) {
+                if (/^([a-zA-Zа-яА-ЯёЁ]+[-]?[a-zA-Zа-яА-ЯёЁ]*[-]?[a-zA-Zа-яА-ЯёЁ]*[-]?[a-zA-Zа-яА-ЯёЁ]*)$/i.test(value)) {
+                    setSettings('weatherSet.city', value)
+                    getWeather()
+                    cityInp.classList.remove('sp-input-error')
+                } else {
+                    cityInp.classList.add('sp-input-error')
+                }
             }
         }
     })
 
     let intervalLbl = ce('label', {
-        html: 'Интервал обновления:<div class="label__desc">от 1 до 360 минут</a></div>',
-        class: 'label'
+        innerHTML: 'Интервал обновления:<div class="label__desc">от 1 до 360 минут</a></div>',
+        className: 'label'
     })
 
     let interval = ce('input', {
         type: 'text',
-        class: 'text-input',
-        style: 'margin-bottom: 7px',
+        className: 'text-input',
         size: 4,
-        attr: { maxlength: 3 },
-        value: _SETTINGS.weatherSet.interval / 60
-    })
+        maxLength: 3,
+        value: _SETTINGS.weatherSet.interval / 60,
+        style: {
+            marginBottom: '7px'
+        },
+        oninput: (e: Event) => {
+            const value = (e.target as HTMLInputElement).value
 
-    interval.addEventListener('input', (e: any) => {
-        // от 1 минуты до 360 минут ¯\_(ツ)_/¯
-        if (/^([1-9]|[1-8][0-9]|9[0-9]|[12][0-9]{2}|3[0-5][0-9]|360)$/i.test(e.target.value)) {
-            setSettings('weatherSet.interval', e.target.value * 60)
-            interval.classList.remove('sp-input-error')
-        } else {
-            interval.classList.add('sp-input-error')
+            // от 1 минуты до 360 минут ¯\_(ツ)_/¯
+            if (/^([1-9]|[1-8][0-9]|9[0-9]|[12][0-9]{2}|3[0-5][0-9]|360)$/i.test(value)) {
+                setSettings('weatherSet.interval', (Number(value) * 60))
+                interval.classList.remove('sp-input-error')
+            } else {
+                interval.classList.add('sp-input-error')
+            }
         }
     })
 

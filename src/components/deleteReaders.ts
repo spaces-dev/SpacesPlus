@@ -25,19 +25,19 @@ export const deleteReaders = () => {
             for (let link of delLinks) {
 
                 let chWrap = ce('label', {
-                    class: 'stnd-link icon-link sp-ch-readers'
+                    className: 'stnd-link icon-link sp-ch-readers'
                 })
 
                 let userId = getParams((<HTMLLinkElement>link).href)['user']
 
                 let bChbx = ce('input', {
                     type: 'checkbox',
-                    class: 'sp-cbfr sp-checkbox-square',
+                    className: 'sp-cbfr sp-checkbox-square',
                     id: userId
                 })
 
                 let ckbxlb = ce('label', {
-                    attr: { 'for': userId }
+                    htmlFor: userId
                 })
 
                 chWrap.appendChild(bChbx)
@@ -48,17 +48,19 @@ export const deleteReaders = () => {
 
             if (qs('.sp-ch-readers')) {
                 let buttonsDiv = ce('div', {
-                    class: 'user__tools_last',
+                    className: 'user__tools_last',
                     id: 'SP_PLUS_BUTTONS_R'
                 })
 
                 const chooseAllButton = ce('button', {
-                    style: 'border-right: unset',
-                    class: 'user__tools-link table__cell sp_btn-list',
-                    html: `
+                    className: 'user__tools-link table__cell sp_btn-list',
+                    innerHTML: `
                         <span class="sp sp-ok-blue"></span>
                         <span class="sp-ch-text">Выбрать все</span>
                     `,
+                    style: {
+                        borderRight: 'unset'
+                    },
                     onclick: (e: MouseEvent) => {
                         if (e.target instanceof Element) {
                             let parent = e.target.nodeName === 'SPAN' ?
@@ -85,8 +87,8 @@ export const deleteReaders = () => {
                 })
 
                 const deleteReadersButton = ce('button', {
-                    class: 'user__tools-link table__cell sp_btn_line sp_btn-list',
-                    html: `
+                    className: 'user__tools-link table__cell sp_btn_line sp_btn-list',
+                    innerHTML: `
                         <span class="sp sp-remove-red"></span>
                         <span class="sp-del-text">Удалить выбранных</span>
                     `,

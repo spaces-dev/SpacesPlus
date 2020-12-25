@@ -11,7 +11,7 @@ export const modalMessage = (title: string, content: string, close: boolean, tim
     let confirm = qs('#SP_PLUS_CONFIRM')
 
     let container = ce('div', {
-        class: `sticker w400 ${confirm || alert ? '' : 'fadeIn'}`,
+        className: `sticker w400 ${confirm || alert ? '' : 'fadeIn'}`,
         id: 'SP_PLUS_ALERT',
     })
 
@@ -20,8 +20,8 @@ export const modalMessage = (title: string, content: string, close: boolean, tim
     confirm?.remove()
 
     let main = ce('div', {
-        class: 'content-item3 wbg oh',
-        html: (close ?
+        className: 'content-item3 wbg oh',
+        innerHTML: (close ?
             '<span id="modal-close" class="sp sp-remove-grey pointer right notif_close close_h" title="Закрыть"></span>' :
             '') + `${title}<div class="pad_t_a"></div><span style="font-size: 13px" class="grey">${content}</span>`
     })
@@ -54,33 +54,33 @@ export const modalConfirm = (text: string, warn: boolean, callback: Function) =>
 
     let container = ce('div', {
         id: 'SP_PLUS_CONFIRM',
-        class: `sticker ${confirm || alert ? '' : 'fadeIn'}`
+        className: `sticker ${confirm || alert ? '' : 'fadeIn'}`
     })
 
     let main = ce('div', {
-        class: 'content-item3 wbg oh',
-        html: text + '<div class="pad_t_a"></div>'
+        className: 'content-item3 wbg oh',
+        innerHTML: text + '<div class="pad_t_a"></div>'
     })
 
     let successBtn = ce('button', {
-        html: 'Да',
+        innerHTML: 'Да',
         href: '#',
-        class: 'btn btn_red btn_input'
+        className: 'btn btn_red btn_input'
     })
 
     let cancelBtn = ce('a', {
-        html: 'Отмена',
+        innerHTML: 'Отмена',
         href: '#',
-        class: 'btn btn_white btn_input right sticker-close_btn'
+        className: 'btn btn_white btn_input right sticker-close_btn'
     })
 
     let warningText = ce('small', {
-        class: 'pad_t_a grey',
-        html: 'Это действие нельзя будет отменить.'
+        className: 'pad_t_a grey',
+        innerHTML: 'Это действие нельзя будет отменить.'
     })
 
     let br = ce('div', {
-        class: 'pad_t_a'
+        className: 'pad_t_a'
     })
 
     // Скрываем раннее созданные уводомления

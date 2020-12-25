@@ -27,7 +27,7 @@ export const playerDownload = () => {
                 DATA.PLAYER = trId
                 let dwnTd = ce('td', {
                     id: 'SP_MUSIC_DOWN',
-                    class: 'ico_td',
+                    className: 'ico_td',
                     innerHTML: '<span style="margin: 0px 6px 0px 0px !important" class="sp sp-download-darkblue" title="Скачать"></span>',
                     onclick: () => location.href = trScr
                 })

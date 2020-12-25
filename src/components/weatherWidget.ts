@@ -35,15 +35,17 @@ export const weatherWidget = () => {
         let { id, name, main, wind, weather, clouds }: IWeather = cookieWeather()
 
         let widgets_group = ce('div', {
-            class: 'widgets-group_top js-container__block',
-            style: 'box-shadow: 0px 3px 5px rgba(93,109,157,0.3)',
-            id: 'SP_WIDGET_WEATHER'
+            className: 'widgets-group_top js-container__block',
+            id: 'SP_WIDGET_WEATHER',
+            style: {
+                boxShadow: '0px 3px 5px rgba(93,109,157,0.3)'
+            }
         })
 
         // шапка виджета
         let widget_header = ce('div', {
-            class: 'b-title cl b-title_first oh',
-            html: `
+            className: 'b-title cl b-title_first oh',
+            innerHTML: `
                 <a href="https://openweathermap.org/city/${id}" target="_blank" class="b-title__link" style="white-space: unset">
                     <h6 class="span">Погода в г. ${name}</h6>
                 </a>
@@ -52,9 +54,11 @@ export const weatherWidget = () => {
 
         // контейнер
         let content = ce('div', {
-            class: 'content',
-            style: 'padding: 0px 16px 16px 16px',
-            html: `
+            className: 'content',
+            style: {
+                padding: '0px 16px 16px 16px'
+            },
+            innerHTML: `
                 <img src="https://openweathermap.org/img/wn/${weather[0].icon}@2x.png" class="sp_img-center">
                 <div class="grey sp_weather-container">
                     <p>${Math.round(main.temp)}°C</p>

@@ -31,15 +31,15 @@ export const favoriteUser = async () => {
             if (nickname && tdBlock.length > 0 && !inFavorite) {
 
                 let favoriteButton = ce('td', {
-                    class: 'table__cell stnd-link_disabled',
+                    className: 'table__cell stnd-link_disabled',
                     id: 'SP_PLUS_INFAVORITE'
                 })
 
                 let loader = ce('a', {
                     href: '#',
                     id: 'SP_FV_LOADER',
-                    class: 'stnd-link',
-                    html: `
+                    className: 'stnd-link',
+                    innerHTML: `
                         <span class="ico bp ico_spinner"></span>
                         <span class="t js-text">Загрузка</span>
                     `
@@ -62,9 +62,9 @@ export const favoriteUser = async () => {
                     if (json !== undefined) {
                         let favoriteLink = ce('a', {
                             href: `${SPACES}/bookmarks/add/?object_id=${json.id}&object_type=11`,
-                            class: 'stnd-link',
-                            attr: { title: 'Добавить в закладки' },
-                            html: '<span class="sp sp-fav"></span> B закладки',
+                            className: 'stnd-link',
+                            title: 'Добавить в закладки',
+                            innerHTML: '<span class="sp sp-fav"></span> B закладки',
                             onclick: () => {
                                 modalConfirm(`Добавить пользователя <b>${json.name}</b> в закладки?`, false, async () => {
                                     await http('POST', `${SPACES}/ajax/bookmarks/add/`, false, `object_id=${json.id}&object_type=11&show_all_tags_state=0&new_tags=Люди&cfms=Добавить&CK=${DATA.CK}`).then(e => {

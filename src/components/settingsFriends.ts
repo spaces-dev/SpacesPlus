@@ -9,14 +9,14 @@ export const settingsFriends = (e: Element) => {
         })
 
         let div = ce('div', {
-            class: 'sp_settings-wrap'
+            className: 'sp_settings-wrap'
         })
 
         let frMax = ce('input', {
             type: 'text',
-            class: 'text-input',
+            className: 'text-input',
             size: 4,
-            attr: { maxlength: 2 },
+            maxLength: 2,
             value: _SETTINGS.friendsSet.max
         })
 
@@ -30,8 +30,8 @@ export const settingsFriends = (e: Element) => {
         })
 
         let frMaxLbl = ce('label', {
-            html: 'Выводить друзей:<div class="label__desc">от 1 до 15</div>',
-            class: 'label'
+            innerHTML: 'Выводить друзей:<div class="label__desc">от 1 до 15</div>',
+            className: 'label'
         })
 
         div.appendChild(frMaxLbl)

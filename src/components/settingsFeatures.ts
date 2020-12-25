@@ -23,8 +23,8 @@ export const settingsFeatures = (root: Element) => {
     // API Отладчик
     let apidebug = ce('a', {
         href: '#',
-        class: 'stnd-link stnd-link_arr sp_font_sm',
-        html: btnWrap(_SETTINGS.apidebug ?
+        className: 'stnd-link stnd-link_arr sp_font_sm',
+        innerHTML: btnWrap(_SETTINGS.apidebug ?
             '<span class="sp sp-remove-grey mr-14"></span>Отключить отладчик' :
             '<span class="sp sp-settings mr-14"></span>Включить отладчик'),
         onclick: () => {
@@ -39,9 +39,9 @@ export const settingsFeatures = (root: Element) => {
     // Вход в бета песочницу
     let sndbeta = ce('a', {
         href: '#',
-        class: 'stnd-link stnd-link_arr sp_font_sm',
+        className: 'stnd-link stnd-link_arr sp_font_sm',
         id: 'sp_spacesAction_beta',
-        html: btnWrap(beta ?
+        innerHTML: btnWrap(beta ?
             '<span class="sp sp-exit-grey mr-14"></span>Выйти из песочницы' :
             '<span class="sp sp-enter-grey mr-14"></span>Войти в песочницу'),
         onclick: () => {
@@ -56,9 +56,9 @@ export const settingsFeatures = (root: Element) => {
     // вкл/выкл полосы загрузки
     let fatWrap = ce('a', {
         href: '#',
-        class: 'stnd-link stnd-link_arr sp_font_sm',
+        className: 'stnd-link stnd-link_arr sp_font_sm',
         id: 'sp_spacesFAT',
-        html: btnWrap(fat ?
+        innerHTML: btnWrap(fat ?
             '<span class="sp sp-remove-grey mr-14"></span>Убрать полосу загрузки' :
             '<span class="sp sp-ok-grey mr-14"></span>Добавить полосу загрузки страницы'),
         onclick: () => {
@@ -73,9 +73,9 @@ export const settingsFeatures = (root: Element) => {
     // закреп/откреп плеера из левой панели
     let glbWrap = ce('a', {
         href: '#',
-        class: 'stnd-link stnd-link_arr sp_last_btn',
+        className: 'stnd-link stnd-link_arr sp_last_btn',
         id: 'sp_spacesGLB',
-        html: btnWrap(glb ?
+        innerHTML: btnWrap(glb ?
             '<span class="sp sp-remove-grey mr-14"></span>Убрать плеер из левой панели' :
             '<span class="sp sp-ok-grey mr-14"></span>Закрепить плеер на левой панели'),
         onclick: () => {
@@ -89,8 +89,8 @@ export const settingsFeatures = (root: Element) => {
     let nbqLink = ce('a', {
         href: '#',
         id: 'sp_newbequest_togl',
-        class: 'stnd-link stnd-link_arr sp_line sp_last_btn sp_newbq_l',
-        html: btnWrap('<span class="sp sp-remove-grey mr-14"></span>Скрыть квест новичка'),
+        className: 'stnd-link stnd-link_arr sp_line sp_last_btn sp_newbq_l',
+        innerHTML: btnWrap('<span class="sp sp-remove-grey mr-14"></span>Скрыть квест новичка'),
         onclick: () => {
             modalConfirm('Вы действительно хотите скрыть квест новичка?', true, () => {
                 http('GET', `${SPACES}/newbequest/?CK=${DATA.CK}`, true).then(e => {

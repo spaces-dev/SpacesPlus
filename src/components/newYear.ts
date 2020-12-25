@@ -1,5 +1,4 @@
-import { qs } from '../utils/qs'
-import { logger } from '../utils/logger'
+import { qs, logger } from '../utils'
 
 /**
  * ? Новогоднее печенье «Мерцающие ёлки»

@@ -27,8 +27,8 @@ export const firstLaunch = () => {
             if (qs('#SP_LAUNCH_BUTTON')) {
                 const goTo = ce('a', {
                     href: `${SPACES}/settings/?sp_plus_settings=1`,
-                    class: 'btn btn_white btn_input right sticker-close_btn',
-                    html: 'Перейти к настройкам',
+                    className: 'btn btn_white btn_input right sticker-close_btn',
+                    innerHTML: 'Перейти к настройкам',
                     onclick: () => qs('#SP_PLUS_ALERT').remove()
                 })
 

@@ -30,9 +30,11 @@ export const settingsBackupMenu = (id: string) => {
             // Предупреждение для ламеров
             if (!_SETTINGS.hideNotify.configImport) {
                 let hideNotify = ce('span', {
-                    class: 'sp sp-remove-grey pointer right notif_close close_h',
-                    style: 'margin: 10px',
+                    className: 'sp sp-remove-grey pointer right notif_close close_h',
                     title: 'Понятно, больше не показывать.',
+                    style: {
+                        margin: '10px'
+                    },
                     onclick: () => {
                         setSettings('hideNotify.configImport', true)
                         qs('#SP_CONFIG_JSON').remove()
@@ -40,12 +42,16 @@ export const settingsBackupMenu = (id: string) => {
                 })
 
                 let smallInfo = ce('div', {
-                    class: 'stnd-block-yellow',
-                    style: 'padding: 16px',
-                    html: '<span class="sp sp-alert"></span>Внимание!</br></br><div style="font-size: small">Редактирование только для опытных пользователей! Перед редактированием файла настроек, следует сделать Экспорт, если что-то пошло не так, следует сделать Импорт настроек.</div>'
+                    className: 'stnd-block-yellow',
+                    innerHTML: '<span class="sp sp-alert"></span>Внимание!</br></br><div style="font-size: small">Редактирование только для опытных пользователей! Перед редактированием файла настроек, следует сделать Экспорт, если что-то пошло не так, следует сделать Импорт настроек.</div>',
+                    style: {
+                        padding: '16px'
+                    }
                 })
 
-                let infoDiv = ce('div', { id: 'SP_CONFIG_JSON' })
+                let infoDiv = ce('div', {
+                    id: 'SP_CONFIG_JSON'
+                })
 
                 infoDiv.appendChild(hideNotify)
                 target.appendChild(infoDiv)
@@ -53,47 +59,51 @@ export const settingsBackupMenu = (id: string) => {
             }
 
             let wrap = ce('div', {
-                style: 'padding: 16px 16px 14px 16px'
+                style: {
+                    padding: '16px 16px 14px 16px'
+                }
             })
 
             let buttonsDiv = ce('div', {
-                class: 'widgets-group user__tools_last',
+                className: 'widgets-group user__tools_last',
                 id: 'SP_PLUS_BOTTOM_DIVB'
             })
 
             let textareaBtn = ce('div', {
-                class: 'widgets-group user__tools_last',
-                style: 'margin: unset'
+                className: 'widgets-group user__tools_last',
+                style: {
+                    margin: 'unset'
+                }
             })
 
             let tiw = ce('div', {
-                class: 'text-input__wrap'
+                className: 'text-input__wrap'
             })
 
             let cl = ce('div', {
-                class: 'cl'
+                className: 'cl'
             })
 
             let updateButton = ce('button', {
-                class: 'user__tools-link table__cell sp_btn',
-                style: 'border-right: none; border-top: 1px solid #cdd4e1',
-                html: `
+                className: 'user__tools-link table__cell sp_btn',
+                innerHTML: `
                     <span class="sp sp-ok-darkblue"></span>
                     <span style="color: #0E3C87; padding-left: 10px">Применить изменения</span>
                 `,
+                style: {
+                    borderRight: 'none',
+                    borderTop: '1px solid #cdd4e1'
+                },
                 onclick: () => {
-                    let json,
-                        val = (<HTMLInputElement>qs('#SP_BACKUP_JSON')).value
+                    let value = (<HTMLInputElement>qs('#SP_BACKUP_JSON')).value
 
                     try {
-                        // валидация лоооол
-                        json = JSON.parse(val)
 
                         // удаляем алерты с ошибками, если они есть
                         qs('#SP_PLUS_ALERT')?.remove()
 
                         // сохраняем настройки
-                        setCookie('SP_PLUS_SET', val)
+                        setCookie('SP_PLUS_SET', value)
 
                         // сообщение
                         modalMessage('Импорт и экспорт настроек', 'Настройки были успешно сохранены', true, 3)
@@ -105,11 +115,11 @@ export const settingsBackupMenu = (id: string) => {
 
             let restoreInput = ce('input', {
                 id: 'SP_IMPORT',
-                attr: {
-                    type: 'file',
-                    accept: 'application/JSON'
-                },
-                style: 'display: none'
+                type: 'file',
+                accept: 'application/JSON',
+                style: {
+                    display: 'none'
+                }
             })
 
             restoreInput.addEventListener('change', () => {
@@ -118,15 +128,15 @@ export const settingsBackupMenu = (id: string) => {
                     textarea = (<HTMLInputElement>qs('#SP_BACKUP_JSON')),
                     f = (<HTMLInputElement>qs('#SP_IMPORT')).files![0]
 
-                const reader = new FileReader()
+                const reader: FileReader = new FileReader()
 
-                reader.onload = ((f) => {
-                    return (e: any) => {
+                reader.onload = ((_f) => {
+                    return () => {
                         try {
-                            json = JSON.parse(e.target.result)
+                            json = JSON.parse((reader.result as string))
 
                             // сохраняем настройки
-                            setCookie('SP_PLUS_SET', e.target.result);
+                            setCookie('SP_PLUS_SET', json);
 
                             // вставляем в textarea
                             textarea.value = beautify(json, null, 4)
@@ -142,8 +152,8 @@ export const settingsBackupMenu = (id: string) => {
             }, false)
 
             let restoreButton = ce('button', {
-                class: 'user__tools-link table__cell sp_btn_line sp_btn-list',
-                html: `
+                className: 'user__tools-link table__cell sp_btn_line sp_btn-list',
+                innerHTML: `
                     <span class="sp sp-restore-g"></span>
                     <span style="color: #3CA93C; padding-left: 10px">Импорт</span>
                 `,
@@ -151,18 +161,16 @@ export const settingsBackupMenu = (id: string) => {
             })
 
             let saveButton = ce('button', {
-                class: 'user__tools-link sp_btn-list',
-                html: `
+                className: 'user__tools-link sp_btn-list',
+                innerHTML: `
                     <span class="sp sp-download-blue"></span>
                     <span style="color: #57A3EA; padding-left: 10px">Экспорт</span>
                 `,
                 onclick: () => {
                     modalConfirm('Вы уверены, что хотите сохранить файл настроек?', false, () => {
                         let blob = ce('a', {
-                            attr: {
-                                href: URL.createObjectURL(new Blob([beautify(_SETTINGS, null, 4)], { type: 'text/plain' })),
-                                download: `spaces-plus-${+new Date}.json`
-                            }
+                            href: URL.createObjectURL(new Blob([beautify(_SETTINGS, null, 4)], { type: 'text/plain' })),
+                            download: `spaces-plus-${+new Date}.json`
                         })
 
                         blob.click()
@@ -172,10 +180,10 @@ export const settingsBackupMenu = (id: string) => {
             })
 
             let textarea = ce('textarea', {
-                class: 'text-input',
+                className: 'text-input',
                 id: 'SP_BACKUP_JSON',
                 rows: 20,
-                html: beautify(_SETTINGS, null, 4)
+                innerHTML: beautify(_SETTINGS, null, 4)
             })
 
             target.appendChild(wrap)

@@ -18,10 +18,10 @@ export const galleryRotate = () => {
         // встявляем кнопку поворота при условии что есть просмотрщик и главное что это не видеоплеер
         if (Image && !Rotate && !Video) {
             let buttonRotate = ce('a', {
-                class: 'gallery__tools_button',
+                className: 'gallery__tools_button',
                 id: 'SP_IMAGE_ROTATE',
                 title: 'Повернуть',
-                html: '<span class="ico_gallery ico_gallery_reload m"></span>',
+                innerHTML: '<span class="ico_gallery ico_gallery_reload m"></span>',
                 onclick: () => {
                     // градус поворота (0, 90, 180, 270)
                     setSettings('angle', (_SETTINGS.angle + 90) % 360)

@@ -16,9 +16,9 @@ export const qrCode = () => {
         if (getPath(1) === 'mysite' && moreMenu && !qs('#SP_QR_BUTTON')) {
 
             let qrCodeBtn = ce('a', {
-                class: 'stnd-link',
+                className: 'stnd-link',
                 id: 'SP_QR_BUTTON',
-                html: `
+                innerHTML: `
                     <span class="sp sp-qrcode"></span>
                     <span class="t js-text">Получить QR-код</span>
                 `,
@@ -42,7 +42,7 @@ export const qrCode = () => {
                         target.appendChild(e)
 
                         target.appendChild(ce('ol', {
-                            html: `
+                            innerHTML: `
                                 <li>Запустите <b>OpenSpaces</b> на телефоне</li>
                                 <li>На странице авторизации нажмите «<b>Login by QR code</b>»</li>
                                 <li>Сканируйте этот код для авторизации</li>

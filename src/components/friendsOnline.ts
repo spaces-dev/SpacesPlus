@@ -29,7 +29,7 @@ export const friendsOnline = (b: boolean) => {
             let parent = friendsCount?.parentNode?.parentNode?.parentNode
             frOnDiv = frOnDiv || ce('div', {
                 id: 'SP_PLUS_FRIENDS_B',
-                class: 'list-link__wrap'
+                className: 'list-link__wrap'
             })
 
             http<IFriendsOnline>('GET', `${SPACES}/friends/?S=3`, true).then(e => {
@@ -51,8 +51,8 @@ export const friendsOnline = (b: boolean) => {
                     for (let i = 0; i < lengthList; i++) {
                         frOnDiv.appendChild(ce('a', {
                             href: `${SPACES}/mysite/index/${friendsList[i].name}`,
-                            class: 'li',
-                            html: (disableAvatar ?
+                            className: 'li',
+                            innerHTML: (disableAvatar ?
                                 `<span class="comm_ava m for_avatar"><img src="${friendsList[i].avatar.previewURL}" class="preview s21_20"></span>` : '') +
                                 `<span class="online-status m"><img class="p14 online_status_ico" src="${HTTP}//spac.me/i/${friendsList[i].online_status.on_img}" alt="(ON)"></span><span class="block-item__title m break-word">${friendsList[i].name}</span>`
                         }))

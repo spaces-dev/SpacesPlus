@@ -114,7 +114,6 @@ const init = () => {
     friendsOnline(_SETTINGS.friendsOn)
     stickyHeader(_SETTINGS.stickyheader)
 
-
     /**
      * ? Единоразовая инициализация
      * ! Только для PC версии сайта

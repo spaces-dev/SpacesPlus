@@ -30,19 +30,19 @@ export const bypassProfile = () => {
             if (blackListLink && !inButton) {
 
                 let button = ce('td', {
-                    class: 'table__cell',
+                    className: 'table__cell',
                     id: 'SP_PLUS_INBL',
-                    html: `
+                    innerHTML: `
                         <a href="#" class="stnd-link" title="Показать профиль">
                         <span class="sp sp-eye-grey"></span> Показать</a>
                     `,
                     onclick: () => {
 
                         button.after(ce('td', {
-                            class: 'table__cell',
+                            className: 'table__cell',
                             id: 'SP_PLUS_INBL',
-                            attr: { width: '25%' },
-                            html: `
+                            width: '25%',
+                            innerHTML: `
                                 <a href="#" class="stnd-link stnd-link_disabled" title="Загрузка">
                                 <span class="ico bp ico_spinner"></span> Загрузка</a>
                             `,
@@ -200,7 +200,7 @@ const setUrls = (e: string, lnk1: HTMLElement, lnk2: HTMLElement) => {
 
     let widget = ce('div', {
         id: 'SP_LIST_LINK',
-        class: 'widgets-group links-group'
+        className: 'widgets-group links-group'
     })
 
     qs('div.js-pending-item').append(widget)
@@ -212,8 +212,8 @@ const setUrls = (e: string, lnk1: HTMLElement, lnk2: HTMLElement) => {
 
         let link = ce('a', {
             href: SPACES + path,
-            class: 'list-link stnd-link_arr list-link-darkblue c-darkblue',
-            html: `
+            className: 'list-link stnd-link_arr list-link-darkblue c-darkblue',
+            innerHTML: `
                 <span class="js-ico ico ico_${ico}"></span>
                 <span class="t js-text">${text}</span>
                 <span class="ico ico_arr"></span>

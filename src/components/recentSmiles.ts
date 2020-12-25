@@ -53,7 +53,7 @@ export const recentSmiles = () => {
             let smilesBody = qs('.smiles_menu-body')
 
             let recentDelete = ce('span', {
-                class: 'sp sp-grey-del trash-btn',
+                className: 'sp sp-grey-del trash-btn',
                 onclick: () => {
                     modalConfirm('Вы действительно хотите очистить ранее использованные смайлики?', true, () => {
                         localStorage.removeItem('sp_recent_smiles')
@@ -65,11 +65,9 @@ export const recentSmiles = () => {
 
             let recentTab = ce('img', {
                 id: 'SP_RECENT_SMILES',
-                class: 'sp_recent-smile-btn',
-                attr: {
-                    src: `${HTTP}//spac.me/i/mail/restore_grey.png`,
-                    title: 'Ранее использованные'
-                },
+                className: 'sp_recent-smile-btn',
+                src: `${HTTP}//spac.me/i/mail/restore_grey.png`,
+                title: 'Ранее использованные',
                 onclick: () => {
                     // Очищаем список смайлов
                     smilesBody.innerHTML = ''
@@ -79,11 +77,9 @@ export const recentSmiles = () => {
                         for (let [src, smile] of Object.entries(smilesStorage)) {
 
                             let smileElem = ce('img', {
-                                class: 'sp_recent-smile',
-                                attr: {
-                                    src: src,
-                                    smile: smile
-                                },
+                                className: 'sp_recent-smile',
+                                src: src,
+                                smile: smile,
                                 onclick: () => {
                                     // Добавляем смайлик в поле ввода
                                     let input = qs('textarea[tabindex="1"]') ?? qs('textarea[name="msg"]');
@@ -95,8 +91,11 @@ export const recentSmiles = () => {
                         }
                     } else {
                         let smilesNotFound = ce('div', {
-                            style: 'color: #a4b7c4; text-align: center',
-                            html: `<img src="${HTTP}//spac.me/i/st/compdude11.gif"></br></br>Список ранее использованных смайликов пуст</br>Используйте смайлики из меню смайликов, чтобы добавить их сюда</br></br>`
+                            innerHTML: `<img src="${HTTP}//spac.me/i/st/compdude11.gif"></br></br>Список ранее использованных смайликов пуст</br>Используйте смайлики из меню смайликов, чтобы добавить их сюда</br></br>`,
+                            style: {
+                                color: '#a4b7c4',
+                                textAlign: 'center'
+                            }
                         })
 
                         smilesBody.append(smilesNotFound)

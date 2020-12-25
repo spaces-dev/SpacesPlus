@@ -5,10 +5,10 @@ import {
     getPath,
     getQuery,
     delCookie,
-    modalConfirm,
-    modalMessage,
+    setSettings,
     historyPush,
-    setSettings
+    modalConfirm,
+    modalMessage
 } from '../utils'
 
 import {
@@ -44,8 +44,8 @@ export const settingsMenu = () => {
                 const baseLink = ce('a', {
                     href: `${SPACES}/settings/?sp_plus_settings=1`,
                     id: 'SP_PLUS_SETLINK',
-                    class: targetLink.className,
-                    html: `
+                    className: targetLink.className,
+                    innerHTML: `
                         <span>Настройки Spaces+</span>
                         <span class="ico ico_arr ico_m"></span>
                     `,
@@ -99,8 +99,8 @@ export const settingsMenu = () => {
                                     let checkbox = ce('input', {
                                         id: i,
                                         type: 'checkbox',
-                                        class: 'sp-checkbox-square',
-                                        attr: { unsupported: unsupported },
+                                        className: 'sp-checkbox-square',
+                                        unsupported: unsupported,
                                         checked: _SETTINGS[i],
                                         onclick: (e: any) => {
                                             const { id, checked } = e.target
@@ -169,14 +169,12 @@ export const settingsMenu = () => {
                                     })
 
                                     let description = ce('label', {
-                                        html: _SETSTRINGS[i],
-                                        attr: {
-                                            for: i
-                                        }
+                                        innerHTML: _SETSTRINGS[i],
+                                        htmlFor: i
                                     })
 
                                     let label = ce('label', {
-                                        class: `stnd-link bstrwrap ${unsupported ? 'sp_unsupported' : ''}`
+                                        className: `stnd-link bstrwrap ${unsupported ? 'sp_unsupported' : ''}`
                                     })
 
                                     label.appendChild(checkbox)
@@ -187,7 +185,7 @@ export const settingsMenu = () => {
 
                                         let info = ce('a', {
                                             href: '#',
-                                            class: 'sp sp-info sp_info-btn',
+                                            className: 'sp sp-info sp_info-btn',
                                             onclick: () => {
                                                 modalMessage(_SETSTRINGS[i], _DESCSTRINGS[i], true)
                                                 return false
@@ -213,13 +211,13 @@ export const settingsMenu = () => {
                             if (_SETTINGS.weather) settingsWeather(qs('#weather'))
 
                             let spacesLabel1 = ce('div', {
-                                class: 'sp_plus_line',
-                                html: '<span class="sp_plus_text">Встроенные возможности сайта</span>'
+                                className: 'sp_plus_line',
+                                innerHTML: '<span class="sp_plus_text">Встроенные возможности сайта</span>'
                             })
 
                             let spacesLabel2 = ce('div', {
-                                class: 'sp_plus_line',
-                                html: '<span class="sp_plus_text">Прочее</span>'
+                                className: 'sp_plus_line',
+                                innerHTML: '<span class="sp_plus_text">Прочее</span>'
                             })
 
                             setArea.appendChild(spacesLabel1)
@@ -231,9 +229,9 @@ export const settingsMenu = () => {
 
                             const SettingsBackup = ce('a', {
                                 href: `${SPACES}/settings/?sp_plus_settings=1&sp_backup=1`,
-                                class: 'stnd-link stnd-link_arr sp_font_sm',
+                                className: 'stnd-link stnd-link_arr sp_font_sm',
                                 id: 'sp_backup',
-                                html: `
+                                innerHTML: `
                                     <span class="b" style="color: #2e7d32">
                                         <span class="sp sp-backup-g mr-14"></span>Импорт и экспорт настроек
                                         <span class="ico ico_arr ico_m"></span>
@@ -260,9 +258,9 @@ export const settingsMenu = () => {
 
                             const ChangeLogMenu = ce('a', {
                                 href: `${SPACES}/settings/?sp_plus_settings=1&sp_changelog=1`,
-                                class: 'stnd-link stnd-link_arr sp_font_sm',
+                                className: 'stnd-link stnd-link_arr sp_font_sm',
                                 id: 'sp_changelog',
-                                html: `
+                                innerHTML: `
                                     <span class="b" style="color: #2196f3">
                                         <span class="sp sp-restore-blue mr-14"></span>История обновлений
                                         <span class="ico ico_arr ico_m"></span>
@@ -289,9 +287,9 @@ export const settingsMenu = () => {
 
                             const ResetSettings = ce('a', {
                                 href: '#',
-                                class: 'stnd-link stnd-link_arr sp_font_sm',
+                                className: 'stnd-link stnd-link_arr sp_font_sm',
                                 id: 'sp_plus_reset',
-                                html: `
+                                innerHTML: `
                                     <span class="b" style="color: #f86934">
                                         <span class="sp sp-alert mr-14"></span>Сброс настроек
                                         <span class="ico ico_arr ico_m"></span>
@@ -311,19 +309,33 @@ export const settingsMenu = () => {
                             })
                             setArea.appendChild(ResetSettings)
 
-                            let clicks: number = 0,
-                                aboutWidget = ce('div', { class: 'widgets-group widgets-group_top nl wbg no-select' }),
-                                ver = ce('div', { style: 'float: right', html: 'v' + PKG_VERSION }),
-                                content = ce('div', { class: 'content-item3' }),
-                                heart = ce('div', {
-                                    html: '❤️',
-                                    class: 'heart',
-                                    onclick: () => { if (++clicks >= 10) document.location.href = 'https://t.me/spaces_dev' }
-                                }),
-                                title = ce('div', {
-                                    class: 'grey',
-                                    html: 'Developed by <a href="https://crashmax.ru" target="_blank">crashmax</a> with love '
-                                })
+                            let clicks: number = 0
+
+                            let aboutWidget = ce('div', {
+                                className: 'widgets-group widgets-group_top nl wbg no-select'
+                            })
+
+                            let ver = ce('div', {
+                                innerHTML: 'v' + PKG_VERSION,
+                                style: {
+                                    float: 'right'
+                                }
+                            })
+
+                            let content = ce('div', {
+                                className: 'content-item3'
+                            })
+
+                            let heart = ce('div', {
+                                innerHTML: '❤️',
+                                className: 'heart',
+                                onclick: () => { if (++clicks >= 10) document.location.href = 'https://t.me/spaces_dev' }
+                            })
+
+                            let title = ce('div', {
+                                className: 'grey',
+                                innerHTML: 'Developed by <a href="https://crashmax.ru" target="_blank">crashmax</a> with love '
+                            })
 
                             aboutWidget.appendChild(content)
                             title.appendChild(heart)
