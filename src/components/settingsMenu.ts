@@ -100,12 +100,11 @@ export const settingsMenu = () => {
                                         id: i,
                                         type: 'checkbox',
                                         className: 'sp-checkbox-square',
-                                        unsupported: unsupported,
                                         checked: _SETTINGS[i],
                                         onclick: (e: any) => {
                                             const { id, checked } = e.target
 
-                                            if (e.target.attributes.unsupported.value === 'true' && checked) {
+                                            if (e.target.attributes.getNamedItem('unsupported') && checked) {
                                                 modalMessage('Внимание!', 'Для работы данной функции, необходимо переключиться на компьютерную версию сайта', true, 5)
                                                 return false
                                             }
@@ -176,6 +175,9 @@ export const settingsMenu = () => {
                                     let label = ce('label', {
                                         className: `stnd-link bstrwrap ${unsupported ? 'sp_unsupported' : ''}`
                                     })
+
+                                    // unsupported attribute
+                                    if (unsupported) checkbox.setAttribute('unsupported', i)
 
                                     label.appendChild(checkbox)
                                     label.appendChild(description)

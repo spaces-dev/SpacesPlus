@@ -70,13 +70,6 @@ interface HTMLAttributes extends EventHandlersType {
     type?: inputType
     value?: string | string[] | number
     width?: number | string
-
-    // settingsMenu.ts
-    unsupported?: boolean
-
-    // settingsBackground.ts
-    'data-val'?: string
-    'data-tag'?: string
 }
 
 type inputType =

@@ -332,12 +332,13 @@ const setColor = () => {
                 for (let i in color) {
                     let dd = ce('div', {
                         className: 'js-bb_color toolbar-color pointer',
-                        'data-val': color[i],
-                        'data-tag': 'fon',
                         style: {
                             backgroundColor: color[i]
                         }
                     })
+
+                    dd.setAttribute('data-tag', 'fon')
+                    dd.setAttribute('data-val', color[i])
 
                     colorsTd.appendChild(dd)
                 }
