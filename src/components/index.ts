@@ -1,87 +1,41 @@
-import { qrCode } from './qrCode'
-import { adBlock } from './adBlock'
-import { newYear } from './newYear'
-import { oldHeader } from './oldHeader'
-import { setStyles } from './setStyles'
-import { scrollMove } from './scrollMove'
-import { userStatus } from './userStatus'
-import { userOnline } from './userOnline'
-import { apiDebugger } from './apiDebugger'
-import { coinsAccept } from './coinsAccept'
-import { deleteBlogs } from './deleteBlogs'
-import { firstLaunch } from './firstLaunch'
-import { karmaAccept } from './karmaAccept'
-import { soundNotify } from './soundNotify'
-import { betaFeatures } from './betaFeatures'
-import { blockedFiles } from './blockedFiles'
-import { favoriteUser } from './favoriteUser'
-import { freeStickers } from './freeStickers'
-import { recentSmiles } from './recentSmiles'
-import { settingsMenu } from './settingsMenu'
-import { stickyHeader } from './stickyHeader'
-import { bypassProfile } from './bypassProfile'
-import { deleteReaders } from './deleteReaders'
-import { friendsOnline } from './friendsOnline'
-import { galleryRotate } from './galleryRotate'
-import { sidebarButton } from './sidebarButton'
-import { weatherWidget } from './weatherWidget'
-import { deleteComments } from './deleteComments'
-import { hiddenRightbar } from './hiddenRightbar'
-import { playerDownload } from './playerDownload'
-import { settingsNotify } from './settingsNotify'
-import { disableRedirect } from './disableRedirect'
-import { settingsLogMenu } from './settingsLogMenu'
-import { settingsFriends } from './settingsFriends'
-import { settingsFeatures } from './settingsFeatures'
-import { videoSpeedPlayback } from './videoSpeedPlayback'
-import { settingsBackground } from './settingsBackground'
-import { settingsBackupMenu } from './settingsBackupMenu'
-import { checkUpdates, getUpdater } from './checkUpdates'
-import { settingsWeather, ipWhois } from './settingsWeather'
-import { settingsRecentSmiles } from './settingsRecentSmiles'
-
-export {
-    qrCode,
-    adBlock,
-    ipWhois,
-    newYear,
-    oldHeader,
-    setStyles,
-    getUpdater,
-    scrollMove,
-    userStatus,
-    userOnline,
-    apiDebugger,
-    coinsAccept,
-    deleteBlogs,
-    firstLaunch,
-    karmaAccept,
-    soundNotify,
-    betaFeatures,
-    blockedFiles,
-    checkUpdates,
-    favoriteUser,
-    freeStickers,
-    recentSmiles,
-    settingsMenu,
-    stickyHeader,
-    bypassProfile,
-    deleteReaders,
-    friendsOnline,
-    galleryRotate,
-    sidebarButton,
-    weatherWidget,
-    deleteComments,
-    hiddenRightbar,
-    playerDownload,
-    settingsNotify,
-    disableRedirect,
-    settingsLogMenu,
-    settingsFriends,
-    settingsWeather,
-    settingsFeatures,
-    videoSpeedPlayback,
-    settingsBackground,
-    settingsBackupMenu,
-    settingsRecentSmiles
-}
+export { qrCode } from './qrCode'
+export { adBlock } from './adBlock'
+export { newYear } from './newYear'
+export { oldHeader } from './oldHeader'
+export { setStyles } from './setStyles'
+export { scrollMove } from './scrollMove'
+export { userStatus } from './userStatus'
+export { userOnline } from './userOnline'
+export { apiDebugger } from './apiDebugger'
+export { coinsAccept } from './coinsAccept'
+export { deleteBlogs } from './deleteBlogs'
+export { firstLaunch } from './firstLaunch'
+export { karmaAccept } from './karmaAccept'
+export { soundNotify } from './soundNotify'
+export { betaFeatures } from './betaFeatures'
+export { blockedFiles } from './blockedFiles'
+export { favoriteUser } from './favoriteUser'
+export { freeStickers } from './freeStickers'
+export { recentSmiles } from './recentSmiles'
+export { settingsMenu } from './settingsMenu'
+export { stickyHeader } from './stickyHeader'
+export { bypassProfile } from './bypassProfile'
+export { deleteReaders } from './deleteReaders'
+export { friendsOnline } from './friendsOnline'
+export { galleryRotate } from './galleryRotate'
+export { sidebarButton } from './sidebarButton'
+export { weatherWidget } from './weatherWidget'
+export { deleteComments } from './deleteComments'
+export { hiddenRightbar } from './hiddenRightbar'
+export { playerDownload } from './playerDownload'
+export { settingsNotify } from './settingsNotify'
+export { disableRedirect } from './disableRedirect'
+export { settingsLogMenu } from './settingsLogMenu'
+export { settingsFriends } from './settingsFriends'
+export { settingsFeatures } from './settingsFeatures'
+export { videoSpeedPlayback } from './videoSpeedPlayback'
+export { settingsBackground } from './settingsBackground'
+export { settingsBackupMenu } from './settingsBackupMenu'
+export { checkUpdates, getUpdater } from './checkUpdates'
+export { settingsWeather, ipWhois } from './settingsWeather'
+export { settingsRecentSmiles } from './settingsRecentSmiles'
