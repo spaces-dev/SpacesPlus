@@ -28,8 +28,7 @@ export const userOnline = () => {
                     if (response) {
                         let str: any = (response / 3600).toFixed(2).split('.')
                         let online = str[0] > 0 ? `${str[0]} ч, ${Math.trunc(str[1] / (100 / 60))} мин` : `${Math.trunc(str[1] / (100 / 60))} мин`
-                        // @ts-ignore Костыль!
-                        onBlock[0].nextElementSibling.textContent = online
+                        onBlock[0].nextElementSibling!.textContent = online
 
                         logger.info(`Время онлайн: ${online}`, e)
                     }

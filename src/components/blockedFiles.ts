@@ -21,7 +21,7 @@ export const blockedFiles = () => {
             !downloadBtn &&
             !linkSSL) {
 
-            let createBtn = ce('a', {
+            let createBtn = <HTMLLinkElement>ce('a', {
                 href: '#',
                 id: 'SP_LINK_SSL',
                 className: 'list-link list-link-blue stnd-link_disabled c-blue',
@@ -39,7 +39,6 @@ export const blockedFiles = () => {
 
                 if (response) {
                     createBtn.classList.remove('stnd-link_disabled')
-                    // @ts-ignore
                     createBtn.href = response.preview.downloadLinkSSL
                     createBtn.innerHTML = `
                         <span class="js-ico ico ico_download2_blue"></span>
