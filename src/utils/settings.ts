@@ -1,4 +1,8 @@
-import { extend, logger, getCookie, setCookie } from './index'
+import {
+    logger,
+    getCookie,
+    setCookie
+} from './index'
 
 import { _SETTINGS } from '../settings'
 
@@ -6,13 +10,14 @@ import { _SETTINGS } from '../settings'
  * Используется для инициализации настроек скрипта
  */
 export const readSettings = () => {
-    let cookieSet = getCookie('SP_PLUS_SET')
+    let settings = getCookie('SP_PLUS_SET')
 
     try {
-        if (cookieSet) {
-            cookieSet = JSON.parse(cookieSet)
+        if (settings) {
             // @ts-ignore
-            _SETTINGS = extend(_SETTINGS, cookieSet)
+            _SETTINGS = JSON.parse(settings)
+        } else {
+            setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
         }
     } catch (e) {
         logger.error('readSettings', e)

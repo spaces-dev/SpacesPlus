@@ -95,15 +95,14 @@ export const settingsBackupMenu = (id: string) => {
                     borderTop: '1px solid #cdd4e1'
                 },
                 onclick: () => {
-                    let value = (<HTMLInputElement>qs('#SP_BACKUP_JSON')).value
-
                     try {
+                        let value = JSON.parse((<HTMLInputElement>qs('#SP_BACKUP_JSON')).value)
 
                         // удаляем алерты с ошибками, если они есть
                         qs('#SP_PLUS_ALERT')?.remove()
 
                         // сохраняем настройки
-                        setCookie('SP_PLUS_SET', value)
+                        setCookie('SP_PLUS_SET', JSON.stringify(value))
 
                         // сообщение
                         modalMessage('Импорт и экспорт настроек', 'Настройки были успешно сохранены', true, 3)
