@@ -21,34 +21,36 @@ export const stickyHeader = (b: boolean) => {
                     }
 
                     // опускаем основной контейнер
-                    css(mainShadow, 'padding-top: 45px')
+                    css(mainShadow, {
+                        paddingTop: '45px'
+                    })
 
                     // фиксированное положение блока (при смене версии сайта)
-                    css(infoBlock, `
-                        position: fixed;
-                        width: ${mainShadow.clientWidth}px;
-                        z-index: 9999
-                    `)
+                    css(infoBlock, {
+                        position: 'fixed',
+                        width: `${mainShadow.clientWidth}px`,
+                        zIndex: 9999
+                    })
 
                     // стили для логотипа
-                    css(sidebarLogo, `
-                        position: fixed;
-                        width: ${leftNav.clientWidth + 1}px;
-                        left: ${wrapAll.offsetLeft}px;
-                        top: 0px;
-                        box-shadow: 0px 2px 2px rgba(93,109,157,0.2);
-                        z-index: 9999
-                    `)
+                    css(sidebarLogo, {
+                        position: 'fixed',
+                        width: `${leftNav.clientWidth + 1}px`,
+                        left: `${wrapAll.offsetLeft}px`,
+                        top: '0px',
+                        boxShadow: '0px 2px 2px rgba(93,109,157,0.2)',
+                        zIndex: 9999
+                    })
 
                     // стили для шапки
-                    css(header, `
-                        position: fixed;
-                        width: ${mainShadow.clientWidth - leftNav.clientWidth + 1}px;
-                        left: ${wrapAll.offsetLeft + leftNav.clientWidth}px;
-                        top: 0px;
-                        box-shadow: 0px 2px 2px rgba(93,109,157,0.2);
-                        z-index: 9999
-                    `)
+                    css(header, {
+                        position: 'fixed',
+                        width: `${mainShadow.clientWidth - leftNav.clientWidth + 1}px`,
+                        left: `${wrapAll.offsetLeft + leftNav.clientWidth}px`,
+                        top: '0px',
+                        boxShadow: '0px 2px 2px rgba(93,109,157,0.2)',
+                        zIndex: 9999
+                    })
                 })
             })
 

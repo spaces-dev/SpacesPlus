@@ -96,5 +96,6 @@ type createElementType = (
 ) => HTMLElementTagNameMap[typeof tag]
 
 export {
+    CSSStyle,
     createElementType
 }
