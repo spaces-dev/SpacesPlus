@@ -18,16 +18,19 @@ import {
     stickyHeader,
     friendsOnline,
     hiddenRightbar,
-    settingsNotify,
+    //settingsNotify,
     settingsLogMenu,
     settingsFriends,
     settingsWeather,
     settingsFeatures,
     settingsBackground,
-    settingsBackupMenu
+    settingsBackupMenu,
+    //settingsRecentSmiles
 } from './index'
 
-import { DEVICE, SPACES, PKG_VERSION } from '../strings'
+import { ISettings } from '../interfaces/Settings'
+
+import { DEVICE, BASE_URL, PKG_VERSION } from '../strings'
 import { _DESCSTRINGS, _SETSTRINGS, _SETTINGS } from '../settings'
 
 export const settingsMenu = () => {
@@ -35,14 +38,14 @@ export const settingsMenu = () => {
         try {
 
             // Ищем таргер для инициализации меню настроек
-            const targetLink = qs(`a[href^="${SPACES}/settings/notification/"`)
+            const targetLink = qs(`a[href^="${BASE_URL}/settings/notification/"`)
 
             if (targetLink) {
                 const urlSett = getQuery('sp_plus_settings')
                 const urlSettChangeLog = getQuery('sp_changelog')
                 const urlSettBackup = getQuery('sp_backup')
                 const baseLink = ce('a', {
-                    href: `${SPACES}/settings/?sp_plus_settings=1`,
+                    href: `${BASE_URL}/settings/?sp_plus_settings=1`,
                     id: 'SP_PLUS_SETLINK',
                     className: targetLink.className,
                     innerHTML: `
@@ -53,14 +56,14 @@ export const settingsMenu = () => {
                         if (!/(\&)sp_plus_settings=1/i.test(document.location.href)) {
                             historyPush({
                                 'sp_plus_settings': urlSett,
-                            }, `${SPACES}/settings/?sp_plus_settings=1`, 'Настройки Spaces+')
+                            }, `${BASE_URL}/settings/?sp_plus_settings=1`, 'Настройки Spaces+')
                         }
 
                         let prnt = (<HTMLElement>qs('#SP_PLUS_SETLINK').parentElement?.parentNode?.parentNode?.parentNode)
                         if (prnt.id === 'main') {
 
                             qs('#header_path').innerHTML = qs('#header_path').innerHTML.replace('Настройки', `
-                                <a href="${SPACES}/settings/">Настройки</a>
+                                <a href="${BASE_URL}/settings/">Настройки</a>
                                 <span class="location-bar__sep ico"></span>
                                 <span id="SP_PLUS_SETHEAD2">Spaces+</span>
                             `)
@@ -77,7 +80,7 @@ export const settingsMenu = () => {
                                     </div>
                                 </div>
                                 <div id="SP_PLUS_ABOUT"></div>
-                                <a id="SP_PLUS_SETBACK" href="${SPACES}/settings/?" class="link-return full_link">
+                                <a id="SP_PLUS_SETBACK" href="${BASE_URL}/settings/?" class="link-return full_link">
                                     <span class="ico ico_arrow-back"></span>
                                     <span class="m">Назад</span>
                                 </a>
@@ -100,11 +103,13 @@ export const settingsMenu = () => {
                                         id: i,
                                         type: 'checkbox',
                                         className: 'sp-checkbox-square',
-                                        checked: _SETTINGS[i],
-                                        onclick: (e: any) => {
-                                            const { id, checked } = e.target
+                                        checked: _SETTINGS[i as Exclude<ISettings, object>],
+                                        onclick: (e: Event) => {
+                                            const checked = (e.target as HTMLInputElement).checked
+                                            const target = (e.target as Element)
+                                            const id = (e.target as Element).id
 
-                                            if (e.target.attributes.getNamedItem('unsupported') && checked) {
+                                            if (target.attributes.getNamedItem('unsupported') && checked) {
                                                 modalMessage('Внимание!', 'Для работы данной функции, необходимо переключиться на компьютерную версию сайта', true, 5)
                                                 return false
                                             }
@@ -121,19 +126,19 @@ export const settingsMenu = () => {
                                                 // TODO: На переработку (скорее всего можно будет менять только звук уведомлений)
                                                 /*case 'notify':
                                                     checked ?
-                                                        settingsNotify(e.target) :
+                                                        settingsNotify(target) :
                                                         qs("#SP_PLUS_EVENTS").remove()
                                                     break*/
                                                 // TODO: Меню настроек на доработку!    
                                                 /*case 'recents':
                                                     checked ?
-                                                        settingsRecentSmiles(e.target) :
+                                                        settingsRecentSmiles(target) :
                                                         qs("#SP_RECENTS_SETTINGS").remove()
                                                     break*/
                                                 case 'friendsOn':
                                                     friendsOnline(checked)
                                                     checked ?
-                                                        settingsFriends(e.target) :
+                                                        settingsFriends(target) :
                                                         qs('#SP_PLUS_MAXFRIENDS').remove()
                                                     break
                                                 case 'sticker':
@@ -149,7 +154,7 @@ export const settingsMenu = () => {
                                                     break
                                                 case 'bodystyle':
                                                     if (checked) {
-                                                        settingsBackground(e.target)
+                                                        settingsBackground(target)
                                                     } else {
                                                         qs('#SP_PLUS_BODYSTYLE').remove()
                                                         qs('#SP_PLUS_INJSTYLE').remove()
@@ -157,7 +162,7 @@ export const settingsMenu = () => {
                                                     break
                                                 case 'weather':
                                                     if (checked) {
-                                                        settingsWeather(e.target)
+                                                        settingsWeather(target)
                                                     } else {
                                                         qs("#SP_WIDGET_WEATHER").remove()
                                                         qs("#SP_WEATHER_SETTINGS").remove()
@@ -200,7 +205,7 @@ export const settingsMenu = () => {
                                     setArea.appendChild(label)
 
                                     // отключаем неподдерживаемые функции
-                                    if (unsupported && _SETTINGS[i]) qs('#' + i).click()
+                                    if (unsupported && _SETTINGS[i as keyof ISettings]) qs('#' + i).click()
                                 }
                             }
 
@@ -209,7 +214,7 @@ export const settingsMenu = () => {
                             //if (_SETTINGS.recents) settingsRecentSmiles(qs('#recents'))
                             if (_SETTINGS.friendsOn) settingsFriends(qs('#friendsOn'))
                             if (_SETTINGS.bodystyle) settingsBackground(qs('#bodystyle'))
-                            if (_SETTINGS.notify) settingsNotify(qs('#notify'))
+                            //if (_SETTINGS.notify) settingsNotify(qs('#notify'))
                             if (_SETTINGS.weather) settingsWeather(qs('#weather'))
 
                             let spacesLabel1 = ce('div', {
@@ -230,7 +235,7 @@ export const settingsMenu = () => {
                             setArea.appendChild(spacesLabel2)
 
                             const SettingsBackup = ce('a', {
-                                href: `${SPACES}/settings/?sp_plus_settings=1&sp_backup=1`,
+                                href: `${BASE_URL}/settings/?sp_plus_settings=1&sp_backup=1`,
                                 className: 'stnd-link stnd-link_arr sp_font_sm',
                                 id: 'sp_backup',
                                 innerHTML: `
@@ -242,15 +247,15 @@ export const settingsMenu = () => {
                                 onclick: () => {
                                     qs('#SP_PLUS_SETHEAD').innerHTML = 'Импорт и экспорт настроек'
                                     qs('#SP_PLUS_SETHEAD2').innerHTML = `
-                                        <a href="${SPACES}/settings/?sp_plus_settings=1">Spaces+</a>
+                                        <a href="${BASE_URL}/settings/?sp_plus_settings=1">Spaces+</a>
                                         <span class="location-bar__sep ico"></span> Импорт и экспорт настроек
                                     `;
-                                    (<HTMLLinkElement>qs('#SP_PLUS_SETBACK')).href = `${SPACES}/settings/?sp_plus_settings=1`
+                                    (<HTMLLinkElement>qs('#SP_PLUS_SETBACK')).href = `${BASE_URL}/settings/?sp_plus_settings=1`
                                     if (!/(\&)sp_backup=1/i.test(document.location.href)) {
                                         historyPush({
                                             'sp_plus_settings': urlSett,
                                             'sp_backup': urlSettBackup
-                                        }, `${SPACES}/settings/?sp_plus_settings=1&sp_backup=1`, 'Spaces+: Импорт и экспорт настроек')
+                                        }, `${BASE_URL}/settings/?sp_plus_settings=1&sp_backup=1`, 'Spaces+: Импорт и экспорт настроек')
                                     }
                                     settingsBackupMenu('#SP_PLUS_SETAREA')
                                     return false
@@ -259,7 +264,7 @@ export const settingsMenu = () => {
                             setArea.appendChild(SettingsBackup)
 
                             const ChangeLogMenu = ce('a', {
-                                href: `${SPACES}/settings/?sp_plus_settings=1&sp_changelog=1`,
+                                href: `${BASE_URL}/settings/?sp_plus_settings=1&sp_changelog=1`,
                                 className: 'stnd-link stnd-link_arr sp_font_sm',
                                 id: 'sp_changelog',
                                 innerHTML: `
@@ -271,15 +276,15 @@ export const settingsMenu = () => {
                                 onclick: () => {
                                     qs('#SP_PLUS_SETHEAD').innerHTML = 'История обновлений'
                                     qs('#SP_PLUS_SETHEAD2').innerHTML = `
-                                        <a href="${SPACES}/settings/?sp_plus_settings=1">Spaces+</a>
+                                        <a href="${BASE_URL}/settings/?sp_plus_settings=1">Spaces+</a>
                                         <span class="location-bar__sep ico"></span> История обновлений
                                     `;
-                                    (<HTMLLinkElement>qs('#SP_PLUS_SETBACK')).href = `${SPACES}/settings/?sp_plus_settings=1`
+                                    (<HTMLLinkElement>qs('#SP_PLUS_SETBACK')).href = `${BASE_URL}/settings/?sp_plus_settings=1`
                                     if (!/(\&)sp_changelog=1/i.test(document.location.href)) {
                                         historyPush({
                                             'sp_plus_settings': urlSett,
                                             'sp_changelog': urlSettChangeLog
-                                        }, `${SPACES}/settings/?sp_plus_settings=1&sp_changelog=1`, 'Spaces+: История обновлений')
+                                        }, `${BASE_URL}/settings/?sp_plus_settings=1&sp_changelog=1`, 'Spaces+: История обновлений')
                                     }
                                     settingsLogMenu('#SP_PLUS_SETAREA')
                                     return false

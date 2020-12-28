@@ -1,4 +1,8 @@
-import { ce, logger, setSettings } from '../utils'
+import {
+    ce,
+    logger,
+    setSettings
+} from '../utils'
 
 import { _SETTINGS } from '../settings'
 
@@ -17,15 +21,16 @@ export const settingsFriends = (e: Element) => {
             className: 'text-input',
             size: 4,
             maxLength: 2,
-            value: _SETTINGS.friendsSet.max
-        })
+            value: _SETTINGS.friendsSet.max,
+            oninput: (e: Event) => {
+                const value = (e.target as HTMLInputElement).value
 
-        frMax.addEventListener('change', (e: any) => {
-            if (/^([1-9]|1[0-5])$/i.test(e.target.value)) {
-                setSettings('friendsSet.max', e.target.value)
-                frMax.classList.remove('sp-input-error')
-            } else {
-                frMax.classList.add('sp-input-error')
+                if (/^([1-9]|1[0-5])$/i.test(value)) {
+                    setSettings('friendsSet.max', value)
+                    frMax.classList.remove('sp-input-error')
+                } else {
+                    frMax.classList.add('sp-input-error')
+                }
             }
         })
 

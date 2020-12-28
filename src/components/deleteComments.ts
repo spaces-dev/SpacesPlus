@@ -9,15 +9,15 @@ import {
     modalMessage
 } from '../utils'
 
-import { SPACES, DEVICE } from '../strings'
+import { BASE_URL, DEVICE } from '../strings'
 
 export const deleteComments = () => {
     try {
 
         let targetComm = qs('h2.span'),
             childs = qsa('span.comment_date'),
-            delLink = qs(`a[href^="${SPACES}/comment/delete/"`),
-            banLink = qs(`a[href^="${SPACES}/forums/moder/ban/"`),
+            delLink = qs(`a[href^="${BASE_URL}/comment/delete/"`),
+            banLink = qs(`a[href^="${BASE_URL}/forums/moder/ban/"`),
             onComments = targetComm?.textContent === 'Комментарии' ? true : false,
             onDelete = delLink?.textContent === 'Удалить' ? true : false,
             onAdmin = banLink?.textContent === 'Бан' ? true : false
@@ -115,7 +115,7 @@ export const deleteComments = () => {
                                     input?.parentNode?.parentNode?.parentNode?.parentNode?.parentNode :
                                     // костыль для Touch
                                     input?.parentNode?.parentNode?.parentNode?.parentNode?.parentNode?.parentNode?.parentNode)
-                                    ?.querySelectorAll(`a[href^="${SPACES}/comment/delete/"]`))
+                                    ?.querySelectorAll(`a[href^="${BASE_URL}/comment/delete/"]`))
                                     .filter(e => {
                                         if (e.textContent === 'Удалить') urls.push(e.href)
                                     })

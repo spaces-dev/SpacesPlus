@@ -12,7 +12,7 @@ import {
 import { newbeeQuest } from './newbeeQuest'
 
 import { _SETTINGS } from '../settings'
-import { SPACES, DATA } from '../strings'
+import { BASE_URL, DATA } from '../strings'
 
 // Встроенные возможности сайта
 export const settingsFeatures = (root: Element) => {
@@ -93,7 +93,7 @@ export const settingsFeatures = (root: Element) => {
         innerHTML: btnWrap('<span class="sp sp-remove-grey mr-14"></span>Скрыть квест новичка'),
         onclick: () => {
             modalConfirm('Вы действительно хотите скрыть квест новичка?', true, () => {
-                http('GET', `${SPACES}/newbequest/?CK=${DATA.CK}`, true).then(e => {
+                http('GET', `${BASE_URL}/newbequest/?CK=${DATA.CK}`, true).then(e => {
                     if (e.status === 200) modalMessage('Поздравляем!', 'Квест новичка был успешно скрыт', true, 5)
                 })
             })

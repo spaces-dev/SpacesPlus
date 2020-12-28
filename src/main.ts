@@ -36,8 +36,8 @@ import {
 
 import {
     DATA,
+    HOST,
     DEVICE,
-    SPACES,
     BASE_URL
 } from './strings'
 
@@ -61,7 +61,7 @@ import { ISessionCheck } from './interfaces/SessionCheck'
              * * 00000 - Авторизированы
              * * 01001 - Требуется авторизация
              */
-            http<ISessionCheck>('POST', `${SPACES}/api/session/check`, false).then(e => {
+            http<ISessionCheck>('POST', `${BASE_URL}/api/session/check`, false).then(e => {
 
                 const response = e.parsedBody
 
@@ -145,8 +145,8 @@ const init = () => {
         if (_SETTINGS.userbypass) bypassProfile()
         if (_SETTINGS.dredirect) disableRedirect()
         if (_SETTINGS.playback) videoSpeedPlayback()
-        if (_SETTINGS.blogsd || BASE_URL === 'spaces-blogs.com') deleteBlogs()
-        if (_SETTINGS.blockedfiles || BASE_URL === 'spac1.net') blockedFiles()
+        if (_SETTINGS.blogsd || HOST === 'spaces-blogs.com') deleteBlogs()
+        if (_SETTINGS.blockedfiles || HOST === 'spac1.net') blockedFiles()
         settingsMenu()
         qrCode()
     }, 200)

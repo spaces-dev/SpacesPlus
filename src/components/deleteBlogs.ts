@@ -11,12 +11,12 @@ import {
     modalMessage
 } from '../utils'
 
-import { SPACES, DATA } from '../strings'
+import { BASE_URL, DATA } from '../strings'
 
 export const deleteBlogs = () => {
     let path = getPath().split('/'),
         buttons = qs('#SP_PLUS_BUTTONS_B'),
-        links = qsa(`a[href^="${SPACES}/diary/editaccess/"`)
+        links = qsa(`a[href^="${BASE_URL}/diary/editaccess/"`)
 
     try {
 
@@ -117,7 +117,7 @@ export const deleteBlogs = () => {
                             for (let blog of blogs) {
                                 modalMessage(`Осталось удалить ${count--} из ${allBlogs} ${declStr(count)}`, 'Подождите немного... <span style="padding-right: 10px" class="ico ico_spinner"></span>', false)
 
-                                await http('GET', `${SPACES}/diary/delete/?CK=${DATA.CK}&id=${blog}&Sure=1`, true).then(e => {
+                                await http('GET', `${BASE_URL}/diary/delete/?CK=${DATA.CK}&id=${blog}&Sure=1`, true).then(e => {
                                     logger.info('Удалили блог', e)
                                 })
                             }

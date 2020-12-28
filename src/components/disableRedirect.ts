@@ -1,9 +1,9 @@
 import { qsa, getParams } from '../utils'
 
-import { SPACES } from '../strings'
+import { BASE_URL } from '../strings'
 
 export const disableRedirect = () => {
-    qsa(`a[href^="${SPACES}/redirect/"`).forEach(e => {
+    qsa(`a[href^="${BASE_URL}/redirect/"`).forEach(e => {
 
         // Все еще костыль, но так лучше
         (e as HTMLLinkElement).href = getParams((e as HTMLLinkElement).href)['redirect']

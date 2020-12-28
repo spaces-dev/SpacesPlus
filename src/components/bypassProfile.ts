@@ -12,14 +12,14 @@ import {
 import { IProxy } from '../interfaces/Proxy'
 import { IUserProfile } from '../interfaces/Mysite'
 
-import { SPACES, BASE_URL, DATA } from '../strings'
+import { BASE_URL, DATA } from '../strings'
 
 export const bypassProfile = () => {
     try {
 
         let tdBlock = qsa('td.table__cell_last'),
-            blackListLink = qs(`a[href^="${SPACES}/blacklist/"`),
-            rulesLink = qs(`a[href^="${SPACES}/info/rules/"`),
+            blackListLink = qs(`a[href^="${BASE_URL}/blacklist/"`),
+            rulesLink = qs(`a[href^="${BASE_URL}/info/rules/"`),
             noAccessIco = qs('div.ico_noaccess_xlarge'),
             inButton = qs('#SP_PLUS_INBL')
 
@@ -99,7 +99,7 @@ const getProfile = async (nickname: string) => {
         // запоминает ник
         DATA.NICKNAME = nickname
 
-        await http<IProxy<IUserProfile>>('GET', `https://crashmax.ru/api/proxy?url=${SPACES}/ajax/mysite/index/${nickname}/`, false).then(e => {
+        await http<IProxy<IUserProfile>>('GET', `https://crashmax.ru/api/proxy?url=${BASE_URL}/ajax/mysite/index/${nickname}/`, false).then(e => {
             let status = e.parsedBody?.status.http_code
 
             if (status === 200) {
@@ -128,7 +128,7 @@ const getProfile = async (nickname: string) => {
         qs('span[class$="ico_gifts"').parentElement?.parentElement?.remove()
 
         // Удаляем вкладку "Активности"
-        qs(`a[href^="${SPACES}/activity"`).parentElement?.remove()
+        qs(`a[href^="${BASE_URL}/activity"`).parentElement?.remove()
 
         // Удаляем кнопку "Написать"
         qs('div.btn-single__wrap').remove()
@@ -211,7 +211,7 @@ const setUrls = (e: string, lnk1: HTMLElement, lnk2: HTMLElement) => {
         const { ico, text, path } = url
 
         let link = ce('a', {
-            href: SPACES + path,
+            href: BASE_URL + path,
             className: 'list-link stnd-link_arr list-link-darkblue c-darkblue',
             innerHTML: `
                 <span class="js-ico ico ico_${ico}"></span>

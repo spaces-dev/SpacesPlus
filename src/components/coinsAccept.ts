@@ -1,10 +1,10 @@
 import { qsa, logger } from '../utils'
 
-import { SPACES } from '../strings'
+import { BASE_URL } from '../strings'
 
 export const coinsAccept = () => {
     try {
-        qsa(`a[href^="${SPACES}/services/gift_get/"`).forEach(e => {
+        qsa(`a[href^="${BASE_URL}/services/gift_get/"`).forEach(e => {
             // Подтверждаем монетку
             (<HTMLElement>e).click()
 

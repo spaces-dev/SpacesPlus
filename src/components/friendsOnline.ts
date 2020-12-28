@@ -7,7 +7,7 @@ import {
 
 import { IFriendsOnline } from '../interfaces/FriendsOnline'
 
-import { HTTP, SPACES } from '../strings'
+import { HTTP, BASE_URL } from '../strings'
 import { _SETTINGS } from '../settings'
 
 /**
@@ -32,7 +32,7 @@ export const friendsOnline = (b: boolean) => {
                 className: 'list-link__wrap'
             })
 
-            http<IFriendsOnline>('GET', `${SPACES}/friends/?S=3`, true).then(e => {
+            http<IFriendsOnline>('GET', `${BASE_URL}/friends/?S=3`, true).then(e => {
                 const response = e.parsedBody?.tabbed_panel.tabs[1].content.list
 
                 if (response) {
@@ -50,7 +50,7 @@ export const friendsOnline = (b: boolean) => {
 
                     for (let i = 0; i < lengthList; i++) {
                         frOnDiv.appendChild(ce('a', {
-                            href: `${SPACES}/mysite/index/${friendsList[i].name}`,
+                            href: `${BASE_URL}/mysite/index/${friendsList[i].name}`,
                             className: 'li',
                             innerHTML: (disableAvatar ?
                                 `<span class="comm_ava m for_avatar"><img src="${friendsList[i].avatar.previewURL}" class="preview s21_20"></span>` : '') +

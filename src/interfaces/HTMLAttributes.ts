@@ -61,10 +61,6 @@ interface HTMLAttributes extends EventHandlersType {
     start?: number
     step?: number | string
     summary?: string
-
-    // recentSmiles.ts
-    smile?: any
-
     target?: string
     title?: string
     type?: inputType

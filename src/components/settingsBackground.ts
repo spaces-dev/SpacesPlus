@@ -70,16 +70,17 @@ export const settingsBackground = (e: Element) => {
             value: _SETTINGS.bodystyleSet.url,
             style: {
                 marginBottom: '7px'
-            }
-        })
+            },
+            oninput: (e: Event) => {
+                const value = (e.target as HTMLInputElement).value
 
-        inputImageUrl.addEventListener('change', (e: any) => {
-            if (isValidUrl(e.target.value) && /\.(jpg|jpeg|png|gif)$/i.test(e.target.value)) {
-                setSettings('bodystyleSet.url', e.target.value)
-                setStyles()
-                inputImageUrl.classList.remove('sp-input-error')
-            } else {
-                inputImageUrl.classList.add('sp-input-error')
+                if (isValidUrl(value) && /\.(jpg|jpeg|png|gif)$/i.test(value)) {
+                    setSettings('bodystyleSet.url', value)
+                    setStyles()
+                    inputImageUrl.classList.remove('sp-input-error')
+                } else {
+                    inputImageUrl.classList.add('sp-input-error')
+                }
             }
         })
 
@@ -87,29 +88,31 @@ export const settingsBackground = (e: Element) => {
             type: 'text',
             className: 'text-input',
             id: 'color-input',
-            value: _SETTINGS.bodystyleSet.color
-        })
+            value: _SETTINGS.bodystyleSet.color,
+            oninput: (e: Event) => {
+                const value = (e.target as HTMLInputElement).value
 
-        inputColor.addEventListener('input', (e: any) => {
-            if (/^\#([A-Za-z0-9]{3,6})$/i.test(e.target.value)) {
-                setSettings('bodystyleSet.color', e.target.value)
-                setStyles()
-                inputColor.classList.remove('sp-input-error')
-            } else {
-                inputColor.classList.add('sp-input-error')
+                if (/^\#([A-Za-z0-9]{3,6})$/i.test(value)) {
+                    setSettings('bodystyleSet.color', value)
+                    setStyles()
+                    inputColor.classList.remove('sp-input-error')
+                } else {
+                    inputColor.classList.add('sp-input-error')
+                }
             }
         })
 
-
-        let radioImage: any = ce('input', {
+        let radioImage = <HTMLInputElement>ce('input', {
             type: 'radio',
             id: 'sp_set_bodystyle_URL',
             checked: _SETTINGS.bodystyleSet.urlchecked,
             className: 'sp-checkbox-circle',
-            onclick: (e: any) => {
-                setSettings('bodystyleSet.urlchecked', e.target.checked)
+            onclick: (e: Event) => {
+                const checked = (e.target as HTMLInputElement).checked
 
-                if (e.target.checked && radioColor.checked) {
+                setSettings('bodystyleSet.urlchecked', checked)
+
+                if (checked && radioColor.checked) {
                     radioColor.checked = false
                     setSettings('bodystyleSet.colorchecked', false)
                 }
@@ -123,15 +126,17 @@ export const settingsBackground = (e: Element) => {
             }
         })
 
-        let radioColor: any = ce('input', {
+        let radioColor = <HTMLInputElement>ce('input', {
             type: 'radio',
             id: 'sp_set_bodystyle_color',
             checked: _SETTINGS.bodystyleSet.colorchecked,
             className: 'sp-checkbox-circle',
-            onclick: (e: any) => {
-                setSettings('bodystyleSet.colorchecked', e.target.checked)
+            onclick: (e: Event) => {
+                const checked = (e.target as HTMLInputElement).checked
 
-                if (e.target.checked && radioImage.checked) {
+                setSettings('bodystyleSet.colorchecked', checked)
+
+                if (checked && radioImage.checked) {
                     radioImage.checked = false
                     setSettings('bodystyleSet.urlchecked', false)
                 }
@@ -221,9 +226,11 @@ const setImage = async () => {
                                 style: {
                                     cursor: 'pointer'
                                 },
-                                onclick: (e: any) => {
-                                    (<HTMLInputElement>qs('#image-input')).value = e.target.src
-                                    setSettings('bodystyleSet.url', e.target.src)
+                                onclick: (e: Event) => {
+                                    const src = (e.target as HTMLImageElement).src;
+
+                                    (qs('#image-input') as HTMLInputElement).value = src
+                                    setSettings('bodystyleSet.url', src)
                                     setStyles()
                                 }
                             })
@@ -367,7 +374,7 @@ const setColor = () => {
 
                 qs('#color-input').addEventListener('change', (e: any) => {
                     if (/^\#([A-Za-z0-9]{3}|[A-Za-z0-9]{6})$/i.test(e.target.value)) {
-                        setSettings('bodystyleSet.color', e.target.value)
+                        setSettings(_SETTINGS.bodystyleSet.color, e.target.value)
                         setStyles()
                         picker.set(_SETTINGS.bodystyleSet.color)
                         e.target.classList.remove('sp-input-error')
@@ -388,8 +395,9 @@ const setColor = () => {
                 const colorsBtn = document.querySelectorAll('.js-bb_color')
 
                 for (let color of colorsBtn) {
-                    color.addEventListener('click', (e: any) => {
-                        let value = e.target.getAttribute('data-val')
+                    color.addEventListener('click', (e: Event) => {
+                        const value = (e.target as HTMLElement).getAttribute('data-val')!
+
                         setValues(value)
                         setSettings('bodystyleSet.color', value)
                         setStyles()

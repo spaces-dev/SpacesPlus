@@ -7,7 +7,7 @@ import {
 
 import { IUserAnketa } from '../interfaces/Mysite'
 
-import { SPACES, DATA } from '../strings'
+import { BASE_URL, DATA } from '../strings'
 
 export const userOnline = () => {
     let path = getPath(),
@@ -22,7 +22,7 @@ export const userOnline = () => {
             DATA.ONLINE = nick
 
             try {
-                http<IUserAnketa>('GET', `${SPACES}/anketa/index/${nick}/`, true).then(e => {
+                http<IUserAnketa>('GET', `${BASE_URL}/anketa/index/${nick}/`, true).then(e => {
                     const response = e.parsedBody?.user_widget?.online_time
 
                     if (response) {

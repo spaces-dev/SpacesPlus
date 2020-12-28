@@ -79,13 +79,14 @@ export const recentSmiles = () => {
                             let smileElem = ce('img', {
                                 className: 'sp_recent-smile',
                                 src: src,
-                                smile: smile,
                                 onclick: () => {
                                     // Добавляем смайлик в поле ввода
                                     let input = qs('textarea[tabindex="1"]') ?? qs('textarea[name="msg"]');
                                     (<HTMLInputElement>input).value += smile + ' '
                                 }
                             })
+
+                            smileElem.setAttribute('smile', (smile as string))
 
                             smilesBody.append(smileElem)
                         }

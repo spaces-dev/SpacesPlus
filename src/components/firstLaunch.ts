@@ -7,26 +7,26 @@ import {
     modalMessage
 } from '../utils'
 
-import { SPACES, BASE_URL } from '../strings'
+import { HOST, BASE_URL } from '../strings'
 
 export const firstLaunch = () => {
     try {
 
         // показываем приветствие, если отсутсвует кука и если BASE_URL не в залупе!
         if (getCookie('SP_LAUNCH') === undefined &&
-            BASE_URL !== 'spaces-blogs.com' &&
-            BASE_URL !== 'spac1.net') {
+            HOST !== 'spaces-blogs.com' &&
+            HOST !== 'spac1.net') {
 
             modalMessage('Спасибо за установку Spaces+', `
                 <b style="color: #f86934">ВНИМАНИЕ!</b></br></br>
                 Во избежания подделок, которые могут воровать пароли пользователей, скрипт скачивать только с официального <a href="https://spaces-dev.github.io" target="_blank">сайта</a></br></br>
-                С вопросами по использованию скрипта, писать в сообщество <a href="${SPACES}/soo/extension/" target="_blank">Spaces+</a></br></br>
+                С вопросами по использованию скрипта, писать в сообщество <a href="${BASE_URL}/soo/extension/" target="_blank">Spaces+</a></br></br>
                 <div id="SP_LAUNCH_BUTTON" class="pad_t_a"></div>
                 `, true)
 
             if (qs('#SP_LAUNCH_BUTTON')) {
                 const goTo = ce('a', {
-                    href: `${SPACES}/settings/?sp_plus_settings=1`,
+                    href: `${BASE_URL}/settings/?sp_plus_settings=1`,
                     className: 'btn btn_white btn_input right sticker-close_btn',
                     innerHTML: 'Перейти к настройкам',
                     onclick: () => qs('#SP_PLUS_ALERT').remove()

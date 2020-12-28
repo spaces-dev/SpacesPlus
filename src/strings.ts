@@ -8,8 +8,8 @@ import { IDevice } from './interfaces/Device'
  */
 const DEV: boolean = process.env.NODE_ENV === 'development' ? true : false
 const HTTP: string = document.location.protocol
-const BASE_URL: string = document.location.hostname
-const SPACES: string = `${HTTP}//${BASE_URL}`
+const HOST: string = document.location.hostname
+const BASE_URL: string = `${HTTP}//${HOST}`
 const PKG_VERSION: string = pkg.version
 const GITHUB: string = pkg.homepage
 const REVISION: number = Number(new Date())
@@ -22,8 +22,10 @@ const ENV_PATH: string = DEV ? 'https://localhost:8080' : GITHUB
 const DATA: IData = {
     // наш CK
     CK: '',
+
     // наш SID
     SID: '',
+
     // наш Никнейм
     USERNAME: '',
 
@@ -42,9 +44,9 @@ export {
     DEV,
     DATA,
     HTTP,
+    HOST,
     DEVICE,
     GITHUB,
-    SPACES,
     BASE_URL,
     ENV_PATH,
     REVISION,

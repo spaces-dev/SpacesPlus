@@ -11,12 +11,12 @@ import {
     modalMessage
 } from '../utils'
 
-import { SPACES, DATA } from '../strings'
+import { BASE_URL, DATA } from '../strings'
 
 export const deleteReaders = () => {
     try {
         let buttons = qs('#SP_PLUS_BUTTONS_R'),
-            delLinks = qsa(`a[href^="${SPACES}/lenta/reader_delete/"`)
+            delLinks = qsa(`a[href^="${BASE_URL}/lenta/reader_delete/"`)
 
         if (getPath() === '/lenta/readers/' && delLinks && !buttons) {
 
@@ -110,7 +110,7 @@ export const deleteReaders = () => {
                                 for (let reader of readers) {
                                     modalMessage(`Осталось удалить ${count--} из ${allReaders} ${declStr(count)}`, 'Подождите немного... <span style="padding-right: 10px" class="ico ico_spinner"></span>', false)
 
-                                    await http('POST', `${SPACES}/lenta/reader_delete/?user=${reader}`, false, `&CK=${DATA.CK}&cfms=Удалить`).then(e => {
+                                    await http('POST', `${BASE_URL}/lenta/reader_delete/?user=${reader}`, false, `&CK=${DATA.CK}&cfms=Удалить`).then(e => {
                                         logger.info('Удалили читателя', e)
                                     })
                                 }
