@@ -55,12 +55,9 @@ import { qs, logger } from '../utils'
 export const newYear = () => {
     try {
 
-        const date = new Date()
-        const day = date.getDate() > 20 || date.getDate() < 15
-        const month = date.getMonth() === 11 || date.getMonth() === 0
         const logo = qs('.ico_logo_newyear')
 
-        if (day && month && logo) {
+        if (logo) {
             let key = 1
 
             setInterval(() => {
