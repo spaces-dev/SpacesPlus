@@ -91,7 +91,10 @@ export const settingsMenu = () => {
 
                         if (setArea) {
                             for (let i in _SETTINGS) {
-                                if (_SETSTRINGS[i] !== undefined) {
+
+                                let key = i as Exclude<ISettings, object>
+
+                                if (_SETSTRINGS[key] !== undefined) {
 
                                     /**
                                     * Проверяем поддерживаемость данных функций (rscroll, hrightbar, weather) на Touch версии сайта
@@ -103,7 +106,7 @@ export const settingsMenu = () => {
                                         id: i,
                                         type: 'checkbox',
                                         className: 'sp-checkbox-square',
-                                        checked: _SETTINGS[i as Exclude<ISettings, object>],
+                                        checked: _SETTINGS[key],
                                         onclick: (e: Event) => {
                                             const checked = (e.target as HTMLInputElement).checked
                                             const target = (e.target as Element)
@@ -111,7 +114,7 @@ export const settingsMenu = () => {
 
                                             if (target.attributes.getNamedItem('unsupported') && checked) {
                                                 modalMessage('Внимание!', 'Для работы данной функции, необходимо переключиться на компьютерную версию сайта', true, 5)
-                                                return false
+                                                return
                                             }
 
                                             setSettings(id, checked)
@@ -173,7 +176,7 @@ export const settingsMenu = () => {
                                     })
 
                                     let description = ce('label', {
-                                        innerHTML: _SETSTRINGS[i],
+                                        innerHTML: _SETSTRINGS[key],
                                         htmlFor: i
                                     })
 
@@ -182,19 +185,21 @@ export const settingsMenu = () => {
                                     })
 
                                     // unsupported attribute
-                                    if (unsupported) checkbox.setAttribute('unsupported', i)
+                                    if (unsupported) {
+                                        checkbox.setAttribute('unsupported', i)
+                                    }
 
                                     label.appendChild(checkbox)
                                     label.appendChild(description)
 
                                     // кнопка 'описание функции'
-                                    if (_DESCSTRINGS[i] !== undefined) {
+                                    if (_DESCSTRINGS[key] !== undefined) {
 
                                         let info = ce('a', {
                                             href: '#',
                                             className: 'sp sp-info sp_info-btn',
                                             onclick: () => {
-                                                modalMessage(_SETSTRINGS[i], _DESCSTRINGS[i], true)
+                                                modalMessage(_SETSTRINGS[key], _DESCSTRINGS[key], true)
                                                 return false
                                             }
                                         })

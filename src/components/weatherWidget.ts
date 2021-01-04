@@ -14,9 +14,6 @@ import { IWeather } from '../interfaces/Weather'
  * Виджет погоды в правом меню
  */
 export const weatherWidget = () => {
-    let widget = qs('#SP_WIDGET_WEATHER')
-    let page_rightbar = qs('#page_rightbar')
-
     /**
      * Из текущего времени вычитаем время последней проверки погоды, если оно больше интервала, то обновляем виджет погоды
      * _SETTINGS.weatherSet.city !== null не пускаем, пока не узнаем город через ipwhois
@@ -24,13 +21,22 @@ export const weatherWidget = () => {
     if (((unixTime() - _SETTINGS.weatherSet.time) >
         _SETTINGS.weatherSet.interval) &&
         _SETTINGS.weatherSet.city !== null) {
+
         // обновляем время
         _SETTINGS.weatherSet.time = unixTime()
+
         // обновляем виджет
         getWeather()
     }
 
-    if (!widget && page_rightbar && cookieWeather()) {
+    // отрисовываем виджет
+    if (!qs('#SP_WIDGET_WEATHER') && _SETTINGS.weatherSet.city !== null) widgetHTML()
+}
+
+const widgetHTML = () => {
+    let page_rightbar = qs('#page_rightbar')
+
+    if (page_rightbar && cookieWeather()) {
 
         let { id, name, main, wind, weather, clouds }: IWeather = cookieWeather()
 

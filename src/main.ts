@@ -97,17 +97,17 @@ const init = () => {
      * ! Технические функции
      * ? Срабатывают один раз после загрузки страницы
      */
-    firstLaunch()
     checkUpdates()
     sidebarButton()
     readSettings()
     setStyles()
+    newYear()
+    firstLaunch()
 
     /**
      * ? Тут перечислены функции, которые срабатывают единоразово
      * ? далее их изменения отслеживаются в components/settingsMenu.ts
      */
-    newYear()
     oldHeader(_SETTINGS.oldheader)
     apiDebugger(_SETTINGS.apidebug)
     freeStickers(_SETTINGS.sticker)

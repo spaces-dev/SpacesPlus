@@ -1,14 +1,10 @@
-export type ISetStrings = {
-    readonly [key: string]: string
-}
-
-export interface NotifySet {
+/*export interface NotifySet {
     url: string
     volume: number
     mail: boolean
     journal: boolean
     feed: boolean
-}
+}*/
 
 export interface RecentSmiles {
     show: boolean

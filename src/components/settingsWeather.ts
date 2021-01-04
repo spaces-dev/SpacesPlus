@@ -140,16 +140,19 @@ export const getWeather = async () => {
             // Город не найден
             if (e.status === 404) {
                 modalMessage('Виджет погоды', `Город <b>${city}</b> не найден`, true, 5)
-                return false
+                return
             }
 
             // если есть другие ошибки
             if (json?.message) {
                 modalMessage('Виджет погоды', json.message, true, 5)
-                return false
+                return
             }
 
-            if (qs('#SP-CITY-INPUT')) { (<HTMLInputElement>qs('#SP-CITY-INPUT')).value = json!.name }
+            if (qs('#SP-CITY-INPUT')) {
+                (<HTMLInputElement>qs('#SP-CITY-INPUT')).value = json!.name
+            }
+
             qs('#SP_WIDGET_WEATHER')?.remove()
 
             if (json?.cod === 200) {

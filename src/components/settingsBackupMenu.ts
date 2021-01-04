@@ -118,37 +118,38 @@ export const settingsBackupMenu = (id: string) => {
                 accept: 'application/JSON',
                 style: {
                     display: 'none'
+                },
+                onchange: () => {
+                    let json,
+                        textarea = (<HTMLInputElement>qs('#SP_BACKUP_JSON')),
+                        f = (<HTMLInputElement>qs('#SP_IMPORT')).files![0]
+
+                    const reader: FileReader = new FileReader()
+
+                    reader.onload = ((_f) => {
+                        return () => {
+                            try {
+                                json = (reader.result as string)
+
+                                // валидация
+                                JSON.parse(json)
+
+                                // сохраняем настройки
+                                setCookie('SP_PLUS_SET', json);
+
+                                // вставляем в textarea
+                                textarea.value = beautify(JSON.parse(json), null, 4)
+
+                                modalMessage('Импорт и экспорт настроек', 'Настройки были успешно сохранены', true, 3)
+                            } catch (e) {
+                                modalMessage('Ошибка разбора файла настроек', e, true)
+                            }
+                        }
+                    })(f)
+
+                    reader.readAsText(f)
                 }
             })
-
-            restoreInput.addEventListener('change', () => {
-
-                let json,
-                    textarea = (<HTMLInputElement>qs('#SP_BACKUP_JSON')),
-                    f = (<HTMLInputElement>qs('#SP_IMPORT')).files![0]
-
-                const reader: FileReader = new FileReader()
-
-                reader.onload = ((_f) => {
-                    return () => {
-                        try {
-                            json = JSON.parse((reader.result as string))
-
-                            // сохраняем настройки
-                            setCookie('SP_PLUS_SET', json);
-
-                            // вставляем в textarea
-                            textarea.value = beautify(json, null, 4)
-
-                            modalMessage('Импорт и экспорт настроек', 'Настройки были успешно сохранены', true, 3)
-                        } catch (e) {
-                            modalMessage('Ошибка разбора файла настроек', e, true)
-                        }
-                    }
-                })(f)
-
-                reader.readAsText(f)
-            }, false)
 
             let restoreButton = ce('button', {
                 className: 'user__tools-link table__cell sp_btn_line sp_btn-list',
@@ -167,8 +168,10 @@ export const settingsBackupMenu = (id: string) => {
                 `,
                 onclick: () => {
                     modalConfirm('Вы уверены, что хотите сохранить файл настроек?', false, () => {
+                        let settings = new Blob([beautify(_SETTINGS, null, 4)], { type: 'text/plain' })
+
                         let blob = ce('a', {
-                            href: URL.createObjectURL(new Blob([beautify(_SETTINGS, null, 4)], { type: 'text/plain' })),
+                            href: URL.createObjectURL(settings),
                             download: `spaces-plus-${+new Date}.json`
                         })
 

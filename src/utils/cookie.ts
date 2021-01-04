@@ -1,20 +1,17 @@
+import { HOST } from '../strings'
+
+import { extend } from './extend'
+
 /**
  * Получение куки
  * @param name
  */
 function getCookie(name: string): string | undefined {
-    const cookieName = name + '='
-    const cookieArr = document.cookie.split(';')
+    let matches = document.cookie.match(
+        new RegExp(`(?:^|; )${name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1')}=([^;]*)`)
+    )
 
-    for (let i = 0, j = cookieArr.length; i < j; i++) {
-        const ex = cookieArr[i].trimLeft()
-
-        if (ex.indexOf(cookieName) == 0) {
-            return ex.substring(cookieName.length, ex.length)
-        }
-    }
-
-    return undefined
+    return matches ? decodeURIComponent(matches[1]) : undefined
 }
 
 /**
@@ -22,19 +19,30 @@ function getCookie(name: string): string | undefined {
  * @param name
  * @param value
  */
-function setCookie(name: string, value: string): void {
-    const d = new Date()
-    d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000))
+function setCookie(key: string, value: string | null, opts?: any) {
+    opts = extend({
+        path: '/',
+        expires: 365,
+        secure: false,
+        domain: '.' + HOST
+    }, opts)
 
-    document.cookie = `${name}=${value}; expires=${d.toUTCString()}`
+    if (opts.expires && !(opts.expires instanceof Date)) opts.expires = new Date(+new Date + 1000 * 3600 * 24 * opts.expires)
+    let query = value !== null ? encodeURIComponent(key) + '=' + encodeURIComponent(value) : encodeURIComponent(key) + '='
+
+    if (opts.expires) query += '; expires=' + opts.expires.toUTCString()
+    if (opts.domain) query += '; domain=' + opts.domain
+    if (opts.path) query += '; path=' + opts.path
+    if (opts.secure) query += '; secure'
+    document.cookie = query
 }
 
 /**
  * Удаляем куку
  * @param name
  */
-function delCookie(name: string): void {
-    document.cookie = name + '=; Max-Age=-99999999;'
+function delCookie(name: string) {
+    setCookie(name, null, { expires: -1 })
 }
 
 export {

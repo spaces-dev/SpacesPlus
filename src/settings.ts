@@ -1,12 +1,12 @@
 import { BASE_URL, ENV_PATH, DATA } from './strings'
 
-import { ISettings, ISetStrings } from './interfaces/Settings'
+import { ISettings } from './interfaces/Settings'
 
 /**
  * * Описание настроек
  * ! Указывать описание для каждого пункта настроек НЕ обязательно
  */
-export const _DESCSTRINGS: ISetStrings = {
+export const _DESCSTRINGS = {
     'blogsd': `Функция позволяет удалять сразу несколько блогов.</br></br><img src="${ENV_PATH}/screens/sort-blogs.png"></br>Работает только в <a href="${BASE_URL}/diary/view/?Short=0&sort=0">"Расширенном виде"</a> (нажмите на ссылку, чтобы включить этот вид - откроется страница с вашими блогами).`,
     'readersd': 'Функция позволяет удалять сразу несколько читателей, может быть вам это пригодиться.',
     'comments': 'Функция будет полезна тем, кто часто удаляет много комментариев. Работает в любом месте, где у Вас есть возможность удалять комментарии, будь это ваш блог или гостевая.',
@@ -37,7 +37,7 @@ export const _DESCSTRINGS: ISetStrings = {
  * * Названия функций в меню настроек
  * ! Положение в объекте НЕ влияет на рассположение в списке настроек
  */
-export const _SETSTRINGS: ISetStrings = {
+export const _SETSTRINGS = {
     'blogsd': 'Пакетное удаление блогов',
     'readersd': 'Пакетное удаление читателей',
     'comments': 'Пакетное удаление комментариев',
@@ -69,11 +69,9 @@ export const _SETSTRINGS: ISetStrings = {
  * ? Чтобы пункт настроек появился в списке настроек
  * ? ключ необходимо продублировать в _SETSTRINGS
  * ? если ключ undefined, то пункт не будет добавлен список
- * * for (let i in _SETTINGS) {
- * *     if (_SETSTRINGS[i] !== undefined) {
  * ! Положение в объекте ВЛИЯЕТ на рассположение в списке настроек
  */
-export let _SETTINGS: ISettings = {
+export const _SETTINGS: ISettings = {
     'blogsd': false,
     'readersd': false,
     'comments': false,

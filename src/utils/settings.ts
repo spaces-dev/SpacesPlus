@@ -1,4 +1,5 @@
 import {
+    extend,
     logger,
     getCookie,
     setCookie
@@ -14,8 +15,7 @@ export const readSettings = () => {
 
     try {
         if (settings) {
-            // @ts-ignore
-            _SETTINGS = JSON.parse(settings)
+            extend(_SETTINGS, JSON.parse(settings))
         } else {
             setCookie('SP_PLUS_SET', JSON.stringify(_SETTINGS))
         }
