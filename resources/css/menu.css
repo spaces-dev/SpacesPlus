@@ -1,6 +1,11 @@
 .sp-input-error {
     border: 1px solid #ff9a95;
-    background-color: #fdf3ef
+    background: #fdf3ef
+}
+
+.sp-input-error:focus {
+    border: 2px solid #ff9a95;
+    background: #fdf3ef
 }
 
 .sp-cbfb+label:before {
