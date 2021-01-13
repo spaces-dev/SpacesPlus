@@ -12,7 +12,7 @@ import {
 import { IProxy } from '../interfaces/Proxy'
 import { IUserProfile } from '../interfaces/Mysite'
 
-import { BASE_URL, DATA } from '../strings'
+import { BASE_URL, DATA, HOST } from '../strings'
 
 export const bypassProfile = () => {
     try {
@@ -70,7 +70,8 @@ export const bypassProfile = () => {
             if ((rulesLink || noAccessIco) && !blackListLink && !qs('#SP_LIST_LINK')) {
 
                 // фикс двойного бордера
-                qs('div.user__tools').style.borderTop = 'none'
+                let userTools = qs('div.user__tools')
+                if (userTools) userTools.style.borderTop = 'none'
 
                 setUrls(
                     // костыль для получения ника пользователя
@@ -104,7 +105,7 @@ const getProfile = async (nickname: string) => {
 
             if (status === 200) {
                 // Заменяем уебанские домены на пользовательский
-                DATA.CONTENT = e.parsedBody!.contents.content.replace(/spac1\.net|spaces-blogs\.com/gi, str => str = BASE_URL)
+                DATA.CONTENT = e.parsedBody!.contents.content.replace(/spac1\.net|spaces-blogs\.com/gi, str => str = HOST)
             } else {
                 modalMessage('Просмотр профилей', 'Ошибка загрузки профиля! Обратитесь к разработчику', true)
             }
@@ -119,19 +120,19 @@ const getProfile = async (nickname: string) => {
 
         // Костыль по восстановлению аватарки
         let avatar = (<HTMLImageElement>qs('img[data-s*="101.100.0"'))
-        avatar.src = (avatar.dataset.s as string)
+        if (avatar) avatar.src = (avatar.dataset.s as string)
 
         // Удаляем ненужную панель c кнопками
         qs('div.user__tools').remove()
 
         // Удаляем кнопку "Сделать подарок"
-        qs('span[class$="ico_gifts"').parentElement?.parentElement?.remove()
+        qs('span[class$="ico_gifts"')?.parentElement?.parentElement?.remove()
 
         // Удаляем вкладку "Активности"
-        qs(`a[href^="${BASE_URL}/activity"`).parentElement?.remove()
+        qs(`a[href^="${BASE_URL}/activity"`)?.parentElement?.remove()
 
         // Удаляем кнопку "Написать"
-        qs('div.btn-single__wrap').remove()
+        qs('div.btn-single__wrap')?.remove()
     }
 }
 
@@ -195,8 +196,9 @@ const setUrls = (e: string, lnk1: HTMLElement, lnk2: HTMLElement) => {
     ]
 
     // конкатим второй массив, если аккаунт покинут
-    if (lnk1 === null && lnk2 === null)
+    if (lnk1 === null && lnk2 === null) {
         urls = urls2.concat(urls)
+    }
 
     let widget = ce('div', {
         id: 'SP_LIST_LINK',
@@ -207,7 +209,6 @@ const setUrls = (e: string, lnk1: HTMLElement, lnk2: HTMLElement) => {
 
     // создаем ссылки
     for (let url of urls) {
-
         const { ico, text, path } = url
 
         let link = ce('a', {
