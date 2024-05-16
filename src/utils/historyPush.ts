@@ -12,10 +12,10 @@ import { logger } from './logger'
  * @param title Заголовок на вкладке в браузере
  */
 export const historyPush = (state: object, url: string, title: string) => {
-    try {
-        document.title = title
-        history.pushState(state, title, url)
-    } catch (e) {
-        logger.error('historyPush.ts', e)
-    }
+  try {
+    document.title = title
+    history.pushState(state, title, url)
+  } catch (e) {
+    logger.error('historyPush.ts', e)
+  }
 }

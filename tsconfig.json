@@ -1,18 +1,13 @@
 {
-    "compilerOptions": {
-        "esModuleInterop": true,
-        "module": "commonjs",
-        "moduleResolution": "node",
-        "resolveJsonModule": true,
-        "strict": true,
-        "target": "es2019"
-    },
-    "include": [
-        "src/*"
-    ],
-    "exclude": [
-        "node_modules/",
-        "resources/",
-        "dist/"
-    ]
+  "extends": "@crashmax/tsconfig",
+  "compilerOptions": {
+    "outDir": "dist",
+    "resolveJsonModule": true,
+    "verbatimModuleSyntax": false,
+    "strict": false,
+    "noPropertyAccessFromIndexSignature": false
+  },
+  "include": [
+    "src/**/*"
+  ]
 }

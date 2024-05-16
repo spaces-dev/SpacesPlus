@@ -1,27 +1,30 @@
-import { ce, qs, qsa, logger } from '../utils'
+import { ce, logger, qs, qsa } from '../utils'
 
 export const adBlock = () => {
-    try {
-        // Удаляем всплывающую рекламу
-        qsa('img[src$="static/i/close3.png"]').forEach(e => e.parentElement?.parentElement?.remove())
+  try {
+    // Удаляем всплывающую рекламу
+    qsa('img[src$="static/i/close3.png"]').forEach((e) =>
+      e.parentElement?.parentElement?.remove()
+    )
 
-        // Удаляем рекламу по атрибуту title
-        qsa('a[title="Реклама"').forEach(e => e.parentElement?.remove())
+    // Удаляем рекламу по атрибуту title
+    qsa('a[title="Реклама"').forEach((e) => e.parentElement?.remove())
 
-        // Удаляем виджет ВК в правой панели
-        qsa('#vk_groups').forEach(e => e.parentElement?.remove())
+    // Удаляем виджет ВК в правой панели
+    qsa('#vk_groups').forEach((e) => e.parentElement?.remove())
 
-        // Прототипируем XMLHttpRequest для блокировки рекламы
-        if (!qs('#SP_PLUS_ADBLOCK')) {
-            let protoAd = ce('script', {
-                type: 'text/javascript',
-                id: 'SP_PLUS_ADBLOCK',
-                innerHTML: 'var rawOpen = XMLHttpRequest.prototype.open; XMLHttpRequest.prototype.open = function() { if (!this._hooked) { this._hooked = true; setupHook(this); }; rawOpen.apply(this, arguments); }; function setupHook(xhr) { function getter() { delete xhr.responseText; var ret = xhr.responseText; var json = JSON.parse(ret); json.reklama = ""; json.rightbar_reklama = ""; json.rightbar_app = ""; json.sidebar_reklama = ""; ret = JSON.stringify(json); setup(); return ret; }; function setup() { Object.defineProperty(xhr, "responseText", { get: getter, configurable: true }); } setup(); };'
-            })
+    // Прототипируем XMLHttpRequest для блокировки рекламы
+    if (!qs('#SP_PLUS_ADBLOCK')) {
+      let protoAd = ce('script', {
+        type: 'text/javascript',
+        id: 'SP_PLUS_ADBLOCK',
+        innerHTML:
+          'var rawOpen = XMLHttpRequest.prototype.open; XMLHttpRequest.prototype.open = function() { if (!this._hooked) { this._hooked = true; setupHook(this); }; rawOpen.apply(this, arguments); }; function setupHook(xhr) { function getter() { delete xhr.responseText; var ret = xhr.responseText; var json = JSON.parse(ret); json.reklama = ""; json.rightbar_reklama = ""; json.rightbar_app = ""; json.sidebar_reklama = ""; ret = JSON.stringify(json); setup(); return ret; }; function setup() { Object.defineProperty(xhr, "responseText", { get: getter, configurable: true }); } setup(); };'
+      })
 
-            document.getElementsByTagName('head')[0].appendChild(protoAd)
-        }
-    } catch (e) {
-        logger.error('adBlock.ts', e)
+      document.getElementsByTagName('head')[0]!.appendChild(protoAd)
     }
+  } catch (e) {
+    logger.error('adBlock.ts', e)
+  }
 }

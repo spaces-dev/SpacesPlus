@@ -1,35 +1,30 @@
 {
-    "name": "spaces-plus",
-    "description": "🚀 Powerful userscript for Spaces.ru",
-    "homepage": "https://spaces-dev.github.io/SpacesPlus",
-    "version": "3.1.3",
-    "author": {
-        "name": "Vitalij Ryndin",
-        "email": "sys@crashmax.ru",
-        "url": "https://crashmax.ru"
-    },
-    "scripts": {
-        "dev": "cross-env NODE_ENV=development webpack-dev-server --config-name main --host localhost --watch-poll",
-        "build": "cross-env NODE_ENV=production webpack --progress"
-    },
-    "devDependencies": {
-        "@types/node": "^14.11.8",
-        "@types/resize-observer-browser": "^0.1.4",
-        "@types/webpack": "^4.41.22",
-        "@types/webpack-dev-server": "^3.11.0",
-        "clean-webpack-plugin": "^3.0.0",
-        "copy-webpack-plugin": "^6.2.1",
-        "cross-env": "^7.0.2",
-        "json-beautify": "^1.1.1",
-        "optimize-css-assets-webpack-plugin": "^5.0.4",
-        "ts-debug": "^1.3.0",
-        "ts-loader": "^8.0.4",
-        "ts-node": "^9.0.0",
-        "typescript": "^4.0.2",
-        "webpack": "^4.44.2",
-        "webpack-cli": "^3.3.12",
-        "webpack-dev-server": "^3.11.0",
-        "webpack-userscript": "^2.5.6",
-        "webpack-zip-files-plugin": "^1.0.0"
-    }
+  "name": "spaces-plus",
+  "description": "🚀 Powerful userscript for Spaces.ru",
+  "homepage": "https://spaces-dev.github.io/SpacesPlus/",
+  "version": "3.1.3",
+  "license": "MIT",
+  "type": "module",
+  "author": {
+    "name": "Vitalij Ryndin",
+    "email": "sys@crashmax.ru",
+    "url": "https://crashmax.ru"
+  },
+  "scripts": {
+    "dev": "vite build --watch --mode development",
+    "build": "pnpm type-check && vite build",
+    "type-check": "tsc --noEmit",
+    "format": "prettier --write \"**/*.{js,ts,tsx,json}\""
+  },
+  "devDependencies": {
+    "@crashmax/prettier-config": "5.0.2",
+    "@crashmax/tsconfig": "2.1.0",
+    "typescript": "5.4.5",
+    "vite": "5.2.11",
+    "vite-userscript-plugin": "1.10.0"
+  },
+  "dependencies": {
+    "json-beautify": "^1.1.1",
+    "zero-dependency": "0.9.9"
+  }
 }

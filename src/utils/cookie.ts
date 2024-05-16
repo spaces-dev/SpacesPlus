@@ -1,5 +1,4 @@
 import { HOST } from '../strings'
-
 import { extend } from './extend'
 
 /**
@@ -7,11 +6,13 @@ import { extend } from './extend'
  * @param name
  */
 function getCookie(name: string): string | undefined {
-    let matches = document.cookie.match(
-        new RegExp(`(?:^|; )${name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1')}=([^;]*)`)
+  let matches = document.cookie.match(
+    new RegExp(
+      `(?:^|; )${name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1')}=([^;]*)`
     )
+  )
 
-    return matches ? decodeURIComponent(matches[1]) : undefined
+  return matches ? decodeURIComponent(matches[1]!) : undefined
 }
 
 /**
@@ -20,21 +21,28 @@ function getCookie(name: string): string | undefined {
  * @param value
  */
 function setCookie(key: string, value: string | null, opts?: any) {
-    opts = extend({
-        path: '/',
-        expires: 365,
-        secure: false,
-        domain: '.' + HOST
-    }, opts)
+  opts = extend(
+    {
+      path: '/',
+      expires: 365,
+      secure: false,
+      domain: '.' + HOST
+    },
+    opts
+  )
 
-    if (opts.expires && !(opts.expires instanceof Date)) opts.expires = new Date(+new Date + 1000 * 3600 * 24 * opts.expires)
-    let query = value !== null ? encodeURIComponent(key) + '=' + encodeURIComponent(value) : encodeURIComponent(key) + '='
+  if (opts.expires && !(opts.expires instanceof Date))
+    opts.expires = new Date(+new Date() + 1000 * 3600 * 24 * opts.expires)
+  let query =
+    value !== null
+      ? encodeURIComponent(key) + '=' + encodeURIComponent(value)
+      : encodeURIComponent(key) + '='
 
-    if (opts.expires) query += '; expires=' + opts.expires.toUTCString()
-    if (opts.domain) query += '; domain=' + opts.domain
-    if (opts.path) query += '; path=' + opts.path
-    if (opts.secure) query += '; secure'
-    document.cookie = query
+  if (opts.expires) query += '; expires=' + opts.expires.toUTCString()
+  if (opts.domain) query += '; domain=' + opts.domain
+  if (opts.path) query += '; path=' + opts.path
+  if (opts.secure) query += '; secure'
+  document.cookie = query
 }
 
 /**
@@ -42,11 +50,7 @@ function setCookie(key: string, value: string | null, opts?: any) {
  * @param name
  */
 function delCookie(name: string) {
-    setCookie(name, null, { expires: -1 })
+  setCookie(name, null, { expires: -1 })
 }
 
-export {
-    getCookie,
-    setCookie,
-    delCookie
-}
+export { getCookie, setCookie, delCookie }

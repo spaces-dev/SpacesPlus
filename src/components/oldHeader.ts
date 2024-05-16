@@ -6,21 +6,20 @@ import { qsa } from '../utils'
  * @param b
  */
 export const oldHeader = (b: boolean) => {
+  // всегда скрываем надписи разделов
+  qsa('span.horiz-menu__link-text').forEach((e) => e.remove())
 
-    // всегда скрываем надписи разделов
-    qsa('span.horiz-menu__link-text').forEach(e => e.remove())
+  // кнопки шапки
+  let p = qsa('a.horiz-menu__link')
 
-    // кнопки шапки
-    let p = qsa('a.horiz-menu__link')
+  // Клонируем ленту
+  let tab1 = p[2].cloneNode(true)
 
-    // Клонируем ленту
-    let tab1 = p[2].cloneNode(true)
+  // Клонируем почту
+  let tab2 = p[4].cloneNode(true)
 
-    // Клонируем почту
-    let tab2 = p[4].cloneNode(true)
-
-    if (b || (p[2] as unknown as URL).pathname === '/mail/') {
-        p[4].replaceWith(tab1)
-        p[2].replaceWith(tab2)
-    }
+  if (b || (p[2] as unknown as URL).pathname === '/mail/') {
+    p[4].replaceWith(tab1)
+    p[2].replaceWith(tab2)
+  }
 }

@@ -1,5 +1,5 @@
 export interface INotify {
-    body: string
-    icon: string
-    tag: 'events'
+  body: string
+  icon: string
+  tag: 'events'
 }
