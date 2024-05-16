@@ -12,7 +12,7 @@ const BASE_URL: string = `${HTTP}//${HOST}`
 const PKG_VERSION: string = pkg.version
 const GITHUB: string = pkg.homepage
 const REVISION: number = Number(new Date())
-const DEVICE: IDevice = window.Device
+const DEVICE: IDevice = window.Device || unsafeWindow.Device
 const ENV_PATH: string = DEV ? 'https://localhost:8080' : GITHUB
 
 /**
