@@ -1,4 +1,5 @@
 import { entries } from 'zero-dependency'
+
 import { PKG_VERSION } from '../strings'
 
 type LogType = 'info' | 'debug' | 'warn' | 'error'

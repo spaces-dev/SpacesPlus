@@ -26,4 +26,6 @@ export const getQuery = (name: string) => {
   } catch (e) {
     logger.error('getQuery.ts', e)
   }
+
+  return undefined
 }

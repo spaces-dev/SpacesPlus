@@ -1,8 +1,4 @@
 declare global {
-  const unsafeWindow: Window
-  interface unsafeWindow {
-    Device: IDevice
-  }
   interface Window {
     Device: IDevice
   }

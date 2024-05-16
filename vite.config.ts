@@ -16,7 +16,7 @@ const DOMAINS = [
 
 export default defineConfig((config) => {
   const isDev = config.mode === 'development'
-  const basePath = isDev ? 'http://localhost:3000' : pkg.homepage
+  const basePath = isDev ? 'http://localhost:3000/' : pkg.homepage
 
   return {
     plugins: [
@@ -28,11 +28,11 @@ export default defineConfig((config) => {
           version: pkg.version,
           author: `${pkg.author.name} <${pkg.author.email}> ${pkg.author.url}`,
           license: pkg.license,
-          homepage: pkg.homepage,
-          icon: `${basePath}/icons/logo_96.png`,
-          homepageURL: 'https://github.com/spaces-dev/SpacesPlus',
-          require: `${basePath}/libs/colorpicker.js`,
-          match: DOMAINS.map((domain) => `https://${domain}/*`)
+          icon: `${basePath}icons/logo_96.png`,
+          require: `${basePath}libs/colorpicker.js`,
+          match: DOMAINS.map((domain) => `https://${domain}/*`),
+          updateURL: `${pkg.homepage}/${pkg.name}.meta.js`,
+          downloadURL: `${pkg.homepage}/${pkg.name}.user.js`,
         },
         server: {
           port: 3000

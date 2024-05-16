@@ -1,5 +1,5 @@
-import type { IFiles } from '../interfaces/Files'
 import { ce, getPath, http, logger, qs } from '../utils'
+import type { IFiles } from '../interfaces/Files'
 
 export const blockedFiles = () => {
   try {
