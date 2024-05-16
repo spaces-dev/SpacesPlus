@@ -1,46 +1,41 @@
-import {
-    ce,
-    qs,
-    logger
-} from '../utils'
-
 import { DATA } from '../strings'
+import { ce, logger, qs } from '../utils'
 
 export const playerDownload = () => {
+  try {
+    let trId: number = 0,
+      track = sessionStorage.getItem('music:track'),
+      data = sessionStorage.getItem('music:playlist'),
+      downPlace = qs('#SP_MUSIC_DOWN'),
+      player = qs('#gp_main_player')
 
-    try {
-        let trId: number = 0,
-            track = sessionStorage.getItem('music:track'),
-            data = sessionStorage.getItem('music:playlist'),
-            downPlace = qs('#SP_MUSIC_DOWN'),
-            player = qs('#gp_main_player')
+    if (player && track && data) {
+      let jstr = JSON.parse(track)
+      let jspl = JSON.parse(data)
 
-        if (player && track && data) {
-            let jstr = JSON.parse(track)
-            let jspl = JSON.parse(data)
+      trId = parseInt(jstr.id, 10)
+      let trScr = jspl.playlist.playlist[trId].src
+      let tdIc = qs('a.js-music_repeat')
 
-            trId = parseInt(jstr.id, 10)
-            let trScr = jspl.playlist.playlist[trId].src
-            let tdIc = qs('a.js-music_repeat')
+      if (tdIc && !downPlace) {
+        DATA.PLAYER = trId
+        let dwnTd = ce('td', {
+          id: 'SP_MUSIC_DOWN',
+          className: 'ico_td',
+          innerHTML:
+            '<span style="margin: 0px 6px 0px 0px !important" class="sp sp-download-darkblue" title="Скачать"></span>',
+          onclick: () => (location.href = trScr)
+        })
 
-            if (tdIc && !downPlace) {
-                DATA.PLAYER = trId
-                let dwnTd = ce('td', {
-                    id: 'SP_MUSIC_DOWN',
-                    className: 'ico_td',
-                    innerHTML: '<span style="margin: 0px 6px 0px 0px !important" class="sp sp-download-darkblue" title="Скачать"></span>',
-                    onclick: () => location.href = trScr
-                })
+        tdIc.parentElement?.after(dwnTd)
+      } else if (downPlace && DATA.PLAYER !== trId) {
+        DATA.PLAYER = trId
+        downPlace.onclick = () => (location.href = trScr)
 
-                tdIc.parentElement?.after(dwnTd)
-            } else if (downPlace && DATA.PLAYER !== trId) {
-                DATA.PLAYER = trId
-                downPlace.onclick = () => location.href = trScr
-
-                logger.info('Обновили ссылку на трек', jstr)
-            }
-        }
-    } catch (e) {
-        logger.error('playerDownload.ts', e)
+        logger.info('Обновили ссылку на трек', jstr)
+      }
     }
+  } catch (e) {
+    logger.error('playerDownload.ts', e)
+  }
 }

@@ -1,4 +1,4 @@
 export interface IWhois {
-    success: boolean
-    city: string
+  success: boolean
+  city: string
 }

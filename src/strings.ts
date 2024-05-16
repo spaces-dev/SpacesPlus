@@ -1,12 +1,11 @@
 import pkg from '../package.json'
-
-import { IData } from './interfaces/Data'
-import { IDevice } from './interfaces/Device'
+import type { IData } from './interfaces/Data'
+import type { IDevice } from './interfaces/Device'
 
 /**
  * Константы
  */
-const DEV: boolean = process.env.NODE_ENV === 'development' ? true : false
+const DEV: boolean = import.meta.env.DEV
 const HTTP: string = document.location.protocol
 const HOST: string = document.location.hostname
 const BASE_URL: string = `${HTTP}//${HOST}`
@@ -20,35 +19,35 @@ const ENV_PATH: string = DEV ? 'https://localhost:8080' : GITHUB
  * Временное хранилище данных
  */
 const DATA: IData = {
-    // наш CK
-    CK: '',
+  // наш CK
+  CK: '',
 
-    // наш SID
-    SID: '',
+  // наш SID
+  SID: '',
 
-    // наш Никнейм
-    USERNAME: '',
+  // наш Никнейм
+  USERNAME: '',
 
-    BANNED: null,
-    ONLINE: null,
-    NICKNAME: null,
-    CONTENT: null,
-    EVENTS: 0,
-    PLAYER: 0,
+  BANNED: null,
+  ONLINE: null,
+  NICKNAME: null,
+  CONTENT: null,
+  EVENTS: 0,
+  PLAYER: 0,
 
-    // версия из package.json
-    VERSION: Number(PKG_VERSION.split('.').join(''))
+  // версия из package.json
+  VERSION: Number(PKG_VERSION.split('.').join(''))
 }
 
 export {
-    DEV,
-    DATA,
-    HTTP,
-    HOST,
-    DEVICE,
-    GITHUB,
-    BASE_URL,
-    ENV_PATH,
-    REVISION,
-    PKG_VERSION
+  DEV,
+  DATA,
+  HTTP,
+  HOST,
+  DEVICE,
+  GITHUB,
+  BASE_URL,
+  ENV_PATH,
+  REVISION,
+  PKG_VERSION
 }

@@ -1,30 +1,30 @@
 export interface OnlineStatus {
-    on_img: string
+  on_img: string
 }
 
 export interface Avatar {
-    previewURL: string
+  previewURL: string
 }
 
 export interface List {
-    online_status: OnlineStatus
-    mysiteURL: string
-    avatar: Avatar
-    name: string
+  online_status: OnlineStatus
+  mysiteURL: string
+  avatar: Avatar
+  name: string
 }
 
 export interface Content {
-    list: List[]
+  list: List[]
 }
 
 export interface Tab {
-    content: Content
+  content: Content
 }
 
 export interface TabbedPanel {
-    tabs: Tab[]
+  tabs: Tab[]
 }
 
 export interface IFriendsOnline {
-    tabbed_panel: TabbedPanel
+  tabbed_panel: TabbedPanel
 }

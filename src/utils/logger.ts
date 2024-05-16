@@ -1,30 +1,37 @@
-import { Debugger } from 'ts-debug'
+import { entries } from 'zero-dependency'
+import { PKG_VERSION } from '../strings'
 
-class Logger {
+type LogType = 'info' | 'debug' | 'warn' | 'error'
 
-    private readonly logger = new Debugger(console, true, '[S+]: ')
-    private readonly styles = [
-        'background: steelblue',
-        'background: green',
-        'background: darkorange',
-        'background: darkred'
-    ]
-
-    public log(str: string, obj?: any): void {
-        this.logger.log('%c' + str, this.styles[0], obj)
-    }
-
-    public info(str: string, obj?: any): void {
-        this.logger.info('%c' + str, this.styles[1], obj)
-    }
-
-    public warn(str: string, obj?: any): void {
-        this.logger.warn('%c' + str, this.styles[2], obj)
-    }
-
-    public error(str: string, obj?: any): void {
-        this.logger.error('%c' + str, this.styles[3], obj)
-    }
+const colors: Record<LogType, string> = {
+  info: `#2ecc71`,
+  debug: `#7f8c8d`,
+  warn: `#f39c12`,
+  error: `#c0392b`
 }
 
-export const logger = new Logger()
+function styles(method: LogType) {
+  return [
+    `background: ${colors[method]}`,
+    `border-radius: 0.5em`,
+    `color: white`,
+    `font-weight: bold`,
+    `padding: 2px 0.5em`,
+    'font-family: cursive'
+  ].join(';')
+}
+
+function createLogger(prefix: string) {
+  return entries(colors).reduce(
+    (acc, [method]) => {
+      acc[method] = (...args) => {
+        console[method](`%c${prefix}`, styles(method), ...args)
+      }
+
+      return acc
+    },
+    {} as Record<LogType, (...args: any[]) => void>
+  )
+}
+
+export const logger = createLogger(`Spaces+ ${PKG_VERSION}`)

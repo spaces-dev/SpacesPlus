@@ -1,41 +1,38 @@
-import { ce, qs, logger, setSettings } from '../utils'
-
 import { _SETTINGS } from '../settings'
+import { ce, logger, qs, setSettings } from '../utils'
 
 export const galleryRotate = () => {
+  // просмотрщик изображений
+  let Image = qs('#gallery-container')
 
-    // просмотрщик изображений
-    let Image = qs('#gallery-container')
+  // кнопка поворота
+  let Rotate = qs('#SP_IMAGE_ROTATE')
 
-    // кнопка поворота
-    let Rotate = qs('#SP_IMAGE_ROTATE')
+  // видеоплеер
+  let Video = qs('.player-dummy_wrap')
 
-    // видеоплеер
-    let Video = qs('.player-dummy_wrap')
+  try {
+    // встявляем кнопку поворота при условии что есть просмотрщик и главное что это не видеоплеер
+    if (Image && !Rotate && !Video) {
+      let buttonRotate = ce('a', {
+        className: 'gallery__tools_button',
+        id: 'SP_IMAGE_ROTATE',
+        title: 'Повернуть',
+        innerHTML: '<span class="ico_gallery ico_gallery_reload m"></span>',
+        onclick: () => {
+          // градус поворота (0, 90, 180, 270)
+          setSettings('angle', (_SETTINGS.angle + 90) % 360)
 
-    try {
-
-        // встявляем кнопку поворота при условии что есть просмотрщик и главное что это не видеоплеер
-        if (Image && !Rotate && !Video) {
-            let buttonRotate = ce('a', {
-                className: 'gallery__tools_button',
-                id: 'SP_IMAGE_ROTATE',
-                title: 'Повернуть',
-                innerHTML: '<span class="ico_gallery ico_gallery_reload m"></span>',
-                onclick: () => {
-                    // градус поворота (0, 90, 180, 270)
-                    setSettings('angle', (_SETTINGS.angle + 90) % 360)
-
-                    // применяем класс для повора изображения
-                    Image.className = 'accel-3d rotate' + _SETTINGS.angle
-                    return false
-                }
-            })
-
-            // вставляем кнопку поворота после кнопки скачивания
-            qs('#g_dloadlink').after(buttonRotate)
+          // применяем класс для повора изображения
+          Image.className = 'accel-3d rotate' + _SETTINGS.angle
+          return false
         }
-    } catch (e) {
-        logger.error('galleryRotate.ts', e)
+      })
+
+      // вставляем кнопку поворота после кнопки скачивания
+      qs('#g_dloadlink').after(buttonRotate)
     }
+  } catch (e) {
+    logger.error('galleryRotate.ts', e)
+  }
 }

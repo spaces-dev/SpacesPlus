@@ -1,0 +1,35 @@
+{
+  "backgrounds": [
+    "default.png",
+    "bananas.png",
+    "cats.png",
+    "ethnic-binary.png",
+    "hearts.png",
+    "skull-and-bones.png",
+    "water.png",
+    "stars.gif",
+    "yellow-leaves.png",
+    "10-years.png",
+    "15bg.png",
+    "triangle.png",
+    "animal-eyes.png",
+    "cube.png",
+    "flowers.png",
+    "girly-doodles.png",
+    "japanese-cranes.png",
+    "round-circle.png",
+    "cicrle-flowers.png",
+    "square-texture.png"
+  ],
+  "sounds": [
+    "default.ogg",
+    "vk.ogg",
+    "tg.ogg",
+    "icq.ogg",
+    "push.ogg",
+    "notify.ogg",
+    "beep-quiet.ogg",
+    "beep-normal.ogg",
+    "beep-loud.ogg"
+  ]
+}
