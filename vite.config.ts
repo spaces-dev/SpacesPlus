@@ -31,8 +31,8 @@ export default defineConfig((config) => {
           icon: `${basePath}icons/logo_96.png`,
           require: `${basePath}libs/colorpicker.js`,
           match: DOMAINS.map((domain) => `https://${domain}/*`),
-          updateURL: `${pkg.homepage}/${pkg.name}.meta.js`,
-          downloadURL: `${pkg.homepage}/${pkg.name}.user.js`,
+          updateURL: `${pkg.homepage}${pkg.name}.meta.js`,
+          downloadURL: `${pkg.homepage}${pkg.name}.user.js`,
         },
         server: {
           port: 3000
