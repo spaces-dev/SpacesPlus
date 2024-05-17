@@ -36,6 +36,9 @@ export default defineConfig((config) => {
         },
         server: {
           port: 3000
+        },
+        esbuildTransformOptions: {
+          banner: ';'
         }
       })
 
