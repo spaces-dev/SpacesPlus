@@ -67,26 +67,32 @@
           <h1 class="hero__title">Spaces Plus</h1>
 
           <div class="hero__text">
-            Powerfull userscript for Spaces.ru
+            🚀 Powerfull userscript for Spaces.ru
           </div>
 
-          <button class="btn" id="install">Установить</button>
+          <button class="btn" id="install">Install</button>
         </div>
       </div>
     </div>
 
     <div class="container d-flex pt-3 pb-3">
-      <footer>От сообщества <a href="https://spaces.im/soo/extension/" class="footer__link">Spaces+</a></footer>
+      <footer>
+        <a href="https://spaces.im/soo/extension/" class="footer__link">Spaces+ on Spaces</a>
+      </footer>
       <footer class="ml-auto">
-        <a href="#" class="footer__link">Release notes</a>
-        <a href="#" class="footer__link">Privacy Policy</a>
+        <a href="https://spaces-dev.github.io/#changelog" class="footer__link">Release Notes</a>
+        <a href="https://t.me/crashmax" class="footer__link">Made by @crashmax</a>
       </footer>
     </div>
   </div>
 
   <script>
     document.querySelector('#install').addEventListener('click', () => {
-      location.href = 'spaces-plus.proxy.user.js'
+      if (location.hostname === 'localhost') {
+        location.href = 'spaces-plus.proxy.user.js'
+      } else {
+        location.href = 'spaces-plus.user.js'
+      }
     })
   </script>
 </body>
