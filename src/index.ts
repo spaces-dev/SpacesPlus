@@ -38,40 +38,38 @@ import { BASE_URL, DATA, DEVICE, HOST } from './strings'
 import { http, logger, qs, readSettings } from './utils'
 import type { ISessionCheck } from './interfaces/SessionCheck'
 
-;(() => {
-  if (qs('#main_wrap')) {
-    try {
-      /**
-       * ! Для работы Spaces+ необходима авторизация
-       * * 00000 - Авторизированы
-       * * 01001 - Требуется авторизация
-       */
-      http<ISessionCheck>('POST', `${BASE_URL}/api/session/check`, false).then(
-        (e) => {
-          const response = e.parsedBody
+if (qs('#main_wrap')) {
+  try {
+    /**
+     * ! Для работы Spaces+ необходима авторизация
+     * * 00000 - Авторизированы
+     * * 01001 - Требуется авторизация
+     */
+    http<ISessionCheck>('POST', `${BASE_URL}/api/session/check`, false).then(
+      (e) => {
+        const response = e.parsedBody
 
-          if (response && userStatus(response.code)) {
-            // Временно храним ник
-            DATA.USERNAME = response.attributes.name
+        if (response && userStatus(response.code)) {
+          // Временно храним ник
+          DATA.USERNAME = response.attributes.name
 
-            // Временно храним CK
-            DATA.CK = response.attributes.CK
+          // Временно храним CK
+          DATA.CK = response.attributes.CK
 
-            // Временно храним SID
-            DATA.SID = response?.attributes.sid
+          // Временно храним SID
+          DATA.SID = response?.attributes.sid
 
-            // Инициализируем работу
-            init()
-          }
-
-          logger.info('Проверка сессии', e)
+          // Инициализируем работу
+          init()
         }
-      )
-    } catch (e) {
-      logger.error('main.ts', e)
-    }
+
+        logger.info('Проверка сессии', e)
+      }
+    )
+  } catch (e) {
+    logger.error('main.ts', e)
   }
-})()
+}
 
 const init = () => {
   // Script error.

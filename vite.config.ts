@@ -32,7 +32,7 @@ export default defineConfig((config) => {
           require: `${basePath}libs/colorpicker.js`,
           match: DOMAINS.map((domain) => `https://${domain}/*`),
           updateURL: `${pkg.homepage}${pkg.name}.meta.js`,
-          downloadURL: `${pkg.homepage}${pkg.name}.user.js`,
+          downloadURL: `${pkg.homepage}${pkg.name}.user.js`
         },
         server: {
           port: 3000
