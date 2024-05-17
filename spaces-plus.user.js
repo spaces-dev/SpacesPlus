@@ -13,8 +13,8 @@
 // @match       https://spac1.net/*
 // @match       https://spaces-blogs.com/*
 // @match       https://world76.spcs.bio/*
-// @updateURL   https://spaces-dev.github.io/SpacesPlus//spaces-plus.meta.js
-// @downloadURL https://spaces-dev.github.io/SpacesPlus//spaces-plus.user.js
+// @updateURL   https://spaces-dev.github.io/SpacesPlus/spaces-plus.meta.js
+// @downloadURL https://spaces-dev.github.io/SpacesPlus/spaces-plus.user.js
 // @grant       unsafeWindow
 // ==/UserScript==
 
