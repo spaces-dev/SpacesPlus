@@ -1,1 +1,54 @@
-.sticker{display:block;position:fixed;bottom:0;left:0;right:0;box-shadow:0 -33px 80px 0 rgba(0,0,0,.3);z-index:999999}.sticker-close{position:absolute;top:-10px;right:0}@media (max-width:329px){.sticker-close_btn{display:none!important}}.touch .sticker,.touch .sticker button{font-size:16px}@media (min-width:900px){.sticker{max-width:600px;margin:0 auto;box-shadow:0 0 5px rgba(93,109,157,.3)}.sticker-close{right:-10px}}@media (min-width:1024px){.sticker{max-width:300px;margin:0;bottom:auto;left:5px;top:5px;right:auto;box-shadow:0 0 5px rgba(93,109,157,.3)}.sticker-close{display:none}.sticker-close_btn{display:block!important}}
+.sticker {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    box-shadow: rgba(0, 0, 0, .3) 0 -33px 80px 0;
+    z-index: 999999
+}
+
+.sticker-close {
+    position: absolute;
+    top: -10px;
+    right: 0
+}
+
+@media all and (max-width:329px) {
+    .sticker-close_btn {
+        display: none!important
+    }
+}
+
+.touch .sticker, .touch .sticker button {
+    font-size: 16px
+}
+
+@media all and (min-width:900px) {
+    .sticker {
+        max-width: 600px;
+        margin: 0 auto;
+        box-shadow: 0 0 5px rgba(93, 109, 157, .3)
+    }
+    .sticker-close {
+        right: -10px
+    }
+}
+
+@media all and (min-width:1024px) {
+    .sticker {
+        max-width: 300px;
+        margin: 0;
+        bottom: auto;
+        left: 5px;
+        top: 5px;
+        right: auto;
+        box-shadow: 0 0 5px rgba(93, 109, 157, .3)
+    }
+    .sticker-close {
+        display: none
+    }
+    .sticker-close_btn {
+        display: block!important
+    }
+}

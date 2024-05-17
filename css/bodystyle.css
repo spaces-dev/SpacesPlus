@@ -1,1 +1,99 @@
-.tiled_item{vertical-align:top;display:inline-block;margin:0;border:0}.tiled_body{position:relative;display:inline-block;max-width:100%;width:100%}.tiled_item img.preview{width:100%;display:block}.tiled_inner{padding:2px}.tiles-wrapper{padding:15px 8px}.tiles_block{padding:15px;background:#e5e5e5}.widgets-wrap.tiles_block{margin-left:0;margin-right:0}.tiles_wrapper{text-align:left;font-size:0}.tiles_wrapper:after{content:"";display:inline-block;width:100%}.tiled_item_bg{border:2px solid #fff;background:#fff;margin:0 auto}.tiled-moar,.tiled-preview img.preview{position:absolute;top:0;left:0;right:0;bottom:0}.tiled-preview{position:relative}.tiled-preview:before{padding-top:100%;content:"";display:block}.tile-ex .tiled-preview{background-color:#000}.tile-ex img.preview{margin:auto}.tiled-preview .fdw{position:absolute;top:0;left:0;right:0;bottom:0}.tiled_item .preview.s201_200{max-height:200px}.tiled_cap,.tiled_item,.touch .tiled_cap,.touch .tiled_item{width:10%}
+.tiled_item {
+    vertical-align: top;
+    display: inline-block;
+    margin: 0;
+    border: 0
+}
+
+.tiled_body {
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
+    width: 100%
+}
+
+.tiled_item img.preview {
+    width: 100%;
+    display: block
+}
+
+.tiled_inner {
+    padding: 2px 2px
+}
+
+.tiles-wrapper {
+    padding: 15px 8px
+}
+
+.tiles_block {
+    padding: 15px 15px;
+    background: #e5e5e5
+}
+
+.widgets-wrap.tiles_block {
+    margin-left: 0;
+    margin-right: 0
+}
+
+.tiles_wrapper {
+    text-align: left;
+    font-size: 0
+}
+
+.tiles_wrapper:after {
+    content: '';
+    display: inline-block;
+    width: 100%
+}
+
+.tiled_item_bg {
+    border: 2px solid #fff;
+    background: #fff;
+    margin: 0 auto
+}
+
+.tiled-moar, .tiled-preview img.preview {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0
+}
+
+.tiled-preview {
+    position: relative
+}
+
+.tiled-preview:before {
+    padding-top: 100%;
+    content: '';
+    display: block
+}
+
+.tile-ex .tiled-preview {
+    background-color: #000
+}
+
+.tile-ex img.preview {
+    margin: auto
+}
+
+.tiled-preview .fdw {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0
+}
+
+.tiled_item .preview.s201_200 {
+    max-height: 200px
+}
+
+.tiled_cap, .tiled_item {
+    width: 10%
+}
+
+.touch .tiled_cap, .touch .tiled_item {
+    width: 10%
+}
