@@ -12,7 +12,7 @@
   },
   "scripts": {
     "dev": "vite build --watch --mode development",
-    "build": "pnpm type-check && vite build",
+    "build": "npm run type-check && vite build",
     "type-check": "tsc --noEmit",
     "format": "prettier --write \"**/*.{js,ts,tsx,json}\""
   },
