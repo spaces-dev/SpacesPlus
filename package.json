@@ -20,7 +20,7 @@
     "@crashmax/prettier-config": "5.0.2",
     "@crashmax/tsconfig": "2.1.0",
     "typescript": "5.4.5",
-    "vite": "5.2.11",
+    "vite": "5.4.6",
     "vite-userscript-plugin": "1.10.0"
   },
   "dependencies": {
