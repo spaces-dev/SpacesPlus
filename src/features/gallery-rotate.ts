@@ -6,8 +6,10 @@ import { assetOrigin } from '../core/site'
 
 const turns = ['rotate90', 'rotate180', 'rotate270']
 
-function applyAngle(image: HTMLElement, angle: number) {
-  image.className = angle ? `accel-3d rotate${angle}` : 'accel-3d'
+function applyAngle(image: HTMLElement, angle: number, animate = false) {
+  const turn = angle ? ` rotate${angle}` : ''
+  const motion = animate ? ' sp-rotate-anim' : ''
+  image.className = `accel-3d${turn}${motion}`
 }
 
 function fileId(value: string) {
@@ -42,7 +44,7 @@ export const galleryRotate: Feature = {
       const next = readPhoto(image, download)
       if (!next) return
       if (photo && next !== photo) {
-        image.classList.remove(...turns)
+        image.classList.remove('sp-rotate-anim', ...turns)
         if (getSettings().angle !== 0) setSetting('angle', 0)
       }
       photo = next
@@ -93,9 +95,15 @@ export const galleryRotate: Feature = {
         button.onclick = () => {
           const current = document.querySelector<HTMLElement>('#gallery-container')
           if (!current) return false
-          const angle = (getSettings().angle + 90) % 360
+          const angle = (getSettings().angle + 270) % 360
           setSetting('angle', angle)
-          applyAngle(current, angle)
+          applyAngle(current, angle, true)
+          const finish = (event: TransitionEvent) => {
+            if (event.target !== current || event.propertyName !== 'transform') return
+            current.removeEventListener('transitionend', finish)
+            current.classList.remove('sp-rotate-anim')
+          }
+          current.addEventListener('transitionend', finish)
           return false
         }
         download.after(button)

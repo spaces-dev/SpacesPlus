@@ -35,6 +35,16 @@
   transform: rotate(90deg) !important;
 }
 
+#gallery-container.sp-rotate-anim {
+  transition: transform 0.2s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #gallery-container.sp-rotate-anim {
+    transition: none;
+  }
+}
+
 .trash-btn {
   float: left;
   cursor: pointer;
