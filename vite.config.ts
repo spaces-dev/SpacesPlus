@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite'
-import Userscript from 'vite-userscript-plugin'
-
-import pkg from './package.json'
+import userscript from 'vite-userscript-plugin'
+import pkg from './package.json' with { type: 'json' }
 
 const DOMAINS = [
   'spaces.ru',
@@ -11,37 +10,44 @@ const DOMAINS = [
   'spac1.com',
   'spac1.net',
   'spaces-blogs.com',
-  'world76.spcs.bio'
+  'world76.spcs.bio',
 ]
+
+const devServerOrigin = 'http://localhost:3000/'
 
 export default defineConfig((config) => {
   const isDev = config.mode === 'development'
-  const basePath = isDev ? 'http://localhost:3000/' : pkg.homepage
+  const basePath = isDev ? devServerOrigin : pkg.homepage
 
   return {
+    base: './',
+    server: {
+      port: 3000,
+    },
+    build: {
+      minify: true,
+      sourcemap: isDev,
+    },
     plugins: [
-      Userscript({
+      userscript({
         fileName: pkg.name,
-        entry: 'src/index.ts',
+        entry: 'src/main.ts',
+        autoMetaUrls: true,
         header: {
           name: 'Spaces+',
           version: pkg.version,
+          description: pkg.description,
           author: `${pkg.author.name} <${pkg.author.email}> ${pkg.author.url}`,
           license: pkg.license,
-          icon: `${basePath}icons/logo_96.png`,
-          require: `${basePath}libs/colorpicker.js`,
-          match: DOMAINS.map((domain) => `https://${domain}/*`),
-          updateURL: `${pkg.homepage}${pkg.name}.meta.js`,
-          downloadURL: `${pkg.homepage}${pkg.name}.user.js`
+          icon: 'icons/logo_96.png',
+          homepage: basePath,
+          require: 'libs/colorpicker.js',
+          match: DOMAINS.map(domain => `https://${domain}/*`),
         },
         server: {
-          port: 3000
+          file: true,
         },
-        esbuildTransformOptions: {
-          banner: ';'
-        }
-      })
-
-    ]
+      }),
+    ],
   }
 })

@@ -1,0 +1,22 @@
+import type { Feature } from '../core/feature'
+import { applyBodyStyle } from '../core/appearance'
+import { renderBackgroundOptions } from './settings/background'
+
+export const bodyStyle: Feature = {
+  id: 'bodystyle',
+  title: 'Фон сайта',
+  description: 'Позволяет украшать фон сайта. В подборке есть набор изображений, также можно переключиться на цветной фон.',
+  optionsId: 'SP_PLUS_BODYSTYLE',
+  renderOptions: renderBackgroundOptions,
+  start: (ctx) => {
+    const stop = ctx.onDom(() => {
+      applyBodyStyle()
+    })
+    return () => {
+      stop()
+      const style = document.getElementById('SP_PLUS_INJSTYLE')
+      if (style) style.textContent = ''
+      document.querySelector('#SP_PLUS_BODYSTYLE')?.remove()
+    }
+  },
+}

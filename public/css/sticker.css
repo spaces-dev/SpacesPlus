@@ -1,54 +1,57 @@
 .sticker {
-    display: block;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    box-shadow: rgba(0, 0, 0, .3) 0 -33px 80px 0;
-    z-index: 999999
+  display: block;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 999999;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 -33px 80px 0;
 }
 
 .sticker-close {
-    position: absolute;
-    top: -10px;
-    right: 0
+  position: absolute;
+  top: -10px;
+  right: 0;
 }
 
-@media all and (max-width:329px) {
-    .sticker-close_btn {
-        display: none!important
-    }
+@media all and (max-width: 329px) {
+  .sticker-close_btn {
+    display: none !important;
+  }
 }
 
-.touch .sticker, .touch .sticker button {
-    font-size: 16px
+.touch .sticker,
+.touch .sticker button {
+  font-size: 16px;
 }
 
-@media all and (min-width:900px) {
-    .sticker {
-        max-width: 600px;
-        margin: 0 auto;
-        box-shadow: 0 0 5px rgba(93, 109, 157, .3)
-    }
-    .sticker-close {
-        right: -10px
-    }
+@media all and (min-width: 900px) {
+  .sticker {
+    margin: 0 auto;
+    box-shadow: 0 0 5px rgba(93, 109, 157, 0.3);
+    max-width: 600px;
+  }
+  .sticker-close {
+    right: -10px;
+  }
 }
 
-@media all and (min-width:1024px) {
-    .sticker {
-        max-width: 300px;
-        margin: 0;
-        bottom: auto;
-        left: 5px;
-        top: 5px;
-        right: auto;
-        box-shadow: 0 0 5px rgba(93, 109, 157, .3)
-    }
-    .sticker-close {
-        display: none
-    }
-    .sticker-close_btn {
-        display: block!important
-    }
+@media all and (min-width: 1024px) {
+  .sticker {
+    top: 5px;
+    right: auto;
+    bottom: auto;
+    left: 5px;
+    margin: 0;
+    box-shadow: 0 0 5px rgba(93, 109, 157, 0.3);
+    max-width: 300px;
+  }
+
+  .sticker-close {
+    display: none;
+  }
+
+  .sticker-close_btn {
+    display: block !important;
+  }
 }

@@ -1,13 +1,30 @@
 {
-  "extends": "@crashmax/tsconfig",
   "compilerOptions": {
-    "outDir": "dist",
+    "target": "ES2023",
+    "lib": [
+      "ES2023",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "moduleDetection": "force",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
-    "verbatimModuleSyntax": false,
-    "strict": false,
-    "noPropertyAccessFromIndexSignature": false
+    "checkJs": true,
+    "strict": true,
+    "strictPropertyInitialization": false,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noUncheckedIndexedAccess": true,
+    "noEmit": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "skipLibCheck": true
   },
   "include": [
-    "src/**/*"
+    "src",
+    "eslint.config.js",
+    "vite.config.ts"
   ]
 }

@@ -42,13 +42,9 @@
 
 ## Разработка
 
-1. Установите зависимости `npm install`
-2. Запустить сервер для разработки `npm run dev`
-3. Откройте `http://localhost:3000` в браузере (нажмите `Advanced` -> `continue`, если отображается предупреждение безопасности) и установить прокси-скрипт для разработки.
-4. Код для разработки находится в папке `src`, после изменений страница автоматически обновится.
-5. Для сборки используйте `npm run build`
+1. Установите зависимости `pnpm install`
+2. Запустите сервер для разработки `pnpm dev`
+3. Установите `http://localhost:3000/spaces-plus.dev.user.js` в Tampermonkey, Greasemonkey или Violentmonkey. HMR подхватывает правки в `src` без переустановки скрипта.
+4. Для сборки используйте `pnpm build`. В `dist` появятся `spaces-plus.user.js` и `spaces-plus.meta.js`.
 
-## Конфигурация Google Chrome
-
-2. Включите insecure-localhost: перейдите к `chrome://flags/#allow-insecure-localhost` и включите insecure-localhost.
-3. Включите доступ к URL-адресу файла для расширения: перейдите к `chrome://extensions/?id=dhdgffkkebhmkfjojejmpbldmpobfkfo` (Страница управления [Tampermonkey](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)) и включите `Allow access to file URLs` (если вам нужно вручную перезагрузить страницу браузера при разработке скрипта, см. [#475](https://github.com/Tampermonkey/tampermonkey/issues/475#issuecomment-348594785) для более подробной информации)
+Сайт Spaces открывается по HTTPS, поэтому Chrome может блокировать скрипт с `http://localhost`. Включите `chrome://flags/#allow-insecure-localhost`. Смена `@match`, `@grant` или `@name` требует переустановки скрипта.
