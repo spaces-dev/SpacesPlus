@@ -3,7 +3,7 @@ import { el } from '@zero-dependency/dom'
 import { http } from '../../core/http'
 import { log } from '../../core/log'
 import { modalConfirm, modalMessage } from '../../core/modals'
-import { cookies, getSettings, setSetting } from '../../core/settings-store'
+import { cookies } from '../../core/settings-store'
 import { baseUrl, session } from '../../core/site'
 
 function button(html: string) {
@@ -11,7 +11,7 @@ function button(html: string) {
 }
 
 export function renderBuiltins(root: Element) {
-  const debugOn = getSettings().apidebug
+  const debugOn = cookies.get('spaces_js_console')
   const sandbox = cookies.get('sandbox')
   const transport = cookies.get('force_ajax_transport')
   const player = cookies.get('gp_left_btn')
@@ -25,7 +25,8 @@ export function renderBuiltins(root: Element) {
       : '<span class="sp sp-settings mr-14"></span>Включить отладчик'),
   })
   api.onclick = () => {
-    setSetting('apidebug', !debugOn)
+    if (debugOn) cookies.remove('spaces_js_console')
+    else cookies.set('spaces_js_console', '1')
     location.reload()
     return false
   }

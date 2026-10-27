@@ -13,6 +13,7 @@ interface StringCookies {
   sandbox: string
   force_ajax_transport: string
   gp_left_btn: string
+  spaces_js_console: string
 }
 
 type SpacesCookies = JsonCookies & StringCookies
@@ -38,7 +39,6 @@ export const defaultSettings = {
   angle: 0,
   adblock: true,
   stickyheader: true,
-  apidebug: false,
   karma: true,
   sticker: true,
   playback: true,
@@ -180,4 +180,5 @@ export function resetSpacesCookies() {
   cookies.remove('gp_left_btn')
   cookies.remove('force_ajax_transport')
   cookies.remove('sandbox')
+  cookies.remove('spaces_js_console')
 }

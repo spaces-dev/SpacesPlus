@@ -44,7 +44,6 @@ export interface Settings {
   angle: number
   adblock: boolean
   stickyheader: boolean
-  apidebug: boolean
   karma: boolean
   sticker: boolean
   playback: boolean

@@ -152,16 +152,6 @@
   }
 }
 
-#api_debug-place {
-  display: none;
-  background: #ecf5fd;
-  padding: 8px;
-}
-
-#api_debug-result_info {
-  font-size: small;
-}
-
 .mr-14 {
   margin-right: 14px !important;
 }

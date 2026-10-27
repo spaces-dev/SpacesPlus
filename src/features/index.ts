@@ -1,5 +1,4 @@
 import { adBlock } from './ad-block'
-import { apiDebugger } from './api-debugger'
 import { baseStyles } from './base-styles'
 import { blockedFiles } from './blocked-files'
 import { bodyStyle } from './body-style'
@@ -11,7 +10,6 @@ import { deleteReaders } from './delete-readers'
 import { disableRedirect } from './disable-redirect'
 import { favoriteUser } from './favorite-user'
 import { firstLaunch } from './first-launch'
-import { freeStickers } from './free-stickers'
 import { friendsOnline } from './friends-online'
 import { galleryRotate } from './gallery-rotate'
 import { hiddenRightbar } from './hidden-rightbar'
@@ -25,7 +23,6 @@ import { scrollMove } from './scroll-move'
 import { createSettingsPage } from './settings/page'
 import { sidebarButton } from './sidebar-button'
 import { stickyHeader } from './sticky-header'
-import { userOnline } from './user-online'
 import { videoSpeed } from './video-speed'
 import { weatherWidget } from './weather'
 
@@ -37,7 +34,6 @@ const configurable = [
   oldHeader,
   playerDownload,
   disableRedirect,
-  userOnline,
   coins,
   scrollMove,
   hiddenRightbar,
@@ -46,7 +42,6 @@ const configurable = [
   adBlock,
   stickyHeader,
   karma,
-  freeStickers,
   videoSpeed,
   recentSmiles,
   friendsOnline,
@@ -57,7 +52,6 @@ const configurable = [
 export const features = [
   baseStyles,
   ...configurable,
-  apiDebugger,
   checkUpdates,
   sidebarButton,
   firstLaunch,
