@@ -26,7 +26,6 @@ export const defaultSettings = {
   blogsd: false,
   readersd: false,
   comments: false,
-  blockedfiles: true,
   oldheader: true,
   playerdn: true,
   dredirect: true,

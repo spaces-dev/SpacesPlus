@@ -31,7 +31,6 @@ export interface Settings {
   blogsd: boolean
   readersd: boolean
   comments: boolean
-  blockedfiles: boolean
   oldheader: boolean
   playerdn: boolean
   dredirect: boolean

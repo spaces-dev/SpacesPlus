@@ -1,6 +1,5 @@
 import { adBlock } from './ad-block'
 import { baseStyles } from './base-styles'
-import { blockedFiles } from './blocked-files'
 import { bodyStyle } from './body-style'
 import { checkUpdates } from './check-updates'
 import { coins } from './coins'
@@ -30,7 +29,6 @@ const configurable = [
   deleteBlogs,
   deleteReaders,
   deleteComments,
-  blockedFiles,
   oldHeader,
   playerDownload,
   disableRedirect,
