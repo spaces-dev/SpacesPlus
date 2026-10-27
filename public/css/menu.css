@@ -526,11 +526,6 @@ details summary:hover {
   border-top: 1px solid #c5d3e1 !important;
 }
 
-.bstrwrap {
-  border-top: 1px solid #cdd4e1;
-  border-bottom: unset !important;
-}
-
 input[type='color'] {
   opacity: 0;
   cursor: pointer;

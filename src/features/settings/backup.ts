@@ -108,7 +108,7 @@ export function renderBackup(target: Element) {
       className: 'widgets-group user__tools_last',
       id: 'SP_PLUS_BOTTOM_DIVB',
     }, [file, restore, save])
-    document.querySelector('#SP_PLUS_ABOUT')?.previousElementSibling?.after(buttons)
+    document.querySelector('#SP_PLUS_MAIN')?.after(buttons)
   } catch (error) {
     log.error('backup', error)
   }

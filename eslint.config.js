@@ -7,7 +7,6 @@ export default antfu({
   jsx: true,
   ignores: [
     'public/libs/**',
-    'public/demo/**',
   ],
 
   // features disabled

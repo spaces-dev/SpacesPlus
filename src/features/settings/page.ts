@@ -25,6 +25,25 @@ function sectionLink({ id, color, icon, label, href }: SectionLink) {
   return link
 }
 
+const groupedIds = ['friendsOn', 'bodystyle', 'weather']
+
+const isGrouped = (id: string) => groupedIds.includes(id)
+
+function settingsCard(id: string, title: string, areaId: string) {
+  return `
+  <div class="widgets-group js-container__block sp-plus-extra" id="${id}">
+    <div class="b-title cl b-title_center b-title_first oh">
+      <div class="b-title__item">${title}</div>
+    </div>
+    <div class="content"><div class="list f-c_fll"><div id="${areaId}" class="no-select"></div></div></div>
+  </div>
+`
+}
+
+function hideExtraCards() {
+  document.querySelectorAll('.sp-plus-extra').forEach(node => node.classList.add('hide'))
+}
+
 function paintHeader(title: string, crumb: string) {
   const head = document.querySelector('#SP_PLUS_SETHEAD')
   const crumbNode = document.querySelector('#SP_PLUS_SETHEAD2')
@@ -38,8 +57,8 @@ function paintHeader(title: string, crumb: string) {
 
 function openSettings(features: Feature[]) {
   if (!/sp_plus_settings=1/i.test(location.href)) {
-    document.title = 'Настройки Spaces+'
-    history.pushState({ sp_plus_settings: '1' }, 'Настройки Spaces+', `${baseUrl}/settings/?sp_plus_settings=1`)
+    document.title = 'Spaces+'
+    history.pushState({ sp_plus_settings: '1' }, 'Spaces+', `${baseUrl}/settings/?sp_plus_settings=1`)
   }
 
   const link = document.querySelector('#SP_PLUS_SETLINK')
@@ -51,15 +70,34 @@ function openSettings(features: Feature[]) {
     path.innerHTML = path.innerHTML.replace('Настройки', `<a href="${baseUrl}/settings/">Настройки</a><span class="location-bar__sep ico"></span><span id="SP_PLUS_SETHEAD2">Spaces+</span>`)
   }
 
+  const groupedCards = groupedIds.map((id) => {
+    const feature = features.find(item => item.id === id)
+    if (!feature?.title) return ''
+    return settingsCard(`SP_PLUS_GROUP_${id}`, feature.title, `SP_PLUS_AREA_${id}`)
+  }).join('')
+
   root.innerHTML = `
-    <div class="widgets-group widgets-group_top js-container__block">
+    <div class="widgets-group widgets-group_top js-container__block" id="SP_PLUS_MAIN">
       <div class="b-title cl b-title_center b-title_first oh">
         <div class="b-title__item" id="SP_PLUS_SETHEAD">Настройки Spaces+</div>
       </div>
       <div class="content"><div class="list f-c_fll"><div id="SP_PLUS_SETAREA" class="no-select"></div></div></div>
     </div>
+    ${groupedCards}
+    <div class="widgets-group js-container__block sp-plus-extra" id="SP_PLUS_BUILTINS">
+      <div class="b-title cl b-title_center b-title_first oh">
+        <div class="b-title__item">Встроенные возможности сайта</div>
+      </div>
+      <div class="content"><div class="list f-c_fll"><div id="SP_PLUS_BUILTINS_AREA" class="no-select"></div></div></div>
+    </div>
+    <div class="widgets-group js-container__block sp-plus-extra" id="SP_PLUS_MISC">
+      <div class="b-title cl b-title_center b-title_first oh">
+        <div class="b-title__item">Прочее</div>
+      </div>
+      <div class="content"><div class="list f-c_fll"><div id="SP_PLUS_MISC_AREA" class="no-select"></div></div></div>
+    </div>
     <div id="SP_PLUS_ABOUT"></div>
-    <a id="SP_PLUS_SETBACK" href="${baseUrl}/settings/?" class="link-return full_link"><span class="ico ico_arrow-back"></span><span class="m">Назад</span></a>
+    <a id="SP_PLUS_SETBACK" href="${baseUrl}/settings/?" class="link-return full_link"><span class="ico ico_arr_small_left_darkblue"></span> Назад</a>
   `
 
   const area = document.querySelector('#SP_PLUS_SETAREA')
@@ -113,19 +151,18 @@ function openSettings(features: Feature[]) {
       row.append(info)
     }
 
-    area.append(row)
+    const target = isGrouped(feature.id)
+      ? document.querySelector(`#SP_PLUS_AREA_${feature.id}`)
+      : area
+    if (!target) continue
+    target.append(row)
     if (checkbox.checked) feature.renderOptions?.(checkbox)
   }
 
-  area.append(el('div', {
-    className: 'sp_plus_line',
-    innerHTML: '<span class="sp_plus_text">Встроенные возможности сайта</span>',
-  }))
-  renderBuiltins(area)
-  area.append(el('div', {
-    className: 'sp_plus_line',
-    innerHTML: '<span class="sp_plus_text">Прочее</span>',
-  }))
+  const builtins = document.querySelector('#SP_PLUS_BUILTINS_AREA')
+  if (builtins) renderBuiltins(builtins)
+
+  const misc = document.querySelector('#SP_PLUS_MISC_AREA')
 
   const backup = sectionLink({
     id: 'sp_backup',
@@ -135,6 +172,7 @@ function openSettings(features: Feature[]) {
     href: `${baseUrl}/settings/?sp_plus_settings=1&sp_backup=1`,
   })
   backup.onclick = () => {
+    hideExtraCards()
     paintHeader('Импорт и экспорт настроек', 'Импорт и экспорт настроек')
     if (!/sp_backup=1/i.test(location.href)) {
       document.title = 'Spaces+: Импорт и экспорт настроек'
@@ -153,6 +191,7 @@ function openSettings(features: Feature[]) {
     href: `${baseUrl}/settings/?sp_plus_settings=1&sp_changelog=1`,
   })
   changelog.onclick = () => {
+    hideExtraCards()
     paintHeader('История обновлений', 'История обновлений')
     if (!/sp_changelog=1/i.test(location.href)) {
       document.title = 'Spaces+: История обновлений'
@@ -177,7 +216,7 @@ function openSettings(features: Feature[]) {
     return false
   }
 
-  area.append(backup, changelog, reset)
+  misc?.append(backup, changelog, reset)
 
   let clicks = 0
   const about = el('div', { className: 'widgets-group widgets-group_top nl wbg no-select' })
@@ -211,7 +250,7 @@ export function createSettingsPage(features: Feature[]): Feature {
         href: `${baseUrl}/settings/?sp_plus_settings=1`,
         id: 'SP_PLUS_SETLINK',
         className: targetLink.className,
-        innerHTML: '<span>Настройки Spaces+</span>',
+        innerHTML: '<span>Spaces+</span>',
       })
       link.onclick = () => {
         openSettings(features)

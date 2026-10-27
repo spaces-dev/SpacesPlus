@@ -42,6 +42,11 @@ const palette = [
   ['#ECF0F1', '#CFD8DC', '#B0BEC5', '#97A6B0', '#546E7A', '#44565E', '#3A474C'],
 ]
 
+function listLinkBorder() {
+  const listLink = document.querySelector('.list-link')
+  return listLink ? getComputedStyle(listLink).borderBottom : '1px solid #c5d3e1'
+}
+
 async function showImages() {
   if (document.querySelector('#SP_WRAP_IMAGE')) return
   document.querySelector('#SP_WRAP_COLOR')?.remove()
@@ -53,7 +58,7 @@ async function showImages() {
   const gallery = el('div', { className: 'js-gallery_skip wbg oh tiles_block tiles_wrapper' })
   const wrap = el('div', {
     id: 'SP_WRAP_IMAGE',
-    style: { borderTop: '1px solid #cdd4e1' },
+    style: { borderTop: listLinkBorder() },
   })
 
   const response = await http<Assets>(`${assetOrigin}/data.json?r=${revision}`)
@@ -104,7 +109,7 @@ function showColors() {
   const pickerHost = el('div', { className: 'js-bb_colorpicker' })
   const wrap = el('div', {
     id: 'SP_WRAP_COLOR',
-    style: { borderTop: '1px solid #cdd4e1' },
+    style: { borderTop: listLinkBorder() },
   }, el('table', { className: 'table__wrap bb-colorpicker' }, el('tbody', {}, el('tr', {}, [
     el('td', { className: 'table__cell' }, swatches),
     el('td', { className: 'table__cell table__cell_last' }, el('div', { className: 'stnd-block' }, pickerHost)),
@@ -228,7 +233,6 @@ export function renderBackgroundOptions(anchor: HTMLElement) {
 
     const panel = el('div', { id: 'SP_PLUS_BODYSTYLE' }, [
       el('div', {
-        className: 'bstrwrap',
         style: { borderBottom: 'none', padding: '15px' },
       }, el('div', { className: 'text-input__wrap' }, [
         el('label', {

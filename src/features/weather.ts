@@ -122,9 +122,8 @@ function renderWidget() {
   if (!rightbar || !data || !condition) return
 
   const widget = el('div', {
-    className: 'widgets-group_top js-container__block',
+    className: 'widgets-group widgets-group_top js-container__block',
     id: 'SP_WIDGET_WEATHER',
-    style: { boxShadow: '0px 3px 5px rgba(93,109,157,0.3)' },
   })
   widget.append(
     el('div', {

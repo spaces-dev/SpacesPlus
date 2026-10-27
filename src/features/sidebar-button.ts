@@ -2,32 +2,36 @@ import type { Feature } from '../core/feature'
 import { el } from '@zero-dependency/dom'
 import { baseUrl } from '../core/site'
 
-function isSettingsTitle(value: string | null | undefined) {
-  return value?.replace(/\s+/g, ' ').trim() === 'Настройки'
+const isSettingsHeading = (value: string | null | undefined) => {
+  const title = value?.replace(/\s+/g, ' ').trim()
+  return title === 'Настройка' || title === 'Настройки'
 }
 
-function settingsTarget() {
+const settingsSection = () => {
   const root = document.querySelector('#sidebar_panel .sidebar__content')
   if (!root) return null
 
   const sections = [...root.querySelectorAll('.sidebar__section')]
-  const titled = sections.find(section => [...section.children].some((child) => {
-    if (child.classList.contains('sidebar-item')) return false
-    return isSettingsTitle(child.textContent)
+  const nested = sections.find(section => [...section.children].some((child) => {
+    if (child.classList.contains('sidebar-item') && !child.classList.contains('sidebar-item--section')) return false
+    return isSettingsHeading(child.textContent)
   }))
-  const titledItem = titled ? firstItem(titled) : null
-  if (titledItem) return titledItem
+  if (nested) return nested
 
-  const label = [...root.querySelectorAll('.sidebar-item__label')].find(node => isSettingsTitle(node.textContent))
-  return label?.closest('.sidebar-item') ?? null
+  const title = [...root.querySelectorAll('.sidebar-item__title')].find(node => isSettingsHeading(node.textContent))
+  const next = title?.closest('.sidebar-item')?.nextElementSibling
+  if (next?.classList.contains('sidebar__section')) return next
+
+  const label = [...root.querySelectorAll('.sidebar-item__label')].find(node => node.textContent?.replace(/\s+/g, ' ').trim() === 'Настройки')
+  return label?.closest('.sidebar__section') ?? null
 }
 
-function firstItem(section: Element) {
-  return [...section.children].find(child => child.classList.contains('sidebar-item'))
-    ?? section.querySelector('.sidebar-item')
+const firstItem = (section: Element) => {
+  return [...section.children].find(child => child.classList.contains('sidebar-item') && !child.classList.contains('sidebar-item--section'))
+    ?? section.querySelector('.sidebar-item:not(.sidebar-item--section)')
 }
 
-function spacesIcon() {
+const spacesIcon = () => {
   return el('span', { className: 'js-ico ico_cats ico_cats_spaces sp-cats-spaces' })
 }
 
@@ -42,26 +46,27 @@ export const sidebarButton: Feature = {
       const icon = document.querySelector('span.s_i_exit') ? '<span class="sp sp-ico"></span>' : ''
       const link = el('li', {
         className: 'li',
-        innerHTML: `<a href="${baseUrl}/settings/?sp_plus_settings=1" title="Настройки Spaces+">${icon}<span class="m s_i_text"> Spaces+</span></a>`,
+        innerHTML: `<a href="${baseUrl}/settings/?sp_plus_settings=1" title="Spaces+">${icon}<span class="m s_i_text"> Spaces+</span></a>`,
       })
       link.dataset.spSidebar = '1'
-      legacy.parentElement.after(link)
+      legacy.parentElement.parentElement?.prepend(link)
       return
     }
 
-    const sample = settingsTarget()
+    const section = settingsSection()
+    const sample = section ? firstItem(section) : null
     const sampleLink = sample?.querySelector('a')
     if (!sample || !sampleLink) return
 
     const label = el('span', {
       className: sampleLink.querySelector('.sidebar-item__label')?.className || 'sidebar-item__label',
-      textContent: 'Настройки Spaces+',
+      textContent: 'Spaces+',
     })
     const linkClass = [...sampleLink.classList].filter(name => !/active|current|selected/i.test(name)).join(' ')
     const link = el('a', {
       href: `${baseUrl}/settings/?sp_plus_settings=1`,
       className: linkClass || 'sidebar-item__link',
-      title: 'Настройки Spaces+',
+      title: 'Spaces+',
     }, [spacesIcon(), label])
     const item = el('div', {
       className: 'sidebar-item',
