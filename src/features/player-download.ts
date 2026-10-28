@@ -1,7 +1,7 @@
-import type { Feature } from '../core/feature'
+import type { Feature } from '@/core/feature'
 import { el } from '@zero-dependency/dom'
-import { log } from '../core/log'
-import { assetOrigin, session } from '../core/site'
+import { log } from '@/core/log'
+import { assetOrigin, session } from '@/core/site'
 
 interface TrackState {
   id: string

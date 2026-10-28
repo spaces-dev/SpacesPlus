@@ -1,5 +1,5 @@
-import type { Feature } from '../core/feature'
-import { applyBodyStyle } from '../core/appearance'
+import type { Feature } from '@/core/feature'
+import { applyBodyStyle } from '@/core/appearance'
 import { renderBackgroundOptions } from './settings/background'
 
 export const bodyStyle: Feature = {

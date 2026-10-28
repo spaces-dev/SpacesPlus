@@ -1,6 +1,6 @@
-import type { Feature } from '../core/feature'
+import type { Feature } from '@/core/feature'
 import { el } from '@zero-dependency/dom'
-import { baseUrl } from '../core/site'
+import { baseUrl } from '@/core/site'
 
 function isSettingsHeading(value: string | null | undefined) {
   const title = value?.replace(/\s+/g, ' ').trim()

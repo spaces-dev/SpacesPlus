@@ -1,3 +1,4 @@
+import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vite'
 import userscript from 'vite-userscript-plugin'
 import pkg from './package.json' with { type: 'json' }
@@ -21,6 +22,11 @@ export default defineConfig((config) => {
 
   return {
     base: './',
+    resolve: {
+      alias: [
+        { find: /^@\//, replacement: `${fileURLToPath(new URL('./src/', import.meta.url))}` },
+      ],
+    },
     server: {
       port: 3000,
     },

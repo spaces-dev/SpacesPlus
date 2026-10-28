@@ -1,8 +1,8 @@
-import type { Feature } from '../core/feature'
+import type { Feature } from '@/core/feature'
 import { el, observeElement } from '@zero-dependency/dom'
-import { log } from '../core/log'
-import { getSettings, setSetting } from '../core/settings-store'
-import { assetOrigin } from '../core/site'
+import { log } from '@/core/log'
+import { getSettings, setSetting } from '@/core/settings-store'
+import { assetOrigin } from '@/core/site'
 
 const turns = ['rotate90', 'rotate180', 'rotate270']
 

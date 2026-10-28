@@ -1,4 +1,4 @@
-import type { Feature } from '../core/feature'
+import type { Feature } from '@/core/feature'
 
 function inSeason() {
   const now = new Date()

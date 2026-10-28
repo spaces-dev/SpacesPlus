@@ -1,10 +1,10 @@
-import type { NewbeeQuest } from '../../types/newbee-quest'
+import type { NewbeeQuest } from '@/types/newbee-quest'
 import { el } from '@zero-dependency/dom'
-import { http } from '../../core/http'
-import { log } from '../../core/log'
-import { modalConfirm, modalMessage } from '../../core/modals'
-import { cookies } from '../../core/settings-store'
-import { baseUrl, session } from '../../core/site'
+import { http } from '@/core/http'
+import { log } from '@/core/log'
+import { modalConfirm, modalMessage } from '@/core/modals'
+import { cookies } from '@/core/settings-store'
+import { baseUrl, session } from '@/core/site'
 
 function button(html: string) {
   return `<span class="b">${html}</span>`

@@ -1,5 +1,5 @@
-import type { Feature } from '../core/feature'
-import { log } from '../core/log'
+import type { Feature } from '@/core/feature'
+import { log } from '@/core/log'
 
 const patch = `
 var rawOpen = XMLHttpRequest.prototype.open;

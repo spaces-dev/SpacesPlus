@@ -1,9 +1,9 @@
-import type { Feature } from '../core/feature'
+import type { Feature } from '@/core/feature'
 import { el } from '@zero-dependency/dom'
-import { log } from '../core/log'
-import { modalMessage } from '../core/modals'
-import { cookies } from '../core/settings-store'
-import { baseUrl, host } from '../core/site'
+import { log } from '@/core/log'
+import { modalMessage } from '@/core/modals'
+import { cookies } from '@/core/settings-store'
+import { baseUrl, host } from '@/core/site'
 
 const skippedHosts = new Set(['spaces-blogs.com', 'spac1.net'])
 

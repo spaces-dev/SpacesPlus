@@ -1,9 +1,9 @@
-import type { Feature } from '../core/feature'
+import type { Feature } from '@/core/feature'
 import { el } from '@zero-dependency/dom'
 import { renderSVG } from 'uqr'
-import { log } from '../core/log'
-import { modalMessage } from '../core/modals'
-import { pathAt, session } from '../core/site'
+import { log } from '@/core/log'
+import { modalMessage } from '@/core/modals'
+import { pathAt, session } from '@/core/site'
 
 export const qrCode: Feature = {
   id: 'qr-code',

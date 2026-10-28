@@ -1,9 +1,9 @@
-import type { Feature } from '../core/feature'
+import type { Feature } from '@/core/feature'
 import { el } from '@zero-dependency/dom'
 import { LocalStorage } from '@zero-dependency/storage'
-import { log } from '../core/log'
-import { modalConfirm } from '../core/modals'
-import { getSettings, setSetting } from '../core/settings-store'
+import { log } from '@/core/log'
+import { modalConfirm } from '@/core/modals'
+import { getSettings, setSetting } from '@/core/settings-store'
 
 type SmileEntry = [string, number, number]
 type SmileMap = Record<string, SmileEntry>

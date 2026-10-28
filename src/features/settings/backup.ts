@@ -1,8 +1,8 @@
 import { el } from '@zero-dependency/dom'
 import beautify from 'json-beautify'
-import { log } from '../../core/log'
-import { modalConfirm, modalMessage } from '../../core/modals'
-import { getSettings, replaceSettings, setSetting } from '../../core/settings-store'
+import { log } from '@/core/log'
+import { modalConfirm, modalMessage } from '@/core/modals'
+import { getSettings, replaceSettings, setSetting } from '@/core/settings-store'
 
 const format = (value: unknown) => beautify(value, null, 4)
 

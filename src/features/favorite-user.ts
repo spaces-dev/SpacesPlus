@@ -1,11 +1,11 @@
-import type { Feature } from '../core/feature'
-import type { Bookmarks } from '../types/bookmarks'
-import type { UserAnketa } from '../types/mysite'
+import type { Feature } from '@/core/feature'
+import type { Bookmarks } from '@/types/bookmarks'
+import type { UserAnketa } from '@/types/mysite'
 import { el } from '@zero-dependency/dom'
-import { http } from '../core/http'
-import { log } from '../core/log'
-import { modalConfirm } from '../core/modals'
-import { assetOrigin, baseUrl, pathAt, session } from '../core/site'
+import { http } from '@/core/http'
+import { log } from '@/core/log'
+import { modalConfirm } from '@/core/modals'
+import { assetOrigin, baseUrl, pathAt, session } from '@/core/site'
 
 async function markFavorite(id: string, name: string, cell: HTMLElement) {
   const link = cell.firstElementChild

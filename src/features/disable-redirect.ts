@@ -1,5 +1,5 @@
-import type { Feature } from '../core/feature'
-import { baseUrl, searchParam } from '../core/site'
+import type { Feature } from '@/core/feature'
+import { baseUrl, searchParam } from '@/core/site'
 
 export const disableRedirect: Feature = {
   id: 'dredirect',

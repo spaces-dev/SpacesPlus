@@ -1,5 +1,5 @@
-import type { Feature } from '../core/feature'
-import { injectBundledCss } from '../core/appearance'
+import type { Feature } from '@/core/feature'
+import { injectBundledCss } from '@/core/appearance'
 
 export const baseStyles: Feature = {
   id: 'base-styles',

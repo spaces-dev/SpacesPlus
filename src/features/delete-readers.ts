@@ -1,10 +1,10 @@
-import type { Feature } from '../core/feature'
+import type { Feature } from '@/core/feature'
 import { el } from '@zero-dependency/dom'
 import { pluralize } from '@zero-dependency/utils'
-import { http } from '../core/http'
-import { log } from '../core/log'
-import { modalConfirm, modalMessage } from '../core/modals'
-import { baseUrl, pathAt, searchParam, session } from '../core/site'
+import { http } from '@/core/http'
+import { log } from '@/core/log'
+import { modalConfirm, modalMessage } from '@/core/modals'
+import { baseUrl, pathAt, searchParam, session } from '@/core/site'
 
 const readerWord = (count: number) => pluralize(count)`читател${['я', 'я', 'ей']}`
 const selectedKey = 'sp_readers_selected'

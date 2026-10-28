@@ -1,10 +1,10 @@
-import type { Assets } from '../../types/assets'
+import type { Assets } from '@/types/assets'
 import { el } from '@zero-dependency/dom'
-import { applyBodyStyle, injectBackgroundCss, injectColorCss } from '../../core/appearance'
-import { http } from '../../core/http'
-import { log } from '../../core/log'
-import { getSettings, setSetting } from '../../core/settings-store'
-import { assetOrigin, revision } from '../../core/site'
+import { applyBodyStyle, injectBackgroundCss, injectColorCss } from '@/core/appearance'
+import { http } from '@/core/http'
+import { log } from '@/core/log'
+import { getSettings, setSetting } from '@/core/settings-store'
+import { assetOrigin, revision } from '@/core/site'
 
 const imagePattern = /\.(?:jpg|jpeg|png|gif)(?:$|\?)/i
 const colorPattern = /^#(?:[a-f0-9]{3}|[a-f0-9]{6})$/i

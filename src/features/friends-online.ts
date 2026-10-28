@@ -1,10 +1,10 @@
-import type { Feature } from '../core/feature'
-import type { FriendsOnline } from '../types/friends-online'
+import type { Feature } from '@/core/feature'
+import type { FriendsOnline } from '@/types/friends-online'
 import { el } from '@zero-dependency/dom'
-import { http } from '../core/http'
-import { log } from '../core/log'
-import { getSettings, setSetting } from '../core/settings-store'
-import { assetOrigin, baseUrl } from '../core/site'
+import { http } from '@/core/http'
+import { log } from '@/core/log'
+import { getSettings, setSetting } from '@/core/settings-store'
+import { assetOrigin, baseUrl } from '@/core/site'
 
 export function renderFriendsOptions(anchor: HTMLElement) {
   if (document.querySelector('#SP_PLUS_MAXFRIENDS')) return

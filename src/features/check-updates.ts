@@ -1,11 +1,11 @@
-import type { Feature } from '../core/feature'
-import type { CheckUpdates } from '../types/check-updates'
+import type { Feature } from '@/core/feature'
+import type { CheckUpdates } from '@/types/check-updates'
 import { el } from '@zero-dependency/dom'
-import { http } from '../core/http'
-import { log } from '../core/log'
-import { modalMessage } from '../core/modals'
-import { getSettings, setSetting } from '../core/settings-store'
-import { assetOrigin, revision, session } from '../core/site'
+import { http } from '@/core/http'
+import { log } from '@/core/log'
+import { modalMessage } from '@/core/modals'
+import { getSettings, setSetting } from '@/core/settings-store'
+import { assetOrigin, revision, session } from '@/core/site'
 
 const dotted = (build: number) => String(build).split('').join('.')
 

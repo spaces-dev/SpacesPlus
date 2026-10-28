@@ -1,10 +1,10 @@
-import type { Feature } from '../core/feature'
+import type { Feature } from '@/core/feature'
 import { el } from '@zero-dependency/dom'
 import { pluralize } from '@zero-dependency/utils'
-import { http } from '../core/http'
-import { log } from '../core/log'
-import { modalConfirm, modalMessage } from '../core/modals'
-import { baseUrl } from '../core/site'
+import { http } from '@/core/http'
+import { log } from '@/core/log'
+import { modalConfirm, modalMessage } from '@/core/modals'
+import { baseUrl } from '@/core/site'
 
 const commentWord = (count: number) => pluralize(count)`комментари${['й', 'я', 'ев']}`
 

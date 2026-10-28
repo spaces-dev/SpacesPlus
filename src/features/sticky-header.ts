@@ -1,4 +1,4 @@
-import type { Feature } from '../core/feature'
+import type { Feature } from '@/core/feature'
 
 const mark = 'sp-sticky-header'
 

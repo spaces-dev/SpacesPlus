@@ -1,5 +1,5 @@
-import type { Settings } from '../types/settings'
-import type { WeatherPayload } from '../types/weather'
+import type { Settings } from '@/types/settings'
+import type { WeatherPayload } from '@/types/weather'
 import { Cookie } from '@zero-dependency/cookie'
 import { assetOrigin, host, versionNumber } from './site'
 

@@ -1,7 +1,7 @@
-import type { Feature } from '../core/feature'
-import { log } from '../core/log'
-import { modalMessage } from '../core/modals'
-import { getSettings, setSetting } from '../core/settings-store'
+import type { Feature } from '@/core/feature'
+import { log } from '@/core/log'
+import { modalMessage } from '@/core/modals'
+import { getSettings, setSetting } from '@/core/settings-store'
 
 const hidden = 'sp-hidden-rightbar'
 

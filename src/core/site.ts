@@ -1,4 +1,4 @@
-import type { DeviceInfo } from '../types/device'
+import type { DeviceInfo } from '@/types/device'
 import pkg from '../../package.json' with { type: 'json' }
 
 export const revision = Date.now()

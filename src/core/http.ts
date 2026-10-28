@@ -1,4 +1,4 @@
-import type { HttpResponse } from '../types/http-response'
+import type { HttpResponse } from '@/types/http-response'
 import { log } from './log'
 
 interface HttpInit {

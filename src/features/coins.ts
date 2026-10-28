@@ -1,6 +1,6 @@
-import type { Feature } from '../core/feature'
-import { log } from '../core/log'
-import { baseUrl } from '../core/site'
+import type { Feature } from '@/core/feature'
+import { log } from '@/core/log'
+import { baseUrl } from '@/core/site'
 
 export const coins: Feature = {
   id: 'coins',
