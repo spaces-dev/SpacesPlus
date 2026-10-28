@@ -4,16 +4,18 @@ import { pluralize } from '@zero-dependency/utils'
 import { http } from '../core/http'
 import { log } from '../core/log'
 import { modalConfirm, modalMessage } from '../core/modals'
-import { baseUrl, isDesktop } from '../core/site'
+import { baseUrl } from '../core/site'
 
 const commentWord = (count: number) => pluralize(count)`комментари${['й', 'я', 'ев']}`
 
 function commentRoot(node: Node) {
-  const steps = isDesktop() ? 5 : 8
-  let current: Node | null = node
-  for (let index = 0; index < steps; index += 1) current = current?.parentElement ?? null
-  return current instanceof HTMLElement ? current : null
+  const element = node instanceof Element ? node : node.parentElement
+  return element?.closest<HTMLElement>('.js-comm') ?? null
 }
+
+const commentId = (root: Element) => root.getAttribute('data-id') ?? ''
+
+const deleteLinkOf = (root: Element) => root.querySelector<HTMLAnchorElement>('a[data-action="comment_delete"]')
 
 function setChosen(parent: Element, inputs: HTMLInputElement[], chooseAll: boolean) {
   for (const input of inputs) input.checked = chooseAll
@@ -37,17 +39,21 @@ export const deleteComments: Feature = {
       if (!dates.length || !onComments || (!onDelete && !onAdmin)) return
 
       for (const child of dates) {
-        if (child.getElementsByTagName('input').length) continue
+        if (child.querySelector('input[id^="DC_"]')) continue
         const root = commentRoot(child)
-        const id = root?.id
-        if (!id || Number.isNaN(Number.parseInt(id, 10))) continue
+        const id = root ? commentId(root) : ''
+        const menu = child.querySelector('a .ico_more')?.parentElement
+        if (!root || !/^\d+$/.test(id) || !deleteLinkOf(root) || !(menu instanceof HTMLElement)) continue
 
-        child.append(el('input', {
-          type: 'checkbox',
-          className: 'sp-cbfc sp-checkbox-square',
-          id: `DC_${id}`,
-        }))
-        child.append(el('label', { htmlFor: `DC_${id}` }))
+        const boxId = `DC_${id}`
+        menu.after(
+          el('input', {
+            type: 'checkbox',
+            className: 'sp-cbfc sp-checkbox-square',
+            id: boxId,
+          }),
+          el('label', { htmlFor: boxId }),
+        )
       }
 
       if (document.querySelector('#SP_PLUS_BUTTONS')) return
@@ -70,7 +76,7 @@ export const deleteComments: Feature = {
       }
 
       const remove = el('button', {
-        className: 'user__tools-link table__cell sp_btn_line sp_btn-list',
+        className: 'user__tools-link table__cell sp_btn-list',
         innerHTML: '<span class="sp sp-remove-red"></span><span class="sp-del-text">Удалить выбранные</span>',
       })
       remove.onclick = () => {
@@ -78,9 +84,8 @@ export const deleteComments: Feature = {
         for (const input of document.querySelectorAll<HTMLInputElement>('input[id^="DC_"]')) {
           if (!input.checked) continue
           const root = commentRoot(input)
-          root?.querySelectorAll<HTMLAnchorElement>(`a[href^="${baseUrl}/comment/delete/"]`).forEach((link) => {
-            if (link.textContent === 'Удалить') urls.push(link.href)
-          })
+          const link = root ? deleteLinkOf(root) : null
+          if (link?.href) urls.push(link.href)
         }
 
         if (!urls.length) {
@@ -97,7 +102,6 @@ export const deleteComments: Feature = {
             const response = await http(url, { proxy: true })
             log.info('Удалил комментарий', response)
           }
-          location.reload()
         })
         return false
       }

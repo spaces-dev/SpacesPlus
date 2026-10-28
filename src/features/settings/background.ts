@@ -31,7 +31,10 @@ function setColorInputs(color: string) {
   const field = document.querySelector<HTMLInputElement>('#color-input')
   const preview = document.querySelector<HTMLElement>('.colorpicker-color')
   if (named) named.value = color
-  if (field) field.value = color
+  if (field) {
+    field.value = color
+    field.classList.remove('text-input_error_bg')
+  }
   if (preview) preview.style.backgroundColor = color
 }
 
@@ -72,7 +75,10 @@ async function showImages() {
     })
     image.onclick = () => {
       const field = document.querySelector<HTMLInputElement>('#image-input')
-      if (field) field.value = image.src
+      if (field) {
+        field.value = image.src
+        field.classList.remove('text-input_error_bg')
+      }
       setSetting('bodystyleSet.url', image.src)
       applyBodyStyle()
     }
@@ -121,14 +127,12 @@ function showColors() {
     const picker = new CP(pickerHost, false, pickerHost)
     const field = document.querySelector<HTMLInputElement>('#color-input')
     field?.addEventListener('change', () => {
-      if (!field.value || !colorPattern.test(field.value)) {
-        field.classList.add('sp-input-error')
-        return
-      }
+      const valid = colorPattern.test(field.value)
+      field.classList.toggle('text-input_error_bg', !valid)
+      if (!valid) return
       setSetting('bodystyleSet.color', field.value)
       applyBodyStyle()
       picker.set(getSettings().bodystyleSet.color)
-      field.classList.remove('sp-input-error')
     })
     picker.enter()
     picker.set(getSettings().bodystyleSet.color)
@@ -165,13 +169,11 @@ export function renderBackgroundOptions(anchor: HTMLElement) {
       style: { marginBottom: '7px' },
     })
     imageInput.oninput = () => {
-      if (isUrl(imageInput.value) && imagePattern.test(imageInput.value)) {
-        setSetting('bodystyleSet.url', imageInput.value)
-        applyBodyStyle()
-        imageInput.classList.remove('sp-input-error')
-        return
-      }
-      imageInput.classList.add('sp-input-error')
+      const valid = isUrl(imageInput.value) && imagePattern.test(imageInput.value)
+      imageInput.classList.toggle('text-input_error_bg', !valid)
+      if (!valid) return
+      setSetting('bodystyleSet.url', imageInput.value)
+      applyBodyStyle()
     }
 
     const colorInput = el('input', {
@@ -181,13 +183,11 @@ export function renderBackgroundOptions(anchor: HTMLElement) {
       value: bodystyleSet.color,
     })
     colorInput.oninput = () => {
-      if (colorPattern.test(colorInput.value)) {
-        setSetting('bodystyleSet.color', colorInput.value)
-        applyBodyStyle()
-        colorInput.classList.remove('sp-input-error')
-        return
-      }
-      colorInput.classList.add('sp-input-error')
+      const valid = colorPattern.test(colorInput.value)
+      colorInput.classList.toggle('text-input_error_bg', !valid)
+      if (!valid) return
+      setSetting('bodystyleSet.color', colorInput.value)
+      applyBodyStyle()
     }
 
     const imageRadio = el('input', {

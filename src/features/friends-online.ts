@@ -16,12 +16,10 @@ export function renderFriendsOptions(anchor: HTMLElement) {
     value: String(getSettings().friendsSet.max),
   })
   input.oninput = () => {
-    if (/^(?:[1-9]|1[0-5])$/.test(input.value)) {
-      setSetting('friendsSet.max', Number(input.value))
-      input.classList.remove('sp-input-error')
-      return
-    }
-    input.classList.add('sp-input-error')
+    const valid = /^(?:[1-9]|1[0-5])$/.test(input.value)
+    input.classList.toggle('text-input_error_bg', !valid)
+    if (!valid) return
+    setSetting('friendsSet.max', Number(input.value))
   }
 
   const panel = el('div', { id: 'SP_PLUS_MAXFRIENDS' }, el('div', { className: 'sp_settings-wrap' }, [

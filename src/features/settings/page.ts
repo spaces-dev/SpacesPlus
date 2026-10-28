@@ -25,7 +25,7 @@ function sectionLink({ id, color, icon, label, href }: SectionLink) {
   return link
 }
 
-const groupedIds = ['friendsOn', 'bodystyle', 'weather']
+const groupedIds = ['friendsOn', 'bodystyle', 'weather', 'recents']
 
 const isGrouped = (id: string) => groupedIds.includes(id)
 
@@ -123,8 +123,12 @@ function openSettings(features: Feature[]) {
         return
       }
 
+      if (feature.onToggle?.(checkbox.checked) === false) {
+        checkbox.checked = false
+        return
+      }
+
       setSetting(feature.id, checkbox.checked)
-      feature.onToggle?.(checkbox.checked)
       if (checkbox.checked) {
         feature.renderOptions?.(checkbox)
         return

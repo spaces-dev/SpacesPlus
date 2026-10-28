@@ -13,5 +13,5 @@ export interface Feature {
   optionsId?: string
   start: (ctx: FeatureContext) => void | Disposer
   renderOptions?: (anchor: HTMLElement) => void
-  onToggle?: (enabled: boolean) => void
+  onToggle?: (enabled: boolean) => void | false
 }

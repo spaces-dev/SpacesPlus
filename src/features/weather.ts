@@ -51,7 +51,9 @@ export const geoPromptSkipped = () => sessionStorage.getItem(geoSkipKey) !== nul
 
 function clearLoadingCity() {
   const input = document.querySelector<HTMLInputElement>('#SP-CITY-INPUT')
-  if (input?.value === 'Загрузка...') input.value = ''
+  if (input?.value !== 'Загрузка...') return
+  input.value = ''
+  input.dispatchEvent(new Event('input'))
 }
 
 export async function getWeather(coords?: GeoPoint) {
@@ -74,7 +76,10 @@ export async function getWeather(coords?: GeoPoint) {
     if (!json || json.cod !== 200) return
 
     const input = document.querySelector<HTMLInputElement>('#SP-CITY-INPUT')
-    if (input) input.value = json.name
+    if (input) {
+      input.value = json.name
+      input.dispatchEvent(new Event('input'))
+    }
     document.querySelector('#SP_WIDGET_WEATHER')?.remove()
     setSetting('weatherSet.city', json.name)
     getSettings().weatherSet.time = unixTime()
@@ -128,7 +133,7 @@ function renderWidget() {
   widget.append(
     el('div', {
       className: 'b-title cl b-title_first oh',
-      innerHTML: `<a href="https://openweathermap.org/city/${data.id}" target="_blank" class="b-title__link" style="white-space: unset"><h6 class="span">Погода в г. ${data.name}</h6></a>`,
+      innerHTML: `<a href="https://openweathermap.org/city/${data.id}" target="_blank" class="b-title__link" style="white-space: unset"><h6 class="span">Погода в ${data.name}</h6></a>`,
     }),
     el('div', {
       className: 'content',
@@ -161,7 +166,9 @@ export const weatherWidget: Feature = {
   optionsId: 'SP_WEATHER_SETTINGS',
   renderOptions: renderWeatherOptions,
   onToggle: (enabled) => {
-    if (enabled && getSettings().hrightbar) setSetting('hrightbar', false)
+    if (!enabled || !getSettings().hrightbar) return
+    modalMessage('Виджет погоды', 'Виджет погоды показывается в правом меню. Сначала отключите «Скрыть правое меню».', { close: true, timer: 5 })
+    return false
   },
   start: () => {
     if (!getSettings().weatherSet.city) detectCity()

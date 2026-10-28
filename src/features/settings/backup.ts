@@ -81,7 +81,7 @@ export function renderBackup(target: Element) {
     }
 
     const restore = el('button', {
-      className: 'user__tools-link table__cell sp_btn_line sp_btn-list',
+      className: 'user__tools-link table__cell sp_btn-list',
       innerHTML: '<span class="sp sp-restore-g"></span><span style="color: #3CA93C; padding-left: 10px">Импорт</span>',
     })
     restore.onclick = () => {

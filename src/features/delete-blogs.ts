@@ -36,7 +36,6 @@ export const deleteBlogs: Feature = {
           el('label', {
             className: 'sp-ch-blogs',
             htmlFor: blogId,
-            style: { margin: '2px' },
           }),
         )
         checks.push(box)
@@ -62,7 +61,7 @@ export const deleteBlogs: Feature = {
       }
 
       const remove = el('button', {
-        className: 'user__tools-link table__cell sp_btn_line sp_btn-list',
+        className: 'user__tools-link table__cell sp_btn-list',
         innerHTML: '<span class="sp sp-remove-red"></span><span class="sp-del-text">Удалить выбранные</span>',
       })
       remove.onclick = () => {

@@ -15,16 +15,18 @@ export function renderWeatherOptions(anchor: HTMLElement) {
     autocomplete: 'off',
     style: { marginBottom: '7px' },
   })
+  const markApiKey = () => {
+    apiKey.classList.toggle('text-input_error_bg', !/^[a-f0-9]{32}$/i.test(apiKey.value))
+  }
+  apiKey.oninput = markApiKey
   apiKey.onkeypress = (event) => {
     if (event.key !== 'Enter') return
-    if (/^[a-f0-9]{32}$/i.test(apiKey.value)) {
-      setSetting('weatherSet.key', apiKey.value)
-      getWeather()
-      apiKey.classList.remove('sp-input-error')
-      return
-    }
-    apiKey.classList.add('sp-input-error')
+    markApiKey()
+    if (!/^[a-f0-9]{32}$/i.test(apiKey.value)) return
+    setSetting('weatherSet.key', apiKey.value)
+    getWeather()
   }
+  markApiKey()
 
   const waitingForCity = weatherSet.city === null && !geoPromptSkipped()
   const city = el('input', {
@@ -35,16 +37,24 @@ export function renderWeatherOptions(anchor: HTMLElement) {
     value: waitingForCity ? 'Загрузка...' : weatherSet.city ?? '',
     style: { marginBottom: '7px' },
   })
-  city.onkeypress = (event) => {
-    if (event.key !== 'Enter') return
-    if (/^[a-zа-яё]+(?:-[a-zа-яё]+){0,3}$/i.test(city.value)) {
-      setSetting('weatherSet.city', city.value)
-      getWeather()
-      city.classList.remove('sp-input-error')
+  const markCity = () => {
+    if (city.value === 'Загрузка...') {
+      city.classList.remove('text-input_error_bg')
       return
     }
-    city.classList.add('sp-input-error')
+    const name = city.value.trim()
+    city.classList.toggle('text-input_error_bg', !/^\p{L}[\p{L}\s.'’-]*$/u.test(name))
   }
+  city.oninput = markCity
+  city.onkeypress = (event) => {
+    if (event.key !== 'Enter' || city.value === 'Загрузка...') return
+    city.value = city.value.trim()
+    markCity()
+    if (city.classList.contains('text-input_error_bg')) return
+    setSetting('weatherSet.city', city.value)
+    getWeather()
+  }
+  markCity()
 
   const interval = el('input', {
     type: 'text',
@@ -55,12 +65,10 @@ export function renderWeatherOptions(anchor: HTMLElement) {
     style: { marginBottom: '7px' },
   })
   interval.oninput = () => {
-    if (/^(?:[1-9]|[1-8]\d|9\d|[12]\d{2}|3[0-5]\d|360)$/.test(interval.value)) {
-      setSetting('weatherSet.interval', Number(interval.value) * 60)
-      interval.classList.remove('sp-input-error')
-      return
-    }
-    interval.classList.add('sp-input-error')
+    const valid = /^(?:[1-9]|[1-8]\d|9\d|[12]\d{2}|3[0-5]\d|360)$/.test(interval.value)
+    interval.classList.toggle('text-input_error_bg', !valid)
+    if (!valid) return
+    setSetting('weatherSet.interval', Number(interval.value) * 60)
   }
 
   const detect = el('a', { href: '#' }, 'Определить')

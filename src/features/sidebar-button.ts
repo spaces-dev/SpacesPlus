@@ -2,12 +2,12 @@ import type { Feature } from '../core/feature'
 import { el } from '@zero-dependency/dom'
 import { baseUrl } from '../core/site'
 
-const isSettingsHeading = (value: string | null | undefined) => {
+function isSettingsHeading(value: string | null | undefined) {
   const title = value?.replace(/\s+/g, ' ').trim()
   return title === 'Настройка' || title === 'Настройки'
 }
 
-const settingsSection = () => {
+function settingsSection() {
   const root = document.querySelector('#sidebar_panel .sidebar__content')
   if (!root) return null
 
@@ -26,12 +26,12 @@ const settingsSection = () => {
   return label?.closest('.sidebar__section') ?? null
 }
 
-const firstItem = (section: Element) => {
+function firstItem(section: Element) {
   return [...section.children].find(child => child.classList.contains('sidebar-item') && !child.classList.contains('sidebar-item--section'))
     ?? section.querySelector('.sidebar-item:not(.sidebar-item--section)')
 }
 
-const spacesIcon = () => {
+function spacesIcon() {
   return el('span', { className: 'js-ico ico_cats ico_cats_spaces sp-cats-spaces' })
 }
 
