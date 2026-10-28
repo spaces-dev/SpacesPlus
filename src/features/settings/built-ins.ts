@@ -75,7 +75,7 @@ export function renderBuiltins(root: Element) {
 
   const quest = el('a', {
     href: '#',
-    className: 'list-link list-link_arr sp_line sp_last_btn sp_newbq_l',
+    className: 'list-link list-link_arr sp_line sp_last_btn',
     innerHTML: button('<span class="sp sp-remove-grey mr-14"></span>Скрыть квест новичка'),
   })
   quest.onclick = () => {
@@ -93,7 +93,10 @@ export function renderBuiltins(root: Element) {
   root.append(wrap)
 
   http<NewbeeQuest>(`${baseUrl}/mysite/`, { proxy: true }).then((response) => {
-    if (response.parsedBody?.owner_widget.newbee_quest_widget) wrap.append(quest)
+    if (response.parsedBody?.owner_widget.newbee_quest_widget) {
+      pin.classList.remove('sp_last_btn')
+      wrap.append(quest)
+    }
     log.info('Квест новичка', response)
   }).catch((error) => {
     log.error('newbee-quest', error)
