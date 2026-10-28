@@ -14,7 +14,8 @@ const DOMAINS = [
   'world76.spcs.bio',
 ]
 
-const devServerOrigin = 'http://localhost:3000/'
+const devServerPort = 3000
+const devServerOrigin = `http://localhost:${devServerPort}/`
 
 export default defineConfig((config) => {
   const isDev = config.mode === 'development'

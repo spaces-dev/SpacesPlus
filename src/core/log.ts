@@ -1,4 +1,4 @@
 import { Logger } from '@zero-dependency/utils'
-import pkg from '../../package.json' with { type: 'json' }
+import { pkgVersion } from './pkg-info'
 
-export const log = new Logger(`Spaces+ ${pkg.version}`)
+export const log = new Logger(`Spaces+ ${pkgVersion}`)

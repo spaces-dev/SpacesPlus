@@ -1,19 +1,15 @@
 import type { DeviceInfo } from '@/types/device'
-import pkg from '../../package.json' with { type: 'json' }
+import { pkgBasePath, pkgVersion } from './pkg-info'
 
 export const revision = Date.now()
 
-export const assetOrigin = import.meta.env.DEV
-  ? 'http://localhost:3000'
-  : pkg.homepage.replace(/\/$/, '')
+export const assetOrigin = pkgBasePath.replace(/\/$/, '')
 
 export const host = location.hostname
 
 export const baseUrl = `${location.protocol}//${host}`
 
-export const version = pkg.version
-
-export const versionNumber = Number(pkg.version.split('.').join(''))
+export const versionNumber = Number(pkgVersion.split('.').join(''))
 
 const fallbackDevice: DeviceInfo = {
   id: 4,

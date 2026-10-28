@@ -1,8 +1,9 @@
 import type { Feature } from '@/core/feature'
 import { el } from '@zero-dependency/dom'
 import { modalConfirm, modalMessage } from '@/core/modals'
+import { pkgVersion } from '@/core/pkg-info'
 import { getSettings, resetSpacesCookies, setSetting } from '@/core/settings-store'
-import { baseUrl, isTouch, pathAt, queryFlag, version } from '@/core/site'
+import { baseUrl, isTouch, pathAt, queryFlag } from '@/core/site'
 import { renderChangelog } from '@/features/check-updates'
 import { renderBackup } from './backup'
 import { renderBuiltins } from './built-ins'
@@ -234,7 +235,7 @@ function openSettings(features: Feature[]) {
     if (clicks >= 10) location.href = 'https://t.me/spaces_dev'
   }
   title.append(heart, el('div', {
-    innerHTML: `v${version}`,
+    innerHTML: `v${pkgVersion}`,
     style: { float: 'right' },
   }))
   about.append(el('div', { className: 'content-item3' }, title))
