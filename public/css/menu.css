@@ -731,3 +731,15 @@ input[type='color'] {
 #SP_WRAP_COLOR .colorpicker-big {
   max-width: 110px !important;
 }
+
+#scroll_page.sp-replace {
+  left: auto;
+  right: 0;
+}
+
+#scroll_page.sp-replace #scroll_page_place,
+#scroll_page.sp-replace #scroll_page_toTop,
+#scroll_page.sp-replace #scroll_page_toBottom {
+  left: auto;
+  right: 0;
+}

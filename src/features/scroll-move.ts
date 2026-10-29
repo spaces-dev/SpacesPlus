@@ -11,10 +11,11 @@ export const scrollMove: Feature = {
   start: (ctx) => {
     const apply = () => {
       const scroll = document.querySelector<HTMLElement>('#scroll_page')
-      if (!scroll || scroll.hasAttribute(moved)) return
-      scroll.style.left = 'auto'
-      scroll.style.right = '0'
-      scroll.setAttribute(moved, '1')
+      if (!scroll) return
+      scroll.classList.add(moved)
+      scroll.style.removeProperty('left')
+      scroll.style.removeProperty('right')
+      scroll.removeAttribute(moved)
     }
 
     const stop = ctx.onDom(() => {
@@ -28,9 +29,10 @@ export const scrollMove: Feature = {
     return () => {
       stop()
       const scroll = document.querySelector<HTMLElement>('#scroll_page')
-      if (!scroll?.hasAttribute(moved)) return
-      scroll.style.left = '0'
-      scroll.style.right = 'auto'
+      if (!scroll?.classList.contains(moved)) return
+      scroll.classList.remove(moved)
+      scroll.style.removeProperty('left')
+      scroll.style.removeProperty('right')
       scroll.removeAttribute(moved)
     }
   },
