@@ -101,11 +101,20 @@ function openSettings(features: Feature[]) {
     <a id="SP_PLUS_SETBACK" href="${baseUrl}/settings/?" class="link-return full_link"><span class="ico ico_arr_small_left_darkblue"></span> Назад</a>
   `
 
-  const area = document.querySelector('#SP_PLUS_SETAREA')
+  const area = document.querySelector<HTMLElement>('#SP_PLUS_SETAREA')
   if (!area) return
 
   for (const feature of features) {
     if (!feature.title) continue
+    const target = isGrouped(feature.id)
+      ? document.querySelector<HTMLElement>(`#SP_PLUS_AREA_${feature.id}`)
+      : area
+    if (!target) continue
+    if (feature.listed === false) {
+      feature.renderOptions?.(target)
+      continue
+    }
+
     const enabled = getSettings()[feature.id as keyof ReturnType<typeof getSettings>] === true
     const unsupported = Boolean(feature.desktopOnly && isTouch())
     if (unsupported && enabled) setSetting(feature.id, false)
@@ -156,10 +165,6 @@ function openSettings(features: Feature[]) {
       row.append(info)
     }
 
-    const target = isGrouped(feature.id)
-      ? document.querySelector(`#SP_PLUS_AREA_${feature.id}`)
-      : area
-    if (!target) continue
     target.append(row)
     if (checkbox.checked) feature.renderOptions?.(checkbox)
   }

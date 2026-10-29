@@ -52,7 +52,7 @@ function hookHistory() {
 }
 
 function isEnabled(feature: Feature) {
-  if (feature.core) return true
+  if (feature.core || feature.listed === false) return true
   if (feature.desktopOnly && isTouch()) return false
   const value = getSettings()[feature.id as keyof ReturnType<typeof getSettings>]
   return value === true

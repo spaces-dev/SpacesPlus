@@ -1,6 +1,43 @@
 import type { DeviceInfo } from '@/types/device'
 import { pkgBasePath, pkgVersion } from './pkg-info'
 
+interface SiteRequireList extends Array<unknown> {
+  push: (argv: unknown[]) => number
+}
+
+type SiteRequire = ((names: string[], onLoad?: () => void, onError?: () => void) => void) & {
+  push?: (argv: unknown[]) => void
+}
+
+declare global {
+  interface Window {
+    __require?: SiteRequire | SiteRequireList
+  }
+}
+
+export function readPage<T>(read: (win: Window) => T | null | undefined): T | undefined {
+  const fromWindow = read(window)
+  if (fromWindow != null) return fromWindow
+  try {
+    return read(unsafeWindow) ?? undefined
+  } catch {
+    return undefined
+  }
+}
+
+export function loadSiteModules(names: string[], onLoad: () => void, onError?: () => void) {
+  const require = readPage(win => win.__require)
+  if (typeof require === 'function') {
+    require(names, onLoad, onError)
+    return true
+  }
+  if (Array.isArray(require)) {
+    require.push([names, onLoad, onError])
+    return true
+  }
+  return false
+}
+
 export const revision = Date.now()
 
 export const assetOrigin = pkgBasePath.replace(/\/$/, '')
@@ -21,14 +58,7 @@ const fallbackDevice: DeviceInfo = {
   old: false,
 }
 
-function readDevice(): DeviceInfo {
-  if (window.Device) return window.Device
-  try {
-    return unsafeWindow.Device ?? fallbackDevice
-  } catch {
-    return fallbackDevice
-  }
-}
+const readDevice = (): DeviceInfo => readPage(win => win.Device) ?? fallbackDevice
 
 export const device: DeviceInfo = readDevice()
 

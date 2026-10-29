@@ -10,6 +10,7 @@ export interface Feature {
   description?: string
   desktopOnly?: boolean
   core?: boolean
+  listed?: boolean
   optionsId?: string
   start: (ctx: FeatureContext) => void | Disposer
   renderOptions?: (anchor: HTMLElement) => void

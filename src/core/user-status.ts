@@ -1,35 +1,24 @@
 import { el } from '@zero-dependency/dom'
 import { device } from './site'
 
-export function showUserStatus(code: string | undefined) {
-  const warning = el('div', {
-    innerHTML: 'Для работы <b>Spaces+</b> необходима авторизация!',
-  })
+const authMessage = 'Для работы <b>Spaces+</b> необходима авторизация!'
 
+export function showUserStatus(code: string | undefined) {
   if (device.id === 1 || device.id === 2) {
     const banner = el('div', {
-      className: 'oh busi',
+      className: 'error',
       innerHTML: 'Используемая версия сайта не поддерживается для работы <b>Spaces+</b>',
-      style: {
-        border: '1px solid #ff9a95',
-        background: '#fdf3ef',
-      },
     })
-    if (code === '01001') banner.prepend(warning)
+    if (code === '01001') banner.prepend(el('div', { innerHTML: authMessage }))
     document.querySelector('.root')?.prepend(banner)
     return false
   }
 
   if ((device.id === 3 || device.id === 4) && code === '01001') {
-    const box = el('div', {
-      className: 'oh nl system-message',
-      style: {
-        border: '1px solid #ff9a95',
-        background: '#fdf3ef',
-      },
-    })
-    box.prepend(warning)
-    document.querySelector('#top_info_block')?.prepend(box)
+    document.querySelector('#top_info_block')?.prepend(el('div', {
+      className: 'js-alert_message nl system-message system-message_alert',
+      innerHTML: authMessage,
+    }))
     return false
   }
 

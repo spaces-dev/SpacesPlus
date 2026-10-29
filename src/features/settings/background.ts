@@ -1,10 +1,50 @@
-import type { Assets } from '@/types/assets'
 import { el } from '@zero-dependency/dom'
-import { applyBodyStyle, injectBackgroundCss, injectColorCss } from '@/core/appearance'
-import { http } from '@/core/http'
+import { applyBodyStyle, injectBackgroundCss } from '@/core/appearance'
 import { log } from '@/core/log'
 import { getSettings, setSetting } from '@/core/settings-store'
-import { assetOrigin, revision } from '@/core/site'
+import { assetOrigin, loadSiteModules, readPage } from '@/core/site'
+
+interface SiteColorPicker {
+  setColor: (hex: string) => void
+}
+
+interface SiteQuery {
+  colorpicker: (flag?: false) => SiteColorPicker | null
+  on: (event: string, handler: (event: unknown, data?: { color?: string }) => void) => void
+}
+
+interface SiteJQuery {
+  (target: Element): SiteQuery
+}
+
+declare global {
+  interface Window {
+    $?: SiteJQuery
+  }
+}
+
+const backgrounds = [
+  'default.png',
+  'bananas.png',
+  'cats.png',
+  'ethnic-binary.png',
+  'hearts.png',
+  'skull-and-bones.png',
+  'water.png',
+  'stars.gif',
+  'yellow-leaves.png',
+  '10-years.png',
+  '15bg.png',
+  'triangle.png',
+  'animal-eyes.png',
+  'cube.png',
+  'flowers.png',
+  'girly-doodles.png',
+  'japanese-cranes.png',
+  'round-circle.png',
+  'cicrle-flowers.png',
+  'square-texture.png',
+]
 
 const imagePattern = /\.(?:jpg|jpeg|png|gif)(?:$|\?)/i
 const colorPattern = /^#(?:[a-f0-9]{3}|[a-f0-9]{6})$/i
@@ -18,24 +58,59 @@ function isUrl(value: string) {
   }
 }
 
-interface ColorPicker {
-  enter: () => void
-  set: (color: string) => void
-  on: (event: 'change', callback: (value: string) => void) => void
+let colorTicket = 0
+let colorObserver: MutationObserver | undefined
+
+function normalizeColor(value: string) {
+  const color = value.startsWith('#') ? value : `#${value}`
+  return color.toUpperCase()
 }
 
-declare const CP: new (target: Element, flag: boolean, container: Element) => ColorPicker
+function applyColor(value: string) {
+  const color = normalizeColor(value)
+  if (!colorPattern.test(color)) return
+  if (getSettings().bodystyleSet.color.toUpperCase() === color) return
+  setSetting('bodystyleSet.color', color)
+  applyBodyStyle()
+}
 
-function setColorInputs(color: string) {
-  const named = document.querySelector<HTMLInputElement>('input[name=color]')
-  const field = document.querySelector<HTMLInputElement>('#color-input')
-  const preview = document.querySelector<HTMLElement>('.colorpicker-color')
-  if (named) named.value = color
-  if (field) {
-    field.value = color
-    field.classList.remove('text-input_error_bg')
+function imageField() {
+  const { url } = getSettings().bodystyleSet
+  const field = el('input', {
+    type: 'text',
+    id: 'image-input',
+    className: 'text-input',
+    value: url,
+  })
+  field.oninput = () => {
+    const valid = isUrl(field.value) && imagePattern.test(field.value)
+    field.classList.toggle('text-input_error_bg', !valid)
+    if (!valid) return
+    setSetting('bodystyleSet.url', field.value)
+    applyBodyStyle()
   }
-  if (preview) preview.style.backgroundColor = color
+  return el('div', {
+    style: { padding: '15px' },
+  }, el('div', { className: 'text-input__wrap' }, [
+    el('label', {
+      className: 'label',
+      innerHTML: 'Ссылка на изображение:<div class="label__desc">.jpg или .png</div>',
+    }),
+    field,
+  ]))
+}
+
+export function destroyColorPicker() {
+  colorTicket += 1
+  colorObserver?.disconnect()
+  colorObserver = undefined
+  const host = document.querySelector<HTMLElement>('#SP_WRAP_COLOR .js-bb_colorpicker')
+  const $ = readPage(win => win.$)
+  if (host && $) {
+    const query = $(host)
+    if (typeof query.colorpicker === 'function') query.colorpicker(false)
+  }
+  document.querySelector('#SP_WRAP_COLOR')?.remove()
 }
 
 const palette = [
@@ -50,24 +125,20 @@ function listLinkBorder() {
   return listLink ? getComputedStyle(listLink).borderBottom : '1px solid #c5d3e1'
 }
 
-async function showImages() {
+function showImages() {
   if (document.querySelector('#SP_WRAP_IMAGE')) return
-  document.querySelector('#SP_WRAP_COLOR')?.remove()
-  document.querySelector('#SP_PLUS_CP_STYLE')?.remove()
+  const toggle = document.querySelector('#sp_set_bodystyle_URL')?.closest('label')
+  if (!toggle) return
   injectBackgroundCss()
 
-  const host = document.querySelector('#SP_PLUS_BODYSTYLE')
-  if (!host) return
   const gallery = el('div', { className: 'js-gallery_skip wbg oh tiles_block tiles_wrapper' })
   const wrap = el('div', {
     id: 'SP_WRAP_IMAGE',
     style: { borderTop: listLinkBorder() },
-  })
+  }, imageField())
+  toggle.after(wrap)
 
-  const response = await http<Assets>(`${assetOrigin}/data.json?r=${revision}`)
-  if (response.status !== 200 || !response.parsedBody?.backgrounds) return
-
-  for (const file of response.parsedBody.backgrounds) {
+  for (const file of backgrounds) {
     const image = el('img', {
       className: 'preview s201_200',
       src: `${assetOrigin}/backgrounds/${file}`,
@@ -86,18 +157,52 @@ async function showImages() {
   }
 
   wrap.append(gallery)
-  host.append(wrap)
   applyBodyStyle()
+}
+
+function mountColorPicker(pickerHost: HTMLElement, wrap: HTMLElement) {
+  const $ = readPage(win => win.$)
+  if (!$) {
+    log.error('colorpicker', 'jQuery is missing')
+    return
+  }
+
+  const query = $(pickerHost)
+  const picker = query.colorpicker()
+  if (!picker) {
+    log.error('colorpicker', 'widget failed')
+    return
+  }
+
+  picker.setColor(getSettings().bodystyleSet.color)
+
+  query.on('colorpicker:select', (_event, data) => {
+    if (data?.color) applyColor(data.color)
+  })
+
+  const preview = pickerHost.querySelector<HTMLElement>('.colorpicker-color')
+  const pickerInput = pickerHost.querySelector<HTMLInputElement>('input[name=color]')
+  if (preview && pickerInput) {
+    colorObserver = new MutationObserver(() => {
+      applyColor(pickerInput.value)
+    })
+    colorObserver.observe(preview, { attributes: true, attributeFilter: ['style'] })
+  }
+
+  for (const swatch of wrap.querySelectorAll<HTMLElement>('.js-bb_color')) {
+    swatch.addEventListener('click', () => {
+      const color = swatch.dataset.val
+      if (!color) return
+      applyColor(color)
+      picker.setColor(color)
+    })
+  }
 }
 
 function showColors() {
   if (document.querySelector('#SP_WRAP_COLOR')) return
-  document.querySelector('#SP_WRAP_IMAGE')?.remove()
-  document.querySelector('#SP_PLUS_IMAGE_STYLE')?.remove()
-  injectColorCss()
-
-  const host = document.querySelector('#SP_PLUS_BODYSTYLE')
-  if (!host) return
+  const toggle = document.querySelector('#sp_set_bodystyle_color')?.closest('label')
+  if (!toggle) return
   const swatches = el('div', { className: 'stnd-block' })
   for (const row of palette) {
     for (const color of row) {
@@ -120,40 +225,20 @@ function showColors() {
     el('td', { className: 'table__cell' }, swatches),
     el('td', { className: 'table__cell table__cell_last' }, el('div', { className: 'stnd-block' }, pickerHost)),
   ]))))
-  host.append(wrap)
+  toggle.after(wrap)
 
-  setTimeout(() => {
-    if (typeof CP !== 'function') return
-    const picker = new CP(pickerHost, false, pickerHost)
-    const field = document.querySelector<HTMLInputElement>('#color-input')
-    field?.addEventListener('change', () => {
-      const valid = colorPattern.test(field.value)
-      field.classList.toggle('text-input_error_bg', !valid)
-      if (!valid) return
-      setSetting('bodystyleSet.color', field.value)
-      applyBodyStyle()
-      picker.set(getSettings().bodystyleSet.color)
-    })
-    picker.enter()
-    picker.set(getSettings().bodystyleSet.color)
-    picker.on('change', (value) => {
-      const color = `#${value.toUpperCase()}`
-      setColorInputs(color)
-      setSetting('bodystyleSet.color', color)
-      applyBodyStyle()
-    })
-
-    for (const swatch of document.querySelectorAll<HTMLElement>('.js-bb_color')) {
-      swatch.addEventListener('click', () => {
-        const color = swatch.dataset.val
-        if (!color) return
-        setColorInputs(color)
-        setSetting('bodystyleSet.color', color)
-        applyBodyStyle()
-        picker.set(color)
-      })
+  const ticket = ++colorTicket
+  const loaded = loadSiteModules(['colorpicker', 'CommentWidget/Toolbar.css'], () => {
+    if (ticket !== colorTicket || !pickerHost.isConnected) return
+    try {
+      mountColorPicker(pickerHost, wrap)
+    } catch (error) {
+      log.error('colorpicker', error)
     }
-  }, 100)
+  }, () => {
+    log.error('colorpicker', 'module load failed')
+  })
+  if (!loaded) log.error('colorpicker', 'site loader is missing')
 }
 
 export function renderBackgroundOptions(anchor: HTMLElement) {
@@ -161,114 +246,63 @@ export function renderBackgroundOptions(anchor: HTMLElement) {
 
   try {
     const { bodystyleSet } = getSettings()
-    const imageInput = el('input', {
-      type: 'text',
-      id: 'image-input',
-      className: 'text-input',
-      value: bodystyleSet.url,
-      style: { marginBottom: '7px' },
-    })
-    imageInput.oninput = () => {
-      const valid = isUrl(imageInput.value) && imagePattern.test(imageInput.value)
-      imageInput.classList.toggle('text-input_error_bg', !valid)
-      if (!valid) return
-      setSetting('bodystyleSet.url', imageInput.value)
-      applyBodyStyle()
-    }
-
-    const colorInput = el('input', {
-      type: 'text',
-      className: 'text-input',
-      id: 'color-input',
-      value: bodystyleSet.color,
-    })
-    colorInput.oninput = () => {
-      const valid = colorPattern.test(colorInput.value)
-      colorInput.classList.toggle('text-input_error_bg', !valid)
-      if (!valid) return
-      setSetting('bodystyleSet.color', colorInput.value)
-      applyBodyStyle()
-    }
-
-    const imageRadio = el('input', {
-      type: 'radio',
+    const imageToggle = el('input', {
+      type: 'checkbox',
       id: 'sp_set_bodystyle_URL',
-      className: 'sp-checkbox-circle',
+      className: 'sp-checkbox-square',
       checked: bodystyleSet.urlchecked,
     })
-    const colorRadio = el('input', {
-      type: 'radio',
+    const colorToggle = el('input', {
+      type: 'checkbox',
       id: 'sp_set_bodystyle_color',
-      className: 'sp-checkbox-circle',
+      className: 'sp-checkbox-square',
       checked: bodystyleSet.colorchecked,
     })
 
-    imageRadio.onclick = () => {
-      setSetting('bodystyleSet.urlchecked', imageRadio.checked)
-      if (imageRadio.checked && colorRadio.checked) {
-        colorRadio.checked = false
-        setSetting('bodystyleSet.colorchecked', false)
-      }
-      if (getSettings().bodystyleSet.urlchecked) {
-        applyBodyStyle()
+    imageToggle.onclick = () => {
+      setSetting('bodystyleSet.urlchecked', imageToggle.checked)
+      applyBodyStyle()
+      if (imageToggle.checked) {
         showImages()
         return
       }
       document.querySelector('#SP_WRAP_IMAGE')?.remove()
     }
 
-    colorRadio.onclick = () => {
-      setSetting('bodystyleSet.colorchecked', colorRadio.checked)
-      if (colorRadio.checked && imageRadio.checked) {
-        imageRadio.checked = false
-        setSetting('bodystyleSet.urlchecked', false)
-      }
-      if (getSettings().bodystyleSet.colorchecked) {
-        applyBodyStyle()
+    colorToggle.onclick = () => {
+      setSetting('bodystyleSet.colorchecked', colorToggle.checked)
+      applyBodyStyle()
+      if (colorToggle.checked) {
         showColors()
         return
       }
-      document.querySelector('#SP_WRAP_COLOR')?.remove()
+      destroyColorPicker()
     }
 
     const panel = el('div', { id: 'SP_PLUS_BODYSTYLE' }, [
-      el('div', {
-        style: { borderBottom: 'none', padding: '15px' },
-      }, el('div', { className: 'text-input__wrap' }, [
-        el('label', {
-          className: 'label',
-          innerHTML: 'Ссылка на изображение:<div class="label__desc">.jpg или .png</div>',
-        }),
-        imageInput,
-        el('label', {
-          className: 'label',
-          innerHTML: 'Цвет фона:<div class="label__desc">#RRGGBB</div>',
-        }),
-        colorInput,
-      ])),
       el('label', {
         className: 'stnd-link',
         style: { borderBottom: 'none' },
       }, [
-        imageRadio,
+        imageToggle,
         el('label', {
           htmlFor: 'sp_set_bodystyle_URL',
-          innerHTML: 'Выбрать изображение',
+          innerHTML: 'Использовать изображение',
         }),
       ]),
       el('label', {
         className: 'stnd-link',
         style: { borderBottom: 'none' },
       }, [
-        colorRadio,
+        colorToggle,
         el('label', {
           htmlFor: 'sp_set_bodystyle_color',
-          innerHTML: 'Подобрать цвет',
+          innerHTML: 'Использовать цвет',
         }),
       ]),
     ])
 
-    anchor.parentElement?.after(panel)
+    anchor.append(panel)
     if (bodystyleSet.urlchecked) showImages()
     if (bodystyleSet.colorchecked) showColors()
   } catch (error) {

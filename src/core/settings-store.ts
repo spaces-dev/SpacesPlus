@@ -96,6 +96,12 @@ export function mergeSettings(saved: unknown): Settings {
     Object.assign(next, { [key]: value })
   }
 
+  if (!next.bodystyle) {
+    next.bodystyle = true
+    next.bodystyleSet.urlchecked = false
+    next.bodystyleSet.colorchecked = false
+  }
+
   return next
 }
 

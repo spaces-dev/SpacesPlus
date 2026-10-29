@@ -48,7 +48,6 @@ export default defineConfig((config) => {
           license: pkg.license,
           icon: 'icons/logo_96.png',
           homepage: basePath,
-          require: 'libs/colorpicker.js',
           match: DOMAINS.map(domain => `https://${domain}/*`),
         },
         server: {
