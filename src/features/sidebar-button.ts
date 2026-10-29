@@ -31,6 +31,16 @@ function firstItem(section: Element) {
     ?? section.querySelector('.sidebar-item:not(.sidebar-item--section)')
 }
 
+function appearanceItem(section: Element) {
+  const items = [...section.querySelectorAll('.sidebar-item:not(.sidebar-item--section)')]
+  return items.find(item => !item.querySelector('.js-site-theme')) ?? items[0] ?? null
+}
+
+function appearanceClass(node: Element | null | undefined, fallback: string) {
+  const names = [...(node?.classList ?? [])].filter(name => !name.startsWith('js-') && !/active|current|selected/i.test(name))
+  return names.join(' ') || fallback
+}
+
 function spacesIcon() {
   return el('span', { className: 'js-ico ico_cats ico_cats_spaces sp-cats-spaces' })
 }
@@ -46,7 +56,7 @@ export const sidebarButton: Feature = {
       const icon = document.querySelector('span.s_i_exit') ? '<span class="sp sp-ico"></span>' : ''
       const link = el('li', {
         className: 'li',
-        innerHTML: `<a href="${baseUrl}/settings/?sp_plus_settings=1" title="Spaces+">${icon}<span class="m s_i_text"> Spaces+</span></a>`,
+        innerHTML: `<a href="${baseUrl}/settings/?sp_plus_settings=1" title="Настройки Spaces Plus">${icon}<span class="m s_i_text"> Настройки Spaces Plus</span></a>`,
       })
       link.dataset.spSidebar = '1'
       legacy.parentElement.parentElement?.prepend(link)
@@ -55,18 +65,18 @@ export const sidebarButton: Feature = {
 
     const section = settingsSection()
     const sample = section ? firstItem(section) : null
-    const sampleLink = sample?.querySelector('a')
+    const appearance = section ? appearanceItem(section) : null
+    const sampleLink = appearance?.querySelector('a') ?? sample?.querySelector('a')
     if (!sample || !sampleLink) return
 
     const label = el('span', {
-      className: sampleLink.querySelector('.sidebar-item__label')?.className || 'sidebar-item__label',
-      textContent: 'Spaces+',
+      className: appearanceClass(sampleLink.querySelector('.sidebar-item__label'), 'sidebar-item__label'),
+      textContent: 'Настройки Spaces Plus',
     })
-    const linkClass = [...sampleLink.classList].filter(name => !/active|current|selected/i.test(name)).join(' ')
     const link = el('a', {
       href: `${baseUrl}/settings/?sp_plus_settings=1`,
-      className: linkClass || 'sidebar-item__link',
-      title: 'Spaces+',
+      className: appearanceClass(sampleLink, 'sidebar-item__link'),
+      title: 'Настройки Spaces Plus',
     }, [spacesIcon(), label])
     const item = el('div', {
       className: 'sidebar-item',

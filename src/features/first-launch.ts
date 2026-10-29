@@ -15,8 +15,8 @@ export const firstLaunch: Feature = {
       if (cookies.get('SP_LAUNCH') !== null || skippedHosts.has(host)) return
 
       modalMessage(
-        'Спасибо за установку Spaces+',
-        `<b style="color: #f86934">ВНИМАНИЕ!</b></br></br>Во избежание подделок, которые могут воровать пароли пользователей, скрипт скачивать только с официального <a href="https://spaces-dev.github.io" target="_blank">сайта</a></br></br>С вопросами по использованию скрипта пишите в сообщество <a href="${baseUrl}/soo/extension/" target="_blank">Spaces+</a></br></br>`,
+        'Спасибо за установку Spaces Plus',
+        `<b style="color: #f86934">ВНИМАНИЕ!</b></br></br>Во избежание подделок, которые могут воровать пароли пользователей, скрипт скачивать только с официального <a href="https://spaces-dev.github.io" target="_blank">сайта</a></br></br>С вопросами по использованию скрипта пишите в сообщество <a href="${baseUrl}/soo/extension/" target="_blank">Spaces Plus</a></br></br>`,
         { close: true },
       )
 

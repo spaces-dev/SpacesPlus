@@ -28,7 +28,7 @@ export const checkUpdates: Feature = {
       if (latest.build <= session.version) return
 
       modalMessage(
-        `Доступна новая версия Spaces+ ${dotted(latest.build)}`,
+        `Доступна новая версия Spaces Plus ${dotted(latest.build)}`,
         `<div class="pad_t_a"></div>${latest.changes}<div id="SP_UPDATER_BUTTONS" class="pad_t_a"><a class="btn btn_green btn_input" href="${assetOrigin}/spaces-plus.user.js?r=${revision}">Обновить</a></div>`,
         { close: true },
       )

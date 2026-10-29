@@ -50,15 +50,15 @@ function paintHeader(title: string, crumb: string) {
   const back = document.querySelector<HTMLAnchorElement>('#SP_PLUS_SETBACK')
   if (head) head.innerHTML = title
   if (crumbNode) {
-    crumbNode.innerHTML = `<a href="${baseUrl}/settings/?sp_plus_settings=1">Spaces+</a><span class="location-bar__sep ico"></span> ${crumb}`
+    crumbNode.innerHTML = `<a href="${baseUrl}/settings/?sp_plus_settings=1">Настройки Spaces Plus</a><span class="location-bar__sep ico"></span> ${crumb}`
   }
   if (back) back.href = `${baseUrl}/settings/?sp_plus_settings=1`
 }
 
 function openSettings(features: Feature[]) {
   if (!/sp_plus_settings=1/i.test(location.href)) {
-    document.title = 'Spaces+'
-    history.pushState({ sp_plus_settings: '1' }, 'Spaces+', `${baseUrl}/settings/?sp_plus_settings=1`)
+    document.title = 'Настройки Spaces Plus'
+    history.pushState({ sp_plus_settings: '1' }, 'Настройки Spaces Plus', `${baseUrl}/settings/?sp_plus_settings=1`)
   }
 
   const link = document.querySelector('#SP_PLUS_SETLINK')
@@ -67,7 +67,7 @@ function openSettings(features: Feature[]) {
 
   const path = document.querySelector('#header_path')
   if (path && !path.innerHTML.includes('SP_PLUS_SETHEAD2')) {
-    path.innerHTML = path.innerHTML.replace('Настройки', `<a href="${baseUrl}/settings/">Настройки</a><span class="location-bar__sep ico"></span><span id="SP_PLUS_SETHEAD2">Spaces+</span>`)
+    path.innerHTML = path.innerHTML.replace('Настройки', `<a href="${baseUrl}/settings/">Настройки</a><span class="location-bar__sep ico"></span><span id="SP_PLUS_SETHEAD2">Настройки Spaces Plus</span>`)
   }
 
   const groupedCards = groupedIds.map((id) => {
@@ -79,7 +79,7 @@ function openSettings(features: Feature[]) {
   root.innerHTML = `
     <div class="widgets-group widgets-group_top js-container__block" id="SP_PLUS_MAIN">
       <div class="b-title cl b-title_center b-title_first oh">
-        <div class="b-title__item" id="SP_PLUS_SETHEAD">Настройки Spaces+</div>
+        <div class="b-title__item" id="SP_PLUS_SETHEAD">Настройки Spaces Plus</div>
       </div>
       <div class="content"><div class="list f-c_fll"><div id="SP_PLUS_SETAREA" class="no-select"></div></div></div>
     </div>
@@ -175,7 +175,7 @@ function openSettings(features: Feature[]) {
     hideExtraCards()
     paintHeader('Импорт и экспорт настроек', 'Импорт и экспорт настроек')
     if (!/sp_backup=1/i.test(location.href)) {
-      document.title = 'Spaces+: Импорт и экспорт настроек'
+      document.title = 'Spaces Plus: Импорт и экспорт настроек'
       history.pushState({ sp_plus_settings: '1', sp_backup: '1' }, document.title, backup.href)
     }
     const current = document.querySelector('#SP_PLUS_SETAREA')
@@ -194,7 +194,7 @@ function openSettings(features: Feature[]) {
     hideExtraCards()
     paintHeader('История обновлений', 'История обновлений')
     if (!/sp_changelog=1/i.test(location.href)) {
-      document.title = 'Spaces+: История обновлений'
+      document.title = 'Spaces Plus: История обновлений'
       history.pushState({ sp_plus_settings: '1', sp_changelog: '1' }, document.title, changelog.href)
     }
     const current = document.querySelector('#SP_PLUS_SETAREA')
@@ -250,7 +250,7 @@ export function createSettingsPage(features: Feature[]): Feature {
         href: `${baseUrl}/settings/?sp_plus_settings=1`,
         id: 'SP_PLUS_SETLINK',
         className: targetLink.className,
-        innerHTML: '<span>Spaces+</span>',
+        innerHTML: '<span>Настройки Spaces Plus</span>',
       })
       link.onclick = () => {
         openSettings(features)

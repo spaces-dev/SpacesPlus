@@ -1,13 +1,13 @@
 import { el } from '@zero-dependency/dom'
 import { device } from './site'
 
-const authMessage = 'Для работы <b>Spaces+</b> необходима авторизация!'
+const authMessage = 'Для работы <b>Spaces Plus</b> необходима авторизация!'
 
 export function showUserStatus(code: string | undefined) {
   if (device.id === 1 || device.id === 2) {
     const banner = el('div', {
       className: 'error',
-      innerHTML: 'Используемая версия сайта не поддерживается для работы <b>Spaces+</b>',
+      innerHTML: 'Используемая версия сайта не поддерживается для работы <b>Spaces Plus</b>',
     })
     if (code === '01001') banner.prepend(el('div', { innerHTML: authMessage }))
     document.querySelector('.root')?.prepend(banner)

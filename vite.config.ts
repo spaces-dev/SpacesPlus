@@ -41,7 +41,7 @@ export default defineConfig((config) => {
         entry: 'src/main.ts',
         autoMetaUrls: true,
         header: {
-          name: 'Spaces+',
+          name: 'Spaces Plus',
           version: pkg.version,
           description: pkg.description,
           author: `${pkg.author.name} <${pkg.author.email}> ${pkg.author.url}`,
