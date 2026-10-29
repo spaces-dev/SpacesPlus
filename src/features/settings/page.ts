@@ -6,7 +6,6 @@ import { getSettings, resetSpacesCookies, setSetting } from '@/core/settings-sto
 import { baseUrl, isTouch, pathAt, queryFlag } from '@/core/site'
 import { renderChangelog } from '@/features/check-updates'
 import { renderBackup } from './backup'
-import { renderBuiltins } from './built-ins'
 
 interface SectionLink {
   id: string
@@ -85,12 +84,6 @@ function openSettings(features: Feature[]) {
       <div class="content"><div class="list f-c_fll"><div id="SP_PLUS_SETAREA" class="no-select"></div></div></div>
     </div>
     ${groupedCards}
-    <div class="widgets-group js-container__block sp-plus-extra" id="SP_PLUS_BUILTINS">
-      <div class="b-title cl b-title_center b-title_first oh">
-        <div class="b-title__item">Встроенные возможности сайта</div>
-      </div>
-      <div class="content"><div class="list f-c_fll"><div id="SP_PLUS_BUILTINS_AREA" class="no-select"></div></div></div>
-    </div>
     <div class="widgets-group js-container__block sp-plus-extra" id="SP_PLUS_MISC">
       <div class="b-title cl b-title_center b-title_first oh">
         <div class="b-title__item">Прочее</div>
@@ -168,9 +161,6 @@ function openSettings(features: Feature[]) {
     target.append(row)
     if (checkbox.checked) feature.renderOptions?.(checkbox)
   }
-
-  const builtins = document.querySelector('#SP_PLUS_BUILTINS_AREA')
-  if (builtins) renderBuiltins(builtins)
 
   const misc = document.querySelector('#SP_PLUS_MISC_AREA')
 

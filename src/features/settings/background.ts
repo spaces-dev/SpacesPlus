@@ -131,7 +131,10 @@ function showImages() {
   if (!toggle) return
   injectBackgroundCss()
 
-  const gallery = el('div', { className: 'js-gallery_skip wbg oh tiles_block tiles_wrapper' })
+  const gallery = el('div', {
+    className: 'js-gallery_skip wbg oh tiles_block tiles_wrapper',
+    style: { paddingTop: 0 },
+  })
   const wrap = el('div', {
     id: 'SP_WRAP_IMAGE',
     style: { borderTop: listLinkBorder() },

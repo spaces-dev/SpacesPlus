@@ -10,10 +10,6 @@ interface JsonCookies {
 
 interface StringCookies {
   SP_LAUNCH: string
-  sandbox: string
-  force_ajax_transport: string
-  gp_left_btn: string
-  spaces_js_console: string
 }
 
 type SpacesCookies = JsonCookies & StringCookies
@@ -182,8 +178,4 @@ export function subscribeSettings(listener: () => void) {
 export function resetSpacesCookies() {
   cookies.remove('SP_PLUS_SET')
   cookies.remove('SP_WEATHER')
-  cookies.remove('gp_left_btn')
-  cookies.remove('force_ajax_transport')
-  cookies.remove('sandbox')
-  cookies.remove('spaces_js_console')
 }

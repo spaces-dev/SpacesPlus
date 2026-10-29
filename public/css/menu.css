@@ -243,11 +243,6 @@ a.js-smile_menu_select:has(.sp-recent-shift) {
   font-size: small !important;
 }
 
-.sp_last_btn {
-  border-bottom: unset !important;
-  font-size: small;
-}
-
 .sp_btn-list {
   display: inline-block;
   box-sizing: border-box !important;
@@ -635,14 +630,6 @@ input[type='color'] {
   background-position: -48px -16px;
 }
 
-.sp-enter-grey {
-  background-position: 0 -32px;
-}
-
-.sp-exit-grey {
-  background-position: -16px -32px;
-}
-
 @media (max-width: 480px) {
   .sp-fav {
     display: none;
@@ -713,10 +700,6 @@ input[type='color'] {
 
 .sp-info {
   background-position: 0px -64px;
-}
-
-.sp-settings {
-  background-position: -48px -64px;
 }
 
 .sp-eye-grey {
