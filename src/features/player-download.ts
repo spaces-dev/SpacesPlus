@@ -1,7 +1,7 @@
 import type { Feature } from '@/core/feature'
 import { el } from '@zero-dependency/dom'
 import { log } from '@/core/log'
-import { assetOrigin, session } from '@/core/site'
+import { session } from '@/core/site'
 
 interface TrackState {
   id: string
@@ -16,7 +16,7 @@ interface PlaylistState {
 export const playerDownload: Feature = {
   id: 'playerdn',
   title: 'Кнопка загрузки трека из плеера',
-  description: `<img src="${assetOrigin}/screens/player-download.png"></br>Добавляется кнопка в аудиоплеер, которая позволяет скачивать воспроизведенный трек.`,
+  description: 'Добавляется кнопка в аудиоплеер, которая позволяет скачивать воспроизведенный трек.',
   start: ctx => ctx.onDom(() => {
     try {
       const trackRaw = sessionStorage.getItem('music:track')

@@ -2,7 +2,6 @@ import type { Feature } from '@/core/feature'
 import { el, observeElement } from '@zero-dependency/dom'
 import { log } from '@/core/log'
 import { getSettings, setSetting } from '@/core/settings-store'
-import { assetOrigin } from '@/core/site'
 
 const turns = ['rotate90', 'rotate180', 'rotate270']
 
@@ -27,7 +26,7 @@ function fileId(value: string) {
 export const galleryRotate: Feature = {
   id: 'grotate',
   title: 'Поворот фотографий',
-  description: `<img src="${assetOrigin}/screens/rotate-image.png"></br>Добавляется кнопка в просмотрщик фотографий, с помощью нее можно поворачивать изображение.`,
+  description: 'Добавляется кнопка в просмотрщик фотографий, с помощью нее можно поворачивать изображение.',
   start: (ctx) => {
     let photo = ''
     let imageNode: HTMLElement | null = null

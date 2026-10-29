@@ -4,14 +4,14 @@ import { pluralize } from '@zero-dependency/utils'
 import { http } from '@/core/http'
 import { log } from '@/core/log'
 import { modalConfirm, modalMessage } from '@/core/modals'
-import { assetOrigin, baseUrl, pathAt, searchParam, session } from '@/core/site'
+import { baseUrl, pathAt, searchParam, session } from '@/core/site'
 
 const blogWord = (count: number) => pluralize(count)`блог${['', 'а', 'ов']}`
 
 export const deleteBlogs: Feature = {
   id: 'blogsd',
   title: 'Пакетное удаление блогов',
-  description: `Функция позволяет удалять сразу несколько блогов.</br></br><img src="${assetOrigin}/screens/sort-blogs.png"></br>Работает только в <a href="${baseUrl}/diary/view/?Short=0&sort=0">расширенном виде</a>.`,
+  description: `Функция позволяет удалять сразу несколько блогов.</br></br>Работает только в <a href="${baseUrl}/diary/view/?Short=0&sort=0">расширенном виде</a>.`,
   start: ctx => ctx.onDom(() => {
     try {
       const section = pathAt(1)

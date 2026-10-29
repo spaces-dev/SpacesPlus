@@ -6,7 +6,6 @@ import { http } from '@/core/http'
 import { log } from '@/core/log'
 import { modalMessage } from '@/core/modals'
 import { cookies, getSettings, setSetting } from '@/core/settings-store'
-import { assetOrigin } from '@/core/site'
 import { renderWeatherOptions } from './settings/weather'
 
 const unixTime = () => Math.round(Date.now() / 1000)
@@ -161,7 +160,7 @@ function renderWidget() {
 export const weatherWidget: Feature = {
   id: 'weather',
   title: 'Виджет погоды',
-  description: `<img src="${assetOrigin}/screens/weather-widget.png"></br>Отображает текущую погоду: температуру, облачность, влажность, давление и ветер.</br></br>Можно изменить город, API-ключ и интервал обновления.`,
+  description: 'Отображает текущую погоду: температуру, облачность, влажность, давление и ветер.</br></br>Можно изменить город, API-ключ и интервал обновления.',
   desktopOnly: true,
   optionsId: 'SP_WEATHER_SETTINGS',
   renderOptions: renderWeatherOptions,

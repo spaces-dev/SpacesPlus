@@ -2,12 +2,11 @@ import type { Feature } from '@/core/feature'
 import { el } from '@zero-dependency/dom'
 import { log } from '@/core/log'
 import { getSettings, setSetting } from '@/core/settings-store'
-import { assetOrigin } from '@/core/site'
 
 export const videoSpeed: Feature = {
   id: 'playback',
   title: 'Кнопка ускорения видео',
-  description: `<img src="${assetOrigin}/screens/video-speed.png"></br>В видеоплеере добавляется кнопка ускорения видео, примерно как на YouTube.`,
+  description: 'В видеоплеере добавляется кнопка ускорения видео, примерно как на YouTube.',
   start: ctx => ctx.onDom(() => {
     try {
       const playback = document.querySelector('#SP_PLAYBACK_VIDEO')

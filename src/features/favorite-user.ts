@@ -5,7 +5,7 @@ import { el } from '@zero-dependency/dom'
 import { http } from '@/core/http'
 import { log } from '@/core/log'
 import { modalConfirm } from '@/core/modals'
-import { assetOrigin, baseUrl, pathAt, session } from '@/core/site'
+import { baseUrl, pathAt, session } from '@/core/site'
 
 async function markFavorite(id: string, name: string, cell: HTMLElement) {
   const link = cell.firstElementChild
@@ -32,7 +32,7 @@ async function markFavorite(id: string, name: string, cell: HTMLElement) {
 export const favoriteUser: Feature = {
   id: 'favorite',
   title: 'Добавить в закладки',
-  description: `<img src="${assetOrigin}/screens/favorite-user.png"></br>Функция добавляет на страницу каждого пользователя кнопку «В закладки». Повторное нажатие удаляет пользователя из закладок.`,
+  description: 'Функция добавляет на страницу каждого пользователя кнопку «В закладки». Повторное нажатие удаляет пользователя из закладок.',
   start: ctx => ctx.onDom(() => {
     const method = pathAt(1)
     const index = pathAt(2)

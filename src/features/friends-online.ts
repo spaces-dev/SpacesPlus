@@ -4,7 +4,7 @@ import { el } from '@zero-dependency/dom'
 import { http } from '@/core/http'
 import { log } from '@/core/log'
 import { getSettings, setSetting } from '@/core/settings-store'
-import { assetOrigin, baseUrl } from '@/core/site'
+import { baseUrl } from '@/core/site'
 
 export function renderFriendsOptions(anchor: HTMLElement) {
   if (document.querySelector('#SP_PLUS_MAXFRIENDS')) return
@@ -35,7 +35,7 @@ export function renderFriendsOptions(anchor: HTMLElement) {
 export const friendsOnline: Feature = {
   id: 'friendsOn',
   title: 'Панель друзей онлайн',
-  description: `<img src="${assetOrigin}/screens/friends-online.png"></br>Функция добавляет в левое меню панель с друзьями онлайн. Для работы необходимо включить раздел <a href="${baseUrl}/sidebar/links/?T=4">Друзья</a>, если он выключен.</br></br>Панель ограничена от 1 до 15 друзей онлайн.`,
+  description: `Функция добавляет в левое меню панель с друзьями онлайн. Для работы необходимо включить раздел <a href="${baseUrl}/sidebar/links/?T=4">Друзья</a>, если он выключен.</br></br>Панель ограничена от 1 до 15 друзей онлайн.`,
   optionsId: 'SP_PLUS_MAXFRIENDS',
   renderOptions: renderFriendsOptions,
   start: (ctx) => {
