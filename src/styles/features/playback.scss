@@ -1,0 +1,62 @@
+.video-js {
+  .sp-playback {
+    &.vjs-control {
+      width: auto;
+      min-width: 3.6em;
+      color: #fff;
+    }
+
+    &__toggle {
+      cursor: pointer;
+      margin: 0;
+      border: 0;
+      background: transparent;
+      padding: 0 0.4em;
+      width: 100%;
+      height: 100%;
+      color: inherit;
+      font: inherit;
+      font-weight: 700;
+      line-height: inherit;
+    }
+
+    .vjs-menu {
+      left: 50%;
+      margin-left: -2.75em;
+      width: 5.5em;
+    }
+
+    .vjs-menu-content {
+      max-height: none;
+    }
+  }
+
+  .vjs-menu-button-popup .vjs-menu.vjs-lock-showing {
+    z-index: 12;
+  }
+
+  &:has(.vjs-menu.vjs-lock-showing) {
+    .vjs-progress-control {
+      pointer-events: none;
+    }
+
+    .vjs-thumbnail {
+      visibility: hidden;
+      opacity: 0;
+    }
+  }
+
+  // Скин держит список на calc(1.75em + 0.5em) над кнопкой, и нижние
+  // пункты попадают в зону таймлайна. Чуть ниже — список садится на панель.
+  &.vjs-theme-desktop .vjs-menu-button-popup .vjs-menu .vjs-menu-content {
+    bottom: 1.85em;
+  }
+}
+
+.vjs-theme-desktop .sp-playback {
+  line-height: 3.5em;
+}
+
+.vjs-theme-touch .sp-playback {
+  line-height: 3em;
+}

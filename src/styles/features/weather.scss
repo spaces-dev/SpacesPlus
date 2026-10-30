@@ -1,0 +1,48 @@
+.sp-weather {
+  .b-title__link {
+    white-space: unset;
+  }
+
+  .content {
+    padding: 0 16px 16px;
+  }
+
+  &__icon {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  &__summary {
+    margin-bottom: 10px;
+    font-size: 18px;
+    text-align: center;
+  }
+
+  &__temp {
+    font-size: 28px;
+  }
+
+  &__stats {
+    > tbody > tr > td {
+      padding-top: 4px;
+      width: 100%;
+      max-width: inherit;
+      overflow: hidden;
+
+      &:last-child {
+        text-align: right;
+      }
+    }
+  }
+}
+
+.sp-weather-settings {
+  padding: 11px 15px;
+
+  > .label__desc {
+    float: none;
+    clear: both;
+    margin-top: 10px;
+  }
+}

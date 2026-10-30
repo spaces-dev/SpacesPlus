@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Spaces Plus</title>
+  <link rel="icon" href="%BASE_URL%icons/logo_32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="%BASE_URL%icons/logo_16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="%BASE_URL%icons/logo_48.png" type="image/png" sizes="48x48">
+  <link rel="icon" href="%BASE_URL%icons/logo_96.png" type="image/png" sizes="96x96">
+  <link rel="icon" href="%BASE_URL%icons/logo_128.png" type="image/png" sizes="128x128">
+  <link rel="apple-touch-icon" href="%BASE_URL%icons/logo_128.png">
+</head>
+
+<body>
+  <div class="page">
+    <nav class="page-nav" aria-label="Разделы">
+      <div class="container page-nav__inner">
+        <a href="#features">Функционал</a>
+        <a href="#privacy">Конфиденциальность</a>
+        <a href="#changelog">История обновлений</a>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <div class="container">
+        <h1 class="hero__title">Spaces Plus</h1>
+        <p class="hero__note" data-install-copy></p>
+        <div class="hero__actions">
+          <button class="btn" type="button" data-install>Установить</button>
+          <button class="btn btn_secondary" type="button" data-install-proxy hidden>Установить прокси</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="page-main">
+      <section class="section">
+        <div class="container">
+          <h2 class="section__title" id="features">Функционал</h2>
+          <div class="groups" data-features></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <h2 class="section__title" id="privacy">Конфиденциальность</h2>
+          <div data-privacy></div>
+          <p class="section__note">Последнее обновление: 31.10.2026</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <h2 class="section__title" id="changelog">История обновлений</h2>
+          <div data-changelog>
+            <p class="section__note">Загрузка…</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="page-footer">
+      <div class="container page-footer__row">
+        <a href="https://spaces.im/mysite/index/anomaiy" class="footer__link">Разработал crashmax</a>
+        <div class="page-footer__links">
+          <a href="https://spaces.im/soo/extension/" class="footer__link">Группа на Spaces</a>
+          <a href="https://t.me/spaces_dev" class="footer__link">Группа в Telegram</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script type="module" src="/src/landing/index.ts"></script>
+</body>
+
+</html>

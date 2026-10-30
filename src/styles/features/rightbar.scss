@@ -1,0 +1,11 @@
+@media (min-width: 1000px) {
+  html.sp-hidden-rightbar .page-layout--with-rightbar {
+    .page-layout__columns {
+      grid-template-columns: minmax(0, 7fr) minmax(0, 0fr);
+    }
+
+    .page-layout__rightbar {
+      overflow: hidden;
+    }
+  }
+}

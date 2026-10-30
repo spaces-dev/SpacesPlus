@@ -1,0 +1,47 @@
+.sp_plus_line_c {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  &:before {
+    content: none;
+  }
+
+  .label__desc {
+    flex-shrink: 0;
+    float: none;
+  }
+}
+
+.sp_plus_ver {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 8px;
+}
+
+.sp_plus_rule {
+  flex: 1;
+  border-bottom: 1px solid var(--sp-line);
+  min-width: 12px;
+}
+
+.sp_plus_badge {
+  border-radius: 3px;
+  background: var(--sp-ink-soft);
+  padding: 0 6px;
+  color: var(--sp-ink);
+  font-weight: 700;
+  font-size: 11px;
+  line-height: 18px;
+}
+
+.sp_plus_c_desc {
+  margin-left: 3rem;
+  font-size: small;
+}
+
+.sp_plus_c_wrap {
+  display: block;
+  padding: 5px 15px 5px 16px;
+}

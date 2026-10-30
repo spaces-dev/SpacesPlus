@@ -1,0 +1,33 @@
+@use '../shared/options';
+
+#SP_PLUS_FRIENDS_B {
+  &.sidebar__section {
+    margin-bottom: unset;
+  }
+
+  &.sp-friends-collapsed {
+    display: none;
+  }
+
+  .sidebar-item__link {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .sp-friend-icons {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .sp-friend-ava {
+    display: block;
+    margin-right: 2px;
+    border-radius: 2px;
+    width: 16px;
+    height: 16px;
+    object-fit: cover;
+  }
+}

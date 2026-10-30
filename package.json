@@ -1,30 +1,37 @@
 {
   "name": "spaces-plus",
-  "description": "🚀 Powerful userscript for Spaces.ru",
-  "homepage": "https://spaces-dev.github.io/SpacesPlus/",
-  "version": "3.2.0",
-  "license": "MIT",
   "type": "module",
+  "version": "4.0.0",
+  "packageManager": "pnpm@11.25.0",
+  "description": "🚀 Powerful userscript for Spaces.im",
   "author": {
     "name": "Vitalij Ryndin",
     "email": "sys@crashmax.ru",
     "url": "https://crashmax.ru"
   },
+  "license": "MIT",
+  "homepage": "https://spaces-dev.github.io/spaces-plus/",
   "scripts": {
-    "dev": "vite build --watch --mode development",
-    "build": "npm run type-check && vite build",
-    "type-check": "tsc --noEmit",
-    "format": "prettier --write \"**/*.{js,ts,tsx,json}\""
-  },
-  "devDependencies": {
-    "@crashmax/prettier-config": "5.0.2",
-    "@crashmax/tsconfig": "2.1.0",
-    "typescript": "5.4.5",
-    "vite": "5.2.11",
-    "vite-userscript-plugin": "1.10.0"
+    "dev": "vite",
+    "build": "vite build",
+    "type-check": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint . --cache",
+    "lint:fix": "eslint . --fix --cache"
   },
   "dependencies": {
-    "json-beautify": "^1.1.1",
-    "zero-dependency": "0.9.9"
+    "@zero-dependency/cookie": "1.13.8",
+    "@zero-dependency/dom": "1.8.5",
+    "@zero-dependency/storage": "1.3.4",
+    "@zero-dependency/utils": "1.7.8"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "10.0.0",
+    "eslint": "9.39.5",
+    "eslint-plugin-format": "2.0.1",
+    "prettier-plugin-css-order": "2.2.0",
+    "sass-embedded": "1.107.0",
+    "typescript": "6.0.3",
+    "vite": "8.3.5",
+    "vite-userscript-plugin": "2.5.5"
   }
 }

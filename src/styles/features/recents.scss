@@ -1,0 +1,63 @@
+@use '../shared/options' as *;
+
+#SP_RECENT_SMILES {
+  white-space: nowrap;
+}
+
+.sp-recent-empty {
+  padding: 8px;
+  color: #a4b7c4;
+  text-align: center;
+}
+
+.sp-recent-clear {
+  display: block;
+  cursor: pointer;
+  margin: 0 0 8px auto;
+  width: fit-content;
+  color: #a4b7c4;
+}
+
+.sp_recent-smile,
+.sp-recent-shift-host {
+  position: relative;
+}
+
+.sp-recent-shift {
+  display: flex;
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  border-radius: 3px;
+  background: rgba(32, 33, 34, 0.92);
+  width: 16px;
+  height: 16px;
+  user-select: none;
+
+  &--add {
+    color: #3ddc84;
+  }
+
+  &--remove {
+    color: #ff5c5c;
+  }
+
+  svg {
+    display: block;
+    width: 10px;
+    height: 10px;
+  }
+}
+
+.smiles_menu {
+  margin-bottom: 10px;
+}
+
+#SP_PLUS_RECENTS {
+  .sp_settings-wrap > .label__desc {
+    @include field-note;
+  }
+}

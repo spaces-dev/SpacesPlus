@@ -1,0 +1,31 @@
+@use '../shared/btn-list';
+
+.btn-tools_centered {
+  &:has(.sp-ch-readers) {
+    > a[href*='/lenta/reader_delete/'] {
+      pointer-events: none;
+    }
+
+    .ico_remove {
+      visibility: hidden;
+    }
+  }
+
+  .sp-ch-readers {
+    position: absolute;
+    z-index: 1;
+    margin: 0;
+    inset: 0;
+    padding: 0 !important;
+    width: auto;
+    height: auto;
+    overflow: visible;
+
+    &:after {
+      top: 50% !important;
+      right: auto !important;
+      left: 50% !important;
+      margin: -8px 0 0 -8px !important;
+    }
+  }
+}
