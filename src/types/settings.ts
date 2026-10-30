@@ -5,6 +5,7 @@ export interface RecentSmiles {
 
 export interface FriendsSet {
   max: number
+  expanded: boolean
 }
 
 export interface HideNotify {

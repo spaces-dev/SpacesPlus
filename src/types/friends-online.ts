@@ -1,5 +1,5 @@
 export interface OnlineStatus {
-  on_img: string
+  on_src: string
 }
 
 export interface Avatar {
@@ -7,22 +7,22 @@ export interface Avatar {
 }
 
 export interface FriendListItem {
-  online_status: OnlineStatus
-  mysiteURL: string
-  avatar: Avatar
+  online_status?: OnlineStatus
+  mysiteURL?: string
+  avatar?: Avatar
   name: string
 }
 
 export interface Content {
-  list: FriendListItem[]
+  list: Array<FriendListItem | null>
 }
 
-export interface Tab {
+export interface PanelLink {
   content: Content
 }
 
 export interface TabbedPanel {
-  tabs: Tab[]
+  links: Array<PanelLink | null>
 }
 
 export interface FriendsOnline {

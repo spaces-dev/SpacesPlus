@@ -116,6 +116,36 @@
   cursor: pointer;
 }
 
+#SP_PLUS_FRIENDS_B.sidebar__section {
+  margin-bottom: unset;
+}
+
+#SP_PLUS_FRIENDS_B.sp-friends-collapsed {
+  display: none;
+}
+
+#SP_PLUS_FRIENDS_B .sidebar-item__link {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+#SP_PLUS_FRIENDS_B .sp-friend-icons {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 4px;
+}
+
+#SP_PLUS_FRIENDS_B .sp-friend-ava {
+  display: block;
+  margin-right: 2px;
+  border-radius: 2px;
+  width: 16px;
+  height: 16px;
+  object-fit: cover;
+}
+
 .form-checkbox.stnd-block-yellow {
   opacity: 1 !important;
 }

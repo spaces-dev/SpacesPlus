@@ -47,6 +47,7 @@ export const defaultSettings = {
   friendsOn: true,
   friendsSet: {
     max: 10,
+    expanded: false,
   },
   bodystyle: true,
   bodystyleSet: {
