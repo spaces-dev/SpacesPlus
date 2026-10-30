@@ -8,7 +8,6 @@ export interface Avatar {
 
 export interface FriendListItem {
   online_status?: OnlineStatus
-  mysiteURL?: string
   avatar?: Avatar
   name: string
 }

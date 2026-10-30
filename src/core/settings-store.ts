@@ -176,4 +176,5 @@ export function subscribeSettings(listener: () => void) {
 export function resetSpacesCookies() {
   cookies.remove('SP_PLUS_SET')
   cookies.remove('SP_WEATHER')
+  localStorage.removeItem('sp_recent_smiles')
 }

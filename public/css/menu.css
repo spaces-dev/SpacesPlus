@@ -208,25 +208,38 @@
   color: #a4b7c4;
 }
 
-a.js-smile_menu_select:has(.sp-recent-shift) {
+.sp_recent-smile,
+.sp-recent-shift-host {
   position: relative;
 }
 
 .sp-recent-shift {
   display: flex;
   position: absolute;
-  justify-content: center;
-  align-items: flex-end;
+  top: 1px;
+  right: 1px;
   z-index: 2;
-  cursor: pointer;
-  inset: 0;
-  background: linear-gradient(to top, rgb(32, 33, 34) 16px, transparent 16px);
-  color: #fff;
-  font-weight: 700;
-  font-size: 10px;
-  line-height: 16px;
+  justify-content: center;
+  align-items: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  background: rgba(32, 33, 34, 0.92);
   user-select: none;
-  text-align: center;
+}
+
+.sp-recent-shift--add {
+  color: #3ddc84;
+}
+
+.sp-recent-shift--remove {
+  color: #ff5c5c;
+}
+
+.sp-recent-shift svg {
+  display: block;
+  width: 10px;
+  height: 10px;
 }
 
 .smiles_menu {

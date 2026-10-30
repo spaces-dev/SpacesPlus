@@ -110,7 +110,7 @@
           "type": "added",
           "items": [
             "Виджет погоды",
-            "Панель с ранее использованными смайликами, Спасибо [BCE_3AKPbIT0](https://spaces.im/mysite/bce-3akpbit0/)"
+            "Панель с ранее использованными смайликами, Спасибо [BCE_3AKPbIT0](/mysite/bce-3akpbit0/)"
           ]
         },
         {
@@ -179,7 +179,7 @@
         {
           "type": "fixed",
           "items": [
-            "В настройках исправлен [Импорт и экспорт настроек](https://spaces.im/settings/?sp_plus_settings=1&sp_backup=1)"
+            "В настройках исправлен [Импорт и экспорт настроек](/settings/?sp_plus_settings=1&sp_backup=1)"
           ]
         }
       ]

@@ -1,5 +1,4 @@
 export interface UserWidget {
-  online_time: number
   name: string
   id: string
 }

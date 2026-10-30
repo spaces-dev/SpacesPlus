@@ -246,7 +246,7 @@ function openSettings(features: Feature[]) {
   const profileUrl = `${baseUrl}/mysite/index/anomaiy`
   const spacesGroupUrl = `${baseUrl}/soo/extension/`
   const telegramUrl = 'https://t.me/spaces_dev'
-  const heartUrl = 'https://spaces.im/i/dark/em/36/2764-FE0F.png'
+  const heartUrl = '/i/dark/em/36/2764-FE0F.png'
 
   const aboutLink = (href: string, text: string) => el('a', {
     href,

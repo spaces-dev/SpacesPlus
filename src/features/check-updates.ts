@@ -6,7 +6,7 @@ import { log } from '@/core/log'
 import { modalMessage } from '@/core/modals'
 import { pkgVersion } from '@/core/pkg-info'
 import { getSettings, setSetting } from '@/core/settings-store'
-import { assetOrigin, revision } from '@/core/site'
+import { assetOrigin, baseUrl, revision } from '@/core/site'
 
 const sectionTitles: Record<ChangelogSectionType, string> = {
   added: 'Новое',
@@ -25,18 +25,25 @@ function escapeHtml(value: string) {
     .replaceAll('"', '&quot;')
 }
 
+function linkHref(href: string) {
+  if (href.startsWith('/')) return `${baseUrl}${href}`
+  return href
+}
+
 function renderInline(value: string) {
-  const pattern = /\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g
+  const pattern = /\[([^\]]+)\]\((https?:\/\/[^)\s]+|\/[^)\s]*)\)/g
   let html = ''
   let last = 0
 
   for (const match of value.matchAll(pattern)) {
     const index = match.index ?? 0
     const label = match[1]
-    const href = match[2]
+    const raw = match[2]
     html += escapeHtml(value.slice(last, index))
-    if (label && href) {
-      html += `<a href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(label)}</a>`
+    if (label && raw) {
+      const external = raw.startsWith('http')
+      const attrs = external ? ' target="_blank" rel="noopener noreferrer"' : ''
+      html += `<a href="${escapeHtml(linkHref(raw))}"${attrs}>${escapeHtml(label)}</a>`
     }
     last = index + match[0].length
   }

@@ -74,7 +74,7 @@ export const favoriteUser: Feature = {
 
     http<UserAnketa>(`${baseUrl}/anketa/index/${nickname}`, { proxy: true }).then(async (response) => {
       const user = response.parsedBody?.user_widget
-      log.info('anketa/index', response)
+      log.info(`Получение профиля пользователя "${nickname}"`, response)
       if (!user) {
         cell.style.display = 'none'
         return
