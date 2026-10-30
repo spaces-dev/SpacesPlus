@@ -18,7 +18,6 @@ import '@/features/halloween.scss'
 
 const siteOrigin = 'https://spaces.im'
 const install = document.querySelector<HTMLButtonElement>('[data-install]')
-const installProxy = document.querySelector<HTMLButtonElement>('[data-install-proxy]')
 
 function openScript(file: string) {
   window.open(`./${file}`, '_blank')
@@ -31,13 +30,17 @@ if (install && pkgScript) {
   })
 }
 
-if (import.meta.env.DEV && installProxy && pkgScript) {
+if (import.meta.env.DEV && install && pkgScript) {
   const proxyFile = pkgScript.file.replace(/\.user\.js$/, '.proxy.user.js')
-  installProxy.hidden = false
+  const installProxy = document.createElement('button')
+  installProxy.type = 'button'
+  installProxy.className = 'btn btn_secondary'
+  installProxy.textContent = 'Установить прокси'
   installProxy.addEventListener('click', (event) => {
     event.preventDefault()
     openScript(proxyFile)
   })
+  install.after(installProxy)
 }
 
 function link(part: TextPart) {
