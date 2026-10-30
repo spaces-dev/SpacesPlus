@@ -172,7 +172,7 @@ const navItems = pageNav
     })
   : []
 
-const markNav = () => {
+function markNav() {
   const line = (pageNav?.offsetHeight ?? 0) + 20
   const current = navItems.findLast(item => item.target.getBoundingClientRect().top <= line)
   for (const item of navItems) {
@@ -182,7 +182,7 @@ const markNav = () => {
 }
 
 let navFrame = 0
-const scheduleNav = () => {
+function scheduleNav() {
   if (navFrame) return
   navFrame = requestAnimationFrame(() => {
     navFrame = 0
