@@ -1,8 +1,11 @@
 import type { Feature } from '@/core/feature'
 import { el, observeElement } from '@zero-dependency/dom'
+import { ensureStyle, removeStyle } from '@/core/appearance'
 import { log } from '@/core/log'
 import { getSettings, setSetting } from '@/core/settings-store'
+import galleryCss from '@/styles/features/gallery.scss?inline'
 
+const galleryStyleId = 'SP_STYLE_GALLERY'
 const turns = ['rotate90', 'rotate180', 'rotate270']
 
 function galleryShowsVideo() {
@@ -41,6 +44,7 @@ export const galleryRotate: Feature = {
   title: 'Поворот фотографий',
   description: 'Добавляется кнопка в просмотрщик фотографий, с помощью нее можно поворачивать изображение.',
   start: (ctx) => {
+    ensureStyle(galleryStyleId, galleryCss)
     let photo = ''
     let imageNode: HTMLElement | null = null
     let linkNode: HTMLAnchorElement | null = null
@@ -132,6 +136,7 @@ export const galleryRotate: Feature = {
     return () => {
       unwatch?.()
       stop()
+      removeStyle(galleryStyleId)
     }
   },
 }

@@ -1,0 +1,23 @@
+.rotate270 {
+  transform: rotate(270deg) translateY(-100%) translateY(100%) translateX(100%) translateX(-100%) !important;
+}
+
+.rotate180 {
+  transform: rotate(180deg) translateY(100%) translateY(-100%) !important;
+}
+
+.rotate90 {
+  transform: rotate(90deg) !important;
+}
+
+#gallery-container.sp-rotate-anim {
+  transition: transform 0.2s ease;
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+.js-ico.ico.sp-ico-rotate {
+  background-position: -1453px -34px;
+}

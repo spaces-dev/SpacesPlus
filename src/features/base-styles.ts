@@ -1,10 +1,13 @@
 import type { Feature } from '@/core/feature'
-import { injectBundledCss } from '@/core/appearance'
+import { ensureStyle } from '@/core/appearance'
+import mainCss from '@/styles/main.scss?inline'
+
+const baseStyleId = 'SP_PLUS_BASE'
 
 export const baseStyles: Feature = {
   id: 'base-styles',
   core: true,
-  start: ctx => ctx.onDom(() => {
-    injectBundledCss()
-  }),
+  start: () => {
+    ensureStyle(baseStyleId, mainCss)
+  },
 }

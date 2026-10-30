@@ -1,6 +1,6 @@
 import type { Feature } from '@/core/feature'
 import { applyBodyStyle } from '@/core/appearance'
-import { destroyColorPicker, renderBackgroundOptions } from './settings/background'
+import { destroyColorPicker, releaseBackgroundSheet, renderBackgroundOptions, syncBackgroundSheet } from './settings/background'
 
 export const bodyStyle: Feature = {
   id: 'bodystyle',
@@ -12,6 +12,7 @@ export const bodyStyle: Feature = {
   start: (ctx) => {
     const stop = ctx.onDom(() => {
       applyBodyStyle()
+      syncBackgroundSheet()
     })
     return () => {
       stop()
@@ -19,6 +20,7 @@ export const bodyStyle: Feature = {
       if (style) style.textContent = ''
       destroyColorPicker()
       document.querySelector('#SP_PLUS_BODYSTYLE')?.remove()
+      releaseBackgroundSheet()
     }
   },
 }

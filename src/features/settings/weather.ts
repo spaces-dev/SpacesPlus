@@ -85,7 +85,7 @@ export function renderWeatherOptions(anchor: HTMLElement) {
 
   const panel = el('div', {
     id: 'SP_WEATHER_SETTINGS',
-    className: 'sp_settings-wrap',
+    className: 'sp-weather-settings',
   }, [
     el('label', { className: 'label' }, [
       'Локация:',

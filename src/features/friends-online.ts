@@ -1,12 +1,15 @@
 import type { Feature } from '@/core/feature'
 import type { FriendListItem, FriendsOnline } from '@/types/friends-online'
 import { el } from '@zero-dependency/dom'
+import { ensureStyle, removeStyle } from '@/core/appearance'
 import { onSiteChange, siteCheckbox } from '@/core/checkbox'
 import { http } from '@/core/http'
 import { log } from '@/core/log'
 import { getSettings, setSetting } from '@/core/settings-store'
 import { baseUrl } from '@/core/site'
+import friendsCss from '@/styles/features/friends.scss?inline'
 
+const friendsStyleId = 'SP_STYLE_FRIENDS'
 const collapsedClass = 'sp-friends-collapsed'
 
 function friendsCounter() {
@@ -95,6 +98,7 @@ export const friendsOnline: Feature = {
   optionsId: 'SP_PLUS_MAXFRIENDS',
   renderOptions: renderFriendsOptions,
   start: (ctx) => {
+    ensureStyle(friendsStyleId, friendsCss)
     let boundNode: HTMLElement | null = null
     let toggleAbort: AbortController | null = null
     let savedExpanded = getSettings().friendsSet.expanded
@@ -189,6 +193,7 @@ export const friendsOnline: Feature = {
 
     return () => {
       stop()
+      removeStyle(friendsStyleId)
       toggleAbort?.abort()
       boundNode = null
       friendsPanel()?.remove()

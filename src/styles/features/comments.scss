@@ -1,0 +1,19 @@
+@use '../shared/btn-list';
+
+.comment_date {
+  .form-checkbox {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 6px;
+    padding: 0;
+    width: 16px;
+    height: 16px;
+    overflow: visible;
+
+    &:after {
+      top: 0 !important;
+      left: 0 !important;
+      margin: 0 !important;
+    }
+  }
+}

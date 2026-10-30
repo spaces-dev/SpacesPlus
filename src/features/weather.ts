@@ -2,12 +2,15 @@ import type { Feature } from '@/core/feature'
 import type { WeatherPayload } from '@/types/weather'
 import { el } from '@zero-dependency/dom'
 import { capitalize } from '@zero-dependency/utils'
+import { ensureStyle, removeStyle } from '@/core/appearance'
 import { http } from '@/core/http'
 import { log } from '@/core/log'
 import { modalMessage } from '@/core/modals'
 import { cookies, getSettings, setSetting } from '@/core/settings-store'
+import weatherCss from '@/styles/features/weather.scss?inline'
 import { renderWeatherOptions } from './settings/weather'
 
+const weatherStyleId = 'SP_STYLE_WEATHER'
 const unixTime = () => Math.round(Date.now() / 1000)
 const geoSkipKey = 'SP_GEO_SKIP'
 const geoTimeout = 10_000
@@ -126,24 +129,23 @@ function renderWidget() {
   if (!rightbar || !data || !condition) return
 
   const widget = el('div', {
-    className: 'widgets-group widgets-group_top js-container__block',
+    className: 'widgets-group widgets-group_top js-container__block sp-weather',
     id: 'SP_WIDGET_WEATHER',
   })
   widget.append(
     el('div', {
       className: 'b-title cl b-title_first oh',
-      innerHTML: `<a href="https://openweathermap.org/city/${data.id}" target="_blank" class="b-title__link" style="white-space: unset"><h6 class="span">Погода в ${data.name}</h6></a>`,
+      innerHTML: `<a href="https://openweathermap.org/city/${data.id}" target="_blank" class="b-title__link"><h6 class="span">Погода в ${data.name}</h6></a>`,
     }),
     el('div', {
       className: 'content',
-      style: { padding: '0px 16px 16px 16px' },
       innerHTML: `
-        <img src="https://openweathermap.org/img/wn/${condition.icon}@2x.png" class="sp_img-center">
-        <div class="grey sp_weather-container">
-          <p class="sp_weather-temp">${Math.round(data.main.temp)}°C</p>
+        <img src="https://openweathermap.org/img/wn/${condition.icon}@2x.png" class="sp-weather__icon" alt="">
+        <div class="grey sp-weather__summary">
+          <p class="sp-weather__temp">${Math.round(data.main.temp)}°C</p>
           <p>${capitalize(condition.description)}</p>
         </div>
-        <table class="grey sp_weather-table">
+        <table class="grey sp-weather__stats">
           <tbody>
             <tr><td>Облачность: </td><td>${data.clouds.all}%</td></tr>
             <tr><td>Влажность: </td><td>${data.main.humidity}%</td></tr>
@@ -170,6 +172,7 @@ export const weatherWidget: Feature = {
     return false
   },
   start: () => {
+    ensureStyle(weatherStyleId, weatherCss)
     if (!getSettings().weatherSet.city) detectCity()
     const tick = () => {
       const set = getSettings().weatherSet
@@ -181,6 +184,7 @@ export const weatherWidget: Feature = {
     return () => {
       window.clearInterval(timer)
       document.querySelector('#SP_WIDGET_WEATHER')?.remove()
+      removeStyle(weatherStyleId)
     }
   },
 }

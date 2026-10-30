@@ -1,0 +1,9 @@
+@mixin tool-width($width) {
+  display: inline-block;
+  box-sizing: border-box !important;
+  width: $width;
+}
+
+.sp_btn-list {
+  @include tool-width(50%);
+}

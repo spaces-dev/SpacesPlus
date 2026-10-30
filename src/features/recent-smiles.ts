@@ -1,10 +1,12 @@
 import type { Feature } from '@/core/feature'
 import { el } from '@zero-dependency/dom'
 import { LocalStorage } from '@zero-dependency/storage'
+import { ensureStyle, removeStyle } from '@/core/appearance'
 import { onSiteChange, siteCheckbox } from '@/core/checkbox'
 import { log } from '@/core/log'
 import { modalConfirm } from '@/core/modals'
 import { getSettings, setSetting } from '@/core/settings-store'
+import recentsCss from '@/styles/features/recents.scss?inline'
 
 type SmileEntry
   = | [string, number, number]
@@ -18,6 +20,7 @@ type CapturedSmile = {
   srcset: string
 }
 
+const recentsStyleId = 'SP_STYLE_RECENTS'
 const smiles = new LocalStorage<Record<string, unknown>>('sp_recent_smiles', {})
 const maxLimit = /^(?:[1-9]\d?|1[01]\d|120)$/
 let shiftHold = false
@@ -448,6 +451,7 @@ export const recentSmiles: Feature = {
   optionsId: 'SP_PLUS_RECENTS',
   renderOptions: renderRecentOptions,
   start: () => {
+    ensureStyle(recentsStyleId, recentsCss)
     compactSmiles()
 
     const onClick = (event: MouseEvent) => {
@@ -497,6 +501,7 @@ export const recentSmiles: Feature = {
     refreshMenus()
 
     return () => {
+      removeStyle(recentsStyleId)
       document.removeEventListener('click', onClick, true)
       window.removeEventListener('keydown', onShift)
       window.removeEventListener('keyup', onShift)

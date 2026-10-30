@@ -1,21 +1,13 @@
 import { el } from '@zero-dependency/dom'
-import bodyStyleCss from '../../public/css/bodystyle.css?inline'
-import dialogCss from '../../public/css/dialog.css?inline'
-import menuCss from '../../public/css/menu.css?inline'
 import { getSettings } from './settings-store'
 
-export function injectStyle(id: string, css: string) {
+export function ensureStyle(id: string, css: string) {
   if (document.getElementById(id)) return
   document.head.append(el('style', { id, textContent: css }))
 }
 
-export function injectBundledCss() {
-  injectStyle('SP_PLUS_MENU', menuCss)
-  injectStyle('SP_DIALOG_CSS', dialogCss)
-}
-
-export function injectBackgroundCss() {
-  injectStyle('SP_PLUS_IMAGE_STYLE', bodyStyleCss)
+export function removeStyle(id: string) {
+  document.getElementById(id)?.remove()
 }
 
 export function applyBodyStyle() {

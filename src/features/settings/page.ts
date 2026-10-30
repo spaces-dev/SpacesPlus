@@ -1,12 +1,16 @@
 import type { Feature } from '@/core/feature'
 import { el } from '@zero-dependency/dom'
+import { ensureStyle, removeStyle } from '@/core/appearance'
 import { onSiteChange, siteCheckbox } from '@/core/checkbox'
 import { modalConfirm, modalMessage } from '@/core/modals'
 import { pkgVersion } from '@/core/pkg-info'
 import { getSettings, resetSpacesCookies, setSetting } from '@/core/settings-store'
 import { baseUrl, isTouch, pathAt, queryFlag } from '@/core/site'
 import { renderChangelog } from '@/features/check-updates'
+import settingsCss from '@/styles/settings.scss?inline'
 import { renderBackup } from './backup'
+
+const settingsStyleId = 'SP_PLUS_SETTINGS'
 
 interface SectionLink {
   id: string
@@ -82,6 +86,7 @@ function openSettings(features: Feature[]) {
   const link = document.querySelector('#SP_PLUS_SETLINK')
   const root = link?.parentElement?.parentElement?.parentElement?.parentElement
   if (!(root instanceof HTMLElement) || root.id !== 'main') return
+  ensureStyle(settingsStyleId, settingsCss)
 
   const path = document.querySelector('#header_path')
   if (path && !path.innerHTML.includes('SP_PLUS_SETHEAD2')) {
@@ -282,27 +287,34 @@ export function createSettingsPage(features: Feature[]): Feature {
   return {
     id: 'settings-page',
     core: true,
-    start: ctx => ctx.onDom(() => {
-      if (pathAt() !== '/settings/' || document.querySelector('#SP_PLUS_SETLINK')) return
-      const targetLink = document.querySelector<HTMLAnchorElement>(`a[href^="${baseUrl}/settings/notification/"]`)
-      if (!targetLink) return
+    start: (ctx) => {
+      const stop = ctx.onDom(() => {
+        if (!document.querySelector('#SP_PLUS_MAIN')) removeStyle(settingsStyleId)
+        if (pathAt() !== '/settings/' || document.querySelector('#SP_PLUS_SETLINK')) return
+        const targetLink = document.querySelector<HTMLAnchorElement>(`a[href^="${baseUrl}/settings/notification/"]`)
+        if (!targetLink) return
 
-      const link = el('a', {
-        href: `${baseUrl}/settings/?sp_plus_settings=1`,
-        id: 'SP_PLUS_SETLINK',
-        className: targetLink.className,
-        innerHTML: '<span>Настройки Spaces Plus</span>',
-      })
-      link.onclick = () => {
+        const link = el('a', {
+          href: `${baseUrl}/settings/?sp_plus_settings=1`,
+          id: 'SP_PLUS_SETLINK',
+          className: targetLink.className,
+          innerHTML: '<span>Настройки Spaces Plus</span>',
+        })
+        link.onclick = () => {
+          openSettings(features)
+          return false
+        }
+        targetLink.before(link)
+
+        if (!queryFlag('sp_plus_settings')) return
         openSettings(features)
-        return false
+        if (queryFlag('sp_backup')) document.querySelector<HTMLAnchorElement>('#sp_backup')?.click()
+        if (queryFlag('sp_changelog')) document.querySelector<HTMLAnchorElement>('#sp_changelog')?.click()
+      })
+      return () => {
+        stop()
+        removeStyle(settingsStyleId)
       }
-      targetLink.before(link)
-
-      if (!queryFlag('sp_plus_settings')) return
-      openSettings(features)
-      if (queryFlag('sp_backup')) document.querySelector<HTMLAnchorElement>('#sp_backup')?.click()
-      if (queryFlag('sp_changelog')) document.querySelector<HTMLAnchorElement>('#sp_changelog')?.click()
-    }),
+    },
   }
 }

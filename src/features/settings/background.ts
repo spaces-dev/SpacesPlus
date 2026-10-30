@@ -1,9 +1,10 @@
 import { el } from '@zero-dependency/dom'
-import { applyBodyStyle, injectBackgroundCss } from '@/core/appearance'
+import { applyBodyStyle, ensureStyle, removeStyle } from '@/core/appearance'
 import { onSiteChange, siteCheckbox } from '@/core/checkbox'
 import { log } from '@/core/log'
 import { getSettings, setSetting } from '@/core/settings-store'
 import { assetOrigin, loadSiteModules, readPage } from '@/core/site'
+import backgroundCss from '@/styles/features/bodystyle.scss?inline'
 
 interface SiteColorPicker {
   setColor: (hex: string) => void
@@ -101,6 +102,20 @@ function imageField() {
   ]))
 }
 
+const backgroundStyleId = 'SP_PLUS_IMAGE_STYLE'
+
+export function syncBackgroundSheet() {
+  if (document.querySelector('#SP_WRAP_IMAGE, #SP_WRAP_COLOR')) {
+    ensureStyle(backgroundStyleId, backgroundCss)
+    return
+  }
+  removeStyle(backgroundStyleId)
+}
+
+export function releaseBackgroundSheet() {
+  removeStyle(backgroundStyleId)
+}
+
 export function destroyColorPicker() {
   colorTicket += 1
   colorObserver?.disconnect()
@@ -112,6 +127,7 @@ export function destroyColorPicker() {
     if (typeof query.colorpicker === 'function') query.colorpicker(false)
   }
   document.querySelector('#SP_WRAP_COLOR')?.remove()
+  syncBackgroundSheet()
 }
 
 const palette = [
@@ -125,7 +141,7 @@ function showImages() {
   if (document.querySelector('#SP_WRAP_IMAGE')) return
   const toggle = document.querySelector('#sp_set_bodystyle_URL')?.closest('label')
   if (!toggle) return
-  injectBackgroundCss()
+  ensureStyle(backgroundStyleId, backgroundCss)
 
   const gallery = el('div', {
     className: 'js-gallery_skip wbg oh tiles_block tiles_wrapper',
@@ -202,6 +218,7 @@ function showColors() {
   if (document.querySelector('#SP_WRAP_COLOR')) return
   const toggle = document.querySelector('#sp_set_bodystyle_color')?.closest('label')
   if (!toggle) return
+  ensureStyle(backgroundStyleId, backgroundCss)
   const swatches = el('div', { className: 'stnd-block' })
   for (const row of palette) {
     for (const color of row) {
@@ -260,6 +277,7 @@ export function renderBackgroundOptions(anchor: HTMLElement) {
         return
       }
       document.querySelector('#SP_WRAP_IMAGE')?.remove()
+      syncBackgroundSheet()
     })
 
     onSiteChange(colorToggle.input, (checked) => {

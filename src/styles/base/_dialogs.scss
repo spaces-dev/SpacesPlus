@@ -1,0 +1,92 @@
+.sp-dialog {
+  &.widgets-group {
+    display: block;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 999999;
+    margin: 0;
+
+    @media all and (min-width: 900px) {
+      margin: 0 auto;
+      width: 25rem;
+      max-width: 25rem !important;
+    }
+
+    @media all and (min-width: 1024px) {
+      top: 5px;
+      right: auto;
+      bottom: auto;
+      left: 5px;
+      margin: 0;
+    }
+  }
+
+  &__btn {
+    @media all and (max-width: 329px) {
+      display: none !important;
+    }
+
+    @media all and (min-width: 1024px) {
+      display: block !important;
+    }
+  }
+}
+
+.touch .sp-dialog {
+  &,
+  button {
+    font-size: 16px;
+  }
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.fadeIn {
+  animation: fade-in 0.3s ease-in-out;
+
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+}
+
+.fadeOut {
+  animation: fade-out 0.3s ease-in-out;
+
+  @keyframes fade-out {
+    0% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+    }
+  }
+}
+
+.close_h {
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.w400 {
+  @media (min-width: 1024px) {
+    max-width: 400px;
+  }
+}
+
+ul.list {
+  > li {
+    margin: 10px;
+  }
+}

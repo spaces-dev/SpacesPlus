@@ -1,6 +1,9 @@
 import type { Feature } from '@/core/feature'
+import { ensureStyle, removeStyle } from '@/core/appearance'
 import { log } from '@/core/log'
+import scrollCss from '@/styles/features/scroll.scss?inline'
 
+const scrollStyleId = 'SP_STYLE_SCROLL'
 const moved = 'sp-replace'
 
 export const scrollMove: Feature = {
@@ -9,6 +12,7 @@ export const scrollMove: Feature = {
   description: 'Перемещает полосу автоскролла на правую сторону.',
   desktopOnly: true,
   start: (ctx) => {
+    ensureStyle(scrollStyleId, scrollCss)
     const apply = () => {
       const scroll = document.querySelector<HTMLElement>('#scroll_page')
       if (!scroll) return
@@ -28,6 +32,7 @@ export const scrollMove: Feature = {
 
     return () => {
       stop()
+      removeStyle(scrollStyleId)
       const scroll = document.querySelector<HTMLElement>('#scroll_page')
       if (!scroll?.classList.contains(moved)) return
       scroll.classList.remove(moved)

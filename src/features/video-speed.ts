@@ -1,8 +1,11 @@
 import type { Feature } from '@/core/feature'
 import { el } from '@zero-dependency/dom'
+import { ensureStyle, removeStyle } from '@/core/appearance'
 import { log } from '@/core/log'
 import { getSettings, setSetting } from '@/core/settings-store'
+import playbackCss from '@/styles/features/playback.scss?inline'
 
+const playbackStyleId = 'SP_STYLE_PLAYBACK'
 const speeds = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2]
 
 const label = (speed: number) => `x${speed}`
@@ -47,6 +50,7 @@ export const videoSpeed: Feature = {
   title: 'Скорость видео',
   description: 'В панели плеера появляется меню скорости: от замедления x0.25 до ускорения x2.',
   start: (ctx) => {
+    ensureStyle(playbackStyleId, playbackCss)
     const bound = new WeakSet<HTMLVideoElement>()
     let alive = true
 
@@ -145,6 +149,7 @@ export const videoSpeed: Feature = {
     return () => {
       alive = false
       stop()
+      removeStyle(playbackStyleId)
       document.removeEventListener('pointerdown', onPointerDown, true)
       document.removeEventListener('keydown', onKeyDown)
       for (const button of document.querySelectorAll('.sp-playback')) button.remove()

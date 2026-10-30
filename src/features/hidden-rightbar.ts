@@ -1,8 +1,11 @@
 import type { Feature } from '@/core/feature'
+import { ensureStyle, removeStyle } from '@/core/appearance'
 import { log } from '@/core/log'
 import { modalMessage } from '@/core/modals'
 import { getSettings, setSetting } from '@/core/settings-store'
+import rightbarCss from '@/styles/features/rightbar.scss?inline'
 
+const rightbarStyleId = 'SP_STYLE_RIGHTBAR'
 const hidden = 'sp-hidden-rightbar'
 
 function hideRightbar() {
@@ -27,6 +30,7 @@ export const hiddenRightbar: Feature = {
     modalMessage('Скрыть правое меню', 'Виджет погоды выключен: он показывается в правом меню.', { close: true, timer: 5 })
   },
   start: (ctx) => {
+    ensureStyle(rightbarStyleId, rightbarCss)
     if (getSettings().weather) setSetting('weather', false)
 
     const stop = ctx.onDom(() => {
@@ -40,6 +44,7 @@ export const hiddenRightbar: Feature = {
     return () => {
       stop()
       showRightbar()
+      removeStyle(rightbarStyleId)
     }
   },
 }
