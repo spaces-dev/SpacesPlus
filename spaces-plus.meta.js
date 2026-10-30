@@ -1,19 +1,12 @@
 // ==UserScript==
-// @name        Spaces+
-// @version     3.2.0
+// @name        Spaces Plus
+// @version     4.0.0
+// @description 🚀 Powerful userscript for Spaces.im
 // @author      Vitalij Ryndin <sys@crashmax.ru> https://crashmax.ru
 // @license     MIT
-// @icon        https://spaces-dev.github.io/SpacesPlus/icons/logo_96.png
-// @require     https://spaces-dev.github.io/SpacesPlus/libs/colorpicker.js
-// @match       https://spaces.ru/*
-// @match       https://spcs.me/*
+// @icon        https://spaces-dev.github.io/spaces-plus/icons/logo_96.png
+// @homepage    https://spaces-dev.github.io/spaces-plus/
 // @match       https://spaces.im/*
-// @match       https://gdespaces.com/*
-// @match       https://spac1.com/*
-// @match       https://spac1.net/*
-// @match       https://spaces-blogs.com/*
-// @match       https://world76.spcs.bio/*
-// @updateURL   https://spaces-dev.github.io/SpacesPlus/spaces-plus.meta.js
-// @downloadURL https://spaces-dev.github.io/SpacesPlus/spaces-plus.user.js
+// @match       https://world84.spcs.bio/*
 // @grant       unsafeWindow
 // ==/UserScript==
