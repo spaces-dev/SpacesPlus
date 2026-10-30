@@ -21,7 +21,6 @@ import { recentSmiles } from './recent-smiles'
 import { scrollMove } from './scroll-move'
 import { createSettingsPage } from './settings/page'
 import { sidebarButton } from './sidebar-button'
-import { stickyHeader } from './sticky-header'
 import { videoSpeed } from './video-speed'
 import { weatherWidget } from './weather'
 
@@ -38,7 +37,6 @@ const configurable = [
   favoriteUser,
   galleryRotate,
   adBlock,
-  stickyHeader,
   karma,
   videoSpeed,
   recentSmiles,

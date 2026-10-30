@@ -42,7 +42,6 @@ export interface Settings {
   grotate: boolean
   angle: number
   adblock: boolean
-  stickyheader: boolean
   karma: boolean
   sticker: boolean
   playback: boolean

@@ -33,7 +33,6 @@ export const defaultSettings = {
   grotate: true,
   angle: 0,
   adblock: true,
-  stickyheader: true,
   karma: true,
   sticker: true,
   playback: true,
@@ -55,7 +54,7 @@ export const defaultSettings = {
   bodystyleSet: {
     url: `${assetOrigin}/backgrounds/default.png`,
     color: '#DAE1E8',
-    urlchecked: true,
+    urlchecked: false,
     colorchecked: false,
   },
   weather: false,
