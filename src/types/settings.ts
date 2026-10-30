@@ -45,7 +45,7 @@ export interface Settings {
   sticker: boolean
   playback: boolean
   videoSpeed: number
-  upVersion: number
+  upVersion: number | string
   hideNotify: HideNotify
   recents: boolean
   recentSmiles: RecentSmiles

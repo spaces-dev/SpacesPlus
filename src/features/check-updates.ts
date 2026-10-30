@@ -1,19 +1,98 @@
 import type { Feature } from '@/core/feature'
-import type { CheckUpdates } from '@/types/check-updates'
+import type { Changelog, ChangelogSection, ChangelogSectionType } from '@/types/check-updates'
 import { el } from '@zero-dependency/dom'
 import { http } from '@/core/http'
 import { log } from '@/core/log'
 import { modalMessage } from '@/core/modals'
+import { pkgVersion } from '@/core/pkg-info'
 import { getSettings, setSetting } from '@/core/settings-store'
-import { assetOrigin, revision, session } from '@/core/site'
+import { assetOrigin, revision } from '@/core/site'
 
-const dotted = (build: number) => String(build).split('').join('.')
+const sectionTitles: Record<ChangelogSectionType, string> = {
+  added: 'Новое',
+  changed: 'Изменено',
+  fixed: 'Исправлено',
+  improved: 'Улучшено',
+  removed: 'Удалено',
+  other: 'Прочее',
+}
+
+function escapeHtml(value: string) {
+  return value
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+}
+
+function renderInline(value: string) {
+  const pattern = /\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g
+  let html = ''
+  let last = 0
+
+  for (const match of value.matchAll(pattern)) {
+    const index = match.index ?? 0
+    const label = match[1]
+    const href = match[2]
+    html += escapeHtml(value.slice(last, index))
+    if (label && href) {
+      html += `<a href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(label)}</a>`
+    }
+    last = index + match[0].length
+  }
+
+  html += escapeHtml(value.slice(last))
+  return html
+}
+
+function sectionHeading(section: ChangelogSection) {
+  return section.title ?? (section.type ? sectionTitles[section.type] : '')
+}
+
+function renderSections(sections: ChangelogSection[]) {
+  return sections.map((section) => {
+    const heading = sectionHeading(section)
+    if (!heading) return ''
+    const items = section.items.map(item => `<li>${renderInline(item)}</li>`).join('')
+    return `<b>${escapeHtml(heading)}:</b><br><ul class="list">${items}</ul>`
+  }).join('')
+}
+
+function formatDate(iso: string) {
+  const [year, month, day] = iso.split('-')
+  if (!year || !month || !day) return iso
+  return `${day}.${month}.${year}`
+}
+
+const semverParts = (value: string) => value.split('.').map(part => Number(part) || 0)
+
+function compareSemver(left: string, right: string) {
+  const a = semverParts(left)
+  const b = semverParts(right)
+  const length = Math.max(a.length, b.length)
+
+  for (let index = 0; index < length; index += 1) {
+    const diff = (a[index] ?? 0) - (b[index] ?? 0)
+    if (diff !== 0) return diff
+  }
+
+  return 0
+}
+
+function asSemver(value: number | string) {
+  return typeof value === 'number' ? String(value).split('').join('.') : value
+}
+
+function latestReleased(changelog: Changelog) {
+  return changelog.releases.find(release => !release.unreleased)
+}
 
 export async function loadUpdates() {
-  const response = await http<CheckUpdates>(`${assetOrigin}/updater.json?r=${revision}`)
+  const response = await http<Changelog>(`${assetOrigin}/changelog.json?r=${revision}`)
   log.info('Проверка обновлений', response)
-  if (response.status !== 200 || !response.parsedBody?.history) return
-  return response.parsedBody
+  const body = response.parsedBody
+  if (response.status !== 200 || body?.schema !== 1 || !Array.isArray(body.releases)) return
+  return body
 }
 
 export const checkUpdates: Feature = {
@@ -21,15 +100,16 @@ export const checkUpdates: Feature = {
   core: true,
   start: () => {
     loadUpdates().then((json) => {
-      const latest = json?.history[0]
+      const latest = json ? latestReleased(json) : undefined
       if (!latest) return
-      const hidden = getSettings().upVersion || 0
-      session.version = Math.max(hidden, session.version)
-      if (latest.build <= session.version) return
+
+      const seen = asSemver(getSettings().upVersion)
+      const current = compareSemver(seen, pkgVersion) > 0 ? seen : pkgVersion
+      if (compareSemver(latest.version, current) <= 0) return
 
       modalMessage(
-        `Доступна новая версия Spaces Plus ${dotted(latest.build)}`,
-        `<div class="pad_t_a"></div>${latest.changes}<div id="SP_UPDATER_BUTTONS" class="pad_t_a"><a class="btn btn_green btn_input" href="${assetOrigin}/spaces-plus.user.js?r=${revision}">Обновить</a></div>`,
+        `Доступна новая версия Spaces Plus ${escapeHtml(latest.version)}`,
+        `<div class="pad_t_a"></div>${renderSections(latest.sections)}<div id="SP_UPDATER_BUTTONS" class="pad_t_a"><a class="btn btn_green btn_input" href="${assetOrigin}/spaces-plus.user.js?r=${revision}">Обновить</a></div>`,
         { close: true },
       )
 
@@ -41,7 +121,7 @@ export const checkUpdates: Feature = {
         innerHTML: 'Больше не показывать',
       })
       hide.onclick = () => {
-        setSetting('upVersion', latest.build)
+        setSetting('upVersion', latest.version)
         document.querySelector('#SP_PLUS_ALERT')?.remove()
         return false
       }
@@ -69,17 +149,39 @@ export async function renderChangelog(target: Element) {
 
   const json = await loadUpdates()
   if (!json) return
-  for (const entry of json.history) {
+
+  for (const entry of json.releases) {
+    const version = el('span', {
+      className: 'sp_plus_ver',
+      textContent: `v${entry.version}`,
+    })
+    if (compareSemver(entry.version, pkgVersion) === 0) {
+      version.append(el('span', {
+        className: 'sp_plus_badge',
+        title: 'Текущая версия',
+        textContent: 'текущая',
+      }))
+    }
+
+    const label = el('label', { className: 'label sp_plus_line_c' }, [
+      version,
+      el('span', { className: 'sp_plus_rule' }),
+    ])
+    if (entry.date) {
+      label.append(el('div', {
+        className: 'label__desc',
+        textContent: formatDate(entry.date),
+      }))
+    }
+
     pad.append(
-      el('label', {
-        className: 'label sp_plus_line_c',
-        innerHTML: `v${dotted(entry.build)}<div class="label__desc">${entry.date}</div>`,
-      }),
+      label,
       el('div', {
         className: 'grey sp_plus_c_desc',
-        innerHTML: entry.changes,
+        innerHTML: renderSections(entry.sections),
       }),
     )
   }
+
   preloader.remove()
 }

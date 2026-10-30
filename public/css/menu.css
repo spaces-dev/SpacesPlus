@@ -280,22 +280,54 @@ a.js-smile_menu_select:has(.sp-recent-shift) {
   font-size: small;
 }
 
-.sp_plus_line_c:before {
-  display: block;
-  position: absolute;
-  top: 50%;
-  right: 80px;
-  left: 48px;
-  border-bottom: 1px solid #c5d3e1;
-  content: '';
+.sp_plus_line_c {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.root--theme-dark .sp_plus_line_c:before {
+.sp_plus_line_c:before {
+  content: none;
+}
+
+.sp_plus_ver,
+.sp_plus_line_c .label__desc {
+  flex-shrink: 0;
+}
+
+.sp_plus_line_c .label__desc {
+  float: none;
+}
+
+.sp_plus_ver {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sp_plus_rule {
+  flex: 1;
+  min-width: 12px;
+  border-bottom: 1px solid #c5d3e1;
+}
+
+.root--theme-dark .sp_plus_rule {
   border-bottom-color: #2d2e30;
 }
 
-.sp_plus_line_c {
-  position: relative;
+.sp_plus_badge {
+  padding: 0 6px;
+  border-radius: 3px;
+  background: #d2e3f4;
+  color: #395387;
+  font-weight: 700;
+  font-size: 11px;
+  line-height: 18px;
+}
+
+.root--theme-dark .sp_plus_badge {
+  background: #395387;
+  color: #d2e3f4;
 }
 
 .sp_plus_c_desc {

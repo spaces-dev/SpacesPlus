@@ -1,9 +1,19 @@
-export interface HistoryEntry {
-  build: number
-  date: string
-  changes: string
+export type ChangelogSectionType = 'added' | 'changed' | 'fixed' | 'improved' | 'removed' | 'other'
+
+export interface ChangelogSection {
+  type?: ChangelogSectionType
+  title?: string
+  items: string[]
 }
 
-export interface CheckUpdates {
-  history: HistoryEntry[]
+export interface ChangelogRelease {
+  version: string
+  date?: string
+  unreleased?: boolean
+  sections: ChangelogSection[]
+}
+
+export interface Changelog {
+  schema: number
+  releases: ChangelogRelease[]
 }
