@@ -3,7 +3,7 @@
   "type": "module",
   "version": "4.0.0",
   "packageManager": "pnpm@11.25.0",
-  "description": "🚀 Powerful userscript for Spaces.ru",
+  "description": "🚀 Powerful userscript for Spaces.im",
   "author": {
     "name": "Vitalij Ryndin",
     "email": "sys@crashmax.ru",
@@ -32,6 +32,6 @@
     "sass-embedded": "1.107.0",
     "typescript": "6.0.3",
     "vite": "8.3.5",
-    "vite-userscript-plugin": "2.5.4"
+    "vite-userscript-plugin": "2.5.5"
   }
 }

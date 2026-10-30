@@ -88,7 +88,7 @@ export const deleteComments: Feature = {
           }
 
           if (!urls.length) {
-            modalMessage('Внимание!', 'Отметьте галочкой комментарии, которые нужно удалить, и попробуйте ещё раз', { close: true, timer: 5 })
+            modalMessage('Внимание!', 'Отметьте галочкой комментарии, которые нужно удалить, и попробуйте еще раз', { close: true, timer: 5 })
             return false
           }
 

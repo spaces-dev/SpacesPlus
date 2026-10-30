@@ -93,7 +93,7 @@ export const deleteReaders: Feature = {
         remove.onclick = () => {
           const readers = [...selected]
           if (!readers.length) {
-            modalMessage('Внимание!', 'Отметьте галочкой читателей, которых нужно удалить, и попробуйте ещё раз', { close: true, timer: 5 })
+            modalMessage('Внимание!', 'Отметьте галочкой читателей, которых нужно удалить, и попробуйте еще раз', { close: true, timer: 5 })
             return
           }
 

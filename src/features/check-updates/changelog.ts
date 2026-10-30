@@ -22,12 +22,12 @@ export function escapeHtml(value: string) {
     .replaceAll('"', '&quot;')
 }
 
-function linkHref(href: string) {
-  if (href.startsWith('/')) return `${baseUrl}${href}`
+function linkHref(href: string, origin: string) {
+  if (href.startsWith('/')) return `${origin}${href}`
   return href
 }
 
-function renderInline(value: string) {
+function renderInline(value: string, origin: string) {
   const pattern = /\[([^\]]+)\]\((https?:\/\/[^)\s]+|\/[^)\s]*)\)/g
   let html = ''
   let last = 0
@@ -40,7 +40,7 @@ function renderInline(value: string) {
     if (label && raw) {
       const external = raw.startsWith('http')
       const attrs = external ? ' target="_blank" rel="noopener noreferrer"' : ''
-      html += `<a href="${escapeHtml(linkHref(raw))}"${attrs}>${escapeHtml(label)}</a>`
+      html += `<a href="${escapeHtml(linkHref(raw, origin))}"${attrs}>${escapeHtml(label)}</a>`
     }
     last = index + match[0].length
   }
@@ -53,16 +53,16 @@ function sectionHeading(section: ChangelogSection) {
   return section.title ?? (section.type ? sectionTitles[section.type] : '')
 }
 
-export function renderSections(sections: ChangelogSection[]) {
+export function renderSections(sections: ChangelogSection[], origin = baseUrl) {
   return sections.map((section) => {
     const heading = sectionHeading(section)
     if (!heading) return ''
-    const items = section.items.map(item => `<li>${renderInline(item)}</li>`).join('')
+    const items = section.items.map(item => `<li>${renderInline(item, origin)}</li>`).join('')
     return `<b>${escapeHtml(heading)}:</b><br><ul class="list">${items}</ul>`
   }).join('')
 }
 
-function formatDate(iso: string) {
+export function formatDate(iso: string) {
   const [year, month, day] = iso.split('-')
   if (!year || !month || !day) return iso
   return `${day}.${month}.${year}`

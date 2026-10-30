@@ -111,7 +111,7 @@ async function locateCity() {
   } catch (error) {
     sessionStorage.setItem(geoSkipKey, '1')
     clearLoadingCity()
-    modalMessage('Виджет погоды', 'Не удалось определить локацию. Введите её вручную.', { close: true })
+    modalMessage('Виджет погоды', 'Не удалось определить локацию. Введите ее вручную.', { close: true })
     log.error('geolocation', error)
   }
 }

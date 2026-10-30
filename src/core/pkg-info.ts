@@ -1,6 +1,6 @@
 import { scripts } from 'virtual:vite-userscript-plugin'
 
-const pkg = scripts[0]!
+export const pkgScript = scripts[0]!
 
-export const pkgVersion = pkg.version
-export const pkgBasePath = pkg.homepage!
+export const pkgVersion = pkgScript.version
+export const pkgBasePath = pkgScript.homepage!

@@ -6,6 +6,7 @@ import { getSettings, setSetting } from '@/core/settings-store'
 import { assetOrigin, loadSiteModules, readPage } from '@/core/site'
 import backgroundCss from '@/styles/features/bodystyle.scss?inline'
 import { applyBodyStyle } from './apply'
+import { backgroundFiles } from './files'
 
 interface SiteColorPicker {
   setColor: (hex: string) => void
@@ -25,29 +26,6 @@ declare global {
     $?: SiteJQuery
   }
 }
-
-const backgrounds = [
-  'default.png',
-  'bananas.png',
-  'cats.png',
-  'ethnic-binary.png',
-  'hearts.png',
-  'skull-and-bones.png',
-  'water.png',
-  'stars.gif',
-  'yellow-leaves.png',
-  '10-years.png',
-  '15bg.png',
-  'triangle.png',
-  'animal-eyes.png',
-  'cube.png',
-  'flowers.png',
-  'girly-doodles.png',
-  'japanese-cranes.png',
-  'round-circle.png',
-  'cicrle-flowers.png',
-  'square-texture.png',
-]
 
 const imagePattern = /\.(?:jpg|jpeg|png|gif)(?:$|\?)/i
 const colorPattern = /^#(?:[a-f0-9]{3}|[a-f0-9]{6})$/i
@@ -153,7 +131,7 @@ function showImages() {
   }, imageField())
   toggle.after(wrap)
 
-  for (const file of backgrounds) {
+  for (const file of backgroundFiles) {
     const image = el('img', {
       className: 'preview s201_200',
       src: `${assetOrigin}/backgrounds/${file}`,

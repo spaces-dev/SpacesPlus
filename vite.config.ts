@@ -2,17 +2,7 @@ import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vite'
 import userscript from 'vite-userscript-plugin'
 import pkg from './package.json' with { type: 'json' }
-
-const DOMAINS = [
-  'spaces.ru',
-  'spcs.me',
-  'spaces.im',
-  'gdespaces.com',
-  'spac1.com',
-  'spac1.net',
-  'spaces-blogs.com',
-  'world76.spcs.bio',
-]
+import { DOMAINS } from './src/landing/content.js'
 
 const devServerPort = 3000
 const devServerOrigin = `http://localhost:${devServerPort}/`
@@ -39,7 +29,6 @@ export default defineConfig((config) => {
       userscript({
         fileName: pkg.name,
         entry: 'src/main.ts',
-        autoMetaUrls: true,
         header: {
           name: 'Spaces Plus',
           version: pkg.version,

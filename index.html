@@ -8,34 +8,62 @@
 </head>
 
 <body>
-  <div class="main__container d-flex">
-    <div class="hero d-flex container text-center">
-      <div class="hero__container align-self-center">
-        <div class="hero__inner d-flex">
-          <h1 class="hero__title">Spaces Plus</h1>
+  <div class="page">
+    <nav class="page-nav" aria-label="Разделы">
+      <div class="container page-nav__inner">
+        <a href="#features">Функционал</a>
+        <a href="#privacy">Конфиденциальность</a>
+        <a href="#changelog">История обновлений</a>
+      </div>
+    </nav>
 
-          <div class="hero__text">
-            🚀 Скрипт для Spaces.ru
-          </div>
-
-          <div class="hero__actions d-flex">
-            <button class="btn" type="button" data-install>Установить</button>
-            <button class="btn btn_secondary" type="button" data-install-proxy hidden>Установить прокси</button>
-          </div>
+    <header class="hero">
+      <div class="container">
+        <h1 class="hero__title">Spaces Plus</h1>
+        <p class="hero__text">🚀 Скрипт для Spaces.im</p>
+        <p class="hero__note" data-install-copy></p>
+        <div class="hero__actions">
+          <button class="btn" type="button" data-install>Установить</button>
+          <button class="btn btn_secondary" type="button" data-install-proxy hidden>Установить прокси</button>
         </div>
       </div>
-    </div>
+    </header>
 
-    <div class="container d-flex pt-3 pb-3">
-      <footer>
-        <a href="https://spaces.im/soo/extension/" class="footer__link">Группа на Spaces</a>
-        <a href="https://t.me/spaces_dev" class="footer__link">Группа в Telegram</a>
-      </footer>
-      <footer class="ml-auto">
-        <a href="https://spaces-dev.github.io/#changelog" class="footer__link">История обновлений</a>
+    <main class="page-main">
+      <section class="section">
+        <div class="container">
+          <h2 class="section__title" id="features">Функционал</h2>
+          <div class="groups" data-features></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <h2 class="section__title" id="privacy">Конфиденциальность</h2>
+          <div data-privacy></div>
+          <p class="section__note">Последнее обновление: 30.10.2026</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <h2 class="section__title" id="changelog">История обновлений</h2>
+          <div data-changelog>
+            <p class="section__note">Загрузка…</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="page-footer">
+      <div class="container page-footer__row">
         <a href="https://spaces.im/mysite/index/anomaiy" class="footer__link">Разработал crashmax</a>
-      </footer>
-    </div>
+        <div class="page-footer__links">
+          <a href="https://spaces.im/soo/extension/" class="footer__link">Группа на Spaces</a>
+          <a href="https://t.me/spaces_dev" class="footer__link">Группа в Telegram</a>
+        </div>
+      </div>
+    </footer>
   </div>
 
   <script type="module" src="/src/landing/index.ts"></script>

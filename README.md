@@ -1,6 +1,6 @@
 # Spaces Plus
 
-> 🚀 Powerful userscript for Spaces.ru
+> 🚀 Powerful userscript for Spaces.im
 
 ![Version](https://img.shields.io/github/package-json/v/spaces-dev/spaces-plus?color=blue)
 ![GitHub](https://img.shields.io/github/license/spaces-dev/spaces-plus?label=license&color=brightgreen)
@@ -9,7 +9,7 @@
 
 Откройте [страницу скрипта](https://spaces-dev.github.io/spaces-plus/) и нажмите «Установить», либо поставьте файл напрямую: [spaces-plus.user.js](https://spaces-dev.github.io/spaces-plus/spaces-plus.user.js).
 
-Подходит для Tampermonkey, Greasemonkey и Violentmonkey. Скрипт работает на `spaces.ru`, `spcs.me`, `spaces.im`, `gdespaces.com`, `spac1.com`, `spac1.net`, `spaces-blogs.com` и `world76.spcs.bio`.
+Подходит для Tampermonkey, Greasemonkey и Violentmonkey. Скрипт работает на `spaces.im`, `world84.spcs.bio`.
 
 Настройки открываются со страницы настроек сайта и разбиты на разделы «Контент», «Сбор», «Медиа» и «Интерфейс».
 
