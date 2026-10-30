@@ -20,7 +20,7 @@ export function modalMessage(title: string, content: string, options: MessageOpt
   const { close = false, timer } = options
   const previous = document.querySelector('#SP_PLUS_ALERT, #SP_PLUS_CONFIRM')
   const container = el('div', {
-    className: `sticker w400 ${previous ? '' : 'fadeIn'}`,
+    className: ['widgets-group', 'sp-dialog', 'w400', previous ? '' : 'fadeIn'].filter(Boolean).join(' '),
     id: 'SP_PLUS_ALERT',
   })
 
@@ -53,7 +53,7 @@ export function modalConfirm(text: string, warn: boolean, callback: () => void) 
   const previous = document.querySelector('#SP_PLUS_ALERT, #SP_PLUS_CONFIRM')
   const container = el('div', {
     id: 'SP_PLUS_CONFIRM',
-    className: `sticker ${previous ? '' : 'fadeIn'}`,
+    className: ['widgets-group', 'sp-dialog', previous ? '' : 'fadeIn'].filter(Boolean).join(' '),
   })
 
   previous?.remove()
@@ -71,7 +71,7 @@ export function modalConfirm(text: string, warn: boolean, callback: () => void) 
   const cancelBtn = el('a', {
     innerHTML: 'Отмена',
     href: '#',
-    className: 'btn btn_white btn_input right sticker-close_btn',
+    className: 'btn btn_white btn_input right sp-dialog__btn',
   })
 
   successBtn.onclick = () => {

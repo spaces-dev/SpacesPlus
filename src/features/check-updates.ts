@@ -37,7 +37,7 @@ export const checkUpdates: Feature = {
       if (!buttons) return
       const hide = el('a', {
         href: '#',
-        className: 'btn btn_white btn_input right sticker-close_btn',
+        className: 'btn btn_white btn_input right sp-dialog__btn',
         innerHTML: 'Больше не показывать',
       })
       hide.onclick = () => {

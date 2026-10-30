@@ -23,7 +23,7 @@ export const firstLaunch: Feature = {
       const pad = el('div', { className: 'pad_t_a' })
       const button = el('a', {
         href: `${baseUrl}/settings/?sp_plus_settings=1`,
-        className: 'btn btn_white btn_input right sticker-close_btn',
+        className: 'btn btn_white btn_input right sp-dialog__btn',
         innerHTML: 'Перейти к настройкам',
       })
       button.onclick = () => {

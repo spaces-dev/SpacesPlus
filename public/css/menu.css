@@ -134,13 +134,6 @@
   background: #f9edbf !important;
 }
 
-@media all and (min-width: 900px) {
-  .sticker {
-    width: 25rem;
-    max-width: 25rem !important;
-  }
-}
-
 .fadeIn {
   animation: fade-in 0.3s ease-in-out;
 }
