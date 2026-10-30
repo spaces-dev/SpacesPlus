@@ -1,7 +1,7 @@
 {
   "name": "spaces-plus",
   "type": "module",
-  "version": "3.2.0",
+  "version": "4.0.0",
   "packageManager": "pnpm@11.25.0",
   "description": "🚀 Powerful userscript for Spaces.ru",
   "author": {
@@ -10,7 +10,7 @@
     "url": "https://crashmax.ru"
   },
   "license": "MIT",
-  "homepage": "https://spaces-dev.github.io/SpacesPlus/",
+  "homepage": "https://spaces-dev.github.io/spaces-plus/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
