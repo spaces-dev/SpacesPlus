@@ -38,14 +38,8 @@ export function renderWeatherOptions(anchor: HTMLElement) {
     id: 'SP-CITY-INPUT',
     value: waitingForCity ? 'Загрузка...' : weatherSet.city ?? '',
     autocomplete: 'off',
-    readOnly: true,
     style: { marginBottom: '7px' },
   })
-  const unlockCity = () => {
-    city.readOnly = false
-  }
-  city.addEventListener('pointerdown', unlockCity, { once: true })
-  city.addEventListener('focus', unlockCity, { once: true })
   const markCity = () => {
     if (city.value === 'Загрузка...') {
       city.classList.remove('text-input_error_bg')

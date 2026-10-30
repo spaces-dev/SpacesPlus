@@ -140,7 +140,7 @@ function renderWidget() {
       innerHTML: `
         <img src="https://openweathermap.org/img/wn/${condition.icon}@2x.png" class="sp_img-center">
         <div class="grey sp_weather-container">
-          <p>${Math.round(data.main.temp)}°C</p>
+          <p class="sp_weather-temp">${Math.round(data.main.temp)}°C</p>
           <p>${capitalize(condition.description)}</p>
         </div>
         <table class="grey sp_weather-table">
