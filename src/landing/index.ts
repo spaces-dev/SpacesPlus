@@ -6,6 +6,7 @@ import {
   formatDate,
   renderSections,
 } from '@/features/check-updates/changelog'
+import { mountHalloween } from '@/features/halloween'
 
 import {
   featureGroups,
@@ -13,6 +14,7 @@ import {
   privacyParagraphs,
 } from './content'
 import './index.scss'
+import '@/features/halloween.scss'
 
 const siteOrigin = 'https://spaces.im'
 const install = document.querySelector<HTMLButtonElement>('[data-install]')
@@ -207,3 +209,4 @@ if (privacy) paintPrivacy(privacy)
 
 const ready = changelog ? paintChangelog(changelog, pkgVersion) : Promise.resolve()
 ready.then(revealHash)
+mountHalloween('page')

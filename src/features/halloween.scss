@@ -1,0 +1,511 @@
+.sp-halloween,
+.sp-halloween__pumpkins {
+  --sp-bat: #120e22;
+  --sp-cut: #241f45;
+  --sp-orange: #e8882a;
+  --sp-orange-deep: #c45c12;
+  --sp-orange-side: #d46512;
+  --sp-stem: #3c7a38;
+  --sp-leaf: #4e9448;
+  --sp-shine: #f6b15a;
+}
+
+.sp-halloween {
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+
+  &,
+  * {
+    pointer-events: none;
+  }
+}
+
+.sp-halloween_site {
+  z-index: 400;
+}
+
+.sp-halloween__flight {
+  position: absolute;
+  top: calc(56px + var(--drop));
+  left: 0;
+  will-change: transform;
+  width: calc(92px * var(--scale));
+}
+
+.sp-halloween__bob {
+  animation: sp-bat-bob 1.15s ease-in-out infinite;
+}
+
+.sp-halloween__bat {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.sp-halloween__wing,
+.sp-halloween__body {
+  fill: var(--sp-bat);
+}
+
+.sp-halloween__wing {
+  transform-box: fill-box;
+  animation-duration: 0.24s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+
+  &_left {
+    transform-origin: 100% 55%;
+    animation-name: sp-wing-left;
+  }
+
+  &_right {
+    transform-origin: 0% 55%;
+    animation-name: sp-wing-right;
+  }
+}
+
+.sp-halloween__eye {
+  filter: drop-shadow(0 0 2px #ffb020);
+  fill: #ffe14a;
+}
+
+.sp-halloween__flight:nth-child(2) .sp-halloween__wing {
+  animation-duration: 0.2s;
+}
+
+.sp-halloween__flight:nth-child(3) .sp-halloween__wing {
+  animation-duration: 0.28s;
+}
+
+.sp-halloween__flight:nth-child(5) .sp-halloween__wing {
+  animation-duration: 0.22s;
+}
+
+@for $i from 1 through 5 {
+  .sp-halloween__flight:nth-child(#{$i}) .sp-halloween__bob {
+    animation-delay: #{$i * -0.45}s;
+  }
+}
+
+.sp-halloween__bats_front {
+  position: fixed;
+  z-index: 10000;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+
+  &,
+  * {
+    pointer-events: none;
+  }
+}
+
+.sp-halloween__ghosts_front {
+  position: fixed;
+  z-index: 2;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.sp-halloween__drift {
+  position: absolute;
+  bottom: 0;
+  left: var(--x);
+  animation: sp-ghost-peek var(--duration) ease-in-out infinite;
+  animation-delay: var(--delay);
+  width: calc(92px * var(--scale));
+}
+
+.sp-halloween__ghost {
+  display: block;
+  filter: drop-shadow(0 0 4px rgb(255 255 255 / 40%));
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.sp-halloween__sheet {
+  fill: #f4f1ea;
+}
+
+.sp-halloween__ghost-eye,
+.sp-halloween__ghost-mouth {
+  fill: #2a2438;
+}
+
+.sp-halloween__ghosts .sp-halloween__sheet,
+.sp-halloween__ghosts .sp-halloween__ghost-eye,
+.sp-halloween__ghosts .sp-halloween__ghost-mouth {
+  cursor: pointer;
+  pointer-events: visiblePainted;
+}
+
+.sp-halloween__drift_away {
+  animation: sp-ghost-flee 0.45s ease-in forwards;
+
+  .sp-halloween__sheet,
+  .sp-halloween__ghost-eye,
+  .sp-halloween__ghost-mouth {
+    cursor: default;
+    pointer-events: none;
+  }
+}
+
+.sp-halloween__drift_gone {
+  display: none;
+}
+
+.sp-halloween__pumpkins,
+.sp-halloween__pumpkins * {
+  pointer-events: none;
+}
+
+.sp-halloween__pumpkins .sp-halloween__pumpkin,
+.sp-halloween__pumpkins .sp-halloween__pumpkin * {
+  cursor: pointer;
+  pointer-events: visiblePainted;
+}
+
+.sp-halloween__pumpkins {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+}
+
+.sp-halloween__pumpkin {
+  position: absolute;
+  transform-origin: 50% 100%;
+  filter: drop-shadow(0 0 6px rgb(255 154 46 / 70%)) drop-shadow(0 0 14px rgb(255 106 0 / 35%));
+  animation: sp-pumpkin 3.6s ease-in-out infinite;
+  width: 70px;
+  height: auto;
+
+  &:nth-child(2) {
+    animation-delay: -1.3s;
+    width: 54px;
+  }
+
+  &:nth-child(3) {
+    animation-delay: -2.1s;
+    width: 40px;
+  }
+}
+
+.sp-halloween__pumpkin.sp-halloween__pumpkin_jump {
+  animation: sp-pumpkin-jump 0.45s ease-in-out;
+}
+
+.sp-halloween__shadow {
+  fill: rgb(0 0 0 / 28%);
+}
+
+.sp-halloween__leaf {
+  fill: var(--sp-leaf);
+}
+
+.sp-halloween__stem {
+  fill: var(--sp-stem);
+}
+
+.sp-halloween__lobe_side {
+  fill: var(--sp-orange-side);
+}
+
+.sp-halloween__lobe_main,
+.sp-halloween__tooth {
+  fill: var(--sp-orange);
+}
+
+.sp-halloween__shine {
+  opacity: 0.55;
+  fill: var(--sp-shine);
+}
+
+.sp-halloween__ridge {
+  opacity: 0.55;
+  fill: none;
+  stroke: var(--sp-orange-deep);
+  stroke-linecap: round;
+  stroke-width: 3;
+}
+
+.sp-halloween__cut {
+  fill: var(--sp-cut);
+}
+
+.sp-halloween_site .sp-halloween__pumpkin {
+  &:nth-child(1) {
+    bottom: 10px;
+    left: var(--sp-layout-left, 12px);
+  }
+
+  &:nth-child(2) {
+    right: calc(var(--sp-layout-right, 16px) + 52px);
+    bottom: 18px;
+  }
+
+  &:nth-child(3) {
+    right: var(--sp-layout-right, 12px);
+    bottom: 8px;
+  }
+}
+
+body:has(.sp-halloween_page) {
+  .page {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero {
+    position: relative;
+  }
+
+  .hero .container {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.hero .sp-halloween__pumpkins {
+  --sp-cut: var(--bg);
+}
+
+.hero .sp-halloween__pumpkin {
+  &:nth-child(1) {
+    top: 22px;
+    left: 16px;
+  }
+
+  &:nth-child(2) {
+    top: 40px;
+    right: 18px;
+  }
+
+  &:nth-child(3) {
+    right: 36px;
+    bottom: 18px;
+  }
+}
+
+@keyframes sp-bat-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(calc(abs(var(--bob)) * 0.12));
+  }
+}
+
+@keyframes sp-wing-left {
+  0%,
+  100% {
+    transform: rotate(12deg);
+  }
+
+  50% {
+    transform: rotate(-28deg);
+  }
+}
+
+@keyframes sp-wing-right {
+  0%,
+  100% {
+    transform: rotate(-12deg);
+  }
+
+  50% {
+    transform: rotate(28deg);
+  }
+}
+
+@keyframes sp-ghost-flee {
+  to {
+    transform: translate3d(var(--sway), -110vh, 0) rotate(20deg);
+    opacity: 0;
+  }
+}
+
+@keyframes sp-ghost-peek {
+  0%,
+  22% {
+    transform: translate3d(0, var(--hide), 0) rotate(var(--tilt));
+  }
+
+  46%,
+  68% {
+    transform: translate3d(var(--sway), var(--peek), 0) rotate(calc(var(--tilt) * -1));
+  }
+
+  100% {
+    transform: translate3d(0, var(--hide), 0) rotate(var(--tilt));
+  }
+}
+
+@keyframes sp-pumpkin {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-2deg);
+    filter: drop-shadow(0 0 5px rgb(255 154 46 / 55%)) drop-shadow(0 0 12px rgb(255 106 0 / 28%));
+  }
+
+  50% {
+    transform: translateY(-6px) rotate(2deg);
+    filter: drop-shadow(0 0 10px rgb(255 176 64 / 85%)) drop-shadow(0 0 18px rgb(255 106 0 / 48%));
+  }
+}
+
+@keyframes sp-pumpkin-jump {
+  0% {
+    transform: translateY(0) rotate(-2deg);
+  }
+
+  45% {
+    transform: translateY(-28px) rotate(8deg);
+  }
+
+  100% {
+    transform: translateY(0) rotate(-2deg);
+  }
+}
+
+@keyframes sp-logo-glow {
+  0%,
+  100% {
+    filter: sepia(0.85) hue-rotate(-16deg) saturate(2.4) contrast(1.3) brightness(0.74) drop-shadow(0 0 4px #ff6a00)
+      drop-shadow(0 0 10px rgb(120 0 0 / 45%));
+  }
+
+  50% {
+    filter: sepia(1) hue-rotate(-22deg) saturate(3) contrast(1.45) brightness(0.86) drop-shadow(0 0 8px #ff6a00)
+      drop-shadow(0 0 16px rgb(160 0 0 / 70%));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sp-halloween__flight,
+  .sp-halloween__bob,
+  .sp-halloween__wing,
+  .sp-halloween__drift,
+  .sp-halloween__pumpkin,
+  html.sp-halloween-site #header_elements .ico_logo_default {
+    animation: none;
+  }
+
+  .sp-halloween__flight {
+    &:nth-child(1) {
+      left: 6%;
+    }
+    &:nth-child(2) {
+      left: 24%;
+    }
+    &:nth-child(3) {
+      left: 44%;
+    }
+    &:nth-child(4) {
+      left: 64%;
+    }
+    &:nth-child(5) {
+      left: 82%;
+    }
+  }
+
+  .sp-halloween__drift {
+    transform: translateY(42%);
+  }
+}
+
+@media (max-width: 640px) {
+  .sp-halloween__flight {
+    width: calc(64px * var(--scale));
+  }
+
+  .sp-halloween__drift {
+    width: calc(68px * var(--scale));
+  }
+
+  .hero .sp-halloween__pumpkin,
+  .sp-halloween_site .sp-halloween__pumpkin {
+    &:nth-child(1) {
+      width: 46px;
+    }
+    &:nth-child(2) {
+      width: 36px;
+    }
+    &:nth-child(3) {
+      width: 30px;
+    }
+  }
+
+  .hero .sp-halloween__pumpkin {
+    &:nth-child(1) {
+      top: 12px;
+      left: 8px;
+    }
+    &:nth-child(2) {
+      top: 16px;
+      right: 8px;
+    }
+    &:nth-child(3) {
+      right: 12px;
+      bottom: 10px;
+    }
+  }
+}
+
+html.sp-halloween-site {
+  .js-site-theme {
+    cursor: default;
+    pointer-events: none;
+  }
+
+  body,
+  .root {
+    background-image: var(--sp-halloween-pattern) !important;
+    background-size: 480px 480px !important;
+    background-repeat: repeat !important;
+    background-color: #14101c !important;
+  }
+
+  #header_elements {
+    .header__icon,
+    .ico:not(.ico_logo_default),
+    .js-ico:not(.ico_logo_default) {
+      filter: sepia(0.85) hue-rotate(-16deg) saturate(2.4) contrast(1.25) brightness(0.92) drop-shadow(0 0 4px #ff6a00)
+        drop-shadow(0 0 8px rgb(140 0 0 / 45%));
+    }
+
+    .ico_logo_default {
+      filter: sepia(0.9) hue-rotate(-18deg) saturate(2.6) contrast(1.35) brightness(0.78) drop-shadow(0 0 6px #ff6a00)
+        drop-shadow(0 0 14px rgb(140 0 0 / 60%));
+      animation: sp-logo-glow 2.8s ease-in-out infinite;
+    }
+
+    .header__avatar {
+      filter: drop-shadow(0 0 4px #ff6a00) drop-shadow(0 0 8px rgb(140 0 0 / 55%));
+    }
+  }
+
+  .sidebar-item__user-avatar,
+  .js-preview_clip {
+    filter: drop-shadow(0 0 4px #ff6a00) drop-shadow(0 0 8px rgb(140 0 0 / 55%));
+  }
+
+  .header__avatar .js-preview_clip,
+  .sidebar-item__user-avatar .js-preview_clip {
+    filter: none;
+  }
+
+  .ico_panel {
+    filter: sepia(0.85) hue-rotate(-16deg) saturate(2.4) contrast(1.25) brightness(0.92) drop-shadow(0 0 4px #ff6a00)
+      drop-shadow(0 0 8px rgb(140 0 0 / 45%));
+  }
+}

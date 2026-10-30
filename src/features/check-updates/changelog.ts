@@ -6,7 +6,7 @@ import { pkgVersion } from '@/core/pkg-info'
 import { assetOrigin, baseUrl, revision } from '@/core/site'
 
 const sectionTitles: Record<ChangelogSectionType, string> = {
-  added: 'Новое',
+  added: 'Добавлено',
   changed: 'Изменено',
   fixed: 'Исправлено',
   improved: 'Улучшено',

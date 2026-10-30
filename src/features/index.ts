@@ -9,6 +9,7 @@ import { favoriteUser } from './favorite-user'
 import { firstLaunch } from './first-launch'
 import { friendsOnline } from './friends-online'
 import { galleryRotate } from './gallery-rotate'
+import { halloween } from './halloween'
 import { hiddenRightbar } from './hidden-rightbar'
 import { karma } from './karma'
 import { newYear } from './new-year'
@@ -46,6 +47,7 @@ export const features = [
   checkUpdates,
   sidebarButton,
   firstLaunch,
+  halloween,
   newYear,
   createSettingsPage(configurable),
 ]

@@ -1,9 +1,7 @@
 .js-ico.ico_cats.sp-cats-spaces {
-  margin-right: 0;
-  margin-bottom: 0;
-  background-position: -646px 0;
+  background-position: -646px -18px;
 
-  .root--theme-dark & {
-    background-position: -646px -16px;
+  .root--theme-light & {
+    background-position: -646px -1px;
   }
 }
