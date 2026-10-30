@@ -65,7 +65,7 @@ export async function getWeather(coords?: GeoPoint) {
     const json = response.parsedBody
     if (response.status === 404) {
       const city = getSettings().weatherSet.city ?? ''
-      modalMessage('Виджет погоды', `Город <b>${city}</b> не найден`, { close: true, timer: 5 })
+      modalMessage('Виджет погоды', `Локация <b>${city}</b> не найдена`, { close: true, timer: 5 })
       return
     }
     if (json?.message && json.cod !== 200) {
@@ -102,7 +102,7 @@ async function locateCity() {
   } catch (error) {
     sessionStorage.setItem(geoSkipKey, '1')
     clearLoadingCity()
-    modalMessage('Виджет погоды', 'Не удалось определить город. Введите его вручную.', { close: true })
+    modalMessage('Виджет погоды', 'Не удалось определить локацию. Введите её вручную.', { close: true })
     log.error('geolocation', error)
   }
 }
@@ -160,7 +160,7 @@ function renderWidget() {
 export const weatherWidget: Feature = {
   id: 'weather',
   title: 'Виджет погоды',
-  description: 'Отображает текущую погоду: температуру, облачность, влажность, давление и ветер.</br></br>Можно изменить город, API-ключ и интервал обновления.',
+  description: 'Отображает текущую погоду: температуру, облачность, влажность, давление и ветер.</br></br>Можно изменить локацию, API-ключ и интервал обновления.',
   desktopOnly: true,
   optionsId: 'SP_WEATHER_SETTINGS',
   renderOptions: renderWeatherOptions,

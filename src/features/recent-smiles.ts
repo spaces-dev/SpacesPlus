@@ -294,7 +294,7 @@ function renderRecentOptions(anchor: HTMLElement) {
       }),
       max,
       el('div', {
-        className: 'label__desc',
+        className: 'label__desc grey',
         textContent: 'С зажатым Shift в списке смайлов и стикеров у каждой ячейки появляется «Добавить» или «Удалить». Клик по всей ячейке добавляет или убирает смайл, меню не закрывается. Без Shift клик вставляет код в поле и запоминает его.',
       }),
     ]),

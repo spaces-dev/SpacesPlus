@@ -10,9 +10,10 @@ export function renderWeatherOptions(anchor: HTMLElement) {
   const apiKey = el('input', {
     type: 'password',
     className: 'text-input',
+    name: 'sp-weather-key',
     size: 32,
     value: weatherSet.key,
-    autocomplete: 'off',
+    autocomplete: 'new-password',
     style: { marginBottom: '7px' },
   })
   const markApiKey = () => {
@@ -32,11 +33,19 @@ export function renderWeatherOptions(anchor: HTMLElement) {
   const city = el('input', {
     type: 'text',
     className: 'text-input',
+    name: 'sp-weather-location',
     size: 32,
     id: 'SP-CITY-INPUT',
     value: waitingForCity ? 'Загрузка...' : weatherSet.city ?? '',
+    autocomplete: 'off',
+    readOnly: true,
     style: { marginBottom: '7px' },
   })
+  const unlockCity = () => {
+    city.readOnly = false
+  }
+  city.addEventListener('pointerdown', unlockCity, { once: true })
+  city.addEventListener('focus', unlockCity, { once: true })
   const markCity = () => {
     if (city.value === 'Загрузка...') {
       city.classList.remove('text-input_error_bg')
@@ -59,9 +68,11 @@ export function renderWeatherOptions(anchor: HTMLElement) {
   const interval = el('input', {
     type: 'text',
     className: 'text-input',
+    name: 'sp-weather-interval',
     size: 4,
     maxLength: 3,
     value: String(weatherSet.interval / 60),
+    autocomplete: 'off',
     style: { marginBottom: '7px' },
   })
   interval.oninput = () => {
@@ -83,13 +94,13 @@ export function renderWeatherOptions(anchor: HTMLElement) {
     className: 'sp_settings-wrap',
   }, [
     el('label', { className: 'label' }, [
-      'Город:',
+      'Локация:',
       el('div', { className: 'label__desc' }, detect),
     ]),
     city,
     el('label', {
       className: 'label',
-      innerHTML: 'API-Ключ:<div class="label__desc"><a href="https://openweathermap.org/appid" target="_blank">Получить ключ</a></div>',
+      innerHTML: 'API-ключ:<div class="label__desc"><a href="https://openweathermap.org/appid" target="_blank">Получить ключ</a></div>',
     }),
     apiKey,
     el('label', {
@@ -97,6 +108,10 @@ export function renderWeatherOptions(anchor: HTMLElement) {
       innerHTML: 'Интервал обновления:<div class="label__desc">от 1 до 360 минут</div>',
     }),
     interval,
+    el('div', {
+      className: 'label__desc grey',
+      textContent: 'Локация и API-ключ сохраняются по Enter. Интервал записывается сразу. «Определить» определяет локацию по геолокации. Виджет показывается в правом меню и не работает вместе с функцией «Скрыть правое меню».',
+    }),
   ])
   anchor.parentElement?.after(panel)
 }

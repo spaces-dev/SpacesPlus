@@ -46,7 +46,8 @@
   padding: 11px 15px;
 }
 
-#SP_PLUS_RECENTS .sp_settings-wrap > .label__desc {
+#SP_PLUS_RECENTS .sp_settings-wrap > .label__desc,
+#SP_WEATHER_SETTINGS > .label__desc {
   float: none;
   clear: both;
   margin-top: 10px;
