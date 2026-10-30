@@ -19,7 +19,6 @@ const jsonKeys = new Set<keyof SpacesCookies>(['SP_PLUS_SET', 'SP_WEATHER'])
 const nestedKeys = ['hideNotify', 'recentSmiles', 'friendsSet', 'bodystyleSet', 'weatherSet'] as const
 
 export const defaultSettings = {
-  blogsd: false,
   readersd: false,
   comments: false,
   oldheader: true,

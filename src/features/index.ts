@@ -3,7 +3,6 @@ import { baseStyles } from './base-styles'
 import { bodyStyle } from './body-style'
 import { checkUpdates } from './check-updates'
 import { coins } from './coins'
-import { deleteBlogs } from './delete-blogs'
 import { deleteComments } from './delete-comments'
 import { deleteReaders } from './delete-readers'
 import { disableRedirect } from './disable-redirect'
@@ -25,7 +24,6 @@ import { videoSpeed } from './video-speed'
 import { weatherWidget } from './weather'
 
 const configurable = [
-  deleteBlogs,
   deleteReaders,
   deleteComments,
   oldHeader,

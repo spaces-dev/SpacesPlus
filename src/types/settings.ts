@@ -28,7 +28,6 @@ export interface WeatherSet {
 }
 
 export interface Settings {
-  blogsd: boolean
   readersd: boolean
   comments: boolean
   oldheader: boolean
