@@ -50,7 +50,7 @@ function paintHeader(title: string, crumb: string) {
   const back = document.querySelector<HTMLAnchorElement>('#SP_PLUS_SETBACK')
   if (head) head.innerHTML = title
   if (crumbNode) {
-    crumbNode.innerHTML = `<a href="${baseUrl}/settings/?sp_plus_settings=1">Настройки Spaces Plus</a><span class="location-bar__sep ico"></span> ${crumb}`
+    crumbNode.innerHTML = `<a href="${baseUrl}/settings/?sp_plus_settings=1">Spaces Plus</a><span class="location-bar__sep ico"></span> ${crumb}`
   }
   if (back) back.href = `${baseUrl}/settings/?sp_plus_settings=1`
 }
@@ -67,7 +67,7 @@ function openSettings(features: Feature[]) {
 
   const path = document.querySelector('#header_path')
   if (path && !path.innerHTML.includes('SP_PLUS_SETHEAD2')) {
-    path.innerHTML = path.innerHTML.replace('Настройки', `<a href="${baseUrl}/settings/">Настройки</a><span class="location-bar__sep ico"></span><span id="SP_PLUS_SETHEAD2">Настройки Spaces Plus</span>`)
+    path.innerHTML = path.innerHTML.replace('Настройки', `<a href="${baseUrl}/settings/">Настройки</a><span class="location-bar__sep ico"></span><span id="SP_PLUS_SETHEAD2">Spaces Plus</span>`)
   }
 
   const groupedCards = groupedIds.map((id) => {
@@ -218,22 +218,38 @@ function openSettings(features: Feature[]) {
 
   misc?.append(backup, changelog, reset)
 
-  let clicks = 0
-  const about = el('div', { className: 'widgets-group widgets-group_top nl wbg no-select' })
-  const title = el('div', {
-    className: 'grey',
-    innerHTML: 'Developed by <a href="https://crashmax.ru" target="_blank">crashmax</a> with love ',
+  const profileUrl = `${baseUrl}/mysite/index/anomaiy`
+  const spacesGroupUrl = `${baseUrl}/soo/extension/`
+  const telegramUrl = 'https://t.me/spaces_dev'
+  const heartUrl = 'https://spaces.im/i/dark/em/36/2764-FE0F.png'
+
+  const aboutLink = (href: string, text: string) => el('a', {
+    href,
+    target: '_blank',
+    rel: 'noopener noreferrer',
+    innerHTML: text,
   })
-  const heart = el('div', { innerHTML: '❤️', className: 'heart' })
-  heart.onclick = () => {
-    clicks += 1
-    if (clicks >= 10) location.href = 'https://t.me/spaces_dev'
-  }
-  title.append(heart, el('div', {
-    innerHTML: `v${pkgVersion}`,
-    style: { float: 'right' },
-  }))
-  about.append(el('div', { className: 'content-item3' }, title))
+
+  const about = el('div', { className: 'widgets-group widgets-group_top nl wbg no-select' })
+  const title = el('div', { className: 'grey' })
+  title.append(
+    'Разработано ',
+    aboutLink(profileUrl, 'crashmax'),
+    ' с любовью ',
+    el('span', { className: 'heart', innerHTML: `<img src="${heartUrl}" alt="❤️" width="16" height="16">` }),
+    el('div', {
+      innerHTML: `v${pkgVersion}`,
+      style: { float: 'right' },
+    }),
+  )
+  const groups = el('div', { className: 'grey' })
+  groups.append(
+    'Группа на ',
+    aboutLink(spacesGroupUrl, 'Spaces'),
+    ' и в ',
+    aboutLink(telegramUrl, 'Telegram'),
+  )
+  about.append(el('div', { className: 'content-item3' }, [title, groups]))
   document.querySelector('#SP_PLUS_ABOUT')?.append(about)
 }
 

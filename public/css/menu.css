@@ -450,10 +450,18 @@ input[type='range']::-ms-fill-lower {
 
 .heart {
   display: inline-block;
+  padding: 0 2px;
+  line-height: 0;
+  vertical-align: middle;
   -webkit-animation: heartbeat 1s infinite;
   -moz-animation: heartbeat 1s infinite;
   animation: heartbeat 1s infinite;
-  cursor: pointer;
+}
+
+.heart img {
+  display: block;
+  width: 16px;
+  height: 16px;
 }
 
 .no-select {
