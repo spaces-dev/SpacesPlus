@@ -1,10 +1,10 @@
-import type { SessionCheck } from './types/session-check'
+import type { SessionCheck } from './session-check'
 import { http } from './core/http'
 import { log } from './core/log'
 import { startRuntime } from './core/runtime'
 import { session } from './core/site'
-import { showUserStatus } from './core/user-status'
 import { features } from './features/index'
+import { showUserStatus } from './user-status'
 
 async function boot() {
   if (!document.querySelector('.root')) return

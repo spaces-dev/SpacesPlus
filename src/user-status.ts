@@ -1,5 +1,5 @@
 import { el } from '@zero-dependency/dom'
-import { device } from './site'
+import { device } from './core/site'
 
 const authMessage = 'Для работы <b>Spaces Plus</b> необходима авторизация!'
 

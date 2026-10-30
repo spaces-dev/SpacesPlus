@@ -1,11 +1,10 @@
 import type { Settings } from '@/types/settings'
-import type { WeatherPayload } from '@/types/weather'
 import { Cookie } from '@zero-dependency/cookie'
 import { assetOrigin, host, versionNumber } from './site'
 
 interface JsonCookies {
   SP_PLUS_SET: Settings
-  SP_WEATHER: WeatherPayload
+  SP_WEATHER: unknown
 }
 
 interface StringCookies {
@@ -176,5 +175,4 @@ export function subscribeSettings(listener: () => void) {
 export function resetSpacesCookies() {
   cookies.remove('SP_PLUS_SET')
   cookies.remove('SP_WEATHER')
-  localStorage.removeItem('sp_recent_smiles')
 }

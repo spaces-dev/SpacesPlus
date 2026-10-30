@@ -1,11 +1,8 @@
-import type { Feature } from '@/core/feature'
-import type { Changelog, ChangelogSection, ChangelogSectionType } from '@/types/check-updates'
+import type { Changelog, ChangelogSection, ChangelogSectionType } from './types'
 import { el } from '@zero-dependency/dom'
 import { http } from '@/core/http'
 import { log } from '@/core/log'
-import { modalMessage } from '@/core/modals'
 import { pkgVersion } from '@/core/pkg-info'
-import { getSettings, setSetting } from '@/core/settings-store'
 import { assetOrigin, baseUrl, revision } from '@/core/site'
 
 const sectionTitles: Record<ChangelogSectionType, string> = {
@@ -17,7 +14,7 @@ const sectionTitles: Record<ChangelogSectionType, string> = {
   other: 'Прочее',
 }
 
-function escapeHtml(value: string) {
+export function escapeHtml(value: string) {
   return value
     .replaceAll('&', '&amp;')
     .replaceAll('<', '&lt;')
@@ -56,7 +53,7 @@ function sectionHeading(section: ChangelogSection) {
   return section.title ?? (section.type ? sectionTitles[section.type] : '')
 }
 
-function renderSections(sections: ChangelogSection[]) {
+export function renderSections(sections: ChangelogSection[]) {
   return sections.map((section) => {
     const heading = sectionHeading(section)
     if (!heading) return ''
@@ -73,7 +70,7 @@ function formatDate(iso: string) {
 
 const semverParts = (value: string) => value.split('.').map(part => Number(part) || 0)
 
-function compareSemver(left: string, right: string) {
+export function compareSemver(left: string, right: string) {
   const a = semverParts(left)
   const b = semverParts(right)
   const length = Math.max(a.length, b.length)
@@ -86,12 +83,8 @@ function compareSemver(left: string, right: string) {
   return 0
 }
 
-function asSemver(value: number | string) {
+export function asSemver(value: number | string) {
   return typeof value === 'number' ? String(value).split('').join('.') : value
-}
-
-function latestReleased(changelog: Changelog) {
-  return changelog.releases.find(release => !release.unreleased)
 }
 
 export async function loadUpdates() {
@@ -100,43 +93,6 @@ export async function loadUpdates() {
   const body = response.parsedBody
   if (response.status !== 200 || body?.schema !== 1 || !Array.isArray(body.releases)) return
   return body
-}
-
-export const checkUpdates: Feature = {
-  id: 'check-updates',
-  core: true,
-  start: () => {
-    loadUpdates().then((json) => {
-      const latest = json ? latestReleased(json) : undefined
-      if (!latest) return
-
-      const seen = asSemver(getSettings().upVersion)
-      const current = compareSemver(seen, pkgVersion) > 0 ? seen : pkgVersion
-      if (compareSemver(latest.version, current) <= 0) return
-
-      modalMessage(
-        `Доступна новая версия Spaces Plus ${escapeHtml(latest.version)}`,
-        `<div class="pad_t_a"></div>${renderSections(latest.sections)}<div id="SP_UPDATER_BUTTONS" class="pad_t_a"><a class="btn btn_green btn_input" href="${assetOrigin}/spaces-plus.user.js?r=${revision}">Обновить</a></div>`,
-        { close: true },
-      )
-
-      const buttons = document.querySelector('#SP_UPDATER_BUTTONS')
-      if (!buttons) return
-      const hide = el('a', {
-        href: '#',
-        className: 'btn btn_white btn_input right sp-dialog__btn',
-        innerHTML: 'Больше не показывать',
-      })
-      hide.onclick = () => {
-        setSetting('upVersion', latest.version)
-        document.querySelector('#SP_PLUS_ALERT')?.remove()
-        return false
-      }
-      buttons.append(hide)
-    }).catch((error) => {
-      log.error('check-updates', error)
-    })
-  },
 }
 
 export async function renderChangelog(target: Element) {

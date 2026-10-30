@@ -1,17 +1,11 @@
-import type { Feature } from '@/core/feature'
-import type { WeatherPayload } from '@/types/weather'
-import { el } from '@zero-dependency/dom'
-import { capitalize } from '@zero-dependency/utils'
-import { ensureStyle, removeStyle } from '@/core/appearance'
+import type { WeatherPayload } from './types'
 import { http } from '@/core/http'
 import { log } from '@/core/log'
 import { modalMessage } from '@/core/modals'
 import { cookies, getSettings, setSetting } from '@/core/settings-store'
-import weatherCss from '@/styles/features/weather.scss?inline'
-import { renderWeatherOptions } from './settings/weather'
 
-const weatherStyleId = 'SP_STYLE_WEATHER'
-const unixTime = () => Math.round(Date.now() / 1000)
+export const unixTime = () => Math.round(Date.now() / 1000)
+
 const geoSkipKey = 'SP_GEO_SKIP'
 const geoTimeout = 10_000
 const geoMaxAge = 30 * 60 * 1000
@@ -19,6 +13,18 @@ const geoMaxAge = 30 * 60 * 1000
 interface GeoPoint {
   lat: number
   lon: number
+}
+
+let paintWidget = () => {}
+
+export function bindWeatherWidget(paint: () => void) {
+  paintWidget = paint
+}
+
+export function readWeatherCache(): WeatherPayload | undefined {
+  const data = cookies.get('SP_WEATHER')
+  if (!data || typeof data !== 'object') return
+  return data as WeatherPayload
 }
 
 function weatherQuery(coords?: GeoPoint) {
@@ -86,7 +92,7 @@ export async function getWeather(coords?: GeoPoint) {
     setSetting('weatherSet.city', json.name)
     getSettings().weatherSet.time = unixTime()
     cookies.set('SP_WEATHER', json)
-    renderWidget()
+    paintWidget()
   } catch (error) {
     log.error('openweathermap', error)
   }
@@ -119,72 +125,4 @@ export function detectCity(force = false) {
     pendingCity = undefined
   })
   return pendingCity
-}
-
-function renderWidget() {
-  if (document.querySelector('#SP_WIDGET_WEATHER') || !getSettings().weatherSet.city) return
-  const rightbar = document.querySelector('#rightbar')
-  const data = cookies.get('SP_WEATHER')
-  const condition = data?.weather[0]
-  if (!rightbar || !data || !condition) return
-
-  const widget = el('div', {
-    className: 'widgets-group widgets-group_top js-container__block sp-weather',
-    id: 'SP_WIDGET_WEATHER',
-  })
-  widget.append(
-    el('div', {
-      className: 'b-title cl b-title_first oh',
-      innerHTML: `<a href="https://openweathermap.org/city/${data.id}" target="_blank" class="b-title__link"><h6 class="span">Погода в ${data.name}</h6></a>`,
-    }),
-    el('div', {
-      className: 'content',
-      innerHTML: `
-        <img src="https://openweathermap.org/img/wn/${condition.icon}@2x.png" class="sp-weather__icon" alt="">
-        <div class="grey sp-weather__summary">
-          <p class="sp-weather__temp">${Math.round(data.main.temp)}°C</p>
-          <p>${capitalize(condition.description)}</p>
-        </div>
-        <table class="grey sp-weather__stats">
-          <tbody>
-            <tr><td>Облачность: </td><td>${data.clouds.all}%</td></tr>
-            <tr><td>Влажность: </td><td>${data.main.humidity}%</td></tr>
-            <tr><td>Давление: </td><td>${Math.round(data.main.pressure * 0.75)}mmHg</td></tr>
-            <tr><td>Ветер: </td><td>${data.wind.speed}m/sec</td></tr>
-          </tbody>
-        </table>
-      `,
-    }),
-  )
-  rightbar.append(widget)
-}
-
-export const weatherWidget: Feature = {
-  id: 'weather',
-  title: 'Виджет погоды',
-  description: 'Отображает текущую погоду: температуру, облачность, влажность, давление и ветер.</br></br>Можно изменить локацию, API-ключ и интервал обновления.',
-  desktopOnly: true,
-  optionsId: 'SP_WEATHER_SETTINGS',
-  renderOptions: renderWeatherOptions,
-  onToggle: (enabled) => {
-    if (!enabled || !getSettings().hrightbar) return
-    modalMessage('Виджет погоды', 'Виджет погоды показывается в правом меню. Сначала отключите «Скрыть правое меню».', { close: true, timer: 5 })
-    return false
-  },
-  start: () => {
-    ensureStyle(weatherStyleId, weatherCss)
-    if (!getSettings().weatherSet.city) detectCity()
-    const tick = () => {
-      const set = getSettings().weatherSet
-      if (set.city && unixTime() - set.time > set.interval) getWeather()
-      renderWidget()
-    }
-    tick()
-    const timer = window.setInterval(tick, 30_000)
-    return () => {
-      window.clearInterval(timer)
-      document.querySelector('#SP_WIDGET_WEATHER')?.remove()
-      removeStyle(weatherStyleId)
-    }
-  },
 }

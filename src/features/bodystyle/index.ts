@@ -1,6 +1,11 @@
 import type { Feature } from '@/core/feature'
-import { applyBodyStyle } from '@/core/appearance'
-import { destroyColorPicker, releaseBackgroundSheet, renderBackgroundOptions, syncBackgroundSheet } from './settings/background'
+import { applyBodyStyle } from './apply'
+import {
+  destroyColorPicker,
+  releaseBackgroundSheet,
+  renderBackgroundOptions,
+  syncBackgroundSheet,
+} from './options'
 
 export const bodyStyle: Feature = {
   id: 'bodystyle',

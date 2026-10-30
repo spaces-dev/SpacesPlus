@@ -6,7 +6,8 @@ import { modalConfirm, modalMessage } from '@/core/modals'
 import { pkgVersion } from '@/core/pkg-info'
 import { getSettings, resetSpacesCookies, setSetting } from '@/core/settings-store'
 import { baseUrl, isTouch, pathAt, queryFlag } from '@/core/site'
-import { renderChangelog } from '@/features/check-updates'
+import { renderChangelog } from '@/features/check-updates/changelog'
+import { clearStoredSmiles } from '@/features/recent-smiles/storage'
 import settingsCss from '@/styles/settings.scss?inline'
 import { renderBackup } from './backup'
 
@@ -241,6 +242,7 @@ function openSettings(features: Feature[]) {
   reset.onclick = () => {
     modalConfirm('Вы действительно хотите полностью сбросить настройки?', true, () => {
       resetSpacesCookies()
+      clearStoredSmiles()
       location.reload()
     })
     return false

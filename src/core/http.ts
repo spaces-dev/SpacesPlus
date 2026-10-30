@@ -1,5 +1,8 @@
-import type { HttpResponse } from '@/types/http-response'
 import { log } from './log'
+
+export interface HttpResponse<T> extends Response {
+  parsedBody?: T
+}
 
 interface HttpInit {
   method?: 'GET' | 'POST'

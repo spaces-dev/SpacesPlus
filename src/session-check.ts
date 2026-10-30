@@ -1,12 +1,12 @@
-export interface Icons {
+interface Icons {
   baseurl: string
 }
 
-export interface Config {
+interface Config {
   icons: Icons
 }
 
-export interface OnlineStatus {
+interface OnlineStatus {
   is_online: number
   on_img: string
   alt: string
@@ -17,7 +17,7 @@ export interface OnlineStatus {
   no_link: number
 }
 
-export interface Attributes {
+interface Attributes {
   name: string
   journalTbNm: number
   mailTbNm: number

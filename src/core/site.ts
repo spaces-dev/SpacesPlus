@@ -1,5 +1,14 @@
-import type { DeviceInfo } from '@/types/device'
 import { pkgBasePath, pkgVersion } from './pkg-info'
+
+export interface DeviceInfo {
+  id: number
+  os: string
+  pc: boolean
+  type: string
+  browser: string
+  v: number
+  old: boolean
+}
 
 interface SiteRequireList extends Array<unknown> {
   push: (argv: unknown[]) => number
@@ -12,6 +21,7 @@ type SiteRequire = ((names: string[], onLoad?: () => void, onError?: () => void)
 declare global {
   interface Window {
     __require?: SiteRequire | SiteRequireList
+    Device: DeviceInfo
   }
 }
 
@@ -61,8 +71,6 @@ const fallbackDevice: DeviceInfo = {
 const readDevice = (): DeviceInfo => readPage(win => win.Device) ?? fallbackDevice
 
 export const device: DeviceInfo = readDevice()
-
-export const isDesktop = () => device.id === 4
 
 export const isTouch = () => device.id === 3
 

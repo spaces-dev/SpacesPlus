@@ -1,13 +1,13 @@
+import type { FriendListItem, FriendsOnline } from './types'
 import type { Feature } from '@/core/feature'
-import type { FriendListItem, FriendsOnline } from '@/types/friends-online'
 import { el } from '@zero-dependency/dom'
 import { ensureStyle, removeStyle } from '@/core/appearance'
-import { onSiteChange, siteCheckbox } from '@/core/checkbox'
 import { http } from '@/core/http'
 import { log } from '@/core/log'
-import { getSettings, setSetting } from '@/core/settings-store'
+import { getSettings } from '@/core/settings-store'
 import { baseUrl } from '@/core/site'
 import friendsCss from '@/styles/features/friends.scss?inline'
+import { renderFriendsOptions } from './options'
 
 const friendsStyleId = 'SP_STYLE_FRIENDS'
 const collapsedClass = 'sp-friends-collapsed'
@@ -54,41 +54,6 @@ function friendItem(friend: FriendListItem, modern: boolean) {
     className: 'li',
     innerHTML: `${legacyAvatar}${legacyStatus}<span class="block-item__title m break-word">${friend.name}</span>`,
   })
-}
-
-export function renderFriendsOptions(anchor: HTMLElement) {
-  if (document.querySelector('#SP_PLUS_MAXFRIENDS')) return
-  const input = el('input', {
-    type: 'text',
-    className: 'text-input',
-    size: 4,
-    maxLength: 2,
-    value: String(getSettings().friendsSet.max),
-  })
-  input.oninput = () => {
-    const valid = /^(?:[1-9]|1\d|20)$/.test(input.value)
-    input.classList.toggle('text-input_error_bg', !valid)
-    if (!valid) return
-    setSetting('friendsSet.max', Number(input.value))
-  }
-
-  const expanded = siteCheckbox('sp_friends_expanded', getSettings().friendsSet.expanded)
-  expanded.label.append('Всегда держать список развернутым')
-  onSiteChange(expanded.input, (checked) => {
-    setSetting('friendsSet.expanded', checked)
-  })
-
-  const panel = el('div', { id: 'SP_PLUS_MAXFRIENDS' }, [
-    expanded.label,
-    el('div', { className: 'sp_settings-wrap' }, [
-      el('label', {
-        className: 'label',
-        innerHTML: 'Выводить друзей:<div class="label__desc">от 1 до 20</div>',
-      }),
-      input,
-    ]),
-  ])
-  anchor.parentElement?.after(panel)
 }
 
 export const friendsOnline: Feature = {

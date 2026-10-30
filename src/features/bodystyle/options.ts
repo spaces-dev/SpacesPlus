@@ -1,10 +1,11 @@
 import { el } from '@zero-dependency/dom'
-import { applyBodyStyle, ensureStyle, removeStyle } from '@/core/appearance'
+import { ensureStyle, removeStyle } from '@/core/appearance'
 import { onSiteChange, siteCheckbox } from '@/core/checkbox'
 import { log } from '@/core/log'
 import { getSettings, setSetting } from '@/core/settings-store'
 import { assetOrigin, loadSiteModules, readPage } from '@/core/site'
 import backgroundCss from '@/styles/features/bodystyle.scss?inline'
+import { applyBodyStyle } from './apply'
 
 interface SiteColorPicker {
   setColor: (hex: string) => void
@@ -50,6 +51,14 @@ const backgrounds = [
 
 const imagePattern = /\.(?:jpg|jpeg|png|gif)(?:$|\?)/i
 const colorPattern = /^#(?:[a-f0-9]{3}|[a-f0-9]{6})$/i
+const backgroundStyleId = 'SP_PLUS_IMAGE_STYLE'
+
+const palette = [
+  ['#90CAF9', '#80DEEA', '#A5D6A7', '#FFF59D', '#FFCC80', '#FFAB91', '#CE93D8'],
+  ['#2196F3', '#00BCD4', '#4CAF50', '#FFEB3B', '#FF9800', '#F44336', '#9C27B0'],
+  ['#1565C0', '#00838F', '#2E7D32', '#F9A825', '#EF6C00', '#C62828', '#6A1B9A'],
+  ['#ECF0F1', '#CFD8DC', '#B0BEC5', '#97A6B0', '#546E7A', '#44565E', '#3A474C'],
+]
 
 function isUrl(value: string) {
   try {
@@ -102,8 +111,6 @@ function imageField() {
   ]))
 }
 
-const backgroundStyleId = 'SP_PLUS_IMAGE_STYLE'
-
 export function syncBackgroundSheet() {
   if (document.querySelector('#SP_WRAP_IMAGE, #SP_WRAP_COLOR')) {
     ensureStyle(backgroundStyleId, backgroundCss)
@@ -129,13 +136,6 @@ export function destroyColorPicker() {
   document.querySelector('#SP_WRAP_COLOR')?.remove()
   syncBackgroundSheet()
 }
-
-const palette = [
-  ['#90CAF9', '#80DEEA', '#A5D6A7', '#FFF59D', '#FFCC80', '#FFAB91', '#CE93D8'],
-  ['#2196F3', '#00BCD4', '#4CAF50', '#FFEB3B', '#FF9800', '#F44336', '#9C27B0'],
-  ['#1565C0', '#00838F', '#2E7D32', '#F9A825', '#EF6C00', '#C62828', '#6A1B9A'],
-  ['#ECF0F1', '#CFD8DC', '#B0BEC5', '#97A6B0', '#546E7A', '#44565E', '#3A474C'],
-]
 
 function showImages() {
   if (document.querySelector('#SP_WRAP_IMAGE')) return

@@ -1,8 +1,8 @@
-export interface OnlineStatus {
+interface OnlineStatus {
   on_src: string
 }
 
-export interface Avatar {
+interface Avatar {
   previewURL: string
 }
 
@@ -12,15 +12,15 @@ export interface FriendListItem {
   name: string
 }
 
-export interface Content {
+interface Content {
   list: Array<FriendListItem | null>
 }
 
-export interface PanelLink {
+interface PanelLink {
   content: Content
 }
 
-export interface TabbedPanel {
+interface TabbedPanel {
   links: Array<PanelLink | null>
 }
 

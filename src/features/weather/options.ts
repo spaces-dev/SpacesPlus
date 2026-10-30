@@ -1,6 +1,6 @@
 import { el } from '@zero-dependency/dom'
 import { getSettings, setSetting } from '@/core/settings-store'
-import { detectCity, geoPromptSkipped, getWeather } from '@/features/weather'
+import { detectCity, geoPromptSkipped, getWeather } from './api'
 
 export function renderWeatherOptions(anchor: HTMLElement) {
   if (document.querySelector('#SP_WEATHER_SETTINGS')) return

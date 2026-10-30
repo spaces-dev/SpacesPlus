@@ -1,5 +1,5 @@
 import { baseStyles } from './base-styles'
-import { bodyStyle } from './body-style'
+import { bodyStyle } from './bodystyle'
 import { checkUpdates } from './check-updates'
 import { coins } from './coins'
 import { deleteComments } from './delete-comments'
