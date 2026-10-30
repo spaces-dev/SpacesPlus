@@ -1,5 +1,6 @@
 import type { Feature } from '@/core/feature'
 import { el } from '@zero-dependency/dom'
+import { onSiteChange, siteCheckbox } from '@/core/checkbox'
 import { modalConfirm, modalMessage } from '@/core/modals'
 import { pkgVersion } from '@/core/pkg-info'
 import { getSettings, resetSpacesCookies, setSetting } from '@/core/settings-store'
@@ -9,23 +10,40 @@ import { renderBackup } from './backup'
 
 interface SectionLink {
   id: string
-  color: string
   icon: string
   label: string
   href: string
 }
 
-function sectionLink({ id, color, icon, label, href }: SectionLink) {
-  const link = el('a', {
+function sectionLink({ id, icon, label, href }: SectionLink) {
+  return el('a', {
     href,
-    className: 'list-link list-link_arr sp_font_sm',
+    className: 'list-link list-link_arr',
     id,
-    innerHTML: `<span class="b" style="color: ${color}"><span class="sp ${icon} mr-14"></span>${label}</span>`,
+    innerHTML: `<span class="ico ${icon} mr-14"></span>${label}`,
   })
-  return link
 }
 
 const groupedIds = ['friendsOn', 'bodystyle', 'weather', 'recents']
+
+const sections = [
+  {
+    title: 'Контент',
+    ids: ['comments', 'readersd', 'favorite'],
+  },
+  {
+    title: 'Сбор',
+    ids: ['coins', 'karma'],
+  },
+  {
+    title: 'Медиа',
+    ids: ['playerdn', 'grotate', 'playback'],
+  },
+  {
+    title: 'Интерфейс',
+    ids: ['oldheader', 'rscroll', 'hrightbar', 'dredirect'],
+  },
+]
 
 const isGrouped = (id: string) => groupedIds.includes(id)
 
@@ -35,7 +53,7 @@ function settingsCard(id: string, title: string, areaId: string) {
     <div class="b-title cl b-title_center b-title_first oh">
       <div class="b-title__item">${title}</div>
     </div>
-    <div class="content"><div class="list f-c_fll"><div id="${areaId}" class="no-select"></div></div></div>
+    <div class="content"><div class="list f-c_fll"><div id="${areaId}"></div></div></div>
   </div>
 `
 }
@@ -81,14 +99,14 @@ function openSettings(features: Feature[]) {
       <div class="b-title cl b-title_center b-title_first oh">
         <div class="b-title__item" id="SP_PLUS_SETHEAD">Настройки Spaces Plus</div>
       </div>
-      <div class="content"><div class="list f-c_fll"><div id="SP_PLUS_SETAREA" class="no-select"></div></div></div>
+      <div class="content"><div class="list f-c_fll"><div id="SP_PLUS_SETAREA"></div></div></div>
     </div>
     ${groupedCards}
     <div class="widgets-group js-container__block sp-plus-extra" id="SP_PLUS_MISC">
       <div class="b-title cl b-title_center b-title_first oh">
         <div class="b-title__item">Прочее</div>
       </div>
-      <div class="content"><div class="list f-c_fll"><div id="SP_PLUS_MISC_AREA" class="no-select"></div></div></div>
+      <div class="content"><div class="list f-c_fll"><div id="SP_PLUS_MISC_AREA"></div></div></div>
     </div>
     <div id="SP_PLUS_ABOUT"></div>
     <a id="SP_PLUS_SETBACK" href="${baseUrl}/settings/?" class="link-return full_link"><span class="ico ico_arr_small_left_darkblue"></span> Назад</a>
@@ -97,77 +115,85 @@ function openSettings(features: Feature[]) {
   const area = document.querySelector<HTMLElement>('#SP_PLUS_SETAREA')
   if (!area) return
 
-  for (const feature of features) {
-    if (!feature.title) continue
-    const target = isGrouped(feature.id)
-      ? document.querySelector<HTMLElement>(`#SP_PLUS_AREA_${feature.id}`)
-      : area
-    if (!target) continue
+  const appendFeature = (feature: Feature, target: HTMLElement) => {
     if (feature.listed === false) {
       feature.renderOptions?.(target)
-      continue
+      return
     }
 
     const enabled = getSettings()[feature.id as keyof ReturnType<typeof getSettings>] === true
     const unsupported = Boolean(feature.desktopOnly && isTouch())
     if (unsupported && enabled) setSetting(feature.id, false)
 
-    const checkbox = el('input', {
-      id: feature.id,
-      type: 'checkbox',
-      className: 'sp-checkbox-square',
-      checked: enabled && !unsupported,
-    })
-    if (unsupported) checkbox.setAttribute('unsupported', feature.id)
-    checkbox.onclick = () => {
-      if (unsupported && checkbox.checked) {
-        checkbox.checked = false
+    const turnedOn = enabled && !unsupported
+    const { input, label } = siteCheckbox(feature.id, turnedOn, unsupported ? 'stnd-block-yellow' : undefined)
+    if (unsupported) {
+      input.disabled = true
+      label.classList.add('form-checkbox--is-disabled')
+      label.addEventListener('click', (event) => {
+        const targetNode = event.target
+        if (targetNode instanceof Element && targetNode.closest('a')) return
         modalMessage('Внимание!', 'Для работы данной функции необходимо переключиться на компьютерную версию сайта', { close: true, timer: 5 })
-        return
-      }
+      })
+    }
+    onSiteChange(input, (checked) => {
+      if (feature.onToggle?.(checked) === false) return false
 
-      if (feature.onToggle?.(checkbox.checked) === false) {
-        checkbox.checked = false
-        return
-      }
-
-      setSetting(feature.id, checkbox.checked)
-      if (checkbox.checked) {
-        feature.renderOptions?.(checkbox)
+      setSetting(feature.id, checked)
+      if (checked) {
+        feature.renderOptions?.(input)
         return
       }
       if (feature.optionsId) document.getElementById(feature.optionsId)?.remove()
-    }
+    })
 
-    const row = el('label', {
-      className: `list-link ${unsupported ? 'sp_unsupported' : ''}`,
-    }, [
-      checkbox,
-      el('label', { innerHTML: feature.title, htmlFor: feature.id }),
-    ])
-
+    label.append(feature.title ?? '')
     if (feature.description) {
       const info = el('a', {
         href: '#',
-        className: 'sp sp-info sp_info-btn',
+        className: 'ico ico_question sp_info-btn',
       })
       info.onclick = () => {
         modalMessage(feature.title ?? '', feature.description ?? '', { close: true })
         return false
       }
-      row.append(info)
+      label.append(info)
     }
 
-    target.append(row)
-    if (checkbox.checked) feature.renderOptions?.(checkbox)
+    target.append(label)
+    if (input.checked) feature.renderOptions?.(input)
+  }
+
+  const byId = new Map(features.map(feature => [feature.id, feature]))
+  const placed = new Set<string>()
+
+  for (const section of sections) {
+    const items = section.ids.flatMap((id) => {
+      const feature = byId.get(id)
+      return feature?.title ? [feature] : []
+    })
+    if (!items.length) continue
+    area.append(el('div', { className: 'sp-group-title', textContent: section.title }))
+    for (const feature of items) {
+      placed.add(feature.id)
+      appendFeature(feature, area)
+    }
+  }
+
+  for (const feature of features) {
+    if (!feature.title || placed.has(feature.id)) continue
+    const target = isGrouped(feature.id)
+      ? document.querySelector<HTMLElement>(`#SP_PLUS_AREA_${feature.id}`)
+      : area
+    if (!target) continue
+    appendFeature(feature, target)
   }
 
   const misc = document.querySelector('#SP_PLUS_MISC_AREA')
 
   const backup = sectionLink({
     id: 'sp_backup',
-    color: '#2e7d32',
-    icon: 'sp-backup-g',
+    icon: 'ico_shared',
     label: 'Импорт и экспорт настроек',
     href: `${baseUrl}/settings/?sp_plus_settings=1&sp_backup=1`,
   })
@@ -185,8 +211,7 @@ function openSettings(features: Feature[]) {
 
   const changelog = sectionLink({
     id: 'sp_changelog',
-    color: '#2196f3',
-    icon: 'sp-restore-blue',
+    icon: 'ico_history_blue',
     label: 'История обновлений',
     href: `${baseUrl}/settings/?sp_plus_settings=1&sp_changelog=1`,
   })
@@ -204,9 +229,9 @@ function openSettings(features: Feature[]) {
 
   const reset = el('a', {
     href: '#',
-    className: 'list-link list-link_arr sp_font_sm',
+    className: 'list-link list-link_arr',
     id: 'sp_plus_reset',
-    innerHTML: '<span class="b" style="color: #f86934"><span class="sp sp-alert mr-14"></span>Сброс настроек</span>',
+    innerHTML: '<span class="ico ico_alert_red mr-14"></span>Сброс настроек',
   })
   reset.onclick = () => {
     modalConfirm('Вы действительно хотите полностью сбросить настройки?', true, () => {
@@ -230,7 +255,7 @@ function openSettings(features: Feature[]) {
     innerHTML: text,
   })
 
-  const about = el('div', { className: 'widgets-group widgets-group_top nl wbg no-select' })
+  const about = el('div', { className: 'widgets-group widgets-group_top nl wbg' })
   const title = el('div', { className: 'grey' })
   title.append(
     'Разработано ',

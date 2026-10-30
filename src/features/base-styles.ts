@@ -4,7 +4,7 @@ import { injectBundledCss } from '@/core/appearance'
 export const baseStyles: Feature = {
   id: 'base-styles',
   core: true,
-  start: () => {
+  start: ctx => ctx.onDom(() => {
     injectBundledCss()
-  },
+  }),
 }

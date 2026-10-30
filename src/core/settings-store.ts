@@ -31,7 +31,6 @@ export const defaultSettings = {
   favorite: true,
   grotate: true,
   angle: 0,
-  adblock: true,
   karma: true,
   sticker: true,
   playback: true,

@@ -1,7 +1,7 @@
 import { el } from '@zero-dependency/dom'
 import bodyStyleCss from '../../public/css/bodystyle.css?inline'
-import menuCss from '../../public/css/menu.css?inline'
 import dialogCss from '../../public/css/dialog.css?inline'
+import menuCss from '../../public/css/menu.css?inline'
 import { getSettings } from './settings-store'
 
 export function injectStyle(id: string, css: string) {

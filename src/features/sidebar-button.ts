@@ -41,27 +41,11 @@ function appearanceClass(node: Element | null | undefined, fallback: string) {
   return names.join(' ') || fallback
 }
 
-function spacesIcon() {
-  return el('span', { className: 'js-ico ico_cats ico_cats_spaces sp-cats-spaces' })
-}
-
 export const sidebarButton: Feature = {
   id: 'sidebar-button',
   core: true,
   start: ctx => ctx.onDom(() => {
     if (document.querySelector('[data-sp-sidebar]')) return
-
-    const legacy = document.querySelector(`li.li>a[href^="${baseUrl}/services/"]`)
-    if (legacy?.parentElement) {
-      const icon = document.querySelector('span.s_i_exit') ? '<span class="sp sp-ico"></span>' : ''
-      const link = el('li', {
-        className: 'li',
-        innerHTML: `<a href="${baseUrl}/settings/?sp_plus_settings=1" title="Настройки Spaces Plus">${icon}<span class="m s_i_text"> Настройки Spaces Plus</span></a>`,
-      })
-      link.dataset.spSidebar = '1'
-      legacy.parentElement.parentElement?.prepend(link)
-      return
-    }
 
     const section = settingsSection()
     const sample = section ? firstItem(section) : null
@@ -77,7 +61,10 @@ export const sidebarButton: Feature = {
       href: `${baseUrl}/settings/?sp_plus_settings=1`,
       className: appearanceClass(sampleLink, 'sidebar-item__link'),
       title: 'Настройки Spaces Plus',
-    }, [spacesIcon(), label])
+    }, [
+      el('span', { className: 'js-ico ico_cats ico_cats_spaces sp-cats-spaces' }),
+      label,
+    ])
     const item = el('div', {
       className: 'sidebar-item',
     }, link)

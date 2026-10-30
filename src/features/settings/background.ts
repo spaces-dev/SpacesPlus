@@ -1,5 +1,6 @@
 import { el } from '@zero-dependency/dom'
 import { applyBodyStyle, injectBackgroundCss } from '@/core/appearance'
+import { onSiteChange, siteCheckbox } from '@/core/checkbox'
 import { log } from '@/core/log'
 import { getSettings, setSetting } from '@/core/settings-store'
 import { assetOrigin, loadSiteModules, readPage } from '@/core/site'
@@ -120,11 +121,6 @@ const palette = [
   ['#ECF0F1', '#CFD8DC', '#B0BEC5', '#97A6B0', '#546E7A', '#44565E', '#3A474C'],
 ]
 
-function listLinkBorder() {
-  const listLink = document.querySelector('.list-link')
-  return listLink ? getComputedStyle(listLink).borderBottom : '1px solid #c5d3e1'
-}
-
 function showImages() {
   if (document.querySelector('#SP_WRAP_IMAGE')) return
   const toggle = document.querySelector('#sp_set_bodystyle_URL')?.closest('label')
@@ -137,7 +133,7 @@ function showImages() {
   })
   const wrap = el('div', {
     id: 'SP_WRAP_IMAGE',
-    style: { borderTop: listLinkBorder() },
+    className: 'sp-separator-top',
   }, imageField())
   toggle.after(wrap)
 
@@ -223,7 +219,7 @@ function showColors() {
   const pickerHost = el('div', { className: 'js-bb_colorpicker' })
   const wrap = el('div', {
     id: 'SP_WRAP_COLOR',
-    style: { borderTop: listLinkBorder() },
+    className: 'sp-separator-top',
   }, el('table', { className: 'table__wrap bb-colorpicker' }, el('tbody', {}, el('tr', {}, [
     el('td', { className: 'table__cell' }, swatches),
     el('td', { className: 'table__cell table__cell_last' }, el('div', { className: 'stnd-block' }, pickerHost)),
@@ -249,60 +245,36 @@ export function renderBackgroundOptions(anchor: HTMLElement) {
 
   try {
     const { bodystyleSet } = getSettings()
-    const imageToggle = el('input', {
-      type: 'checkbox',
-      id: 'sp_set_bodystyle_URL',
-      className: 'sp-checkbox-square',
-      checked: bodystyleSet.urlchecked,
-    })
-    const colorToggle = el('input', {
-      type: 'checkbox',
-      id: 'sp_set_bodystyle_color',
-      className: 'sp-checkbox-square',
-      checked: bodystyleSet.colorchecked,
-    })
+    const imageToggle = siteCheckbox('sp_set_bodystyle_URL', bodystyleSet.urlchecked)
+    const colorToggle = siteCheckbox('sp_set_bodystyle_color', bodystyleSet.colorchecked)
+    imageToggle.label.style.borderBottom = 'none'
+    colorToggle.label.style.borderBottom = 'none'
+    imageToggle.label.append('Использовать изображение')
+    colorToggle.label.append('Использовать цвет')
 
-    imageToggle.onclick = () => {
-      setSetting('bodystyleSet.urlchecked', imageToggle.checked)
+    onSiteChange(imageToggle.input, (checked) => {
+      setSetting('bodystyleSet.urlchecked', checked)
       applyBodyStyle()
-      if (imageToggle.checked) {
+      if (checked) {
         showImages()
         return
       }
       document.querySelector('#SP_WRAP_IMAGE')?.remove()
-    }
+    })
 
-    colorToggle.onclick = () => {
-      setSetting('bodystyleSet.colorchecked', colorToggle.checked)
+    onSiteChange(colorToggle.input, (checked) => {
+      setSetting('bodystyleSet.colorchecked', checked)
       applyBodyStyle()
-      if (colorToggle.checked) {
+      if (checked) {
         showColors()
         return
       }
       destroyColorPicker()
-    }
+    })
 
     const panel = el('div', { id: 'SP_PLUS_BODYSTYLE' }, [
-      el('label', {
-        className: 'stnd-link',
-        style: { borderBottom: 'none' },
-      }, [
-        imageToggle,
-        el('label', {
-          htmlFor: 'sp_set_bodystyle_URL',
-          innerHTML: 'Использовать изображение',
-        }),
-      ]),
-      el('label', {
-        className: 'stnd-link',
-        style: { borderBottom: 'none' },
-      }, [
-        colorToggle,
-        el('label', {
-          htmlFor: 'sp_set_bodystyle_color',
-          innerHTML: 'Использовать цвет',
-        }),
-      ]),
+      imageToggle.label,
+      colorToggle.label,
     ])
 
     anchor.append(panel)

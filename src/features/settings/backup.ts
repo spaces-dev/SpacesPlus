@@ -13,7 +13,7 @@ export function renderBackup(target: Element) {
     if (!getSettings().hideNotify.configImport) {
       const notice = el('div', { id: 'SP_CONFIG_JSON' })
       const hide = el('span', {
-        className: 'sp sp-remove-grey pointer right notif_close close_h',
+        className: 'ico ico_close pointer right notif_close close_h',
         title: 'Понятно, больше не показывать.',
         style: { margin: '10px' },
       })
@@ -24,7 +24,7 @@ export function renderBackup(target: Element) {
       notice.append(hide, el('div', {
         className: 'stnd-block-yellow',
         style: { padding: '16px' },
-        innerHTML: '<span class="sp sp-alert"></span>Внимание!</br></br><div style="font-size: small">Редактирование только для опытных пользователей. Перед правкой сделайте экспорт: если что-то пойдёт не так, настройки можно импортировать обратно.</div>',
+        innerHTML: '<span class="ico ico_alert_red"></span>Сохраните копию перед правкой</br></br><div style="font-size: small">В поле лежит JSON настроек. «Экспорт» сохраняет файл, «Импорт» возвращает его, если после изменения что-то сломается.</div>',
       }))
       target.append(notice)
     }
@@ -38,9 +38,9 @@ export function renderBackup(target: Element) {
     target.append(el('div', { style: { padding: '16px 16px 14px 16px' } }, el('div', { className: 'text-input__wrap' }, el('div', { className: 'cl' }, textarea))))
 
     const apply = el('button', {
-      className: 'user__tools-link table__cell sp_btn',
-      style: { borderRight: 'none', borderTop: '1px solid #cdd4e1' },
-      innerHTML: '<span class="sp sp-ok-darkblue"></span><span style="color: #0E3C87; padding-left: 10px">Применить изменения</span>',
+      className: 'user__tools-link table__cell sp_btn sp-separator-top',
+      style: { borderRight: 'none' },
+      innerHTML: '<span class="ico ico_ok_darkblue"></span> Применить изменения',
     })
     apply.onclick = () => {
       try {
@@ -81,7 +81,7 @@ export function renderBackup(target: Element) {
 
     const restore = el('button', {
       className: 'user__tools-link table__cell sp_btn-list',
-      innerHTML: '<span class="sp sp-restore-g"></span><span style="color: #3CA93C; padding-left: 10px">Импорт</span>',
+      innerHTML: '<span class="ico ico_download2"></span> Импорт',
     })
     restore.onclick = () => {
       file.click()
@@ -89,7 +89,7 @@ export function renderBackup(target: Element) {
 
     const save = el('button', {
       className: 'user__tools-link sp_btn-list',
-      innerHTML: '<span class="sp sp-download-blue"></span><span style="color: #57A3EA; padding-left: 10px">Экспорт</span>',
+      innerHTML: '<span class="ico ico_upload"></span> Экспорт',
     })
     save.onclick = () => {
       modalConfirm('Вы уверены, что хотите сохранить файл настроек?', false, () => {

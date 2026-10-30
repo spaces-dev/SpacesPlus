@@ -53,6 +53,7 @@ export const checkUpdates: Feature = {
 }
 
 export async function renderChangelog(target: Element) {
+  window.scrollTo(0, 0)
   target.innerHTML = ''
   const pad = el('div', { className: 'pad_t_a' })
   const preloader = el('div', {

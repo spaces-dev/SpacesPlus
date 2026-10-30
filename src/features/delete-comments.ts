@@ -1,6 +1,7 @@
 import type { Feature } from '@/core/feature'
 import { el } from '@zero-dependency/dom'
 import { pluralize } from '@zero-dependency/utils'
+import { setChecked, siteCheckbox } from '@/core/checkbox'
 import { http } from '@/core/http'
 import { log } from '@/core/log'
 import { modalConfirm, modalMessage } from '@/core/modals'
@@ -18,9 +19,9 @@ const commentId = (root: Element) => root.getAttribute('data-id') ?? ''
 const deleteLinkOf = (root: Element) => root.querySelector<HTMLAnchorElement>('a[data-action="comment_delete"]')
 
 function setChosen(parent: Element, inputs: HTMLInputElement[], chooseAll: boolean) {
-  for (const input of inputs) input.checked = chooseAll
+  for (const input of inputs) setChecked(input, chooseAll)
   const caption = chooseAll ? 'Снять отметки' : 'Выбрать все'
-  parent.innerHTML = `<span class="sp sp-ok-blue"></span><span class="sp-ch-text">${caption}</span>`
+  parent.innerHTML = `<span class="ico ico_ok_blue"></span> ${caption}`
 }
 
 export const deleteComments: Feature = {
@@ -45,15 +46,8 @@ export const deleteComments: Feature = {
         const menu = child.querySelector('a .ico_more')?.parentElement
         if (!root || !/^\d+$/.test(id) || !deleteLinkOf(root) || !(menu instanceof HTMLElement)) continue
 
-        const boxId = `DC_${id}`
-        menu.after(
-          el('input', {
-            type: 'checkbox',
-            className: 'sp-cbfc sp-checkbox-square',
-            id: boxId,
-          }),
-          el('label', { htmlFor: boxId }),
-        )
+        const box = siteCheckbox(`DC_${id}`, false)
+        menu.after(box.label)
       }
 
       if (document.querySelector('#SP_PLUS_BUTTONS')) return
@@ -64,7 +58,7 @@ export const deleteComments: Feature = {
 
       const chooseAll = el('button', {
         className: 'user__tools-link table__cell sp_btn-list',
-        innerHTML: '<span class="sp sp-ok-blue"></span><span class="sp-ch-text">Выбрать все</span>',
+        innerHTML: '<span class="ico ico_ok_blue"></span> Выбрать все',
       })
       chooseAll.onclick = (event) => {
         const target = event.target
@@ -77,7 +71,7 @@ export const deleteComments: Feature = {
 
       const remove = el('button', {
         className: 'user__tools-link table__cell sp_btn-list',
-        innerHTML: '<span class="sp sp-remove-red"></span><span class="sp-del-text">Удалить выбранные</span>',
+        innerHTML: '<span class="ico ico_remove_red"></span> Удалить выбранные',
       })
       remove.onclick = () => {
         const urls: string[] = []

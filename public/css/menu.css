@@ -1,4 +1,4 @@
-.comment_date .sp-cbfc + label {
+.comment_date .form-checkbox {
   display: inline-block;
   vertical-align: middle;
   margin-left: 6px;
@@ -8,14 +8,10 @@
   overflow: visible;
 }
 
-.comment_date .sp-cbfc + label:before {
+.comment_date .form-checkbox:after {
   top: 0 !important;
   left: 0 !important;
-}
-
-.sp-cbfr + label:before {
-  top: 0 !important;
-  left: 0 !important;
+  margin: 0 !important;
 }
 
 .rotate270 {
@@ -65,7 +61,6 @@
 .sp_info-btn {
   float: right;
   cursor: help;
-  margin-top: 2px !important;
 }
 
 .sp_img-center {
@@ -91,25 +86,15 @@
   text-align: right;
 }
 
-.sp-ch-text {
-  padding-left: 10px;
-  color: #57a3ea;
-}
-
-.sp-del-text {
-  padding-left: 10px;
-  color: #f86934;
-}
-
-.btn-tools_centered:has(.sp-cbfr) > a[href*='/lenta/reader_delete/'] {
+.btn-tools_centered:has(.sp-ch-readers) > a[href*='/lenta/reader_delete/'] {
   pointer-events: none;
 }
 
-.btn-tools_centered:has(.sp-cbfr) .ico_remove {
+.btn-tools_centered:has(.sp-ch-readers) .ico_remove {
   visibility: hidden;
 }
 
-.btn-tools_centered .sp-checkbox-square + .sp-ch-readers {
+.btn-tools_centered .sp-ch-readers {
   position: absolute;
   z-index: 1;
   margin: 0;
@@ -120,18 +105,19 @@
   overflow: visible;
 }
 
-.btn-tools_centered .sp-cbfr + .sp-ch-readers:before {
+.btn-tools_centered .sp-ch-readers:after {
   top: 50% !important;
+  right: auto !important;
   left: 50% !important;
-  margin: -8px 0 0 -8px;
+  margin: -8px 0 0 -8px !important;
 }
 
 .pointer {
   cursor: pointer;
 }
 
-.sp_unsupported {
-  background: #f9edbf !important;
+.form-checkbox.stnd-block-yellow {
+  opacity: 1 !important;
 }
 
 .fadeIn {
@@ -217,10 +203,6 @@ a.js-smile_menu_select:has(.sp-recent-shift) {
   border-bottom: unset !important;
 }
 
-.sp_font_sm {
-  font-size: small !important;
-}
-
 .sp_btn-list {
   display: inline-block;
   box-sizing: border-box !important;
@@ -231,6 +213,31 @@ a.js-smile_menu_select:has(.sp-recent-shift) {
   display: inline-block;
   box-sizing: border-box !important;
   width: 100%;
+}
+
+.sp-group-title {
+  padding: 14px 15px 2px;
+  color: #7a8794;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.sp-group-title:first-child {
+  padding-top: 8px;
+}
+
+.root--theme-dark .sp-group-title {
+  color: #9aa4ae;
+}
+
+.sp-separator-top {
+  border-top: 1px solid #c5d3e1;
+}
+
+.root--theme-dark .sp-separator-top {
+  border-top-color: #2d2e30;
 }
 
 .sp_error-block {
@@ -244,8 +251,12 @@ a.js-smile_menu_select:has(.sp-recent-shift) {
   top: 50%;
   right: 80px;
   left: 48px;
-  border-bottom: 1px solid #cdd4e1;
+  border-bottom: 1px solid #c5d3e1;
   content: '';
+}
+
+.root--theme-dark .sp_plus_line_c:before {
+  border-bottom-color: #2d2e30;
 }
 
 .sp_plus_line_c {
@@ -276,8 +287,12 @@ ul.list > li {
   }
 }
 
-.border {
+.tiled-preview.border {
   border: 1px solid #b4bed1;
+}
+
+.root--theme-dark .tiled-preview.border {
+  border-color: #1b1b1b;
 }
 
 #check_point_full_info {
@@ -428,12 +443,12 @@ input[type='range']::-ms-fill-lower {
 
 .heart {
   display: inline-block;
-  padding: 0 2px;
-  line-height: 0;
   vertical-align: middle;
   -webkit-animation: heartbeat 1s infinite;
   -moz-animation: heartbeat 1s infinite;
   animation: heartbeat 1s infinite;
+  padding: 0 2px;
+  line-height: 0;
 }
 
 .heart img {
@@ -442,97 +457,8 @@ input[type='range']::-ms-fill-lower {
   height: 16px;
 }
 
-.no-select {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-}
-
 details summary:hover {
   cursor: pointer;
-}
-
-.sp {
-  display: inline-block;
-  margin: 0 4px -3px 0;
-  background-image: url(../icons/icons.png);
-  width: 16px;
-  height: 16px;
-}
-
-.sp-checkbox-checked + label,
-.sp-checkbox-circle + label,
-.sp-checkbox-square + label {
-  position: relative;
-  cursor: pointer;
-  overflow: hidden;
-  text-decoration: none !important;
-}
-
-.sp-checkbox-checked + label {
-  display: inline-block;
-  vertical-align: top;
-  margin-left: 5px;
-  padding: 0 4px;
-  width: 16px;
-  height: 16px;
-}
-
-.sp-checkbox-circle + label,
-.sp-checkbox-square + label {
-  padding: 11px 5px 12px 30px;
-}
-
-.sp-checkbox-checked + label:before,
-.sp-checkbox-square + label:before {
-  display: inline-block;
-  position: absolute;
-  background-image: url(../icons/icons.png);
-  background-position: -32px -16px;
-  background-color: transparent;
-  width: 16px;
-  height: 16px;
-  content: '';
-}
-
-.sp-checkbox-checked + label:before,
-.sp-checkbox-circle + label:before {
-  display: inline-block;
-  position: absolute;
-  background-image: url(../icons/icons.png);
-  background-position: -16px -16px;
-  background-color: transparent;
-  width: 16px;
-  height: 16px;
-  content: '';
-}
-
-.sp-checkbox-square + label:before {
-  top: 12px;
-  left: 0;
-}
-
-.sp-checkbox-circle + label:before {
-  top: 12px;
-  left: 0;
-}
-
-.sp-checkbox-checked + label:before {
-  top: 8px;
-  margin-top: -8px;
-}
-
-.sp-checkbox-checked:checked + label:before,
-.sp-checkbox-circle:checked + label:before,
-.sp-checkbox-square:checked + label:before {
-  background-position: 0 -16px;
-}
-
-.sp-checkbox-checked,
-.sp-checkbox-circle,
-.sp-checkbox-square {
-  position: absolute;
-  left: -10000px;
 }
 
 .sp_plus_line > span {
@@ -543,6 +469,10 @@ details summary:hover {
   padding: 0 5px;
 }
 
+.root--theme-dark .sp_plus_line > span {
+  background: #3e3f40;
+}
+
 .sp_plus_line:before {
   display: block;
   position: absolute;
@@ -551,6 +481,10 @@ details summary:hover {
   left: 0;
   border-bottom: 1px solid #cdd4e1;
   content: '';
+}
+
+.root--theme-dark .sp_plus_line:before {
+  border-bottom-color: #28282a;
 }
 
 .sp_plus_line {
@@ -567,141 +501,19 @@ details summary:hover {
   border-top: 1px solid #c5d3e1 !important;
 }
 
+.root--theme-dark .sp_lines {
+  border-top-color: #2d2e30 !important;
+}
+
 input[type='color'] {
   opacity: 0;
   cursor: pointer;
 }
 
-.sp-qrcode {
-  background-position: 0 0;
-}
-
-.sp-alert {
-  background-position: -16px 0;
-}
-
-.sp-backup-g {
-  background-position: -32px 0;
-}
-
-@media (max-width: 899px) {
-  .sp-ico {
-    background-position: -64px -32px !important;
-  }
-}
-
-.dark_theme .sp-ico {
-  background-position: -64px -32px !important;
-}
-
-.js-ico.ico_cats.sp-cats-spaces {
-  margin-right: 0;
-  margin-bottom: 0;
-  background-position: -646px 0;
-}
-
-.root--theme-dark .js-ico.ico_cats.sp-cats-spaces {
-  background-position: -646px -16px;
-}
-
-.sp-ico {
-  display: block;
-  position: absolute;
-  top: 50%;
-  margin: -8px 0 0 -26px;
-  background-position: -48px 0;
-}
-
-.sp-download-darkblue {
-  background-position: -48px -16px;
-}
-
 @media (max-width: 480px) {
-  .sp-fav {
-    display: none;
-  }
-  .sp-fav-on {
-    display: none;
-  }
-  .sp-eye-grey {
-    display: none;
-  }
   .bp.ico_spinner {
     display: none;
   }
-}
-
-.sp-fav {
-  background-position: -32px -32px;
-}
-
-.sp-fav-on {
-  background-position: -48px -32px;
-}
-
-.sp-love {
-  background-position: 0 -48px;
-}
-
-.sp-ok-blue {
-  background-position: -16px -48px;
-}
-
-.sp-ok-grey {
-  background-position: -16px -64px;
-}
-
-.sp-play-green {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-top: -8px;
-  margin-left: -8px;
-  background-position: -32px -48px;
-}
-
-.sp-remove-grey {
-  background-position: -48px -48px;
-}
-
-.sp-remove-red {
-  background-position: -32px -64px;
-}
-
-.sp-restore-blue {
-  background-position: -64px 0;
-}
-
-.sp-restore-g {
-  background-position: -64px -16px;
-}
-
-.sp-write-grey {
-  background-position: -64px -48px;
-}
-
-.sp-grey-del {
-  background-position: 0px -48px;
-}
-
-.sp-info {
-  background-position: 0px -64px;
-}
-
-.sp-eye-grey {
-  background-position: -64px -64px;
-}
-
-.sp-ok-darkblue {
-  background-position: -16px -80px;
-}
-
-.sp-download-blue {
-  background-position: 0px -80px;
-}
-
-.sp-qrcode {
-  background-position: -32px -80px;
 }
 
 @media (min-width: 1000px) {
@@ -719,13 +531,84 @@ input[type='color'] {
 }
 
 #scroll_page.sp-replace {
-  left: auto;
   right: 0;
+  left: auto;
 }
 
 #scroll_page.sp-replace #scroll_page_place,
 #scroll_page.sp-replace #scroll_page_toTop,
 #scroll_page.sp-replace #scroll_page_toBottom {
-  left: auto;
   right: 0;
+  left: auto;
+}
+
+.js-ico.ico.sp-ico-rotate {
+  background-position: -1453px -34px;
+}
+
+.js-ico.ico_cats.sp-cats-spaces {
+  margin-right: 0;
+  margin-bottom: 0;
+  background-position: -646px 0;
+}
+
+.root--theme-dark .js-ico.ico_cats.sp-cats-spaces {
+  background-position: -646px -16px;
+}
+
+.video-js .sp-playback.vjs-control {
+  width: auto;
+  min-width: 3.6em;
+  color: #fff;
+}
+
+.video-js .sp-playback__toggle {
+  cursor: pointer;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  padding: 0 0.4em;
+  width: 100%;
+  height: 100%;
+  color: inherit;
+  font: inherit;
+  font-weight: 700;
+  line-height: inherit;
+}
+
+.vjs-theme-desktop .sp-playback {
+  line-height: 3.5em;
+}
+
+.vjs-theme-touch .sp-playback {
+  line-height: 3em;
+}
+
+.video-js .sp-playback .vjs-menu {
+  left: 50%;
+  margin-left: -2.75em;
+  width: 5.5em;
+}
+
+.video-js .sp-playback .vjs-menu-content {
+  max-height: none;
+}
+
+/* Скин держит список на calc(1.75em + 0.5em) над кнопкой, и нижние
+   пункты попадают в зону таймлайна. Чуть ниже — список садится на панель. */
+.video-js.vjs-theme-desktop .vjs-menu-button-popup .vjs-menu .vjs-menu-content {
+  bottom: 1.85em;
+}
+
+.video-js .vjs-menu-button-popup .vjs-menu.vjs-lock-showing {
+  z-index: 12;
+}
+
+.video-js:has(.vjs-menu.vjs-lock-showing) .vjs-progress-control {
+  pointer-events: none;
+}
+
+.video-js:has(.vjs-menu.vjs-lock-showing) .vjs-thumbnail {
+  visibility: hidden;
+  opacity: 0;
 }

@@ -5,6 +5,19 @@ import { getSettings, setSetting } from '@/core/settings-store'
 
 const turns = ['rotate90', 'rotate180', 'rotate270']
 
+function galleryShowsVideo() {
+  const gallery = document.querySelector('#Gallery')
+  if (!gallery) return false
+  if (gallery.classList.contains('gallery__video')) return true
+
+  const zoom = gallery.querySelector<HTMLElement>('#gallery__zoom')
+  if (zoom) return getComputedStyle(zoom).display === 'none'
+
+  const player = gallery.querySelector('#galleryVideo')
+  if (player?.querySelector('video, iframe, .video-js, img.preview')) return true
+  return Boolean(gallery.querySelector('.player-dummy_wrap'))
+}
+
 function applyAngle(image: HTMLElement, angle: number, animate = false) {
   const turn = angle ? ` rotate${angle}` : ''
   const motion = animate ? ' sp-rotate-anim' : ''
@@ -82,18 +95,23 @@ export const galleryRotate: Feature = {
 
         watch(image, download)
         remember(image, download)
-        const video = document.querySelector('.player-dummy_wrap')
-        if (video || document.querySelector('#SP_IMAGE_ROTATE')) return
+        const existing = document.querySelector<HTMLElement>('#SP_IMAGE_ROTATE')
+        if (galleryShowsVideo()) {
+          existing?.remove()
+          image.classList.remove('sp-rotate-anim', ...turns)
+          if (getSettings().angle !== 0) setSetting('angle', 0)
+          return
+        }
+        if (existing) return
 
         const button = el('a', {
           className: 'gallery__tools_button',
           id: 'SP_IMAGE_ROTATE',
           title: 'Повернуть',
-          innerHTML: '<span class="ico_gallery ico_gallery_reload m"></span>',
-        })
+        }, el('span', { className: 'js-ico ico sp-ico-rotate' }))
         button.onclick = () => {
           const current = document.querySelector<HTMLElement>('#gallery-container')
-          if (!current) return false
+          if (!current || galleryShowsVideo()) return false
           const angle = (getSettings().angle + 270) % 360
           setSetting('angle', angle)
           applyAngle(current, angle, true)

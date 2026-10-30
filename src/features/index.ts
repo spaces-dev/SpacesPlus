@@ -1,4 +1,3 @@
-import { adBlock } from './ad-block'
 import { baseStyles } from './base-styles'
 import { bodyStyle } from './body-style'
 import { checkUpdates } from './check-updates'
@@ -15,7 +14,6 @@ import { karma } from './karma'
 import { newYear } from './new-year'
 import { oldHeader } from './old-header'
 import { playerDownload } from './player-download'
-import { qrCode } from './qr-code'
 import { recentSmiles } from './recent-smiles'
 import { scrollMove } from './scroll-move'
 import { createSettingsPage } from './settings/page'
@@ -34,7 +32,6 @@ const configurable = [
   hiddenRightbar,
   favoriteUser,
   galleryRotate,
-  adBlock,
   karma,
   videoSpeed,
   recentSmiles,
@@ -50,6 +47,5 @@ export const features = [
   sidebarButton,
   firstLaunch,
   newYear,
-  qrCode,
   createSettingsPage(configurable),
 ]

@@ -40,7 +40,6 @@ export interface Settings {
   favorite: boolean
   grotate: boolean
   angle: number
-  adblock: boolean
   karma: boolean
   sticker: boolean
   playback: boolean

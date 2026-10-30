@@ -1,6 +1,7 @@
 import type { Feature } from '@/core/feature'
 import { el } from '@zero-dependency/dom'
 import { pluralize } from '@zero-dependency/utils'
+import { onSiteChange, setChecked, siteCheckbox } from '@/core/checkbox'
 import { http } from '@/core/http'
 import { log } from '@/core/log'
 import { modalConfirm, modalMessage } from '@/core/modals'
@@ -45,22 +46,17 @@ export const deleteReaders: Feature = {
       for (const link of links) {
         const userId = searchParam(link.href, 'user')
         if (!userId) continue
-        const box = el('input', {
-          type: 'checkbox',
-          className: 'sp-cbfr sp-checkbox-square',
-          id: userId,
-        })
-        box.checked = selected.has(userId)
-        box.onchange = () => {
-          if (box.checked) selected.add(userId)
+        const box = siteCheckbox(userId, selected.has(userId), 'sp-ch-readers')
+        onSiteChange(box.input, (checked) => {
+          if (checked) selected.add(userId)
           else selected.delete(userId)
           writeSelected(selected)
-          chooseAll.innerHTML = `<span class="sp sp-ok-blue"></span><span class="sp-ch-text">${chooseCaption(checks.every(item => item.checked))}</span>`
-        }
+          chooseAll.innerHTML = `<span class="ico ico_ok_blue"></span> ${chooseCaption(checks.every(item => item.checked))}`
+        })
         link.tabIndex = -1
         link.setAttribute('aria-hidden', 'true')
-        link.before(box, el('label', { className: 'sp-ch-readers', htmlFor: userId }))
-        checks.push(box)
+        link.before(box.label)
+        checks.push(box.input)
       }
 
       if (!document.querySelector('.sp-ch-readers')) return
@@ -69,7 +65,7 @@ export const deleteReaders: Feature = {
         className: 'user__tools_last',
         id: 'SP_PLUS_BUTTONS_R',
       })
-      chooseAll.innerHTML = `<span class="sp sp-ok-blue"></span><span class="sp-ch-text">${chooseCaption(checks.every(item => item.checked))}</span>`
+      chooseAll.innerHTML = `<span class="ico ico_ok_blue"></span> ${chooseCaption(checks.every(item => item.checked))}`
       chooseAll.onclick = (event) => {
         const target = event.target
         if (!(target instanceof Element)) return
@@ -77,17 +73,17 @@ export const deleteReaders: Feature = {
         if (!parent) return
         const enable = parent.innerHTML.includes('Выбрать все')
         for (const box of checks) {
-          box.checked = enable
+          setChecked(box, enable)
           if (enable) selected.add(box.id)
           else selected.delete(box.id)
         }
         writeSelected(selected)
-        parent.innerHTML = `<span class="sp sp-ok-blue"></span><span class="sp-ch-text">${chooseCaption(enable)}</span>`
+        parent.innerHTML = `<span class="ico ico_ok_blue"></span> ${chooseCaption(enable)}`
       }
 
       const remove = el('button', {
         className: 'user__tools-link table__cell sp_btn-list',
-        innerHTML: '<span class="sp sp-remove-red"></span><span class="sp-del-text">Удалить выбранных</span>',
+        innerHTML: '<span class="ico ico_remove_red"></span> Удалить выбранных',
       })
       remove.onclick = () => {
         const readers = [...selected]

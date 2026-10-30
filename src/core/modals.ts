@@ -27,7 +27,7 @@ export function modalMessage(title: string, content: string, options: MessageOpt
   previous?.remove()
 
   const closeMarkup = close
-    ? '<span id="modal-close" class="sp sp-remove-grey pointer right notif_close close_h" title="Закрыть"></span>'
+    ? '<span id="modal-close" class="ico ico_close pointer right notif_close close_h" title="Закрыть"></span>'
     : ''
 
   const main = el('div', {

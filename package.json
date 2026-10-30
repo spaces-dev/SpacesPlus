@@ -22,8 +22,7 @@
     "@zero-dependency/cookie": "1.13.8",
     "@zero-dependency/dom": "1.8.5",
     "@zero-dependency/storage": "1.3.4",
-    "@zero-dependency/utils": "1.7.8",
-    "uqr": "0.1.3"
+    "@zero-dependency/utils": "1.7.8"
   },
   "devDependencies": {
     "@antfu/eslint-config": "10.0.0",

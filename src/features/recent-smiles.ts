@@ -1,6 +1,7 @@
 import type { Feature } from '@/core/feature'
 import { el } from '@zero-dependency/dom'
 import { LocalStorage } from '@zero-dependency/storage'
+import { onSiteChange, siteCheckbox } from '@/core/checkbox'
 import { log } from '@/core/log'
 import { modalConfirm } from '@/core/modals'
 import { getSettings, setSetting } from '@/core/settings-store'
@@ -260,15 +261,11 @@ function renderRecentOptions(anchor: HTMLElement) {
   if (document.querySelector('#SP_PLUS_RECENTS')) return
   const { recentSmiles: options } = getSettings()
 
-  const show = el('input', {
-    id: 'SP_RECENTS_SHOW',
-    type: 'checkbox',
-    className: 'sp-checkbox-square',
-    checked: options.show,
+  const show = siteCheckbox('SP_RECENTS_SHOW', options.show)
+  show.label.append('Открывать недавние по умолчанию')
+  onSiteChange(show.input, (checked) => {
+    setSetting('recentSmiles.show', checked)
   })
-  show.onchange = () => {
-    setSetting('recentSmiles.show', show.checked)
-  }
 
   const max = el('input', {
     type: 'text',
@@ -289,13 +286,7 @@ function renderRecentOptions(anchor: HTMLElement) {
   }
 
   const panel = el('div', { id: 'SP_PLUS_RECENTS' }, [
-    el('label', { className: 'list-link' }, [
-      show,
-      el('label', {
-        htmlFor: 'SP_RECENTS_SHOW',
-        textContent: 'Открывать недавние по умолчанию',
-      }),
-    ]),
+    show.label,
     el('div', { className: 'sp_settings-wrap' }, [
       el('label', {
         className: 'label',
