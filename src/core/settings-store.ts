@@ -1,72 +1,112 @@
 import type { Settings } from '@/types/settings'
 import { Cookie } from '@zero-dependency/cookie'
+import { toggleId } from '@/types/toggles'
+import { coalesce } from './coalesce'
 import { assetOrigin, host, versionNumber } from './site'
 
+export const storageKey = {
+  settings: 'SP_PLUS_SET',
+  weather: 'SP_WEATHER',
+  launch: 'SP_LAUNCH',
+} as const
+
 interface JsonCookies {
-  SP_PLUS_SET: Settings
-  SP_WEATHER: unknown
+  [storageKey.settings]: Settings
+  [storageKey.weather]: unknown
 }
 
 interface StringCookies {
-  SP_LAUNCH: string
+  [storageKey.launch]: string
 }
 
 type SpacesCookies = JsonCookies & StringCookies
 
-const jsonKeys = new Set<keyof SpacesCookies>(['SP_PLUS_SET', 'SP_WEATHER'])
+type Scalar = string | number | boolean | null
 
-const nestedKeys = ['hideNotify', 'recentSmiles', 'friendsSet', 'bodystyleSet', 'weatherSet'] as const
+type NestedGroup = {
+  [K in keyof Settings]: Settings[K] extends object ? K : never
+}[keyof Settings]
+
+type NestedPath = {
+  [K in NestedGroup]: `${K}.${Extract<keyof Settings[K], string>}`
+}[NestedGroup]
+
+export type SettingPath = keyof Settings | NestedPath
+
+type ValueAt<P extends string> = P extends `${infer Parent}.${infer Child}`
+  ? Parent extends keyof Settings
+    ? Child extends keyof Settings[Parent]
+      ? Settings[Parent][Child]
+      : never
+    : never
+  : P extends keyof Settings
+    ? Settings[P]
+    : never
+
+type SetSetting = {
+  <P extends SettingPath>(key: P, value: ValueAt<P>): void
+  (key: string, value: Scalar): void
+}
+
+const jsonKeys = new Set<keyof SpacesCookies>([storageKey.settings, storageKey.weather])
+const cookieLifetimeDays = 365
+const defaultBackgroundColor = '#DAE1E8'
+const defaultWeatherKey = '5f11ea40424990937175d20a072e0c72'
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === 'object' && value !== null
+}
 
 export const defaultSettings = {
-  readersd: false,
-  comments: false,
-  oldheader: true,
-  playerdn: true,
-  dredirect: true,
-  coins: true,
-  rscroll: false,
-  hrightbar: false,
-  favorite: true,
-  grotate: true,
+  [toggleId.readers]: false,
+  [toggleId.comments]: false,
+  [toggleId.oldHeader]: true,
+  [toggleId.player]: true,
+  [toggleId.redirect]: true,
+  [toggleId.coins]: true,
+  [toggleId.scroll]: false,
+  [toggleId.rightbar]: false,
+  [toggleId.favorite]: true,
+  [toggleId.gallery]: true,
   angle: 0,
-  karma: true,
-  playback: true,
+  [toggleId.karma]: true,
+  [toggleId.playback]: true,
   videoSpeed: 1,
   upVersion: versionNumber,
   hideNotify: {
     configImport: false,
   },
-  recents: true,
+  [toggleId.recents]: true,
   recentSmiles: {
     show: false,
     max: 60,
   },
-  friendsOn: true,
+  [toggleId.friends]: true,
   friendsSet: {
     max: 10,
     expanded: false,
   },
-  bodystyle: true,
+  [toggleId.background]: true,
   bodystyleSet: {
     url: `${assetOrigin}/backgrounds/default.png`,
-    color: '#DAE1E8',
+    color: defaultBackgroundColor,
     urlchecked: false,
     colorchecked: false,
   },
-  weather: false,
+  [toggleId.weather]: false,
   weatherSet: {
     interval: 3600,
     time: 0,
     city: null,
     language: 'ru',
     units: 'metric',
-    key: '5f11ea40424990937175d20a072e0c72',
+    key: defaultWeatherKey,
   },
 } satisfies Settings
 
-function isRecord(value: unknown): value is Record<string, unknown> {
-  return typeof value === 'object' && value !== null
-}
+const nestedKeys = new Set<keyof Settings>(
+  (Object.keys(defaultSettings) as (keyof Settings)[]).filter(key => isRecord(defaultSettings[key])),
+)
 
 export function mergeSettings(saved: unknown): Settings {
   const next: Settings = structuredClone(defaultSettings)
@@ -76,19 +116,17 @@ export function mergeSettings(saved: unknown): Settings {
     const value = saved[key]
     if (value === undefined) continue
 
-    if (nestedKeys.includes(key as typeof nestedKeys[number]) && isRecord(value)) {
-      const current = next[key]
-      if (isRecord(current)) {
-        Object.assign(current, value)
-      }
+    if (nestedKeys.has(key) && isRecord(value)) {
+      const currentGroup = next[key]
+      if (isRecord(currentGroup)) Object.assign(currentGroup, value)
       continue
     }
 
     Object.assign(next, { [key]: value })
   }
 
-  if (!next.bodystyle) {
-    next.bodystyle = true
+  if (!next[toggleId.background]) {
+    next[toggleId.background] = true
     next.bodystyleSet.urlchecked = false
     next.bodystyleSet.colorchecked = false
   }
@@ -100,7 +138,7 @@ export const cookies = new Cookie<SpacesCookies>({
   attributes: {
     path: '/',
     domain: `.${host}`,
-    expires: 365,
+    expires: cookieLifetimeDays,
   },
   encode: (value, name) => {
     if (jsonKeys.has(name)) return JSON.stringify(value)
@@ -116,35 +154,44 @@ export const cookies = new Cookie<SpacesCookies>({
   },
 })
 
-let current = mergeSettings(cookies.get('SP_PLUS_SET'))
+let current = mergeSettings(cookies.get(storageKey.settings))
 
-if (!cookies.has('SP_PLUS_SET')) cookies.set('SP_PLUS_SET', current)
+if (!cookies.has(storageKey.settings)) cookies.set(storageKey.settings, current)
 
 const listeners = new Set<() => void>()
 
-let running = false
-let queued = false
+const emit = coalesce(() => {
+  for (const listener of [...listeners]) listener()
+})
 
-function emit() {
-  if (running) {
-    queued = true
-    return
-  }
-
-  running = true
-  try {
-    do {
-      queued = false
-      for (const listener of [...listeners]) listener()
-    } while (queued)
-  } finally {
-    running = false
-  }
+function commit() {
+  cookies.set(storageKey.settings, current)
+  emit()
 }
 
 export const getSettings = () => current
 
-export function setSetting(key: string, value: string | number | boolean | null) {
+export const settingEnabled = (id: string) => current[id as keyof Settings] === true
+
+export const settingKey = {
+  angle: 'angle',
+  playbackSpeed: 'videoSpeed',
+  seenVersion: 'upVersion',
+  dismissImport: 'hideNotify.configImport',
+  recentOpen: 'recentSmiles.show',
+  recentLimit: 'recentSmiles.max',
+  friendsLimit: 'friendsSet.max',
+  friendsExpanded: 'friendsSet.expanded',
+  backgroundUrl: 'bodystyleSet.url',
+  backgroundColor: 'bodystyleSet.color',
+  backgroundImageOn: 'bodystyleSet.urlchecked',
+  backgroundColorOn: 'bodystyleSet.colorchecked',
+  weatherCity: 'weatherSet.city',
+  weatherKey: 'weatherSet.key',
+  weatherInterval: 'weatherSet.interval',
+} as const satisfies Record<string, SettingPath>
+
+export const setSetting: SetSetting = (key: string, value: Scalar) => {
   const [parent, child] = key.split('.')
   if (child && parent) {
     const group = current[parent as keyof Settings]
@@ -153,14 +200,12 @@ export function setSetting(key: string, value: string | number | boolean | null)
     Object.assign(current, { [key]: value })
   }
 
-  cookies.set('SP_PLUS_SET', current)
-  emit()
+  commit()
 }
 
 export function replaceSettings(value: unknown) {
   current = mergeSettings(value)
-  cookies.set('SP_PLUS_SET', current)
-  emit()
+  commit()
 }
 
 export function subscribeSettings(listener: () => void) {
@@ -171,6 +216,6 @@ export function subscribeSettings(listener: () => void) {
 }
 
 export function resetSpacesCookies() {
-  cookies.remove('SP_PLUS_SET')
-  cookies.remove('SP_WEATHER')
+  cookies.remove(storageKey.settings)
+  cookies.remove(storageKey.weather)
 }

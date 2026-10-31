@@ -1,11 +1,24 @@
 import { el } from '@zero-dependency/dom'
+import { classes } from './dom'
+
+const checkboxClass = {
+  input: 'form-checkbox__el',
+  root: 'form-checkbox',
+  square: 'square',
+  left: 'left_chb',
+  inline: 'form-checkbox--inline',
+  js: 'js-checkbox',
+  checked: 'form-checkbox_checked',
+} as const
+
+export const checkboxDisabledClass = 'form-checkbox--is-disabled'
 
 const changeHandlers = new WeakMap<HTMLLabelElement, (checked: boolean) => void | false>()
 const boundLabels = new WeakSet<HTMLLabelElement>()
 
 export function setChecked(input: HTMLInputElement, checked: boolean) {
   input.checked = checked
-  input.closest('.js-checkbox')?.classList.toggle('form-checkbox_checked', checked)
+  input.closest(`.${checkboxClass.js}`)?.classList.toggle(checkboxClass.checked, checked)
 }
 
 // form_controls.js вешает клик на body и после смены checked делает jQuery.trigger('change').
@@ -27,7 +40,7 @@ function onLabelClick(event: Event) {
   event.stopPropagation()
   if (input.disabled) return
 
-  const next = !label.classList.contains('form-checkbox_checked')
+  const next = !label.classList.contains(checkboxClass.checked)
   input.checked = next
   const finalChecked = handler(next) !== false ? next : !next
   setChecked(input, finalChecked)
@@ -41,17 +54,17 @@ export function siteCheckbox(id: string, checked: boolean, className?: string) {
   const input = el('input', {
     id,
     type: 'checkbox',
-    className: 'form-checkbox__el',
+    className: checkboxClass.input,
     checked,
   })
   const label = el('label', {
-    className: ['form-checkbox', 'square', 'left_chb', 'form-checkbox--inline', 'js-checkbox', checked ? 'form-checkbox_checked' : '', className ?? ''].filter(Boolean).join(' '),
+    className: classes(checkboxClass.root, checkboxClass.square, checkboxClass.left, checkboxClass.inline, checkboxClass.js, checked ? checkboxClass.checked : undefined, className),
   }, input)
   return { input, label }
 }
 
 export function onSiteChange(input: HTMLInputElement, handler: (checked: boolean) => void | false) {
-  const label = input.closest('.js-checkbox')
+  const label = input.closest(`.${checkboxClass.js}`)
   if (!(label instanceof HTMLLabelElement)) {
     input.addEventListener('change', () => {
       if (handler(input.checked) === false) setChecked(input, !input.checked)

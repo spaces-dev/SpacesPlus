@@ -1,7 +1,23 @@
 import type { Feature } from '@/core/feature'
 import { el, observeElement } from '@zero-dependency/dom'
+import { defineToggle } from '@/core/feature'
 import { log } from '@/core/log'
 import { readPage } from '@/core/site'
+import { toggleId } from '@/types/toggles'
+
+const playerRoot = '#gp_main_player'
+const artistSelector = `${playerRoot} .js-music_artist`
+const titleSelector = `${playerRoot} .js-music_title`
+const playlistItem = '.player_item[data-src]'
+const activePlay = '#gp_playlist .js-music_pl_play.gp-playlist_active'
+const activePlaylist = '#gp_playlist .gp-playlist_active'
+const repeatSelector = `${playerRoot} a.js-music_repeat`
+const downloadCellId = 'SP_MUSIC_DOWN'
+const storedTrack = 'music:track'
+const storedPlaylist = 'music:playlist'
+const builtinSound = '/i/sounds/'
+const maxNameLength = 120
+const fallbackName = 'track'
 
 interface SavedFile {
   src?: string
@@ -15,21 +31,29 @@ interface MusicHowl {
 
 function howlUrl(howl: MusicHowl) {
   const src = Array.isArray(howl._src) ? howl._src[0] : howl._src
-  if (!src || src.includes('/i/sounds/')) return
+  if (!src || src.includes(builtinSound)) return
   return src
 }
 
 function fromPlaylist() {
-  const activeId = document.querySelector('#gp_playlist .js-music_pl_play.gp-playlist_active')?.getAttribute('data-n')
+  const activeId = document.querySelector(activePlay)?.getAttribute('data-n')
   if (!activeId) return
-  return document.querySelector<HTMLElement>(`.player_item[data-src][data-n="${CSS.escape(activeId)}"]`)?.getAttribute('data-src') ?? undefined
+  return document.querySelector<HTMLElement>(`${playlistItem}[data-n="${CSS.escape(activeId)}"]`)?.getAttribute('data-src') ?? undefined
+}
+
+const playerText = (selector: string) => document.querySelector(selector)?.textContent?.trim() ?? ''
+
+function trackHeading() {
+  return {
+    artist: playerText(artistSelector),
+    title: playerText(titleSelector),
+  }
 }
 
 function fromTitle() {
-  const artist = document.querySelector('#gp_main_player .js-music_artist')?.textContent?.trim() ?? ''
-  const title = document.querySelector('#gp_main_player .js-music_title')?.textContent?.trim() ?? ''
+  const { artist, title } = trackHeading()
   if (!artist && !title) return
-  const item = [...document.querySelectorAll<HTMLElement>('.player_item[data-src]')].find((node) => {
+  const item = [...document.querySelectorAll<HTMLElement>(playlistItem)].find((node) => {
     return node.getAttribute('data-artist') === artist && node.getAttribute('data-title') === title
   })
   return item?.getAttribute('data-src') ?? undefined
@@ -46,8 +70,8 @@ function fromHowler() {
 
 function fromStorage() {
   try {
-    const trackRaw = readPage(win => win.sessionStorage.getItem('music:track'))
-    const playlistRaw = readPage(win => win.sessionStorage.getItem('music:playlist'))
+    const trackRaw = readPage(win => win.sessionStorage.getItem(storedTrack))
+    const playlistRaw = readPage(win => win.sessionStorage.getItem(storedPlaylist))
     if (!trackRaw || !playlistRaw) return
     const track = JSON.parse(trackRaw) as { id?: string | number }
     const saved = JSON.parse(playlistRaw) as { playlist?: { playlist?: SavedFile[] } }
@@ -63,11 +87,10 @@ function fromStorage() {
 const trackUrl = () => fromPlaylist() ?? fromTitle() ?? fromHowler() ?? fromStorage()
 
 function trackLabel() {
-  const artist = document.querySelector('#gp_main_player .js-music_artist')?.textContent?.trim() ?? ''
-  const title = document.querySelector('#gp_main_player .js-music_title')?.textContent?.trim() ?? ''
+  const { artist, title } = trackHeading()
   const fromHeader = [artist, title].filter(Boolean).join(' - ')
   if (fromHeader) return fromHeader
-  return document.querySelector('#gp_playlist .gp-playlist_active')?.textContent?.replace(/\s+/g, ' ').trim() || 'track'
+  return document.querySelector(activePlaylist)?.textContent?.replace(/\s+/g, ' ').trim() || fallbackName
 }
 
 const latin: Record<string, string> = {
@@ -120,7 +143,7 @@ function fileName(label: string) {
     .replace(/[^\w.-]+/g, '_')
     .replace(/_+/g, '_')
     .replace(/^[_.-]+|[_.-]+$/g, '')
-  const base = (ascii || 'track').slice(0, 120)
+  const base = (ascii || fallbackName).slice(0, maxNameLength)
   return base.toLowerCase().endsWith('.mp3') ? base : `${base}.mp3`
 }
 
@@ -135,12 +158,12 @@ function downloadUrl(src: string, label: string) {
   return href
 }
 
-const repeatCell = () => document.querySelector('#gp_main_player a.js-music_repeat')?.closest('td') ?? undefined
+const repeatCell = () => document.querySelector(repeatSelector)?.closest('td') ?? undefined
 
 function downloadCell(src: string, label: string) {
   const href = downloadUrl(src, label)
-  const cell = document.querySelector<HTMLTableCellElement>('#SP_MUSIC_DOWN') ?? el('td', {
-    id: 'SP_MUSIC_DOWN',
+  const cell = document.querySelector<HTMLTableCellElement>(`#${downloadCellId}`) ?? el('td', {
+    id: downloadCellId,
     className: 'ico_td',
   })
   const link = cell.querySelector('a') ?? el('a', {
@@ -169,8 +192,8 @@ function syncDownload() {
   if (cell.previousElementSibling !== anchor) anchor.after(cell)
 }
 
-export const playerDownload: Feature = {
-  id: 'playerdn',
+export const playerDownload: Feature = defineToggle({
+  id: toggleId.player,
   title: 'Кнопка загрузки трека из плеера',
   description: 'Добавляется кнопка в аудиоплеер, которая позволяет скачивать воспроизведенный трек.',
   start: (ctx) => {
@@ -192,21 +215,17 @@ export const playerDownload: Feature = {
       return { node, stop: observeElement(node, onTrackText, { characterData: true }) }
     }
     const watchTrack = () => {
-      const artist = watchText('#gp_main_player .js-music_artist', artistNode, stopArtist)
+      const artist = watchText(artistSelector, artistNode, stopArtist)
       artistNode = artist.node
       stopArtist = artist.stop
-      const title = watchText('#gp_main_player .js-music_title', titleNode, stopTitle)
+      const title = watchText(titleSelector, titleNode, stopTitle)
       titleNode = title.node
       stopTitle = title.stop
     }
 
     const stopDom = ctx.onDom(() => {
-      try {
-        watchTrack()
-        syncDownload()
-      } catch (error) {
-        log.error('playerdn', error)
-      }
+      watchTrack()
+      syncDownload()
     })
 
     return () => {
@@ -215,4 +234,4 @@ export const playerDownload: Feature = {
       stopTitle()
     }
   },
-}
+})

@@ -1,9 +1,28 @@
 import { el } from '@zero-dependency/dom'
+import { byId } from '@/core/dom'
 import { log } from '@/core/log'
-import { modalConfirm, modalMessage } from '@/core/modals'
-import { getSettings, replaceSettings, setSetting } from '@/core/settings-store'
+import { briefNotice, closable, modalConfirm, modalMessage, removeAlert } from '@/core/modals'
+import { getSettings, replaceSettings, setSetting, settingKey } from '@/core/settings-store'
+import { settingsDom } from './ids'
 
-const format = (value: unknown) => JSON.stringify(value, null, 4)
+const jsonIndent = 4
+const format = (value: unknown) => JSON.stringify(value, null, jsonIndent)
+const savedTitle = 'Импорт и экспорт настроек'
+const savedText = 'Настройки были успешно сохранены'
+const parseErrorTitle = 'Ошибка разбора файла настроек'
+const importNoticeId = 'SP_CONFIG_JSON'
+const backupFieldId = 'SP_BACKUP_JSON'
+const importInputId = 'SP_IMPORT'
+const exportPrefix = 'spaces-plus'
+
+function showSaved(fade: boolean) {
+  if (fade) removeAlert()
+  modalMessage(savedTitle, savedText, briefNotice)
+}
+
+function showParseError(error: unknown) {
+  modalMessage(parseErrorTitle, String(error), closable)
+}
 
 export function renderBackup(target: Element) {
   window.scrollTo(0, 0)
@@ -11,14 +30,14 @@ export function renderBackup(target: Element) {
 
   try {
     if (!getSettings().hideNotify.configImport) {
-      const notice = el('div', { id: 'SP_CONFIG_JSON' })
+      const notice = el('div', { id: importNoticeId })
       const hide = el('span', {
         className: 'ico ico_close pointer right notif_close close_h',
         title: 'Понятно, больше не показывать.',
         style: { margin: '10px' },
       })
       hide.onclick = () => {
-        setSetting('hideNotify.configImport', true)
+        setSetting(settingKey.dismissImport, true)
         notice.remove()
       }
       notice.append(hide, el('div', {
@@ -31,7 +50,7 @@ export function renderBackup(target: Element) {
 
     const textarea = el('textarea', {
       className: 'text-input',
-      id: 'SP_BACKUP_JSON',
+      id: backupFieldId,
       rows: 20,
       textContent: format(getSettings()),
     })
@@ -45,10 +64,9 @@ export function renderBackup(target: Element) {
     apply.onclick = () => {
       try {
         replaceSettings(JSON.parse(textarea.value))
-        document.querySelector('#SP_PLUS_ALERT')?.remove()
-        modalMessage('Импорт и экспорт настроек', 'Настройки были успешно сохранены', { close: true, timer: 3 })
+        showSaved(true)
       } catch (error) {
-        modalMessage('Ошибка разбора файла настроек', String(error), { close: true })
+        showParseError(error)
       }
     }
     target.append(el('div', {
@@ -57,7 +75,7 @@ export function renderBackup(target: Element) {
     }, apply))
 
     const file = el('input', {
-      id: 'SP_IMPORT',
+      id: importInputId,
       type: 'file',
       accept: 'application/JSON',
       style: { display: 'none' },
@@ -68,12 +86,12 @@ export function renderBackup(target: Element) {
       const reader = new FileReader()
       reader.onload = () => {
         try {
-          const json = String(reader.result)
-          replaceSettings(JSON.parse(json))
-          textarea.value = format(JSON.parse(json))
-          modalMessage('Импорт и экспорт настроек', 'Настройки были успешно сохранены', { close: true, timer: 3 })
+          const parsed = JSON.parse(String(reader.result))
+          replaceSettings(parsed)
+          textarea.value = format(parsed)
+          showSaved(false)
         } catch (error) {
-          modalMessage('Ошибка разбора файла настроек', String(error), { close: true })
+          showParseError(error)
         }
       }
       reader.readAsText(selected)
@@ -96,7 +114,7 @@ export function renderBackup(target: Element) {
         const blob = new Blob([format(getSettings())], { type: 'text/plain' })
         const link = el('a', {
           href: URL.createObjectURL(blob),
-          download: `spaces-plus-${Date.now()}.json`,
+          download: `${exportPrefix}-${Date.now()}.json`,
         })
         link.click()
         link.remove()
@@ -105,9 +123,9 @@ export function renderBackup(target: Element) {
 
     const buttons = el('div', {
       className: 'widgets-group user__tools_last',
-      id: 'SP_PLUS_BOTTOM_DIVB',
+      id: settingsDom.backupTools,
     }, [file, restore, save])
-    document.querySelector('#SP_PLUS_MAIN')?.after(buttons)
+    byId(settingsDom.main)?.after(buttons)
   } catch (error) {
     log.error('backup', error)
   }

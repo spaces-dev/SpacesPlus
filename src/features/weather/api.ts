@@ -1,8 +1,10 @@
 import type { WeatherPayload } from './types'
-import { http } from '@/core/http'
+import { byId } from '@/core/dom'
+import { http, httpStatus } from '@/core/http'
 import { log } from '@/core/log'
-import { modalMessage } from '@/core/modals'
-import { cookies, getSettings, setSetting } from '@/core/settings-store'
+import { closable, modalMessage, notice } from '@/core/modals'
+import { cookies, getSettings, setSetting, settingKey, storageKey } from '@/core/settings-store'
+import { cityInputId, loadingCity, openWeather, weatherWidgetId } from './constants'
 
 export const unixTime = () => Math.round(Date.now() / 1000)
 
@@ -22,7 +24,7 @@ export function bindWeatherWidget(paint: () => void) {
 }
 
 export function readWeatherCache(): WeatherPayload | undefined {
-  const data = cookies.get('SP_WEATHER')
+  const data = cookies.get(storageKey.weather)
   if (!data || typeof data !== 'object') return
   return data as WeatherPayload
 }
@@ -58,8 +60,8 @@ function readPosition() {
 export const geoPromptSkipped = () => sessionStorage.getItem(geoSkipKey) !== null
 
 function clearLoadingCity() {
-  const input = document.querySelector<HTMLInputElement>('#SP-CITY-INPUT')
-  if (input?.value !== 'Загрузка...') return
+  const input = byId<HTMLInputElement>(cityInputId)
+  if (input?.value !== loadingCity) return
   input.value = ''
   input.dispatchEvent(new Event('input'))
 }
@@ -70,28 +72,28 @@ export async function getWeather(coords?: GeoPoint) {
   if (!place) return
 
   try {
-    const response = await http<WeatherPayload>(`https://api.openweathermap.org/data/2.5/weather?lang=${language}&units=${units}&${place}&appid=${key}`)
+    const response = await http<WeatherPayload>(`${openWeather.endpoint}?lang=${language}&units=${units}&${place}&appid=${key}`)
     const json = response.parsedBody
-    if (response.status === 404) {
+    if (response.status === httpStatus.notFound) {
       const city = getSettings().weatherSet.city ?? ''
-      modalMessage('Виджет погоды', `Локация <b>${city}</b> не найдена`, { close: true, timer: 5 })
+      modalMessage('Виджет погоды', `Локация <b>${city}</b> не найдена`, notice)
       return
     }
-    if (json?.message && json.cod !== 200) {
-      modalMessage('Виджет погоды', json.message, { close: true, timer: 5 })
+    if (json?.message && json.cod !== httpStatus.ok) {
+      modalMessage('Виджет погоды', json.message, notice)
       return
     }
-    if (!json || json.cod !== 200) return
+    if (!json || json.cod !== httpStatus.ok) return
 
-    const input = document.querySelector<HTMLInputElement>('#SP-CITY-INPUT')
+    const input = byId<HTMLInputElement>(cityInputId)
     if (input) {
       input.value = json.name
       input.dispatchEvent(new Event('input'))
     }
-    document.querySelector('#SP_WIDGET_WEATHER')?.remove()
-    setSetting('weatherSet.city', json.name)
+    byId(weatherWidgetId)?.remove()
+    setSetting(settingKey.weatherCity, json.name)
     getSettings().weatherSet.time = unixTime()
-    cookies.set('SP_WEATHER', json)
+    cookies.set(storageKey.weather, json)
     paintWidget()
   } catch (error) {
     log.error('openweathermap', error)
@@ -111,7 +113,7 @@ async function locateCity() {
   } catch (error) {
     sessionStorage.setItem(geoSkipKey, '1')
     clearLoadingCity()
-    modalMessage('Виджет погоды', 'Не удалось определить локацию. Введите ее вручную.', { close: true })
+    modalMessage('Виджет погоды', 'Не удалось определить локацию. Введите ее вручную.', closable)
     log.error('geolocation', error)
   }
 }

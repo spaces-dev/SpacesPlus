@@ -1,18 +1,21 @@
 import type { Feature } from '@/core/feature'
 import { el } from '@zero-dependency/dom'
-import { ensureStyle, removeStyle } from '@/core/appearance'
-import { log } from '@/core/log'
-import { getSettings, setSetting } from '@/core/settings-store'
+import { defineToggle } from '@/core/feature'
+import { defaultSettings, getSettings, setSetting, settingKey } from '@/core/settings-store'
+import { withStyle } from '@/core/with-style'
 import playbackCss from '@/styles/features/playback.scss?inline'
+import { toggleId } from '@/types/toggles'
 
 const playbackStyleId = 'SP_STYLE_PLAYBACK'
 const speeds = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2]
+const slowestSpeed = speeds[0] ?? defaultSettings.videoSpeed
+const fastestSpeed = speeds.at(-1) ?? slowestSpeed
 
 const label = (speed: number) => `x${speed}`
 
 function currentSpeed() {
   const saved = getSettings().videoSpeed
-  return speeds.includes(saved) ? saved : 1
+  return speeds.includes(saved) ? saved : defaultSettings.videoSpeed
 }
 
 function applyRate(video: HTMLVideoElement, speed: number) {
@@ -39,18 +42,17 @@ function closeMenus() {
 }
 
 function choose(speed: number) {
-  setSetting('videoSpeed', speed)
+  setSetting(settingKey.playbackSpeed, speed)
   for (const node of document.querySelectorAll<HTMLVideoElement>('.video-js video')) applyRate(node, speed)
   syncMenus(speed)
   closeMenus()
 }
 
-export const videoSpeed: Feature = {
-  id: 'playback',
+export const videoSpeed: Feature = defineToggle({
+  id: toggleId.playback,
   title: 'Скорость видео',
-  description: 'В панели плеера появляется меню скорости: от замедления x0.25 до ускорения x2.',
-  start: (ctx) => {
-    ensureStyle(playbackStyleId, playbackCss)
+  description: `В панели плеера появляется меню скорости: от замедления x${slowestSpeed} до ускорения x${fastestSpeed}.`,
+  start: withStyle(playbackStyleId, playbackCss, (ctx) => {
     const bound = new WeakSet<HTMLVideoElement>()
     let alive = true
 
@@ -139,21 +141,16 @@ export const videoSpeed: Feature = {
     }
 
     const stop = ctx.onDom(() => {
-      try {
-        for (const player of document.querySelectorAll<HTMLElement>('.video-js')) mount(player)
-      } catch (error) {
-        log.error('playback', error)
-      }
+      for (const player of document.querySelectorAll<HTMLElement>('.video-js')) mount(player)
     })
 
     return () => {
       alive = false
       stop()
-      removeStyle(playbackStyleId)
       document.removeEventListener('pointerdown', onPointerDown, true)
       document.removeEventListener('keydown', onKeyDown)
       for (const button of document.querySelectorAll('.sp-playback')) button.remove()
-      for (const video of document.querySelectorAll<HTMLVideoElement>('.video-js video')) video.playbackRate = 1
+      for (const video of document.querySelectorAll<HTMLVideoElement>('.video-js video')) video.playbackRate = defaultSettings.videoSpeed
     }
-  },
-}
+  }),
+})

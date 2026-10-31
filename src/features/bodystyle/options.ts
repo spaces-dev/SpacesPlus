@@ -1,12 +1,15 @@
 import { el } from '@zero-dependency/dom'
 import { ensureStyle, removeStyle } from '@/core/appearance'
 import { onSiteChange, siteCheckbox } from '@/core/checkbox'
+import { byId } from '@/core/dom'
+import { clearInvalid, markInvalid } from '@/core/fields'
 import { log } from '@/core/log'
-import { getSettings, setSetting } from '@/core/settings-store'
+import { getSettings, setSetting, settingKey } from '@/core/settings-store'
 import { assetOrigin, loadSiteModules, readPage } from '@/core/site'
 import backgroundCss from '@/styles/features/bodystyle.scss?inline'
 import { applyBodyStyle } from './apply'
 import { backgroundFiles } from './files'
+import { bodyDom } from './ids'
 
 interface SiteColorPicker {
   setColor: (hex: string) => void
@@ -29,7 +32,8 @@ declare global {
 
 const imagePattern = /\.(?:jpg|jpeg|png|gif)(?:$|\?)/i
 const colorPattern = /^#(?:[a-f0-9]{3}|[a-f0-9]{6})$/i
-const backgroundStyleId = 'SP_PLUS_IMAGE_STYLE'
+const sheetSelector = `#${bodyDom.imageWrap}, #${bodyDom.colorWrap}`
+const colorPickerModules = ['colorpicker', 'CommentWidget/Toolbar.css']
 
 const palette = [
   ['#90CAF9', '#80DEEA', '#A5D6A7', '#FFF59D', '#FFCC80', '#FFAB91', '#CE93D8'],
@@ -59,7 +63,7 @@ function applyColor(value: string) {
   const color = normalizeColor(value)
   if (!colorPattern.test(color)) return
   if (getSettings().bodystyleSet.color.toUpperCase() === color) return
-  setSetting('bodystyleSet.color', color)
+  setSetting(settingKey.backgroundColor, color)
   applyBodyStyle()
 }
 
@@ -67,15 +71,15 @@ function imageField() {
   const { url } = getSettings().bodystyleSet
   const field = el('input', {
     type: 'text',
-    id: 'image-input',
+    id: bodyDom.imageInput,
     className: 'text-input',
     value: url,
   })
   field.oninput = () => {
     const valid = isUrl(field.value) && imagePattern.test(field.value)
-    field.classList.toggle('text-input_error_bg', !valid)
+    markInvalid(field, !valid)
     if (!valid) return
-    setSetting('bodystyleSet.url', field.value)
+    setSetting(settingKey.backgroundUrl, field.value)
     applyBodyStyle()
   }
   return el('div', {
@@ -90,43 +94,43 @@ function imageField() {
 }
 
 export function syncBackgroundSheet() {
-  if (document.querySelector('#SP_WRAP_IMAGE, #SP_WRAP_COLOR')) {
-    ensureStyle(backgroundStyleId, backgroundCss)
+  if (document.querySelector(sheetSelector)) {
+    ensureStyle(bodyDom.sheet, backgroundCss)
     return
   }
-  removeStyle(backgroundStyleId)
+  removeStyle(bodyDom.sheet)
 }
 
 export function releaseBackgroundSheet() {
-  removeStyle(backgroundStyleId)
+  removeStyle(bodyDom.sheet)
 }
 
 export function destroyColorPicker() {
   colorTicket += 1
   colorObserver?.disconnect()
   colorObserver = undefined
-  const host = document.querySelector<HTMLElement>('#SP_WRAP_COLOR .js-bb_colorpicker')
+  const host = document.querySelector<HTMLElement>(`#${bodyDom.colorWrap} .js-bb_colorpicker`)
   const $ = readPage(win => win.$)
   if (host && $) {
     const query = $(host)
     if (typeof query.colorpicker === 'function') query.colorpicker(false)
   }
-  document.querySelector('#SP_WRAP_COLOR')?.remove()
+  byId(bodyDom.colorWrap)?.remove()
   syncBackgroundSheet()
 }
 
 function showImages() {
-  if (document.querySelector('#SP_WRAP_IMAGE')) return
-  const toggle = document.querySelector('#sp_set_bodystyle_URL')?.closest('label')
+  if (byId(bodyDom.imageWrap)) return
+  const toggle = byId(bodyDom.imageToggle)?.closest('label')
   if (!toggle) return
-  ensureStyle(backgroundStyleId, backgroundCss)
+  ensureStyle(bodyDom.sheet, backgroundCss)
 
   const gallery = el('div', {
     className: 'js-gallery_skip wbg oh tiles_block tiles_wrapper',
     style: { paddingTop: 0 },
   })
   const wrap = el('div', {
-    id: 'SP_WRAP_IMAGE',
+    id: bodyDom.imageWrap,
     className: 'sp-separator-top',
   }, imageField())
   toggle.after(wrap)
@@ -138,12 +142,12 @@ function showImages() {
       style: { cursor: 'pointer' },
     })
     image.onclick = () => {
-      const field = document.querySelector<HTMLInputElement>('#image-input')
+      const field = byId<HTMLInputElement>(bodyDom.imageInput)
       if (field) {
         field.value = image.src
-        field.classList.remove('text-input_error_bg')
+        clearInvalid(field)
       }
-      setSetting('bodystyleSet.url', image.src)
+      setSetting(settingKey.backgroundUrl, image.src)
       applyBodyStyle()
     }
     gallery.append(el('div', { className: 'js-file_item tiled_item tiled_item-200' }, el('div', { className: 'tiled_inner t_center relative' }, el('span', { className: 'relative sp_bg-items' }, el('div', { className: 'tiled-preview border' }, image)))))
@@ -193,10 +197,10 @@ function mountColorPicker(pickerHost: HTMLElement, wrap: HTMLElement) {
 }
 
 function showColors() {
-  if (document.querySelector('#SP_WRAP_COLOR')) return
-  const toggle = document.querySelector('#sp_set_bodystyle_color')?.closest('label')
+  if (byId(bodyDom.colorWrap)) return
+  const toggle = byId(bodyDom.colorToggle)?.closest('label')
   if (!toggle) return
-  ensureStyle(backgroundStyleId, backgroundCss)
+  ensureStyle(bodyDom.sheet, backgroundCss)
   const swatches = el('div', { className: 'stnd-block' })
   for (const row of palette) {
     for (const color of row) {
@@ -213,7 +217,7 @@ function showColors() {
 
   const pickerHost = el('div', { className: 'js-bb_colorpicker' })
   const wrap = el('div', {
-    id: 'SP_WRAP_COLOR',
+    id: bodyDom.colorWrap,
     className: 'sp-separator-top',
   }, el('table', { className: 'table__wrap bb-colorpicker' }, el('tbody', {}, el('tr', {}, [
     el('td', { className: 'table__cell' }, swatches),
@@ -222,7 +226,7 @@ function showColors() {
   toggle.after(wrap)
 
   const ticket = ++colorTicket
-  const loaded = loadSiteModules(['colorpicker', 'CommentWidget/Toolbar.css'], () => {
+  const loaded = loadSiteModules(colorPickerModules, () => {
     if (ticket !== colorTicket || !pickerHost.isConnected) return
     try {
       mountColorPicker(pickerHost, wrap)
@@ -236,30 +240,30 @@ function showColors() {
 }
 
 export function renderBackgroundOptions(anchor: HTMLElement) {
-  if (document.querySelector('#SP_PLUS_BODYSTYLE')) return
+  if (byId(bodyDom.panel)) return
 
   try {
     const { bodystyleSet } = getSettings()
-    const imageToggle = siteCheckbox('sp_set_bodystyle_URL', bodystyleSet.urlchecked)
-    const colorToggle = siteCheckbox('sp_set_bodystyle_color', bodystyleSet.colorchecked)
+    const imageToggle = siteCheckbox(bodyDom.imageToggle, bodystyleSet.urlchecked)
+    const colorToggle = siteCheckbox(bodyDom.colorToggle, bodystyleSet.colorchecked)
     imageToggle.label.style.borderBottom = 'none'
     colorToggle.label.style.borderBottom = 'none'
     imageToggle.label.append('Использовать изображение')
     colorToggle.label.append('Использовать цвет')
 
     onSiteChange(imageToggle.input, (checked) => {
-      setSetting('bodystyleSet.urlchecked', checked)
+      setSetting(settingKey.backgroundImageOn, checked)
       applyBodyStyle()
       if (checked) {
         showImages()
         return
       }
-      document.querySelector('#SP_WRAP_IMAGE')?.remove()
+      byId(bodyDom.imageWrap)?.remove()
       syncBackgroundSheet()
     })
 
     onSiteChange(colorToggle.input, (checked) => {
-      setSetting('bodystyleSet.colorchecked', checked)
+      setSetting(settingKey.backgroundColorOn, checked)
       applyBodyStyle()
       if (checked) {
         showColors()
@@ -268,7 +272,7 @@ export function renderBackgroundOptions(anchor: HTMLElement) {
       destroyColorPicker()
     })
 
-    const panel = el('div', { id: 'SP_PLUS_BODYSTYLE' }, [
+    const panel = el('div', { id: bodyDom.panel }, [
       imageToggle.label,
       colorToggle.label,
     ])

@@ -1,9 +1,12 @@
 import type { Feature } from '@/core/feature'
 import { el } from '@zero-dependency/dom'
-import { baseUrl } from '@/core/site'
+import { plusSettingsUrl } from '@/core/site'
+import { plusSettingsTitle } from './settings/ids'
+
+const normalized = (value: string | null | undefined) => value?.replace(/\s+/g, ' ').trim()
 
 function isSettingsHeading(value: string | null | undefined) {
-  const title = value?.replace(/\s+/g, ' ').trim()
+  const title = normalized(value)
   return title === 'Настройка' || title === 'Настройки'
 }
 
@@ -22,7 +25,7 @@ function settingsSection() {
   const next = title?.closest('.sidebar-item')?.nextElementSibling
   if (next?.classList.contains('sidebar__section')) return next
 
-  const label = [...root.querySelectorAll('.sidebar-item__label')].find(node => node.textContent?.replace(/\s+/g, ' ').trim() === 'Настройки')
+  const label = [...root.querySelectorAll('.sidebar-item__label')].find(node => normalized(node.textContent) === 'Настройки')
   return label?.closest('.sidebar__section') ?? null
 }
 
@@ -55,12 +58,12 @@ export const sidebarButton: Feature = {
 
     const label = el('span', {
       className: appearanceClass(sampleLink.querySelector('.sidebar-item__label'), 'sidebar-item__label'),
-      textContent: 'Настройки Spaces Plus',
+      textContent: plusSettingsTitle,
     })
     const link = el('a', {
-      href: `${baseUrl}/settings/?sp_plus_settings=1`,
+      href: plusSettingsUrl(),
       className: appearanceClass(sampleLink, 'sidebar-item__link'),
-      title: 'Настройки Spaces Plus',
+      title: plusSettingsTitle,
     }, [
       el('span', { className: 'js-ico ico_cats ico_cats_spaces sp-cats-spaces' }),
       label,

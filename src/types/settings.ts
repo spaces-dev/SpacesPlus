@@ -1,3 +1,5 @@
+import type { toggleId } from './toggles'
+
 export interface RecentSmiles {
   show: boolean
   max: number
@@ -29,28 +31,28 @@ export interface WeatherSet {
 }
 
 export interface Settings {
-  readersd: boolean
-  comments: boolean
-  oldheader: boolean
-  playerdn: boolean
-  dredirect: boolean
-  coins: boolean
-  rscroll: boolean
-  hrightbar: boolean
-  favorite: boolean
-  grotate: boolean
+  [toggleId.readers]: boolean
+  [toggleId.comments]: boolean
+  [toggleId.oldHeader]: boolean
+  [toggleId.player]: boolean
+  [toggleId.redirect]: boolean
+  [toggleId.coins]: boolean
+  [toggleId.scroll]: boolean
+  [toggleId.rightbar]: boolean
+  [toggleId.favorite]: boolean
+  [toggleId.gallery]: boolean
   angle: number
-  karma: boolean
-  playback: boolean
+  [toggleId.karma]: boolean
+  [toggleId.playback]: boolean
   videoSpeed: number
   upVersion: number | string
   hideNotify: HideNotify
-  recents: boolean
+  [toggleId.recents]: boolean
   recentSmiles: RecentSmiles
-  friendsOn: boolean
+  [toggleId.friends]: boolean
   friendsSet: FriendsSet
-  bodystyle: boolean
+  [toggleId.background]: boolean
   bodystyleSet: BodystyleSet
-  weather: boolean
+  [toggleId.weather]: boolean
   weatherSet: WeatherSet
 }

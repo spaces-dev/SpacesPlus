@@ -1,25 +1,29 @@
 import type { FriendListItem, FriendsOnline } from './types'
 import type { Feature } from '@/core/feature'
 import { el } from '@zero-dependency/dom'
-import { ensureStyle, removeStyle } from '@/core/appearance'
+import { defineToggle } from '@/core/feature'
 import { http } from '@/core/http'
 import { log } from '@/core/log'
-import { getSettings } from '@/core/settings-store'
+import { defaultSettings, getSettings } from '@/core/settings-store'
 import { baseUrl } from '@/core/site'
+import { withStyle } from '@/core/with-style'
 import friendsCss from '@/styles/features/friends.scss?inline'
-import { renderFriendsOptions } from './options'
+import { toggleId } from '@/types/toggles'
+import { friendsOptionsId, friendsPanelId, friendsRange, renderFriendsOptions } from './options'
 
 const friendsStyleId = 'SP_STYLE_FRIENDS'
 const collapsedClass = 'sp-friends-collapsed'
+const friendsOnlinePath = '/friends/?S=3&json=1'
+const friendsSidebarPath = '/sidebar/links/?T=4'
+const legacyCountSelector = '#friends_cnt'
+const modernCountSelector = '.sidebar-item__counter.sidebar-item__counter--online.js-cnt'
 
 function friendsCounter() {
-  return document.querySelector<HTMLElement>('#friends_cnt')
-    ?? document.querySelector<HTMLElement>('.sidebar-item__counter.sidebar-item__counter--online.js-cnt')
+  return document.querySelector<HTMLElement>(legacyCountSelector)
+    ?? document.querySelector<HTMLElement>(modernCountSelector)
 }
 
-function friendsPanel() {
-  return document.querySelector<HTMLElement>('#SP_PLUS_FRIENDS_B')
-}
+const friendsPanel = () => document.getElementById(friendsPanelId)
 
 function listHint(collapsed: boolean) {
   return collapsed ? 'Показать список' : 'Скрыть список'
@@ -56,14 +60,13 @@ function friendItem(friend: FriendListItem, modern: boolean) {
   })
 }
 
-export const friendsOnline: Feature = {
-  id: 'friendsOn',
+export const friendsOnline: Feature = defineToggle({
+  id: toggleId.friends,
   title: 'Панель друзей онлайн',
-  description: `Функция добавляет в левое меню панель с друзьями онлайн. Для работы необходимо включить раздел <a href="${baseUrl}/sidebar/links/?T=4">Друзья</a>, если он выключен.</br></br>Панель ограничена от 1 до 20 друзей онлайн.`,
-  optionsId: 'SP_PLUS_MAXFRIENDS',
+  description: `Функция добавляет в левое меню панель с друзьями онлайн. Для работы необходимо включить раздел <a href="${baseUrl}${friendsSidebarPath}">Друзья</a>, если он выключен.</br></br>Панель ограничена от ${friendsRange.min} до ${friendsRange.max} друзей онлайн.`,
+  optionsId: friendsOptionsId,
   renderOptions: renderFriendsOptions,
-  start: (ctx) => {
-    ensureStyle(friendsStyleId, friendsCss)
+  start: withStyle(friendsStyleId, friendsCss, (ctx) => {
     let boundNode: HTMLElement | null = null
     let toggleAbort: AbortController | null = null
     let savedExpanded = getSettings().friendsSet.expanded
@@ -98,12 +101,12 @@ export const friendsOnline: Feature = {
     }
 
     const loadFriends = (panel: HTMLElement, modern: boolean) => {
-      http<FriendsOnline>(`${baseUrl}/friends/?S=3&json=1`, { proxy: true }).then((response) => {
+      http<FriendsOnline>(`${baseUrl}${friendsOnlinePath}`, { proxy: true }).then((response) => {
         if (!panel.isConnected) return
         const raw = response.parsedBody?.tabbed_panel?.links?.[1]?.content?.list ?? []
         const list = Object.values(raw).filter((friend): friend is FriendListItem => Boolean(friend?.name))
         if (!list.length) return
-        const max = Number(getSettings().friendsSet.max) || 10
+        const max = Number(getSettings().friendsSet.max) || defaultSettings.friendsSet.max
         panel.replaceChildren()
         for (const friend of list.slice(0, max)) {
           panel.append(friendItem(friend, modern))
@@ -147,7 +150,7 @@ export const friendsOnline: Feature = {
 
       const modern = Boolean(item)
       const next = el('div', {
-        id: 'SP_PLUS_FRIENDS_B',
+        id: friendsPanelId,
         className: modern ? 'sidebar__section' : 'list-link__wrap',
       })
       applyCollapsed(next)
@@ -158,7 +161,6 @@ export const friendsOnline: Feature = {
 
     return () => {
       stop()
-      removeStyle(friendsStyleId)
       toggleAbort?.abort()
       boundNode = null
       friendsPanel()?.remove()
@@ -167,5 +169,5 @@ export const friendsOnline: Feature = {
       countNode.title = ''
       countNode.classList.remove('pointer')
     }
-  },
-}
+  }),
+})

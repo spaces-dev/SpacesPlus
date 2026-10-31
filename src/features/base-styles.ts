@@ -1,5 +1,5 @@
 import type { Feature } from '@/core/feature'
-import { ensureStyle } from '@/core/appearance'
+import { withStyle } from '@/core/with-style'
 import mainCss from '@/styles/main.scss?inline'
 
 const baseStyleId = 'SP_PLUS_BASE'
@@ -7,7 +7,5 @@ const baseStyleId = 'SP_PLUS_BASE'
 export const baseStyles: Feature = {
   id: 'base-styles',
   core: true,
-  start: () => {
-    ensureStyle(baseStyleId, mainCss)
-  },
+  start: withStyle(baseStyleId, mainCss, () => {}),
 }

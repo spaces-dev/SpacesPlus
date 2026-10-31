@@ -1,9 +1,10 @@
 import type { Changelog, ChangelogSection, ChangelogSectionType } from './types'
 import { el } from '@zero-dependency/dom'
-import { http } from '@/core/http'
+import { http, httpStatus } from '@/core/http'
 import { log } from '@/core/log'
 import { pkgVersion } from '@/core/pkg-info'
-import { assetOrigin, baseUrl, revision } from '@/core/site'
+import { baseUrl, cacheBust } from '@/core/site'
+import { changelogSchema } from './types'
 
 const sectionTitles: Record<ChangelogSectionType, string> = {
   added: 'Добавлено',
@@ -68,6 +69,8 @@ export function formatDate(iso: string) {
   return `${day}.${month}.${year}`
 }
 
+const changelogFile = 'changelog.json'
+
 const semverParts = (value: string) => value.split('.').map(part => Number(part) || 0)
 
 export function compareSemver(left: string, right: string) {
@@ -83,15 +86,11 @@ export function compareSemver(left: string, right: string) {
   return 0
 }
 
-export function asSemver(value: number | string) {
-  return typeof value === 'number' ? String(value).split('').join('.') : value
-}
-
 export async function loadUpdates() {
-  const response = await http<Changelog>(`${assetOrigin}/changelog.json?r=${revision}`)
+  const response = await http<Changelog>(cacheBust(changelogFile))
   log.info('Проверка обновлений', response)
   const body = response.parsedBody
-  if (response.status !== 200 || body?.schema !== 1 || !Array.isArray(body.releases)) return
+  if (response.status !== httpStatus.ok || body?.schema !== changelogSchema || !Array.isArray(body.releases)) return
   return body
 }
 

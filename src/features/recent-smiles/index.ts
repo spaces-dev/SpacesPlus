@@ -1,7 +1,9 @@
 import type { Feature } from '@/core/feature'
-import { ensureStyle, removeStyle } from '@/core/appearance'
+import { defineToggle } from '@/core/feature'
 import { log } from '@/core/log'
+import { withStyle } from '@/core/with-style'
 import recentsCss from '@/styles/features/recents.scss?inline'
+import { toggleId } from '@/types/toggles'
 import {
   dropShiftHold,
   openerSelector,
@@ -12,19 +14,18 @@ import {
   shiftHeld,
   toggleStored,
 } from './menu'
-import { renderRecentOptions } from './options'
+import { recentsOptionsId, renderRecentOptions } from './options'
 import { compactSmiles } from './storage'
 
 const recentsStyleId = 'SP_STYLE_RECENTS'
 
-export const recentSmiles: Feature = {
-  id: 'recents',
+export const recentSmiles: Feature = defineToggle({
+  id: toggleId.recents,
   title: 'Ранее использованные смайлики',
   description: 'В меню смайликов добавляется раздел с ранее использованными смайликами. Чтобы смайл туда попал, выберите его из меню или с зажатым Shift нажмите на ячейку: плюс в правом верхнем углу добавляет, крестик убирает.',
-  optionsId: 'SP_PLUS_RECENTS',
+  optionsId: recentsOptionsId,
   renderOptions: renderRecentOptions,
-  start: () => {
-    ensureStyle(recentsStyleId, recentsCss)
+  start: withStyle(recentsStyleId, recentsCss, () => {
     compactSmiles()
 
     const onClick = (event: MouseEvent) => {
@@ -69,7 +70,6 @@ export const recentSmiles: Feature = {
     refreshMenus()
 
     return () => {
-      removeStyle(recentsStyleId)
       document.removeEventListener('click', onClick, true)
       window.removeEventListener('keydown', onShift)
       window.removeEventListener('keyup', onShift)
@@ -77,5 +77,5 @@ export const recentSmiles: Feature = {
       observer.disconnect()
       dropShiftHold()
     }
-  },
-}
+  }),
+})

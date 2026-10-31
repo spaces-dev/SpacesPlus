@@ -6,6 +6,7 @@ import {
   formatDate,
   renderSections,
 } from '@/features/check-updates/changelog'
+import { changelogSchema } from '@/features/check-updates/types'
 import { mountHalloween } from '@/features/halloween/halloween'
 
 import {
@@ -104,7 +105,7 @@ async function paintChangelog(root: HTMLElement, version: string) {
     const response = await fetch('./changelog.json')
     if (!response.ok) throw new Error(String(response.status))
     const body = await response.json() as Changelog
-    if (body.schema !== 1 || !Array.isArray(body.releases)) throw new Error('schema')
+    if (body.schema !== changelogSchema || !Array.isArray(body.releases)) throw new Error('schema')
 
     const releases = body.releases.filter(release => !release.unreleased)
     root.replaceChildren()

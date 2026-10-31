@@ -1,6 +1,6 @@
 import type { CapturedSmile, SmileEntry, SmileMap } from './types'
 import { LocalStorage } from '@zero-dependency/storage'
-import { getSettings } from '@/core/settings-store'
+import { defaultSettings, getSettings } from '@/core/settings-store'
 
 const smilesKey = 'sp_recent_smiles'
 const smiles = new LocalStorage<Record<string, unknown>>(smilesKey, {})
@@ -97,7 +97,7 @@ export function positive(value: string | null) {
 export function saveSmile(src: string, smile: string, captured: CapturedSmile) {
   const key = sitePath(src)
   if (!key.startsWith('/') || (!captured.cell && !captured.image)) return
-  const max = getSettings().recentSmiles.max || 60
+  const max = getSettings().recentSmiles.max || defaultSettings.recentSmiles.max
   const cell = captured.cell ?? [0, 0]
   const image = captured.image
   const set = siteSet(captured.srcset)

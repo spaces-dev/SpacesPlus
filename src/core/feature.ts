@@ -1,3 +1,6 @@
+import type { Settings } from '@/types/settings'
+import { isTouch } from './site'
+
 export type Disposer = () => void
 
 export interface FeatureContext {
@@ -16,3 +19,7 @@ export interface Feature {
   renderOptions?: (anchor: HTMLElement) => void
   onToggle?: (enabled: boolean) => void | false
 }
+
+export const defineToggle = <K extends keyof Settings>(feature: Feature & { id: K }): Feature => feature
+
+export const unavailableOnTouch = (feature: Feature) => Boolean(feature.desktopOnly && isTouch())

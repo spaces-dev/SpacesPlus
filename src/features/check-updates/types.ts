@@ -1,3 +1,5 @@
+export const changelogSchema = 1
+
 export type ChangelogSectionType = 'added' | 'changed' | 'fixed' | 'improved' | 'removed' | 'other'
 
 export interface ChangelogSection {

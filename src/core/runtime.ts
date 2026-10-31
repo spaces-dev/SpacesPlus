@@ -1,11 +1,13 @@
 import type { Feature, FeatureContext } from './feature'
 import { observeElement } from '@zero-dependency/dom'
 import { debounce } from '@zero-dependency/utils'
+import { coalesce } from './coalesce'
+import { unavailableOnTouch } from './feature'
 import { log } from './log'
-import { getSettings, subscribeSettings } from './settings-store'
-import { isTouch } from './site'
+import { settingEnabled, subscribeSettings } from './settings-store'
 
 const listeners = new Set<() => void>()
+const domSettleMs = 50
 
 let disconnect = () => {}
 let applying = false
@@ -27,7 +29,7 @@ function flush() {
   }
 }
 
-const schedule = debounce(flush, 50)
+const schedule = debounce(flush, domSettleMs)
 
 function connect() {
   if (!document.body) return
@@ -53,23 +55,18 @@ function hookHistory() {
 
 function isEnabled(feature: Feature) {
   if (feature.core || feature.listed === false) return true
-  if (feature.desktopOnly && isTouch()) return false
-  const value = getSettings()[feature.id as keyof ReturnType<typeof getSettings>]
-  return value === true
+  if (unavailableOnTouch(feature)) return false
+  return settingEnabled(feature.id)
 }
 
-export function startRuntime(features: Feature[]) {
-  const active = new Map<string, () => void>()
-  let syncing = false
-  let pending = false
-
-  const context: FeatureContext = {
+function contextFor(id: string): FeatureContext {
+  return {
     onDom: (apply) => {
       const safe = () => {
         try {
           apply()
         } catch (error) {
-          log.error('feature', error)
+          log.error(id, error)
         }
       }
       listeners.add(safe)
@@ -79,6 +76,10 @@ export function startRuntime(features: Feature[]) {
       }
     },
   }
+}
+
+export function startRuntime(features: Feature[]) {
+  const active = new Map<string, () => void>()
 
   const run = () => {
     for (const feature of features) {
@@ -96,7 +97,7 @@ export function startRuntime(features: Feature[]) {
       if (!enabled) continue
 
       try {
-        const dispose = feature.start(context) ?? (() => {})
+        const dispose = feature.start(contextFor(feature.id)) ?? (() => {})
         active.set(feature.id, dispose)
       } catch (error) {
         log.error(feature.id, error)
@@ -106,22 +107,7 @@ export function startRuntime(features: Feature[]) {
     schedule()
   }
 
-  const sync = () => {
-    if (syncing) {
-      pending = true
-      return
-    }
-
-    syncing = true
-    try {
-      do {
-        pending = false
-        run()
-      } while (pending)
-    } finally {
-      syncing = false
-    }
-  }
+  const sync = coalesce(run)
 
   hookHistory()
   connect()

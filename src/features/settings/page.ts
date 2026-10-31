@@ -1,17 +1,38 @@
 import type { Feature } from '@/core/feature'
 import { el } from '@zero-dependency/dom'
 import { ensureStyle, removeStyle } from '@/core/appearance'
-import { onSiteChange, siteCheckbox } from '@/core/checkbox'
-import { modalConfirm, modalMessage } from '@/core/modals'
+import { checkboxDisabledClass, onSiteChange, siteCheckbox } from '@/core/checkbox'
+import { byId } from '@/core/dom'
+import { unavailableOnTouch } from '@/core/feature'
+import { attentionTitle, closable, modalConfirm, modalMessage, notice } from '@/core/modals'
 import { pkgVersion } from '@/core/pkg-info'
-import { getSettings, resetSpacesCookies, setSetting } from '@/core/settings-store'
-import { baseUrl, isTouch, pathAt, queryFlag } from '@/core/site'
+import { resetSpacesCookies, setSetting, settingEnabled } from '@/core/settings-store'
+import {
+  backupFlag,
+  baseUrl,
+  changelogFlag,
+  communityUrl,
+  notificationSettingsUrl,
+  pathAt,
+  plusSettingsFlag,
+  plusSettingsUrl,
+  queryFlag,
+  settingsPath,
+  siteSettingsUrl,
+} from '@/core/site'
+import { groupedOptionIds, isGroupedOption, settingsSections } from '@/features/catalog'
 import { renderChangelog } from '@/features/check-updates/changelog'
 import { clearStoredSmiles } from '@/features/recent-smiles/storage'
 import settingsCss from '@/styles/settings.scss?inline'
 import { renderBackup } from './backup'
+import { plusSettingsTitle, settingsAreaId, settingsDom, settingsGroupId } from './ids'
 
-const settingsStyleId = 'SP_PLUS_SETTINGS'
+const crumbSep = '<span class="location-bar__sep ico"></span>'
+const unsupportedClass = 'stnd-block-yellow'
+const authorNick = 'anomaiy'
+const telegramUrl = 'https://t.me/spaces_dev'
+const heartIcon = '/i/dark/em/36/2764-FE0F.png'
+const subviewTitle = (title: string) => `Spaces Plus: ${title}`
 
 interface SectionLink {
   id: string
@@ -29,29 +50,6 @@ function sectionLink({ id, icon, label, href }: SectionLink) {
   })
 }
 
-const groupedIds = ['friendsOn', 'bodystyle', 'weather', 'recents']
-
-const sections = [
-  {
-    title: 'Контент',
-    ids: ['comments', 'readersd', 'favorite'],
-  },
-  {
-    title: 'Сбор',
-    ids: ['coins', 'karma'],
-  },
-  {
-    title: 'Медиа',
-    ids: ['playerdn', 'grotate', 'playback'],
-  },
-  {
-    title: 'Интерфейс',
-    ids: ['oldheader', 'rscroll', 'hrightbar', 'dredirect'],
-  },
-]
-
-const isGrouped = (id: string) => groupedIds.includes(id)
-
 function settingsCard(id: string, title: string, areaId: string) {
   return `
   <div class="widgets-group js-container__block sp-plus-extra" id="${id}">
@@ -68,114 +66,165 @@ function hideExtraCards() {
 }
 
 function paintHeader(title: string, crumb: string) {
-  const head = document.querySelector('#SP_PLUS_SETHEAD')
-  const crumbNode = document.querySelector('#SP_PLUS_SETHEAD2')
-  const back = document.querySelector<HTMLAnchorElement>('#SP_PLUS_SETBACK')
+  const head = byId(settingsDom.head)
+  const crumbNode = byId(settingsDom.crumb)
+  const back = byId<HTMLAnchorElement>(settingsDom.back)
+  const home = plusSettingsUrl()
   if (head) head.innerHTML = title
-  if (crumbNode) {
-    crumbNode.innerHTML = `<a href="${baseUrl}/settings/?sp_plus_settings=1">Spaces Plus</a><span class="location-bar__sep ico"></span> ${crumb}`
+  if (crumbNode) crumbNode.innerHTML = `<a href="${home}">Spaces Plus</a>${crumbSep} ${crumb}`
+  if (back) back.href = home
+}
+
+function appendFeature(feature: Feature, target: HTMLElement) {
+  if (feature.listed === false) {
+    feature.renderOptions?.(target)
+    return
   }
-  if (back) back.href = `${baseUrl}/settings/?sp_plus_settings=1`
+
+  const enabled = settingEnabled(feature.id)
+  const unsupported = unavailableOnTouch(feature)
+  if (unsupported && enabled) setSetting(feature.id, false)
+
+  const turnedOn = enabled && !unsupported
+  const { input, label } = siteCheckbox(feature.id, turnedOn, unsupported ? unsupportedClass : undefined)
+  if (unsupported) {
+    input.disabled = true
+    label.classList.add(checkboxDisabledClass)
+    label.addEventListener('click', (event) => {
+      const targetNode = event.target
+      if (targetNode instanceof Element && targetNode.closest('a')) return
+      modalMessage(attentionTitle, 'Для работы данной функции необходимо переключиться на компьютерную версию сайта', notice)
+    })
+  }
+  onSiteChange(input, (checked) => {
+    if (feature.onToggle?.(checked) === false) return false
+
+    setSetting(feature.id, checked)
+    if (checked) {
+      feature.renderOptions?.(input)
+      return
+    }
+    if (feature.optionsId) byId(feature.optionsId)?.remove()
+  })
+
+  label.append(feature.title ?? '')
+  if (feature.description) {
+    const info = el('a', {
+      href: '#',
+      className: 'ico ico_question sp_info-btn',
+    })
+    info.onclick = () => {
+      modalMessage(feature.title ?? '', feature.description ?? '', closable)
+      return false
+    }
+    label.append(info)
+  }
+
+  target.append(label)
+  if (input.checked) feature.renderOptions?.(input)
+}
+
+interface Subview {
+  title: string
+  flag: string
+  href: string
+  render: (area: HTMLElement) => void
+}
+
+function openSubview({ title, flag, href, render }: Subview) {
+  return () => {
+    hideExtraCards()
+    paintHeader(title, title)
+    if (queryFlag(flag) !== '1') {
+      document.title = subviewTitle(title)
+      history.pushState({ [plusSettingsFlag]: '1', [flag]: '1' }, document.title, href)
+    }
+    const current = byId(settingsDom.area)
+    if (current) render(current)
+    return false
+  }
+}
+
+function paintAbout() {
+  const aboutLink = (href: string, text: string) => el('a', {
+    href,
+    target: '_blank',
+    rel: 'noopener noreferrer',
+    innerHTML: text,
+  })
+
+  const about = el('div', { className: 'widgets-group widgets-group_top nl wbg' })
+  const title = el('div', { className: 'grey' })
+  title.append(
+    'Разработано ',
+    aboutLink(`${baseUrl}/mysite/index/${authorNick}`, authorNick),
+    ' с любовью ',
+    el('span', { className: 'heart', innerHTML: `<img src="${heartIcon}" alt="❤️" width="16" height="16">` }),
+    el('div', {
+      innerHTML: `v${pkgVersion}`,
+      style: { float: 'right' },
+    }),
+  )
+  const groups = el('div', { className: 'grey' })
+  groups.append(
+    'Группа на ',
+    aboutLink(communityUrl(), 'Spaces'),
+    ' и в ',
+    aboutLink(telegramUrl, 'Telegram'),
+  )
+  about.append(el('div', { className: 'content-item3' }, [title, groups]))
+  byId(settingsDom.about)?.append(about)
 }
 
 function openSettings(features: Feature[]) {
-  if (!/sp_plus_settings=1/i.test(location.href)) {
-    document.title = 'Настройки Spaces Plus'
-    history.pushState({ sp_plus_settings: '1' }, 'Настройки Spaces Plus', `${baseUrl}/settings/?sp_plus_settings=1`)
+  if (queryFlag(plusSettingsFlag) !== '1') {
+    document.title = plusSettingsTitle
+    history.pushState({ [plusSettingsFlag]: '1' }, plusSettingsTitle, plusSettingsUrl())
   }
 
-  const link = document.querySelector('#SP_PLUS_SETLINK')
+  const link = byId(settingsDom.link)
   const root = link?.parentElement?.parentElement?.parentElement?.parentElement
   if (!(root instanceof HTMLElement) || root.id !== 'main') return
-  ensureStyle(settingsStyleId, settingsCss)
+  ensureStyle(settingsDom.style, settingsCss)
 
-  const path = document.querySelector('#header_path')
-  if (path && !path.innerHTML.includes('SP_PLUS_SETHEAD2')) {
-    path.innerHTML = path.innerHTML.replace('Настройки', `<a href="${baseUrl}/settings/">Настройки</a><span class="location-bar__sep ico"></span><span id="SP_PLUS_SETHEAD2">Spaces Plus</span>`)
+  const path = document.getElementById('header_path')
+  if (path && !path.innerHTML.includes(settingsDom.crumb)) {
+    path.innerHTML = path.innerHTML.replace('Настройки', `<a href="${siteSettingsUrl()}">Настройки</a>${crumbSep}<span id="${settingsDom.crumb}">Spaces Plus</span>`)
   }
 
-  const groupedCards = groupedIds.map((id) => {
+  const groupedCards = groupedOptionIds.map((id) => {
     const feature = features.find(item => item.id === id)
     if (!feature?.title) return ''
-    return settingsCard(`SP_PLUS_GROUP_${id}`, feature.title, `SP_PLUS_AREA_${id}`)
+    return settingsCard(settingsGroupId(id), feature.title, settingsAreaId(id))
   }).join('')
 
   root.innerHTML = `
-    <div class="widgets-group widgets-group_top js-container__block" id="SP_PLUS_MAIN">
+    <div class="widgets-group widgets-group_top js-container__block" id="${settingsDom.main}">
       <div class="b-title cl b-title_center b-title_first oh">
-        <div class="b-title__item" id="SP_PLUS_SETHEAD">Настройки Spaces Plus</div>
+        <div class="b-title__item" id="${settingsDom.head}">${plusSettingsTitle}</div>
       </div>
-      <div class="content"><div class="list f-c_fll"><div id="SP_PLUS_SETAREA"></div></div></div>
+      <div class="content"><div class="list f-c_fll"><div id="${settingsDom.area}"></div></div></div>
     </div>
     ${groupedCards}
-    <div class="widgets-group js-container__block sp-plus-extra" id="SP_PLUS_MISC">
+    <div class="widgets-group js-container__block sp-plus-extra" id="${settingsDom.misc}">
       <div class="b-title cl b-title_center b-title_first oh">
         <div class="b-title__item">Прочее</div>
       </div>
-      <div class="content"><div class="list f-c_fll"><div id="SP_PLUS_MISC_AREA"></div></div></div>
+      <div class="content"><div class="list f-c_fll"><div id="${settingsDom.miscArea}"></div></div></div>
     </div>
-    <div id="SP_PLUS_ABOUT"></div>
-    <a id="SP_PLUS_SETBACK" href="${baseUrl}/settings/?" class="link-return full_link"><span class="ico ico_arr_small_left_darkblue"></span> Назад</a>
+    <div id="${settingsDom.about}"></div>
+    <a id="${settingsDom.back}" href="${siteSettingsUrl()}?" class="link-return full_link"><span class="ico ico_arr_small_left_darkblue"></span> Назад</a>
   `
 
-  const area = document.querySelector<HTMLElement>('#SP_PLUS_SETAREA')
+  const area = byId(settingsDom.area)
   if (!area) return
 
-  const appendFeature = (feature: Feature, target: HTMLElement) => {
-    if (feature.listed === false) {
-      feature.renderOptions?.(target)
-      return
-    }
-
-    const enabled = getSettings()[feature.id as keyof ReturnType<typeof getSettings>] === true
-    const unsupported = Boolean(feature.desktopOnly && isTouch())
-    if (unsupported && enabled) setSetting(feature.id, false)
-
-    const turnedOn = enabled && !unsupported
-    const { input, label } = siteCheckbox(feature.id, turnedOn, unsupported ? 'stnd-block-yellow' : undefined)
-    if (unsupported) {
-      input.disabled = true
-      label.classList.add('form-checkbox--is-disabled')
-      label.addEventListener('click', (event) => {
-        const targetNode = event.target
-        if (targetNode instanceof Element && targetNode.closest('a')) return
-        modalMessage('Внимание!', 'Для работы данной функции необходимо переключиться на компьютерную версию сайта', { close: true, timer: 5 })
-      })
-    }
-    onSiteChange(input, (checked) => {
-      if (feature.onToggle?.(checked) === false) return false
-
-      setSetting(feature.id, checked)
-      if (checked) {
-        feature.renderOptions?.(input)
-        return
-      }
-      if (feature.optionsId) document.getElementById(feature.optionsId)?.remove()
-    })
-
-    label.append(feature.title ?? '')
-    if (feature.description) {
-      const info = el('a', {
-        href: '#',
-        className: 'ico ico_question sp_info-btn',
-      })
-      info.onclick = () => {
-        modalMessage(feature.title ?? '', feature.description ?? '', { close: true })
-        return false
-      }
-      label.append(info)
-    }
-
-    target.append(label)
-    if (input.checked) feature.renderOptions?.(input)
-  }
-
-  const byId = new Map(features.map(feature => [feature.id, feature]))
+  const byFeature = new Map(features.map(feature => [feature.id, feature]))
   const placed = new Set<string>()
 
-  for (const section of sections) {
+  for (const section of settingsSections) {
     const items = section.ids.flatMap((id) => {
-      const feature = byId.get(id)
+      const feature = byFeature.get(id)
       return feature?.title ? [feature] : []
     })
     if (!items.length) continue
@@ -188,50 +237,40 @@ function openSettings(features: Feature[]) {
 
   for (const feature of features) {
     if (!feature.title || placed.has(feature.id)) continue
-    const target = isGrouped(feature.id)
-      ? document.querySelector<HTMLElement>(`#SP_PLUS_AREA_${feature.id}`)
-      : area
+    const target = isGroupedOption(feature.id) ? byId(settingsAreaId(feature.id)) : area
     if (!target) continue
     appendFeature(feature, target)
   }
 
-  const misc = document.querySelector('#SP_PLUS_MISC_AREA')
+  const misc = byId(settingsDom.miscArea)
+  const backupTitle = 'Импорт и экспорт настроек'
+  const changelogTitle = 'История обновлений'
 
   const backup = sectionLink({
-    id: 'sp_backup',
+    id: backupFlag,
     icon: 'ico_shared',
-    label: 'Импорт и экспорт настроек',
-    href: `${baseUrl}/settings/?sp_plus_settings=1&sp_backup=1`,
+    label: backupTitle,
+    href: plusSettingsUrl(backupFlag),
   })
-  backup.onclick = () => {
-    hideExtraCards()
-    paintHeader('Импорт и экспорт настроек', 'Импорт и экспорт настроек')
-    if (!/sp_backup=1/i.test(location.href)) {
-      document.title = 'Spaces Plus: Импорт и экспорт настроек'
-      history.pushState({ sp_plus_settings: '1', sp_backup: '1' }, document.title, backup.href)
-    }
-    const current = document.querySelector('#SP_PLUS_SETAREA')
-    if (current) renderBackup(current)
-    return false
-  }
+  backup.onclick = openSubview({
+    title: backupTitle,
+    flag: backupFlag,
+    href: backup.href,
+    render: renderBackup,
+  })
 
   const changelog = sectionLink({
-    id: 'sp_changelog',
+    id: changelogFlag,
     icon: 'ico_history_blue',
-    label: 'История обновлений',
-    href: `${baseUrl}/settings/?sp_plus_settings=1&sp_changelog=1`,
+    label: changelogTitle,
+    href: plusSettingsUrl(changelogFlag),
   })
-  changelog.onclick = () => {
-    hideExtraCards()
-    paintHeader('История обновлений', 'История обновлений')
-    if (!/sp_changelog=1/i.test(location.href)) {
-      document.title = 'Spaces Plus: История обновлений'
-      history.pushState({ sp_plus_settings: '1', sp_changelog: '1' }, document.title, changelog.href)
-    }
-    const current = document.querySelector('#SP_PLUS_SETAREA')
-    if (current) renderChangelog(current)
-    return false
-  }
+  changelog.onclick = openSubview({
+    title: changelogTitle,
+    flag: changelogFlag,
+    href: changelog.href,
+    render: renderChangelog,
+  })
 
   const reset = el('a', {
     href: '#',
@@ -249,40 +288,7 @@ function openSettings(features: Feature[]) {
   }
 
   misc?.append(backup, changelog, reset)
-
-  const profileUrl = `${baseUrl}/mysite/index/anomaiy`
-  const spacesGroupUrl = `${baseUrl}/soo/extension/`
-  const telegramUrl = 'https://t.me/spaces_dev'
-  const heartUrl = '/i/dark/em/36/2764-FE0F.png'
-
-  const aboutLink = (href: string, text: string) => el('a', {
-    href,
-    target: '_blank',
-    rel: 'noopener noreferrer',
-    innerHTML: text,
-  })
-
-  const about = el('div', { className: 'widgets-group widgets-group_top nl wbg' })
-  const title = el('div', { className: 'grey' })
-  title.append(
-    'Разработано ',
-    aboutLink(profileUrl, 'crashmax'),
-    ' с любовью ',
-    el('span', { className: 'heart', innerHTML: `<img src="${heartUrl}" alt="❤️" width="16" height="16">` }),
-    el('div', {
-      innerHTML: `v${pkgVersion}`,
-      style: { float: 'right' },
-    }),
-  )
-  const groups = el('div', { className: 'grey' })
-  groups.append(
-    'Группа на ',
-    aboutLink(spacesGroupUrl, 'Spaces'),
-    ' и в ',
-    aboutLink(telegramUrl, 'Telegram'),
-  )
-  about.append(el('div', { className: 'content-item3' }, [title, groups]))
-  document.querySelector('#SP_PLUS_ABOUT')?.append(about)
+  paintAbout()
 }
 
 export function createSettingsPage(features: Feature[]): Feature {
@@ -291,16 +297,16 @@ export function createSettingsPage(features: Feature[]): Feature {
     core: true,
     start: (ctx) => {
       const stop = ctx.onDom(() => {
-        if (!document.querySelector('#SP_PLUS_MAIN')) removeStyle(settingsStyleId)
-        if (pathAt() !== '/settings/' || document.querySelector('#SP_PLUS_SETLINK')) return
-        const targetLink = document.querySelector<HTMLAnchorElement>(`a[href^="${baseUrl}/settings/notification/"]`)
+        if (!byId(settingsDom.main)) removeStyle(settingsDom.style)
+        if (pathAt() !== settingsPath || byId(settingsDom.link)) return
+        const targetLink = document.querySelector<HTMLAnchorElement>(`a[href^="${notificationSettingsUrl()}"]`)
         if (!targetLink) return
 
         const link = el('a', {
-          href: `${baseUrl}/settings/?sp_plus_settings=1`,
-          id: 'SP_PLUS_SETLINK',
+          href: plusSettingsUrl(),
+          id: settingsDom.link,
           className: targetLink.className,
-          innerHTML: '<span>Настройки Spaces Plus</span>',
+          innerHTML: `<span>${plusSettingsTitle}</span>`,
         })
         link.onclick = () => {
           openSettings(features)
@@ -308,14 +314,14 @@ export function createSettingsPage(features: Feature[]): Feature {
         }
         targetLink.before(link)
 
-        if (!queryFlag('sp_plus_settings')) return
+        if (!queryFlag(plusSettingsFlag)) return
         openSettings(features)
-        if (queryFlag('sp_backup')) document.querySelector<HTMLAnchorElement>('#sp_backup')?.click()
-        if (queryFlag('sp_changelog')) document.querySelector<HTMLAnchorElement>('#sp_changelog')?.click()
+        if (queryFlag(backupFlag)) byId<HTMLAnchorElement>(backupFlag)?.click()
+        if (queryFlag(changelogFlag)) byId<HTMLAnchorElement>(changelogFlag)?.click()
       })
       return () => {
         stop()
-        removeStyle(settingsStyleId)
+        removeStyle(settingsDom.style)
       }
     },
   }

@@ -1,10 +1,12 @@
 import { el } from '@zero-dependency/dom'
+import { byId } from '@/core/dom'
 import { getSettings } from '@/core/settings-store'
+import { bodyDom } from './ids'
 
 export function applyBodyStyle() {
-  let style = document.getElementById('SP_PLUS_INJSTYLE')
+  let style = byId(bodyDom.injected)
   if (!style) {
-    style = el('style', { id: 'SP_PLUS_INJSTYLE' })
+    style = el('style', { id: bodyDom.injected })
     document.head.append(style)
   }
 

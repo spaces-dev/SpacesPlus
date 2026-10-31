@@ -1,10 +1,17 @@
 import type { Feature } from '@/core/feature'
 
+const december = 11
+const january = 0
+const seasonEndsOn = 15
+const frameCount = 6
+const frameMs = 10_000
+const logoClass = 'ico_logo_newyear'
+
 function inSeason() {
   const now = new Date()
   const month = now.getMonth()
   const day = now.getDate()
-  return month === 11 || (month === 0 && day <= 15)
+  return month === december || (month === january && day <= seasonEndsOn)
 }
 
 export const newYear: Feature = {
@@ -16,16 +23,16 @@ export const newYear: Feature = {
     let timer = 0
     const stop = ctx.onDom(() => {
       if (timer) return
-      const logo = document.querySelector<HTMLElement>('.ico_logo_newyear')
+      const logo = document.querySelector<HTMLElement>(`.${logoClass}`)
       if (!logo) return
 
       let key = 1
       timer = window.setInterval(() => {
-        const next = key > 5 ? 1 : key + 1
-        logo.classList.replace(`ico_logo_newyear_${key}`, `ico_logo_newyear_${next}`)
+        const next = key >= frameCount ? 1 : key + 1
+        logo.classList.replace(`${logoClass}_${key}`, `${logoClass}_${next}`)
         key += 1
-        if (key > 6) key = 1
-      }, 10000)
+        if (key > frameCount) key = 1
+      }, frameMs)
     })
 
     return () => {

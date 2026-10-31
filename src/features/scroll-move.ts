@@ -1,44 +1,42 @@
 import type { Feature } from '@/core/feature'
-import { ensureStyle, removeStyle } from '@/core/appearance'
-import { log } from '@/core/log'
+import { byId } from '@/core/dom'
+import { defineToggle } from '@/core/feature'
+import { withStyle } from '@/core/with-style'
 import scrollCss from '@/styles/features/scroll.scss?inline'
+import { toggleId } from '@/types/toggles'
 
 const scrollStyleId = 'SP_STYLE_SCROLL'
+const scrollId = 'scroll_page'
 const moved = 'sp-replace'
 
-export const scrollMove: Feature = {
-  id: 'rscroll',
+const scrollBar = () => byId(scrollId)
+
+function clearOffset(scroll: HTMLElement) {
+  scroll.style.removeProperty('left')
+  scroll.style.removeProperty('right')
+  scroll.removeAttribute(moved)
+}
+
+function placeRight() {
+  const scroll = scrollBar()
+  if (!scroll) return
+  scroll.classList.add(moved)
+  clearOffset(scroll)
+}
+
+export const scrollMove: Feature = defineToggle({
+  id: toggleId.scroll,
   title: 'Прокрутка страницы справа',
   description: 'Перемещает полосу автоскролла на правую сторону.',
   desktopOnly: true,
-  start: (ctx) => {
-    ensureStyle(scrollStyleId, scrollCss)
-    const apply = () => {
-      const scroll = document.querySelector<HTMLElement>('#scroll_page')
-      if (!scroll) return
-      scroll.classList.add(moved)
-      scroll.style.removeProperty('left')
-      scroll.style.removeProperty('right')
-      scroll.removeAttribute(moved)
-    }
-
-    const stop = ctx.onDom(() => {
-      try {
-        apply()
-      } catch (error) {
-        log.error('rscroll', error)
-      }
-    })
-
+  start: withStyle(scrollStyleId, scrollCss, (ctx) => {
+    const stop = ctx.onDom(placeRight)
     return () => {
       stop()
-      removeStyle(scrollStyleId)
-      const scroll = document.querySelector<HTMLElement>('#scroll_page')
+      const scroll = scrollBar()
       if (!scroll?.classList.contains(moved)) return
       scroll.classList.remove(moved)
-      scroll.style.removeProperty('left')
-      scroll.style.removeProperty('right')
-      scroll.removeAttribute(moved)
+      clearOffset(scroll)
     }
-  },
-}
+  }),
+})

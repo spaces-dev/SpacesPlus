@@ -1,9 +1,12 @@
 import type { Feature } from '@/core/feature'
-import { ensureStyle, removeStyle } from '@/core/appearance'
-import { log } from '@/core/log'
-import { modalMessage } from '@/core/modals'
-import { getSettings, setSetting } from '@/core/settings-store'
+import { byId } from '@/core/dom'
+import { defineToggle } from '@/core/feature'
+import { modalMessage, notice } from '@/core/modals'
+import { setSetting, settingEnabled } from '@/core/settings-store'
+import { withStyle } from '@/core/with-style'
 import rightbarCss from '@/styles/features/rightbar.scss?inline'
+import { toggleId } from '@/types/toggles'
+import { weatherOptionsId } from './weather/constants'
 
 const rightbarStyleId = 'SP_STYLE_RIGHTBAR'
 const hidden = 'sp-hidden-rightbar'
@@ -16,35 +19,25 @@ function showRightbar() {
   document.documentElement.classList.remove(hidden)
 }
 
-export const hiddenRightbar: Feature = {
-  id: 'hrightbar',
+export const hiddenRightbar: Feature = defineToggle({
+  id: toggleId.rightbar,
   title: 'Скрыть правое меню',
   description: 'Функция скрывает правое меню (страница становится на 25% шире).</br></br>Конфликтует с функцией «Виджет погоды».',
   desktopOnly: true,
   onToggle: (enabled) => {
-    if (!enabled || !getSettings().weather) return
-    setSetting('weather', false)
-    const box = document.querySelector<HTMLInputElement>('#weather')
+    if (!enabled || !settingEnabled(toggleId.weather)) return
+    setSetting(toggleId.weather, false)
+    const box = byId<HTMLInputElement>(toggleId.weather)
     if (box) box.checked = false
-    document.getElementById('SP_WEATHER_SETTINGS')?.remove()
-    modalMessage('Скрыть правое меню', 'Виджет погоды выключен: он показывается в правом меню.', { close: true, timer: 5 })
+    byId(weatherOptionsId)?.remove()
+    modalMessage('Скрыть правое меню', 'Виджет погоды выключен: он показывается в правом меню.', notice)
   },
-  start: (ctx) => {
-    ensureStyle(rightbarStyleId, rightbarCss)
-    if (getSettings().weather) setSetting('weather', false)
-
-    const stop = ctx.onDom(() => {
-      try {
-        hideRightbar()
-      } catch (error) {
-        log.error('hideRightbar', error)
-      }
-    })
-
+  start: withStyle(rightbarStyleId, rightbarCss, (ctx) => {
+    if (settingEnabled(toggleId.weather)) setSetting(toggleId.weather, false)
+    const stop = ctx.onDom(hideRightbar)
     return () => {
       stop()
       showRightbar()
-      removeStyle(rightbarStyleId)
     }
-  },
-}
+  }),
+})

@@ -1,20 +1,14 @@
 import type { Feature } from '@/core/feature'
-import { log } from '@/core/log'
+import { defineToggle } from '@/core/feature'
 import { baseUrl } from '@/core/site'
+import { toggleId } from '@/types/toggles'
+import { collectLinks } from './collect-links'
 
-export const karma: Feature = {
-  id: 'karma',
+const karmaPrefix = `${baseUrl}/mysite/rate_n_karma/karma/?Accept=`
+
+export const karma: Feature = defineToggle({
+  id: toggleId.karma,
   title: 'Собирать карму',
   description: 'Функция в автоматическом режиме подтверждает назойливую карму.',
-  start: ctx => ctx.onDom(() => {
-    try {
-      document.querySelectorAll<HTMLElement>(`a[href^="${baseUrl}/mysite/rate_n_karma/karma/?Accept="]`).forEach((link) => {
-        link.click()
-        link.parentElement?.remove()
-        log.info('Собрали карму', link)
-      })
-    } catch (error) {
-      log.error('karma', error)
-    }
-  }),
-}
+  start: collectLinks(karmaPrefix, 'Собрали карму'),
+})

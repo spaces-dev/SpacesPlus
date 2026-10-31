@@ -11,9 +11,12 @@ const patternVar = '--sp-halloween-pattern'
 
 let themeLocked = false
 
+const october = 9
+const halloweenDay = 31
+
 function inSeason() {
   const now = new Date()
-  return now.getMonth() === 9 && now.getDate() === 31
+  return now.getMonth() === october && now.getDate() === halloweenDay
 }
 
 const flights = [
