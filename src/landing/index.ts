@@ -6,7 +6,7 @@ import {
   formatDate,
   renderSections,
 } from '@/features/check-updates/changelog'
-import { mountHalloween } from '@/features/halloween'
+import { mountHalloween } from '@/features/halloween/halloween'
 
 import {
   featureGroups,
@@ -14,7 +14,7 @@ import {
   privacyParagraphs,
 } from './content'
 import './index.scss'
-import '@/features/halloween.scss'
+import '@/features/halloween/halloween.scss'
 
 const siteOrigin = 'https://spaces.im'
 const install = document.querySelector<HTMLButtonElement>('[data-install]')
