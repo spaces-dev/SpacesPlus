@@ -34,7 +34,6 @@ export interface Settings {
   oldheader: boolean
   playerdn: boolean
   dredirect: boolean
-  online: boolean
   coins: boolean
   rscroll: boolean
   hrightbar: boolean
@@ -42,7 +41,6 @@ export interface Settings {
   grotate: boolean
   angle: number
   karma: boolean
-  sticker: boolean
   playback: boolean
   videoSpeed: number
   upVersion: number | string
