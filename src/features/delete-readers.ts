@@ -35,6 +35,10 @@ function writeSelected(selected: Set<string>) {
   sessionStorage.setItem(selectedKey, JSON.stringify([...selected]))
 }
 
+export function clearReaderSelection() {
+  sessionStorage.removeItem(selectedKey)
+}
+
 export const deleteReaders: Feature = defineToggle({
   id: toggleId.readers,
   title: 'Пакетное удаление читателей',

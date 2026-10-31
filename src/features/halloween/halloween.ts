@@ -158,8 +158,16 @@ const ghostHideMs = 3 * 60 * 1000
 const awayClass = 'sp-halloween__drift_away'
 const goneClass = 'sp-halloween__drift_gone'
 
+const ghostKeyPrefix = 'sp-halloween-ghost-'
+
 function ghostKey(index: number) {
-  return `sp-halloween-ghost-${index}`
+  return `${ghostKeyPrefix}${index}`
+}
+
+export function clearHiddenGhosts() {
+  for (const key of Object.keys(sessionStorage)) {
+    if (key.startsWith(ghostKeyPrefix)) sessionStorage.removeItem(key)
+  }
 }
 
 function ghostHidden(index: number) {

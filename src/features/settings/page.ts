@@ -22,7 +22,10 @@ import {
 } from '@/core/site'
 import { groupedOptionIds, isGroupedOption, settingsSections } from '@/features/catalog'
 import { renderChangelog } from '@/features/check-updates/changelog'
+import { clearReaderSelection } from '@/features/delete-readers'
+import { clearHiddenGhosts } from '@/features/halloween/halloween'
 import { clearStoredSmiles } from '@/features/recent-smiles/storage'
+import { clearGeoPromptSkip } from '@/features/weather/api'
 import settingsCss from '@/styles/settings.scss?inline'
 import { renderBackup } from './backup'
 import { plusSettingsTitle, settingsAreaId, settingsDom, settingsGroupId } from './ids'
@@ -282,6 +285,9 @@ function openSettings(features: Feature[]) {
     modalConfirm('Вы действительно хотите полностью сбросить настройки?', true, () => {
       resetSpacesCookies()
       clearStoredSmiles()
+      clearGeoPromptSkip()
+      clearReaderSelection()
+      clearHiddenGhosts()
       location.reload()
     })
     return false

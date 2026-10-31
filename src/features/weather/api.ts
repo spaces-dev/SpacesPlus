@@ -59,6 +59,10 @@ function readPosition() {
 
 export const geoPromptSkipped = () => sessionStorage.getItem(geoSkipKey) !== null
 
+export function clearGeoPromptSkip() {
+  sessionStorage.removeItem(geoSkipKey)
+}
+
 function clearLoadingCity() {
   const input = byId<HTMLInputElement>(cityInputId)
   if (input?.value !== loadingCity) return
